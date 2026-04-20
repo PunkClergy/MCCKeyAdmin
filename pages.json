@@ -10,7 +10,7 @@
 			"path": "pages/login/index",
 			"style": {
 				"navigationBarTitleText": "",
-				"navigationStyle": "default"
+				"navigationStyle": "custom"
 			}
 		}
 	],
@@ -23,7 +23,8 @@
 				{
 					"path": "index",
 					"style": {
-						"navigationBarTitleText": "区域中心"
+						"navigationBarTitleText": "区域中心",
+						"navigationStyle": "custom"
 					}
 				},
 				{

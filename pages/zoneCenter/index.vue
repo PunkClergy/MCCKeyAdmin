@@ -6,13 +6,16 @@
       :style="{
         paddingTop: height_from_head + 'px',
         paddingLeft: capsule_distance_to_the_right + 'px',
-        height: head_height + 'px'
+        paddingRight: capsule_distance_to_the_right + 'px',
+        height: head_height + 'px',
+		display:'flex',
+		justifyContent:'center'
       }"
     >
       <view class="custom-header-outer-layer">
         <image class="custom-header-outer-layer-image" src="/static/images/home.png" @tap="handleBackHome"></image>
-        <view class="custom-header-outer-layer-title">{{title_name}}</view>
-        <view class="custom-header-outer-layer-user_name">
+        <view class="custom-header-outer-layer-title">{{title_name||'租车公司电子钥匙'}}</view>
+        <view class="custom-header-outer-layer_user_name">
           <text v-if="account">{{account}}</text>
           <view v-else @tap="handleOnExistingAccountTap" class="login-wrapper">
             <text>请登录</text>
@@ -25,7 +28,6 @@
         class="subtitle" 
         :style="{
           fontSize: (stfontSize || 11) + 'px',
-          padding: '0 ' + capsule_distance_to_the_right + 'px'
         }"
       >
         {{subtitle}}
@@ -191,7 +193,8 @@ import {
 export default {
   data() {
     return {
-      tabBarHeight: 100,
+      // ========== 这里改低了 ==========
+      tabBarHeight: 60, 
       currentTab: 0,
       c_link: 'https://k1sw.wiselink.net.cn/',
       g_banner_image: [],
@@ -201,7 +204,7 @@ export default {
       title_name: '',
       bgcolor: '#fff',
       
-      // ✅ 关键：给默认值，永远不会为空
+      // 状态栏适配默认值
       height_from_head: 20,
       head_height: 88,
       capsule_distance_to_the_right: 15,
@@ -226,17 +229,17 @@ export default {
   methods: {
     initSystemInfo() {
       try {
-        const { statusBarHeight } = uni.getWindowInfo()
+        const { statusBarHeight, screenWidth } = uni.getWindowInfo()
         const menu = uni.getMenuButtonBoundingClientRect()
         if (!menu) return
         
+        // 计算头部高度
         const headerHeight = menu.height + (menu.top - statusBarHeight) * 2
-        const right = uni.getWindowInfo().screenWidth - menu.right
+        const rightPadding = screenWidth - menu.right
         
-        // 赋值
         this.height_from_head = statusBarHeight
         this.head_height = statusBarHeight + headerHeight
-        this.capsule_distance_to_the_right = right
+        this.capsule_distance_to_the_right = rightPadding
       } catch (e) {
         console.log('获取状态栏信息失败')
       }
@@ -268,7 +271,6 @@ export default {
     async initialGetBanner() {
       try {
         const d = await u_bannerlist20({ terminalId: 0 });
-		console.log(d)
         if (d?.content) this.g_banner_image = d.content
       } catch (e) {}
     },
@@ -293,10 +295,8 @@ export default {
     async initZoneInfo() {
       try {
         const ReturnData = await u_getHomeArea({});
-		  console.log(ReturnData)
         if (ReturnData.code === 1000) {
           this.zoneList = ReturnData.content;
-		  console.log(ReturnData)
           this.groupZoneByXu()
         }
       } catch (e) {}
@@ -360,7 +360,6 @@ export default {
     },
   },
   onLoad(options) {
-    // ✅ 关键：onLoad 最先执行
     this.initSystemInfo()
     
     this.initialGetBanner()
@@ -385,12 +384,18 @@ export default {
 
 <style scoped>
   ::-webkit-scrollbar { display: none; }
+  
+  /* 页面容器：允许弹性滑动 */
   .container {
     width: 100vw;
     min-height: 100vh;
     box-sizing: border-box;
     overflow: hidden;
+    /* 核心：开启弹性抖动 */
+    -webkit-overflow-scrolling: touch;
   }
+
+  /* 头部：已适配状态栏 + 左右间距 */
   .custom-header {
     position: fixed;
     top: 0;
@@ -418,7 +423,7 @@ export default {
     font-weight: bold;
     color: #333;
   }
-  .custom-header-outer-layer-user_name {
+  .custom-header-outer-layer_user_name {
     display: flex;
     align-items: center;
     gap: 8rpx;
@@ -428,11 +433,11 @@ export default {
     align-items: center;
     gap: 6rpx;
   }
-  .custom-header-outer-layer-user_name text {
+  .custom-header-outer-layer_user_name text {
     font-size: 28rpx;
     color: #333;
   }
-  .custom-header-outer-layer-user_name image {
+  .custom-header-outer-layer_user_name image {
     width: 26rpx;
     height: 26rpx;
   }
@@ -441,13 +446,18 @@ export default {
     color: #666;
     width: 100%;
   }
+
+  /* 内容区域：支持弹性滑动 */
   .content {
     position: fixed;
     left: 0;
     width: 100%;
     box-sizing: border-box;
     padding: 0 20rpx;
+    /* 核心：开启流畅弹性滚动 */
+    -webkit-overflow-scrolling: touch;
   }
+
   .swiper-container {
     width: 100%;
     margin-top: 20rpx;
@@ -557,10 +567,11 @@ export default {
   .tab-item.active text {
     color: #3498db;
   }
+  /* ========== 悬浮按钮同步上移 ========== */
   .float-button {
     position: fixed;
     right: 24rpx;
-    bottom: 160rpx;
+    bottom: 100rpx;
     display: flex;
     flex-direction: column;
     gap: 24rpx;

@@ -1,9 +1,10 @@
 import {
 	http
 } from '@/utils/request/http'
-
+export const u_dismantleAlarmList = (data) => http.get('/efenceApi/dismantleAlarmList', data)
 export const u_maintained = (data) => utils_request_http.http.postFormData("/carapi/maintained", data)
-export const u_calibrateTotalMileage = (data) => utils_request_http.http.postFormData("/carapi/calibrateTotalMileage", data)
+export const u_calibrateTotalMileage = (data) => utils_request_http.http.postFormData("/carapi/calibrateTotalMileage",
+	data)
 export const u_cancelRentKey = (data) => http.get('/rentKeyApi/cancelRentKey', data)
 export const u_rentRecord = (data) => http.get('/rentKeyApi/rentRecord', data)
 export const u_addOrUpdate = (data) => http.get('/oilReimbursementapi/list', data)
@@ -34,17 +35,15 @@ export const u_mylist = (data) => http.get('/deskapi/mylist', data)
 export const u_paivatecarList = (data) => http.get('/carapi/getCarList', data)
 export const u_paivateAddOrUpdateCar = (data) => http.postFormData('/carapi/addOrUpdateCar', data)
 export const u_paivateCarapiDeleteCar = (data) => http.postFormData('/carapi/deleteCar', data)
-export const u_paivateUpdateRentKey = (data) => http.postFormData('/rentKeyApi/updateRentKey', data) 
-export const u_paivateCarList = (data) => http.get('/carapi/getCarList', data) 
-export const u_paivateRentRecord = (data) => http.get('/rentKeyApi/rentRecord', data) 
-export const u_paivateSendRentKey = (data) => http.get('/rentKeyApi/sendRentKey', data) 
-export const u_paivateCancelRentKey = (data) => http.get('/rentKeyApi/cancelRentKey', data) 
+export const u_paivateUpdateRentKey = (data) => http.postFormData('/rentKeyApi/updateRentKey', data)
+export const u_paivateCarList = (data) => http.get('/carapi/getCarList', data)
+export const u_paivateRentRecord = (data) => http.get('/rentKeyApi/rentRecord', data)
+export const u_paivateSendRentKey = (data) => http.get('/rentKeyApi/sendRentKey', data)
+export const u_paivateCancelRentKey = (data) => http.get('/rentKeyApi/cancelRentKey', data)
 export const u_promotionalApi = (data) => http.get('/promotionalApi/list', data)
 export const u_promotionalApiWxBooklist = (data) => http.get('/promotionalApi/wxFilelist', data)
 export const u_industryList = (data) => http.get('/promotionalApi/industryList', data)
-export const login = (data) => http.postFormData('/api/login', data) 
+export const login = (data) => http.postFormData('/api/login', data)
 export const u_register = (data) => http.postFormData('/userapi/userReg', data) //注册
 export const u_sendRentKey = (data) => http.get('/rentKeyApi/sendRentKey', data) //发送
 export const u_updateRentKey = (data) => http.postFormData('/rentKeyApi/updateRentKey', data) //修改
-
-
