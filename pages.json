@@ -1,0 +1,75 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "智信通"
+			}
+		},
+		{
+			"path" : "pages/login/index",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		}
+	],
+	"subpackages": [
+		{
+			"root": "pages/zoneCenter",
+			"pages": [
+				{
+					"path": "index",
+					"style": {
+						"navigationBarTitleText": "专区首页"
+					}
+				},
+				{
+					"path": "sendKeyToRenter",
+					"style": {
+						"navigationBarTitleText": "钥匙发送租车人"
+					}
+				}
+				// {
+				// 	"path": "maintain",
+				// 	"style": {
+				// 		"navigationBarTitleText": "保养提醒"
+				// 	}
+				// }
+			]
+		},
+		{
+			"root": "pages/userCenter",
+			"pages": [
+				{
+					"path": "index",
+					"style": {
+						"navigationBarTitleText": "个人中心"
+					}
+				}
+				// {
+				// 	"path": "unmannedStores",
+				// 	"style": {
+				// 		"navigationBarTitleText": "无人门店信息"
+				// 	}
+				// }
+			]
+		}
+	],
+	"permission": {
+		"scope.userLocation": {
+			"desc": "你的位置信息将用于展示当前位置"
+		}
+	},
+	"requiredPrivateInfos": [
+		"getLocation"
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"navigationStyle": "custom"
+	},
+	"uniIdRouter": {}
+}
