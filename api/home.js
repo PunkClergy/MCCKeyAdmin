@@ -2,7 +2,8 @@ import {
 	http
 } from '@/utils/request/http'
 
-
+export const u_maintained = (data) => utils_request_http.http.postFormData("/carapi/maintained", data)
+export const u_calibrateTotalMileage = (data) => utils_request_http.http.postFormData("/carapi/calibrateTotalMileage", data)
 export const u_cancelRentKey = (data) => http.get('/rentKeyApi/cancelRentKey', data)
 export const u_rentRecord = (data) => http.get('/rentKeyApi/rentRecord', data)
 export const u_addOrUpdate = (data) => http.get('/oilReimbursementapi/list', data)

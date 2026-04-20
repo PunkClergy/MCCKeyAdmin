@@ -1,75 +1,140 @@
 {
-	"pages": [
-		{
+	"pages": [{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "智信通"
+				"navigationBarTitleText": "智信通",
+				"navigationStyle": "custom"
 			}
 		},
 		{
-			"path" : "pages/login/index",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "default"
 			}
 		}
 	],
 	"subpackages": [
+
 		{
 			"root": "pages/zoneCenter",
 			"pages": [
+
 				{
 					"path": "index",
 					"style": {
-						"navigationBarTitleText": "专区首页"
+						"navigationBarTitleText": "区域中心"
 					}
 				},
 				{
 					"path": "sendKeyToRenter",
 					"style": {
-						"navigationBarTitleText": "钥匙发送租车人"
+						"navigationBarTitleText": "发送钥匙"
+					}
+				},
+				{
+					"path": "maintainRemind",
+					"style": {
+						"navigationBarTitleText": "保养提醒"
+					}
+				},
+
+
+				{
+					"path": "alarmDeviceRemove",
+					"style": {
+						"navigationBarTitleText": "设备拆除报警"
+					}
+				},
+				{
+					"path": "alarmOutOfFence",
+					"style": {
+						"navigationBarTitleText": "围栏报警记录"
+					}
+				},
+
+
+				{
+					"path": "carKeyConfig",
+					"style": {
+						"navigationBarTitleText": "车辆钥匙配置"
+					}
+				},
+				{
+					"path": "bizKeyConfig",
+					"style": {
+						"navigationBarTitleText": "车务钥匙配置"
+					}
+				},
+
+
+				{
+					"path": "returnRecord",
+					"style": {
+						"navigationBarTitleText": "还车记录"
+					}
+				},
+
+
+				{
+					"path": "rolePermission",
+					"style": {
+						"navigationBarTitleText": "角色与权限"
+					}
+				},
+				{
+					"path": "userRole",
+					"style": {
+						"navigationBarTitleText": "人员与角色"
+					}
+				},
+				{
+					"path": "transferAdmin",
+					"style": {
+						"navigationBarTitleText": "移交管理员"
 					}
 				}
-				// {
-				// 	"path": "maintain",
-				// 	"style": {
-				// 		"navigationBarTitleText": "保养提醒"
-				// 	}
-				// }
 			]
 		},
+
 		{
 			"root": "pages/userCenter",
-			"pages": [
-				{
-					"path": "index",
-					"style": {
-						"navigationBarTitleText": "个人中心"
-					}
+			"pages": [{
+				"path": "index",
+				"style": {
+					"navigationBarTitleText": "个人中心"
 				}
-				// {
-				// 	"path": "unmannedStores",
-				// 	"style": {
-				// 		"navigationBarTitleText": "无人门店信息"
-				// 	}
-				// }
-			]
+			}]
 		}
 	],
+
+
 	"permission": {
 		"scope.userLocation": {
-			"desc": "你的位置信息将用于展示当前位置"
+			"desc": "你的位置信息将用于车辆定位与围栏监控"
+		},
+		"scope.bluetooth": {
+			"desc": "需要蓝牙权限连接车辆电子钥匙"
+		},
+		"scope.writePhotosAlbum": {
+			"desc": "需要保存车辆证件及报警截图至相册"
+		},
+		"scope.camera": {
+			"desc": "需要相机权限扫码绑定车辆及设备"
+		},
+		"scope.notification": {
+			"desc": "需要通知权限接收拆除及围栏报警消息"
 		}
 	},
 	"requiredPrivateInfos": [
-		"getLocation"
+		"getLocation", "startBluetoothDevicesDiscovery", "saveImageToPhotosAlbum", "camera", "notification"
 	],
+
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8",
-		"navigationStyle": "custom"
+		"backgroundColor": "#F8F8F8"
 	},
 	"uniIdRouter": {}
 }
