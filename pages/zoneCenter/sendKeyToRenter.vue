@@ -605,7 +605,7 @@
 				// showLoading("加载中...")
 				try {
 					const param = {
-						[u_addOrUpdate.page]: this.g_page
+						page: this.g_page
 					}
 					const res = await u_carList(param)
 					if (res.code === 1000) {
@@ -804,7 +804,6 @@
 			},
 		},
 		onLoad(options) {
-			console.log(11122222)
 			this.getOrderList()
 			this.getKeySendingList()
 		},
