@@ -2,6 +2,8 @@ import {
 	http
 } from '@/utils/request/http'
 
+export const u_addOrUpdateCar = (data) => http.postFormData('/carapi/addOrUpdateCar', data)
+export const u_carapiDeleteCar = (data) => http.postFormData('/carapi/deleteCar', data)
 export const u_efenceAlarmList = (data) => http.get('/efenceApi/efenceAlarmList', data)
 export const u_dismantleAlarmList = (data) => http.get('/efenceApi/dismantleAlarmList', data)
 export const u_maintained = (data) => utils_request_http.http.postFormData("/carapi/maintained", data)
