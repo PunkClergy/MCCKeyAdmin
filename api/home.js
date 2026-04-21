@@ -1,6 +1,12 @@
 import {
 	http
 } from '@/utils/request/http'
+
+
+
+export const u_addOrUpdateChildUser = (data) => http.postFormData('/accountapi/addOrUpdateChildUser', data)
+export const u_delChildUser = (data) => http.get('/accountapi/delChildUser', data)
+export const u_childUserList = (data) => http.get('/accountapi/childUserList', data)
 export const u_getMenuTree = (data) => http.get('/roleapi/getMenuTree', data)
 export const u_roleapidel = (data) => http.get('/roleapi/del', data)
 export const u_roleapiaddOrUpdate = (data) => http.postFormData('/roleapi/addOrUpdate', data)
