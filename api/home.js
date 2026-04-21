@@ -1,6 +1,8 @@
 import {
 	http
 } from '@/utils/request/http'
+
+export const u_efenceAlarmList = (data) => http.get('/efenceApi/efenceAlarmList', data)
 export const u_dismantleAlarmList = (data) => http.get('/efenceApi/dismantleAlarmList', data)
 export const u_maintained = (data) => utils_request_http.http.postFormData("/carapi/maintained", data)
 export const u_calibrateTotalMileage = (data) => utils_request_http.http.postFormData("/carapi/calibrateTotalMileage",
