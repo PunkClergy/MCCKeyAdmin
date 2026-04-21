@@ -2,6 +2,12 @@ import {
 	http
 } from '@/utils/request/http'
 
+
+export const u_carManagerapi_del = (data) => http.get('/carManagerapi/del', data)
+export const u_carManagerList = (data) => http.get('/rentKeyApi/carManagerList', data)
+export const u_vehBindCarManager = (data) => http.postFormData('/rentKeyApi/vehBindCarManager', data)
+export const u_GetRole = (data) => http.get('/roleapi/getRole', data)
+export const u_vehUnBindCarManager = (data) => http.postFormData('/rentKeyApi/vehUnBindCarManager', data)
 export const u_addOrUpdateCar = (data) => http.postFormData('/carapi/addOrUpdateCar', data)
 export const u_carapiDeleteCar = (data) => http.postFormData('/carapi/deleteCar', data)
 export const u_efenceAlarmList = (data) => http.get('/efenceApi/efenceAlarmList', data)
