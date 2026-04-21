@@ -1,8 +1,11 @@
 import {
 	http
 } from '@/utils/request/http'
-
-
+export const u_getMenuTree = (data) => http.get('/roleapi/getMenuTree', data)
+export const u_roleapidel = (data) => http.get('/roleapi/del', data)
+export const u_roleapiaddOrUpdate = (data) => http.postFormData('/roleapi/addOrUpdate', data)
+export const u_setMenuTree = (data) => http.postFormData('/roleapi/setMenuTree', data)
+export const u_roleapiList = (data) => http.postFormData('/roleapi/list', data)
 export const u_carManagerapi_del = (data) => http.get('/carManagerapi/del', data)
 export const u_carManagerList = (data) => http.get('/rentKeyApi/carManagerList', data)
 export const u_vehBindCarManager = (data) => http.postFormData('/rentKeyApi/vehBindCarManager', data)
