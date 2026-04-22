@@ -38,16 +38,31 @@
             <button 
               class="nav-btn" 
               size="mini"
-              @click.stop="handleNavToRecord"
+              @click.stop="showAddressModal"
               :data-record="item"
             >
-              导航到位置
+              查看位置
             </button>
           </view>
         </view>
 
         <view class="empty" v-if="filteredRecords.length === 0">
           暂无符合条件的疑似拆除异常记录
+        </view>
+      </view>
+    </view>
+
+    <!-- 地址信息弹窗 -->
+    <view class="address-modal" v-if="showAddressPop">
+      <view class="modal-mask" @click="closeAddressModal"></view>
+      <view class="modal-content">
+        <view class="modal-title">位置信息</view>
+        <view class="address-content">
+          <text class="address-label">详细地址：</text>
+          <text class="address-text">{{ currentAddress }}</text>
+        </view>
+        <view class="btn-group">
+          <button class="reset-btn" @click="closeAddressModal">关闭</button>
         </view>
       </view>
     </view>
@@ -117,7 +132,11 @@ export default {
       inputCarNumber: '',
       carCandidateList: [],
       focusCarInput: false,
-      filteredRecords: []
+      filteredRecords: [],
+      // 地址弹窗相关
+      showAddressPop: false,
+      currentAddress: '',
+      currentRecord: null
     }
   },
 
@@ -230,16 +249,31 @@ export default {
       })
     },
 
-    // 导航
-    handleNavToRecord(e) {
+    // 显示地址弹窗
+    showAddressModal(e) {
       const record = e.currentTarget.dataset.record
+      this.currentRecord = record
+      this.currentAddress = record.address || '暂无地址信息'
+      this.showAddressPop = true
+    },
+
+    // 关闭地址弹窗
+    closeAddressModal() {
+      this.showAddressPop = false
+    },
+
+    // 打开地图导航
+    openMapLocation() {
+      const record = this.currentRecord
+      if (!record) return
+      
       const { latitude, longitude, vehicleSerialName, vehicleModeName, platenumber } = record
 
       uni.openLocation({
         latitude: Number(latitude),
         longitude: Number(longitude),
         name: `${vehicleSerialName}${vehicleModeName}（${platenumber}）疑似拆除`,
-        address: `${vehicleSerialName}${vehicleModeName}（${platenumber}）疑似拆除异常位置`,
+        address: this.currentAddress,
         scale: 18,
         fail: () => {
           uni.showModal({
@@ -249,6 +283,7 @@ export default {
           })
         }
       })
+      this.closeAddressModal()
     }
   }
 }
@@ -256,9 +291,15 @@ export default {
 
 <style scoped>
 page {
-  background: #f5f7fa;
+  background: #EFF1FC;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 .page-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   padding-bottom: 30rpx;
   width: 100%;
   box-sizing: border-box;
@@ -291,7 +332,7 @@ page {
   margin: 0 30rpx;
   width: calc(100% - 60rpx);
   box-sizing: border-box;
-  max-height: calc(100vh - 300rpx);
+  flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -370,6 +411,36 @@ page {
   font-size: 28rpx;
   width: 100%;
 }
+
+/* 地址弹窗样式 */
+.address-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+.address-content {
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  margin-bottom: 30rpx;
+  min-height: 120rpx;
+}
+.address-label {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+  display: block;
+}
+.address-text {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
 .filter-modal {
   position: fixed;
   top: 0;

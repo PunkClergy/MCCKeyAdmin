@@ -32,7 +32,7 @@
 					"style": {
 						"navigationBarTitleText": "发送钥匙",
 						"navigationBarBackgroundColor": "#EFF1FC"
-					
+
 					}
 				},
 				{
@@ -47,13 +47,15 @@
 				{
 					"path": "alarmDeviceRemove",
 					"style": {
-						"navigationBarTitleText": "设备拆除报警"
+						"navigationBarTitleText": "设备拆除报警",
+						"navigationBarBackgroundColor": "#EFF1FC"
 					}
 				},
 				{
 					"path": "alarmOutOfFence",
 					"style": {
-						"navigationBarTitleText": "围栏报警记录"
+						"navigationBarTitleText": "围栏报警记录",
+						"navigationBarBackgroundColor": "#EFF1FC"
 					}
 				},
 

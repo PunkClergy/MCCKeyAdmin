@@ -28,8 +28,8 @@
             <text class="record-vehicle">涉及车辆：{{ item.vehicleSerialName }}{{ item.vehicleModeName }}（{{ item.platenumber }}）</text>
           </view>
           <view class="record-right">
-            <button class="nav-btn" size="mini" @tap="handleNavToRecord" :data-record="item" catchtap>
-              导航到位置
+            <button class="nav-btn" size="mini" @tap="showAddressModal" :data-record="item" catchtap>
+              查看位置
             </button>
           </view>
         </view>
@@ -37,6 +37,18 @@
         <view class="empty" v-if="filteredRecords.length === 0">
           暂无符合条件的异常记录
         </view>
+      </view>
+    </view>
+
+    <!-- 地址信息弹窗 -->
+    <view class="address-modal" v-if="showAddressPop">
+      <view class="modal-mask" @tap="closeAddressModal"></view>
+      <view class="modal-content">
+        <view class="modal-title">位置信息</view>
+        <view class="address-box">
+          <text class="address-text">{{ currentAddress || '暂无地址信息' }}</text>
+        </view>
+        <button class="close-btn" @tap="closeAddressModal">关闭</button>
       </view>
     </view>
 
@@ -48,7 +60,6 @@
 
         <view class="filter-item">
           <text class="filter-label">选择日期：</text>
-          <!-- 修复：picker 不用 v-model，用 value + @change -->
           <picker mode="date" :value="selectedDate" @change="onDateChange">
             <view class="picker-input">{{ selectedDate || '请选择日期' }}</view>
           </picker>
@@ -65,6 +76,7 @@
           </view>
         </view>
 
+        <!-- 修复：按钮组布局 -->
         <view class="btn-group">
           <button class="reset-btn" @tap="resetFilter">重置</button>
           <button class="confirm-btn" @tap="confirmFilter">确认筛选</button>
@@ -89,7 +101,10 @@ export default {
       inputCarNumber: '',
       carCandidateList: [],
       focusCarInput: false,
-      filteredRecords: []
+      filteredRecords: [],
+      // 地址弹窗
+      showAddressPop: false,
+      currentAddress: ''
     }
   },
   onLoad() {
@@ -180,24 +195,15 @@ export default {
         url: `/pages/recordDetail/recordDetail?recordId=${record.recordId}`
       })
     },
-    handleNavToRecord(e) {
+    // 打开地址弹窗
+    showAddressModal(e) {
       const record = e.currentTarget.dataset.record
-      const { latitude, longitude, vehicleSerialName, vehicleModeName, platenumber } = record
-
-      uni.openLocation({
-        latitude: Number(latitude),
-        longitude: Number(longitude),
-        name: `${vehicleSerialName}${vehicleModeName}（${platenumber}）数据异常`,
-        address: `${vehicleSerialName}${vehicleModeName}（${platenumber}）数据异常位置`,
-        scale: 18,
-        fail: () => {
-          uni.showModal({
-            title: '导航失败',
-            content: '无法打开地图',
-            showCancel: false
-          })
-        }
-      })
+      this.currentAddress = record.address || '暂无地址信息'
+      this.showAddressPop = true
+    },
+    // 关闭地址弹窗
+    closeAddressModal() {
+      this.showAddressPop = false
     }
   }
 }
@@ -205,10 +211,16 @@ export default {
 
 <style scoped>
 page {
-  background: #f5f7fa;
-  overflow-y: auto;
+  background: #EFF1FC;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 .page-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   padding-bottom: 30rpx;
   width: 100%;
   box-sizing: border-box;
@@ -237,7 +249,7 @@ page {
 }
 .record-list-container {
   margin: 0 30rpx;
-  max-height: calc(100vh - 300rpx);
+  flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -307,7 +319,9 @@ page {
   color: #999;
   font-size: 28rpx;
 }
-.filter-modal {
+
+/* 地址弹窗样式 */
+.address-modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -318,9 +332,58 @@ page {
 .modal-mask {
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
 }
-.modal-content {
+.address-modal .modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 560rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  box-sizing: border-box;
+}
+.modal-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+.address-box {
+  background: #f5f7fa;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  min-height: 120rpx;
+  margin-bottom: 40rpx;
+}
+.address-text {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.7;
+  word-break: break-all;
+}
+.close-btn {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #fa4143;
+  color: #fff;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+}
+
+/* 筛选弹窗 */
+.filter-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 998;
+}
+.filter-modal .modal-content {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -330,12 +393,7 @@ page {
   padding: 30rpx;
   max-height: 80vh;
   overflow-y: auto;
-}
-.modal-title {
-  font-size: 32rpx;
-  font-weight: bold;
-  margin-bottom: 30rpx;
-  text-align: center;
+  box-sizing: border-box;
 }
 .filter-item {
   display: flex;
@@ -367,24 +425,35 @@ page {
   font-size: 26rpx;
   border-bottom: 1rpx solid #f5f5f5;
 }
+
+/* ========== 重点修复：按钮组布局（彻底解决错位） ========== */
 .btn-group {
   display: flex;
-  gap: 20rpx;
+  flex-direction: row;
+  justify-content: space-between;
   margin-top: 40rpx;
+  width: 100%;
+}
+.reset-btn, .confirm-btn {
+  /* 强制均分宽度 */
+  flex: 1;
+  width: 0;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 8rpx;
+  font-size: 28rpx;
 }
 .reset-btn {
-  flex: 1;
-  height: 80rpx;
   background: #f5f5f5;
-  border-radius: 8rpx;
-  font-size: 28rpx;
+  color: #333;
+  margin-right: 10rpx;
 }
 .confirm-btn {
-  flex: 1;
-  height: 80rpx;
   background: #fa4143;
   color: #fff;
-  border-radius: 8rpx;
-  font-size: 28rpx;
+  margin-left: 10rpx;
 }
 </style>
