@@ -1,95 +1,80 @@
 <template>
-	<view class="container" :style="{ height: `${c_screen_height}px` }">
+	<view class="container" :style="{ height: screenHeight + 'px' }">
 		<view class="record-container">
-			<!-- 切换部分 -->
 			<view class="record-tabs">
-				<view class="record-tabs-item" :class="c_activeTab == 1 ? 'active' : ''" @tap="c_activeTab = 1">
-					发送钥匙
-				</view>
-				<view class="record-tabs-item" :class="c_activeTab == 2 ? 'active' : ''" @tap="c_activeTab = 2">
-					使用记录
-				</view>
+				<view class="record-tabs-item" :class="activeTab == 1 && 'active'" @tap="activeTab = 1">发送钥匙</view>
+				<view class="record-tabs-item" :class="activeTab == 2 && 'active'" @tap="activeTab = 2">使用记录</view>
 			</view>
 
-			<!-- 详情区域部分 -->
-			<block v-if="c_activeTab == 1">
-				<scroll-view scroll-y class="scroll-full" @scrolltolower="handleLower">
-					<view v-for="(item, index) in g_items" :key="index" class="content-item">
+			<block v-if="activeTab == 1">
+				<scroll-view scroll-y class="scroll-full" @scrolltolower="loadCarList">
+					<view v-for="(item, idx) in carList" :key="idx" class="content-item">
 						<view class="content-item-head">
 							<view class="head-left">
 								<view class="left-category">
 									<image src="/static/car_icon.png" />
-									<text>{{ item.platenumber }}</text>
+									< <text>{{ item.platenumber }}</text>
 								</view>
 								<view class="left-model" v-if="!item.bluetoothKey">
 									{{ item.vehicleSerialName || '-' }}{{ item.vehicleModeName || '' }}
 								</view>
 							</view>
 						</view>
-
 						<view class="content-item-info">
-							<view class="info-item" :class="item.vin.length > 15 ? 'long-info-item' : ''"
+							<view class="info-item" :class="item.vin.length > 15 && 'long-info-item'"
 								v-if="!item.bluetoothKey">
-								<label>车架号 ：</label>
-								<text>{{ item.vin || '-' }}</text>
+								<label>车架号：</label><text>{{ item.vin || '-' }}</text>
 							</view>
-							<view class="info-item" :class="item.xsgw.length > 15 ? 'long-info-item' : ''"
+							<view class="info-item" :class="item.xsgw.length > 15 && 'long-info-item'"
 								v-if="!item.bluetoothKey">
-								<label>油箱容积 ：</label>
-								<text>{{ item.xsgw ? item.xsgw + 'L' : '-' }}</text>
+								<label>油箱容积：</label><text>{{ item.xsgw ? item.xsgw + 'L' : '-' }}</text>
 							</view>
-							<view class="info-item" :class="item.carOwnerName.length > 15 ? 'long-info-item' : ''"
+							<view class="info-item" :class="item.carOwnerName.length > 15 && 'long-info-item'"
 								v-if="!item.bluetoothKey">
-								<label>设备平台 ：</label>
-								<text>{{ item.carOwnerName || '-' }}</text>
+								<label>设备平台：</label><text>{{ item.carOwnerName || '-' }}</text>
 							</view>
-							<view class="info-item" :class="item.sn.length > 15 ? 'long-info-item' : ''">
-								<label>设备号 ：</label>
-								<text>{{ item.sn || '-' }}</text>
+							<view class="info-item" :class="item.sn.length > 15 && 'long-info-item'">
+								<label>设备号：</label><text>{{ item.sn || '-' }}</text>
 							</view>
 						</view>
-
 						<view class="content-item-footer">
 							<view class="footer-left"></view>
 							<view class="footer-right">
-								<view class="footer-right-btn" :data-item="item" @tap="handleShowSendKeyModal">
+								<view class="footer-right-btn" :data-item="item" @tap="openSendKeyModal">
 									<text>发送钥匙</text>
 								</view>
 							</view>
 						</view>
 					</view>
-
-					<view v-if="g_items.length < 1"
-						style="display: flex;justify-content: center;margin-top: 20rpx;font-size: 24rpx;">
+					<view v-if="carList.length < 1"
+						style="display:flex;justify-content:center;margin-top:20rpx;font-size:24rpx;">
 						暂无数据
 					</view>
 				</scroll-view>
 			</block>
 
-			<block v-if="c_activeTab == 2">
-				<view class="record-tabs-1" style="display: flex;flex-direction: column;gap: 10rpx;">
+			<block v-if="activeTab == 2">
+				<view class="record-tabs-1" style="display:flex;flex-direction:column;gap:10rpx;">
 					<view class="search-box">
 						<icon type="search" size="16" class="search-icon" />
-						<input placeholder="车牌号/设备号/使用人" class="search-input" @blur="bindblurSea" />
+						<input placeholder="车牌号/设备号/使用人" class="search-input" @blur="onSearchBlur" />
 					</view>
-
 					<view class="picker-container">
 						<view class="picker-btns">
-							<view class="picker-btn" :class="his_state == 0 ? 'active' : ''" @tap="handleOnStatusChange"
+							<view class="picker-btn" :class="recordStatus == 0 && 'active'" @tap="changeRecordStatus"
 								data-id="0">
 								使用中
 							</view>
-							<view class="picker-btn" :class="his_state == 1 ? 'active' : ''" @tap="handleOnStatusChange"
+							<view class="picker-btn" :class="recordStatus == 1 && 'active'" @tap="changeRecordStatus"
 								data-id="1">
 								已过期
 							</view>
 						</view>
 					</view>
 				</view>
-
-				<view class="tabs-1-conut">共有{{ y_total }}条记录</view>
-				<scroll-view scroll-y class="scroll-full" @scrolltolower="handleKeyLower">
-					<view v-for="(item, index) in y_items" :key="index" class="content-card">
+				<view class="tabs-1-conut">共有{{ recordTotal }}条记录</view>
+				<scroll-view scroll-y class="scroll-full" @scrolltolower="loadRecordList">
+					<view v-for="(item, idx) in recordList" :key="idx" class="content-card">
 						<view class="card-head">
 							<view class="card-head-left">
 								<text>{{ item.platenumber }}</text>
@@ -98,30 +83,28 @@
 								<text class="phone-text">{{ item.mobile }}</text>
 							</view>
 							<view class="card-head-right">
-								<text v-if="item.status" style="color: #7b7b7c;">已取消</text>
+								<text v-if="item.status" style="color:#7b7b7c;">已取消</text>
 								<text v-else>使用中</text>
 							</view>
 						</view>
-
 						<view class="card-info">
 							<time-line
 								:events="[{ createdate: (item.startdate || '-') + ' 至 ' + (item.enddate || '-') }]" />
 						</view>
-
-						<view class="card-footer1" style="display: flex;justify-content: space-between;">
+						<view class="card-footer1" style="display:flex;justify-content:space-between;">
 							<block v-if="!item.status">
 								<view>
-									<text @tap="handleEditKey" :data-item="item" style="float: left;">修改</text>
+									<text @tap="openEditKeyModal" :data-item="item" style="float:left;">修改</text>
 								</view>
-								<view style="display: flex;flex-direction: row;">
-									<text @tap="handleCopy" :data-item="item">{{ copied ? '已复制' : '复制链接' }}</text>
-									<text @tap="handleCance" :data-item="item">取消用车</text>
+								<view style="display:flex;flex-direction:row;">
+									<text @tap="copyLink" :data-item="item">{{ copied ? '已复制' : '复制链接' }}</text>
+									<text @tap="cancelRentKey" :data-item="item">取消用车</text>
 								</view>
 							</block>
 							<block v-else>
 								<view></view>
-								<view style="display: flex;flex-direction: row;">
-									<text @tap="handleViewPhotos" :data-item="item">查看照片</text>
+								<view style="display:flex;flex-direction:row;">
+									<text @tap="previewImages" :data-item="item">查看照片</text>
 								</view>
 							</block>
 						</view>
@@ -131,222 +114,179 @@
 		</view>
 	</view>
 
-	<!-- 发送电子钥匙弹窗 -->
-	<block>
-		<view class="modal-mask" v-if="c_send_key_show_momal" @tap="handleHideSengKeyModal"></view>
-		<view class="modal-base-map" v-if="c_send_key_show_momal"
-			:style="{ bottom: `${flag_item_state ? 250 : 0}rpx` }">
-			<form @submit="handleFormSubmit">
-				<view class="modal-container">
-					<view class="modal-container-head">
-						<text>发送电子钥匙</text>
-						<image src="/static/images/right_1.png" @tap="handleHideSengKeyModal" />
-					</view>
-
-					<view class="modal-container-middle">
-						<view class="middle-form-item">
-							<label>车牌号</label>
-							<view class="modal-form-region" style="position: relative;">
-								<view v-if="all_send" style="position: relative;">
-									<input @focus="onInputFocus" @blur="onInputBlur" class="temporary"
-										placeholder="请输入车牌号" name="platenumber" :value="keyword" @input="onInputChange"
-										confirm-type="search" />
-									<view v-if="g_items_temporary.length > 0 && keyword.trim() !== ''"
-										class="g_items_temporary">
-										<view v-for="(item, index) in g_items_temporary" :key="index"
-											@tap="handleQueRen" :data-item="item" class="item-card-footer">
-											{{ item.platenumber }}
-										</view>
+	<view class="modal-mask" v-if="showSendModal" @tap="closeSendKeyModal"></view>
+	<view class="modal-base-map" v-if="showSendModal" :style="{ bottom: showSearchList ? 250 : 0 + 'rpx' }">
+		<form @submit="submitSendKey">
+			<view class="modal-container">
+				<view class="modal-container-head">
+					<text>发送电子钥匙</text>
+					<image src="/static/images/right_1.png" @tap="closeSendKeyModal" />
+				</view>
+				<view class="modal-container-middle">
+					<view class="middle-form-item">
+						<label>车牌号</label>
+						<view class="modal-form-region" style="position:relative;">
+							<view v-if="isManualInput" style="position:relative;">
+								<input @focus="onInputFocus" @blur="onInputBlur" class="temporary" placeholder="请输入车牌号"
+									name="platenumber" :value="searchKeyword" @input="onSearchInput"
+									confirm-type="search" />
+								<view v-if="searchList.length > 0 && searchKeyword.trim() !== ''"
+									class="g_items_temporary">
+									<view v-for="(item, idx) in searchList" :key="idx" @tap="selectPlate"
+										:data-item="item" class="item-card-footer">
+										{{ item.platenumber }}
 									</view>
 								</view>
-								<text v-else>{{ cellData.platenumber }}</text>
 							</view>
-						</view>
-
-						<view class="middle-form-item">
-							<label>使用人</label>
-							<view class="modal-form-region">
-								<input @focus="onInputFocus" @blur="onInputBlur" placeholder="请输入使用人" name="personName"
-									style="text-align: right;font-size: 28rpx;" />
-							</view>
-						</view>
-
-						<view class="middle-form-item">
-							<label>手机号</label>
-							<view class="modal-form-region">
-								<input @focus="onInputFocus" @blur="onInputBlur" placeholder="请输入手机号" name="mobile"
-									style="text-align: right;font-size: 28rpx;" />
-							</view>
-						</view>
-
-						<view class="middle-form-item">
-							<label>开始时间</label>
-							<view class="modal-form-region">
-								<picker mode="date" data-index="startDate" @change="bindTimeChange">
-									<view class="form-item-text">
-										<text>{{ startDate }}</text>
-									</view>
-								</picker>
-								<picker mode="time" data-index="startTime" @change="bindTimeChange">
-									<view class="form-item-text">
-										<text>{{ startTime }}</text>
-									</view>
-								</picker>
-							</view>
-						</view>
-
-						<view class="middle-form-item">
-							<label>结束时间</label>
-							<view class="modal-form-region">
-								<picker mode="date" data-index="endDate" @change="bindTimeChange">
-									<view class="form-item-text">
-										<text>{{ endDate }}</text>
-									</view>
-								</picker>
-								<picker mode="time" data-index="endTime" @change="bindTimeChange">
-									<view class="form-item-text">
-										<text>{{ endTime }}</text>
-									</view>
-								</picker>
-							</view>
-						</view>
-
-						<view class="middle-form-item">
-							<label>是否允许多人使用</label>
-							<view class="modal-form-region">
-								<picker mode="selector" :range="pickerList" range-key="name"
-									@change="handleOnPickerChange" :value="pickerIndex">
-									<text>{{ pickerList[pickerIndex].name }}</text>
-								</picker>
-							</view>
-						</view>
-
-						<view class="middle-form-item">
-							<label>备注</label>
-							<view class="modal-form-region">
-								<input placeholder="请输入车位号或车辆位置" name="bak"
-									style="text-align: right;font-size: 28rpx;" />
-							</view>
+							<text v-else>{{ selectCarData.platenumber }}</text>
 						</view>
 					</view>
-
-					<view class="modal-container-footer">
-						<button form-type="submit">确认</button>
+					<view class="middle-form-item">
+						<label>使用人</label>
+						<view class="modal-form-region">
+							<input @focus="onInputFocus" @blur="onInputBlur" placeholder="请输入使用人" name="personName"
+								style="text-align:right;font-size:28rpx;" />
+						</view>
+					</view>
+					<view class="middle-form-item">
+						<label>手机号</label>
+						<view class="modal-form-region">
+							<input @focus="onInputFocus" @blur="onInputBlur" placeholder="请输入手机号" name="mobile"
+								style="text-align:right;font-size:28rpx;" />
+						</view>
+					</view>
+					<view class="middle-form-item">
+						<label>开始时间</label>
+						<view class="modal-form-region">
+							<picker mode="date" data-index="startDate" @change="changeDateTime">
+								<view class="form-item-text">
+									<text>{{ startDate }}</text>
+								</view>
+							</picker>
+							<picker mode="time" data-index="startTime" @change="changeDateTime">
+								<view class="form-item-text">
+									<text>{{ startTime }}</text>
+								</view>
+							</picker>
+						</view>
+					</view>
+					<view class="middle-form-item">
+						<label>结束时间</label>
+						<view class="modal-form-region">
+							<picker mode="date" data-index="endDate" @change="changeDateTime">
+								<view class="form-item-text">
+									<text>{{ endDate }}</text>
+								</view>
+							</picker>
+							<picker mode="time" data-index="endTime" @change="changeDateTime">
+								<view class="form-item-text">
+									<text>{{ endTime }}</text>
+								</view>
+							</picker>
+						</view>
+					</view>
+					<view class="middle-form-item">
+						<label>是否允许多人使用</label>
+						<view class="modal-form-region">
+							<picker mode="selector" :range="multiOptions" range-key="name" @change="changeMultiSelect"
+								:value="multiIndex">
+								<text>{{ multiOptions[multiIndex].name }}</text>
+							</picker>
+						</view>
+					</view>
+					<view class="middle-form-item">
+						<label>备注</label>
+						<view class="modal-form-region">
+							<input placeholder="请输入车位号或车辆位置" name="bak" style="text-align:right;font-size:28rpx;" />
+						</view>
 					</view>
 				</view>
-			</form>
-		</view>
-	</block>
+				<view class="modal-container-footer">
+					<button form-type="submit">确认</button>
+				</view>
+			</view>
+		</form>
+	</view>
 
-	<!-- 修改电子钥匙 -->
-	<block>
-		<view class="modal-mask" v-if="c_edit_key_show_momal" @tap="handleHideEditKeyModal"></view>
-		<view class="modal-base-map" v-if="c_edit_key_show_momal">
-			<form @submit="handleFormEdit">
-				<view class="modal-container">
-					<view class="modal-container-head">
-						<text>修改</text>
-						<image src="/static/images/right_1.png" @tap="handleHideEditKeyModal" />
+	<view class="modal-mask" v-if="showEditModal" @tap="closeEditKeyModal"></view>
+	<view class="modal-base-map" v-if="showEditModal">
+		<form @submit="submitEditKey">
+			<view class="modal-container">
+				<view class="modal-container-head">
+					<text>修改</text>
+					<image src="/static/images/right_1.png" @tap="closeEditKeyModal" />
+				</view>
+				<view class="modal-container-middle">
+					<view class="middle-form-item">
+						<label>车牌号</label>
+						<view class="modal-form-region">{{ editRecordData.platenumber }}</view>
 					</view>
-
-					<view class="modal-container-middle">
-						<view class="middle-form-item">
-							<label>车牌号</label>
-							<view class="modal-form-region">
-								{{ g_edit_info.platenumber }}
-							</view>
-						</view>
-
-						<view class="middle-form-item">
-							<label>使用人</label>
-							<view class="modal-form-region">
-								<text>{{ g_edit_info.personname }}</text>
-							</view>
-						</view>
-
-						<view class="middle-form-item">
-							<label>手机号</label>
-							<view class="modal-form-region">
-								<text>{{ g_edit_info.mobile }}</text>
-							</view>
-						</view>
-
-						<view class="middle-form-item">
-							<label>开始时间</label>
-							<view class="modal-form-region">
-								<picker mode="date" data-index="startDate" @change="bindTimeChange">
-									<view class="form-item-text">
-										<text>{{ startDate }}</text>
-									</view>
-								</picker>
-								<picker mode="time" data-index="startTime" @change="bindTimeChange">
-									<view class="form-item-text">
-										<text>{{ startTime }}</text>
-									</view>
-								</picker>
-							</view>
-						</view>
-
-						<view class="middle-form-item">
-							<label>结束时间</label>
-							<view class="modal-form-region">
-								<picker mode="date" data-index="endDate" @change="bindTimeChange">
-									<view class="form-item-text">
-										<text>{{ endDate }}</text>
-									</view>
-								</picker>
-								<picker mode="time" data-index="endTime" @change="bindTimeChange">
-									<view class="form-item-text">
-										<text>{{ endTime }}</text>
-									</view>
-								</picker>
-							</view>
-						</view>
-
-						<view class="middle-form-item">
-							<label>是否允许多人使用</label>
-							<view class="modal-form-region">
-								<picker mode="selector" :range="pickerList" range-key="name"
-									@change="handleOnPickerChange" :value="pickerIndex">
-									<text>{{ pickerList[pickerIndex].name }}</text>
-								</picker>
-							</view>
-						</view>
-
-						<view class="middle-form-item">
-							<label>打开方式</label>
-							<view class="modal-form-region">
-								<radio-group class="radio-group" @change="handleOnRadioChange">
-									<label class="radio-item">
-										<radio value="1" :checked="radioValue == 1" />
-										<text class="radio-label">智车钥</text>
-									</label>
-									<label class="radio-item">
-										<radio value="0" :checked="radioValue == 0" />
-										<text class="radio-label">智信通</text>
-									</label>
-								</radio-group>
-							</view>
-						</view>
-
-						<view class="middle-form-item">
-							<label>备注</label>
-							<view class="modal-form-region">
-								<text>{{ g_edit_info.bak || '-' }}</text>
-							</view>
+					<view class="middle-form-item">
+						<label>使用人</label>
+						<view class="modal-form-region">
+							<text>{{ editRecordData.personname }}</text>
 						</view>
 					</view>
-
-					<view class="modal-container-footer">
-						<button form-type="submit">确认</button>
+					<view class="middle-form-item">
+						<label>手机号</label>
+						<view class="modal-form-region">
+							<text>{{ editRecordData.mobile }}</text>
+						</view>
+					</view>
+					<view class="middle-form-item">
+						<label>开始时间</label>
+						<view class="modal-form-region">
+							<picker mode="date" data-index="startDate" @change="changeDateTime">
+								<view class="form-item-text">
+									<text>{{ startDate }}</text>
+								</view>
+							</picker>
+							<picker mode="time" data-index="startTime" @change="changeDateTime">
+								<view class="form-item-text">
+									<text>{{ startTime }}</text>
+								</view>
+							</picker>
+						</view>
+					</view>
+					<view class="middle-form-item">
+						<label>结束时间</label>
+						<view class="modal-form-region">
+							<picker mode="date" data-index="endDate" @change="changeDateTime">
+								<view class="form-item-text">
+									<text>{{ endDate }}</text>
+								</view>
+							</picker>
+							<picker mode="time" data-index="endTime" @change="changeDateTime">
+								<view class="form-item-text">
+									<text>{{ endTime }}</text>
+								</view>
+							</picker>
+						</view>
+					</view>
+					<view class="middle-form-item">
+						<label>是否允许多人使用</label>
+						<view class="modal-form-region">
+							<picker mode="selector" :range="multiOptions" range-key="name" @change="changeMultiSelect"
+								:value="multiIndex">
+								<text>{{ multiOptions[multiIndex].name }}</text>
+							</picker>
+						</view>
+					</view>
+					<view class="middle-form-item">
+						<label>备注</label>
+						<view class="modal-form-region">
+							<text>{{ editRecordData.bak || '-' }}</text>
+						</view>
 					</view>
 				</view>
-			</form>
-		</view>
-	</block>
-
+				<view class="modal-container-footer">
+					<button form-type="submit">确认</button>
+				</view>
+			</view>
+		</form>
+	</view>
 	<view class="card-footer">
-		<view @tap="handleSendSubmit">发送钥匙</view>
+		<view @tap="openGlobalSendModal">发送钥匙</view>
 	</view>
 </template>
 
@@ -363,331 +303,266 @@
 	export default {
 		data() {
 			return {
-				c_screen_height: 0,
-				c_screen_width: 0,
+				screenHeight: 0,
+				screenWidth: 0,
 				statusBarHeight: 0,
-				g_page: 1,
-				g_items: [],
-				c_fin3_link: 'https://fin3.wiselink.net.cn/fin/',
-				y_items: [],
-				y_page: 1,
-				y_triggered: false,
-				c_activeTab: 1,
-				g_triggered: false,
-				c_send_key_show_momal: false,
-				startDate: '2025-03-20',
-				startTime: '19:00',
-				endDate: '2025-03-20',
-				endTime: '19:00',
+				carPage: 1,
+				carList: [],
+				imgDomain: 'https://fin3.wiselink.net.cn/fin/',
+				recordList: [],
+				recordPage: 1,
+				activeTab: 1,
+				showSendModal: false,
+				startDate: '',
+				startTime: '',
+				endDate: '',
+				endTime: '',
 				copied: false,
-				c_edit_key_show_momal: false,
-				g_edit_info: {},
-				all_send: false,
-				his_state: '0',
-				keyword: '',
-				pickerList: [{
-						name: "允许",
-						value: 1
-					},
-					{
-						name: "不允许",
-						value: 0
-					}
-				],
-				pickerIndex: 0,
-				radioValue: 1,
-				g_items_temporary: [],
-				flag_item_state: false,
+				showEditModal: false,
+				editRecordData: {},
+				isManualInput: false,
+				recordStatus: '0',
+				searchKeyword: '',
+				multiOptions: [{
+					name: '允许',
+					value: 1
+				}, {
+					name: '不允许',
+					value: 0
+				}],
+				multiIndex: 0,
+				openType: 1,
+				searchList: [],
+				showSearchList: false,
 				searchTimer: null,
-				cellData: {},
+				selectCarData: {},
 				vehId: '',
-				y_total: 0,
-				comParam: ''
+				recordTotal: 0,
+				searchParam: ''
 			}
 		},
 		methods: {
-			handleOnRadioChange(e) {
-				this.radioValue = e.detail.value
+			changeOpenType(e) {
+				this.openType = e.detail.value
 			},
-			handleOnPickerChange(e) {
-				this.pickerIndex = e.detail.value
+			changeMultiSelect(e) {
+				this.multiIndex = e.detail.value
 			},
-			onInputChange(e) {
-				const keyword = e.detail.value.trim()
-				this.keyword = keyword
+			onSearchInput(e) {
+				const val = e.detail.value.trim()
+				this.searchKeyword = val
 				clearTimeout(this.searchTimer)
 				this.searchTimer = setTimeout(() => {
-					this.filterData(keyword)
+					this.doSearchFilter(val)
 				}, 500)
 			},
 			onInputBlur() {
-				this.flag_item_state = false
+				this.showSearchList = false
 			},
 			onInputFocus() {
-				this.flag_item_state = true
+				this.showSearchList = true
 			},
-			filterData(keyword) {
-				if (!keyword || keyword.trim() === '') {
-					this.g_items_temporary = []
+			doSearchFilter(keyword) {
+				if (!keyword) {
+					this.searchList = []
 					return
 				}
-				const lowerKeyword = keyword.toLowerCase().trim()
-				const matchedItems = this.g_items.filter(item => {
-					if (!item || !item.platenumber) return false
-					return item.platenumber.toLowerCase().includes(lowerKeyword)
-				})
-				this.g_items_temporary = matchedItems
+				const lower = keyword.toLowerCase()
+				this.searchList = this.carList.filter(i => i?.platenumber?.toLowerCase().includes(lower))
 			},
-			handleQueRen(evt) {
-				this.keyword = evt?.currentTarget?.dataset?.item?.platenumber
-				this.g_items_temporary = []
+			selectPlate(e) {
+				this.searchKeyword = e.currentTarget.dataset.item.platenumber
+				this.searchList = []
 			},
-			handleOnStatusChange(evt) {
-				this.his_state = evt?.currentTarget?.dataset?.id
-				this.y_triggered = false
-				this.y_page = 1
-				this.y_items = []
-				this.getKeySendingList()
+			changeRecordStatus(e) {
+				this.recordStatus = e.currentTarget.dataset.id
+				this.recordPage = 1
+				this.recordList = []
+				this.getRecordList()
 			},
-			handleSendSubmit() {
-				this.c_edit_key_show_momal = false
-				this.c_send_key_show_momal = true
-				this.all_send = true
-				this.radioValue = 1
+			openGlobalSendModal() {
+				this.showEditModal = false
+				this.showSendModal = true
+				this.isManualInput = true
+				this.openType = 1
 			},
-			handleCurrentDate() {
-				const formatDate = (date) => {
-					const year = date.getFullYear()
-					const month = date.getMonth() + 1
-					const day = date.getDate()
-					return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`
+			initDateTime() {
+				const fmtDate = d => {
+					const y = d.getFullYear()
+					const m = (d.getMonth() + 1).toString().padStart(2, '0')
+					const day = d.getDate().toString().padStart(2, '0')
+					return `${y}-${m}-${day}`
 				}
-				const formatTime = (date) => {
-					const hours = date.getHours()
-					const minutes = date.getMinutes()
-					return `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`
+				const fmtTime = d => {
+					const h = d.getHours().toString().padStart(2, '0')
+					const mi = d.getMinutes().toString().padStart(2, '0')
+					return `${h}:${mi}`
 				}
 				const now = new Date()
 				const tomorrow = new Date(now)
 				tomorrow.setDate(now.getDate() + 1)
-				const currentDate = formatDate(now)
-				const tomorrowDate = formatDate(tomorrow)
-				const currentTime = formatTime(now)
-
-				this.startDate = currentDate
-				this.endDate = tomorrowDate
-				this.startTime = currentTime
-				this.endTime = currentTime
+				this.startDate = fmtDate(now)
+				this.endDate = fmtDate(tomorrow)
+				this.startTime = fmtTime(now)
+				this.endTime = fmtTime(now)
 			},
-			handleShowSendKeyModal(evt) {
-				const info = evt.currentTarget.dataset.item
-				this.cellData = info
-				this.c_edit_key_show_momal = false
-				this.c_send_key_show_momal = true
-				this.vehId = info.id
-				this.radioValue = 1
+			openSendKeyModal(e) {
+				const item = e.currentTarget.dataset.item
+				this.selectCarData = item
+				this.showEditModal = false
+				this.showSendModal = true
+				this.vehId = item.id
+				this.openType = 1
 			},
-			handleHideSengKeyModal() {
-				this.cellData = {}
-				this.keyword = ''
-				this.c_send_key_show_momal = false
-				this.all_send = false
+			closeSendKeyModal() {
+				this.selectCarData = {}
+				this.searchKeyword = ''
+				this.showSendModal = false
+				this.isManualInput = false
 			},
-			handleHideEditKeyModal() {
-				this.c_edit_key_show_momal = false
-				this.g_edit_info = {}
+			closeEditKeyModal() {
+				this.showEditModal = false
+				this.editRecordData = {}
 			},
-			handleLower() {
-				this.g_page++
-				this.getOrderList()
+			loadCarList() {
+				this.carPage++
+				this.getCarList()
 			},
-			handleKeyLower() {
-				this.y_page++
-				this.getKeySendingList()
+			loadRecordList() {
+				this.recordPage++
+				this.getRecordList()
 			},
-			handleRefresh() {
-				this.g_triggered = false
-				this.g_page = 1
-				this.g_items = []
-				this.getOrderList()
-			},
-			handleKeyRefresh() {
-				this.y_triggered = false
-				this.y_page = 1
-				this.y_items = []
-				this.getKeySendingList()
-			},
-			async getOrderList() {
+			async getCarList() {
 				try {
-					const param = {
-						page: this.g_page
-					}
-					const res = await u_carList(param)
-					if (res.code === 1000) {
-						this.g_items = this.g_items.concat(res.content)
-					}
-				} catch (e) {}
-			},
-			bindblurSea(evt) {
-				this.comParam = evt.detail.value
-				this.y_triggered = false
-				this.y_page = 1
-				this.y_items = []
-				this.getKeySendingList()
-			},
-			async getKeySendingList() {
-				try {
-					const params = {
-						page: this.y_page,
-						status: this.his_state,
-						comParam: this.comParam || ''
-					}
-					const res = await u_rentRecord(params)
-					this.y_total = res.count || 0
-					this.y_items = [...this.y_items, ...res.content]
-				} catch (e) {}
-			},
-			handleViewPhotos(evt) {
-				const info = evt?.currentTarget?.dataset?.item
-				if (!info) return
-				const g_images = [info.img1, info.img2, info.img3, info.img4, info.img5].filter(img => img != null &&
-					img !== '')
-				if (g_images.length < 1) {
-					uni.showToast({
-						title: '暂无照片',
-						icon: 'none'
+					const res = await u_carList({
+						page: this.carPage
 					})
-					return
-				}
-				const images = g_images.map(ele => this.c_fin3_link + ele.replace(/\\/g, "/"))
+					if (res.code === 1000) this.carList = this.carList.concat(res.content)
+				} catch (e) {}
+			},
+			onSearchBlur(e) {
+				this.searchParam = e.detail.value
+				this.recordPage = 1
+				this.recordList = []
+				this.getRecordList()
+			},
+			async getRecordList() {
+				try {
+					const res = await u_rentRecord({
+						page: this.recordPage,
+						status: this.recordStatus,
+						comParam: this.searchParam || ''
+					})
+					this.recordTotal = res.count || 0
+					this.recordList = [...this.recordList, ...res.content]
+				} catch (e) {}
+			},
+			previewImages(e) {
+				const item = e.currentTarget.dataset.item
+				if (!item) return
+				const imgs = [item.img1, item.img2, item.img3, item.img4, item.img5].filter(Boolean)
+				if (!imgs.length) return uni.showToast({
+					title: '暂无照片',
+					icon: 'none'
+				})
+				const urls = imgs.map(u => this.imgDomain + u.replace(/\\/g, '/'))
 				uni.previewImage({
-					urls: images
+					urls
 				})
 			},
-			async handleFormSubmit(evt) {
-				const {
-					startDate,
-					startTime,
-					endDate,
-					endTime,
-					vehId
-				} = this
-				const formData = evt.detail.value
-				const validations = [{
-						field: formData.personName,
-						message: '请输入使用人'
-					},
-					{
-						field: formData.mobile,
-						message: '请输入手机号'
-					}
-				]
-				const validationError = validations.find(({
-					field
-				}) => !field)
-				if (validationError) {
-					uni.showToast({
-						title: validationError.message,
-						icon: 'none'
-					})
-					return
-				}
-				const buildDateTime = (date, time) => `${date || ''} ${time ? `${time}:00` : '00:00:00'}`.trim()
-				const requestParams = {
-					vehId: vehId || '',
-					client: this.radioValue || '',
-					startDate: buildDateTime(startDate, startTime),
-					endDate: buildDateTime(endDate, endTime),
-					personName: formData.personName,
-					mobile: formData.mobile,
-					bak: formData.bak,
-					platenumber: formData?.platenumber || '',
-					multipleUsed: this.pickerList[this.pickerIndex]?.value
+			async submitSendKey(e) {
+				const form = e.detail.value
+				if (!form.personName) return uni.showToast({
+					title: '请输入使用人',
+					icon: 'none'
+				})
+				if (!form.mobile) return uni.showToast({
+					title: '请输入手机号',
+					icon: 'none'
+				})
+				const build = (d, t) => `${d} ${t || '00:00'}:00`
+				const params = {
+					vehId: this.vehId || '',
+					client: this.openType,
+					startDate: build(this.startDate, this.startTime),
+					endDate: build(this.endDate, this.endTime),
+					personName: form.personName,
+					mobile: form.mobile,
+					bak: form.bak,
+					platenumber: form.platenumber || '',
+					multipleUsed: this.multiOptions[this.multiIndex].value
 				}
 				try {
-					const res = await u_sendRentKey(requestParams)
+					const res = await u_sendRentKey(params)
 					if (res.code !== 1000) throw new Error(res.msg)
-					this.c_send_key_show_momal = false
-					this.g_items = []
-					this.y_items = []
-					this.y_page = 1
-					this.vehId = ''
+					this.showSendModal = false
+					this.carList = []
+					this.recordList = []
+					this.recordPage = 1
 					setTimeout(() => {
-						this.getKeySendingList()
-						this.getOrderList()
+						this.getCarList()
+						this.getRecordList()
 					}, 1000)
 					uni.showModal({
 						title: '发送成功',
 						content: res.msg,
 						showCancel: false
 					})
-				} catch (error) {
+				} catch (err) {
 					uni.showToast({
-						title: error.message || '请求失败',
+						title: err.message || '发送失败',
 						icon: 'none'
 					})
 				}
 			},
-			bindTimeChange(evt) {
-				const category = evt.currentTarget.dataset.index
-				const value = evt.detail.value
-				this[category] = value
+			changeDateTime(e) {
+				this[e.currentTarget.dataset.index] = e.detail.value
 			},
-			async handleCance(evt) {
+			async cancelRentKey(e) {
 				try {
-					const params = {
-						controlCode: evt.currentTarget.dataset.item.controlcode
-					}
-					const res = await u_cancelRentKey(params)
+					const code = e.currentTarget.dataset.item.controlcode
+					const res = await u_cancelRentKey({
+						controlCode: code
+					})
 					if (res.code === 1000) {
-						this.y_items = []
-						this.y_page = 1
-						this.getKeySendingList()
+						this.recordList = []
+						this.recordPage = 1
+						this.getRecordList()
 					}
 				} catch (e) {}
 			},
-			handleCopy(evt) {
-				const text = evt.currentTarget.dataset.item.simplecode
+			copyLink(e) {
+				const txt = e.currentTarget.dataset.item.simplecode
 				uni.setClipboardData({
-					data: text,
-					success: () => {
-						this.copied = true
-					}
+					data: txt,
+					success: () => this.copied = true
 				})
 			},
-			handleEditKey(evt) {
-				this.c_send_key_show_momal = false
-				this.radioValue = evt?.currentTarget?.dataset?.item?.client || 0
-				this.c_edit_key_show_momal = true
-				this.g_edit_info = evt.currentTarget.dataset.item
-				this.pickerIndex = Number(evt.currentTarget.dataset.item?.multipleUsed) == 0 ? 1 : 0
+			openEditKeyModal(e) {
+				const item = e.currentTarget.dataset.item
+				this.showSendModal = false
+				this.openType = item.client || 0
+				this.showEditModal = true
+				this.editRecordData = item
+				this.multiIndex = item.multipleUsed == 0 ? 1 : 0
 			},
-			async handleFormEdit() {
-				const {
-					startDate,
-					startTime,
-					endDate,
-					endTime,
-					g_edit_info
-				} = this
-				const buildDateTime = (date, time) => `${date || ''} ${time ? `${time}:00` : '00:00:00'}`.trim()
-				const requestParams = {
-					client: this.radioValue || 0,
-					controlCode: g_edit_info.controlcode,
-					startDate: buildDateTime(startDate, startTime),
-					endDate: buildDateTime(endDate, endTime),
-					multipleUsed: this.pickerList[this.pickerIndex]?.value
+			async submitEditKey() {
+				const build = (d, t) => `${d} ${t || '00:00'}:00`
+				const params = {
+					client: this.openType,
+					controlCode: this.editRecordData.controlcode,
+					startDate: build(this.startDate, this.startTime),
+					endDate: build(this.endDate, this.endTime),
+					multipleUsed: this.multiOptions[this.multiIndex].value
 				}
 				try {
-					const res = await u_updateRentKey(requestParams)
+					const res = await u_updateRentKey(params)
 					if (res.code === 1000) {
-						this.g_edit_info = {}
-						this.c_edit_key_show_momal = false
-						this.y_triggered = false
-						this.y_page = 1
-						this.y_items = []
-						this.vehId = ''
-						this.getKeySendingList()
+						this.editRecordData = {}
+						this.showEditModal = false
+						this.recordList = []
+						this.recordPage = 1
+						this.getRecordList()
 						uni.showModal({
 							title: '温馨提示',
 							content: res.msg,
@@ -695,45 +570,44 @@
 						})
 					}
 				} catch (e) {}
-			},
+			}
 		},
-		onLoad(options) {
+		onLoad() {
 			uni.getSystemInfo({
-				success: (res) => {
-					this.c_screen_height = res.windowHeight
-					this.c_screen_width = res.windowWidth
+				success: res => {
+					this.screenHeight = res.windowHeight
+					this.screenWidth = res.windowWidth
 					this.statusBarHeight = res.statusBarHeight
 				}
 			})
-			this.getOrderList()
-			this.getKeySendingList()
+			this.getCarList()
+			this.getRecordList()
 		},
 		onReady() {
-			this.handleCurrentDate()
+			this.initDateTime()
 		},
 		onShow() {
-			this.handleCurrentDate()
-		},
+			this.initDateTime()
+		}
 	}
 </script>
 
 <style scoped>
-	/* 全局去除滚动条 */
 	::-webkit-scrollbar {
 		width: 0;
 		height: 0;
-		display: none;
+		display: none
 	}
 
 	scroll-view::-webkit-scrollbar {
-		display: none;
+		display: none
 	}
 
 	.container {
 		height: 100vh;
 		padding: 10rpx 4rpx;
 		background-color: #f7f9fc;
-		box-sizing: border-box;
+		box-sizing: border-box
 	}
 
 	.record-container {
@@ -747,7 +621,7 @@
 		display: flex;
 		flex-direction: column;
 		overflow: hidden;
-		gap: 15rpx;
+		gap: 15rpx
 	}
 
 	.record-tabs {
@@ -755,7 +629,7 @@
 		height: 50px;
 		background-color: #f8f9fa;
 		border-radius: 12rpx 12rpx 0 0;
-		flex-shrink: 0;
+		flex-shrink: 0
 	}
 
 	.record-tabs-item {
@@ -768,18 +642,18 @@
 		font-weight: 500;
 		font-size: 28rpx;
 		color: #333;
-		font-weight: bold;
-		transition: all 0.3s;
+		font-weight: 700;
+		transition: all .3s
 	}
 
 	.record-tabs-item.active {
 		background-color: #6a9bee;
-		color: #fff;
+		color: #fff
 	}
 
 	.record-tabs-1 {
 		flex-shrink: 0;
-		padding: 0rpx 10rpx;
+		padding: 0 10rpx
 	}
 
 	.search-box {
@@ -790,28 +664,28 @@
 		padding: 4px 12px;
 		width: 96%;
 		background-color: #f8f9fa;
-		flex-shrink: 0;
+		flex-shrink: 0
 	}
 
 	.tabs-1-conut {
 		flex-shrink: 0;
-		padding: 0rpx 10px;
+		padding: 0 10px;
 		text-align: center;
 		font-size: 22rpx;
-		color: #999;
+		color: #999
 	}
 
 	.scroll-full {
 		flex: 1;
 		width: 100%;
-		gap: 10rpx;
+		gap: 10rpx
 	}
 
 	.content-item {
 		margin: 15rpx;
-		background-color: #ffffff;
+		background-color: #fff;
 		border-radius: 8px;
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04)
 	}
 
 	.content-item-head {
@@ -819,13 +693,13 @@
 		flex-direction: row;
 		justify-content: space-between;
 		border-bottom: 1px solid #f5f5f5;
-		padding: 10rpx;
+		padding: 10rpx
 	}
 
 	.head-left {
 		display: flex;
 		align-items: center;
-		gap: 20rpx;
+		gap: 20rpx
 	}
 
 	.left-category {
@@ -834,17 +708,17 @@
 		font-weight: 500;
 		font-size: 26rpx;
 		color: #555;
-		gap: 10rpx;
+		gap: 10rpx
 	}
 
 	.left-category image {
 		width: 30rpx;
-		height: 24rpx;
+		height: 24rpx
 	}
 
 	.left-model {
 		font-size: 24rpx;
-		color: #666;
+		color: #666
 	}
 
 	.content-item-info {
@@ -852,23 +726,23 @@
 		flex-wrap: wrap;
 		padding: 10rpx;
 		gap: 20rpx;
-		border-bottom: 1px solid #f5f5f5;
+		border-bottom: 1px solid #f5f5f5
 	}
 
 	.info-item {
 		flex: 0 0 48%;
 		font-size: 24rpx;
-		color: #666;
+		color: #666
 	}
 
 	.long-info-item {
-		flex-basis: 100% !important;
+		flex-basis: 100% !important
 	}
 
 	.content-item-footer {
 		display: flex;
 		padding: 15rpx;
-		justify-content: space-between;
+		justify-content: space-between
 	}
 
 	.footer-right-btn {
@@ -877,7 +751,7 @@
 		border-radius: 8rpx;
 		padding: 4rpx 15rpx;
 		font-size: 22rpx;
-		font-weight: 500;
+		font-weight: 500
 	}
 
 	.content-card {
@@ -885,7 +759,7 @@
 		margin: 12rpx;
 		padding: 12rpx;
 		border-radius: 8rpx;
-		background-color: #fff;
+		background-color: #fff
 	}
 
 	.card-head {
@@ -893,7 +767,7 @@
 		height: 60rpx;
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: space-between
 	}
 
 	.card-head-left {
@@ -902,17 +776,17 @@
 		gap: 20rpx;
 		font-weight: 500;
 		font-size: 26rpx;
-		color: #555;
+		color: #555
 	}
 
 	.split-line {
 		border-left: 1px solid #f0f0f0;
 		width: 1px;
-		height: 35rpx;
+		height: 35rpx
 	}
 
 	.card-info {
-		border-bottom: 1px solid #f5f5f5;
+		border-bottom: 1px solid #f5f5f5
 	}
 
 	.card-footer1 {
@@ -921,7 +795,7 @@
 		align-items: center;
 		height: 60rpx;
 		font-size: 22rpx;
-		padding-top: 10rpx;
+		padding-top: 10rpx
 	}
 
 	.card-footer1 text {
@@ -930,7 +804,7 @@
 		border-radius: 8rpx;
 		background-color: #6a9bee;
 		color: #fff;
-		margin-left: 10rpx;
+		margin-left: 10rpx
 	}
 
 	.modal-mask {
@@ -939,8 +813,8 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background: rgba(0, 0, 0, 0.4);
-		z-index: 998;
+		background: rgba(0, 0, 0, .4);
+		z-index: 998
 	}
 
 	.modal-base-map {
@@ -951,13 +825,13 @@
 		background: #fff;
 		border-radius: 20rpx 20rpx 0 0;
 		z-index: 999;
-		padding: 20rpx;
+		padding: 20rpx
 	}
 
 	.modal-container {
 		max-height: 70vh;
 		display: flex;
-		flex-direction: column;
+		flex-direction: column
 	}
 
 	.modal-container-head {
@@ -966,18 +840,18 @@
 		align-items: center;
 		height: 60rpx;
 		border-bottom: 1px solid #f5f5f5;
-		margin-bottom: 20rpx;
+		margin-bottom: 20rpx
 	}
 
 	.modal-container-head text {
 		font-weight: 500;
 		font-size: 34rpx;
-		color: #555;
+		color: #555
 	}
 
 	.modal-container-head image {
 		width: 24rpx;
-		height: 24rpx;
+		height: 24rpx
 	}
 
 	.modal-container-middle {
@@ -986,14 +860,14 @@
 		display: flex;
 		flex-direction: column;
 		gap: 20rpx;
-		padding-bottom: 20rpx;
+		padding-bottom: 20rpx
 	}
 
 	.modal-container-footer {
 		height: 80rpx;
 		display: flex;
 		justify-content: center;
-		align-items: center;
+		align-items: center
 	}
 
 	.modal-container-footer button {
@@ -1004,7 +878,7 @@
 		color: #fff;
 		width: 50%;
 		height: 90%;
-		border: none;
+		border: none
 	}
 
 	.middle-form-item {
@@ -1012,14 +886,14 @@
 		align-items: center;
 		justify-content: space-between;
 		width: 90%;
-		margin: 0 auto;
+		margin: 0 auto
 	}
 
 	.middle-form-item label {
 		font-weight: 500;
 		font-size: 28rpx;
 		color: #666;
-		min-width: 120rpx;
+		min-width: 120rpx
 	}
 
 	.modal-form-region {
@@ -1029,14 +903,14 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-end;
-		font-size: 26rpx;
+		font-size: 26rpx
 	}
 
 	.temporary {
 		text-align: right;
 		font-size: 28rpx;
 		width: 100%;
-		color: #666;
+		color: #666
 	}
 
 	.g_items_temporary {
@@ -1048,7 +922,7 @@
 		z-index: 10000;
 		border-radius: 10rpx;
 		padding: 20rpx;
-		box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+		box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, .05)
 	}
 
 	.item-card-footer {
@@ -1056,19 +930,19 @@
 		line-height: 70rpx;
 		padding: 0 10rpx;
 		border-bottom: 1px solid #f5f5f5;
-		color: #666;
+		color: #666
 	}
 
 	.radio-group {
 		display: flex;
-		gap: 60rpx;
+		gap: 60rpx
 	}
 
 	.radio-item {
 		display: flex;
 		align-items: center;
 		font-size: 30rpx;
-		color: #666;
+		color: #666
 	}
 
 	.card-footer {
@@ -1077,7 +951,7 @@
 		width: 100%;
 		display: flex;
 		justify-content: center;
-		z-index: 10;
+		z-index: 10
 	}
 
 	.card-footer view {
@@ -1088,7 +962,7 @@
 		color: #fff;
 		text-align: center;
 		font-weight: 500;
-		font-size: 30rpx;
+		font-size: 30rpx
 	}
 
 	.picker-container {
@@ -1099,13 +973,13 @@
 		align-items: center;
 		font-size: 26rpx;
 		color: #333;
-		margin-top: 8rpx;
+		margin-top: 8rpx
 	}
 
 	.picker-btns {
 		display: flex;
 		flex-direction: row;
-		gap: 16rpx;
+		gap: 16rpx
 	}
 
 	.picker-btn {
@@ -1114,20 +988,20 @@
 		border-radius: 30rpx;
 		padding: 10rpx 24rpx;
 		font-size: 24rpx;
-		transition: all 0.2s ease;
+		transition: all .2s ease
 	}
 
 	.picker-btn.active {
 		background-color: #6a9bee;
-		color: #fff;
+		color: #fff
 	}
 
 	.search-input {
-		font-size: 24rpx;
+		font-size: 24rpx
 	}
 
 	.card-head-right {
 		font-size: 24rpx;
-		font-weight: bold;
+		font-weight: 700
 	}
 </style>
