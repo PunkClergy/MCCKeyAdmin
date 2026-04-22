@@ -38,7 +38,8 @@
 				{
 					"path": "maintainRemind",
 					"style": {
-						"navigationBarTitleText": "保养提醒"
+						"navigationBarTitleText": "保养提醒",
+						"navigationBarBackgroundColor": "#EFF1FC"
 					}
 				},
 
