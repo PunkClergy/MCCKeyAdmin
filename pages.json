@@ -79,7 +79,8 @@
 				{
 					"path": "returnRecord",
 					"style": {
-						"navigationBarTitleText": "还车记录"
+						"navigationBarTitleText": "还车记录",
+						"navigationBarBackgroundColor": "#EFF1FC"
 					}
 				},
 

@@ -114,6 +114,7 @@ export default {
   height: 100vh;
   padding: 10rpx 4rpx;
   box-sizing: border-box;
+  background-color: #EFF1FC;
 }
 
 /* 核心卡片：flex 纵向布局 */
