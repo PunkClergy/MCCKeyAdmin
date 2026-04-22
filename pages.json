@@ -30,7 +30,9 @@
 				{
 					"path": "sendKeyToRenter",
 					"style": {
-						"navigationBarTitleText": "发送钥匙"
+						"navigationBarTitleText": "发送钥匙",
+						"navigationBarBackgroundColor": "#EFF1FC"
+					
 					}
 				},
 				{

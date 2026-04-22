@@ -1,26 +1,19 @@
 <template>
-	<view class="container"
-		:style="{ backgroundImage: `url(${s_background_picture_of_the_front_page})`, height: `${c_screen_height}px` }">
-		<custom-header title="发送电子钥匙" />
-
-		<view class="record-container"
-			:style="{ height: `${c_screen_height - (navBarHeight + statusBarHeight + 10)}px`, marginTop: `${navBarHeight + statusBarHeight}px` }">
+	<view class="container" :style="{ height: `${c_screen_height}px` }">
+		<view class="record-container">
 			<!-- 切换部分 -->
-			<view class="record-tabs" @tap="handleSwitchTab">
-				<view class="record-tabs-item"
-					:style="{ backgroundImage: `url(${c_activeTab == 1 ? s_background_tabs_active_1 : s_background_tabs_1})` }">
-					发送钥匙</view>
-				<view class="record-tabs-item"
-					:style="{ backgroundImage: `url(${c_activeTab == 2 ? s_background_tabs_2 : s_background_tabs_active_2})` }">
-					使用记录</view>
+			<view class="record-tabs">
+				<view class="record-tabs-item" :class="c_activeTab == 1 ? 'active' : ''" @tap="c_activeTab = 1">
+					发送钥匙
+				</view>
+				<view class="record-tabs-item" :class="c_activeTab == 2 ? 'active' : ''" @tap="c_activeTab = 2">
+					使用记录
+				</view>
 			</view>
 
 			<!-- 详情区域部分 -->
 			<block v-if="c_activeTab == 1">
-				<scroll-view scroll-y
-					:style="{ height: `${c_screen_height - (navBarHeight + statusBarHeight + 10 + 50)}px` }"
-					@scrolltolower="handleLower" @refresherrefresh="handleRefresh" :refresher-enabled="true"
-					:refresher-triggered="g_triggered">
+				<scroll-view scroll-y class="scroll-full" @scrolltolower="handleLower">
 					<view v-for="(item, index) in g_items" :key="index" class="content-item">
 						<view class="content-item-head">
 							<view class="head-left">
@@ -29,7 +22,7 @@
 									<text>{{ item.platenumber }}</text>
 								</view>
 								<view class="left-model" v-if="!item.bluetoothKey">
-									{{ item.vehicleSerialName || '-' }}{{ item.vehicleModeName || '' }}111
+									{{ item.vehicleSerialName || '-' }}{{ item.vehicleModeName || '' }}
 								</view>
 							</view>
 						</view>
@@ -74,22 +67,20 @@
 			</block>
 
 			<block v-if="c_activeTab == 2">
-				<view class="record-tabs-1" style="display: flex;flex-direction: column;">
+				<view class="record-tabs-1" style="display: flex;flex-direction: column;gap: 10rpx;">
 					<view class="search-box">
 						<icon type="search" size="16" class="search-icon" />
 						<input placeholder="车牌号/设备号/使用人" class="search-input" @blur="bindblurSea" />
 					</view>
 
-					<view class="picker-container custom-arrow-picker"
-						style="width: 92%;font-size: 24rpx;display: flex;flex-direction: row;gap: 20rpx;align-items: center;">
-						<view>全部状态：</view>
-						<view style="display: flex;flex-direction: row;gap: 10rpx;">
-							<view @tap="handleOnStatusChange" data-id="0"
-								:style="{ backgroundColor: his_state == 0 ? '#F56F48' : '#7B7C7C', borderRadius: '24rpx', color: '#fff', padding: '10rpx 20rpx' }">
+					<view class="picker-container">
+						<view class="picker-btns">
+							<view class="picker-btn" :class="his_state == 0 ? 'active' : ''" @tap="handleOnStatusChange"
+								data-id="0">
 								使用中
 							</view>
-							<view @tap="handleOnStatusChange" data-id="1"
-								:style="{ backgroundColor: his_state == 1 ? '#F56F48' : '#7B7C7C', borderRadius: '24rpx', color: '#fff', padding: '10rpx 20rpx' }">
+							<view class="picker-btn" :class="his_state == 1 ? 'active' : ''" @tap="handleOnStatusChange"
+								data-id="1">
 								已过期
 							</view>
 						</view>
@@ -97,10 +88,7 @@
 				</view>
 
 				<view class="tabs-1-conut">共有{{ y_total }}条记录</view>
-
-				<scroll-view class="content-container" scroll-y
-					:style="{ top: `${25 + 5 + 8 + 10 + 10 + searchBarHeight}px` }" @scrolltolower="handleKeyLower"
-					@refresherrefresh="handleKeyRefresh" :refresher-enabled="true" :refresher-triggered="y_triggered">
+				<scroll-view scroll-y class="scroll-full" @scrolltolower="handleKeyLower">
 					<view v-for="(item, index) in y_items" :key="index" class="content-card">
 						<view class="card-head">
 							<view class="card-head-left">
@@ -363,7 +351,6 @@
 </template>
 
 <script>
-	import 'url-search-params-polyfill';
 	import {
 		u_addOrUpdate,
 		u_updateRentKey,
@@ -379,31 +366,13 @@
 				c_screen_height: 0,
 				c_screen_width: 0,
 				statusBarHeight: 0,
-				navBarHeight: 49,
-				s_background_tabs_1: '',
-				s_background_tabs_2: '',
-				s_background_tabs_active_1: '',
-				s_background_tabs_active_2: '',
-				searchBarHeight: 80,
-				totalNavHeight: (0) + (44),
 				g_page: 1,
 				g_items: [],
 				c_fin3_link: 'https://fin3.wiselink.net.cn/fin/',
 				y_items: [],
 				y_page: 1,
 				y_triggered: false,
-				c_tabs: [{
-						name: '报销记录',
-						value: '1'
-					},
-					{
-						name: '新增报销',
-						value: '2'
-					}
-				],
 				c_activeTab: 1,
-				params: {},
-				file: null,
 				g_triggered: false,
 				c_send_key_show_momal: false,
 				startDate: '2025-03-20',
@@ -411,11 +380,9 @@
 				endDate: '2025-03-20',
 				endTime: '19:00',
 				copied: false,
-				controlcode: '',
 				c_edit_key_show_momal: false,
 				g_edit_info: {},
 				all_send: false,
-				selectedIndex: 0,
 				his_state: '0',
 				keyword: '',
 				pickerList: [{
@@ -435,8 +402,7 @@
 				cellData: {},
 				vehId: '',
 				y_total: 0,
-				comParam: '',
-				s_background_picture_of_the_front_page: ''
+				comParam: ''
 			}
 		},
 		methods: {
@@ -481,10 +447,10 @@
 				this.y_triggered = false
 				this.y_page = 1
 				this.y_items = []
-				this.selectedIndex = evt?.detail?.value
 				this.getKeySendingList()
 			},
 			handleSendSubmit() {
+				this.c_edit_key_show_momal = false
 				this.c_send_key_show_momal = true
 				this.all_send = true
 				this.radioValue = 1
@@ -513,51 +479,10 @@
 				this.startTime = currentTime
 				this.endTime = currentTime
 			},
-			async initialiImageBaseConversion() {
-				const imageMap = [{
-						path: '/assets/images/home/car-bg.png',
-						key: 's_background_picture_of_the_front_page'
-					},
-					{
-						path: '/assets/images/home/1-1.png',
-						key: 's_background_tabs_1'
-					},
-					{
-						path: '/assets/images/home/2-1.png',
-						key: 's_background_tabs_active_1'
-					},
-					{
-						path: '/assets/images/home/1-2.png',
-						key: 's_background_tabs_2'
-					},
-					{
-						path: '/assets/images/home/2-2.png',
-						key: 's_background_tabs_active_2'
-					}
-				]
-				const promises = imageMap.map(item =>
-					new Promise((resolve) => {
-						uni.getFileSystemManager().readFile({
-							filePath: item.path,
-							encoding: 'base64',
-							success: (res) => {
-								resolve({
-									[item.key]: `data:image/png;base64,${res.data}`
-								})
-							}
-						})
-					})
-				)
-				const results = await Promise.all(promises)
-				const dataToUpdate = results.reduce((acc, curr) => ({
-					...acc,
-					...curr
-				}), {})
-				Object.assign(this, dataToUpdate)
-			},
 			handleShowSendKeyModal(evt) {
 				const info = evt.currentTarget.dataset.item
 				this.cellData = info
+				this.c_edit_key_show_momal = false
 				this.c_send_key_show_momal = true
 				this.vehId = info.id
 				this.radioValue = 1
@@ -571,14 +496,6 @@
 			handleHideEditKeyModal() {
 				this.c_edit_key_show_momal = false
 				this.g_edit_info = {}
-			},
-			handleSwitchTab(e) {
-				const flag = e.target.textContent
-				if (flag == '发送钥匙') {
-					this.c_activeTab = 1
-				} else {
-					this.c_activeTab = 2
-				}
 			},
 			handleLower() {
 				this.g_page++
@@ -601,25 +518,15 @@
 				this.getKeySendingList()
 			},
 			async getOrderList() {
-				console.log(1111)
-				// showLoading("加载中...")
 				try {
 					const param = {
 						page: this.g_page
 					}
 					const res = await u_carList(param)
 					if (res.code === 1000) {
-						if (this.g_page > 1 && res.content.length === 0) {
-							// showToast(`已加载全部数据：共${this.g_items.length}条`)
-						}
 						this.g_items = this.g_items.concat(res.content)
-						this.g_total = Number(res.count || 0).toLocaleString()
 					}
-				} catch (e) {
-					// showToast('请求失败，请稍后再试')
-				} finally {
-					// hideLoading()
-				}
+				} catch (e) {}
 			},
 			bindblurSea(evt) {
 				this.comParam = evt.detail.value
@@ -629,36 +536,27 @@
 				this.getKeySendingList()
 			},
 			async getKeySendingList() {
-				// showLoading("加载中...")
 				try {
 					const params = {
-						[u_rentRecord.page]: this.y_page,
+						page: this.y_page,
 						status: this.his_state,
 						comParam: this.comParam || ''
 					}
 					const res = await u_rentRecord(params)
-					if (this.y_page > 1 && res.content.length === 0) {
-						// showToast(`已加载全部数据：共${this.y_items.length}条`)
-						return
-					}
 					this.y_total = res.count || 0
 					this.y_items = [...this.y_items, ...res.content]
-				} catch (e) {
-					// showToast("数据加载失败，请重试")
-				} finally {
-					// hideLoading()
-				}
+				} catch (e) {}
 			},
 			handleViewPhotos(evt) {
 				const info = evt?.currentTarget?.dataset?.item
-				if (!info) {
-					// showToast('无效数据')
-					return
-				}
+				if (!info) return
 				const g_images = [info.img1, info.img2, info.img3, info.img4, info.img5].filter(img => img != null &&
 					img !== '')
 				if (g_images.length < 1) {
-					// showToast('无可查看照片')
+					uni.showToast({
+						title: '暂无照片',
+						icon: 'none'
+					})
 					return
 				}
 				const images = g_images.map(ele => this.c_fin3_link + ele.replace(/\\/g, "/"))
@@ -688,7 +586,10 @@
 					field
 				}) => !field)
 				if (validationError) {
-					// showToast(validationError.message)
+					uni.showToast({
+						title: validationError.message,
+						icon: 'none'
+					})
 					return
 				}
 				const buildDateTime = (date, time) => `${date || ''} ${time ? `${time}:00` : '00:00:00'}`.trim()
@@ -721,7 +622,10 @@
 						showCancel: false
 					})
 				} catch (error) {
-					// showToast(error.message || '请求失败，请稍后重试')
+					uni.showToast({
+						title: error.message || '请求失败',
+						icon: 'none'
+					})
 				}
 			},
 			bindTimeChange(evt) {
@@ -732,18 +636,13 @@
 			async handleCance(evt) {
 				try {
 					const params = {
-						[u_cancelRentKey.controlCode]: evt.currentTarget.dataset.item.controlcode
+						controlCode: evt.currentTarget.dataset.item.controlcode
 					}
 					const res = await u_cancelRentKey(params)
 					if (res.code === 1000) {
-						this.c_send_key_show_momal = false
-						this.g_items = []
 						this.y_items = []
 						this.y_page = 1
 						this.getKeySendingList()
-						this.getOrderList()
-					} else {
-						// showToast(res.msg)
 					}
 				} catch (e) {}
 			},
@@ -756,13 +655,8 @@
 					}
 				})
 			},
-			handleForward(evt) {
-				const controlcode = evt.currentTarget.dataset.item.controlcode
-				const bak = evt?.currentTarget?.dataset?.item?.bak
-				this.controlcode = controlcode
-				this.bak = bak
-			},
 			handleEditKey(evt) {
+				this.c_send_key_show_momal = false
 				this.radioValue = evt?.currentTarget?.dataset?.item?.client || 0
 				this.c_edit_key_show_momal = true
 				this.g_edit_info = evt.currentTarget.dataset.item
@@ -804,6 +698,13 @@
 			},
 		},
 		onLoad(options) {
+			uni.getSystemInfo({
+				success: (res) => {
+					this.c_screen_height = res.windowHeight
+					this.c_screen_width = res.windowWidth
+					this.statusBarHeight = res.statusBarHeight
+				}
+			})
 			this.getOrderList()
 			this.getKeySendingList()
 		},
@@ -811,23 +712,28 @@
 			this.handleCurrentDate()
 		},
 		onShow() {
-			this.initialiImageBaseConversion()
 			this.handleCurrentDate()
 		},
-		onShareAppMessage() {
-			return {
-				title: `请前往${this.bak || '车主指定位置'}寻找车辆`,
-				path: '/pages/index/index?scene=' + this.controlcode
-			}
-		}
 	}
 </script>
 
 <style scoped>
-	/* 你的原样式完全保留，无任何修改 */
+	/* 全局去除滚动条 */
+	::-webkit-scrollbar {
+		width: 0;
+		height: 0;
+		display: none;
+	}
+
+	scroll-view::-webkit-scrollbar {
+		display: none;
+	}
+
 	.container {
 		height: 100vh;
 		padding: 10rpx 4rpx;
+		background-color: #f7f9fc;
+		box-sizing: border-box;
 	}
 
 	.record-container {
@@ -835,13 +741,21 @@
 		margin: auto;
 		position: relative;
 		border-radius: 12rpx;
-		background-color: #fff;
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		background-color: #EFF1FC;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		gap: 15rpx;
 	}
 
 	.record-tabs {
 		display: flex;
 		height: 50px;
+		background-color: #f8f9fa;
+		border-radius: 12rpx 12rpx 0 0;
+		flex-shrink: 0;
 	}
 
 	.record-tabs-item {
@@ -850,53 +764,61 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center;
-		touch-action: pan-x;
 		font-family: PingFang SC;
-		font-weight: bold;
+		font-weight: 500;
 		font-size: 28rpx;
-		color: #010101;
+		color: #333;
+		font-weight: bold;
+		transition: all 0.3s;
+	}
+
+	.record-tabs-item.active {
+		background-color: #6a9bee;
+		color: #fff;
 	}
 
 	.record-tabs-1 {
-		display: flex;
-		padding: 10rpx;
-		justify-content: space-between;
-		align-items: center;
+		flex-shrink: 0;
+		padding: 0rpx 10rpx;
 	}
 
-	.tabs-1-title {
+	.search-box {
 		display: flex;
 		align-items: center;
-		gap: 6rpx;
+		border: 1px solid #f0f0f0;
+		border-radius: 40rpx;
+		padding: 4px 12px;
+		width: 96%;
+		background-color: #f8f9fa;
+		flex-shrink: 0;
 	}
 
-	.tabs-1-title text {
-		font-family: PingFang SC;
-		font-weight: bold;
-		font-size: 26rpx;
-		color: #333333;
+	.tabs-1-conut {
+		flex-shrink: 0;
+		padding: 0rpx 10px;
+		text-align: center;
+		font-size: 22rpx;
+		color: #999;
 	}
 
-	.tabs-1-title image {
-		width: 42rpx;
-		height: 46rpx;
+	.scroll-full {
+		flex: 1;
+		width: 100%;
+		gap: 10rpx;
 	}
 
 	.content-item {
 		margin: 15rpx;
 		background-color: #ffffff;
 		border-radius: 8px;
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
 	}
 
 	.content-item-head {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		border-bottom: 1px solid #f0f0f0;
+		border-bottom: 1px solid #f5f5f5;
 		padding: 10rpx;
 	}
 
@@ -909,268 +831,38 @@
 	.left-category {
 		display: flex;
 		align-items: center;
-		font-family: PingFang SC;
-		font-weight: bold;
+		font-weight: 500;
 		font-size: 26rpx;
-		color: #333333;
+		color: #555;
 		gap: 10rpx;
 	}
 
 	.left-category image {
-		width: 40rpx;
-		height: 40rpx;
-	}
-
-	.left-brand {
-		font-family: PingFang SC;
-		font-weight: 500;
-		font-size: 24rpx;
-		color: #1b64b1;
-		background: #eef7ff;
-		border-radius: 5rpx;
-		padding: 0 15rpx;
+		width: 30rpx;
+		height: 24rpx;
 	}
 
 	.left-model {
-		font-family: PingFang SC;
-		font-weight: 500;
 		font-size: 24rpx;
-		color: #333333;
-	}
-
-	.head-right {
-		display: flex;
-		flex-direction: row;
-		gap: 10rpx;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.right-state {
-		font-family: PingFang SC;
-		font-weight: bold;
-		font-size: 26rpx;
-	}
-
-	.right-special-state {
-		border-radius: 8rpx;
-		border: 1px solid #dd0b2d;
-		font-family: PingFang SC;
-		font-weight: bold;
-		font-size: 20rpx;
-		color: #dd0b2d;
-		padding: 0 15rpx;
+		color: #666;
 	}
 
 	.content-item-info {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: flex-start;
 		padding: 10rpx;
 		gap: 20rpx;
-		border-bottom: 1px solid #f0f0f0;
+		border-bottom: 1px solid #f5f5f5;
 	}
 
 	.info-item {
 		flex: 0 0 48%;
-		box-sizing: border-box;
-		word-wrap: break-word;
-		transition: all 0.3s;
-		font-family: PingFang SC;
-		font-weight: 500;
 		font-size: 24rpx;
-		color: #333333;
+		color: #666;
 	}
 
 	.long-info-item {
 		flex-basis: 100% !important;
-	}
-
-	.card-head {
-		display: flex;
-		align-items: center;
-		gap: 20rpx;
-		padding: 0 20rpx;
-		height: 30px;
-	}
-
-	.card-head image {
-		width: 40rpx;
-		height: 30rpx;
-	}
-
-	.card-head text {
-		font-family: PingFang SC;
-		font-weight: bold;
-		font-size: 28rpx;
-		color: #333333;
-	}
-
-	.card-info {
-		flex: 1;
-		overflow-y: auto;
-	}
-
-	.card-info-item {
-		display: flex;
-		justify-content: space-between;
-		border-bottom: 1px solid #f0f0f0;
-		padding: 20rpx;
-	}
-
-	.card-info-item label {
-		font-family: PingFang SC;
-		font-weight: 500;
-		font-size: 26rpx;
-		color: #333333;
-		display: flex;
-		gap: 6rpx;
-		align-items: flex-start;
-	}
-
-	.card-info-item label text {
-		color: red;
-	}
-
-	.picker {
-		font-family: PingFang SC;
-		font-weight: 500;
-		font-size: 26rpx;
-		color: #333333;
-		display: flex;
-		align-items: center;
-	}
-
-	.picker image {
-		width: 30rpx;
-		height: 30rpx;
-	}
-
-	.card-info input {
-		text-align: right;
-		font-family: PingFang SC;
-		font-weight: 500;
-		font-size: 26rpx;
-		color: #333333;
-	}
-
-	.viewText {
-		text-align: right;
-		font-family: PingFang SC;
-		font-weight: 500;
-		font-size: 26rpx;
-		color: #333333;
-	}
-
-	.card-info-item-tabs {}
-
-	.card-info-item-tabs-btn {
-		display: flex;
-		gap: 10rpx;
-		justify-content: flex-end;
-	}
-
-	.card-info-item-tabs-btn text {
-		border-radius: 7rpx;
-		border: 1px solid #7b7c7c;
-		font-family: PingFang SC;
-		font-weight: 500;
-		padding: 6rpx 20rpx;
-		font-size: 24rpx;
-		color: #333333;
-	}
-
-	.tabs-footer {
-		font-family: PingFang SC;
-		font-weight: 500;
-		font-size: 22rpx;
-		color: #7b7c7c;
-		display: flex;
-	}
-
-	.card-info-item-tips {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-	}
-
-	.tabs-active {
-		background: #1b64b1;
-		border-radius: 7rpx;
-		color: #ffffff !important;
-	}
-
-	.card-footer {
-		height: 50px;
-		color: white;
-		text-align: center;
-		display: flex;
-		align-items: flex-start;
-		justify-content: center;
-		font-family: PingFang SC;
-		font-weight: bold;
-		font-size: 34rpx;
-		color: #ffffff;
-	}
-
-	.card-footer view {
-		width: 40%;
-		background-color: #2196f3;
-		padding: 10rpx;
-		background: linear-gradient(88deg, #1576dc, #1b64b1);
-		box-shadow: 0rpx 1rpx 13rpx 0rpx rgba(51, 63, 92, 0.31);
-		border-radius: 36rpx;
-	}
-
-	.card-upload {
-		font-size: 26rpx;
-		color: #7b7c7c;
-		border: 1rpx solid #f0f0f0;
-		padding: 0rpx 20rpx;
-		border-radius: 8rpx;
-	}
-
-	.modal-form-region {
-		display: flex;
-		gap: 10rpx;
-	}
-
-	.form-item-text {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		border-radius: 4rpx;
-		padding: 4rpx 2rpx 4rpx 10rpx;
-		gap: 20rpx;
-	}
-
-	.form-item-text text {
-		font-family: PingFang SC;
-		font-weight: 500;
-		font-size: 28rpx;
-		color: #7b7c7c;
-	}
-
-	.card-footer {
-		position: absolute;
-		text-align: center;
-		bottom: 120rpx;
-		width: 100%;
-		display: flex;
-		justify-content: center;
-		font-family: PingFang SC;
-		font-weight: bold;
-		font-size: 30rpx;
-		color: #ffffff;
-	}
-
-	.card-footer view {
-		width: 40%;
-		background-color: #2196f3;
-		padding: 10rpx;
-		background: linear-gradient(88deg, #1576dc, #1b64b1);
-		box-shadow: 0rpx 1rpx 13rpx 0rpx rgba(51, 63, 92, 0.31);
-		border-radius: 36rpx;
 	}
 
 	.content-item-footer {
@@ -1179,126 +871,13 @@
 		justify-content: space-between;
 	}
 
-	.footer-left {
-		font-family: PingFang SC;
-		font-weight: bold;
-		font-size: 26rpx;
-		color: #333333;
-	}
-
-	.footer-right {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-	}
-
 	.footer-right-btn {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		font-family: PingFang SC;
-		font-weight: bold;
-		font-size: 22rpx;
-		color: #ffffff;
-		background-color: #1b64b1;
+		background-color: #6a9bee;
+		color: #fff;
 		border-radius: 8rpx;
 		padding: 4rpx 15rpx;
-	}
-
-	.levitation-button {
-		position: absolute;
-		bottom: 50rpx;
-		width: 100%;
-		display: flex;
-		justify-content: center;
-	}
-
-	.levitation-button text {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: 75rpx;
-		width: 40%;
-		background: linear-gradient(88deg, #1576dc, #1b64b1);
-		box-shadow: 0rpx 1rpx 13rpx 0rpx rgba(51, 63, 92, 0.31);
-		border-radius: 36rpx;
-		font-family: PingFang SC;
-		font-weight: bold;
-		font-size: 32rpx;
-		color: #ffffff;
-	}
-
-	.record-tabs-1 {
-		display: flex;
-		padding: 10rpx;
-		justify-content: space-between;
-		align-items: center;
-		gap: 20rpx;
-	}
-
-	.tabs-1-title {
-		display: flex;
-		align-items: center;
-		gap: 6rpx;
-	}
-
-	.tabs-1-title text {
-		font-family: PingFang SC;
-		font-weight: bold;
-		font-size: 26rpx;
-		color: #333333;
-	}
-
-	.tabs-1-title image {
-		width: 42rpx;
-		height: 46rpx;
-	}
-
-	.search-box {
-		display: flex;
-		align-items: center;
-		border: 1px solid #f0f0f0;
-		border-radius: 40rpx;
-		padding: 4px 12px;
-		width: 92%;
-	}
-
-	.search-icon {
-		margin-right: 8px;
-	}
-
-	.search-input {
-		flex: 1;
-		border: none;
-		background-color: transparent;
-		outline: none;
 		font-size: 22rpx;
-	}
-
-	.count-text {
-		font-family: PingFang SC;
 		font-weight: 500;
-		font-size: 22rpx;
-		color: #7b7c7c;
-	}
-
-	.tabs-1-conut {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		font-family: PingFang SC;
-		font-weight: 500;
-		font-size: 22rpx;
-		color: #7b7c7c;
-		padding: 10px;
-	}
-
-	.content-container {
-		position: absolute;
-		bottom: 10rpx;
-		left: 0;
-		right: 0;
-		overflow-y: auto;
 	}
 
 	.content-card {
@@ -1306,10 +885,11 @@
 		margin: 12rpx;
 		padding: 12rpx;
 		border-radius: 8rpx;
+		background-color: #fff;
 	}
 
 	.card-head {
-		border-bottom: 1px solid #f0f0f0;
+		border-bottom: 1px solid #f5f5f5;
 		height: 60rpx;
 		display: flex;
 		align-items: center;
@@ -1318,28 +898,11 @@
 
 	.card-head-left {
 		display: flex;
-		flex-direction: row;
-		justify-content: center;
 		align-items: center;
 		gap: 20rpx;
-		font-family: PingFang SC;
-		font-weight: bold;
-		font-size: 26rpx;
-		color: #333333;
-	}
-
-	.phone-text {
-		font-family: PingFang SC;
 		font-weight: 500;
-		font-size: 24rpx;
-		color: #333333;
-	}
-
-	.card-head-right {
-		font-family: PingFang SC;
-		font-weight: bold;
 		font-size: 26rpx;
-		color: #4587fd;
+		color: #555;
 	}
 
 	.split-line {
@@ -1349,18 +912,15 @@
 	}
 
 	.card-info {
-		border-bottom: 1px solid #f0f0f0;
+		border-bottom: 1px solid #f5f5f5;
 	}
 
 	.card-footer1 {
 		display: flex;
-		justify-content: flex-end;
+		justify-content: space-between;
 		align-items: center;
 		height: 60rpx;
-		font-family: PingFang SC;
-		font-weight: 500;
 		font-size: 22rpx;
-		color: #333333;
 		padding-top: 10rpx;
 	}
 
@@ -1368,40 +928,9 @@
 		border: 1px solid #f0f0f0;
 		padding: 10rpx 20rpx;
 		border-radius: 8rpx;
-		background-color: #4587fd;
+		background-color: #6a9bee;
 		color: #fff;
-	}
-
-	.card-footer1 button {
-		border: 1px solid #f0f0f0;
-		border-radius: 8rpx;
-		height: 58rpx;
-		font-size: 22rpx;
-		display: flex;
-		justify-content: flex-end;
-		background-color: #4587fd;
-		color: #fff;
-		margin: inherit;
-	}
-
-	.detection_button {
-		position: absolute;
-		bottom: 60px;
-		width: 100%;
-		display: flex;
-		justify-content: center;
-	}
-
-	.detection_button text {
-		background: linear-gradient(88deg, #1576dc, #1b64b1);
-		box-shadow: 0rpx 1rpx 13rpx 0rpx rgba(51, 63, 92, 0.31);
-		border-radius: 50rpx;
-		font-family: PingFang SC;
-		padding: 0rpx 100rpx;
-		font-weight: bold;
-		font-size: 30rpx;
-		color: #ffffff;
-		line-height: 76rpx;
+		margin-left: 10rpx;
 	}
 
 	.modal-mask {
@@ -1420,29 +949,30 @@
 		right: 0;
 		bottom: 0;
 		background: #fff;
-		border-radius: 20rpx;
-		z-index: 998;
+		border-radius: 20rpx 20rpx 0 0;
+		z-index: 999;
 		padding: 20rpx;
 	}
 
 	.modal-container {
-		height: 50vh;
+		max-height: 70vh;
 		display: flex;
 		flex-direction: column;
 	}
 
 	.modal-container-head {
 		display: flex;
-		justify-content: row;
 		justify-content: space-between;
 		align-items: center;
 		height: 60rpx;
+		border-bottom: 1px solid #f5f5f5;
+		margin-bottom: 20rpx;
 	}
 
 	.modal-container-head text {
-		font-weight: bold;
+		font-weight: 500;
 		font-size: 34rpx;
-		color: #333333;
+		color: #555;
 	}
 
 	.modal-container-head image {
@@ -1454,10 +984,9 @@
 		flex: 1;
 		overflow-y: auto;
 		display: flex;
-		justify-content: center;
-		align-items: center;
 		flex-direction: column;
 		gap: 20rpx;
+		padding-bottom: 20rpx;
 	}
 
 	.modal-container-footer {
@@ -1468,74 +997,46 @@
 	}
 
 	.modal-container-footer button {
-		background: linear-gradient(88deg, #1576dc, #1b64b1);
-		box-shadow: 0rpx 1rpx 13rpx 0rpx rgba(51, 63, 92, 0.31);
+		background: linear-gradient(88deg, #6a9bee, #5a8de1);
 		border-radius: 36rpx;
-		font-weight: bold;
+		font-weight: 500;
 		font-size: 34rpx;
-		color: #ffffff;
+		color: #fff;
 		width: 50%;
 		height: 90%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+		border: none;
 	}
 
 	.middle-form-item {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 45rpx;
-		width: 80%;
+		width: 90%;
+		margin: 0 auto;
 	}
 
 	.middle-form-item label {
-		font-family: PingFang SC;
-		font-weight: 600;
+		font-weight: 500;
 		font-size: 28rpx;
-		color: #333333;
+		color: #666;
+		min-width: 120rpx;
 	}
 
 	.modal-form-region {
+		flex: 1;
+		text-align: right;
+		color: #666;
 		display: flex;
-		gap: 10rpx;
-	}
-
-	.form-item-text {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		border-radius: 4rpx;
-		padding: 4rpx 2rpx 4rpx 10rpx;
-		gap: 20rpx;
-	}
-
-	.form-item-text text {
-		font-family: PingFang SC;
-		font-weight: 500;
-		font-size: 28rpx;
-		color: #7b7c7c;
-		border-bottom: 1rpx solid #f0f0f0;
-	}
-
-	.form-item-text image {
-		width: 30rpx;
-		height: 30rpx;
-	}
-
-	.picker-container {
-		width: 99rpx;
-		height: 23rpx;
-		font-family: PingFang SC;
-		font-weight: bold;
-		font-size: 25rpx;
-		color: #333333;
-		line-height: 29rpx;
+		flex-direction: row;
+		justify-content: flex-end;
+		font-size: 26rpx;
 	}
 
 	.temporary {
 		text-align: right;
 		font-size: 28rpx;
+		width: 100%;
+		color: #666;
 	}
 
 	.g_items_temporary {
@@ -1543,14 +1044,11 @@
 		top: 60rpx;
 		left: 0;
 		right: 0;
-		background-color: #fff;
-		width: 100%;
+		background: #fff;
 		z-index: 10000;
 		border-radius: 10rpx;
 		padding: 20rpx;
-		display: flex;
-		flex-direction: column;
-		box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+		box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
 	}
 
 	.item-card-footer {
@@ -1558,6 +1056,7 @@
 		line-height: 70rpx;
 		padding: 0 10rpx;
 		border-bottom: 1px solid #f5f5f5;
+		color: #666;
 	}
 
 	.radio-group {
@@ -1569,19 +1068,66 @@
 		display: flex;
 		align-items: center;
 		font-size: 30rpx;
-	}
-
-	.radio-label {
-		margin-left: 10rpx;
 		color: #666;
 	}
 
-	.radio-result {
-		margin-top: 30rpx;
-		padding: 20rpx;
-		font-size: 28rpx;
+	.card-footer {
+		position: fixed;
+		bottom: 120rpx;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		z-index: 10;
+	}
+
+	.card-footer view {
+		width: 40%;
+		background: linear-gradient(88deg, #6a9bee, #5a8de1);
+		padding: 10rpx;
+		border-radius: 36rpx;
+		color: #fff;
+		text-align: center;
+		font-weight: 500;
+		font-size: 30rpx;
+	}
+
+	.picker-container {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		gap: 20rpx;
+		align-items: center;
+		font-size: 26rpx;
+		color: #333;
+		margin-top: 8rpx;
+	}
+
+	.picker-btns {
+		display: flex;
+		flex-direction: row;
+		gap: 16rpx;
+	}
+
+	.picker-btn {
+		background-color: #e8ebf2;
 		color: #666;
-		background-color: #f8f8f8;
-		border-radius: 8rpx;
+		border-radius: 30rpx;
+		padding: 10rpx 24rpx;
+		font-size: 24rpx;
+		transition: all 0.2s ease;
+	}
+
+	.picker-btn.active {
+		background-color: #6a9bee;
+		color: #fff;
+	}
+
+	.search-input {
+		font-size: 24rpx;
+	}
+
+	.card-head-right {
+		font-size: 24rpx;
+		font-weight: bold;
 	}
 </style>
