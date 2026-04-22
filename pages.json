@@ -63,7 +63,8 @@
 				{
 					"path": "carKeyConfig",
 					"style": {
-						"navigationBarTitleText": "车辆钥匙配置"
+						"navigationBarTitleText": "车辆钥匙配置",
+						"navigationBarBackgroundColor": "#EFF1FC"
 					}
 				},
 				{
