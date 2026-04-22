@@ -226,7 +226,7 @@
 					id: e?.currentTarget?.dataset?.item?.id
 				}
 				uni.navigateTo({
-					url: `/pages/carManager/carList/carList?source=/pages/carManager/corpel/index&flagMulti=1&info=${JSON.stringify(temp)}&type=${this.type}&name=${this.title_name}&desc=${JSON.stringify(e?.currentTarget?.dataset?.item)}`
+					url: `/pages/zoneCenter/carKeyConfig?source=/pages/zoneCenter/bizKeyConfig&flagMulti=1&info=${JSON.stringify(temp)}&type=${this.type}&name=${this.title_name}&desc=${JSON.stringify(e?.currentTarget?.dataset?.item)}`
 				})
 			},
 
@@ -293,6 +293,7 @@
 		background-size: cover;
 		background-position: center;
 		position: relative;
+		background-color: #EFF1FC;
 	}
 
 	.content-container {

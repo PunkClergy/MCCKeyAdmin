@@ -70,7 +70,8 @@
 				{
 					"path": "bizKeyConfig",
 					"style": {
-						"navigationBarTitleText": "车务钥匙配置"
+						"navigationBarTitleText": "车务钥匙配置",
+						"navigationBarBackgroundColor": "#EFF1FC"
 					}
 				},
 
