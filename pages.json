@@ -134,27 +134,9 @@
 					}
 				},
 
-				{
-					"path": "merchantCooperation",
-					"style": {
-						"navigationBarTitleText": "多场景商家租车流量合作",
-						"navigationBarBackgroundColor": "#EFF1FC"
-					}
-				},
 
-				{
-					"path": "merchantCooperation",
-					"style": {
-						"navigationBarTitleText": "多场景商家租车流量合作",
-						"navigationBarBackgroundColor": "#EFF1FC"
-					}
-				}, {
-					"path": "merchantCooperation",
-					"style": {
-						"navigationBarTitleText": "多场景商家租车流量合作",
-						"navigationBarBackgroundColor": "#EFF1FC"
-					}
-				}, {
+
+				 {
 					"path": "completeCustomerInfo",
 					"style": {
 						"navigationBarTitleText": "完善客户资料",

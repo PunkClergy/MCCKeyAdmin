@@ -3,7 +3,9 @@ import {
 } from '@/utils/request/http'
 
 
-
+export const u_houseFlowList = (data) => http.get('/unmannedStoreApi/unmannedStoreList', data)
+export const u_houseFlowApirAdd = (data) => http.postFormData('/unmannedStoreApi/addOrUpdate', data)
+export const u_unmannedStoreApidel = (data) => http.postFormData('/unmannedStoreApi/del', data)
 export const u_transferAdminUser = (data) => http.postFormData('/accountapi/transferAdminUser', data)
 export const u_addOrUpdateChildUser = (data) => http.postFormData('/accountapi/addOrUpdateChildUser', data)
 export const u_delChildUser = (data) => http.get('/accountapi/delChildUser', data)
