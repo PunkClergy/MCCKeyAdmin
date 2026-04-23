@@ -2,6 +2,11 @@ import {
 	http
 } from '@/utils/request/http'
 
+export const u_getUserlnfo = (data) => http.get('/deskapi/getUserInfo', data)
+export const u_companyImprove = (data) => http.postFormData('/companyapi/companyImprove', data)
+export const u_getCitys = (data) => http.get('/companyapi/getCitys', data)
+export const u_companyInfo = (data) => http.get('/companyapi/companyInfo', data)
+export const u_getProvinces = (data) => http.get('/companyapi/getProvinces', data)
 export const u_carStoreApidel = (data) => http.postFormData('/carStoreApi/del', data)
 export const u_houseFlowDel = (data) => http.postFormData('/houseFlowApi/del', data)
 export const u_carStoreApiaddOrUpdate = (data) => http.postFormData('/carStoreApi/addOrUpdate', data)
