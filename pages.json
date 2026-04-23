@@ -112,11 +112,62 @@
 		{
 			"root": "pages/userCenter",
 			"pages": [{
-				"path": "index",
-				"style": {
-					"navigationBarTitleText": "个人中心"
+					"path": "index",
+					"style": {
+						"navigationBarTitleText": "个人中心",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "storeInfoOverview",
+					"style": {
+						"navigationBarTitleText": "无人门店全信息一览",
+						"navigationBarBackgroundColor": "#EFF1FC"
+					}
+				},
+
+				{
+					"path": "merchantCooperation",
+					"style": {
+						"navigationBarTitleText": "多场景商家租车流量合作",
+						"navigationBarBackgroundColor": "#EFF1FC"
+					}
+				},
+
+				{
+					"path": "merchantCooperation",
+					"style": {
+						"navigationBarTitleText": "多场景商家租车流量合作",
+						"navigationBarBackgroundColor": "#EFF1FC"
+					}
+				},
+
+				{
+					"path": "merchantCooperation",
+					"style": {
+						"navigationBarTitleText": "多场景商家租车流量合作",
+						"navigationBarBackgroundColor": "#EFF1FC"
+					}
+				}, {
+					"path": "merchantCooperation",
+					"style": {
+						"navigationBarTitleText": "多场景商家租车流量合作",
+						"navigationBarBackgroundColor": "#EFF1FC"
+					}
+				}, {
+					"path": "completeCustomerInfo",
+					"style": {
+						"navigationBarTitleText": "完善客户资料",
+						"navigationBarBackgroundColor": "#EFF1FC"
+					}
+				}, {
+					"path": "userGuide",
+					"style": {
+						"navigationBarTitleText": "使用指南",
+						"navigationBarBackgroundColor": "#EFF1FC"
+					}
 				}
-			}]
+			]
 		}
 	],
 

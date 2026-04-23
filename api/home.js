@@ -4,6 +4,7 @@ import {
 
 
 
+export const u_transferAdminUser = (data) => http.postFormData('/accountapi/transferAdminUser', data)
 export const u_addOrUpdateChildUser = (data) => http.postFormData('/accountapi/addOrUpdateChildUser', data)
 export const u_delChildUser = (data) => http.get('/accountapi/delChildUser', data)
 export const u_childUserList = (data) => http.get('/accountapi/childUserList', data)

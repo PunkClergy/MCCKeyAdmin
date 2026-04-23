@@ -1,768 +1,527 @@
 <template>
-	<view class="container" style="background: linear-gradient({{bgcolor}}, #fff)">
-		<!-- 自定义头部 -->
-		<view class="custom-header"
-			style="padding-top: {{height_from_head}}px;padding-left: {{capsule_distance_to_the_right}}px; height: {{head_height}}px;">
-			<view class="custom-header-outer-layer">
-				<image class="custom-header-outer-layer-image" src="/static/QRCode_1400.png"
-					@tap="handleBackHome"></image>
-				<view class="custom-header-outer-layer-title">{{title_name}}</view>
-				<view class="custom-header-outer-layer-user_name">
-					<text v-if="account">{{account}}</text>
-					<text v-else @tap="handleOnExistingAccountTap">请登录</text>
-					<image v-else @tap="handleOnExistingAccountTap" src="/static/QRCode_1400.png" />
-				</view>
-			</view>
-			<view style="font-size: {{stfontSize||11}}px;width: 98%;padding: 0 {{capsule_distance_to_the_right}}px;">
-				{{subtitle}}
-			</view>
-		</view>
+  <view class="container">
 
-		<!-- 滚动内容 -->
-		<scroll-view class="content" scroll-y="true" style="top: {{90}}px; bottom: {{tabBarHeight}}px;">
-			<!-- 轮播图 -->
-			<view class="swiper-container">
-				<swiper indicator-dots="false" autoplay="true" interval="3000" duration="500"
-					:style="`height: ${s_banner_height}px`">
-					<swiper-item v-for="(item,index) in g_banner_image" :key="index">
-						<image @tap="handleJumpInfo" :data-item="item"
-							:src="c_link + '/img/' + (item.fileType==1?item.img:item.videoImg)" class="banner-img"
-							mode="widthFix" data-flag="banner" @load="LoadOnUseGuideImageLoad" />
-					</swiper-item>
-				</swiper>
-			</view>
+    <!-- 自定义头部 -->
+    <view 
+      class="custom-header" 
+      :style="{
+        paddingTop: height_from_head + 'px',
+        paddingLeft: capsule_distance_to_the_right + 'px',
+        height: head_height + 'px'
+      }"
+    >
+      <view class="custom-header-outer-layer">
+        <image 
+          class="custom-header-outer-layer-image" 
+          src="/static/images/home.png"
+          @tap="handleBackHome"
+        />
+        <view class="custom-header-outer-layer-title">个人中心</view>
+        <view class="custom-header-outer-layer-user_name">
+          <!-- 修复：把 v-else 包在一个 view 里 -->
+          <text v-if="account" @tap="handleOnExistingAccountTap">{{account}}</text>
+          <view v-else @tap="handleOnExistingAccountTap">
+            <text>请登录</text>
+            <image src="/static/images/right_1.png" />
+          </view>
+        </view>
+      </view>
+    </view>
 
-			<!-- 公告 -->
-			<view class="notice" v-if="isShowInfo">
-				<view class="notice-outer-layer" @tap="handleNotice">
-					<view class="notice-content">
-						温馨提示：请提醒用车人，若遇无网络时，点击页面右上角「···」并刷新当前页面，即可进入【紧急开关锁】页面；<text>若需长时间处于无信号覆盖区域，建议随身携带实体钥匙备用。</text>
-					</view>
-				</view>
-			</view>
+    <!-- 滚动内容 -->
+    <scroll-view 
+      class="content" 
+      scroll-y
+      :style="{
+        top: '90px',
+        bottom: tabBarHeight + 'px'
+      }"
+      @scrolltolower="onReachBottom"
+    >
+      <view class="my-content-list-container">
+        <view class="my-content-list-inner">
+          <view 
+            v-for="(item, index) in contentList" 
+            :key="item.id"
+            :data-info="item"
+            class="my-content-list-item"
+            :class="index === contentList.length - 1 ? 'my-content-list-item_last' : ''"
+            @tap="handleFunExe"
+          >
+            <view class="my-content-list-item__left">
+              <text class="my-content-list-item__text">{{item.text}}</text>
+            </view>
+            <image src="/static/images/right_1.png" class="my-content-list-item__arrow" mode="widthFix" />
+          </view>
+        </view>
+      </view>
+    </scroll-view>
 
-			<!-- 专区入口 -->
-			<view class="special-zone-container">
-				<view class="special-zone" v-for="(item,index) in groupedZoneList" :key="index"
-					:style="`--item-count: ${item.list.length}`">
-					<view class="zone-item" v-for="(zoneItem,idx) in item.list" :key="idx">
-						<view class="zone-out" :style="{backgroundColor: zoneItem.bgcolor}" :data-info="zoneItem"
-							@tap="handleGetMenuList">
-							<image class="zone-img" :src="'https://k1sw.wiselink.net.cn/img/' + zoneItem.icon" />
-							<view class="zone-text-area">
-								<view class="zone-name">{{zoneItem.name}}</view>
-								<view class="zone-desc">{{zoneItem.bak}}</view>
-							</view>
-						</view>
-					</view>
-				</view>
-			</view>
+    <!-- 底部tabbar -->
+    <view class="tabbar" :style="{ height: tabBarHeight + 'px' }">
+      <view 
+        class="tab-item" 
+        :class="currentTab === index ? 'active' : ''"
+        v-for="(item, index) in tabList" 
+        :key="index"
+        @tap="handleSwitchTabNavigation"
+        :data-index="index"
+      >
+        <image 
+          :src="`https://k1sw.wiselink.net.cn/img/${item.selectedIconPath}`" 
+          class="tab-icon" 
+          mode="widthFix"
+          v-if="currentTab === index"
+        />
+        <image 
+          :src="`https://k1sw.wiselink.net.cn/img/${item.iconPath}`" 
+          class="tab-icon" 
+          mode="widthFix"
+          v-else
+        />
+        <text>{{item.text}}</text>
+      </view>
+    </view>
 
-			<!-- 使用指南 -->
-			<view class="full-width-swiper" v-if="fullBannerList.length>0">
-				<view class="full-width-use">
-					<image src="/static/QRCode_1400.png" />
-					<text>使用指南</text>
-				</view>
-				<swiper indicator-dots="false" autoplay="true" interval="4000" duration="500"
-					:style="`height: ${s_use_height}px`">
-					<swiper-item v-for="(item,index) in fullBannerList" :key="index" :data-info="item">
-						<image :src="'https://k1sw.wiselink.net.cn/img/' + item.imgpath" class="full-banner-img"
-							data-flag="use" :data-url="item.bookPath" :data-title="item.title" @tap="handlePlayVideo"
-							@load="LoadOnUseGuideImageLoad" mode="widthFix"></image>
-					</swiper-item>
-				</swiper>
-			</view>
-		</scroll-view>
+    <!-- 悬浮按钮 -->
+    <view class="float-button">
+      <button 
+        open-type="contact" 
+        :show-message-card="true"
+        send-message-title="我想咨询问题"
+        send-message-path="/pages/index/index"
+        class="hidden-contact-btn"
+        @contact="handleContact"
+      />
+      <image src="https://k1sw.wiselink.net.cn/img/app2.0/desk/consulting.png" />
+      <image 
+        src="/static/images/tel400.png" 
+        style="width: 80rpx;height: 80rpx;" 
+        @tap="handleMakePhoneCallWithConfirm"
+      />
+    </view>
 
-		<!-- 底部tabbar -->
-		<view class="tabbar" :style="`height: ${tabBarHeight}px`">
-			<view class="tab-item" :class="currentTab === index ? 'active' : ''" v-for="(item,index) in tabList"
-				:key="index" @tap="handleSwitchTabNavigation" :data-index="index">
-				<image class="tab-icon" mode="widthFix"
-					:src="'https://k1sw.wiselink.net.cn/img/' + item.selectedIconPath" v-if="currentTab === index" />
-				<image class="tab-icon" mode="widthFix" :src="'https://k1sw.wiselink.net.cn/img/' + item.iconPath"
-					v-else />
-				<text>{{item.text}}</text>
-			</view>
-		</view>
+    <!-- 二维码弹窗 -->
+    <view class="qr-group-container" v-if="join_the_group_modal">
+      <view class="qr-group-mask" @tap="handleQRClose">
+        <view class="qr-group-close" @tap="handleQRClose">×</view>
+        <view class="qr-group-preview-content">
+          <image 
+            catchtap="handleQRShowImageMask" 
+            class="qr-group-preview-img" 
+            :src="personal_qr_code" 
+            mode="widthFix"
+          />
+          <text class="qr-group-preview-desc">请点击、长按添加官方客服，获取体验权限！</text>
+        </view>
+      </view>
+    </view>
 
-		<!-- 悬浮按钮 -->
-		<view class="float-button">
-			<button open-type="contact" class="hidden-contact-btn"></button>
-			<image src="https://k1sw.wiselink.net.cn/img/app2.0/desk/consulting.png" />
-			<image src="/static/QRCode_1400.png" style="width: 80rpx;height: 80rpx;"
-				@tap="handleMakePhoneCallWithConfirm" />
-		</view>
-
-		<!-- 二维码弹窗 -->
-		<view class="qr-group-container" v-if="join_the_group_modal">
-			<view class="qr-group-mask" @tap="handleQRClose">
-				<view class="qr-group-close" @tap="handleQRClose">×</view>
-				<view class="qr-group-preview-content">
-					<image catchtap="handleQRShowImageMask" class="qr-group-preview-img" :src="personal_qr_code"
-						mode="widthFix"></image>
-					<text class="qr-group-preview-desc">请点击、长按添加官方客服，获取体验权限！</text>
-				</view>
-			</view>
-		</view>
-	</view>
+  </view>
 </template>
-
 <script>
-	import {
-		u_getHomeArea,
+import { u_getQrcodeImg, u_navlist20, u_mylist } from '@/api/index'
 
+export default {
+  data() {
+    return {
+      tabBarHeight: 80,
+      currentTab: 2,
+      c_link: 'https://k1sw.wiselink.net.cn/',
+      join_the_group_modal: false,
+      tabList: [],
+      contentList: [],
+      servicePhone: '400-090-5050',
+      
+      height_from_head: 0,
+      head_height: 0,
+      capsule_distance_to_the_right: 0,
+      account: '',
+      personal_qr_code: ''
+    }
+  },
 
-		u_bannerlist20,
-		u_getQrcodeImg,
-		u_navlist20,
-		u_booklist
-		
-	} from '@/api/index'
+  onLoad() {
+    this.initBottomDirectory()
+    this.initDirectoryStructure()
+  },
 
+  onShow() {
+    this.initSystemInfo()
+  },
 
-	export default {
-		data() {
-			return {
-				tabBarHeight: 80,
-				currentTab: 0,
-				c_link: 'https://k1sw.wiselink.net.cn/',
-				g_banner_image: [],
-				s_banner_height: '',
-				join_the_group_modal: false,
-				fullBannerList: [],
-				title_name: '',
-				bgcolor: '#fff',
-				height_from_head: '',
-				zoneList: [{
-					id: 1,
-					name: '钥匙分享',
-					bgcolor: '#EFF1FC',
-					icon: 'privateCar.png'
-				}, ],
-				tabList: [],
-				isShowInfo: false,
-				servicePhone: '400-090-5050',
-				head_height: '',
-				capsule_distance_to_the_right: '',
-				s_background_picture_of_the_front_page: '',
-				personal_qr_code: '',
-				groupedZoneList: [],
-				account: '',
-				subtitle: '',
-				stfontSize: '',
-				s_use_height: ''
-			}
-		},
-		methods: {
-			handleJumpInfo(evt) {
-				const {
-					item = {}
-				} = evt?.currentTarget?.dataset || {};
-				const {
-					fileType,
-					path: localPath,
-					img
-				} = item;
+  onReady() {
+    this.initLoginStatus()
+    this.initQrCode()
+  },
 
-				const IMG_BASE_URL = 'https://k3a.wiselink.net.cn/img/';
-				const targetPath = fileType === 1 ?
-					localPath :
-					`${IMG_BASE_URL}${img || ''}`;
-				const navigateUrl = fileType === 1 ?
-					targetPath :
-					`/pages/agreementWebView/agreementWebView?url=${encodeURIComponent(targetPath)}`;
+  methods: {
+    // 拨打电话
+    handleMakePhoneCallWithConfirm() {
+      uni.showModal({
+        title: '拨打电话',
+        content: `是否拨打客服电话：${this.servicePhone}`,
+        confirmText: '拨打',
+        cancelText: '取消',
+        success: (res) => {
+          if (res.confirm) {
+            uni.makePhoneCall({
+              phoneNumber: this.servicePhone,
+              fail: (err) => {
+                if (err.errMsg !== 'makePhoneCall:fail cancel') {
+                  uni.showToast({ title: '拨号失败', icon: 'none' })
+                }
+              }
+            })
+          }
+        }
+      })
+    },
 
-				if (!navigateUrl) {
-					uni.showToast({
-						title: '跳转路径无效',
-						icon: 'none'
-					});
-					return;
-				}
+    // 系统信息
+    initSystemInfo() {
+      const { statusBarHeight: s, screenWidth } = uni.getWindowInfo()
+      const m = uni.getMenuButtonBoundingClientRect()
+      if (!m) return
+      const n = m.height + (m.top - s) * 2
+      const c = screenWidth - m.right
+      this.height_from_head = s
+      this.head_height = s + n
+      this.capsule_distance_to_the_right = c
+    },
 
-				uni.navigateTo({
-					url: navigateUrl,
-					fail: (err) => {
-						console.error('页面跳转失败:', err);
-						uni.showToast({
-							title: '跳转失败，请重试',
-							icon: 'none'
-						});
-					}
-				});
-			},
-			handleMakePhoneCallWithConfirm() {
-				uni.showModal({
-					title: '拨打电话',
-					content: `是否拨打客服电话：${this.servicePhone}`,
-					confirmText: '拨打',
-					cancelText: '取消',
-					success: (res) => {
-						if (res.confirm) {
-							uni.makePhoneCall({
-								phoneNumber: this.servicePhone,
-								fail(err) {
-									if (err.errMsg !== 'makePhoneCall:fail cancel') {
-										uni.showToast({
-											title: '拨号失败，请稍后重试',
-											icon: 'none'
-										});
-									}
-								}
-							});
-						}
-					}
-				});
-			},
-			handleOnExistingAccountTap() {
-				uni.navigateTo({
-					url: '/pages/system/managerLoginView/loginView'
-				})
-			},
-			initSystemInfo() {
-				const {
-					statusBarHeight: s
-				} = uni.getWindowInfo()
-				const m = uni.getMenuButtonBoundingClientRect()
-				if (!m) return
-				const n = m.height + (m.top - s) * 2
-				const c = uni.getWindowInfo().screenWidth - m.right
-				this.height_from_head = s
-				this.head_height = s + n
-				this.capsule_distance_to_the_right = c
-			},
-			initialiImageBaseConversion() {
-				const list = [{
-					path: "/static/images/index/bg.png",
-					key: "s_background_picture_of_the_front_page"
-				}];
-				const fs = uni.getFileSystemManager();
-				Promise.all(list.map(item => new Promise(resolve => {
-					fs.readFile({
-						filePath: item.path,
-						encoding: 'base64',
-						success: d => resolve({
-							[item.key]: `data:image/png;base64,${d.data}`
-						})
-					})
-				}))).then(res => {
-					if (res[0]) this.s_background_picture_of_the_front_page = res[0]
-						.s_background_picture_of_the_front_page
-				});
-			},
-			async initialGetBanner() {
-				try {
-					const d = await byGet(`${this.c_link}${u_bannerlist20.URL}`, {
-						terminalId: 0
-					});
-					if (d?.data?.content) this.g_banner_image = d.data.content
-				} catch (e) {
-					console.error(e)
-				}
-			},
-			initLoginStatus() {
-				uni.getStorage({
-					key: 'userKey',
-					success: res => {
-						this.account = res?.data?.companyName || res?.data?.username
-					},
-					fail: err => console.error("获取失败", err)
-				});
-			},
-			async initQrCode() {
-				const res = await byGet(this.c_link + u_getQrcodeImg.URL, {})
-				if (res.statusCode === 200) this.personal_qr_code = res.data.content.img
-			},
-			async initBottomDirectory() {
-				const res = await byGet(this.c_link + u_navlist20.URL, {})
-				if (res.statusCode === 200) this.tabList = res.data.content
-			},
-			async initZoneInfo() {
-				const res = await byGet(this.c_link + u_getHomeArea.URL, {})
-				if (res.statusCode === 200) {
-					this.zoneList = res.data.content
-					this.groupZoneByXu()
-				}
-			},
-			groupZoneByXu() {
-				const map = {}
-				this.zoneList.forEach(item => {
-					const k = item.serial_number || 1
-					if (!map[k]) map[k] = []
-					map[k].push(item)
-				})
-				this.groupedZoneList = Object.keys(map).sort((a, b) => a - b).map(k => ({
-					serial_number: +k,
-					list: map[k]
-				}))
-			},
-			async initBookList() {
-				const res = await byGet(this.c_link + u_booklist.URL, {})
-				if (res.statusCode === 200) this.fullBannerList = res.data.content
-			},
-			LoadOnUseGuideImageLoad(e) {
-				try {
-					const {
-						width: w,
-						height: h
-					} = e.detail
-					if (!w || !h) return
-					const {
-						windowWidth
-					} = uni.getSystemInfoSync()
-					const hh = h / w * windowWidth
-					const f = e.currentTarget.dataset.flag
-					if (f === 'use') this.s_use_height = hh
-					if (f === 'banner') this.s_banner_height = hh
-				} catch (e) {
-					console.error('imgLoadErr', e)
-				}
-			},
-			handlePlayVideo(e) {
-				const {
-					url,
-					title
-				} = e.currentTarget.dataset
-				if (url) {
-					uni.navigateTo({
-						url: `/pages/watchVideos/index?url=${encodeURI(url)}&title=${title || '使用指南'}`
-					})
-				}
-			},
-			async inIsShowInfo() {
-				const res = await byGet(this.c_link + u_isShowInfo.URL, {})
-				if (res.statusCode === 200) this.isShowInfo = res.data.content
-			},
-			handleShowContact() {
-				this.join_the_group_modal = true
-			},
-			handleQRClose() {
-				this.join_the_group_modal = false
-			},
-			handleQRShowImageMask() {
-				uni.previewMedia({
-					sources: [{
-						url: this.personal_qr_code,
-						type: 'image'
-					}]
-				})
-			},
-			handleSwitchTabNavigation(e) {
-				const idx = e.currentTarget.dataset.index
-				const url = this.tabList[idx]?.pagePath
-				if (!url) return
-				const cur = getCurrentPages().at(-1)?.route
-				if (cur && cur !== url.split('?')[0]) uni.redirectTo({
-					url: `/${url}`
-				})
-			},
-			handleBackHome() {
-				uni.redirectTo({
-					url: '/pages/index/index'
-				})
-			},
-			handleGetMenuList(e) {
-				if (!isLogin()) return uni.redirectTo({
-					url: '/pages/system/managerLoginView/loginView'
-				})
-				const path = e.currentTarget.dataset.info?.path
-				if (/desk/.test(path)) {
-					uni.switchTab({
-						url: path
-					})
-				} else {
-					uni.navigateTo({
-						url: `/${path}`
-					})
-				}
-			},
-			handleNotice() {},
-			async initGetHomeArea() {
-				const ReturnData = await u_getHomeArea({});
-				console.log(ReturnData)
-			}
-		},
-		onLoad(options) {
-			this.initGetHomeArea()
-			return
-			this.initialiImageBaseConversion()
-			this.initialGetBanner()
-			this.initBottomDirectory()
-			this.initZoneInfo()
-			this.initBookList()
+    // 登录状态
+    initLoginStatus() {
+      try {
+        const res = uni.getStorageSync('userKey')
+        this.account = res?.data?.companyName || res?.data?.username || ''
+      } catch (e) {}
+    },
 
-			this.title_name = options?.name
-			this.bgcolor = options?.bgcolor
-			this.subtitle = options?.subtitle
-			this.stfontSize = options?.stfontSize
+    // 二维码
+    async initQrCode() {
+      try {
+        const res = await u_getQrcodeImg({})
+        if (res.code === 1000) {
+          this.personal_qr_code = res.content.img
+        }
+      } catch (e) {}
+    },
 
-			uni.setStorageSync('cacheFields', {
-				title_name: this.title_name,
-				bgcolor: this.bgcolor,
-				subtitle: this.subtitle,
-				stfontSize: this.stfontSize
-			})
-		},
-		onShow() {
-			this.initSystemInfo()
-			this.inIsShowInfo()
-			try {
-				const cache = uni.getStorageSync('cacheFields') || {}
-				Object.assign(this, cache)
-			} catch (e) {
-				console.error(e)
-			}
-		},
-		onReady() {
-			this.initLoginStatus()
-			this.initQrCode()
-		}
-	}
+    // 底部导航
+    async initBottomDirectory() {
+      try {
+        const res = await u_navlist20({})
+        if (res.code === 1000) {
+          this.tabList = res.content
+          this.currentTab = res.content?.length - 1
+        }
+      } catch (e) {}
+    },
+
+    // 跳登录
+    handleOnExistingAccountTap() {
+      uni.navigateTo({ url: '/pages/system/managerLoginView/loginView' })
+    },
+
+    // 目录数据
+    async initDirectoryStructure() {
+      try {
+        const res = await u_mylist({})
+        if (res.code === 1000) {
+          this.contentList = res.content
+        }
+      } catch (e) {}
+    },
+
+    // 显示二维码
+    handleShowContact() {
+      this.join_the_group_modal = true
+    },
+
+    // 关闭二维码
+    handleQRClose() {
+      this.join_the_group_modal = false
+    },
+
+    // 预览图片
+    handleQRShowImageMask() {
+      uni.previewMedia({
+        sources: [{ url: this.personal_qr_code, type: 'image' }]
+      })
+    },
+
+    // 切换tab
+    handleSwitchTabNavigation(evt) {
+      const idx = evt.currentTarget.dataset.index
+      if (!idx) return
+      const item = this.tabList[idx]
+      if (!item?.pagePath) return
+      const targetUrl = item.pagePath
+      uni.redirectTo({ url: `/${targetUrl}` })
+    },
+
+    // 返回首页
+    handleBackHome() {
+      uni.redirectTo({ url: '/pages/index/index' })
+    },
+
+    // 点击功能
+    handleFunExe(evt) {
+      const info = evt.currentTarget.dataset.info
+      if (!info || !info.pagePath) return
+      uni.navigateTo({ url: `/${info.pagePath}` })
+    },
+
+    // 客服消息
+    handleContact() {},
+
+    // 触底
+    onReachBottom() {}
+  }
+}
 </script>
 
-<style scoped>
-	::-webkit-scrollbar {
-		width: 0;
-		height: 0;
-		color: transparent;
-	}
+<style scoped lang="scss">
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
 
-	.container {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center;
-		align-items: center;
-		height: 100vh;
-	}
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #F3F9FD;
+}
 
-	.custom-header {
-		width: 100%;
-		position: fixed;
-		top: 0;
-		left: 0;
-		z-index: 100;
-		box-sizing: border-box;
-		display: flex;
-		flex-direction: column;
-	}
+.custom-header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
 
-	.custom-header-outer-layer {
-		display: flex;
-		justify-content: flex-start;
-		align-items: center;
-		gap: 25rpx;
-	}
+.custom-header-outer-layer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25rpx;
+}
 
-	.custom-header-outer-layer-image {
-		width: 45rpx;
-		height: 49rpx;
-	}
+.custom-header-outer-layer-image {
+  width: 45rpx;
+  height: 49rpx;
+}
 
-	.custom-header-outer-layer-title {
-		font-weight: bold;
-		font-size: 36rpx;
-		color: #333;
-	}
+.custom-header-outer-layer-title {
+  font-weight: bold;
+  font-size: 36rpx;
+  color: #333333;
+}
 
-	.custom-header-outer-layer-user_name {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		gap: 5rpx;
-	}
+.custom-header-outer-layer-user_name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5rpx;
+}
 
-	.custom-header-outer-layer-user_name text {
-		font-weight: 500;
-		font-size: 28rpx;
-		color: #333;
-	}
+.custom-header-outer-layer-user_name text {
+  font-weight: 500;
+  font-size: 28rpx;
+  color: #333333;
+}
 
-	.custom-header-outer-layer-user_name image {
-		width: 26rpx;
-		height: 26rpx;
-	}
+.custom-header-outer-layer-user_name image {
+  width: 26rpx;
+  height: 26rpx;
+}
 
-	.content {
-		width: 100%;
-		position: absolute;
-		overflow-y: auto;
-		box-sizing: border-box;
-	}
+.content {
+  width: 100%;
+  position: absolute;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
 
-	.swiper-container {
-		width: 100%;
-		padding: 0 10rpx;
-		box-sizing: border-box;
-	}
+.my-content-list-container {
+  width: 96%;
+  margin: 0 auto;
+}
 
-	.banner-img {
-		width: 100%;
-		height: auto;
-		border-radius: 20rpx;
-	}
+.my-content-list-inner {
+  width: 94%;
+  background-color: #fff;
+  margin: 0 auto;
+  border-radius: 20rpx;
+  padding: 20rpx;
+}
 
-	.special-zone-container {
-		width: 100%;
-		box-sizing: border-box;
-		padding: 0 10rpx;
-		margin-top: 20rpx;
-	}
+.my-content-list-item {
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #CDD5DA;
+}
 
-	.special-zone {
-		width: 100%;
-		display: flex;
-		flex-wrap: nowrap;
-		align-items: flex-start;
-		box-sizing: border-box;
-		margin-bottom: 20rpx;
-		gap: 5rpx;
-	}
+.my-content-list-item_last {
+  border-bottom: none;
+}
 
-	.zone-item {
-		width: calc((100% - (max(var(--item-count, 3), 3) - 1) * 5rpx) / max(var(--item-count, 3), 3));
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		box-sizing: border-box;
-	}
+.my-content-list-item__left {
+  display: flex;
+  gap: 20rpx;
+  flex-direction: row;
+  align-items: center;
+}
 
-	.zone-out {
-		width: 100%;
-		height: calc(180rpx - clamp(0rpx, (var(--item-count, 3) - 3) * 30rpx, 80rpx));
-		min-height: 100rpx;
-		border-radius: 32rpx;
-		margin-bottom: 10rpx;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		gap: 15rpx;
-		box-sizing: border-box;
-		padding: 0 10rpx;
-		border: 1rpx solid #f1f1f1;
-	}
+.my-content-list-item__text {
+  font-weight: bold;
+  font-size: 28rpx;
+  color: #333333;
+}
 
-	.zone-img {
-		width: calc(50rpx - clamp(0rpx, (var(--item-count, 3) - 3) * 8rpx, 20rpx));
-		height: calc(50rpx - clamp(0rpx, (var(--item-count, 3) - 3) * 8rpx, 20rpx));
-		object-fit: contain;
-		flex-shrink: 0;
-	}
+.my-content-list-item__arrow {
+  width: 25rpx;
+  height: 25rpx;
+}
 
-	.zone-text-area {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		width: 100%;
-	}
+.tabbar {
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  box-sizing: border-box;
+}
 
-	.zone-name {
-		font-weight: bold;
-		font-size: calc(24rpx - clamp(0rpx, (var(--item-count, 3) - 3) * 3rpx, 8rpx));
-		color: #333;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		text-align: center;
-	}
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+}
 
-	.zone-desc {
-		font-size: calc(20rpx - clamp(0rpx, (var(--item-count, 3) - 3) * 3rpx, 6rpx));
-		color: #333;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		text-align: center;
-	}
+.tab-icon {
+  width: 50rpx;
+  height: 50rpx;
+  margin-bottom: 10rpx;
+}
 
-	.full-width-swiper {
-		width: 100%;
-		padding: 20rpx;
-		box-sizing: border-box;
-	}
+.tab-item text {
+  font-size: 24rpx;
+  color: #999;
+}
 
-	.full-width-use {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		gap: 20rpx;
-		margin-bottom: 20rpx;
-	}
+.tab-item.active text {
+  color: #3498db;
+}
 
-	.full-width-use image {
-		width: 13rpx;
-		height: 34rpx;
-		background: linear-gradient(-45deg, #8C94FD, #B5D6FF, #2964B8, #8FB6F6);
-		box-shadow: 0rpx 5rpx 5rpx 0rpx rgba(178, 195, 221, 0.5);
-		border-radius: 6rpx;
-		opacity: 0.8;
-	}
+.float-button {
+  position: fixed;
+  right: 20rpx;
+  top: 75%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  transition: all 0.2s ease;
+  flex-direction: column;
+  gap: 20rpx;
+}
 
-	.full-width-use text {
-		font-weight: bold;
-		font-size: 32rpx;
-		color: #333;
-	}
+.float-button image {
+  width: 111rpx;
+  height: 123rpx;
+}
 
-	.full-banner-img {
-		width: 100%;
-		height: 200rpx;
-		border-radius: 20rpx;
-	}
+.hidden-contact-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  opacity: 0;
+  z-index: 10;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
 
-	.tabbar {
-		width: 100%;
-		background-color: #fff;
-		display: flex;
-		justify-content: space-around;
-		align-items: center;
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.1);
-		z-index: 100;
-		box-sizing: border-box;
-	}
+.qr-group-container {
+  width: 100%;
+  box-sizing: border-box;
+}
 
-	.tab-item {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		width: 25%;
-	}
+.qr-group-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-	.tab-icon {
-		width: 50rpx;
-		height: 50rpx;
-		margin-bottom: 10rpx;
-	}
+.qr-group-close {
+  position: absolute;
+  top: 12vh;
+  right: 30rpx;
+  color: white;
+  font-size: 60rpx;
+  width: 80rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
 
-	.tab-item text {
-		font-size: 24rpx;
-		color: #999;
-	}
+.qr-group-preview-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30rpx;
+}
 
-	.tab-item.active text {
-		color: #3498db;
-	}
+.qr-group-preview-img {
+  max-width: 90%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 12rpx;
+}
 
-	.float-button {
-		position: fixed;
-		right: 20rpx;
-		top: 75%;
-		transform: translateY(-50%);
-		border-radius: 50%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		z-index: 999;
-		flex-direction: column;
-		gap: 20rpx;
-	}
-
-	.float-button image {
-		width: 111rpx;
-		height: 123rpx;
-	}
-
-	.hidden-contact-btn {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 50%;
-		opacity: 0;
-		z-index: 10;
-		background: none !important;
-		border: none !important;
-		padding: 0 !important;
-		margin: 0 !important;
-	}
-
-	.qr-group-container {
-		width: 100%;
-		box-sizing: border-box;
-	}
-
-	.qr-group-mask {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-color: rgba(0, 0, 0, 0.9);
-		z-index: 9999;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.qr-group-close {
-		position: absolute;
-		top: 12vh;
-		right: 30rpx;
-		color: white;
-		font-size: 60rpx;
-		width: 80rpx;
-		height: 80rpx;
-		line-height: 80rpx;
-		text-align: center;
-		border-radius: 50%;
-		background-color: rgba(0, 0, 0, 0.3);
-		z-index: 10;
-	}
-
-	.qr-group-preview-content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 30rpx;
-	}
-
-	.qr-group-preview-img {
-		max-width: 90%;
-		max-height: 70vh;
-		object-fit: contain;
-		border-radius: 12rpx;
-	}
-
-	.qr-group-preview-desc {
-		color: white;
-		font-size: 24rpx;
-		text-align: center;
-		padding: 0 40rpx;
-		line-height: 1.5;
-	}
-
-	.notice {
-		width: 98%;
-		background-color: #EFF1FC;
-		display: flex;
-		align-items: center;
-		margin: 30rpx auto;
-		border-radius: 20rpx;
-	}
-
-	.notice-outer-layer {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		width: 95%;
-		margin: auto;
-	}
-
-	.notice-content {
-		font-size: 22rpx;
-		color: #504F4F;
-		line-height: 35rpx;
-		padding: 15rpx 5rpx;
-	}
+.qr-group-preview-desc {
+  color: white;
+  font-size: 24rpx;
+  text-align: center;
+  padding: 0 40rpx;
+  line-height: 1.5;
+}
 </style>
