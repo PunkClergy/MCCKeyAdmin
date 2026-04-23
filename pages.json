@@ -133,6 +133,13 @@
 						"navigationBarBackgroundColor": "#EFF1FC"
 					}
 				},
+				{
+					"path": "vehicleDispatch",
+					"style": {
+						"navigationBarTitleText": "无人门店车辆调度",
+						"navigationBarBackgroundColor": "#EFF1FC"
+					}
+				},
 
 
 
