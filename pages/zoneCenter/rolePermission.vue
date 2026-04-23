@@ -7,14 +7,14 @@
       <view class="record-tabs">
         <view 
           class="record-tabs-item" 
-          :style="{ backgroundImage: `url(${c_activeTab === 1 ? s_background_tabs_active_1 : s_background_tabs_1})` }"
+          :class="c_activeTab === 1 ? 'tab-active' : ''"
           @tap="handleSwitchTab('角色列表')"
         >
           角色列表
         </view>
         <view 
           class="record-tabs-item" 
-          :style="{ backgroundImage: `url(${c_activeTab === 2 ? s_background_tabs_2 : s_background_tabs_active_2})` }"
+          :class="c_activeTab === 2 ? 'tab-active' : ''"
           @tap="handleSwitchTab('新增角色')"
         >
           {{ btnState }}角色
@@ -213,8 +213,6 @@
 </template>
 
 <script>
-// import { _handleWindowInfo, _handleDeviceInfo } from '@/utils/public'
-// import { showLoading, hideLoading, showToast } from '@/utils/Inspect/tips'
 import {
   u_roleapidel,
   u_getMenuTree,
@@ -231,24 +229,18 @@ export default {
       statusBarHeight:  0,
       navBarHeight: 44,
       searchBarHeight: 80,
-      totalNavHeight: ( 0) + ( 44),
+      totalNavHeight: 44,
 
       g_page: 1,
       g_items: [],
       g_total: 0,
 
-      c_tabs: [{ name: '账 号列表', value: '1' }, { name: '新增账号', value: '2' }],
-      c_activeTab: 2,
+      c_tabs: [{ name: '账号列表', value: '1' }, { name: '新增账号', value: '2' }],
+      c_activeTab: 1,
       params: {},
       btnState: '新增',
       id: '',
-      tree: [],
-
-      s_background_picture_of_the_front_page: '',
-      s_background_tabs_1: '',
-      s_background_tabs_2: '',
-      s_background_tabs_active_1: '',
-      s_background_tabs_active_2: ''
+      tree: []
     }
   },
 
@@ -261,112 +253,103 @@ export default {
   },
 
   onShow() {
-    this.initialiImageBaseConversion()
     this.inittMenuTree()
   },
 
   methods: {
     // 切换选中
     handleCheck(id) {
-      this.toggleCheck(this.tree, id)
-      this.updateParentStates(this.tree)
-      this.tree = [...this.tree]
+      this.toggleCheck(this.tree, id);
+      this.tree = [...this.tree];
+    },
+
+    // 递归勾选/取消子节点
+    toggleCheck(nodes, targetId) {
+      for (let node of nodes) {
+        if (node.id === targetId) {
+          // 切换当前节点
+          node.checked = !node.checked;
+          node.indeterminate = false;
+          // 同步所有子节点
+          this.setChildrenChecked(node.children, node.checked);
+          return;
+        }
+        // 递归查找子节点
+        if (node.children && node.children.length) {
+          this.toggleCheck(node.children, targetId);
+        }
+      }
+      // 更新所有父节点状态
+      this.updateAllParentChecked(this.tree);
+    },
+
+    // 强制设置所有子节点状态
+    setChildrenChecked(children, checked) {
+      if (!children || !children.length) return;
+      children.forEach(item => {
+        item.checked = checked;
+        item.indeterminate = false;
+        this.setChildrenChecked(item.children, checked);
+      });
+    },
+
+    // 更新所有父节点的勾选状态（递归向上）
+    updateAllParentChecked(tree) {
+      tree.forEach(node => {
+        if (node.children && node.children.length) {
+          this.updateAllParentChecked(node.children);
+          this.updateNodeChecked(node);
+        }
+      });
+    },
+
+    // 更新单个节点状态
+    updateNodeChecked(node) {
+      if (!node.children || !node.children.length) return;
+      const total = node.children.length;
+      let checkedCount = 0;
+      let indeterminateCount = 0;
+      node.children.forEach(item => {
+        if (item.checked) checkedCount++;
+        if (item.indeterminate) indeterminateCount++;
+      });
+      if (checkedCount === total) {
+        node.checked = true;
+        node.indeterminate = false;
+      } else if (checkedCount > 0 || indeterminateCount > 0) {
+        node.checked = false;
+        node.indeterminate = true;
+      } else {
+        node.checked = false;
+        node.indeterminate = false;
+      }
     },
 
     // 切换展开
     toggleExpand(id) {
-      this.toggleNodeExpand(this.tree, id)
-      this.tree = [...this.tree]
+      this.toggleNodeExpand(this.tree, id);
+      this.tree = [...this.tree];
     },
 
     toggleNodeExpand(nodes, targetId) {
       nodes.forEach(node => {
         if (node.id === targetId) {
-          node.isExpanded = !node.isExpanded
+          node.isExpanded = !node.isExpanded;
         } else if (node.children) {
-          this.toggleNodeExpand(node.children, targetId)
+          this.toggleNodeExpand(node.children, targetId);
         }
-      })
-    },
-
-    toggleCheck(nodes, targetId) {
-      nodes.forEach(node => {
-        if (node.id === targetId) {
-          node.checked = !node.checked
-          this.toggleChildren(node.children, node.checked)
-        } else if (node.children) {
-          this.toggleCheck(node.children, targetId)
-        }
-      })
-    },
-
-    toggleChildren(children, checked) {
-      if (!children) return
-      children.forEach(child => {
-        child.checked = checked
-        this.toggleChildren(child.children, checked)
-      })
-    },
-
-    updateParentStates(nodes) {
-      nodes.forEach(node => {
-        if (node.children?.length) {
-          this.checkParentState(node)
-          this.updateParentStates(node.children)
-        }
-      })
-    },
-
-    checkParentState(node) {
-      const allChecked = node.children.every(c => c.checked)
-      const someChecked = node.children.some(c => c.checked || c.indeterminate)
-      node.checked = allChecked
-      node.indeterminate = !allChecked && someChecked
-    },
-
-    // 背景图
-    initialiImageBaseConversion() {
-      const imageMap = [
-        { path: '/static/images/home/car-bg.png', key: 's_background_picture_of_the_front_page' },
-        { path: '/static/images/home/1-1.png', key: 's_background_tabs_1' },
-        { path: '/static/images/home/2-1.png', key: 's_background_tabs_active_1' },
-        { path: '/static/images/home/1-2.png', key: 's_background_tabs_2' },
-        { path: '/static/images/home/2-2.png', key: 's_background_tabs_active_2' }
-      ]
-
-      const promises = imageMap.map(item => {
-        return new Promise(resolve => {
-          uni.getFileSystemManager().readFile({
-            filePath: item.path,
-            encoding: 'base64',
-            success: res => {
-              resolve({ [item.key]: `data:image/png;base64,${res.data}` })
-            }
-          })
-        })
-      })
-
-      Promise.all(promises).then(results => {
-        const data = results.reduce((acc, curr) => ({ ...acc, ...curr }), {})
-        Object.assign(this, data)
-      })
+      });
     },
 
     // 列表
     async initList() {
-      // showLoading()
       try {
         const res = await u_roleapiList()
-		console.log(res,'22222')
         if (res.code === 1000) {
-          if (this.g_page > 1 && res.content.length === 0) {
-            // showToast(`已加载全部：${this.g_items.length} 条`)
-          }
           this.g_items = this.g_items.concat(res.content)
           this.g_total = Number(res.count || 0).toLocaleString()
         }
       } catch (e) {}
-      // hideLoading()
     },
 
     handleLower() {},
@@ -402,17 +385,13 @@ export default {
     // 提交
     async handleSubmit() {
       if (!this.params.name) {
-        // showToast('请输入角色名称')
         return
       }
-      // showLoading()
       try {
         const res = await u_roleapiaddOrUpdate({ ...this.params, id: this.id })
         if (res.code !== 1000) {
-          // showToast(res.msg)
           return
         }
-        // showToast('操作成功')
         this.c_activeTab = 1
         this.params = {}
         this.btnState = '新增'
@@ -420,10 +399,7 @@ export default {
         this.g_items = []
         this.initList()
         this.handleSetMenuTree(res.content.id)
-      } catch (e) {
-        // showToast('提交失败')
-      }
-      // hideLoading()
+      } catch (e) {}
     },
 
     // 编辑
@@ -511,17 +487,19 @@ export default {
 </script>
 
 <style scoped>
-/* 你的样式全部保留，我已优化自动高度 */
 .container {
   height: 100vh;
   padding: 10rpx 4rpx;
   box-sizing: border-box;
+  background-color: #EFF1FC;
+  display: flex;
+  flex-direction: column;
 }
 
 .record-container {
   width: 96%;
   margin: 0 auto;
-  height: calc(100% - 130rpx);
+  flex: 1;
   border-radius: 12rpx;
   background: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -533,6 +511,8 @@ export default {
 .record-tabs {
   display: flex;
   height: 50px;
+  background-color: #f5f7fa;
+  flex-shrink: 0;
 }
 
 .record-tabs-item {
@@ -540,17 +520,21 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
   font-weight: bold;
   font-size: 28rpx;
-  color: #010101;
+  color: #666;
+  transition: all 0.3s;
+}
+
+.record-tabs-item.tab-active {
+  background-color: #1677ff;
+  color: #ffffff;
 }
 
 .list-scroll,
 .form-scroll {
   flex: 1;
+  height: 0;
   overflow-y: auto;
 }
 
@@ -689,5 +673,11 @@ export default {
 .node-name {
   font-size: 24rpx;
   color: #333;
+}
+.card-info-item-input{
+	font-size: 26rpx;
+}
+.card-info-item-input input{
+	text-align: right;
 }
 </style>

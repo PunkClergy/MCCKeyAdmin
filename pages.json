@@ -88,19 +88,22 @@
 				{
 					"path": "rolePermission",
 					"style": {
-						"navigationBarTitleText": "角色与权限"
+						"navigationBarTitleText": "角色与权限",
+						"navigationBarBackgroundColor": "#EFF1FC"
 					}
 				},
 				{
 					"path": "userRole",
 					"style": {
-						"navigationBarTitleText": "人员与角色"
+						"navigationBarTitleText": "人员与角色",
+						"navigationBarBackgroundColor": "#EFF1FC"
 					}
 				},
 				{
 					"path": "transferAdmin",
 					"style": {
-						"navigationBarTitleText": "移交管理员"
+						"navigationBarTitleText": "移交管理员",
+						"navigationBarBackgroundColor": "#EFF1FC"
 					}
 				}
 			]
