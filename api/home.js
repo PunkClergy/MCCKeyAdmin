@@ -2,7 +2,9 @@ import {
 	http
 } from '@/utils/request/http'
 
+export const u_houseFlowDel = (data) => http.postFormData('/unmannedStoreApi/addOrUpdate', data)
 
+// export const  = (data) => http.get('/unmannedStoreApi/unmannedStoreList', data)
 export const u_houseFlowList = (data) => http.get('/unmannedStoreApi/unmannedStoreList', data)
 export const u_houseFlowApirAdd = (data) => http.postFormData('/unmannedStoreApi/addOrUpdate', data)
 export const u_unmannedStoreApidel = (data) => http.postFormData('/unmannedStoreApi/del', data)
