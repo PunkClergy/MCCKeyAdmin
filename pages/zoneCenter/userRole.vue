@@ -3,7 +3,6 @@
     <custom-header title="人员角色设定" />
 
     <view class="record-container">
-      <!-- 去掉了下拉刷新所有属性 -->
       <scroll-view 
         scroll-y 
         class="list-scroll"
@@ -22,7 +21,6 @@
               </view>
             </view>
             <view class="head-right">
-              <!-- 图标改为文字 -->
               <text class="text-btn edit" @tap="handleEdit(item)">编辑</text>
               <text class="text-btn delete" @tap="handleDelete(item.id)">删除</text>
             </view>
@@ -124,10 +122,10 @@ import {
 export default {
   data() {
     return {
-      c_screen_height:  0,
-      c_screen_width:  0,
-      statusBarHeight:  0,
-      navBarHeight:  44,
+      c_screen_height: 0,
+      c_screen_width: 0,
+      statusBarHeight: 0,
+      navBarHeight: 44,
       searchBarHeight: 80,
       totalNavHeight: 44,
 
@@ -282,25 +280,31 @@ export default {
 </script>
 
 <style scoped>
+/* 核心：父容器使用 flex 布局自动占满 */
 .container {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
   padding: 10rpx 4rpx;
   box-sizing: border-box;
-  background-color: #EFF1FC;
 }
 
 .record-container {
+  flex: 1; /* 关键：自动占满剩余高度 */
   width: 96%;
   margin: 0 auto;
-  height: calc(100% - 130rpx);
   position: relative;
   border-radius: 12rpx;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
+/* 滚动区域占满容器剩余高度 */
 .list-scroll {
-  height: 100%;
+  flex: 1;
+  height: 0; /* 兼容必备 */
 }
 
 .content-item {
@@ -381,6 +385,7 @@ export default {
   width: 100%;
   display: flex;
   justify-content: center;
+  z-index: 10;
 }
 
 .levitation-button text {
@@ -450,7 +455,6 @@ export default {
   padding: 40rpx 0;
 }
 
-/* 表单项上下间距加大 */
 .middle-form-item {
   display: flex;
   align-items: center;
