@@ -3,11 +3,10 @@
     <custom-header title="人员角色设定" />
 
     <view class="record-container">
+      <!-- 去掉了下拉刷新所有属性 -->
       <scroll-view 
         scroll-y 
         class="list-scroll"
-        @refresherrefresh="handleRefresh"
-        refresher-enabled
       >
         <view class="content-item" v-for="(item, index) in g_items" :key="index">
           <view class="content-item-head">
@@ -23,8 +22,9 @@
               </view>
             </view>
             <view class="head-right">
-              <image src="/static/images/home/_edit.png" @tap="handleEdit(item)" />
-              <image src="/static/images/home/_delete.png" @tap="handleDelete(item.id)" />
+              <!-- 图标改为文字 -->
+              <text class="text-btn edit" @tap="handleEdit(item)">编辑</text>
+              <text class="text-btn delete" @tap="handleDelete(item.id)">删除</text>
             </view>
           </view>
 
@@ -134,7 +134,6 @@ export default {
       g_page: 1,
       g_items: [],
       g_total: 0,
-      g_triggered: false,
 
       c_activeTab: 1,
       btnState: '新增',
@@ -195,13 +194,6 @@ export default {
       } catch (e) {}
     },
 
-    // 刷新
-    handleRefresh() {
-      this.g_page = 1
-      this.g_items = []
-      this.initList()
-    },
-
     // 编辑
     handleEdit(item) {
       this.c_send_key_show_momal = true
@@ -224,8 +216,6 @@ export default {
           try {
             const res = await u_delChildUser({ id })
             if (res.code === 1000) {
-              this.g_page = 1
-              this.g_items = []
               this.initList()
             }
           } catch (e) {}
@@ -296,6 +286,7 @@ export default {
   height: 100vh;
   padding: 10rpx 4rpx;
   box-sizing: border-box;
+  background-color: #EFF1FC;
 }
 
 .record-container {
@@ -336,14 +327,24 @@ export default {
 .head-right {
   display: flex;
   flex-direction: row;
-  gap: 40rpx;
+  gap: 30rpx;
   align-items: center;
   justify-content: center;
 }
 
-.head-right image {
-  width: 30rpx;
-  height: 30rpx;
+/* 文字按钮样式 */
+.text-btn {
+  font-size: 26rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 6rpx;
+}
+.edit {
+  color: #1576DC;
+  background: #e8f4ff;
+}
+.delete {
+  color: #fa4d4d;
+  background: #fff0f0;
 }
 
 .content-item-info {
@@ -459,7 +460,7 @@ export default {
 }
 
 .middle-form-item label {
-  font-weight: 600;
+  font-weight: 60;
   font-size: 28rpx;
   color: #333;
   width: 120rpx;
