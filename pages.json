@@ -36,6 +36,14 @@
 					}
 				},
 				{
+					"path": "carServiceKey",
+					"style": {
+						"navigationBarTitleText": "车务使用电子钥匙",
+						"navigationBarBackgroundColor": "#EFF1FC"
+					}
+				},
+				
+				{
 					"path": "maintainRemind",
 					"style": {
 						"navigationBarTitleText": "保养提醒",
