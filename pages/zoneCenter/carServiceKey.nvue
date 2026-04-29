@@ -30,9 +30,9 @@
 				<view
 					style="display: flex;width: 730rpx;flex-direction: row;justify-content: space-between;padding: 20rpx;">
 					<view>
-						2：{{vehicle_info?.vin||'-'}}
+						车架号：{{vehicle_info?.vin||'-'}}
 					</view>
-					<view>1：{{vehicle_info?.xsgw||0}}</view>
+					<view>设备号：{{vehicle_info?.sn||'-'}}</view>
 				</view>
 			</view>
 		</view>
@@ -107,7 +107,8 @@
 		},
 
 		onLoad(options) {
-			this.vehicle_info = JSON.parse(options?.info || '{}');
+			console.log(options,'2222')
+			this.vehicle_info = JSON.parse(options?.datails || '{}');
 			this.initialScreenInfo();
 		},
 
@@ -190,6 +191,7 @@
 
 			// 向Webview发送数据
 			sendDataToWebview(data) {
+				console.log('222]]]',data)
 				const payload = JSON.stringify(data);
 				const jsStr = `window.postMessage(${payload}, '*')`;
 
@@ -207,8 +209,9 @@
 
 			// 页面跳转
 			handleJumpVehicle() {
+		
 				uni.redirectTo({
-					url: `/pages/carRental/vehicleList/index?souce=/pages/carRental/carServiceKey/carServiceKey`
+					url: `/pages/zoneCenter/carKeyConfig?source=/pages/zoneCenter/carServiceKey`
 				});
 			},
 
@@ -267,9 +270,9 @@
 				try {
 					const controlType = evt;
 					const requestParam = {
-						sn: '640019899',
+						sn: this.vehicle_info?.sn,
 						operationType: controlType,
-						_timestamp: Date.now()
+						_timestamp: Date.now()	
 					};
 					const res = await u_operation(requestParam)
 					uni.showToast({
