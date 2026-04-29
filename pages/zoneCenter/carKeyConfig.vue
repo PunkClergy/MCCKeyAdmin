@@ -60,12 +60,10 @@
 									<text>{{ item.startDate || '' }}-{{ item.endDate || '' }}</text>
 								</view>
 							</view>
-							<view class="content-item-footer" v-if="g_source">
-								<view class="footer-right">
-									<view class="footer-right-btn" :data-item="item" @tap="handleSelectJump"
-										v-if="!g_flagMulti">
-										<text>选择此车</text>
-									</view>
+							<!-- 优化后的选择此车按钮 -->
+							<view class="content-item-footer" v-if="g_source && !g_flagMulti">
+								<view class="select-car-btn" :data-item="item" @tap="handleSelectJump">
+									选择此车
 								</view>
 							</view>
 						</view>
@@ -418,7 +416,7 @@
 		height: 100vh;
 		display: flex;
 		flex-direction: column;
-		background: #f5f5f5;
+		background: #EFF1FC;
 	}
 
 	.container {
@@ -564,13 +562,20 @@
 		width: 100%;
 	}
 
-	.footer-right-btn {
+	/* 选择此车按钮 优化样式 */
+	.content-item-footer {
+		padding: 20rpx 24rpx;
+		display: flex;
+		justify-content: flex-end;
+		border-top: 1rpx solid #f5f5f5;
+	}
+	.select-car-btn {
 		background: #1677ff;
 		color: #fff;
-		padding: 8rpx 16rpx;
-		border-radius: 6rpx;
-		font-size: 22rpx;
-		margin-left: auto;
+		padding: 12rpx 24rpx;
+		border-radius: 8rpx;
+		font-size: 24rpx;
+		line-height: 1.2;
 	}
 
 	.empty {

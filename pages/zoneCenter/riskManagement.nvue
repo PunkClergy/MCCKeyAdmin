@@ -86,7 +86,7 @@
 			},
 
 			webUrlWithTimestamp() {
-				return `/hybrid/html/sendKey.html?nowTime=${this.nowTimestamp}`;
+				return `/hybrid/html/risk.html?nowTime=${this.nowTimestamp}`;
 			},
 
 			statusBarHeight() {
@@ -211,7 +211,7 @@
 			handleJumpVehicle() {
 		
 				uni.redirectTo({
-					url: `/pages/zoneCenter/carKeyConfig?source=/pages/zoneCenter/carServiceKey`
+					url: `/pages/zoneCenter/carKeyConfig?source=/pages/zoneCenter/riskManagement`
 				});
 			},
 

@@ -42,6 +42,13 @@
 						"navigationBarBackgroundColor": "#EFF1FC"
 					}
 				},
+				{
+					"path": "riskManagement",
+					"style": {
+						"navigationBarTitleText": "远程控车风控",
+						"navigationBarBackgroundColor": "#EFF1FC"
+					}
+				},
 				
 				{
 					"path": "maintainRemind",
@@ -75,6 +82,7 @@
 						"navigationBarBackgroundColor": "#EFF1FC"
 					}
 				},
+				
 				{
 					"path": "bizKeyConfig",
 					"style": {

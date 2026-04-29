@@ -67,12 +67,12 @@
       </view>
 
       <!-- 公告 -->
-      <view class="notice" v-if="isShowInfo">
+     <!-- <view class="notice" v-if="isShowInfo">
         <view class="notice-content">
           温馨提示：请提醒用车人，若遇无网络时，点击页面右上角「···」并刷新页面，即可进入【紧急开关锁】页面；
           若需长时间处于无信号覆盖区域，建议随身携带实体钥匙备用。
         </view>
-      </view>
+      </view> -->
 
       <!-- 专区入口 -->
       <view class="special-zone-container">
