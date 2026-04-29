@@ -17,7 +17,6 @@
 								{{vehicle_info.vehicleSerialName||'-'}}{{vehicle_info.vehicleModeName||''}}
 							</text>
 						</view>
-
 					</view>
 					<view class="vehicle-edit-btn" @tap="handleJumpVehicle">
 						<text class="vehicle-edit-text">重新选择</text>
@@ -111,7 +110,7 @@
 			},
 
 			webUrlWithTimestamp() {
-				return `/hybrid/html/sendKey.html?nowTime=${this.nowTimestamp}`;
+				return `/hybrid/html/trajectory.html?nowTime=${this.nowTimestamp}`;
 			},
 
 			statusBarHeight() {
@@ -235,7 +234,7 @@
 			// 页面跳转
 			handleJumpVehicle() {
 				uni.redirectTo({
-					url: `/pages/zoneCenter/carKeyConfig?source=/pages/zoneCenter/carServiceKey`
+					url: `/pages/zoneCenter/carKeyConfig?source=/pages/zoneCenter/trajectory`
 				});
 			},
 

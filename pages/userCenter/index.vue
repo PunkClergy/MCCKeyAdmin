@@ -2,7 +2,7 @@
   <view class="container">
 
     <!-- 自定义头部 -->
-    <view 
+   <!-- <view 
       class="custom-header" 
       :style="{
         paddingTop: height_from_head + 'px',
@@ -18,7 +18,7 @@
         />
         <view class="custom-header-outer-layer-title">个人中心</view>
         <view class="custom-header-outer-layer-user_name">
-          <!-- 修复：把 v-else 包在一个 view 里 -->
+    
           <text v-if="account" @tap="handleOnExistingAccountTap">{{account}}</text>
           <view v-else @tap="handleOnExistingAccountTap">
             <text>请登录</text>
@@ -26,16 +26,12 @@
           </view>
         </view>
       </view>
-    </view>
+    </view> -->
 
     <!-- 滚动内容 -->
     <scroll-view 
       class="content" 
       scroll-y
-      :style="{
-        top: '90px',
-        bottom: tabBarHeight + 'px'
-      }"
       @scrolltolower="onReachBottom"
     >
       <view class="my-content-list-container">
@@ -85,15 +81,15 @@
 
     <!-- 悬浮按钮 -->
     <view class="float-button">
-      <button 
+    <!--  <button 
         open-type="contact" 
         :show-message-card="true"
         send-message-title="我想咨询问题"
         send-message-path="/pages/index/index"
         class="hidden-contact-btn"
         @contact="handleContact"
-      />
-      <image src="https://k1sw.wiselink.net.cn/img/app2.0/desk/consulting.png" />
+      /> -->
+      <!-- <image src="https://k1sw.wiselink.net.cn/img/app2.0/desk/consulting.png" /> -->
       <image 
         src="/static/images/tel400.png" 
         style="width: 80rpx;height: 80rpx;" 
@@ -253,8 +249,8 @@ export default {
 
     // 切换tab
     handleSwitchTabNavigation(evt) {
+		console.log('11111',evt)
       const idx = evt.currentTarget.dataset.index
-      if (!idx) return
       const item = this.tabList[idx]
       if (!item?.pagePath) return
       const targetUrl = item.pagePath

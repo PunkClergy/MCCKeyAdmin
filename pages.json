@@ -49,6 +49,13 @@
 						"navigationBarBackgroundColor": "#EFF1FC"
 					}
 				},
+				{
+					"path": "trajectory",
+					"style": {
+						"navigationBarTitleText": "车辆轨迹",
+						"navigationBarBackgroundColor": "#EFF1FC"
+					}
+				},
 				
 				{
 					"path": "maintainRemind",
@@ -130,8 +137,7 @@
 			"pages": [{
 					"path": "index",
 					"style": {
-						"navigationBarTitleText": "个人中心",
-						"navigationStyle": "custom"
+						"navigationBarTitleText": "个人中心"
 					}
 				},
 				{

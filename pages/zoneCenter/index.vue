@@ -156,8 +156,8 @@
 
     <!-- 悬浮按钮 -->
     <view class="float-button">
-      <button open-type="contact" class="hidden-contact-btn"></button>
-      <image src="https://k1sw.wiselink.net.cn/img/app2.0/desk/consulting.png" />
+    <!--  <button open-type="contact" class="hidden-contact-btn"></button>
+      <image src="https://k1sw.wiselink.net.cn/img/app2.0/desk/consulting.png" /> -->
       <image src="/static/images/tel400.png" @tap="handleMakePhoneCallWithConfirm" />
     </view>
 
