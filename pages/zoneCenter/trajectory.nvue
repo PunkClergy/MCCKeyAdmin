@@ -74,7 +74,8 @@
 	} from '@/utils/scheme/screen.js'
 	import {
 		u_getAllCarPoisiton,
-		u_operation
+		u_operation,
+		u_getTrackPlayback
 	} from '@/api'
 	import 'url-search-params-polyfill';
 
@@ -334,7 +335,7 @@
 			},
 
 			// 确认日期选择
-			confirmPicker() {
+			async confirmPicker() {
 				if (!this.startDate || !this.endDate) {
 					uni.showToast({
 						title: '请选择完整的日期区间',
@@ -342,14 +343,146 @@
 					});
 					return;
 				}
+				console.log(this.vehicle_info)
+				const params = {
+					sn: this.vehicle_info?.sn,
+					startDate: this.startDate,
+					endDate: this.endDate
+				};
+
+				// const responeInfo = await u_getTrackPlayback({
+				// 	params
+				// });
+
 				// 关闭弹窗并可后续扩展日期提交逻辑
 				this.showPicker = false;
 				this.lat = [{
-					lat: 12,
-					lat1: 223
-				}]
-				this.sendDataToWebviewDebounced();
-				console.log('选择的日期:', this.startDate, this.endDate);
+						lat: 39.8512,
+						lng: 116.3124
+					},
+					{
+						lat: 39.8505,
+						lng: 116.3115
+					},
+					{
+						lat: 39.8498,
+						lng: 116.3105
+					},
+					{
+						lat: 39.8491,
+						lng: 116.3095
+					},
+					{
+						lat: 39.8484,
+						lng: 116.3085
+					},
+					{
+						lat: 39.8477,
+						lng: 116.3075
+					},
+					{
+						lat: 39.8470,
+						lng: 116.3065
+					},
+					{
+						lat: 39.8463,
+						lng: 116.3055
+					},
+					{
+						lat: 39.8456,
+						lng: 116.3045
+					},
+					{
+						lat: 39.8449,
+						lng: 116.3035
+					},
+					{
+						lat: 39.8442,
+						lng: 116.3025
+					},
+					{
+						lat: 39.8435,
+						lng: 116.3015
+					},
+					{
+						lat: 39.8428,
+						lng: 116.3005
+					},
+					{
+						lat: 39.8421,
+						lng: 116.2995
+					},
+					{
+						lat: 39.8414,
+						lng: 116.2985
+					},
+					{
+						lat: 39.8410,
+						lng: 116.2990
+					},
+					{
+						lat: 39.8415,
+						lng: 116.3005
+					},
+					{
+						lat: 39.8425,
+						lng: 116.3020
+					},
+					{
+						lat: 39.8435,
+						lng: 116.3035
+					},
+					{
+						lat: 39.8445,
+						lng: 116.3050
+					},
+					{
+						lat: 39.8455,
+						lng: 116.3065
+					},
+					{
+						lat: 39.8465,
+						lng: 116.3080
+					},
+					{
+						lat: 39.8475,
+						lng: 116.3095
+					},
+					{
+						lat: 39.8485,
+						lng: 116.3110
+					},
+					{
+						lat: 39.8495,
+						lng: 116.3125
+					},
+					{
+						lat: 39.8505,
+						lng: 116.3135
+					},
+					{
+						lat: 39.8510,
+						lng: 116.3130
+					},
+					{
+						lat: 39.8515,
+						lng: 116.3128
+					},
+					{
+						lat: 39.8513,
+						lng: 116.3126
+					},
+					{
+						lat: 39.8512,
+						lng: 116.3124
+					} // 👈 闭环：最后一点 = 第一点
+				]
+				setTimeout(() => {
+					this.sendDataToWebviewDebounced();
+					console.log('选择的日期:', this.startDate, this.endDate);
+				}, 3000)
+
+
 			},
 
 			// 开始日期改变

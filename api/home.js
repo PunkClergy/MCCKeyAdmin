@@ -1,6 +1,7 @@
 import {
 	http
 } from '@/utils/request/http'
+export const u_getTrackPlayback = (data) => http.get('/carapi/getTrackPlayback', data)
 export const u_getAllCarPoisiton = (data) => http.get('/carapi/getAllCarPoisiton', data)//替换
 export const u_getUserlnfo = (data) => http.get('/deskapi/getUserInfo', data)
 export const u_companyImprove = (data) => http.postFormData('/companyapi/companyImprove', data)

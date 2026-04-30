@@ -249,7 +249,6 @@ export default {
 
     // 切换tab
     handleSwitchTabNavigation(evt) {
-		console.log('11111',evt)
       const idx = evt.currentTarget.dataset.index
       const item = this.tabList[idx]
       if (!item?.pagePath) return

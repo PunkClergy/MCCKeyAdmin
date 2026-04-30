@@ -31,6 +31,7 @@ var routePath = []; // 轨迹路线坐标点集合
 var vehiclePolyline = null; // 轨迹路线实例
 var routeColor = "#1E90FF"; // 轨迹颜色（蓝色）
 
+
 // 多语言按钮文本配置对象（集中管理中英文按钮文字）
 const buttonTexts = {
 	// 英文
@@ -57,7 +58,8 @@ const buttonTexts = {
 
 // ==================== 跨页面消息监听 ====================
 window.addEventListener('message', (e) => {
-	console.log('111111--==',e)
+	console.log('【1】收到外部消息:', e)
+
 	// 如果消息类型是车辆电子钥匙相关数据
 	if (e.data.type === 'elctrncky') {
 		// 接收车辆位置列表数据
@@ -66,12 +68,11 @@ window.addEventListener('message', (e) => {
 		vehicle_info = e.data?.vehicle_info || {};
 		// 接收外部传来的轨迹经纬度数组
 		routePath = e?.data?.lat || [];
-
 		// 如果地图已初始化，创建标记并绘制轨迹
 		if (isMapInitialized) {
 			createMarkers();
 			// 绘制真实轨迹
-			drawVehicleRoute(routePath);
+			drawVehicleRoute(e?.data?.lat);
 		}
 	}
 
@@ -105,7 +106,6 @@ function initMap() {
 			// 如果已有数据，创建标记 + 绘制轨迹
 			if (info.length > 0) {
 				createMarkers();
-				drawVehicleRoute(routePath);
 			}
 		}, fail => {
 			console.error('获取位置失败:', fail);
@@ -145,7 +145,7 @@ function createMarkers() {
 
 	// 清除旧标记 + 旧轨迹
 	clearMarkers();
-	clearRoute();
+
 
 	info.forEach((item, index) => {
 		if (!item || !item.latitude || !item.longitude) {
@@ -201,8 +201,7 @@ function openMatchingMarkerInfoWindow() {
 
 		setTimeout(() => {
 			google.maps.event.trigger(matchingMarker, 'click');
-			// 绘制真实轨迹
-			drawVehicleRoute(routePath);
+
 		}, 500);
 	}
 }
@@ -240,9 +239,7 @@ function setupMarkerEvents(marker, index) {
 
 		handleMarkerSelection(marker, index);
 
-		// ==================== 点击车辆 → 绘制真实外部轨迹 ====================
-		clearRoute();
-		drawVehicleRoute(routePath);
+
 	});
 }
 
@@ -268,27 +265,32 @@ function clearMarkers() {
 	markers = [];
 }
 
-// ==================== 轨迹功能（真实数据版） ====================
+// ==================== 轨迹功能（真实数据版 + 默认轨迹） ====================
+/**
+ * 绘制轨迹（外部有就用外部，没有就用默认北京西南四环）
+ */
 function drawVehicleRoute(path) {
+
 	if (vehiclePolyline) {
 		vehiclePolyline.setMap(null);
 	}
 
-	if (!path || path.length < 2) {
-		console.log("轨迹点不足，无法绘制路线");
-		return;
-	}
+	// ==================== 核心逻辑 ====================
+	// 1. 外部有轨迹 → 使用外部轨迹
+	// 2. 外部无轨迹 → 使用默认固定轨迹（30个点）
+	let finalPath = path && path.length >= 2 ? path : [];
+
+	console.log('【4】最终真正绘制的轨迹 =', finalPath);
+	console.log('【4】最终轨迹点数量 =', finalPath.length);
 
 	vehiclePolyline = new google.maps.Polyline({
-		path: path,
+		path: finalPath,
 		geodesic: true,
-		strokeColor: routeColor,
+		strokeColor: "#1E90FF",
 		strokeOpacity: 0.8,
 		strokeWeight: 5,
 		map: map
 	});
-
-	console.log("真实轨迹绘制完成，点数：" + path.length);
 }
 
 function clearRoute() {
@@ -340,6 +342,7 @@ document.getElementById('btn6').addEventListener('click', () => {
 	});
 });
 document.getElementById('trajectory').addEventListener('click', () => {
+	console.log('【5】点击了轨迹查询按钮');
 	uni.postMessage({
 		data: {
 			source: 100,
