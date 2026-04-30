@@ -13,7 +13,7 @@
 							<view class="head-left">
 								<view class="left-category">
 									<image src="/static/car_icon.png" />
-									< <text>{{ item.platenumber }}</text>
+									 <text>{{ item.platenumber }}</text>
 								</view>
 								<view class="left-model" v-if="!item.bluetoothKey">
 									{{ item.vehicleSerialName || '-' }}{{ item.vehicleModeName || '' }}
