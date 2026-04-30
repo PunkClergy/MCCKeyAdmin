@@ -30,13 +30,11 @@
 			</view>
 		</view>
 
-		<!-- 日期区间选择弹窗（悬浮上层） -->
 		<view class="picker-mask" @click="closePicker" v-if="showPicker">
 			<view class="picker-panel" @click.stop="">
 				<view class="panel-body">
 					<view class="panel-title">请选择开始和结束日期</view>
 
-					<!-- 开始日期 -->
 					<picker mode="date" :value="startDate" @change="onStartChange">
 						<view class="picker-item">
 							<text>开始日期</text>
@@ -44,7 +42,6 @@
 						</view>
 					</picker>
 
-					<!-- 结束日期 -->
 					<picker mode="date" :value="endDate" @change="onEndChange">
 						<view class="picker-item">
 							<text>结束日期</text>
@@ -52,7 +49,6 @@
 						</view>
 					</picker>
 
-					<!-- 按钮组 -->
 					<view class="btn-group">
 						<text class="btn cancel" @click="closePicker">取消</text>
 						<text class="btn confirm" @click="confirmPicker">确认</text>
@@ -79,7 +75,6 @@
 	} from '@/api'
 	import 'url-search-params-polyfill';
 
-	// 常量定义
 	const DATA_SEND_INTERVAL = 2000;
 	const NAVBAR_HEIGHT = {
 		ios: 49,
@@ -164,7 +159,6 @@
 				let currentLang = uni.getStorageSync('lang') || 'zh-CN';
 			},
 
-			// 初始化屏幕信息
 			async initialScreenInfo() {
 				try {
 					this.screenInfo = await info_screen();
@@ -180,7 +174,6 @@
 				}
 			},
 
-			// 获取车辆位置数据
 			async initSearchLink() {
 				try {
 					const res = await u_getAllCarPoisiton();
@@ -191,7 +184,6 @@
 				}
 			},
 
-			// 防抖发送数据
 			sendDataToWebviewDebounced() {
 				let currentLang = uni.getStorageSync('lang') || 'zh-CN';
 				this.clearSendDataTimer();
@@ -206,7 +198,6 @@
 				}, DATA_SEND_INTERVAL);
 			},
 
-			// 清理定时器
 			clearSendDataTimer() {
 				if (this.sendDataTimeout) {
 					clearTimeout(this.sendDataTimeout);
@@ -214,25 +205,21 @@
 				}
 			},
 
-			// 向Webview发送数据
 			sendDataToWebview(data) {
 				console.log('222]]]', data)
 				const payload = JSON.stringify(data);
 				const jsStr = `window.postMessage(${payload}, '*')`;
 
-				// APP端处理
 				// #ifdef APP-PLUS
 				this.$refs.webview?.evalJS(jsStr);
 				// #endif
 
-				// H5端处理
 				// #ifdef H5
 				const iframe = document.querySelector('web-view iframe');
 				iframe?.contentWindow?.postMessage(data, '*');
 				// #endif
 			},
 
-			// 页面跳转
 			handleJumpVehicle() {
 				uni.redirectTo({
 					url: `/pages/zoneCenter/carKeyConfig?source=/pages/zoneCenter/trajectory`
@@ -241,7 +228,6 @@
 
 			handleDate(e) {
 				if (this.vehicle_info?.sn) {
-					// 打开日期选择器
 					this.showPicker = true;
 				} else {
 					uni.showToast({
@@ -251,7 +237,6 @@
 				}
 			},
 
-			// 消息处理
 			handlePostMessage(evt) {
 				const messageData = evt?.detail?.data?.[0] || {};
 				const {
@@ -262,7 +247,6 @@
 					console.warn('Received message without type:', evt);
 					return;
 				}
-				// 使用策略模式替代多重 if 判断
 				const ACTION_HANDLERS = {
 					3: () => {
 						console.log('开锁操作');
@@ -290,7 +274,6 @@
 					}
 				};
 
-				// 执行对应的处理函数
 				const handler = ACTION_HANDLERS[source];
 				if (handler) {
 					handler();
@@ -326,17 +309,13 @@
 				} catch (error) {}
 			},
 
-			// 触摸移动事件
 			handleTouchMove() {},
 
-			// 关闭日期选择器
 			closePicker() {
 				this.showPicker = false;
 			},
 
-			// 确认日期选择
 			async confirmPicker() {
-				// 1. 校验日期
 				if (!this.startDate || !this.endDate) {
 					uni.showToast({
 						title: '请选择完整的日期区间',
@@ -345,7 +324,6 @@
 					return;
 				}
 			
-				// 2. 校验车辆SN
 				if (!this.vehicle_info?.sn) {
 					uni.showToast({
 						title: '请先选择车辆',
@@ -354,32 +332,27 @@
 					return;
 				}
 			
-				// 3. 组装参数
 				const params = {
 					sn: this.vehicle_info.sn,
 					startDate: `${this.startDate} 00:00`,
 					endDate: `${this.endDate} 23:59`
 				};
-			
+				console.log(params)
 				try {
-					// 4. 请求轨迹接口
 					const responeInfo = await u_getTrackPlayback(params);
 			
-					// 5. 判断接口返回
 					if (responeInfo?.code === 1000) {
-						// 6. 【核心】后端字段转换：longitude → lon，latitude → lat
 						let trackList = responeInfo?.content || [];
 						this.lat = trackList.map(item => ({
-							lat: item.latitude,    // 把 latitude 改成 lat
-							lng: item.longitude    // 把 longitude 改成 lon
+							lat: item.latitude,
+							lng: item.longitude,
+							gpstime:item.gpstime
 						}));
 			
 						console.log('转换后的轨迹数据：', this.lat);
 			
-						// 7. 关闭选择器
 						this.showPicker = false;
 			
-						// 8. 发送给 web-view 地图
 						this.sendDataToWebviewDebounced();
 						console.log('已向地图发送轨迹:', this.startDate, this.endDate);
 						
@@ -401,12 +374,10 @@
 					});
 				}
 			},
-			// 开始日期改变
 			onStartChange(e) {
 				this.startDate = e.detail.value;
 			},
 
-			// 结束日期改变
 			onEndChange(e) {
 				this.endDate = e.detail.value;
 			}
@@ -415,7 +386,6 @@
 </script>
 
 <style>
-	/* ===== 基础布局 ===== */
 	.container {
 		width: 750rpx;
 		display: flex;
@@ -457,7 +427,6 @@
 		color: #333;
 	}
 
-	/* 车辆信息样式 */
 	.vehicle-info-main {
 		display: flex;
 		flex-direction: row;
@@ -528,7 +497,6 @@
 		padding: 20rpx;
 	}
 
-	/* 遮罩层（全屏悬浮） */
 	.picker-mask {
 		position: fixed;
 		top: 0;
@@ -542,7 +510,6 @@
 		z-index: 9999;
 	}
 
-	/* 选择面板 - 居中、宽度100%、高级样式 */
 	.picker-panel {
 		min-width: 600rpx;
 		background: #ffffff;
@@ -551,7 +518,6 @@
 		overflow: hidden;
 	}
 
-	/* 标题 */
 	.panel-title {
 		text-align: center;
 		font-size: 32rpx;
@@ -560,12 +526,10 @@
 		margin-bottom: 20rpx;
 	}
 
-	/* 内容区 */
 	.panel-body {
 		padding: 40rpx 30rpx;
 	}
 
-	/* 选择项 */
 	.picker-item {
 		display: flex;
 		justify-content: space-between;
@@ -583,7 +547,6 @@
 		font-weight: 500;
 	}
 
-	/* 按钮组 */
 	.btn-group {
 		display: flex;
 		justify-content: space-between;
@@ -600,14 +563,12 @@
 		font-weight: 500;
 	}
 
-	/* 取消按钮 */
 	.btn.cancel {
 		background: #f5f5f5;
 		color: #666;
 		margin-right: 5rpx;
 	}
 
-	/* 确认按钮 */
 	.btn.confirm {
 		margin-left: 5rpx;
 		background: #1677ff;
