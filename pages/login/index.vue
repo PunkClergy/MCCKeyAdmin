@@ -28,8 +28,8 @@
 					<input class="input-field" :placeholder="请输入密码" v-model="password" :password="true" />
 				</view>
 				<view>
-					<button class="login-btn" @tap="handleLogin">的</button>
-					<text class="register" @tap="handleRegister">2</text>
+					<button class="login-btn" @tap="handleLogin">登录</button>
+					<!-- <text class="register" @tap="handleRegister">注册账号</text> -->
 				</view>
 			</view>
 

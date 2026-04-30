@@ -4,7 +4,7 @@ var currentLat = '';
 // 当前用户位置经度（用于地图定位）
 var currentLng = '';
 // 地图默认缩放级别（数值越大地图越精细）
-var zoom = 18;
+var zoom = 14;
 // 代表“我的位置”的地图标记点实例
 var meMarker = '';
 // 自定义“我的位置”标记点图标地址
