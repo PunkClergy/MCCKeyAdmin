@@ -171,7 +171,7 @@
 			initLoginStatus() {
 				try {
 					const res = uni.getStorageSync('user_info')
-					this.account = res?.data?.companyName || res?.data?.username || ''
+					this.account = res?.companyName || res?.username || ''
 				} catch (e) {}
 			},
 
