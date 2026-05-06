@@ -16,7 +16,7 @@
     </view>
 
     <!-- 底部版权 -->
-    <view class="footer">© 2025 技术支持</view>
+    <view class="footer">© 2026 智信通</view>
   </view>
 </template>
 
