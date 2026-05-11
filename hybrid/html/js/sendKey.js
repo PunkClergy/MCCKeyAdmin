@@ -46,11 +46,11 @@ window.addEventListener('message', (e) => {
 			createMarkers();
 		}
 	}
-	const langData = buttonTexts[e.data.lang] || buttonTexts['zh-CN']; // 默认中文
-	Object.entries(langData).forEach(([id, text]) => {
-		const element = document.getElementById(id);
-		if (element) element.innerText = text;
-	});
+	// const langData = buttonTexts[e.data.lang] || buttonTexts['zh-CN']; // 默认中文
+	// Object.entries(langData).forEach(([id, text]) => {
+	// 	const element = document.getElementById(id);
+	// 	if (element) element.innerText = text;
+	// });
 });
 
 /**

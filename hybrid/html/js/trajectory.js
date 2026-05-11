@@ -77,11 +77,11 @@ window.addEventListener('message', (e) => {
 	}
 
 	// 多语言切换
-	const langData = buttonTexts[e.data.lang] || buttonTexts['zh-CN'];
-	Object.entries(langData).forEach(([id, text]) => {
-		const element = document.getElementById(id);
-		if (element) element.innerText = text;
-	});
+	// const langData = buttonTexts[e.data.lang] || buttonTexts['zh-CN'];
+	// Object.entries(langData).forEach(([id, text]) => {
+	// 	const element = document.getElementById(id);
+	// 	if (element) element.innerText = text;
+	// });
 });
 
 // ==================== 初始化地图 ====================
