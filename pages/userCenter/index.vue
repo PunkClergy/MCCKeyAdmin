@@ -1,35 +1,6 @@
 <template>
 	<view class="container">
-
-		<!-- 自定义头部 -->
-		<!-- <view 
-      class="custom-header" 
-      :style="{
-        paddingTop: height_from_head + 'px',
-        paddingLeft: capsule_distance_to_the_right + 'px',
-        height: head_height + 'px'
-      }"
-    >
-      <view class="custom-header-outer-layer">
-        <image 
-          class="custom-header-outer-layer-image" 
-          src="/static/images/home.png"
-          @tap="handleBackHome"
-        />
-        <view class="custom-header-outer-layer-title">个人中心</view>
-        <view class="custom-header-outer-layer-user_name">
-    
-          <text v-if="account" @tap="handleOnExistingAccountTap">{{account}}</text>
-          <view v-else @tap="handleOnExistingAccountTap">
-            <text>请登录</text>
-            <image src="/static/images/right_1.png" />
-          </view>
-        </view>
-      </view>
-    </view> -->
-
-		<!-- 滚动内容 -->
-		<scroll-view class="content" scroll-y @scrolltolower="onReachBottom">
+		<scroll-view class="content" scroll-y>
 			<view class="my-content-list-container">
 				<view class="my-content-list-inner">
 					<view v-for="(item, index) in contentList" :key="item.id" :data-info="item"
@@ -37,7 +8,9 @@
 						:class="index === contentList.length - 1 ? 'my-content-list-item_last' : ''"
 						@tap="handleFunExe">
 						<view class="my-content-list-item__left">
-							<text class="my-content-list-item__text">{{item.text}}</text>
+							<text class="my-content-list-item__text">
+								{{ item['text' + lang.replace('-', '')] || item.text }}
+							</text>
 						</view>
 						<image src="/static/images/right_1.png" class="my-content-list-item__arrow" mode="widthFix" />
 					</view>
@@ -45,7 +18,6 @@
 			</view>
 		</scroll-view>
 
-		<!-- 底部tabbar -->
 		<view class="tabbar" :style="{ height: tabBarHeight + 'px' }">
 			<view class="tab-item" :class="currentTab === index ? 'active' : ''" v-for="(item, index) in tabList"
 				:key="index" @tap="handleSwitchTabNavigation" :data-index="index">
@@ -53,45 +25,28 @@
 					mode="widthFix" v-if="currentTab === index" />
 				<image :src="`https://k1sw.wiselink.net.cn/img/${item.iconPath}`" class="tab-icon" mode="widthFix"
 					v-else />
-				<text>{{item.text}}</text>
+				<text>{{ item['text' + lang.replace('-', '')] || item.text }}</text>
 			</view>
 		</view>
 
-		<!-- 悬浮按钮 -->
 		<view class="float-button">
-			<!--  <button 
-        open-type="contact" 
-        :show-message-card="true"
-        send-message-title="我想咨询问题"
-        send-message-path="/pages/index/index"
-        class="hidden-contact-btn"
-        @contact="handleContact"
-      /> -->
-			<!-- <image src="https://k1sw.wiselink.net.cn/img/app2.0/desk/consulting.png" /> -->
 			<image src="/static/images/tel400.png" style="width: 80rpx;height: 80rpx;"
 				@tap="handleMakePhoneCallWithConfirm" />
 		</view>
-
-		<!-- 二维码弹窗 -->
-		<view class="qr-group-container" v-if="join_the_group_modal">
-			<view class="qr-group-mask" @tap="handleQRClose">
-				<view class="qr-group-close" @tap="handleQRClose">×</view>
-				<view class="qr-group-preview-content">
-					<image catchtap="handleQRShowImageMask" class="qr-group-preview-img" :src="personal_qr_code"
-						mode="widthFix" />
-					<text class="qr-group-preview-desc">请点击、长按添加官方客服，获取体验权限！</text>
-				</view>
-			</view>
-		</view>
-
 	</view>
 </template>
+
 <script>
 	import {
-		u_getQrcodeImg,
 		u_navlist20,
 		u_mylist
 	} from '@/api/index'
+	import {
+		titles
+	} from '@/utils/langtitle.js'
+	import {
+		tips
+	} from '@/utils/langtips.js'
 
 	export default {
 		data() {
@@ -99,16 +54,14 @@
 				tabBarHeight: 80,
 				currentTab: 2,
 				c_link: 'https://k1sw.wiselink.net.cn/',
-				join_the_group_modal: false,
 				tabList: [],
 				contentList: [],
-				servicePhone: '400-090-5050',
-
+				servicePhone: '+86400-090-5050',
 				height_from_head: 0,
 				head_height: 0,
 				capsule_distance_to_the_right: 0,
 				account: '',
-				personal_qr_code: ''
+				lang: 'zh-en',
 			}
 		},
 
@@ -118,22 +71,25 @@
 		},
 
 		onShow() {
+			this.lang = uni.getStorageSync('language') || 'zh-en'
+			const pageRoute = 'userCenter/index'
+			uni.setNavigationBarTitle({
+				title: titles[pageRoute][this.lang]
+			})
 			this.initSystemInfo()
 		},
 
 		onReady() {
 			this.initLoginStatus()
-			this.initQrCode()
 		},
 
 		methods: {
-			// 拨打电话
 			handleMakePhoneCallWithConfirm() {
 				uni.showModal({
-					title: '拨打电话',
-					content: `是否拨打客服电话：${this.servicePhone}`,
-					confirmText: '拨打',
-					cancelText: '取消',
+					title: tips.MakeACall[this.lang],
+					content: `${tips.DoYouWantToCallCustomerService[this.lang]}：${this.servicePhone}`,
+					confirmText: tips.Call[this.lang],
+					cancelText: tips.Cancel[this.lang],
 					success: (res) => {
 						if (res.confirm) {
 							uni.makePhoneCall({
@@ -141,7 +97,7 @@
 								fail: (err) => {
 									if (err.errMsg !== 'makePhoneCall:fail cancel') {
 										uni.showToast({
-											title: '拨号失败',
+											title: tips.DialFailed[this.lang],
 											icon: 'none'
 										})
 									}
@@ -152,7 +108,6 @@
 				})
 			},
 
-			// 系统信息
 			initSystemInfo() {
 				const {
 					statusBarHeight: s,
@@ -167,7 +122,6 @@
 				this.capsule_distance_to_the_right = c
 			},
 
-			// 登录状态
 			initLoginStatus() {
 				try {
 					const res = uni.getStorageSync('user_info')
@@ -175,17 +129,6 @@
 				} catch (e) {}
 			},
 
-			// 二维码
-			async initQrCode() {
-				try {
-					const res = await u_getQrcodeImg({})
-					if (res.code === 1000) {
-						this.personal_qr_code = res.content.img
-					}
-				} catch (e) {}
-			},
-
-			// 底部导航
 			async initBottomDirectory() {
 				try {
 					const res = await u_navlist20({})
@@ -196,14 +139,12 @@
 				} catch (e) {}
 			},
 
-			// 跳登录
 			handleOnExistingAccountTap() {
 				uni.navigateTo({
 					url: '/pages/system/managerLoginView/loginView'
 				})
 			},
 
-			// 目录数据
 			async initDirectoryStructure() {
 				try {
 					const res = await u_mylist({})
@@ -213,27 +154,6 @@
 				} catch (e) {}
 			},
 
-			// 显示二维码
-			handleShowContact() {
-				this.join_the_group_modal = true
-			},
-
-			// 关闭二维码
-			handleQRClose() {
-				this.join_the_group_modal = false
-			},
-
-			// 预览图片
-			handleQRShowImageMask() {
-				uni.previewMedia({
-					sources: [{
-						url: this.personal_qr_code,
-						type: 'image'
-					}]
-				})
-			},
-
-			// 切换tab
 			handleSwitchTabNavigation(evt) {
 				const idx = evt.currentTarget.dataset.index
 				const item = this.tabList[idx]
@@ -244,34 +164,75 @@
 				})
 			},
 
-			// 返回首页
 			handleBackHome() {
 				uni.redirectTo({
 					url: '/pages/index/index'
 				})
 			},
 
-			// 点击功能
 			handleFunExe(evt) {
-				if (this.account) {
-					const info = evt.currentTarget.dataset.info
-					if (!info || !info.pagePath) return
-					uni.navigateTo({
-						url: `/${info.pagePath}`
+				if (!this.account) return uni.redirectTo({
+					url: '/pages/login/index'
+				})
+
+				const info = evt.currentTarget.dataset.info
+				if (!info?.pagePath) return
+
+				if (info.pagePath === 'Language') {
+					const langList = [{
+							name: '中文',
+							value: 'zh-en'
+						},
+						{
+							name: 'English',
+							value: 'en-us'
+						}
+					]
+					uni.showActionSheet({
+						itemList: langList.map(item => item.name),
+						success: async (res) => {
+							const {
+								name,
+								value
+							} = langList[res.tapIndex]
+
+							uni.setStorageSync('language', value)
+							this.lang = value
+
+							const pageRoute = 'userCenter/index'
+							uni.setNavigationBarTitle({
+								title: titles[pageRoute][value]
+							})
+
+							await this.initDirectoryStructure()
+							await this.initBottomDirectory()
+						}
 					})
-				} else {
-					uni.redirectTo({
-						url: '/pages/login/index'
-					})
+					return
 				}
 
+				if (info.pagePath === 'Exit') {
+					uni.showModal({
+						title: tips.Tip[this.lang],
+						content: tips.ExitClearCache[this.lang],
+						confirmText: tips.Confirm[this.lang],
+							cancelText: tips.Cancel[this.lang],
+						success: (res) => {
+							if (res.confirm) {
+								uni.clearStorageSync()
+								uni.reLaunch({
+									url: '/pages/index/index'
+								})
+							}
+						}
+					})
+					return
+				}
+
+				uni.navigateTo({
+					url: `/${info.pagePath}`
+				})
 			},
-
-			// 客服消息
-			handleContact() {},
-
-			// 触底
-			onReachBottom() {}
 		}
 	}
 </script>
