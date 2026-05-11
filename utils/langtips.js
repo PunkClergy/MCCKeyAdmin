@@ -149,10 +149,6 @@ export const tips = {
 		'zh-en': '请输入开户账号',
 		'en-us': 'Please enter bank account'
 	},
-	// 确认修改 | Confirm Modification
-	'ConfirmModify': {
-		'zh-en': '确认修改',
-		'en-us': 'Confirm Modification'
-	},
+
 	// 可在此添加所有页面的多语言提示 | You can add all page tips here
 }
