@@ -118,7 +118,7 @@
 		data() {
 			return {
 				tips: tips,
-				lang: 'zh-en',
+				lang: 'zhCn',
 				c_screen_height: 0,
 				c_statusBarHeight: 0,
 				c_navBarHeight: 20,
@@ -135,7 +135,7 @@
 			}
 		},
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'zh-en'
+			this.lang = uni.getStorageSync('language') || 'zh-Cn'
 			const pageRoute = 'zoneCenter/completeCustomerInfo'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

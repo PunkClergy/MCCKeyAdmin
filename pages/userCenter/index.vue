@@ -9,7 +9,7 @@
 						@tap="handleFunExe">
 						<view class="my-content-list-item__left">
 							<text class="my-content-list-item__text">
-								{{ item['text' + lang.replace('-', '')] || item.text }}
+								{{ item['text' + lang] || item.text }}
 							</text>
 						</view>
 						<image src="/static/images/right_1.png" class="my-content-list-item__arrow" mode="widthFix" />
@@ -61,7 +61,7 @@
 				head_height: 0,
 				capsule_distance_to_the_right: 0,
 				account: '',
-				lang: 'zh-en',
+				lang: 'zhCn',
 			}
 		},
 
@@ -71,7 +71,7 @@
 		},
 
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'zh-en'
+			this.lang = uni.getStorageSync('language') || 'zhCn'
 			const pageRoute = 'userCenter/index'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]
@@ -148,6 +148,7 @@
 			async initDirectoryStructure() {
 				try {
 					const res = await u_mylist({})
+					console.log(res)
 					if (res.code === 1000) {
 						this.contentList = res.content
 					}
@@ -181,11 +182,11 @@
 				if (info.pagePath === 'Language') {
 					const langList = [{
 							name: '中文',
-							value: 'zh-en'
+							value: 'zhCn'
 						},
 						{
 							name: 'English',
-							value: 'en-us'
+							value: 'enUs'
 						}
 					]
 					uni.showActionSheet({
@@ -216,7 +217,7 @@
 						title: tips.Tip[this.lang],
 						content: tips.ExitClearCache[this.lang],
 						confirmText: tips.Confirm[this.lang],
-							cancelText: tips.Cancel[this.lang],
+						cancelText: tips.Cancel[this.lang],
 						success: (res) => {
 							if (res.confirm) {
 								uni.clearStorageSync()

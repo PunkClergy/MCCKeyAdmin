@@ -1,154 +1,173 @@
 export const tips = {
 	// 拨打电话 | Make a Call
 	'MakeACall': {
-		'zh-en': '拨打电话',
-		'en-us': 'Make a Call'
+		'zhCn': '拨打电话',
+		'enUs': 'Make a Call'
 	},
 	// 是否拨打客服电话 | Do you want to call customer service
 	'DoYouWantToCallCustomerService': {
-		'zh-en': '是否拨打客服电话',
-		'en-us': 'Do you want to call customer service'
+		'zhCn': '是否拨打客服电话',
+		'enUs': 'Do you want to call customer service'
 	},
 	// 拨打 | Call
 	'Call': {
-		'zh-en': '拨打',
-		'en-us': 'Call'
+		'zhCn': '拨打',
+		'enUs': 'Call'
 	},
 	// 确认 | Confirm
 	'Confirm': {
-		'zh-en': '确认',
-		'en-us': 'Confirm'
+		'zhCn': '确认',
+		'enUs': 'Confirm'
 	},
 	// 取消 | Cancel
 	'Cancel': {
-		'zh-en': '取消',
-		'en-us': 'Cancel'
+		'zhCn': '取消',
+		'enUs': 'Cancel'
 	},
 	// 拨号失败 | Dial failed
 	'DialFailed': {
-		'zh-en': '拨号失败',
-		'en-us': 'Dial failed'
+		'zhCn': '拨号失败',
+		'enUs': 'Dial failed'
 	},
 	// 提示 | Tip
 	'Tip': {
-		'zh-en': '提示',
-		'en-us': 'Tip'
+		'zhCn': '提示',
+		'enUs': 'Tip'
 	},
 	// 退出并清除缓存 | Exit and clear all cache
 	'ExitClearCache': {
-		'zh-en': '确定要退出并清除所有缓存吗?',
-		'en-us': 'Are you sure to exit and clear all cache?'
+		'zhCn': '确定要退出并清除所有缓存吗?',
+		'enUs': 'Are you sure to exit and clear all cache?'
 	},
 	// 我的资料 | My Profile
 	'MyProfile': {
-		'zh-en': '我的资料',
-		'en-us': 'My Profile'
+		'zhCn': '我的资料',
+		'enUs': 'My Profile'
 	},
 	// 企业名称 | Company Name
 	'CompanyName': {
-		'zh-en': '企业名称',
-		'en-us': 'Company Name'
+		'zhCn': '企业名称',
+		'enUs': 'Company Name'
 	},
 	// 请输入企业名称 | Please enter company name
 	'PleaseEnterCompanyName': {
-		'zh-en': '请输入企业名称',
-		'en-us': 'Please enter company name'
+		'zhCn': '请输入企业名称',
+		'enUs': 'Please enter company name'
 	},
 	// 联系人 | Contact Person
 	'ContactPerson': {
-		'zh-en': '联系人',
-		'en-us': 'Contact Person'
+		'zhCn': '联系人',
+		'enUs': 'Contact Person'
 	},
 	// 请输入联系人 | Please enter contact person
 	'PleaseEnterContactPerson': {
-		'zh-en': '请输入联系人',
-		'en-us': 'Please enter contact person'
+		'zhCn': '请输入联系人',
+		'enUs': 'Please enter contact person'
 	},
 	// 联系电话 | Contact Phone
 	'ContactPhone': {
-		'zh-en': '联系电话',
-		'en-us': 'Contact Phone'
+		'zhCn': '联系电话',
+		'enUs': 'Contact Phone'
 	},
 	// 请输入联系电话 | Please enter contact phone
 	'PleaseEnterContactPhone': {
-		'zh-en': '请输入联系电话',
-		'en-us': 'Please enter contact phone'
+		'zhCn': '请输入联系电话',
+		'enUs': 'Please enter contact phone'
 	},
 	// 备注 | Remarks
 	'Remarks': {
-		'zh-en': '备注',
-		'en-us': 'Remarks'
+		'zhCn': '备注',
+		'enUs': 'Remarks'
 	},
 	// 请输入备注 | Please enter remarks
 	'PleaseEnterRemarks': {
-		'zh-en': '请输入备注',
-		'en-us': 'Please enter remarks'
+		'zhCn': '请输入备注',
+		'enUs': 'Please enter remarks'
 	},
 	// 开票信息 | Billing Information
 	'BillingInfo': {
-		'zh-en': '开票信息',
-		'en-us': 'Billing Information'
+		'zhCn': '开票信息',
+		'enUs': 'Billing Information'
 	},
 	// 开票名称 | Billing Name
 	'BillingName': {
-		'zh-en': '开票名称',
-		'en-us': 'Billing Name'
+		'zhCn': '开票名称',
+		'enUs': 'Billing Name'
 	},
 	// 请输入开票名称 | Please enter billing name
 	'PleaseEnterBillingName': {
-		'zh-en': '请输入开票名称',
-		'en-us': 'Please enter billing name'
+		'zhCn': '请输入开票名称',
+		'enUs': 'Please enter billing name'
 	},
 	// 纳税人识别号 | Taxpayer ID
 	'TaxpayerId': {
-		'zh-en': '纳税人识别号',
-		'en-us': 'Taxpayer ID'
+		'zhCn': '纳税人识别号',
+		'enUs': 'Taxpayer ID'
 	},
 	// 请输入纳税人识别号 | Please enter taxpayer ID
 	'PleaseEnterTaxpayerId': {
-		'zh-en': '请输入纳税人识别号',
-		'en-us': 'Please enter taxpayer ID'
+		'zhCn': '请输入纳税人识别号',
+		'enUs': 'Please enter taxpayer ID'
 	},
 	// 电话 | Phone
 	'Phone': {
-		'zh-en': '电话',
-		'en-us': 'Phone'
+		'zhCn': '电话',
+		'enUs': 'Phone'
 	},
 	// 请输入电话 | Please enter phone
 	'PleaseEnterPhone': {
-		'zh-en': '请输入电话',
-		'en-us': 'Please enter phone'
+		'zhCn': '请输入电话',
+		'enUs': 'Please enter phone'
 	},
 	// 地址 | Address
 	'Address': {
-		'zh-en': '地址',
-		'en-us': 'Address'
+		'zhCn': '地址',
+		'enUs': 'Address'
 	},
 	// 请输入地址 | Please enter address
 	'PleaseEnterAddress': {
-		'zh-en': '请输入地址',
-		'en-us': 'Please enter address'
+		'zhCn': '请输入地址',
+		'enUs': 'Please enter address'
 	},
 	// 开户行 | Bank Name
 	'BankName': {
-		'zh-en': '开户行',
-		'en-us': 'Bank Name'
+		'zhCn': '开户行',
+		'enUs': 'Bank Name'
 	},
 	// 请输入开户行 | Please enter bank name
 	'PleaseEnterBankName': {
-		'zh-en': '请输入开户行',
-		'en-us': 'Please enter bank name'
+		'zhCn': '请输入开户行',
+		'enUs': 'Please enter bank name'
 	},
 	// 开户账号 | Bank Account
 	'BankAccount': {
-		'zh-en': '开户账号',
-		'en-us': 'Bank Account'
+		'zhCn': '开户账号',
+		'enUs': 'Bank Account'
 	},
 	// 请输入开户账号 | Please enter bank account
 	'PleaseEnterBankAccount': {
-		'zh-en': '请输入开户账号',
-		'en-us': 'Please enter bank account'
+		'zhCn': '请输入开户账号',
+		'enUs': 'Please enter bank account'
 	},
-
+	// 请登录 | Please Login
+	'PleaseLogin': {
+		'zhCn': '请登录',
+		'enUs': 'Please Login'
+	},
+	// 欢迎使用 | Welcome to use
+	'WelcomeUse': {
+		'zhCn': '欢迎使用',
+		'enUs': 'Welcome to Use'
+	},
+	// 正在为您准备优质服务 | Preparing high‑quality services for you
+	'PreparingService': {
+		'zhCn': '正在为您准备优质服务',
+		'enUs': 'Preparing high‑quality services for you'
+	},
+	// 智信通 | WiseLink Auto
+	'ZhiXinTong': {
+		'zhCn': '智信通',
+		'enUs': 'WiseLink Auto'
+	}
 	// 可在此添加所有页面的多语言提示 | You can add all page tips here
 }

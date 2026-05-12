@@ -16,7 +16,7 @@
 				<view class="custom-header-outer-layer_user_name">
 					<text v-if="account">{{account}}</text>
 					<view v-else @tap="handleOnExistingAccountTap" class="login-wrapper">
-						<text>请登录</text>
+						<text>{{tips.PleaseLogin[lang]}}</text>
 						<image src="/static/images/right_1.png" />
 					</view>
 				</view>
@@ -45,14 +45,6 @@
 					</swiper-item>
 				</swiper>
 			</view>
-
-			<!-- 公告 -->
-			<!-- <view class="notice" v-if="isShowInfo">
-        <view class="notice-content">
-          温馨提示：请提醒用车人，若遇无网络时，点击页面右上角「···」并刷新页面，即可进入【紧急开关锁】页面；
-          若需长时间处于无信号覆盖区域，建议随身携带实体钥匙备用。
-        </view>
-      </view> -->
 
 			<!-- 专区入口 -->
 			<view class="special-zone-container">
@@ -102,21 +94,7 @@
 
 		<!-- 悬浮按钮 -->
 		<view class="float-button">
-			<!--  <button open-type="contact" class="hidden-contact-btn"></button>
-      <image src="https://k1sw.wiselink.net.cn/img/app2.0/desk/consulting.png" /> -->
 			<image src="/static/images/tel400.png" @tap="handleMakePhoneCallWithConfirm" />
-		</view>
-
-		<!-- 二维码弹窗 -->
-		<view class="qr-group-container" v-if="join_the_group_modal">
-			<view class="qr-group-mask" @tap="handleQRClose">
-				<view class="qr-group-close" @tap="handleQRClose">×</view>
-				<view class="qr-group-preview-content">
-					<image catchtap="handleQRShowImageMask" class="qr-group-preview-img" :src="personal_qr_code"
-						mode="widthFix" />
-					<text class="qr-group-preview-desc">请点击、长按添加官方客服，获取体验权限！</text>
-				</view>
-			</view>
 		</view>
 	</view>
 </template>
@@ -131,7 +109,12 @@
 		u_booklist,
 		u_isShowInfo
 	} from '@/api/index'
-
+	import {
+		titles
+	} from '@/utils/langtitle.js'
+	import {
+		tips
+	} from '@/utils/langtips.js'
 	export default {
 		data() {
 			return {
@@ -165,7 +148,10 @@
 				account: '',
 				subtitle: '',
 				stfontSize: '',
-				s_use_height: ''
+				s_use_height: '',
+				// 语言设置
+				tips: tips,
+				lang: 'zhEn',
 			}
 		},
 		methods: {
@@ -377,6 +363,7 @@
 		onReady() {
 			this.initLoginStatus()
 			this.initQrCode()
+			this.lang = uni.getStorageSync('language') || 'zh-en'
 		}
 	}
 </script>
