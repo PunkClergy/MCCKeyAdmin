@@ -13,23 +13,23 @@ var isFirstLoad = true; // 标记是否是首次加载
 var vehicle_info = {};
 // 使用配置对象集中管理多语言文本
 const buttonTexts = {
-	'en-US': {
-		btnReturn: "Return",
-		btn3: "Unlock",
-		btn1: "Lock",
-		btn5: "Locate",
-		btnSee: "Photos",
-		btn8: "Block",
-		btn6: "Unblock"
+	'enUs': {
+		btnReturnLang: "Return",
+		btn3Lang: "Unlock",
+		btn1Lang: "Lock",
+		btn5Lang: "Locate",
+		btnSeeLang: "Photos",
+		btn8Lang: "Block",
+		btn6Lang: "Unblock"
 	},
-	'zh-CN': { // 假设中文标识为 zh-CN
-		btnReturn: "归还车辆",
-		btn3: "开锁",
-		btn1: "关锁",
-		btn5: "寻车",
-		btnSee: "送车拍照",
-		btn8: "风控拦截",
-		btn6: "取消拦截"
+	'zhCn': { // 假设中文标识为 zh-CN
+		btnReturnLang: "归还车辆",
+		btn3Lang: "开锁",
+		btn1Lang: "关锁",
+		btn5Lang: "寻车",
+		btnSeeLang: "送车拍照",
+		btn8Lang: "风控拦截",
+		btn6Lang: "取消拦截"
 	}
 };
 
@@ -46,11 +46,11 @@ window.addEventListener('message', (e) => {
 			createMarkers();
 		}
 	}
-	// const langData = buttonTexts[e.data.lang] || buttonTexts['zh-CN']; // 默认中文
-	// Object.entries(langData).forEach(([id, text]) => {
-	// 	const element = document.getElementById(id);
-	// 	if (element) element.innerText = text;
-	// });
+	const langData = buttonTexts[e.data.lang] || buttonTexts['zhCn']; // 默认中文
+	Object.entries(langData).forEach(([id, text]) => {
+		const element = document.getElementById(id);
+		if (element) element.innerText = text;
+	});
 });
 
 /**

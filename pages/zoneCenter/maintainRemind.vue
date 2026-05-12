@@ -4,12 +4,12 @@
 		<view class="stats-card">
 			<view class="stats-item">
 				<text class="stats-num risky">{{ totalCount }}</text>
-				<text class="stats-label">车辆总数</text>
+				<text class="stats-label">{{ tips.TotalCars[lang] }}</text>
 			</view>
 			<view class="stats-item">
 				<text class="stats-num risky"
 					:style="{ color: todayCount > 0 ? '#fa4143' : '' }">{{ todayCount }}</text>
-				<text class="stats-label">辆车需要保养</text>
+				<text class="stats-label">{{ tips.NeedMaintenance[lang] }}</text>
 			</view>
 		</view>
 
@@ -17,32 +17,35 @@
 		<view class="record-list-container">
 			<view class="record-list">
 				<view class="list-title">
-					<text>车辆保养提醒</text>
-					<view class="filter-btn" @tap="openFilterModal">筛选 📋</view>
+					<text>{{ tips.CarMaintenanceReminder[lang] }}</text>
+					<view class="filter-btn" @tap="openFilterModal">{{ tips.Filter[lang] }} 📋</view>
 				</view>
 
 				<view class="record-item" v-for="(item, idx) in filteredRecords" :key="idx" :data-record="item">
 					<view class="record-left">
 						<text class="record-title">{{ item.carModel }}（{{ item.carNumber }}）</text>
 						<text class="record-desc" :style="{ color: item.remainingMileage > 0 ? '' : '#fa4143' }">
-							离保养里程: {{ item.remainingMileage }}公里
+							{{ tips.RemainingMaintenance[lang] }}: {{ item.remainingMileage }}{{ tips.KM[lang] }}
 						</text>
 						<view class="mileage-row">
-							<text class="mileage-text">总里程: {{ item.totalMileage }}公里</text>
-							<text class="calibrate-btn" @tap="openCalibrateModal" :data-record="item">校准</text>
+							<text class="mileage-text">{{ tips.TotalMileage[lang] }}:
+								{{ item.totalMileage }}{{ tips.KM[lang] }}</text>
+							<text class="calibrate-btn" @tap="openCalibrateModal"
+								:data-record="item">{{ tips.Calibrate[lang] }}</text>
 						</view>
-						<text class="cycle-text">保养周期: {{ item.maintenanceCycle }}公里</text>
-						<text class="record-time">记录时间：{{ item.warningTime }}</text>
+						<text class="cycle-text">{{ tips.MaintenanceCycle[lang] }}:
+							{{ item.maintenanceCycle }}{{ tips.KM[lang] }}</text>
+						<text class="record-time">{{ tips.RecordTime[lang] }}：{{ item.warningTime }}</text>
 					</view>
 					<view class="record-right">
 						<view class="nav-btn" @tap="handleMaintenanceConfirm" :data-record="item"
 							v-if="item.maintenanceStatus === 'pending'">
-							保养确认
+							{{ tips.MaintenanceConfirm[lang] }}
 						</view>
 					</view>
 				</view>
 
-				<view class="empty" v-if="filteredRecords.length === 0">暂无符合条件的保养提醒记录</view>
+				<view class="empty" v-if="filteredRecords.length === 0">{{ tips.NoMaintenanceRecords[lang] }}</view>
 			</view>
 		</view>
 
@@ -50,18 +53,18 @@
 		<view class="filter-modal" v-if="showFilterModal">
 			<view class="modal-mask" @tap="closeFilterModal"></view>
 			<view class="modal-content">
-				<view class="modal-title">筛选条件</view>
+				<view class="modal-title">{{ tips.FilterConditions[lang] }}</view>
 				<view class="filter-item">
-					<text class="filter-label">保养状态：</text>
+					<text class="filter-label">{{ tips.MaintenanceStatus[lang] }}：</text>
 					<picker mode="selector" :range="maintenanceStatusOptions" range-key="name"
 						:value="selectedStatusIndex" @change="onStatusChange">
-						<view class="picker-input">{{ selectedStatus.name || '请选择状态' }}</view>
+						<view class="picker-input">{{ selectedStatus.name || tips.PleaseSelectStatus[lang] }}</view>
 					</picker>
 				</view>
 				<view class="filter-item">
-					<text class="filter-label">车牌号：</text>
-					<input class="input-box" placeholder="请输入车牌号" v-model="inputCarNumber" @input="onCarNumberInput"
-						:focus="focusCarInput" />
+					<text class="filter-label">{{ tips.PlateNumber[lang] }}：</text>
+					<input class="input-box" :placeholder="tips.PleaseEnterPlate[lang]" v-model="inputCarNumber"
+						@input="onCarNumberInput" :focus="focusCarInput" />
 					<view class="car-list" v-if="carCandidateList.length > 0">
 						<view class="car-item" v-for="(item, idx) in carCandidateList" :key="idx" @tap="selectCarNumber"
 							:data-carnumber="item.carNumber">
@@ -70,8 +73,8 @@
 					</view>
 				</view>
 				<view class="btn-group">
-					<button class="reset-btn" @tap="resetFilter">重置</button>
-					<button class="confirm-btn" @tap="confirmFilter">确认筛选</button>
+					<button class="reset-btn" @tap="resetFilter">{{ tips.Reset[lang] }}</button>
+					<button class="confirm-btn" @tap="confirmFilter">{{ tips.Confirm[lang] }}</button>
 				</view>
 			</view>
 		</view>
@@ -80,14 +83,15 @@
 		<view class="calibrate-modal" v-if="showCalibrateModal">
 			<view class="modal-mask" @tap="closeCalibrateModal"></view>
 			<view class="calibrate-content">
-				<view class="modal-title">里程校准</view>
+				<view class="modal-title">{{ tips.MileageCalibration[lang] }}</view>
 				<view class="calibrate-input-wrap">
-					<input class="calibrate-input" type="number" placeholder="请输入校准里程" v-model="calibrateValue" />
+					<input class="calibrate-input" type="number" :placeholder="tips.PleaseEnterCalibrateMileage[lang]"
+						v-model="calibrateValue" />
 					<text class="unit-text">km</text>
 				</view>
 				<view class="btn-group">
-					<button class="cancel-btn" @tap="closeCalibrateModal">取消</button>
-					<button class="confirm-btn" @tap="confirmCalibrate">确认</button>
+					<button class="cancel-btn" @tap="closeCalibrateModal">{{ tips.Cancel[lang] }}</button>
+					<button class="confirm-btn" @tap="confirmCalibrate">{{ tips.Confirm[lang] }}</button>
 				</view>
 			</view>
 		</view>
@@ -95,6 +99,12 @@
 </template>
 
 <script>
+	import {
+		tips
+	} from '@/utils/langtips.js'
+	import {
+		titles
+	} from '@/utils/langtitle.js'
 	import {
 		u_carList,
 		u_maintained,
@@ -104,6 +114,9 @@
 	export default {
 		data() {
 			return {
+				lang: 'zhCn',
+				tips: tips,
+
 				totalCount: 0,
 				todayCount: 0,
 				maintenanceStatusOptions: [{
@@ -136,7 +149,32 @@
 			}
 		},
 		onLoad() {
-			this.loadCarMaintenanceList()
+			this.lang = uni.getStorageSync('language') || 'zhCn';
+			this.loadCarMaintenanceList();
+		},
+		onShow() {
+			this.lang = uni.getStorageSync('language') || 'zhCn'
+			const pageRoute = 'zoneCenter/maintainRemind'
+			uni.setNavigationBarTitle({
+				title: titles[pageRoute][this.lang]
+			})
+			this.maintenanceStatusOptions = [{
+					name: this.tips.All[this.lang],
+					value: 'all'
+				},
+				{
+					name: this.tips.PendingMaintenance[this.lang],
+					value: 'pending'
+				},
+				{
+					name: this.tips.Maintained[this.lang],
+					value: 'done'
+				}
+			]
+			this.selectedStatus = {
+				name: this.tips.All[this.lang],
+				value: 'all'
+			}
 		},
 		methods: {
 			async loadCarMaintenanceList() {
@@ -171,7 +209,6 @@
 				} catch (e) {}
 			},
 
-			// 筛选弹窗
 			openFilterModal() {
 				this.showFilterModal = true
 				this.focusCarInput = true
@@ -204,7 +241,7 @@
 			resetFilter() {
 				this.selectedStatusIndex = 0
 				this.selectedStatus = {
-					name: '全部',
+					name: this.tips.All[this.lang],
 					value: 'all'
 				}
 				this.inputCarNumber = ''
@@ -226,22 +263,23 @@
 				this.showFilterModal = false
 				this.carCandidateList = []
 				uni.showToast({
-					title: `筛选出${result.length}条记录`,
+					title: `${tips.FilteredOut[lang]}${result.length}${tips.Records[lang]}`,
 					icon: 'none'
 				})
 			},
 
-			// 保养确认
 			async handleMaintenanceConfirm(e) {
 				const record = e.currentTarget.dataset.record
 				uni.showModal({
-					title: '温馨提示',
-					content: '确认已完成保养？',
+					title: this.tips.WarmTip[this.lang],
+					content: this.tips.ConfirmMaintenanceCompleted[this.lang],
+					confirmText: this.tips.Confirm[this.lang],
+					cancelText: this.tips.Cancel[this.lang],
 					success: async (res) => {
 						if (!res.confirm) return
 						try {
 							uni.showLoading({
-								title: '提交中...'
+								title: this.tips.Submitting[this.lang]
 							})
 							const {
 								code
@@ -251,13 +289,13 @@
 							})
 							if (code === 1000) {
 								uni.showToast({
-									title: '保养成功',
+									title: this.tips.MaintenanceSuccess[this.lang],
 									icon: 'none'
 								})
 								this.loadCarMaintenanceList()
 							} else {
 								uni.showToast({
-									title: '操作失败',
+									title: this.tips.OperationFailed[this.lang],
 									icon: 'none'
 								})
 							}
@@ -268,7 +306,6 @@
 				})
 			},
 
-			// 里程校准
 			openCalibrateModal(e) {
 				const record = e.currentTarget.dataset.record
 				this.showCalibrateModal = true
@@ -283,14 +320,14 @@
 				const mileage = Number(this.calibrateValue)
 				if (!this.currentCalibrateRecord || isNaN(mileage) || mileage < 0) {
 					return uni.showToast({
-						title: '请输入有效里程',
+						title: this.tips.PleaseEnterValidMileage[this.lang],
 						icon: 'none'
 					})
 				}
 
 				try {
 					uni.showLoading({
-						title: '校准中...'
+						title: this.tips.Calibrating[this.lang]
 					})
 					const {
 						code
@@ -300,14 +337,14 @@
 					})
 					if (code === 1000) {
 						uni.showToast({
-							title: '校准成功',
+							title: this.tips.CalibrateSuccess[this.lang],
 							icon: 'none'
 						})
 						this.showCalibrateModal = false
 						this.loadCarMaintenanceList()
 					} else {
 						uni.showToast({
-							title: '校准失败',
+							title: this.tips.CalibrateFailed[this.lang],
 							icon: 'none'
 						})
 					}
@@ -472,7 +509,7 @@
 		position: absolute;
 		bottom: 0;
 		left: 0;
-		width: 100%;
+		width: 92%;
 		background: #fff;
 		border-radius: 20rpx 20rpx 0 0;
 		padding: 30rpx;

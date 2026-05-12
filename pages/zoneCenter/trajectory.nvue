@@ -1,8 +1,9 @@
 <template>
-	<view class="container" :style="containerStyle" @touchmove.prevent="handleTouchMove">
+	<!-- 只在 不显示弹窗 时阻止滑动，显示弹窗时不阻止 -->
+	<view class="container" :style="containerStyle" @touchmove.prevent="!showPicker">
 		<view class="select-region">
 			<view class="select-vehicle" @tap="handleJumpVehicle" v-if="!vehicle_info?.sn">
-				<text>请选择车辆</text>
+				<text>{{ tips.PleaseSelectCar[lang] }}</text>
 				<image src="/static/images/right_1.png" class="select-vehicle-image"></image>
 			</view>
 			<view v-else>
@@ -14,18 +15,18 @@
 						</view>
 						<view class="vehicle-type-tag">
 							<text class="vehicle-type-text">
-								{{vehicle_info.vehicleSerialName||'-'}}{{vehicle_info.vehicleModeName||''}}
+								{{vehicle_info.vehicleSerialName||tips.NoData[lang]}}{{vehicle_info.vehicleModeName||''}}
 							</text>
 						</view>
 					</view>
 					<view class="vehicle-edit-btn" @tap="handleJumpVehicle">
-						<text class="vehicle-edit-text">重新选择</text>
+						<text class="vehicle-edit-text">{{ tips.ReSelect[lang] }}</text>
 						<image src="/static/images/right_1.png" class="right-arrow-icon"></image>
 					</view>
 				</view>
 				<view class="vehicle-vin-device">
-					<view>车架号：{{vehicle_info?.vin||'-'}}</view>
-					<view>设备号：{{vehicle_info?.sn||'-'}}</view>
+					<view>{{ tips.VIN[lang] }}：{{vehicle_info?.vin||tips.NoData[lang]}}</view>
+					<view>{{ tips.DeviceID[lang] }}：{{vehicle_info?.sn||tips.NoData[lang]}}</view>
 				</view>
 			</view>
 		</view>
@@ -33,25 +34,25 @@
 		<view class="picker-mask" @click="closePicker" v-if="showPicker">
 			<view class="picker-panel" @click.stop="">
 				<view class="panel-body">
-					<view class="panel-title">请选择开始和结束日期</view>
+					<view class="panel-title">{{ tips.PleaseSelectDateRange[lang] }}</view>
 
 					<picker mode="date" :value="startDate" @change="onStartChange">
 						<view class="picker-item">
-							<text>开始日期</text>
-							<text class="val">{{ startDate || '请选择' }}</text>
+							<text>{{ tips.StartDate[lang] }}</text>
+							<text class="val">{{ startDate || tips.PleaseSelect[lang] }}</text>
 						</view>
 					</picker>
 
 					<picker mode="date" :value="endDate" @change="onEndChange">
 						<view class="picker-item">
-							<text>结束日期</text>
-							<text class="val">{{ endDate || '请选择' }}</text>
+							<text>{{ tips.EndDate[lang] }}</text>
+							<text class="val">{{ endDate || tips.PleaseSelect[lang] }}</text>
 						</view>
 					</picker>
 
 					<view class="btn-group">
-						<text class="btn cancel" @click="closePicker">取消</text>
-						<text class="btn confirm" @click="confirmPicker">确认</text>
+						<text class="btn cancel" @click="closePicker">{{ tips.Cancel[lang] }}</text>
+						<text class="btn confirm" @click="confirmPicker">{{ tips.Confirm[lang] }}</text>
 					</view>
 				</view>
 			</view>
@@ -66,6 +67,12 @@
 
 <script>
 	import {
+		tips
+	} from '@/utils/langtips.js'
+	import {
+		titles
+	} from '@/utils/langtitle.js'
+	import {
 		info_screen
 	} from '@/utils/scheme/screen.js'
 	import {
@@ -74,7 +81,6 @@
 		u_getTrackPlayback
 	} from '@/api'
 	import 'url-search-params-polyfill';
-
 	const DATA_SEND_INTERVAL = 2000;
 	const NAVBAR_HEIGHT = {
 		ios: 49,
@@ -86,11 +92,13 @@
 		components: {},
 
 		data: () => ({
+			lang: 'zhCn',
+			tips: tips,
+
 			screenInfo: {},
 			nowTimestamp: Date.now(),
 			vehicle_info: {},
 			info: [],
-			isLoading: false,
 			sendDataTimeout: null,
 			showPicker: false,
 			startDate: '',
@@ -127,13 +135,15 @@
 		},
 
 		onLoad(options) {
-			console.log(options, '2222')
 			this.vehicle_info = JSON.parse(options?.datails || '{}');
 			this.initialScreenInfo();
 		},
 
 		async onShow() {
-			this.isLoading = true;
+			this.lang = uni.getStorageSync('language') || 'zhCn'
+			uni.setNavigationBarTitle({
+				title: titles['zoneCenter/trajectory'][this.lang]
+			})
 
 			try {
 				this.nowTimestamp = Date.now();
@@ -141,13 +151,10 @@
 			} catch (error) {
 				console.error('数据初始化失败:', error);
 				uni.showToast({
-					title: '数据加载失败',
+					title: this.tips.DataLoadFailed[this.lang],
 					icon: 'none'
 				});
-			} finally {
-				this.isLoading = false;
 			}
-			this.handleGetCurrentLanguage()
 		},
 
 		onUnload() {
@@ -155,20 +162,13 @@
 		},
 
 		methods: {
-			handleGetCurrentLanguage() {
-				let currentLang = uni.getStorageSync('lang') || 'zh-CN';
-			},
-
 			async initialScreenInfo() {
 				try {
 					this.screenInfo = await info_screen();
-					if (process.env.NODE_ENV === 'development') {
-						console.log('Screen info:', this.screenInfo);
-					}
 				} catch (error) {
 					console.error('[ScreenInfo] 获取屏幕信息失败:', error);
 					uni.showToast({
-						title: '设备信息获取失败',
+						title: this.tips.DeviceInfoFailed[this.lang],
 						icon: 'none'
 					});
 				}
@@ -185,7 +185,6 @@
 			},
 
 			sendDataToWebviewDebounced() {
-				let currentLang = uni.getStorageSync('lang') || 'zh-CN';
 				this.clearSendDataTimer();
 				this.sendDataTimeout = setTimeout(() => {
 					this.sendDataToWebview({
@@ -193,7 +192,7 @@
 						payload: this.info,
 						vehicle_info: this.vehicle_info,
 						lat: this.lat,
-						lang: currentLang
+						lang: this.lang
 					});
 				}, DATA_SEND_INTERVAL);
 			},
@@ -206,7 +205,6 @@
 			},
 
 			sendDataToWebview(data) {
-				console.log('222]]]', data)
 				const payload = JSON.stringify(data);
 				const jsStr = `window.postMessage(${payload}, '*')`;
 
@@ -226,12 +224,12 @@
 				});
 			},
 
-			handleDate(e) {
+			handleDate() {
 				if (this.vehicle_info?.sn) {
 					this.showPicker = true;
 				} else {
 					uni.showToast({
-						title: '请先选择车辆',
+						title: this.tips.PleaseSelectCarFirst[this.lang],
 						icon: 'none'
 					})
 				}
@@ -242,74 +240,41 @@
 				const {
 					source
 				} = messageData;
+				if (!source) return;
 
-				if (!source) {
-					console.warn('Received message without type:', evt);
-					return;
-				}
 				const ACTION_HANDLERS = {
-					3: () => {
-						console.log('开锁操作');
-						this.handleVehicle(source);
-					},
-					1: () => {
-						console.log('关锁操作');
-						this.handleVehicle(source);
-					},
-					5: () => {
-						console.log('寻车操作');
-						this.handleVehicle(source);
-					},
-					8: () => {
-						console.log('风控拦截');
-						this.handleVehicle(source);
-					},
-					6: () => {
-						console.log('取消拦截');
-						this.handleVehicle(source);
-					},
-					100: () => {
-						console.log('轨迹查询');
-						this.handleDate(source);
-					}
+					3: () => this.handleVehicle(source),
+					1: () => this.handleVehicle(source),
+					5: () => this.handleVehicle(source),
+					8: () => this.handleVehicle(source),
+					6: () => this.handleVehicle(source),
+					100: () => this.handleDate()
 				};
 
 				const handler = ACTION_HANDLERS[source];
-				if (handler) {
-					handler();
-				} else {
-					console.warn(`未处理的 message 类型: ${source}`, messageData);
-				}
+				if (handler) handler();
 
 				const targetSn = evt.detail.data[0]?.plateNumber;
 				if (!targetSn) return;
 
 				const matchedItem = this.info.find(item => item.plateNumber === targetSn);
-				console.log('matchedItem', matchedItem)
-				if (matchedItem) {
-					this.vehicle_info = matchedItem;
-				}
+				if (matchedItem) this.vehicle_info = matchedItem;
 			},
 
 			async handleVehicle(evt) {
 				try {
-					const controlType = evt;
-					const requestParam = {
+					const res = await u_operation({
 						sn: this.vehicle_info?.sn,
-						operationType: controlType,
+						operationType: evt,
 						_timestamp: Date.now()
-					};
-					const res = await u_operation(requestParam)
+					});
 					uni.showToast({
 						title: res.msg,
 						icon: 'none',
-						duration: 2000,
+						duration: 2000
 					});
-
 				} catch (error) {}
 			},
-
-			handleTouchMove() {},
 
 			closePicker() {
 				this.showPicker = false;
@@ -318,66 +283,60 @@
 			async confirmPicker() {
 				if (!this.startDate || !this.endDate) {
 					uni.showToast({
-						title: '请选择完整的日期区间',
+						title: this.tips.PleaseSelectFullDate[this.lang],
 						icon: 'none'
 					});
 					return;
 				}
-			
+
 				if (!this.vehicle_info?.sn) {
 					uni.showToast({
-						title: '请先选择车辆',
+						title: this.tips.PleaseSelectCarFirst[this.lang],
 						icon: 'none'
 					});
 					return;
 				}
-			
+
 				const params = {
 					sn: this.vehicle_info.sn,
 					startDate: `${this.startDate} 00:00`,
 					endDate: `${this.endDate} 23:59`
 				};
-				console.log(params)
+
 				try {
 					const responeInfo = await u_getTrackPlayback(params);
-			
 					if (responeInfo?.code === 1000) {
-						let trackList = responeInfo?.content || [];
+						const trackList = responeInfo?.content || [];
 						this.lat = trackList.map(item => ({
 							lat: item.latitude,
 							lng: item.longitude,
-							gpstime:item.gpstime
+							gpstime: item.gpstime
 						}));
-			
-						console.log('转换后的轨迹数据：', this.lat);
-			
+
 						this.showPicker = false;
-			
 						this.sendDataToWebviewDebounced();
-						console.log('已向地图发送轨迹:', this.startDate, this.endDate);
-						
 						uni.showToast({
-							title: '轨迹加载成功',
+							title: this.tips.TrackLoadSuccess[this.lang],
 							icon: 'success'
 						});
 					} else {
 						uni.showToast({
-							title: responeInfo?.msg || '暂无轨迹数据',
+							title: responeInfo?.msg || this.tips.NoTrackData[this.lang],
 							icon: 'none'
 						});
 					}
 				} catch (err) {
 					console.error('轨迹请求失败：', err);
 					uni.showToast({
-						title: '轨迹请求异常，请重试',
+						title: this.tips.TrackRequestFailed[this.lang],
 						icon: 'none'
 					});
 				}
 			},
+
 			onStartChange(e) {
 				this.startDate = e.detail.value;
 			},
-
 			onEndChange(e) {
 				this.endDate = e.detail.value;
 			}

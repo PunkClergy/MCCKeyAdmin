@@ -2,37 +2,30 @@
 	<view class="container" :style="containerStyle" @touchmove.prevent="handleTouchMove">
 		<view class="select-region">
 			<view class="select-vehicle" @tap="handleJumpVehicle" v-if="!vehicle_info?.sn">
-				<text>请选择车辆</text>
+				<text>{{ tips.PleaseSelectCar[lang] }}</text>
 				<image src="/static/images/right_1.png" class="select-vehicle-image"></image>
 			</view>
 			<view v-else>
-				<view
-					style="display: flex;flex-direction: row;justify-content: space-between;width: 730rpx;border-bottom: 1px solid #f0f0f0;padding: 20rpx; font-size: 26rpx;align-items: center;">
-					<view style="display: flex;flex-direction: row;gap: 20rpx;align-items: center;">
-						<view style="display: flex;flex-direction: row; margin-right: 4rpx;align-items: center;">
-							<image src="/static/public/car_01.png" style="width: 40rpx;height: 40rpx;"></image>
-							<text style="font-weight: bold;">{{vehicle_info?.platenumber}}</text>
+				<view class="vehicle-info-main">
+					<view class="vehicle-info-left">
+						<view class="vehicle-plate-wrapper">
+							<image src="/static/images/01.png" class="vehicle-icon"></image>
+							<text class="vehicle-plate-text">{{vehicle_info?.platenumber}}</text>
 						</view>
-						<view
-							style="background-color: aliceblue;border-radius: 5rpx;padding: 0 8rpx;margin-right: 4rpx;align-items: center;">
-							<text style="color: #2440b3;">
-								{{vehicle_info.vehicleSerialName||'-'}}{{vehicle_info.vehicleModeName||''}}</text>
-						</view>
-						<view>
-							{{vehicle_info.sn ?'3':vehicle_info.sn===null?'2':'-'}}
+						<view class="vehicle-type-tag">
+							<text class="vehicle-type-text">
+								{{vehicle_info.vehicleSerialName||tips.NoData[lang]}}{{vehicle_info.vehicleModeName||''}}
+							</text>
 						</view>
 					</view>
-					<view style="display: flex;flex-direction: row;align-items: center;" @tap="handleJumpVehicle">
-						<text style="font-size: 28rpx;color: #2440b3;">3</text>
-						<image src="/static/public/right.png" style="width: 28rpx;height: 28rpx;"></image>
+					<view class="vehicle-edit-btn" @tap="handleJumpVehicle">
+						<text class="vehicle-edit-text">{{ tips.ReSelect[lang] }}</text>
+						<image src="/static/images/right_1.png" class="right-arrow-icon"></image>
 					</view>
 				</view>
-				<view
-					style="display: flex;width: 730rpx;flex-direction: row;justify-content: space-between;padding: 20rpx;">
-					<view>
-						车架号：{{vehicle_info?.vin||'-'}}
-					</view>
-					<view>设备号：{{vehicle_info?.sn||'-'}}</view>
+				<view class="vehicle-vin-device">
+					<view>{{ tips.VIN[lang] }}：{{vehicle_info?.vin||tips.NoData[lang]}}</view>
+					<view>{{ tips.DeviceID[lang] }}：{{vehicle_info?.sn||tips.NoData[lang]}}</view>
 				</view>
 			</view>
 		</view>
@@ -46,14 +39,10 @@
 </template>
 
 <script>
-	import {
-		info_screen
-	} from '@/utils/scheme/screen.js'
-	import {
-		u_getAllCarPoisiton,
-		u_operation
-	} from '@/api'
-	import 'url-search-params-polyfill';
+	import { tips } from '@/utils/langtips.js'
+	import { titles } from '@/utils/langtitle.js'
+	import { info_screen } from '@/utils/scheme/screen.js'
+	import { u_getAllCarPoisiton, u_operation } from '@/api'
 
 	// 常量定义
 	const DATA_SEND_INTERVAL = 2000;
@@ -64,25 +53,22 @@
 	};
 
 	export default {
-		components: {
-		
-		},
+		components: {},
 
 		data: () => ({
+			lang: 'zhCn',
+			tips: tips,
+
 			screenInfo: {},
 			nowTimestamp: Date.now(),
 			vehicle_info: {},
 			info: [],
-			isLoading: false,
 			sendDataTimeout: null,
-			
 		}),
 
 		computed: {
 			containerStyle() {
-				return {
-					height: `${this.screenInfo.windowHeight || 667}px`
-				};
+				return { height: `${this.screenInfo.windowHeight || 667}px` };
 			},
 
 			webUrlWithTimestamp() {
@@ -98,37 +84,29 @@
 			},
 
 			contentHeight() {
-				const {
-					screenHeight
-				} = this.screenInfo;
-				return screenHeight - (this.statusBarHeight + this.navBarHeight + (!this.vehicle_info?.platenumber ? 60 :
-					100));
+				const { screenHeight } = this.screenInfo;
+				return screenHeight - (this.statusBarHeight + this.navBarHeight + (!this.vehicle_info?.platenumber ? 60 : 100));
 			}
 		},
 
 		onLoad(options) {
-			console.log(options,'2222')
 			this.vehicle_info = JSON.parse(options?.datails || '{}');
 			this.initialScreenInfo();
 		},
 
 		async onShow() {
-			this.isLoading = true;
-			
+			// 多语言 + 导航栏标题
+			this.lang = uni.getStorageSync('language') || 'zhCn'
+			const pageRoute = 'zoneCenter/riskManagement'
+			uni.setNavigationBarTitle({ title: titles[pageRoute][this.lang] })
 
 			try {
 				this.nowTimestamp = Date.now();
 				await this.initSearchLink();
 			} catch (error) {
 				console.error('数据初始化失败:', error);
-				uni.showToast({
-					title: '数据加载失败',
-					icon: 'none'
-				});
-			} finally {
-				this.isLoading = false;
+				uni.showToast({ title: this.tips.DataLoadFailed[this.lang], icon: 'none' });
 			}
-			this.handleGetCurrentLanguage()
 		},
 
 		onUnload() {
@@ -136,23 +114,13 @@
 		},
 
 		methods: {
-			handleGetCurrentLanguage() {
-				let currentLang = uni.getStorageSync('lang') || 'zh-CN';
-				
-			},
 			// 初始化屏幕信息
 			async initialScreenInfo() {
 				try {
 					this.screenInfo = await info_screen();
-					if (process.env.NODE_ENV === 'development') {
-						console.log('Screen info:', this.screenInfo);
-					}
 				} catch (error) {
 					console.error('[ScreenInfo] 获取屏幕信息失败:', error);
-					uni.showToast({
-						title: '设备信息获取失败',
-						icon: 'none'
-					});
+					uni.showToast({ title: this.tips.DeviceInfoFailed[this.lang], icon: 'none' });
 				}
 			},
 
@@ -169,14 +137,13 @@
 
 			// 防抖发送数据
 			sendDataToWebviewDebounced() {
-				let currentLang = uni.getStorageSync('lang') || 'zh-CN';
 				this.clearSendDataTimer();
 				this.sendDataTimeout = setTimeout(() => {
 					this.sendDataToWebview({
 						type: 'elctrncky',
 						payload: this.info,
 						vehicle_info: this.vehicle_info,
-						lang: currentLang
+						lang: this.lang
 					});
 				}, DATA_SEND_INTERVAL);
 			},
@@ -191,16 +158,13 @@
 
 			// 向Webview发送数据
 			sendDataToWebview(data) {
-				console.log('222]]]',data)
 				const payload = JSON.stringify(data);
 				const jsStr = `window.postMessage(${payload}, '*')`;
 
-				// APP端处理
 				// #ifdef APP-PLUS
 				this.$refs.webview?.evalJS(jsStr);
 				// #endif
 
-				// H5端处理
 				// #ifdef H5
 				const iframe = document.querySelector('web-view iframe');
 				iframe?.contentWindow?.postMessage(data, '*');
@@ -209,7 +173,6 @@
 
 			// 页面跳转
 			handleJumpVehicle() {
-		
 				uni.redirectTo({
 					url: `/pages/zoneCenter/carKeyConfig?source=/pages/zoneCenter/riskManagement`
 				});
@@ -218,73 +181,40 @@
 			// 消息处理
 			handlePostMessage(evt) {
 				const messageData = evt?.detail?.data?.[0] || {};
-				const {
-					source
-				} = messageData;
-				
-				console.log('==[[]][][][]',source)
-				if (!source) {
-					console.warn('Received message without type:', evt);
-					return;
-				}
-				// 使用策略模式替代多重 if 判断
+				const { source } = messageData;
+
+				if (!source) return;
+
 				const ACTION_HANDLERS = {
-					3: () => {
-						console.log('开锁操作');
-						this.handleVehicle(source);
-					},
-					1: () => {
-						console.log('关锁操作');
-						this.handleVehicle(source);
-					},
-					5: () => {
-						console.log('寻车操作');
-						this.handleVehicle(source);
-					},
-					8: () => {
-						console.log('风控拦截');
-						this.handleVehicle(source);
-					},
-					6: () => {
-						console.log('取消拦截');
-						this.handleVehicle(source);
-					}
+					3: () => this.handleVehicle(source),
+					1: () => this.handleVehicle(source),
+					5: () => this.handleVehicle(source),
+					8: () => this.handleVehicle(source),
+					6: () => this.handleVehicle(source),
 				};
 
-				// 执行对应的处理函数
 				const handler = ACTION_HANDLERS[source];
-				if (handler) {
-					handler();
-				} else {
-					console.warn(`未处理的 message 类型: ${source}`, messageData);
-				}
+				if (handler) handler();
 
 				const targetSn = evt.detail.data[0]?.plateNumber;
 				if (!targetSn) return;
 
 				const matchedItem = this.info.find(item => item.plateNumber === targetSn);
-				console.log('matchedItem', matchedItem)
-				if (matchedItem) {
-					this.vehicle_info = matchedItem;
-				}
+				if (matchedItem) this.vehicle_info = matchedItem;
 			},
+
 			async handleVehicle(evt) {
 				try {
-					const controlType = evt;
-					const requestParam = {
+					const res = await u_operation({
 						sn: this.vehicle_info?.sn,
-						operationType: controlType,
-						_timestamp: Date.now()	
-					};
-					const res = await u_operation(requestParam)
-					uni.showToast({
-						title: res.msg,
-						icon: 'none',
-						duration: 2000,
+						operationType: evt,
+						_timestamp: Date.now()
 					});
-
+					uni.showToast({ title: res.msg, icon: 'none', duration: 2000 });
 				} catch (error) {}
 			},
+			
+			handleTouchMove() {}
 		}
 	}
 </script>
@@ -296,7 +226,6 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		
 		background-size: cover;
 	}
 
@@ -331,5 +260,76 @@
 		height: 50px;
 		background-color: aliceblue;
 		color: #333;
+	}
+
+	/* 车辆信息样式 */
+	.vehicle-info-main {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		width: 730rpx;
+		border-bottom: 1px solid #f0f0f0;
+		padding: 20rpx;
+		font-size: 26rpx;
+		align-items: center;
+	}
+
+	.vehicle-info-left {
+		display: flex;
+		flex-direction: row;
+		gap: 20rpx;
+		align-items: center;
+	}
+
+	.vehicle-plate-wrapper {
+		display: flex;
+		flex-direction: row;
+		margin-right: 4rpx;
+		align-items: center;
+	}
+
+	.vehicle-icon {
+		width: 40rpx;
+		height: 40rpx;
+	}
+
+	.vehicle-plate-text {
+		font-weight: bold;
+	}
+
+	.vehicle-type-tag {
+		background-color: aliceblue;
+		border-radius: 5rpx;
+		padding: 0 8rpx;
+		margin-right: 4rpx;
+		align-items: center;
+	}
+
+	.vehicle-type-text {
+		color: #2440b3;
+	}
+
+	.vehicle-edit-btn {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.vehicle-edit-text {
+		font-size: 28rpx;
+		color: #2440b3;
+	}
+
+	.right-arrow-icon {
+		width: 28rpx;
+		height: 28rpx;
+	}
+
+	.vehicle-vin-device {
+		display: flex;
+		width: 730rpx;
+		flex-direction: row;
+		justify-content: space-between;
+		padding: 20rpx;
 	}
 </style>

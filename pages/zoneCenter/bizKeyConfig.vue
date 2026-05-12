@@ -1,6 +1,5 @@
 <template>
 	<view class="container">
-
 		<scroll-view class="content-container" scroll-y @scrolltolower="handleLower">
 			<block v-for="(item, index) in g_items" :key="index">
 				<view class="content-item">
@@ -15,23 +14,24 @@
 
 					<view class="content-item-info">
 						<view class="info-item" :class="item.username?.length > 15 ? 'long-info-item' : ''">
-							<label>账号 ：</label>
+							<label>{{ tips.Account[lang] }} ：</label>
 							<text>{{ item.username || '-' }}</text>
 						</view>
 						<view class="info-item" :class="item.mobile?.length > 15 ? 'long-info-item' : ''">
-							<label>联系电话 ：</label>
+							<label>{{ tips.Phone[lang] }} ：</label>
 							<text>{{ item.mobile || '-' }}</text>
 						</view>
 						<view class="info-item long-info-item" v-if="type">
 							<label>
-								已绑定车辆 ：
+								{{ tips.BoundCars[lang] }} ：
 								<text data-all="all" :data-item="item.vehList" :data-id="item.id"
-									@tap="handleUnbind">解绑所有车辆</text>
+									@tap="handleUnbind">{{ tips.UnbindAll[lang] }}</text>
 							</label>
 							<view v-for="(g_item, g_index) in item.vehList" :key="g_index">
 								<text>{{ g_item.platenumber }}</text>
 								&nbsp;
-								<text :data-item="g_item" :data-id="item.id" @tap="handleUnbind">解绑</text>
+								<text :data-item="g_item" :data-id="item.id"
+									@tap="handleUnbind">{{ tips.Unbind[lang] }}</text>
 							</view>
 						</view>
 					</view>
@@ -40,7 +40,7 @@
 						<view class="footer-left"></view>
 						<view class="footer-right">
 							<view class="footer-right-btn" :data-item="item" @tap="handleSelectJump">
-								<text>绑定车辆</text>
+								<text>{{ tips.BindCar[lang] }}</text>
 							</view>
 						</view>
 					</view>
@@ -51,8 +51,12 @@
 </template>
 
 <script>
-	// import { showLoading, hideLoading, showToast } from '@/utils/Inspect/tips'
-	// import { _handleWindowInfo, _handleDeviceInfo } from '@/utils/public'
+	import {
+		tips
+	} from '@/utils/langtips.js'
+	import {
+		titles
+	} from '@/utils/langtitle.js'
 	import {
 		u_GetRole,
 		u_carManagerList,
@@ -64,12 +68,14 @@
 	export default {
 		data() {
 			return {
+				lang: 'zhCn',
+				tips: tips,
+
 				c_screen_height: 0,
 				c_statusBarHeight: 0,
 				c_navBarHeight: 44,
 				c_searchBarHeight: 70,
-				c_totalNavHeight: (0) +
-					(44),
+				c_totalNavHeight: 0 + 44,
 
 				g_page: 1,
 				g_comParam: '',
@@ -88,6 +94,11 @@
 		},
 
 		onShow() {
+			this.lang = uni.getStorageSync('language') || 'zhCn'
+			const pageRoute = 'zoneCenter/bizKeyConfig'
+			uni.setNavigationBarTitle({
+				title: titles[pageRoute][this.lang]
+			})
 			if (this.roleName) {
 				this.initGetRole({
 					name: this.roleName
@@ -102,9 +113,10 @@
 		methods: {
 			async handleUnbind(e) {
 				uni.showModal({
-					title: '重要提示',
-					content: '确定要解绑吗？',
-					confirmText: '解绑',
+					title: this.tips.ImportantTip[this.lang],
+					content: this.tips.ConfirmUnbind[this.lang],
+					confirmText: this.tips.Unbind[this.lang],
+					cancelText: this.tips.Cancel[this.lang],
 					confirmColor: '#d9534f',
 					success: async ({
 						confirm
@@ -128,12 +140,9 @@
 								vehIds
 							})
 							if (res.code === 1000) {
-								// showToast(res.msg)
 								this.initGetRole({
 									name: this.roleName
 								})
-							} else {
-								// showToast(res.msg)
 							}
 						} catch (e) {}
 					}
@@ -167,9 +176,6 @@
 							this.g_page = 1
 							this.type = 1
 							this.initGetRole(evt)
-							// showToast(res.msg)
-						} else {
-							// showToast(res.msg)
 						}
 					} catch (e) {}
 				} else {
@@ -270,12 +276,8 @@
 					const res = await u_carManagerapi_del({
 						id: item?.id
 					})
-					// hideLoading()
 					if (res.code === 1000) {
 						this.g_items = this.g_items.filter((_, i) => i !== index)
-						// showToast(res.msg)
-					} else {
-						// showToast('请求失败')
 					}
 				} catch (e) {}
 			}
@@ -286,7 +288,7 @@
 <style scoped>
 	.container {
 		width: 100%;
-		height: 95vh;
+		height: 100vh;
 		display: flex;
 		flex-direction: column;
 		background-repeat: no-repeat;

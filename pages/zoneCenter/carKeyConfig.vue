@@ -3,10 +3,10 @@
 		<view class="record-container">
 			<view class="record-tabs">
 				<view class="record-tabs-item" :class="{ active: c_activeTab == 1 }" @tap="switchToList">
-					车辆列表
+					{{ tips.CarList[lang] }}
 				</view>
 				<view class="record-tabs-item" :class="{ active: c_activeTab == 2 }" @tap="switchToForm">
-					{{ btnState }}车辆
+					{{ btnState }}{{ tips.Car[lang] }}
 				</view>
 			</view>
 
@@ -14,20 +14,18 @@
 				<view class="record-tabs-1">
 					<view class="search-box">
 						<icon type="search" size="16" class="search-icon" />
-						<input placeholder="车牌号/设备号/车型/车系" class="search-input" @blur="bindblurSea" />
+						<input :placeholder="tips.SearchPlaceholder[lang]" class="search-input" @blur="bindblurSea" />
 					</view>
 				</view>
 
-				<!-- 居中：共有x条记录 -->
 				<view class="tabs-1-conut">
-					<view>共有{{ g_total }}条记录</view>
+					<view>{{ tips.TotalRecords[lang] }}{{ g_total }}{{ tips.Items[lang] }}</view>
 					<view class="select-all" v-if="g_flagMulti">
-						<text>全选</text>
+						<text>{{ tips.SelectAll[lang] }}</text>
 						<checkbox style="transform: scale(0.9);" @tap="handleAllC" :checked="all_c" />
 					</view>
 				</view>
 
-				<!-- 列表滚动：占满剩余高度 -->
 				<view class="scroll-wrapper">
 					<scroll-view scroll-y class="scroll-view">
 						<view class="content-item" v-for="(item, index) in g_items" :key="index">
@@ -38,11 +36,14 @@
 									</view>
 									<view class="left-split_line"></view>
 									<view class="left-model">
-										{{ item.vehicleSerialName || '-' }}{{ item.vehicleModeName || '' }}</view>
+										{{ item.vehicleSerialName || '-' }}{{ item.vehicleModeName || '' }}
+									</view>
 								</view>
 								<view class="head-right" v-if="!g_flagMulti">
-									<view class="btn-icon" :data-item="item" @tap="handleEdit">编辑</view>
-									<view class="btn-icon" :data-item="item" @tap="handleDelete">删除</view>
+									<view class="btn-icon" :data-item="item" @tap="handleEdit">{{ tips.Edit[lang] }}
+									</view>
+									<view class="btn-icon" :data-item="item" @tap="handleDelete">{{ tips.Delete[lang] }}
+									</view>
 								</view>
 								<view v-else>
 									<checkbox-group :data-item="item" @change="handleChangeBlack">
@@ -52,108 +53,110 @@
 							</view>
 							<view class="content-item-info">
 								<view class="info-item" :class="item.sn && item.sn.length > 15 ? 'long-info-item' : ''">
-									<label>设备号：</label>
+									<label>{{ tips.DeviceSN[lang] }}：</label>
 									<text>{{ item.sn || '-' }}</text>
 								</view>
 								<view class="info-item long-info-item">
-									<label>生效周期：</label>
+									<label>{{ tips.EffectivePeriod[lang] }}：</label>
 									<text>{{ item.startDate || '' }}-{{ item.endDate || '' }}</text>
 								</view>
 							</view>
-							<!-- 优化后的选择此车按钮 -->
 							<view class="content-item-footer" v-if="g_source && !g_flagMulti">
 								<view class="select-car-btn" :data-item="item" @tap="handleSelectJump">
-									选择此车
+									{{ tips.SelectThisCar[lang] }}
 								</view>
 							</view>
 						</view>
-						<view class="empty" v-if="g_items.length === 0">暂无数据</view>
+						<view class="empty" v-if="g_items.length === 0">{{ tips.NoData[lang] }}</view>
 					</scroll-view>
 				</view>
 			</block>
 
 			<block v-else>
-				<!-- 新增/编辑：占满剩余高度 -->
 				<view class="scroll-wrapper">
 					<scroll-view scroll-y class="scroll-view">
 						<view class="card-info">
 							<view class="card-info-item">
-								<label>车牌号<text>*</text></label>
+								<label>{{ tips.PlateNumber[lang] }}<text>*</text></label>
 								<view class="card-info-item-input">
-									<input placeholder="请输入车牌号" v-model="params.platenumber" data-item="platenumber"
-										@input="handleBindinput" />
+									<input :placeholder="tips.PleaseEnterPlate[lang]" v-model="params.platenumber"
+										data-item="platenumber" @input="handleBindinput" />
 								</view>
 							</view>
 
 							<view class="card-info-item">
-								<label>设备号(sn)<text>*</text></label>
+								<label>{{ tips.DeviceSN[lang] }}<text>*</text></label>
 								<view class="card-info-item-input">
-									<text v-if="id !== ''">{{ params.sn || '空' }}</text>
-									<input v-else placeholder="请输入设备号" v-model="params.paramsn" data-item="sn"
-										@input="handleBindinput" />
+									<text v-if="id !== ''">{{ params.sn || tips.Empty[lang] }}</text>
+									<input v-else :placeholder="tips.PleaseEnterSN[lang]" v-model="params.paramsn"
+										data-item="sn" @input="handleBindinput" />
 								</view>
 							</view>
 
 							<view class="card-info-item">
 								<label>code<text>*</text></label>
 								<view class="card-info-item-input">
-									<text v-if="id !== ''">{{ params.code || '空' }}</text>
-									<input v-else placeholder="请输入code" v-model="params.code" data-item="code"
+									<text v-if="id !== ''">{{ params.code || tips.Empty[lang] }}</text>
+									<input v-else :placeholder="tips.PleaseEnterCode[lang]" v-model="params.code"
+										data-item="code" @input="handleBindinput" />
+								</view>
+							</view>
+
+							<view class="card-info-item">
+								<label>{{ tips.VehicleSeries[lang] }}</label>
+								<view class="card-info-item-input">
+									<input :placeholder="tips.PleaseEnterSeries[lang]"
+										v-model="params.vehicleSerialName" data-item="vehicleSerialName"
 										@input="handleBindinput" />
 								</view>
 							</view>
 
 							<view class="card-info-item">
-								<label>车系</label>
+								<label>{{ tips.VehicleModel[lang] }}</label>
 								<view class="card-info-item-input">
-									<input placeholder="请输入车系" v-model="params.vehicleSerialName"
-										data-item="vehicleSerialName" @input="handleBindinput" />
-								</view>
-							</view>
-
-							<view class="card-info-item">
-								<label>车型</label>
-								<view class="card-info-item-input">
-									<input placeholder="请输入车型" v-model="params.vehicleModeName"
+									<input :placeholder="tips.PleaseEnterModel[lang]" v-model="params.vehicleModeName"
 										data-item="vehicleModeName" @input="handleBindinput" />
 								</view>
 							</view>
 
 							<view class="card-info-item">
-								<label>年款</label>
+								<label>{{ tips.ModelYear[lang] }}</label>
 								<view class="card-info-item-input">
-									<input placeholder="请输入年款" v-model="params.ccdate" data-item="ccdate"
+									<input :placeholder="tips.PleaseEnterYear[lang]" v-model="params.ccdate"
+										data-item="ccdate" @input="handleBindinput" />
+								</view>
+							</view>
+
+							<view class="card-info-item">
+								<label>{{ tips.TotalMileage[lang] }}</label>
+								<view class="card-info-item-input">
+									<input :placeholder="tips.PleaseEnterTotalMileage[lang]"
+										v-model="params.totalMileage" data-item="totalMileage"
 										@input="handleBindinput" />
 								</view>
 							</view>
 
 							<view class="card-info-item">
-								<label>当前总里程(km)</label>
+								<label>{{ tips.MaintainMileage[lang] }}</label>
 								<view class="card-info-item-input">
-									<input placeholder="请输入车辆当前里程" v-model="params.totalMileage"
-										data-item="totalMileage" @input="handleBindinput" />
+									<input :placeholder="tips.PleaseEnterMaintainMileage[lang]"
+										v-model="params.maintainMileage" data-item="maintainMileage"
+										@input="handleBindinput" />
 								</view>
 							</view>
 
 							<view class="card-info-item">
-								<label>已保养里程(km)</label>
+								<label>{{ tips.MaintainInterval[lang] }}</label>
 								<view class="card-info-item-input">
-									<input placeholder="请输入已保养里程" v-model="params.maintainMileage"
-										data-item="maintainMileage" @input="handleBindinput" />
-								</view>
-							</view>
-
-							<view class="card-info-item">
-								<label>保养周期里程(km)</label>
-								<view class="card-info-item-input">
-									<input placeholder="请输入车辆保养周期里程" v-model="params.maintainMileageInterval"
-										data-item="maintainMileageInterval" @input="handleBindinput" />
+									<input :placeholder="tips.PleaseEnterMaintainInterval[lang]"
+										v-model="params.maintainMileageInterval" data-item="maintainMileageInterval"
+										@input="handleBindinput" />
 								</view>
 							</view>
 						</view>
 
 						<view class="card-footer">
-							<view @tap="handleSubmit">确认{{ btnState }}</view>
+							<view @tap="handleSubmit">{{ tips.Confirm[lang] }}{{ btnState }}</view>
 						</view>
 					</scroll-view>
 				</view>
@@ -162,7 +165,7 @@
 
 		<view class="levitation-button" v-if="c_activeTab == 1 && g_flagMulti && g_black.length > 0"
 			@tap="handleJumpBlackInfo">
-			<text>确定</text>
+			<text>{{ tips.Confirm[lang] }}</text>
 		</view>
 	</view>
 </template>
@@ -173,15 +176,22 @@
 		u_addOrUpdateCar,
 		u_carapiDeleteCar
 	} from '@/api/index'
-
+	import {
+		tips
+	} from '@/utils/langtips.js'
+	import {
+		titles
+	} from '@/utils/langtitle.js'
 	export default {
 		data() {
 			return {
+				lang: 'zhCn',
+				tips: tips,
 				c_activeTab: 1,
 				g_page: 1,
 				g_items: [],
 				params: {},
-				btnState: '新增',
+				btnState: '',
 				id: '',
 				batterylift: '一键启动',
 				carOwnerName: '智信通',
@@ -204,6 +214,14 @@
 			this.initCarryParams(options)
 			this.initList()
 		},
+		onShow() {
+			this.lang = uni.getStorageSync('language') || 'zhCn'
+			const pageRoute = 'zoneCenter/carKeyConfig'
+			uni.setNavigationBarTitle({
+				title: titles[pageRoute][this.lang]
+			})
+			this.btnState = this.tips.Add[this.lang]
+		},
 		methods: {
 			switchToList() {
 				this.c_activeTab = 1
@@ -214,7 +232,7 @@
 				this.clearForm()
 			},
 			clearForm() {
-				this.btnState = '新增'
+				this.btnState = this.tips.Add[this.lang];
 				this.id = ''
 				this.params = {
 					platenumber: '',
@@ -237,8 +255,10 @@
 			async handleDelete(evt) {
 				const info = evt.currentTarget.dataset.item
 				uni.showModal({
-					title: '提示',
-					content: '确认删除？',
+					title: this.tips.Tips[this.lang],
+					content: this.tips.ConfirmDelete[this.lang],
+					confirmText: this.tips.Confirm[this.lang],
+					cancelText: this.tips.Cancel[this.lang],
 					success: async (res) => {
 						if (res.confirm) {
 							try {
@@ -278,7 +298,7 @@
 			},
 			handleAllC() {
 				if (this.g_items.length === 0) return uni.showToast({
-					title: '暂无数据',
+					title: this.tips.NoData[this.lang],
 					icon: 'none'
 				})
 				const target = !this.all_c
@@ -370,11 +390,11 @@
 					id: this.id || ''
 				}
 				if (!param.platenumber) return uni.showToast({
-					title: '请输入车牌号',
+					title: this.tips.PleaseEnterPlate[this.lang],
 					icon: 'none'
 				})
 				if (!param.sn) return uni.showToast({
-					title: '请输入设备号',
+					title: this.tips.PleaseEnterSN[this.lang],
 					icon: 'none'
 				})
 				try {
@@ -393,7 +413,7 @@
 			handleEdit(evt) {
 				const info = evt.currentTarget.dataset.item
 				this.c_activeTab = 2
-				this.btnState = '修改'
+				this.btnState = this.tips.Edit[this.lang];
 				this.id = info.id
 				this.params = {
 					maintainMileage: info.maintainMileage || '',
@@ -470,7 +490,6 @@
 		margin-left: 10rpx;
 	}
 
-	/* 记录数居中 */
 	.tabs-1-conut {
 		display: flex;
 		justify-content: space-between;
@@ -491,7 +510,6 @@
 		gap: 10rpx;
 	}
 
-	/* --------- 核心：列表 + 新增/编辑 统一占满剩余高度 --------- */
 	.scroll-wrapper {
 		flex: 1;
 		overflow: hidden;
@@ -562,13 +580,13 @@
 		width: 100%;
 	}
 
-	/* 选择此车按钮 优化样式 */
 	.content-item-footer {
 		padding: 20rpx 24rpx;
 		display: flex;
 		justify-content: flex-end;
 		border-top: 1rpx solid #f5f5f5;
 	}
+
 	.select-car-btn {
 		background: #1677ff;
 		color: #fff;

@@ -2,7 +2,7 @@
 	<view class="container" :style="containerStyle" @touchmove.prevent="handleTouchMove">
 		<view class="select-region">
 			<view class="select-vehicle" @tap="handleJumpVehicle" v-if="!vehicle_info?.sn">
-				<text>请选择车辆</text>
+				<text>{{ tips.PleaseSelectCar[lang] }}</text>
 				<image src="/static/images/right_1.png" class="select-vehicle-image"></image>
 			</view>
 			<view v-else>
@@ -14,50 +14,19 @@
 						</view>
 						<view class="vehicle-type-tag">
 							<text class="vehicle-type-text">
-								{{vehicle_info.vehicleSerialName||'-'}}{{vehicle_info.vehicleModeName||''}}
+								{{vehicle_info.vehicleSerialName||tips.NoData[lang]}}{{vehicle_info.vehicleModeName||''}}
 							</text>
 						</view>
 
 					</view>
 					<view class="vehicle-edit-btn" @tap="handleJumpVehicle">
-						<text class="vehicle-edit-text">重新选择</text>
+						<text class="vehicle-edit-text">{{ tips.ReSelect[lang] }}</text>
 						<image src="/static/images/right_1.png" class="right-arrow-icon"></image>
 					</view>
 				</view>
 				<view class="vehicle-vin-device">
-					<view>车架号：{{vehicle_info?.vin||'-'}}</view>
-					<view>设备号：{{vehicle_info?.sn||'-'}}</view>
-				</view>
-			</view>
-		</view>
-
-		<!-- 日期区间选择弹窗（悬浮上层） -->
-		<view class="picker-mask" @click="closePicker" v-if="showPicker">
-			<view class="picker-panel" @click.stop="">
-				<view class="panel-body">
-					<view class="panel-title">请选择开始和结束日期</view>
-
-					<!-- 开始日期 -->
-					<picker mode="date" :value="startDate" @change="onStartChange">
-						<view class="picker-item">
-							<text>开始日期</text>
-							<text class="val">{{ startDate || '请选择' }}</text>
-						</view>
-					</picker>
-
-					<!-- 结束日期 -->
-					<picker mode="date" :value="endDate" @change="onEndChange">
-						<view class="picker-item">
-							<text>结束日期</text>
-							<text class="val">{{ endDate || '请选择' }}</text>
-						</view>
-					</picker>
-
-					<!-- 按钮组 -->
-					<view class="btn-group">
-						<text class="btn cancel" @click="closePicker">取消</text>
-						<text class="btn confirm" @click="confirmPicker">确认</text>
-					</view>
+					<view>{{ tips.VIN[lang] }}：{{vehicle_info?.vin||tips.NoData[lang]}}</view>
+					<view>{{ tips.DeviceID[lang] }}：{{vehicle_info?.sn||tips.NoData[lang]}}</view>
 				</view>
 			</view>
 		</view>
@@ -70,6 +39,10 @@
 </template>
 
 <script>
+	import { tips } from '@/utils/langtips.js'
+	import {
+		titles
+	} from '@/utils/langtitle.js'
 	import {
 		info_screen
 	} from '@/utils/scheme/screen.js'
@@ -91,6 +64,9 @@
 		components: {},
 
 		data: () => ({
+			lang: 'zhCn',
+			tips: tips,
+			
 			screenInfo: {},
 			nowTimestamp: Date.now(),
 			vehicle_info: {},
@@ -138,6 +114,13 @@
 		},
 
 		async onShow() {
+			// 多语言 + 导航标题
+			this.lang = uni.getStorageSync('language') || 'zhCn'
+			const pageRoute = 'zoneCenter/carServiceKey'
+			uni.setNavigationBarTitle({
+				title: titles[pageRoute][this.lang]
+			})
+			
 			this.isLoading = true;
 
 			try {
@@ -146,13 +129,12 @@
 			} catch (error) {
 				console.error('数据初始化失败:', error);
 				uni.showToast({
-					title: '数据加载失败',
+					title: this.tips.DataLoadFailed[this.lang],
 					icon: 'none'
 				});
 			} finally {
 				this.isLoading = false;
 			}
-			this.handleGetCurrentLanguage()
 		},
 
 		onUnload() {
@@ -174,7 +156,7 @@
 				} catch (error) {
 					console.error('[ScreenInfo] 获取屏幕信息失败:', error);
 					uni.showToast({
-						title: '设备信息获取失败',
+						title: this.tips.DeviceInfoFailed[this.lang],
 						icon: 'none'
 					});
 				}
@@ -193,7 +175,7 @@
 
 			// 防抖发送数据
 			sendDataToWebviewDebounced() {
-				let currentLang = uni.getStorageSync('lang') || 'zh-CN';
+				let currentLang = this.lang;
 				this.clearSendDataTimer();
 				this.sendDataTimeout = setTimeout(() => {
 					this.sendDataToWebview({
@@ -245,7 +227,7 @@
 					this.showPicker = true;
 				} else {
 					uni.showToast({
-						title: '请先选择车辆',
+						title: this.tips.PleaseSelectCarFirst[this.lang],
 						icon: 'none'
 					})
 				}
@@ -325,46 +307,6 @@
 
 				} catch (error) {}
 			},
-
-			// 触摸移动事件
-			handleTouchMove() {},
-
-			// 关闭日期选择器
-			closePicker() {
-				this.showPicker = false;
-			},
-
-			// 确认日期选择
-			confirmPicker() {
-				if (!this.startDate || !this.endDate) {
-					uni.showToast({
-						title: '请选择完整的日期区间',
-						icon: 'none'
-					});
-					return;
-				}
-				
-				// 调接口
-				
-				// 关闭弹窗并可后续扩展日期提交逻辑
-				this.showPicker = false;
-				this.lat = [{
-					lat: 12,
-					lat1: 223
-				}]
-				this.sendDataToWebviewDebounced();
-				console.log('选择的日期:', this.startDate, this.endDate);
-			},
-
-			// 开始日期改变
-			onStartChange(e) {
-				this.startDate = e.detail.value;
-			},
-
-			// 结束日期改变
-			onEndChange(e) {
-				this.endDate = e.detail.value;
-			}
 		}
 	}
 </script>
