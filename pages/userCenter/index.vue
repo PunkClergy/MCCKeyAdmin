@@ -25,7 +25,7 @@
 					mode="widthFix" v-if="currentTab === index" />
 				<image :src="`https://k1sw.wiselink.net.cn/img/${item.iconPath}`" class="tab-icon" mode="widthFix"
 					v-else />
-				<text>{{ item['text' + lang.replace('-', '')] || item.text }}</text>
+				<text>{{ item['text' + lang] || item.text }}</text>
 			</view>
 		</view>
 
@@ -393,7 +393,7 @@
 
 	.float-button {
 		position: fixed;
-		right: 20rpx;
+		right: 24rpx;
 		top: 75%;
 		transform: translateY(-50%);
 		border-radius: 50%;

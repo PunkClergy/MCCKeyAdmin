@@ -2,8 +2,12 @@
 	<view class="container" :style="{ height: screenHeight + 'px' }">
 		<view class="record-container">
 			<view class="record-tabs">
-				<view class="record-tabs-item" :class="activeTab == 1 && 'active'" @tap="activeTab = 1">发送钥匙</view>
-				<view class="record-tabs-item" :class="activeTab == 2 && 'active'" @tap="activeTab = 2">使用记录</view>
+				<view class="record-tabs-item" :class="activeTab == 1 && 'active'" @tap="activeTab = 1">
+					{{tips.SendKey[lang]}}
+				</view>
+				<view class="record-tabs-item" :class="activeTab == 2 && 'active'" @tap="activeTab = 2">
+					{{tips.UsageLogs[lang]}}
+				</view>
 			</view>
 
 			<block v-if="activeTab == 1">
@@ -13,7 +17,7 @@
 							<view class="head-left">
 								<view class="left-category">
 									<image src="/static/car_icon.png" />
-									 <text>{{ item.platenumber }}</text>
+									<text>{{ item.platenumber }}</text>
 								</view>
 								<view class="left-model" v-if="!item.bluetoothKey">
 									{{ item.vehicleSerialName || '-' }}{{ item.vehicleModeName || '' }}
@@ -23,32 +27,32 @@
 						<view class="content-item-info">
 							<view class="info-item" :class="item.vin.length > 15 && 'long-info-item'"
 								v-if="!item.bluetoothKey">
-								<label>车架号：</label><text>{{ item.vin || '-' }}</text>
+								<label>{{tips.VIN[lang]}}：</label><text>{{ item.vin || '-' }}</text>
 							</view>
 							<view class="info-item" :class="item.xsgw.length > 15 && 'long-info-item'"
 								v-if="!item.bluetoothKey">
-								<label>油箱容积：</label><text>{{ item.xsgw ? item.xsgw + 'L' : '-' }}</text>
+								<label>{{tips.FuelCapacity[lang]}}：</label><text>{{ item.xsgw ? item.xsgw + 'L' : '-' }}</text>
 							</view>
 							<view class="info-item" :class="item.carOwnerName.length > 15 && 'long-info-item'"
 								v-if="!item.bluetoothKey">
-								<label>设备平台：</label><text>{{ item.carOwnerName || '-' }}</text>
+								<label>{{tips.DevicePlatform[lang]}}：</label><text>{{ item.carOwnerName || '-' }}</text>
 							</view>
 							<view class="info-item" :class="item.sn.length > 15 && 'long-info-item'">
-								<label>设备号：</label><text>{{ item.sn || '-' }}</text>
+								<label>{{tips.DeviceID[lang]}}：</label><text>{{ item.sn || '-' }}</text>
 							</view>
 						</view>
 						<view class="content-item-footer">
 							<view class="footer-left"></view>
 							<view class="footer-right">
 								<view class="footer-right-btn" :data-item="item" @tap="openSendKeyModal">
-									<text>发送钥匙</text>
+									<text>{{tips.SendKey[lang]}}</text>
 								</view>
 							</view>
 						</view>
 					</view>
 					<view v-if="carList.length < 1"
 						style="display:flex;justify-content:center;margin-top:20rpx;font-size:24rpx;">
-						暂无数据
+						{{tips.NoData[lang]}}
 					</view>
 				</scroll-view>
 			</block>
@@ -57,22 +61,22 @@
 				<view class="record-tabs-1" style="display:flex;flex-direction:column;gap:10rpx;">
 					<view class="search-box">
 						<icon type="search" size="16" class="search-icon" />
-						<input placeholder="车牌号/设备号/使用人" class="search-input" @blur="onSearchBlur" />
+						<input :placeholder="tips.PlateDeviceUser[lang]" class="search-input" @blur="onSearchBlur" />
 					</view>
 					<view class="picker-container">
 						<view class="picker-btns">
 							<view class="picker-btn" :class="recordStatus == 0 && 'active'" @tap="changeRecordStatus"
 								data-id="0">
-								使用中
+								{{tips.InUse[lang]}}
 							</view>
 							<view class="picker-btn" :class="recordStatus == 1 && 'active'" @tap="changeRecordStatus"
 								data-id="1">
-								已过期
+								{{tips.Expired[lang]}}
 							</view>
 						</view>
 					</view>
 				</view>
-				<view class="tabs-1-conut">共有{{ recordTotal }}条记录</view>
+				<view class="tabs-1-conut">{{tips.Total[lang]}} {{recordTotal}} {{tips.Records[lang]}}</view>
 				<scroll-view scroll-y class="scroll-full" @scrolltolower="loadRecordList">
 					<view v-for="(item, idx) in recordList" :key="idx" class="content-card">
 						<view class="card-head">
@@ -83,28 +87,31 @@
 								<text class="phone-text">{{ item.mobile }}</text>
 							</view>
 							<view class="card-head-right">
-								<text v-if="item.status" style="color:#7b7b7c;">已取消</text>
-								<text v-else>使用中</text>
+								<text v-if="item.status" style="color:#7b7b7c;">{{tips.Cancelled[lang]}}</text>
+								<text v-else>{{tips.Expired[lang]}}</text>
 							</view>
 						</view>
 						<view class="card-info">
-							<time-line
-								:events="[{ createdate: (item.startdate || '-') + ' 至 ' + (item.enddate || '-') }]" />
+							{{ (item.startdate || '-') }}
+							~
+							{{(item.enddate || '-') }}
 						</view>
 						<view class="card-footer1" style="display:flex;justify-content:space-between;">
 							<block v-if="!item.status">
 								<view>
-									<text @tap="openEditKeyModal" :data-item="item" style="float:left;">修改</text>
+									<text @tap="openEditKeyModal" :data-item="item"
+										style="float:left;">{{tips.Edit[lang]}}</text>
 								</view>
 								<view style="display:flex;flex-direction:row;">
-									<text @tap="copyLink" :data-item="item">{{ copied ? '已复制' : '复制链接' }}</text>
-									<text @tap="cancelRentKey" :data-item="item">取消用车</text>
+									<text @tap="copyLink"
+										:data-item="item">{{ copied ? tips.Copied[lang] : tips.CopyLink[lang] }}</text>
+									<text @tap="cancelRentKey" :data-item="item">{{tips.CancelCarUse[lang]}}</text>
 								</view>
 							</block>
 							<block v-else>
 								<view></view>
 								<view style="display:flex;flex-direction:row;">
-									<text @tap="previewImages" :data-item="item">查看照片</text>
+									<text @tap="previewImages" :data-item="item">{{tips.ViewPhotos[lang]}}</text>
 								</view>
 							</block>
 						</view>
@@ -116,20 +123,21 @@
 
 	<view class="modal-mask" v-if="showSendModal" @tap="closeSendKeyModal"></view>
 	<view class="modal-base-map" v-if="showSendModal" :style="{ bottom: showSearchList ? 250 : 0 + 'rpx' }">
+
 		<form @submit="submitSendKey">
 			<view class="modal-container">
 				<view class="modal-container-head">
-					<text>发送电子钥匙</text>
+					<text>{{ tips.SendKey[lang] }}</text>
 					<image src="/static/images/right_1.png" @tap="closeSendKeyModal" />
 				</view>
 				<view class="modal-container-middle">
 					<view class="middle-form-item">
-						<label>车牌号</label>
+						<label>{{ tips.PlateNo[lang] }}</label>
 						<view class="modal-form-region" style="position:relative;">
 							<view v-if="isManualInput" style="position:relative;">
-								<input @focus="onInputFocus" @blur="onInputBlur" class="temporary" placeholder="请输入车牌号"
-									name="platenumber" :value="searchKeyword" @input="onSearchInput"
-									confirm-type="search" />
+								<input @focus="onInputFocus" @blur="onInputBlur" class="temporary"
+									:placeholder="tips.EnterPlateNo[lang]" name="platenumber" :value="searchKeyword"
+									@input="onSearchInput" confirm-type="search" />
 								<view v-if="searchList.length > 0 && searchKeyword.trim() !== ''"
 									class="g_items_temporary">
 									<view v-for="(item, idx) in searchList" :key="idx" @tap="selectPlate"
@@ -142,21 +150,21 @@
 						</view>
 					</view>
 					<view class="middle-form-item">
-						<label>使用人</label>
+						<label>{{ tips.User[lang] }}</label>
 						<view class="modal-form-region">
-							<input @focus="onInputFocus" @blur="onInputBlur" placeholder="请输入使用人" name="personName"
-								style="text-align:right;font-size:28rpx;" />
+							<input @focus="onInputFocus" @blur="onInputBlur" :placeholder="tips.EnterUser[lang]"
+								name="personName" style="text-align:right;font-size:28rpx;" />
 						</view>
 					</view>
 					<view class="middle-form-item">
-						<label>手机号</label>
+						<label>{{ tips.AccountPhone[lang] }}</label>
 						<view class="modal-form-region">
-							<input @focus="onInputFocus" @blur="onInputBlur" placeholder="请输入手机号" name="mobile"
-								style="text-align:right;font-size:28rpx;" />
+							<input @focus="onInputFocus" @blur="onInputBlur" :placeholder="tips.EnterAccountPhone[lang]"
+								name="mobile" style="text-align:right;font-size:28rpx;" />
 						</view>
 					</view>
 					<view class="middle-form-item">
-						<label>开始时间</label>
+						<label>{{ tips.StartTime[lang] }}</label>
 						<view class="modal-form-region">
 							<picker mode="date" data-index="startDate" @change="changeDateTime">
 								<view class="form-item-text">
@@ -171,7 +179,7 @@
 						</view>
 					</view>
 					<view class="middle-form-item">
-						<label>结束时间</label>
+						<label>{{ tips.EndTime[lang] }}</label>
 						<view class="modal-form-region">
 							<picker mode="date" data-index="endDate" @change="changeDateTime">
 								<view class="form-item-text">
@@ -186,7 +194,7 @@
 						</view>
 					</view>
 					<view class="middle-form-item">
-						<label>是否允许多人使用</label>
+						<label>{{ tips.MultiUserAllowed[lang] }}</label>
 						<view class="modal-form-region">
 							<picker mode="selector" :range="multiOptions" range-key="name" @change="changeMultiSelect"
 								:value="multiIndex">
@@ -195,14 +203,15 @@
 						</view>
 					</view>
 					<view class="middle-form-item">
-						<label>备注</label>
+						<label>{{ tips.Remark[lang] }}</label>
 						<view class="modal-form-region">
-							<input placeholder="请输入车位号或车辆位置" name="bak" style="text-align:right;font-size:28rpx;" />
+							<input :placeholder="tips.EnterParkingPos[lang]" name="bak"
+								style="text-align:right;font-size:28rpx;" />
 						</view>
 					</view>
 				</view>
 				<view class="modal-container-footer">
-					<button form-type="submit">确认</button>
+					<button form-type="submit">{{ tips.Confirm[lang] }}</button>
 				</view>
 			</view>
 		</form>
@@ -213,28 +222,28 @@
 		<form @submit="submitEditKey">
 			<view class="modal-container">
 				<view class="modal-container-head">
-					<text>修改</text>
+					<text>{{ tips.Edit[lang] }}</text>
 					<image src="/static/images/right_1.png" @tap="closeEditKeyModal" />
 				</view>
 				<view class="modal-container-middle">
 					<view class="middle-form-item">
-						<label>车牌号</label>
+						<label>{{ tips.PlateNo[lang] }}</label>
 						<view class="modal-form-region">{{ editRecordData.platenumber }}</view>
 					</view>
 					<view class="middle-form-item">
-						<label>使用人</label>
+						<label>{{ tips.User[lang] }}</label>
 						<view class="modal-form-region">
 							<text>{{ editRecordData.personname }}</text>
 						</view>
 					</view>
 					<view class="middle-form-item">
-						<label>手机号</label>
+						<label>{{ tips.AccountPhone[lang] }}</label>
 						<view class="modal-form-region">
 							<text>{{ editRecordData.mobile }}</text>
 						</view>
 					</view>
 					<view class="middle-form-item">
-						<label>开始时间</label>
+						<label>{{ tips.StartTime[lang] }}</label>
 						<view class="modal-form-region">
 							<picker mode="date" data-index="startDate" @change="changeDateTime">
 								<view class="form-item-text">
@@ -249,7 +258,7 @@
 						</view>
 					</view>
 					<view class="middle-form-item">
-						<label>结束时间</label>
+						<label>{{ tips.EndTime[lang] }}</label>
 						<view class="modal-form-region">
 							<picker mode="date" data-index="endDate" @change="changeDateTime">
 								<view class="form-item-text">
@@ -264,7 +273,7 @@
 						</view>
 					</view>
 					<view class="middle-form-item">
-						<label>是否允许多人使用</label>
+						<label>{{ tips.MultiUserAllowed[lang] }}</label>
 						<view class="modal-form-region">
 							<picker mode="selector" :range="multiOptions" range-key="name" @change="changeMultiSelect"
 								:value="multiIndex">
@@ -273,20 +282,20 @@
 						</view>
 					</view>
 					<view class="middle-form-item">
-						<label>备注</label>
+						<label>{{ tips.Remark[lang] }}</label>
 						<view class="modal-form-region">
 							<text>{{ editRecordData.bak || '-' }}</text>
 						</view>
 					</view>
 				</view>
 				<view class="modal-container-footer">
-					<button form-type="submit">确认</button>
+					<button form-type="submit">{{ tips.Confirm[lang] }}</button>
 				</view>
 			</view>
 		</form>
 	</view>
 	<view class="card-footer">
-		<view @tap="openGlobalSendModal">发送钥匙</view>
+		<view @tap="openGlobalSendModal">{{tips.SendKey[lang]}}</view>
 	</view>
 </template>
 
@@ -299,7 +308,12 @@
 		u_sendRentKey,
 		u_cancelRentKey
 	} from '@/api/index'
-
+	import {
+		titles
+	} from '@/utils/langtitle.js'
+	import {
+		tips
+	} from '@/utils/langtips.js'
 	export default {
 		data() {
 			return {
@@ -324,12 +338,14 @@
 				recordStatus: '0',
 				searchKeyword: '',
 				multiOptions: [{
-					name: '允许',
-					value: 1
-				}, {
-					name: '不允许',
-					value: 0
-				}],
+						name: '允许',
+						value: 1
+					},
+					{
+						name: '不允许',
+						value: 0
+					}
+				],
 				multiIndex: 0,
 				openType: 1,
 				searchList: [],
@@ -338,7 +354,9 @@
 				selectCarData: {},
 				vehId: '',
 				recordTotal: 0,
-				searchParam: ''
+				searchParam: '',
+				lang: 'zhCn',
+				tips: tips
 			}
 		},
 		methods: {
@@ -462,7 +480,7 @@
 				if (!item) return
 				const imgs = [item.img1, item.img2, item.img3, item.img4, item.img5].filter(Boolean)
 				if (!imgs.length) return uni.showToast({
-					title: '暂无照片',
+					title: this.tips.NoData[this.lang],
 					icon: 'none'
 				})
 				const urls = imgs.map(u => this.imgDomain + u.replace(/\\/g, '/'))
@@ -473,11 +491,11 @@
 			async submitSendKey(e) {
 				const form = e.detail.value
 				if (!form.personName) return uni.showToast({
-					title: '请输入使用人',
+					title: this.tips.EnterUser[this.lang],
 					icon: 'none'
 				})
 				if (!form.mobile) return uni.showToast({
-					title: '请输入手机号',
+					title: this.tips.EnterAccountPhone[this.lang],
 					icon: 'none'
 				})
 				const build = (d, t) => `${d} ${t || '00:00'}:00`
@@ -504,13 +522,13 @@
 						this.getRecordList()
 					}, 1000)
 					uni.showModal({
-						title: '发送成功',
+						title: this.tips.SendSuccess[this.lang],
 						content: res.msg,
 						showCancel: false
 					})
 				} catch (err) {
 					uni.showToast({
-						title: err.message || '发送失败',
+						title: err.message || this.tips.SendFailed[this.lang],
 						icon: 'none'
 					})
 				}
@@ -532,10 +550,17 @@
 				} catch (e) {}
 			},
 			copyLink(e) {
+				console.log(e.currentTarget)
 				const txt = e.currentTarget.dataset.item.simplecode
 				uni.setClipboardData({
 					data: txt,
-					success: () => this.copied = true
+					success: () => {
+						uni.showToast({
+							title: this.tips.CopySuccess[this.lang],
+							icon: 'none'
+						})
+						this.copied = true
+					}
 				})
 			},
 			openEditKeyModal(e) {
@@ -564,7 +589,7 @@
 						this.recordPage = 1
 						this.getRecordList()
 						uni.showModal({
-							title: '温馨提示',
+							title: this.tips.Tip[this.lang],
 							content: res.msg,
 							showCancel: false
 						})
@@ -587,7 +612,21 @@
 			this.initDateTime()
 		},
 		onShow() {
-			this.initDateTime()
+			this.lang = uni.getStorageSync('language') || 'zhCn';
+			const pageRoute = 'zoneCenter/sendKeyToRenter';
+			uni.setNavigationBarTitle({
+				title: titles[pageRoute][this.lang]
+			});
+			this.multiOptions = [{
+					name: this.tips.Allow[this.lang],
+					value: 1
+				},
+				{
+					name: this.tips.Disallow[this.lang],
+					value: 0
+				}
+			];
+			this.initDateTime();
 		}
 	}
 </script>
@@ -786,7 +825,10 @@
 	}
 
 	.card-info {
-		border-bottom: 1px solid #f5f5f5
+		border-bottom: 1px solid #f5f5f5;
+		color: #333;
+		font-size: 14px;
+		padding: 10px;
 	}
 
 	.card-footer1 {
@@ -903,7 +945,8 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-end;
-		font-size: 26rpx
+		font-size: 26rpx;
+		gap: 10rpx
 	}
 
 	.temporary {

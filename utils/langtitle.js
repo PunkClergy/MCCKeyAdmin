@@ -1,8 +1,8 @@
 export const titles = {
-  // 区域中心
-  'zoneCenter/index': {
-    'zhCn': '区域中心',
-    'enUs': 'Zone Center'
+  // 发送钥匙
+  'zoneCenter/sendKeyToRenter': {
+    'zhCn': '发送钥匙',
+    'enUs': 'Send Key'
   },
   // 完善客户资料
   'zoneCenter/completeCustomerInfo': {

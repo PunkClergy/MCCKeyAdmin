@@ -31,8 +31,8 @@
 		  }
 		
 		  const systemInfo = uni.getSystemInfoSync()
-		  const language = systemInfo.language 
-		  const [prefix, suffix] = language.split('-')
+		  const language = systemInfo?.language||'zh_CN' 
+		  const [prefix, suffix] = language.split(/[-_]/);
 		  const processedSuffix = suffix.charAt(0).toUpperCase() + suffix.slice(1).toLowerCase()
 		  const lang = prefix.toLowerCase() + processedSuffix
 		  this.lang = lang

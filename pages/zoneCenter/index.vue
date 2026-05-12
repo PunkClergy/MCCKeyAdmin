@@ -1,5 +1,5 @@
 <template>
-	<view class="container" :style="{ background: `linear-gradient(${bgcolor}, #fff)` }">
+	<view class="container" style="background: #fff;">
 		<!-- 自定义头部 -->
 		<view class="custom-header" :style="{
         paddingTop: height_from_head + 'px',
@@ -12,7 +12,7 @@
 			<view class="custom-header-outer-layer">
 				<image class="custom-header-outer-layer-image" src="/static/images/home.png" @tap="handleBackHome">
 				</image>
-				<view class="custom-header-outer-layer-title">{{title_name||'租车公司电子钥匙'}}</view>
+				<view class="custom-header-outer-layer-title">{{title_name||tips.RentalEKey[lang]}}</view>
 				<view class="custom-header-outer-layer_user_name">
 					<text v-if="account">{{account}}</text>
 					<view v-else @tap="handleOnExistingAccountTap" class="login-wrapper">
@@ -51,12 +51,17 @@
 				<view class="special-zone" v-for="(item,index) in groupedZoneList" :key="index"
 					:style="{ '--item-count': item.list.length }">
 					<view class="zone-item" v-for="(zoneItem,idx) in item.list" :key="idx">
-						<view class="zone-out" :style="{ backgroundColor: zoneItem.bgcolor }" :data-info="zoneItem"
-							@tap="handleGetMenuList">
+						<view class="zone-out"
+							:style="{ backgroundColor: zoneItem.bgcolor,border: zoneItem.namezhCn ? '1rpx solid #f0f0f0' : 'none'}"
+							:data-info="zoneItem" @tap="handleGetMenuList">
 							<image class="zone-img" :src="'https://k1sw.wiselink.net.cn/img/' + zoneItem.icon" />
 							<view class="zone-text-area">
-								<view class="zone-name">{{zoneItem.name}}</view>
-								<view class="zone-desc">{{zoneItem.bak}}</view>
+								<view class="zone-name">
+									{{ zoneItem['name' + lang]  }}
+								</view>
+								<view class="zone-desc">
+									{{ zoneItem['subtitle' + lang]  }}
+								</view>
 							</view>
 						</view>
 					</view>
@@ -67,7 +72,7 @@
 			<view class="full-width-swiper" v-if="fullBannerList.length>0">
 				<view class="full-width-use">
 					<image src="/static/images/useGuideIcon.png" />
-					<text>使用指南</text>
+					<text>{{tips.UserGuide[lang]}}</text>
 				</view>
 				<swiper indicator-dots="false" autoplay interval="4000" duration="500"
 					:style="{ height: s_use_height + 'px' }">
@@ -88,7 +93,9 @@
 					:src="'https://k1sw.wiselink.net.cn/img/' + item.selectedIconPath" v-if="currentTab === index" />
 				<image class="tab-icon" mode="widthFix" :src="'https://k1sw.wiselink.net.cn/img/' + item.iconPath"
 					v-else />
-				<text>{{item.text}}</text>
+				<text>
+					{{ item['text' + lang]  }}
+				</text>
 			</view>
 		</view>
 
@@ -110,16 +117,13 @@
 		u_isShowInfo
 	} from '@/api/index'
 	import {
-		titles
-	} from '@/utils/langtitle.js'
-	import {
 		tips
 	} from '@/utils/langtips.js'
 	export default {
 		data() {
 			return {
 				// ========== 这里改低了 ==========
-				tabBarHeight: 60,
+				tabBarHeight: 80,
 				currentTab: 0,
 				c_link: 'https://k1sw.wiselink.net.cn/',
 				g_banner_image: [],
@@ -151,7 +155,7 @@
 				s_use_height: '',
 				// 语言设置
 				tips: tips,
-				lang: 'zhEn',
+				lang: 'zhCn',
 			}
 		},
 		methods: {
@@ -359,11 +363,12 @@
 		},
 		onShow() {
 			this.inIsShowInfo()
+			this.lang = uni.getStorageSync('language') || 'zhCn'
 		},
 		onReady() {
 			this.initLoginStatus()
 			this.initQrCode()
-			this.lang = uni.getStorageSync('language') || 'zh-en'
+
 		}
 	}
 </script>
@@ -502,7 +507,6 @@
 		align-items: center;
 		justify-content: center;
 		gap: 12rpx;
-		border: 1rpx solid #f0f0f0;
 	}
 
 	.zone-img {
@@ -588,7 +592,7 @@
 	.float-button {
 		position: fixed;
 		right: 24rpx;
-		bottom: 100rpx;
+		top: 75%;
 		display: flex;
 		flex-direction: column;
 		gap: 24rpx;
@@ -598,6 +602,13 @@
 	.float-button image {
 		width: 88rpx;
 		height: 88rpx;
+	}
+
+	.zone-text-area {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.hidden-contact-btn {
