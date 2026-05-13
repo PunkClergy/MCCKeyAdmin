@@ -1,4 +1,14 @@
 export const titles = {
+	'zoneCenter/transferAdmin': {
+	  zhCn: '移交管理员',
+	  enUs: 'Transfer Admin'
+	},
+	// 人员与角色
+	'zoneCenter/userRole': {
+	  zhCn: '人员与角色',
+	  enUs: 'Staff & Roles'
+	},
+	// 轨迹查询
 	'zoneCenter/trajectory': {
 	  zhCn: '轨迹查询',
 	  enUs: 'Track Playback'

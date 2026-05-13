@@ -764,5 +764,50 @@ export const tips = {
 		"zhCn": "结束日期",
 		"enUs": "End Date"
 	},
+	// 超级管理员
+	"SuperAdmin": {
+		"zhCn": "超级管理员",
+		"enUs": "Super Admin"
+	},
+	// 角色
+	"Role": {
+		"zhCn": "角色",
+		"enUs": "Role"
+	},
+	// 姓名
+	"Name": {
+		"zhCn": "姓名",
+		"enUs": "Name"
+	},
+	// 请输入姓名
+	"EnterName": {
+		"zhCn": "请输入姓名",
+		"enUs": "Enter Name"
+	},
+	// 请输入手机号
+	"EnterPhone": {
+		"zhCn": "请输入手机号",
+		"enUs": "Enter Phone"
+	},
+	// 请选择角色
+	"SelectRole": {
+		"zhCn": "请选择角色",
+		"enUs": "Select Role"
+	},
+	// 确认删除当前人员吗
+	"ConfirmDeleteUser": {
+		"zhCn": "确认删除当前人员吗",
+		"enUs": "Confirm to delete this user?"
+	},
+	// 移交管理员
+	"TransferAdmin": {
+		"zhCn": "移交管理员",
+		"enUs": "Transfer Admin"
+	},
+	// 确认移交管理员
+	"ConfirmTransferAdmin": {
+		"zhCn": "确认移交管理员",
+		"enUs": "Confirm Transfer Admin"
+	},
 	// 可在此添加所有页面的多语言提示 | You can add all page tips here
 }

@@ -7,27 +7,21 @@
 		<!-- 搜索框（正常显示，不遮挡） -->
 		<view class="search-container">
 			<view class="search-count">
-				<text>共有{{g_total}}人员</text>
+				<text>{{tips.Total[lang]}} {{g_total}} {{tips.Items[lang]}}</text>
 			</view>
 		</view>
 
 		<!-- 滚动列表（自动排在搜索框下方） -->
-		<scroll-view
-			class="content-container"
-			scroll-y
-			:refresher-enabled="true"
-			:refresher-triggered="g_triggered"
-			@refresherrefresh="handleRefresh"
-			@scrolltolower="handleLower"
-		>
+		<scroll-view class="content-container" scroll-y :refresher-enabled="true" :refresher-triggered="g_triggered"
+			@refresherrefresh="handleRefresh" @scrolltolower="handleLower">
 			<view v-for="(item, index) in g_items" :key="index">
 				<view class="content-item">
 					<view class="content-item-head">
 						<view class="head-left">
 							<view class="left-category">
-								<text>{{item.realname}}
+								<text>{{item.realname||'-'}}
 									<text v-if="item.acquiescent"
-										style="font-size:22rpx;padding:4rpx;border-radius:6rpx;background:#f0f0f0;color:#575656;margin-left:20rpx;">超级管理员</text>
+										style="font-size:22rpx;padding:4rpx;border-radius:6rpx;background:#f0f0f0;color:#575656;margin-left:20rpx;">{{tips.SuperAdmin[lang]}}</text>
 								</text>
 							</view>
 						</view>
@@ -35,15 +29,15 @@
 
 					<view class="content-item-info">
 						<view class="info-item" :class="item.username?.length>8 ? 'long-info-item' : ''">
-							<label>账号 ：</label>
+							<label>{{tips.Account[lang]}} ：</label>
 							<text>{{item.username || '-'}}</text>
 						</view>
 						<view class="info-item" :class="item.username?.length>8 ? 'long-info-item' : ''">
-							<label>角色 ：</label>
+							<label>{{tips.Role[lang]}} ：</label>
 							<text>{{item.roleName || '-'}}</text>
 						</view>
 						<view class="info-item" :class="item.mobile?.length>15 ? 'long-info-item' : ''">
-							<label>手机号 ：</label>
+							<label>{{tips.Phone[lang]}} ：</label>
 							<text>{{item.mobile || '-'}}</text>
 						</view>
 					</view>
@@ -52,7 +46,7 @@
 						<view class="footer-left"></view>
 						<view class="footer-right">
 							<view class="footer-right-btn" :data-item="item" @tap="handleSelectJump">
-								<text>移交管理员</text>
+								<text>{{tips.TransferAdmin[lang]}}</text>
 							</view>
 						</view>
 					</view>
@@ -63,11 +57,21 @@
 </template>
 
 <script>
-	import { u_childUserList, u_transferAdminUser } from '@/api/index'
-
+	import {
+		u_childUserList,
+		u_transferAdminUser
+	} from '@/api/index'
+	import {
+		titles
+	} from '@/utils/langtitle.js'
+	import {
+		tips
+	} from '@/utils/langtips.js'
 	export default {
 		data() {
 			return {
+				tips: tips,
+				lang: 'zhCn',
 				c_screen_height: 0,
 				c_statusBarHeight: 0,
 				c_navBarHeight: 44,
@@ -99,12 +103,19 @@
 
 		onShow() {
 			this.user = getApp()?.globalData?.userInfo?.username || ''
+			this.lang = uni.getStorageSync('language') || 'zhCn'
+			const pageRoute = 'zoneCenter/transferAdmin'
+			uni.setNavigationBarTitle({
+				title: titles[pageRoute][this.lang]
+			})
 		},
 
 		methods: {
 			async getCarList() {
 				try {
-					const param = { page: this.g_page }
+					const param = {
+						page: this.g_page
+					}
 					const res = await u_childUserList(param)
 					if (res.code === 1000) {
 						let list = res.data?.content || res.content || []
@@ -128,17 +139,23 @@
 
 			handleSelectJump(e) {
 				const item = e.currentTarget.dataset.item
-				const params = { targetUserId: item.id }
+				const params = {
+					targetUserId: item.id
+				}
 
 				uni.showModal({
-					title: '提示',
-					content: '确认移交管理员？',
+					title: this.tips.Tip[this.lang],
+					content: this.tips.ConfirmTransferAdmin[this.lang],
+					confirmText: this.tips.Confirm[this.lang],
+					cancelText: this.tips.Cancel[this.lang],
 					success: async (res) => {
 						if (res.confirm) {
 							try {
 								const res = await u_transferAdminUser(params)
 								if (res.code === 1000) {
-									uni.redirectTo({ url: '/pages/index/index' })
+									uni.redirectTo({
+										url: '/pages/index/index'
+									})
 								}
 							} catch (e) {}
 						}
