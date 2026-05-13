@@ -171,9 +171,9 @@ class Http {
 
 // 创建实例
 export const http = new Http({
-	baseURL: 'https://k1sw.wiselink.net.cn' ,// 你的基础地址
+	baseURL: 'https://k1sw.wiselink.net.cn', // 你的基础地址
 	// baseURL: 'http://192.168.10.100:8689/' ,
-	
+
 })
 
 // 快捷方法挂载到实例上（可选）
@@ -214,9 +214,11 @@ http.setInterceptor({
 	request: (config) => {
 		// 添加全局header（例如token）
 		const userKey = uni.getStorageSync('user_info')
+		const language = uni.getStorageSync('language')?.replace(/([a-z])([A-Z])/g, '$1_$2')
 		const token = userKey?.token || ''
 		let header = config.header || {}
 		header['funAreaId'] = 1760 //暂时写死参数
+		header['lang'] = language //所属语言
 
 		if (token) {
 			header['token'] = token

@@ -187,7 +187,11 @@
 						{
 							name: 'English',
 							value: 'enUs'
-						}
+						},
+						// {
+						// 	name: 'にほんご',
+						// 	value: 'jaJp'
+						// }
 					]
 					uni.showActionSheet({
 						itemList: langList.map(item => item.name),
