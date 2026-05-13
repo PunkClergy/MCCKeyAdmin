@@ -1,4 +1,9 @@
 export const titles = {
+	// 角色与权限
+	'zoneCenter/rolePermission': {
+	  zhCn: '角色与权限',
+	  enUs: 'Role Perms'
+	},
 	// 设备拆除提醒
 	'zoneCenter/alarmDeviceRemove': {
 	  zhCn: '设备拆除提醒',

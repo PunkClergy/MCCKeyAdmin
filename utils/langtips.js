@@ -894,5 +894,30 @@ export const tips = {
 		"zhCn": "无法打开地图",
 		"enUs": "Cannot Open Map"
 	},
+	// 角色列表
+	"RoleList": {
+		"zhCn": "角色列表",
+		"enUs": "Role List"
+	},
+	// 基础信息
+	"BasicInfo": {
+		"zhCn": "基础信息",
+		"enUs": "Basic Info"
+	},
+	// 角色名称
+	"RoleName": {
+		"zhCn": "角色名称",
+		"enUs": "Role Name"
+	},
+	// 请输入角色名称
+	"EnterRoleName": {
+		"zhCn": "请输入角色名称",
+		"enUs": "Enter Role Name"
+	},
+	// 权限设置
+	"PermissionSettings": {
+		"zhCn": "权限设置",
+		"enUs": "Permission Settings"
+	},
 	// 可在此添加所有页面的多语言提示 | You can add all page tips here
 }
