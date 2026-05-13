@@ -8,27 +8,23 @@
 			<!-- Logo 区域 -->
 			<view class="logo-container fade-in">
 				<view class="logo-wrapper">
-					<image src="/static/public/logo.png" class="logo-img" />
-					<text class="logo-text">智信通wiselink</text>
+					<image src="/static/images/logo.png" class="logo-img" />
+					<text class="logo-text">{{tips.footInfo[lang]}}</text>
 				</view>
-				<text class="slogan">智信通汽车出行技术服务运营提供商</text>
 			</view>
 
 			<!-- 登录方式选择 -->
-
-
-
 			<view class="input-group">
 				<view class="input-item">
-					<view class="input-label">账号</view>
-					<input class="input-field" :placeholder="请输入账号" v-model="username" />
+					<view class="input-label">{{tips.Account[lang]}}</view>
+					<input class="input-field" :placeholder="tips.EnterAccountPhone[lang]" v-model="username" />
 				</view>
 				<view class="input-item">
-					<view class="input-label">密码</view>
-					<input class="input-field" :placeholder="请输入密码" v-model="password" :password="true" />
+					<view class="input-label">{{tips.Password[lang]}}</view>
+					<input class="input-field" :placeholder="tips.EnterPassword[lang]" v-model="password" :password="true" />
 				</view>
 				<view>
-					<button class="login-btn" @tap="handleLogin">登录</button>
+					<button class="login-btn" @tap="handleLogin">{{tips.Login[lang]}}</button>
 					<!-- <text class="register" @tap="handleRegister">注册账号</text> -->
 				</view>
 			</view>
@@ -39,14 +35,10 @@
 		<!-- 下部分：信息展示 -->
 		<view class="info-area">
 			<view class="info-card">
-				<text class="product-name">智前通wiselink</text>
-				<view style="font-size: 26rpx; color: #575658">商务合作咨询、更多产品了解，请点击、长按官方群二维码，有专属客服服务！</view>
-				<view style="display: flex; justify-content: center">
-					<image :src="init_qr_code" style="width: 300rpx; height: 300rpx" @tap="handlePreviewImage" />
-				</view>
-
+				<text class="product-name">{{tips.footInfo[lang]}}</text>
+				<view style="font-size: 26rpx; color: #575658">{{tips.BPlatformIntro[lang]}}</view>
 				<view class="contact-info">
-					<text class="company-name">智信通·中国北京</text>
+					<text class="company-name">{{tips.footInfo[lang]}}</text>
 				</view>
 			</view>
 		</view>
@@ -58,7 +50,12 @@
 		login,
 		u_getQrcodeImg
 	} from '@/api';
-	// import CustomNavBar from "@/components/custom-header/index.vue";
+	import {
+		titles
+	} from '@/utils/langtitle.js'
+	import {
+		tips
+	} from '@/utils/langtips.js'
 	export default {
 		data() {
 			return {
@@ -66,17 +63,24 @@
 				password: '',
 				isSubmitting: false,
 				init_qr_code: '',
+				tips:tips,
+				lang:'zhCn'
 		
 			};
 		},
 		components: {
-			// CustomNavBar
+			
 		},
 		mounted() {
 			this.infinityGetQrcodeImg()
 		},
 		onShow() {
 			this.handleGetCurrentLanguage()
+			this.lang = uni.getStorageSync('language') || 'zhCn'
+			const pageRoute = 'login/index'
+			uni.setNavigationBarTitle({
+				title: titles[pageRoute][this.lang]
+			})
 		},
 		methods: {
 			handleGetCurrentLanguage() {
@@ -124,7 +128,7 @@
 			async handleLogin() {
 				if (!this.username || !this.password) {
 					uni.showToast({
-						title: '请输入用户名和密码',
+						title: this.tips.EnterUsernameAndPwd[this.lang],
 						icon: 'none'
 					});
 					return;
@@ -148,7 +152,7 @@
 					});
 				} catch (error) {
 					uni.showToast({
-						title: '登录失败，请检查用户名和密码',
+						title: this.tips.LoginFailCheckInfo[this.lang],
 						icon: 'none'
 					});
 				} finally {

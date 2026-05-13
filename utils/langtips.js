@@ -1102,5 +1102,120 @@ export const tips = {
 		'zhCn': '权限设置',
 		'enUs': 'Permission Settings',
 		'jaJp': '権限設定'
+	},
+	// 智车钥
+	'WiseLinkAutoRide': {
+		'zhCn': '智车钥',
+		'enUs': 'WiseLink Auto Ride'
+	},
+	// 个人中心
+	"PersonalCenter": {
+		"zhCn": "个人中心",
+		"enUs": "Center",
+		"jaJp": "マイページ"
+	},
+
+
+	// 加载中
+	"Loading": {
+		"zhCn": "加载中",
+		"enUs": "Loading",
+		"jaJp": "読み込み中"
+	},
+
+	// 操作成功
+	"OperateSuccess": {
+		"zhCn": "操作成功",
+		"enUs": "Operation successful",
+		"jaJp": "操作に成功しました"
+	},
+	// 联系智信通
+	"ContactZhitongxin": {
+		"zhCn": "联系智信通",
+		"enUs": "Contact Us",
+		"jaJp": "ジートンシンに連絡"
+	},
+	// 语言设置
+	"LanguageSettings": {
+		"zhCn": "语言设置",
+		"enUs": "Language",
+		"jaJp": "言語設定"
+	},
+	// 退出登录
+	"Logout": {
+		"zhCn": "退出登录",
+		"enUs": "Logout",
+		"jaJp": "ログアウト"
+	},
+	// 拨打电话
+	"CallPhone": {
+		"zhCn": "拨打电话",
+		"enUs": "Call Phone",
+		"jaJp": "電話をかける"
+	},
+	// 是否拨打客服电话
+	"IsCallServicePhone": {
+		"zhCn": "是否拨打客服电话",
+		"enUs": "Call customer service phone",
+		"jaJp": "カスタマーサービスに電話しますか"
+	},
+
+
+	// 确定退出登录吗
+	"ConfirmLogout": {
+		"zhCn": "确定退出登录吗",
+		"enUs": "Are you sure to logout?",
+		"jaJp": "ログアウトしてもよろしいですか"
+	},
+
+	"ServiceIntro": {
+		"zhCn": "WiseLink Auto Ride 面向全球个人车主、租车用户、出行人群的C端服务入口，聚焦便捷租车、智能出行、车辆服务，主打轻松出行、随行随心的用户体验。",
+		"enUs": "WiseLink Auto Ride A C‑end service portal for global individual car owners, car rental users and travelers, focusing on convenient car rental, smart mobility and vehicle services, delivering a user experience of easy and free‑style travel.",
+		"jaJp": "WiseLink Auto Ride 世界の個人車主、レンタカーユーザー、移動者向けC端サービス窓口で、便利なレンタカー、スマートモビリティ、車両サービスに注力し、気軽で自由な移動体験を提供します。"
+	},
+	"BPlatformIntro": {
+		"zhCn": "WiseLink Auto Global面向全球车企、租赁公司、服务商、商户的B端管理平台，聚合全球车源、业务管控、渠道运维、国际业务一体化运营，主打全球化、专业化、企业级商务服务",
+		"enUs": "WiseLink Auto Global B‑side management platform for global automakers, rental companies, service providers and merchants, integrating global vehicle resources, business control, channel operation and maintenance, and integrated international business operations, featuring global, professional and enterprise‑level business services",
+		"jaJp": "WiseLink Auto Global 世界の自動車メーカー、レンタカー会社、サービスプロバイダー、事業者向けB端管理プラットフォーム。世界の車両リソース、業務管理、チャネル運用保守、国際業務の一体的運営を集約し、グローバル・専門的・エンタープライズ級のビジネスサービスを提供します"
+	},
+	"footInfo": {
+		"zhCn": "智信通",
+		"enUs": "WiseLink Auto",
+		"jaJp": "WiseLink Auto"
+	},
+
+	// 请输入账号或手机号
+	"EnterAccountOrPhone": {
+		"zhCn": "请输入账号或手机号",
+		"enUs": "Enter account or phone number",
+		"jaJp": "アカウントまたは電話番号を入力してください"
+	},
+	// 密码
+	"Password": {
+		"zhCn": "密码",
+		"enUs": "Password",
+		"jaJp": "パスワード"
+	},
+	// 请输入密码
+	"EnterPassword": {
+		"zhCn": "请输入密码",
+		"enUs": "Enter password",
+		"jaJp": "パスワードを入力してください"
+	},
+	// 登录
+	"Login": {
+		"zhCn": "登录",
+		"enUs": "Login",
+		"jaJp": "ログイン"
+	},
+	"EnterUsernameAndPwd": {
+		"zhCn": "请输入用户名和密码",
+		"enUs": "Please enter username and password",
+		"jaJp": "ユーザー名とパスワードを入力してください"
+	},
+	"LoginFailCheckInfo": {
+		"zhCn": "登录失败，请检查用户名和密码",
+		"enUs": "Login failed, please check your username and password",
+		"jaJp": "ログインに失敗しました。ユーザー名とパスワードを確認してください"
 	}
 };
