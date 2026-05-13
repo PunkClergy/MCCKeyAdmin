@@ -1,4 +1,9 @@
 export const titles = {
+	// 设备拆除提醒
+	'zoneCenter/alarmDeviceRemove': {
+	  zhCn: '设备拆除提醒',
+	  enUs: 'Tamper Alarm'
+	},
 	'zoneCenter/transferAdmin': {
 	  zhCn: '移交管理员',
 	  enUs: 'Transfer Admin'

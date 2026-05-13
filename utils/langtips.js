@@ -549,11 +549,6 @@ export const tips = {
 		zhCn: '车辆保养提醒',
 		enUs: 'Car Maintenance Reminder'
 	},
-	// 筛选
-	'Filter': {
-		zhCn: '筛选',
-		enUs: 'Filter'
-	},
 	// 离保养里程
 	'RemainingMaintenance': {
 		zhCn: '离保养里程',
@@ -603,11 +598,6 @@ export const tips = {
 	'PleaseSelectStatus': {
 		zhCn: '请选择状态',
 		enUs: 'Please Select Status'
-	},
-	// 重置
-	'Reset': {
-		zhCn: '重置',
-		enUs: 'Reset'
 	},
 	// 里程校准
 	'MileageCalibration': {
@@ -808,6 +798,101 @@ export const tips = {
 	"ConfirmTransferAdmin": {
 		"zhCn": "确认移交管理员",
 		"enUs": "Confirm Transfer Admin"
+	},
+	// 异常记录总数
+	"AbnormalRecordTotal": {
+		"zhCn": "异常记录总数",
+		"enUs": "Total Abnormal Records"
+	},
+	// 今日新增异常
+	"TodayNewAbnormal": {
+		"zhCn": "今日新增异常",
+		"enUs": "Today New Abnormal"
+	},
+	// 疑似拆除异常记录
+	"SuspectedRemovalAbnormal": {
+		"zhCn": "疑似拆除异常记录",
+		"enUs": "Suspected Removal Records"
+	},
+	// 筛选
+	"Filter": {
+		"zhCn": "筛选",
+		"enUs": "Filter"
+	},
+	// 疑似拆除
+	"SuspectedRemoval": {
+		"zhCn": "疑似拆除",
+		"enUs": "Suspected Removal"
+	},
+	// 涉及车辆
+	"RelatedVehicle": {
+		"zhCn": "涉及车辆",
+		"enUs": "Related Vehicle"
+	},
+	// 查看位置
+	"ViewLocation": {
+		"zhCn": "查看位置",
+		"enUs": "View Location"
+	},
+	// 暂无符合条件的疑似拆除异常记录
+	"NoSuspectedRemovalRecords": {
+		"zhCn": "暂无符合条件的疑似拆除异常记录",
+		"enUs": "No matching suspected removal records"
+	},
+	// 位置信息
+	"LocationInfo": {
+		"zhCn": "位置信息",
+		"enUs": "Location Info"
+	},
+	// 详细地址
+	"DetailedAddress": {
+		"zhCn": "详细地址",
+		"enUs": "Detailed Address"
+	},
+	// 暂无地址信息
+	"NoAddressInfo": {
+		"zhCn": "暂无地址信息",
+		"enUs": "No Address Info"
+	},
+	// 关闭
+	"Close": {
+		"zhCn": "关闭",
+		"enUs": "Close"
+	},
+	// 选择日期
+	"SelectDate": {
+		"zhCn": "选择日期",
+		"enUs": "Select Date"
+	},
+	// 车牌号
+	"LicensePlate": {
+		"zhCn": "车牌号",
+		"enUs": "License Plate"
+	},
+	// 请输入车牌号
+	"EnterLicensePlate": {
+		"zhCn": "请输入车牌号",
+		"enUs": "Enter License Plate"
+	},
+	// 重置
+	"Reset": {
+		"zhCn": "重置",
+		"enUs": "Reset"
+	},
+	// 确认筛选
+	"ConfirmFilter": {
+		"zhCn": "确认筛选",
+		"enUs": "Confirm Filter"
+	},
+	// 导航失败
+	"NavigationFailed": {
+		"zhCn": "导航失败",
+		"enUs": "Navigation Failed"
+	},
+	// 无法打开地图
+	"CannotOpenMap": {
+		"zhCn": "无法打开地图",
+		"enUs": "Cannot Open Map"
 	},
 	// 可在此添加所有页面的多语言提示 | You can add all page tips here
 }
