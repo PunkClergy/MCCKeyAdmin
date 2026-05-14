@@ -96,7 +96,8 @@
 													<view class="checkmark" v-if="child1.checked">✓</view>
 													<view class="indeterminate-line" v-if="child1.indeterminate"></view>
 												</view>
-												<text class="node-name">{{ child1.name }}</text>
+												<text
+													class="node-name">{{ child1['name' + lang] ||child1.name }}</text>
 											</view>
 
 											<!-- 三级 -->
@@ -116,7 +117,9 @@
 															<view class="indeterminate-line"
 																v-if="child2.indeterminate"></view>
 														</view>
-														<text class="node-name">{{ child2.name }}</text>
+														<text class="node-name">
+															{{ child2['name' + lang] ||child2.name }}
+														</text>
 													</view>
 
 													<!-- 四级 -->
@@ -477,6 +480,7 @@
 					})
 					if (res.code === 1000) {
 						this.tree = this.convertMenuData(res.content)
+						console.log(res)
 					}
 				} catch (e) {}
 			}
