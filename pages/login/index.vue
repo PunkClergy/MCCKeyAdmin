@@ -24,7 +24,7 @@
 					<input class="input-field" :placeholder="tips.EnterPassword[lang]" v-model="password" :password="true" />
 				</view>
 				<view>
-					<button class="login-btn" @tap="handleLogin">{{tips.Login[lang]}}</button>
+					<button class="login-btn" @tap="handleLogin">{{tips.Login[lang]||'登录'}}</button>
 					<!-- <text class="register" @tap="handleRegister">注册账号</text> -->
 				</view>
 			</view>
