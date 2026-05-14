@@ -128,6 +128,7 @@
 						"navigationBarBackgroundColor": "#EFF1FC"
 					}
 				}
+
 			]
 		},
 
@@ -150,6 +151,13 @@
 					"path": "userGuide",
 					"style": {
 						"navigationBarTitleText": "使用指南",
+						"navigationBarBackgroundColor": "#EFF1FC"
+					}
+				},
+				{
+					"path": "register",
+					"style": {
+						"navigationBarTitleText": "注册账号",
 						"navigationBarBackgroundColor": "#EFF1FC"
 					}
 				}

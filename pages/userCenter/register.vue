@@ -1,19 +1,17 @@
-<!-- pages/login/login.vue -->
+<!-- pages/register/register.vue -->
 <template>
-	<!-- index.wxml -->
 	<view class="container">
-		<!-- <CustomNavBar title="登录" /> -->
-		<!-- 上部分：登录区域 -->
-		<view class="login-area">
+		<view class="register-area">
 			<!-- Logo 区域 -->
 			<view class="logo-container fade-in">
 				<view class="logo-wrapper">
 					<image src="/static/images/logo.png" class="logo-img" />
-					<text class="logo-text">{{tips.footInfo[lang]}}</text>
+					<text class="logo-text">{{tips.ZhiXinTong[lang]}}</text>
 				</view>
+				<text class="slogan">{{tips.ZhitongxinProvider[lang]}}</text>
 			</view>
 
-			<!-- 登录方式选择 -->
+			<!-- 注册表单 -->
 			<view class="input-group">
 				<view class="input-item">
 					<view class="input-label">{{tips.Account[lang]}}</view>
@@ -21,24 +19,32 @@
 				</view>
 				<view class="input-item">
 					<view class="input-label">{{tips.Password[lang]}}</view>
-					<input class="input-field" :placeholder="tips.EnterPassword[lang]" v-model="password" :password="true" />
+					<input class="input-field" :placeholder="tips.EnterPassword[lang]" v-model="password"
+						:password="true" />
 				</view>
-				<view>
-					<button class="login-btn" @tap="handleLogin">{{tips.Login[lang]||'登录'}}</button>
-					<text class="register" @tap="handleRegister">{{tips.RegisterAccount[lang]}}</text>
+				<view class="input-item">
+					<view class="input-label">{{tips.ConfirmPassword[lang]}}</view>
+					<input class="input-field" :placeholder="tips.ReEnterPassword[lang]" v-model="confirmPassword"
+						:password="true" />
 				</view>
-			</view>
 
 
-		</view>
+				<button class="register-btn" :disabled="isSubmitting"
+					@tap="handleRegister">{{tips.Login[lang]}}</button>
 
-		<!-- 下部分：信息展示 -->
-		<view class="info-area">
-			<view class="info-card">
-				<text class="product-name">{{tips.footInfo[lang]}}</text>
-				<view style="font-size: 26rpx; color: #575658">{{tips.BPlatformIntro[lang]}}</view>
-				<view class="contact-info">
-					<text class="company-name">{{tips.footInfo[lang]}}</text>
+				<view class="login-link">
+					<text>{{langs.haveanaccount}}</text>
+					<text class="link-text" @tap="goToLogin">{{tips.GoToLogin[lang]}}</text>
+				</view>
+				<!-- 下部分：信息展示 -->
+				<view class="info-area">
+					<view class="info-card">
+						<text class="product-name">{{tips.footInfo[lang]}}</text>
+						<view style="font-size: 26rpx; color: #575658">{{tips.BPlatformIntro[lang]}}</view>
+						<view class="contact-info">
+							<text class="company-name">{{tips.footInfo[lang]}}</text>
+						</view>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -47,123 +53,107 @@
 
 <script>
 	import {
-		login,
-		u_getQrcodeImg
-	} from '@/api';
-	import {
 		titles
 	} from '@/utils/langtitle.js'
 	import {
 		tips
 	} from '@/utils/langtips.js'
+	import {
+		u_register
+	} from '@/api';
 	export default {
 		data() {
 			return {
+				tips: tips,
 				username: '',
 				password: '',
+				confirmPassword: '',
+				phone: '',
+				smsCode: '',
 				isSubmitting: false,
-				init_qr_code: '',
-				tips:tips,
-				lang:'zhCn'
-		
+				smsDisabled: false,
+				smsBtnText: '',
+				countdown: 60,
+				langs: {},
 			};
 		},
-		components: {
-			
-		},
-		mounted() {
-			this.infinityGetQrcodeImg()
-		},
+		components: {},
 		onShow() {
-			this.handleGetCurrentLanguage()
 			this.lang = uni.getStorageSync('language') || 'zhCn'
-			const pageRoute = 'login/index'
+			const pageRoute = 'userCenter/register'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]
 			})
 		},
 		methods: {
-			handleGetCurrentLanguage() {
-				let currentLang = uni.getStorageSync('lang') || 'zh-CN';
-			},
-			// 预览图片
-			handlePreviewImage(evt) {
-				uni.previewMedia({
-					sources: [{
-						url: this.init_qr_code,
-						// 图片路径
-						type: 'image'
-					}]
-				});
-			},
 
-			handlePreviewImage() {
-				if (this.init_qr_code) {
-					uni.previewImage({
-						urls: [this.init_qr_code],
-						longPressActions: {
-							itemList: ['保存图片到相册'],
-							success: (data) => {
 
-							}
-						}
-					});
-				}
-			},
-			async infinityGetQrcodeImg() {
-				console.log(111)
-				try {
-					const response = await u_getQrcodeImg();
-					if (response?.code == 1000) {
-						this.init_qr_code = response?.content?.img
-					}
 
-				} catch (error) {
+			// 表单验证
+			validateForm() {
+				if (!this.password) {
 					uni.showToast({
-						title: '查询失败',
+						title: this.tips.EnterPassword[this.lang],
 						icon: 'none'
 					});
+					return false;
 				}
-			},
-			async handleLogin() {
-				if (!this.username || !this.password) {
+				if (this.password !== this.confirmPassword) {
 					uni.showToast({
-						title: this.tips.EnterUsernameAndPwd[this.lang],
+						title: this.tips.PwdNotMatch[this.lang],
 						icon: 'none'
 					});
-					return;
+					return false;
+				}
+				if (!this.username) {
+					uni.showToast({
+						title: this.tips.EnterAccountPhone[this.lang],
+						icon: 'none'
+					});
+					return false;
 				}
 
+				return true;
+			},
+
+			// 注册处理
+			async handleRegister() {
+				if (this.isSubmitting) return;
+				if (!this.validateForm()) return;
 				this.isSubmitting = true;
 
 				try {
-					const response = await login({
-						username: this.username,
+					const response = await u_register({
 						password: this.password,
-						type: 2
+						username: this.username,
 					});
-
-					uni.setStorageSync('token', response.content.token);
-					uni.setStorageSync('user_info', response.content);
-
-					// 跳转到首页或其他页面
-					uni.reLaunch({
-						url: '/pages/index/index'
-					});
+					console.log(response)
+					if (response.code === 1000) {
+						uni.showToast({
+							title: this.tips.RegisterSuccess[this.lang]
+						});
+						setTimeout(() => {
+							uni.navigateBack();
+						}, 3000);
+					} else {
+						uni.showToast({
+							title: response.msg || this.tips.RegisterFail[this.lang],
+							icon: 'none'
+						});
+					}
 				} catch (error) {
 					uni.showToast({
-						title: this.tips.LoginFailCheckInfo[this.lang],
+						title: this.tips.RequestFailRetry[this.lang],
 						icon: 'none'
 					});
 				} finally {
 					this.isSubmitting = false;
 				}
 			},
-			handleRegister(){
-				console.log(1111)
-				uni.navigateTo({
-					url:'/pages/userCenter/register'
-				})
+
+			// 跳转到登录页面
+			goToLogin() {
+				uni.navigateBack();
 			}
 		}
 	};
@@ -175,28 +165,26 @@
 		height: 100%;
 	}
 
-	/* index.wxss */
 	.container {
 		display: flex;
 		flex-direction: column;
 		height: 100vh;
 	}
 
-	/* 登录区域 */
-	.login-area {
-		flex: 4;
+	.register-area {
+		flex: 1;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
-		padding: 20rpx 0;
-		gap: 40rpx;
+		padding: 40rpx 0;
+		/* justify-content: center; */
 	}
 
 	.logo-container {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		margin-bottom: 60rpx;
 	}
 
 	.logo-wrapper {
@@ -224,45 +212,11 @@
 		margin-top: 20rpx;
 	}
 
-	/* 单选按钮组 */
-	.radio-container {
-		width: 92%;
-		display: flex;
-		justify-content: flex-start;
-	}
-
-	.radio-group {
-		display: flex;
-		gap: 40rpx;
-	}
-
-	.radio-label {
-		display: flex;
-		align-items: center;
-	}
-
-	.radio-item {
-		transform: scale(0.8);
-	}
-
-	.radio-text {
-		font-size: 28rpx;
-		margin-left: 10rpx;
-		color: #fff;
-	}
-
-	/* 表单样式 */
-	.form-container {
-		width: 92%;
-		margin: 0 auto;
-		transition: all 0.3s ease;
-	}
-
 	.input-group {
+		width: 90%;
 		display: flex;
 		flex-direction: column;
-		gap: 40rpx;
-		width: 90%;
+		gap: 30rpx;
 	}
 
 	.input-item {
@@ -272,6 +226,7 @@
 		background: white;
 		border-radius: 10rpx;
 		align-items: center;
+		position: relative;
 	}
 
 	.input-label {
@@ -288,30 +243,61 @@
 		text-align: left;
 		color: #4a4a4a;
 		font-size: 30rpx;
+		padding-right: 20rpx;
 	}
 
-	.login-btn {
+	.sms-btn {
+		position: absolute;
+		right: 10rpx;
+		height: 70rpx;
+		line-height: 70rpx;
+		padding: 0 20rpx;
+		font-size: 26rpx;
+		background: #4cd964;
+		color: white;
+		border-radius: 8rpx;
+	}
+
+	.sms-btn[disabled] {
+		background: #cccccc;
+	}
+
+	.register-btn {
 		width: 100%;
 		background: #4cd964;
 		color: white;
+		margin-top: 20rpx;
 	}
 
-	.login-tip {
-		color: white;
-		font-size: 24rpx;
+	.register-btn[disabled] {
+		background: #a0e6ad;
 	}
 
-	.wx-login-container {
-		width: 96%;
+	.login-link {
+		text-align: center;
+		margin-top: 30rpx;
+		font-size: 28rpx;
+		color: #a3a1a1;
 	}
 
-	/* 微信登录按钮 */
-	.wx-login-btn {
-		color: #fff;
-		font-size: 34rpx;
-		font-weight: 500;
-		background: #4cd964;
-		width: 100%;
+	.link-text {
+		color: #4cd964;
+		margin-left: 10rpx;
+		text-decoration: underline;
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+
+		to {
+			opacity: 1;
+		}
+	}
+
+	.fade-in {
+		animation: fadeIn 0.6s ease-in;
 	}
 
 	/* 信息展示区域 */

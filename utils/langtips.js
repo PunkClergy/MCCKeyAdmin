@@ -1217,5 +1217,63 @@ export const tips = {
 		"zhCn": "登录失败，请检查用户名和密码",
 		"enUs": "Login failed, please check your username and password",
 		"jaJp": "ログインに失敗しました。ユーザー名とパスワードを確認してください"
+	},
+	"RegisterAccount": {
+		"zhCn": "注册账号",
+		"enUs": "Register Account",
+		"jaJp": "アカウント登録"
+	},
+	"zhixintong": {
+		"zhCn": "智信通",
+		"enUs": "WiseLink Auto Global",
+		"jaJp": "WiseLink Auto Global"
+	},
+	"ZhitongxinProvider": {
+		"zhCn": "智信通汽车出行技术服务运营提供商",
+		"enUs": "Zhitongxin Provider of Automobile Mobility Technology Services and Operations",
+		"jaJp": "智信通　自動車モビリティ技術サービス運営事業者"
+	},
+	"ConfirmPassword": {
+		"zhCn": "确认密码",
+		"enUs": "Confirm Password",
+		"jaJp": "パスワード確認"
+	},
+	"ReEnterPassword": {
+		"zhCn": "请再次输入密码",
+		"enUs": "Please enter password again",
+		"jaJp": "パスワードをもう一度入力してください"
+	},
+	"Login": {
+		"zhCn": "登录",
+		"enUs": "Login",
+		"jaJp": "ログイン"
+	},
+	"GoToLogin": {
+		"zhCn": "去登录",
+		"enUs": "Go to Login",
+		"jaJp": "ログインへ"
+	},
+	"PwdNotMatch": {
+		"zhCn": "两次输入的密码不一致",
+		"enUs": "The two passwords you entered do not match",
+		"jaJp": "入力した2つのパスワードが一致しません"
+	},
+	// 注册成功
+	"RegisterSuccess": {
+		"zhCn": "注册成功",
+		"enUs": "Registration successful",
+		"jaJp": "登録完了"
+	},
+	// 注册失败
+	"RegisterFail": {
+		"zhCn": "注册失败",
+		"enUs": "Registration failed",
+		"jaJp": "登録失敗"
+	},
+	// 请求失败，请稍后重试
+	"RequestFailRetry": {
+		"zhCn": "请求失败，请稍后重试",
+		"enUs": "Request failed, please try again later",
+		"jaJp": "リクエストに失敗しました。しばらくしてから再試行してください"
 	}
 };

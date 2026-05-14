@@ -85,8 +85,14 @@ export const titles = {
 	},
 	// 登录
 	'login/index': {
-		'zhCn': '智车钥',
-		'enUs': 'WiseLink Auto Ride',
+		'zhCn': '智信通',
+		'enUs': 'WiseLink Auto Global',
 		'jaJp': 'マイページ'
 	},
+	// 登录
+	"userCenter/register": {
+		"zhCn": "注册账号",
+		"enUs": "Register Account",
+		"jaJp": "アカウント登録"
+	}
 };
