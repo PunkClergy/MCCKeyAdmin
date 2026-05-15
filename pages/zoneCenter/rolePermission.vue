@@ -441,6 +441,8 @@
 					const res = {
 						id: node.id,
 						name: node.name,
+						namezhCn:node.namezhCn,
+						nameenUs:node.nameenUs,
 						checked: !!node.checked,
 						indeterminate: false,
 						isExpanded: true,

@@ -1202,12 +1202,6 @@ export const tips = {
 		"enUs": "Enter password",
 		"jaJp": "パスワードを入力してください"
 	},
-	// 登录
-	"Login": {
-		"zhCn": "登录",
-		"enUs": "Login",
-		"jaJp": "ログイン"
-	},
 	"EnterUsernameAndPwd": {
 		"zhCn": "请输入用户名和密码",
 		"enUs": "Please enter username and password",
