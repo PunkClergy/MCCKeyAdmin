@@ -156,13 +156,13 @@
 								name="personName" style="text-align:right;font-size:28rpx;" />
 						</view>
 					</view>
-					<view class="middle-form-item">
+					<!-- <view class="middle-form-item">
 						<label>{{ tips.AccountPhone[lang] }}</label>
 						<view class="modal-form-region">
 							<input @focus="onInputFocus" @blur="onInputBlur" :placeholder="tips.EnterAccountPhone[lang]"
 								name="mobile" style="text-align:right;font-size:28rpx;" />
 						</view>
-					</view>
+					</view> -->
 					<view class="middle-form-item">
 						<label>{{ tips.StartTime[lang] }}</label>
 						<view class="modal-form-region">
@@ -236,12 +236,12 @@
 							<text>{{ editRecordData.personname }}</text>
 						</view>
 					</view>
-					<view class="middle-form-item">
+					<!-- <view class="middle-form-item">
 						<label>{{ tips.AccountPhone[lang] }}</label>
 						<view class="modal-form-region">
 							<text>{{ editRecordData.mobile }}</text>
 						</view>
-					</view>
+					</view> -->
 					<view class="middle-form-item">
 						<label>{{ tips.StartTime[lang] }}</label>
 						<view class="modal-form-region">
@@ -494,10 +494,10 @@
 					title: this.tips.EnterUser[this.lang],
 					icon: 'none'
 				})
-				if (!form.mobile) return uni.showToast({
-					title: this.tips.EnterAccountPhone[this.lang],
-					icon: 'none'
-				})
+				// if (!form.mobile) return uni.showToast({
+				// 	title: this.tips.EnterAccountPhone[this.lang],
+				// 	icon: 'none'
+				// })
 				const build = (d, t) => `${d} ${t || '00:00'}:00`
 				const params = {
 					vehId: this.vehId || '',
@@ -505,13 +505,15 @@
 					startDate: build(this.startDate, this.startTime),
 					endDate: build(this.endDate, this.endTime),
 					personName: form.personName,
-					mobile: form.mobile,
+					// mobile: form.mobile,
 					bak: form.bak,
 					platenumber: form.platenumber || '',
 					multipleUsed: this.multiOptions[this.multiIndex].value
 				}
+				console.log(params)
 				try {
 					const res = await u_sendRentKey(params)
+					console.log(res)
 					if (res.code !== 1000) throw new Error(res.msg)
 					this.showSendModal = false
 					this.carList = []

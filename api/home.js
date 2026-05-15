@@ -76,5 +76,5 @@ export const u_promotionalApiWxBooklist = (data) => http.get('/promotionalApi/wx
 export const u_industryList = (data) => http.get('/promotionalApi/industryList', data)
 export const login = (data) => http.postFormData('/api/login', data)
 export const u_register = (data) => http.postFormData('/userapi/userReg', data) //注册
-export const u_sendRentKey = (data) => http.get('/rentKeyApi/appsendRentKey', data) //发送
+export const u_sendRentKey = (data) => http.get('/rentKeyApi/appSendRentKey', data) //发送
 export const u_updateRentKey = (data) => http.postFormData('/rentKeyApi/updateRentKey', data) //修改
