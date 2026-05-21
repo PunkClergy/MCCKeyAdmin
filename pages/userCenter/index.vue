@@ -39,7 +39,8 @@
 <script>
 	import {
 		u_navlist20,
-		u_mylist
+		u_mylist,
+		u_deleteAccount
 	} from '@/api/index'
 	import {
 		titles
@@ -233,7 +234,65 @@
 					})
 					return
 				}
+				
+				if (info?.pagePath === 'Delete') {
+					// 注销账号 - 二次确认弹窗
+					uni.showModal({
+						title: this.lang === 'zhCn' ? '注销账号' : 'Delete Account',
+						content: this.lang === 'zhCn' ?
+							'警告：注销后数据永久清除，无法恢复！确定要注销吗？' :
+							'Warning: All data will be permanently deleted. Are you sure?',
+						confirmText: this.lang === 'zhCn' ? '确认注销' : 'Confirm Delete',
+						cancelText: this.lang === 'zhCn' ? '取消' : 'Cancel',
+						confirmColor: '#FF3B30',
+						success: async (res) => {
+							if (res.confirm) {
+								// 显示加载
+								uni.showLoading({
+									title: this.lang === 'zhCn' ? '注销中...' : 'Deleting...'
+								})
 
+								try {
+									// 调用注销接口
+									const res = await u_deleteAccount({})
+
+									// 接口成功
+									if (res.code === 1000) {
+										uni.hideLoading()
+										uni.showToast({
+											title: this.lang === 'zhCn' ? '注销成功' :
+												'Deleted successfully',
+											icon: 'success'
+										})
+
+										// 清除本地缓存并跳首页
+										uni.clearStorageSync()
+										setTimeout(() => {
+											uni.reLaunch({
+												url: '/pages/index/index'
+											})
+										}, 1500)
+									} else {
+										// 接口失败
+										uni.hideLoading()
+										uni.showToast({
+											title: res.msg || (this.lang === 'zhCn' ? '注销失败' :
+												'Delete failed'),
+											icon: 'none'
+										})
+									}
+								} catch (err) {
+									uni.hideLoading()
+									uni.showToast({
+										title: this.lang === 'zhCn' ? '网络异常' : 'Network error',
+										icon: 'none'
+									})
+								}
+							}
+						}
+					})
+					return
+				}
 				uni.navigateTo({
 					url: `/${info.pagePath}`
 				})
