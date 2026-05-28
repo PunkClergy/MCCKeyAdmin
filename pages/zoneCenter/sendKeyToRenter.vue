@@ -87,7 +87,7 @@
 								<text class="phone-text">{{ item.mobile }}</text>
 							</view>
 							<view class="card-head-right">
-								<text v-if="item.status" style="color:#7b7b7c;">{{tips.Cancelled[lang]}}</text>
+								<text v-if="item.status == 0" style="color:#7b7b7c;">{{tips.InUse[lang]}}</text>
 								<text v-else>{{tips.Expired[lang]}}</text>
 							</view>
 						</view>
@@ -472,6 +472,7 @@
 						comParam: this.searchParam || ''
 					})
 					this.recordTotal = res.count || 0
+					console.log(res)
 					this.recordList = [...this.recordList, ...res.content]
 				} catch (e) {}
 			},
