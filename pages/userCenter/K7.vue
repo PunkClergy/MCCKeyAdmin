@@ -1,100 +1,115 @@
 <template>
-	<!-- 页面根容器，整体布局 -->
-	<view class="page-container">
-		<!-- 上半部分：一个完整大卡片 -->
-		<view class="content-box">
-			<!-- 主卡片容器，承载所有功能模块 -->
-			<view class="main-card">
-				<!-- 1. IDC + Code 输入区域 -->
-				<view class="form-section">
-					<!-- 设备IDC输入项 -->
+	<!-- 页面根容器：设备检测全流程主页面 -->
+	<view class="device-check-page">
+		<!-- 内容主体区域：表单 + 上传 + 功能检测 -->
+		<view class="content-wrapper">
+			<!-- 主内容卡片：统一视觉容器 -->
+			<view class="main-content-card">
+
+				<!-- ==================== 1. 设备信息绑定模块 ==================== -->
+				<view class="device-bind-section">
 					<view class="form-item">
-						<text class="label">设备号：</text>
-						<!-- 双向绑定IDC输入框 -->
-						<input v-model="form.idc" class="input" placeholder="请输入设备号(SN)" />
+						<text class="form-label">设备号：</text>
+						<input v-model="checkForm.idc" class="form-input" placeholder="请输入设备号(SN)" />
 					</view>
-					<!-- 设备Code输入项 -->
+
 					<view class="form-item">
-						<text class="label">检验码：</text>
-						<!-- 双向绑定Code输入框 -->
-						<input v-model="form.code" class="input" placeholder="请输入检验码(CODE)" />
+						<text class="form-label">检验码：</text>
+						<input v-model="checkForm.code" class="form-input" placeholder="请输入检验码(CODE)" />
 					</view>
+
 					<!-- 绑定设备按钮：未输入完整/已绑定时禁用 -->
-					<button class="bind-btn" :disabled="!form.idc || !form.code || isBind" @click="bindDevice">
+					<button class="bind-device-btn" :disabled="!checkForm.idc || !checkForm.code || isDeviceBound"
+						@click="handleDeviceBind">
 						开始检测
 					</button>
 				</view>
 
 				<!-- 模块分隔线 -->
-				<view class="divider"></view>
+				<view class="section-divider"></view>
 
-				<!-- 2. 图片上传模块 -->
-				<view class="upload-section">
-					<!-- 上传模块标题 -->
+				<!-- ==================== 2. 现场图片上传模块 ==================== -->
+				<view class="image-upload-section">
 					<view class="upload-title">现场图片上传</view>
-					<!-- 上传说明文字 -->
-					<view class="upload-subtitle">请拍照上传：车辆名牌、ACC、常火、打铁、主机及回避器、安装位置（最少4张，可多传）</view>
+					<view class="upload-tip">
+						请拍照上传：车辆名牌、ACC、常火、打铁、主机及回避器、安装位置（最少4张，可多传）
+					</view>
 
 					<!-- 图片列表滚动容器 -->
-					<scroll-view scroll-y class="upload-scroll-area">
-						<view class="upload-list">
-							<!-- 循环渲染已选择的图片 -->
-							<view class="upload-item" v-for="(item, idx) in imgList" :key="idx">
-								<image :src="item" mode="aspectFill" class="upload-img"></image>
+					<scroll-view scroll-y class="upload-scroll-container">
+						<view class="image-list">
+							<!-- 已上传图片 -->
+							<view class="image-item" v-for="(imagePath, index) in selectedImageList" :key="index">
+								<image :src="imagePath" mode="aspectFill" class="preview-image"></image>
 							</view>
-							<!-- 图片添加按钮，点击选择图片 -->
-							<view class="upload-add" @click="chooseImage">
+
+							<!-- 添加图片按钮 -->
+							<view class="add-image-btn" @click="handleChooseImage">
 								<text class="add-icon">+</text>
 							</view>
 						</view>
 					</scroll-view>
 
-					<!-- 确认上传按钮：未绑定/图片不足4张/已上传/上传中时禁用 -->
-					<button class="upload-btn" :disabled="!isBind || imgList.length < 4 || isUploadSuccess || uploading"
-						@click="uploadImages">
+					<!-- 确认上传按钮 -->
+					<button class="confirm-upload-btn"
+						:disabled="!isDeviceBound || selectedImageList.length < 4 || isImageUploaded || isUploading"
+						@click="handleBatchUploadImages">
 						确认上传图片
 					</button>
 				</view>
 
-				<view class="divider"></view>
+				<view class="section-divider"></view>
 
-				<!-- 3. 功能检测：仅保留网络模式 -->
-				<view class="test-section">
-					<view class="step-title">
-						<text :class="['step-text', networkStepDone ? 'done' : '']">网络模式检测</text>
+				<!-- ==================== 3. 网络模式功能检测 ==================== -->
+				<view class="network-check-section">
+					<view class="section-title">
+						<text :class="['title-text', isNetworkTestFinished ? 'finished' : '']">
+							网络模式检测
+						</text>
 					</view>
 
-					<!-- 网络模式检测模块 -->
-					<view class="mode-section" :style="{pointerEvents: networkStepDone ? 'none' : 'auto'}">
-						<view class="mode-header">
-							<text>网络模式</text>
-							<text class="tip" v-if="networkStepDone">✅ 已完成</text>
+					<!-- 网络检测操作区 -->
+					<view class="network-test-container"
+						:style="{ pointerEvents: isNetworkTestFinished ? 'none' : 'auto' }">
+						<view class="test-header">
+							<text>网络模式操作</text>
+							<text class="finish-tip" v-if="isNetworkTestFinished">✅ 已完成</text>
 						</view>
-						<view class="btn-group">
-							<view class="btn-item click-effect" @click="checkAndTest('lock','network')">
+
+						<view class="test-btn-group">
+							<view class="test-btn-item click-effect" @click="handleNetworkTest('lock')">
 								<text>开锁</text>
-								<text class="status"
-									:class="networkStatus.lockStatus">{{ statusText(networkStatus.lockStatus) }}</text>
+								<text class="test-status" :class="networkTestStatus.lockStatus">
+									{{ getTestStatusText(networkTestStatus.lockStatus) }}
+								</text>
 							</view>
-							<view class="btn-item click-effect" @click="checkAndTest('unlock','network')">
+
+							<view class="test-btn-item click-effect" @click="handleNetworkTest('unlock')">
 								<text>关锁</text>
-								<text class="status"
-									:class="networkStatus.unlockStatus">{{ statusText(networkStatus.unlockStatus) }}</text>
+								<text class="test-status" :class="networkTestStatus.unlockStatus">
+									{{ getTestStatusText(networkTestStatus.unlockStatus) }}
+								</text>
 							</view>
-							<view class="btn-item click-effect" @click="checkAndTest('findCar','network')">
+
+							<view class="test-btn-item click-effect" @click="handleNetworkTest('findCar')">
 								<text>寻车</text>
-								<text class="status"
-									:class="networkStatus.findCarStatus">{{ statusText(networkStatus.findCarStatus) }}</text>
+								<text class="test-status" :class="networkTestStatus.findCarStatus">
+									{{ getTestStatusText(networkTestStatus.findCarStatus) }}
+								</text>
 							</view>
-							<view class="btn-item click-effect" @click="checkAndTest('risk','network')">
+
+							<view class="test-btn-item click-effect" @click="handleNetworkTest('risk')">
 								<text>风控拦截</text>
-								<text class="status"
-									:class="networkStatus.riskStatus">{{ statusText(networkStatus.riskStatus) }}</text>
+								<text class="test-status" :class="networkTestStatus.riskStatus">
+									{{ getTestStatusText(networkTestStatus.riskStatus) }}
+								</text>
 							</view>
-							<view class="btn-item click-effect" @click="checkAndTest('cancelRisk','network')">
+
+							<view class="test-btn-item click-effect" @click="handleNetworkTest('cancelRisk')">
 								<text>取消拦截</text>
-								<text class="status"
-									:class="networkStatus.cancelRiskStatus">{{ statusText(networkStatus.cancelRiskStatus) }}</text>
+								<text class="test-status" :class="networkTestStatus.cancelRiskStatus">
+									{{ getTestStatusText(networkTestStatus.cancelRiskStatus) }}
+								</text>
 							</view>
 						</view>
 					</view>
@@ -102,17 +117,19 @@
 			</view>
 		</view>
 
-		<!-- 日志：独立区块 -->
-		<view class="log-box">
+		<!-- ==================== 实时日志展示模块 ==================== -->
+		<view class="test-log-section">
 			<view class="log-title">测试日志</view>
-			<scroll-view scroll-y class="log-content">
-				<view class="log-item" v-for="(item, idx) in logList" :key="idx">{{ item }}</view>
+			<scroll-view scroll-y class="log-content-container">
+				<view class="log-item" v-for="(log, index) in testLogList" :key="index">
+					{{ log }}
+				</view>
 			</scroll-view>
 		</view>
 
-		<!-- 固定底部按钮 -->
-		<view class="fixed-submit">
-			<button class="submit-btn" :disabled="!canSubmit" @click="submitCheck">
+		<!-- ==================== 底部固定提交按钮 ==================== -->
+		<view class="fixed-submit-bar">
+			<button class="submit-check-btn" :disabled="!canSubmitFinalCheck" @click="handleSubmitFinalCheck">
 				提交检测
 			</button>
 		</view>
@@ -127,20 +144,35 @@
 	} from '@/api/index'
 
 	export default {
+		/**
+		 * 设备检测页面
+		 * 功能：设备绑定 → 图片上传 → 网络功能检测 → 提交检测结果
+		 */
+		name: 'DeviceCheckPage',
+
 		data() {
 			return {
-				// 表单数据：设备SN + 检验码
-				form: {
-					idc: '856020072',
-					code: '655058'
+				// 检测表单：设备SN + 校验码
+				checkForm: {
+					idc: '',
+					code: ''
 				},
-				isBind: false, // 是否已绑定设备
-				isUploadSuccess: false, // 图片是否全部上传成功
-				uploading: false, // 控制上传中状态，防止重复点击
-				imgList: [], // 本地选择的图片临时路径列表
+
+				// 设备绑定状态
+				isDeviceBound: false,
+				// 设备信息（绑定成功后返回）
+				deviceInfo: {
+					sn: '',
+					code: ''
+				},
+
+				// 图片上传相关
+				selectedImageList: [], // 已选择的本地图片临时路径
+				isImageUploaded: false, // 图片是否全部上传成功
+				isUploading: false, // 上传中状态，防止重复提交
 
 				// 网络模式各项检测状态
-				networkStatus: {
+				networkTestStatus: {
 					lockStatus: '',
 					unlockStatus: '',
 					findCarStatus: '',
@@ -148,103 +180,118 @@
 					cancelRiskStatus: ''
 				},
 
-				logList: [], // 日志展示列表
-				SNinfo: {
-					sn: '856020072',
-					code: '655058'
-				} // 设备绑定后返回的设备信息
+				// 测试日志列表
+				testLogList: []
 			}
 		},
 
-		// 监听：修复 networkStepDone 实时刷新
 		watch: {
-			networkStepDone(newVal) {
+			/**
+			 * 监听网络检测是否全部完成
+			 */
+			isNetworkTestFinished(newVal) {
 				if (newVal) {
-					this.addLog('🎉 网络模式全部检测完成！可提交检测')
+					this.appendTestLog('🎉 网络模式全部检测完成！可提交检测')
 				}
 			}
 		},
 
-		// 计算属性：状态自动判断
 		computed: {
-			// 网络模式是否全部检测完成
-			networkStepDone() {
-				const s = this.networkStatus
-				return s.lockStatus === 'success' &&
-					s.unlockStatus === 'success' &&
-					s.findCarStatus === 'success' &&
-					s.riskStatus === 'success' &&
-					s.cancelRiskStatus === 'success'
+			/**
+			 * 网络模式是否全部检测完成
+			 * @return {Boolean}
+			 */
+			isNetworkTestFinished() {
+				const status = this.networkTestStatus
+				return (
+					status.lockStatus === 'success' &&
+					status.unlockStatus === 'success' &&
+					status.findCarStatus === 'success' &&
+					status.riskStatus === 'success' &&
+					status.cancelRiskStatus === 'success'
+				)
 			},
 
-			// 提交条件：绑定设备 + 图片上传成功 + 网络检测全部完成
-			canSubmit() {
-				return this.isBind && this.isUploadSuccess && this.networkStepDone
+			/**
+			 * 是否满足最终提交条件
+			 * 条件：设备已绑定 + 图片已上传 + 网络检测全部完成
+			 * @return {Boolean}
+			 */
+			canSubmitFinalCheck() {
+				return this.isDeviceBound && this.isImageUploaded && this.isNetworkTestFinished
 			}
 		},
 
 		methods: {
 			/**
 			 * 统一操作前置校验
-			 * @return {Boolean} 校验通过返回true，否则false
+			 * 校验规则：
+			 * 1. 必须输入SN和CODE
+			 * 2. 必须先绑定设备
+			 * 3. 必须先完成图片上传
+			 * @return {Boolean} 校验通过返回true
 			 */
-			checkCanOperate() {
-				// 1. 必须输入SN和CODE
-				if (!this.form.idc || !this.form.code) {
+			validateBeforeOperate() {
+				// 1. 校验SN和CODE
+				if (!this.checkForm.idc || !this.checkForm.code) {
 					uni.showToast({
-						title: '请先输入IDC和Code码',
+						title: '请先输入设备号和检验码',
 						icon: 'none'
 					})
 					return false
 				}
-				// 2. 必须先绑定设备
-				if (!this.isBind) {
+
+				// 2. 校验设备是否绑定
+				if (!this.isDeviceBound) {
 					uni.showToast({
 						title: '请先绑定设备',
 						icon: 'none'
 					})
 					return false
 				}
-				// 3. 必须先完成图片上传
-				if (!this.isUploadSuccess) {
+
+				// 3. 校验图片是否上传
+				if (!this.isImageUploaded) {
 					uni.showToast({
-						title: '请先上传图片',
+						title: '请先上传现场图片',
 						icon: 'none'
 					})
 					return false
 				}
+
 				return true
 			},
 
 			/**
-			 * 绑定设备接口请求
+			 * 绑定设备
+			 * 调用接口获取设备密钥
 			 */
-			async bindDevice() {
+			async handleDeviceBind() {
 				// 非空校验
-				if (!this.form.idc || !this.form.code) {
+				if (!this.checkForm.idc || !this.checkForm.code) {
 					uni.showToast({
-						title: '请输入SN和验证码',
+						title: '请输入完整的设备号和检验码',
 						icon: 'none'
 					})
 					return
 				}
 
 				uni.showLoading({
-					title: '绑定中...'
+					title: '设备绑定中...'
 				})
 
 				try {
 					// 调用绑定接口
 					const res = await u_getBluetoothKey({
-						sn: this.form.idc,
-						code: this.form.code
+						sn: this.checkForm.idc,
+						code: this.checkForm.code
 					})
 
 					if (res.code === 1000) {
 						// 绑定成功
-						this.isBind = true
-						this.SNinfo = res.content || {}
-						this.addLog('✅ 设备绑定成功，可以上传图片')
+						this.isDeviceBound = true
+						this.deviceInfo = res.content || {}
+						this.appendTestLog('✅ 设备绑定成功，可进行图片上传')
 						uni.showToast({
 							title: '绑定成功',
 							icon: 'none'
@@ -252,53 +299,53 @@
 					} else {
 						// 绑定失败
 						uni.showToast({
-							title: res.msg || '绑定失败',
+							title: res.msg || '设备绑定失败',
 							icon: 'none'
 						})
 					}
-				} catch (err) {
-					// 接口异常捕获
-					console.error('绑定设备异常：', err)
+				} catch (error) {
+					console.error('设备绑定接口异常：', error)
 					uni.showToast({
 						title: '绑定请求异常',
 						icon: 'none'
 					})
 				} finally {
-					// 无论成功失败都关闭loading
 					uni.hideLoading()
 				}
 			},
 
 			/**
-			 * 选择本地图片/拍照
+			 * 选择图片（拍照/相册）
+			 * 最多选择9张，自动压缩
 			 */
-			async chooseImage() {
+			async handleChooseImage() {
 				try {
 					const res = await uni.chooseImage({
-						count: 9, // 最多9张
-						sizeType: ['compressed'], // 压缩图
-						sourceType: ['album', 'camera'] // 相册+拍照
+						count: 9,
+						sizeType: ['compressed'],
+						sourceType: ['album', 'camera']
 					})
-					// 覆盖式更新图片列表
-					this.imgList = res.tempFilePaths
-				} catch (err) {
-					console.log('选择图片取消或失败：', err)
+					// 覆盖更新图片列表
+					this.selectedImageList = res.tempFilePaths
+				} catch (error) {
+					console.log('选择图片取消或失败：', error)
 				}
 			},
 
 			/**
-			 * 批量上传图片：循环调用，全部成功后才执行成功逻辑
+			 * 批量上传图片
+			 * 必须 ≥4张，全部上传成功后才标记完成
 			 */
-			async uploadImages() {
+			async handleBatchUploadImages() {
 				// 基础校验
-				if (this.imgList.length < 4) {
+				if (this.selectedImageList.length < 4) {
 					uni.showToast({
-						title: '至少上传4张图片',
+						title: '至少上传4张现场图片',
 						icon: 'none'
 					})
 					return
 				}
-				if (!this.SNinfo?.sn) {
+				if (!this.deviceInfo?.sn) {
 					uni.showToast({
 						title: '设备信息异常，请重新绑定',
 						icon: 'none'
@@ -306,356 +353,332 @@
 					return
 				}
 
-				// 上锁：上传中禁止重复点击
-				this.uploading = true
+				// 锁定上传状态
+				this.isUploading = true
 				uni.showLoading({
 					title: '开始上传图片...'
 				})
 
-				// 循环上传所有图片，等待全部完成
-				for (let i = 0; i < this.imgList.length; i++) {
-					const filePath = this.imgList[i]
-					uni.showLoading({
-						title: `正在上传第 ${i+1}/${this.imgList.length} 张`
-					})
-
-					// 单张上传，失败直接抛出异常，终止整个上传
-					try {
-						await this.uploadSingleImage(filePath)
-					} catch (err) {
-						uni.hideLoading()
-						uni.showToast({
-							title: `第${i+1}张上传失败，上传终止`,
-							icon: 'none'
+				try {
+					// 循环上传所有图片
+					const total = this.selectedImageList.length
+					for (let i = 0; i < total; i++) {
+						const path = this.selectedImageList[i]
+						uni.showLoading({
+							title: `正在上传第 ${i + 1}/${total} 张`
 						})
-						this.addLog(`❌ 第${i+1}张图片上传失败：${err}`)
-						this.uploading = false
-						return
+						await this.uploadSingleImage(path)
 					}
+
+					// 全部上传成功
+					this.isImageUploaded = true
+					this.appendTestLog('✅ 图片全部上传成功！可开始功能检测')
+					uni.showToast({
+						title: '上传成功',
+						icon: 'none'
+					})
+				} catch (error) {
+					this.appendTestLog(`❌ 图片上传失败：${error}`)
+					uni.showToast({
+						title: '上传失败，请重试',
+						icon: 'none'
+					})
+				} finally {
+					uni.hideLoading()
+					this.isUploading = false
 				}
-
-				// ======================
-				// 所有图片全部上传成功
-				// ======================
-				uni.hideLoading()
-				this.isUploadSuccess = true
-				this.uploading = false
-
-				// 你要求的成功后统一执行逻辑
-				this.addLog('✅ 图片上传成功！可开始功能检测')
-				uni.showToast({
-					title: '上传成功',
-					icon: 'none'
-				})
 			},
 
 			/**
-			 * 单张图片上传（Promise化，支持异步等待）
+			 * 单张图片上传（Promise封装）
 			 * @param {String} filePath 图片临时路径
 			 * @return Promise
 			 */
 			uploadSingleImage(filePath) {
 				return new Promise((resolve, reject) => {
-					// 获取用户token
+					// 获取用户登录令牌
 					const userInfo = uni.getStorageSync('user_info') || {}
 					const token = userInfo.token || ''
 
-					// 执行上传
 					uni.uploadFile({
 						url: 'https://k1sw.wiselink.net.cn/k7Api/uploadInstallImg',
-						filePath: filePath,
+						filePath,
 						name: 'installImgs',
 						header: {
 							token
 						},
 						formData: {
-							sn: this.SNinfo.sn
+							sn: this.deviceInfo.sn
 						},
 
-						// 上传成功
 						success: (uploadRes) => {
 							try {
 								const data = JSON.parse(uploadRes.data)
-								// 接口返回成功
-								if (data.code === 1000) {
-									resolve(true)
-								} else {
-									reject(data.msg || '上传失败')
-								}
+								if (data.code === 1000) resolve()
+								else reject(data.msg || '上传失败')
 							} catch (e) {
-								reject('返回数据解析失败')
+								reject('数据解析异常')
 							}
 						},
 
-						// 上传失败
-						fail: () => reject('网络异常，上传失败')
+						fail: () => reject('网络异常')
 					})
 				})
 			},
 
 			/**
-			 * 检测前校验 + 执行测试
-			 * @param {String} type 操作类型
-			 * @param {String} mode 模式：network
+			 * 网络检测统一入口
+			 * @param {String} testType 检测类型
 			 */
-			// 策略模式：根据 type + mode 分发不同执行逻辑
-			checkAndTest(type, mode) {
-				// 前置统一校验
-				if (!this.checkCanOperate()) return;
+			handleNetworkTest(testType) {
+				if (!this.validateBeforeOperate()) return
 
-				const strategy = {
-					// --------------------
-					// network 网络模式
-					// --------------------
-					"lock_network": () => {
-						this.testAction(3, "network");
-					},
-					"unlock_network": () => {
-						this.testAction(1, "network");
-					},
-					"findCar_network": () => {
-						this.testAction(5, "network");
-					},
-					"risk_network": () => {
-						this.testAction(8, "network");
-					},
-					"cancelRisk_network": () => {
-						this.testAction(6, "network");
-					},
-				};
-
-				// 拼接策略KEY：type_mode
-				const key = `${type}_${mode}`;
-
-				// 执行对应策略
-				if (strategy[key]) {
-					strategy[key]();
+				// 策略映射：操作类型 → 接口指令码
+				const commandMap = {
+					lock: 3,
+					unlock: 1,
+					findCar: 5,
+					risk: 8,
+					cancelRisk: 6
 				}
+
+				const command = commandMap[testType]
+				if (!command) return
+
+				this.executeNetworkTestAction(command, testType)
 			},
 
 			/**
-			 * 执行功能测试
-			 * @param {String} type 测试项
-			 * @param {String} mode 模式
+			 * 执行网络测试指令
+			 * @param {Number} command 接口指令
+			 * @param {String} testType 操作类型
 			 */
-			async testAction(type, mode) {
-				console.log(type)
-				if (mode == 'network') {
-					this.setStatus(type, mode, 'testing')
-					this.addLog(`🚗【网络】开始${this.actionText(type)} → IDC:${this.form.idc}`)
-					const res = await u_operation({
-						sn: this.SNinfo?.sn,
-						operationType: type,
-						code: this.SNinfo?.code,
-						_timestamp: Date.now()
-					});
-					console.log(res)
-					if (res?.code == 1000) {
-						console.log(res.code)
+			async executeNetworkTestAction(command, testType) {
+				// 1. 设置测试中状态
+				this.setTestStatus(command, 'testing')
+				const actionName = this.getTestActionText(command)
+				this.appendTestLog(`🚗【网络】开始${actionName} → 设备号：${this.checkForm.idc}`)
 
-						// 风控相关操作弹窗提示
-						if ((type === 8 || type === 6) && mode === 'network') {
-							uni.showModal({
-								title: '请确认车辆启动状态',
-								content: `${this.actionText(type)}指令已执行，请启动车辆后选择实际状态`,
-								confirmText: '已正常启动',
-								cancelText: '无法启动',
-								showCancel: true,
-								success: (res) => {
-									console.log('用户选择结果：', res)
+				// 2. 调用操作接口
+				const res = await u_operation({
+					sn: this.deviceInfo?.sn,
+					operationType: command,
+					code: this.deviceInfo?.code,
+					_timestamp: Date.now()
+				})
 
-									// ====================
-									// 点击：已正常启动
-									// ====================
-									if (res.confirm) {
-										if (type == 8) {
-											// 8：启动成功 = 失败
-											this.addLog(`❌ ${this.actionText(type)} → 车辆启动成功，检测失败`)
-											this.setStatus(type, 'network', 'fail')
-										} else if (type == 6) {
-											// 6：启动成功 = 成功
-											this.addLog(`✅ ${this.actionText(type)} → 车辆启动成功，检测成功`)
-											this.setStatus(type, 'network', 'success')
-										}
-									}
-
-									// ====================
-									// 点击：无法启动
-									// ====================
-									else if (res.cancel) {
-										if (type == 8) {
-											// 8：启动失败 = 成功
-											this.addLog(`✅ ${this.actionText(type)} → 车辆无法启动，检测成功`)
-											this.setStatus(type, 'network', 'success')
-										} else if (type == 6) {
-											// 6：启动失败 = 失败
-											this.addLog(`❌ ${this.actionText(type)} → 车辆无法启动，检测失败`)
-											this.setStatus(type, 'network', 'fail')
-										}
-									}
-								}
-							})
-						} else {
-							this.setStatus(type, mode, 'success')
-							this.addLog(`${ '✅' }【网络】${this.actionText(type)} ${'成功'}`)
-						}
-
+				// 3. 接口返回成功
+				if (res?.code === 1000) {
+					// 风控类操作需要弹窗确认车辆状态
+					if (command === 8 || command === 6) {
+						this.showRiskConfirmModal(command, actionName)
 					} else {
-						this.setStatus(type, 'network', 'fail')
-						this.addLog(`❌ ${this.actionText(type)} → ${res?.msg}`)
+						this.setTestStatus(command, 'success')
+						this.appendTestLog(`✅【网络】${actionName} 成功`)
 					}
+				} else {
+					// 接口失败
+					this.setTestStatus(command, 'fail')
+					this.appendTestLog(`❌【网络】${actionName} 失败：${res?.msg}`)
 				}
 			},
 
 			/**
-			 * 统一设置测试状态（修复：使用 $set 保证响应式）
-			 * @param {String} type 操作类型
-			 * @param {String} mode 模式
-			 * @param {String} status 状态值：testing/success/fail
+			 * 风控操作确认弹窗
+			 * @param {Number} command 指令
+			 * @param {String} actionName 操作名称
 			 */
-			setStatus(type, mode, status) {
-				const keyMap = {
+			showRiskConfirmModal(command, actionName) {
+				uni.showModal({
+					title: '请确认车辆启动状态',
+					content: `${actionName}指令已执行，请启动车辆后选择实际状态`,
+					confirmText: '已正常启动',
+					cancelText: '无法启动',
+					success: (res) => {
+						if (res.confirm) {
+							// 已启动
+							const status = command === 8 ? 'fail' : 'success'
+							const logMsg =
+								command === 8 ?
+								'车辆启动成功 → 检测失败' :
+								'车辆启动成功 → 检测成功'
+							this.appendTestLog(
+								`${status === 'success' ? '✅' : '❌'}【网络】${actionName} ${logMsg}`)
+							this.setTestStatus(command, status)
+						} else if (res.cancel) {
+							// 未启动
+							const status = command === 8 ? 'success' : 'fail'
+							const logMsg =
+								command === 8 ?
+								'车辆无法启动 → 检测成功' :
+								'车辆无法启动 → 检测失败'
+							this.appendTestLog(
+								`${status === 'success' ? '✅' : '❌'}【网络】${actionName} ${logMsg}`)
+							this.setTestStatus(command, status)
+						}
+					}
+				})
+			},
+
+			/**
+			 * 统一设置测试状态（保证响应式）
+			 * @param {Number} command 指令码
+			 * @param {String} status 状态：testing / success / fail
+			 */
+			setTestStatus(command, status) {
+				const statusKeyMap = {
 					3: 'lockStatus',
 					1: 'unlockStatus',
 					5: 'findCarStatus',
 					8: 'riskStatus',
 					6: 'cancelRiskStatus'
 				}
-				// 核心修复：强制 Vue 监听对象变更
-				this.$set(this.networkStatus, keyMap[type], status)
+				const key = statusKeyMap[command]
+				if (key) this.$set(this.networkTestStatus, key, status)
 			},
 
 			/**
 			 * 提交最终检测结果
+			 * 调用接口：http://fin3.wiselink.net.cn/fin/deviceTes/saveResult
+			 * 参数：
+			 * idc: 设备idc
+			 * checkType: 0蓝牙 1网络
+			 * checkState: 0失败 1成功
 			 */
-			submitCheck() {
-				uni.showModal({
-					title: '提交成功',
-					content: '设备全流程检测已完成！',
-					showCancel: false
-				})
-				this.addLog('✅ 检测流程全部完成，已提交')
+			async handleSubmitFinalCheck() {
+				// 接口必填参数
+				const idc = this.checkForm.idc;
+				const checkType = 1; // 1=网络模式（你当前只有网络检测）
+				const checkState = 1; // 1=成功（走到这里说明全部检测通过）
+
+				// 显示加载
+				uni.showLoading({
+					title: '提交检测结果中...'
+				});
+
+				try {
+					// 调用提交接口
+					const res = await uni.request({
+						url: 'http://fin3.wiselink.net.cn/fin/deviceTes/saveResult',
+						method: 'GET',
+						data: {
+							idc,
+							checkType,
+							checkState
+						}
+					});
+
+					// 接口返回成功（根据实际接口返回格式判断）
+					console.log('提交检测结果接口返回：', res);
+
+					// 提示成功
+					uni.showModal({
+						title: '提交成功',
+						content: '设备全流程检测已完成！',
+						showCancel: false,
+						success: () => {
+							uni.redirectTo({
+								url: '/pages/index/index'
+							})
+						}
+					});
+
+				} catch (err) {
+					console.error('提交检测结果失败：', err);
+					uni.showToast({
+						title: '提交失败，请重试',
+						icon: 'none'
+					});
+					this.appendTestLog('❌ 检测结果提交失败：网络或接口异常');
+				} finally {
+					uni.hideLoading();
+				}
 			},
 
 			/**
-			 * 状态文本转换
+			 * 获取状态显示文本
 			 */
-			statusText(s) {
-				return s === 'testing' ? '测试中' :
-					s === 'success' ? '成功' :
-					s === 'fail' ? '失败' : ''
-			},
-
-			/**
-			 * 操作文本转换
-			 */
-			actionText(t) {
+			getTestStatusText(status) {
 				return {
-					3: '关锁',
-					1: '开锁',
+					testing: '测试中',
+					success: '成功',
+					fail: '失败'
+				} [status] || ''
+			},
+
+			/**
+			 * 获取操作名称文本
+			 */
+			getTestActionText(command) {
+				return {
+					3: '开锁',
+					1: '关锁',
 					5: '寻车',
 					8: '风控拦截',
 					6: '取消拦截'
-				} [t] || t
+				} [command] || command
 			},
 
 			/**
-			 * 添加日志（自动追加时间）
-			 * @param {String} text 日志内容
+			 * 追加日志（自动带时间）
+			 * @param {String} content 日志内容
 			 */
-			addLog(text) {
+			appendTestLog(content) {
 				const time = new Date().toLocaleTimeString()
-				this.logList.unshift(`[${time}] ${text}`)
+				this.testLogList.unshift(`[${time}] ${content}`)
 			}
 		}
 	}
 </script>
 
 <style scoped>
-	.page-container {
+	/* 页面根容器 */
+	.device-check-page {
 		width: 100vw;
 		height: 100vh;
 		display: flex;
 		flex-direction: column;
-		background: #f5f7fa;
+		background-color: #f5f7fa;
 		box-sizing: border-box;
 		padding-bottom: 100rpx;
 	}
 
-	.content-box {
+	/* 内容主体 */
+	.content-wrapper {
 		flex: 0 0 70%;
 		overflow-y: auto;
 		padding: 30rpx 20rpx 0;
 	}
 
-	.main-card {
-		background: #fff;
+	/* 主内容卡片 */
+	.main-content-card {
+		background-color: #fff;
 		border-radius: 20rpx;
 		padding: 40rpx;
 		box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.08);
 	}
 
-	.divider {
+	/* 模块分隔线 */
+	.section-divider {
 		height: 1rpx;
-		background: #f0f0f0;
+		background-color: #f0f0f0;
 		margin: 40rpx 0;
 	}
 
-	.log-box {
-		flex: 0 0 25%;
-		background: #fff;
-		border-radius: 16rpx;
-		padding: 20rpx;
-		margin: 30rpx 20rpx 0;
-		box-sizing: border-box;
-		display: flex;
-		flex-direction: column;
-		box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
-	}
-
-	.fixed-submit {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		height: 100rpx;
-		background: #fff;
-		box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
-		padding: 0 20rpx;
-		box-sizing: border-box;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		z-index: 999;
-	}
-
-	.submit-btn {
-		width: 100%;
-		height: 70rpx;
-		background: #007aff;
-		color: #fff;
-		font-size: 28rpx;
-		font-weight: bold;
-		border-radius: 12rpx;
-	}
-
-	.submit-btn[disabled] {
-		background: #ccc !important;
-	}
-
+	/* 表单项目 */
 	.form-item {
 		display: flex;
 		align-items: center;
 		margin-bottom: 24rpx;
 	}
 
-	.label {
+	.form-label {
 		width: 150rpx;
 		font-size: 28rpx;
 		color: #333;
 	}
 
-	.input {
+	.form-input {
 		flex: 1;
 		height: 70rpx;
 		border: 2rpx solid #eee;
@@ -664,45 +687,35 @@
 		font-size: 28rpx;
 	}
 
-	.bind-btn,
-	.upload-btn {
+	/* 绑定设备按钮 */
+	.bind-device-btn {
 		width: 100%;
+		background-color: #007aff;
 		color: #fff;
 		border-radius: 10rpx;
 		font-size: 28rpx;
 		padding: 14rpx 0;
-	}
-
-	.bind-btn {
-		background: #007aff;
 		margin-top: 10rpx;
 	}
 
-	.upload-btn {
-		background: #07c160;
-	}
-
-	button[disabled] {
-		background: #ccc !important;
-		color: #fff !important;
-	}
-
-	.upload-title {
+	/* 图片上传模块 */
+	.image-upload-section .upload-title {
 		font-size: 30rpx;
 		font-weight: bold;
 		margin-bottom: 8rpx;
 	}
 
-	.upload-subtitle {
+	.image-upload-section .upload-tip {
 		font-size: 24rpx;
 		color: #fa8c16;
 		margin-bottom: 20rpx;
 		line-height: 1.4;
 	}
 
-	.upload-scroll-area {
+	/* 图片上传滚动容器 */
+	.upload-scroll-container {
 		max-height: 380rpx;
-		background: #fafbfc;
+		background-color: #fafbfc;
 		border-radius: 12rpx;
 		padding: 20rpx;
 		margin-bottom: 24rpx;
@@ -710,13 +723,14 @@
 		border: 1rpx solid #eee;
 	}
 
-	.upload-list {
+	/* 图片列表 */
+	.image-list {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 16rpx;
 	}
 
-	.upload-item {
+	.image-item {
 		width: 150rpx;
 		height: 150rpx;
 		border-radius: 12rpx;
@@ -724,12 +738,13 @@
 		box-shadow: 0 3rpx 8rpx rgba(0, 0, 0, 0.1);
 	}
 
-	.upload-img {
+	.preview-image {
 		width: 100%;
 		height: 100%;
 	}
 
-	.upload-add {
+	/* 添加图片按钮 */
+	.add-image-btn {
 		width: 150rpx;
 		height: 150rpx;
 		border: 2rpx dashed #ccc;
@@ -737,7 +752,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: #fff;
+		background-color: #fff;
 	}
 
 	.add-icon {
@@ -745,7 +760,24 @@
 		color: #999;
 	}
 
-	.step-title {
+	/* 确认上传按钮 */
+	.confirm-upload-btn {
+		width: 100%;
+		background-color: #07c160;
+		color: #fff;
+		border-radius: 10rpx;
+		font-size: 28rpx;
+		padding: 14rpx 0;
+	}
+
+	/* 按钮禁用状态 */
+	button[disabled] {
+		background-color: #ccc !important;
+		color: #fff !important;
+	}
+
+	/* 网络检测模块标题 */
+	.section-title {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -754,19 +786,20 @@
 		font-weight: bold;
 	}
 
-	.step-text {
+	.title-text {
 		color: #333;
 	}
 
-	.step-text.done {
+	.title-text.finished {
 		color: #00b42a;
 	}
 
-	.mode-section {
+	/* 网络检测容器 */
+	.network-test-container {
 		margin-bottom: 24rpx;
 	}
 
-	.mode-header {
+	.test-header {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -776,38 +809,36 @@
 		color: #007aff;
 	}
 
-	.tip {
+	.finish-tip {
 		font-size: 24rpx;
 		color: #999;
 		font-weight: normal;
 	}
 
-	.can-operate {
-		pointer-events: auto;
-	}
-
-	.btn-group {
-		gap: 20rpx;
+	/* 检测按钮组 */
+	.test-btn-group {
 		display: flex;
 		flex-direction: column;
+		gap: 20rpx;
 	}
 
-	.btn-item {
+	.test-btn-item {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		padding: 30rpx 24rpx;
-		background: #fafafa;
+		background-color: #fafafa;
 		border-radius: 12rpx;
 		box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.04);
 	}
 
 	.click-effect:active {
-		background: #eee;
+		background-color: #eee;
 		transform: scale(0.98);
 	}
 
-	.status {
+	/* 检测状态标签 */
+	.test-status {
 		padding: 8rpx 16rpx;
 		border-radius: 8rpx;
 		font-size: 24rpx;
@@ -815,19 +846,32 @@
 		text-align: center;
 	}
 
-	.status.testing {
-		background: #fff7e6;
+	.test-status.testing {
+		background-color: #fff7e6;
 		color: #fa8c16;
 	}
 
-	.status.success {
-		background: #e6ffed;
+	.test-status.success {
+		background-color: #e6ffed;
 		color: #00b42a;
 	}
 
-	.status.fail {
-		background: #fff2f0;
+	.test-status.fail {
+		background-color: #fff2f0;
 		color: #ff4d4f;
+	}
+
+	/* 日志模块 */
+	.test-log-section {
+		flex: 0 0 25%;
+		background-color: #fff;
+		border-radius: 16rpx;
+		padding: 20rpx;
+		margin: 30rpx 20rpx 0;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
 	}
 
 	.log-title {
@@ -836,11 +880,11 @@
 		margin-bottom: 12rpx;
 	}
 
-	.log-content {
+	.log-content-container {
 		flex: 1;
 		width: 100%;
 		box-sizing: border-box;
-		background: #f9f9f9;
+		background-color: #f9f9f9;
 		border-radius: 10rpx;
 		padding: 16rpx;
 		box-shadow: inset 0 2rpx 5rpx rgba(0, 0, 0, 0.05);
@@ -854,5 +898,36 @@
 		line-height: 1.5;
 		margin-bottom: 6rpx;
 		word-break: break-all;
+	}
+
+	/* 底部固定提交栏 */
+	.fixed-submit-bar {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100rpx;
+		background-color: #fff;
+		box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+		padding: 0 20rpx;
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 999;
+	}
+
+	.submit-check-btn {
+		width: 100%;
+		height: 70rpx;
+		background-color: #007aff;
+		color: #fff;
+		font-size: 28rpx;
+		font-weight: bold;
+		border-radius: 12rpx;
+	}
+
+	.submit-check-btn[disabled] {
+		background-color: #ccc !important;
 	}
 </style>
