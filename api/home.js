@@ -2,6 +2,8 @@ import {
 	http
 } from '@/utils/request/http'
 
+export const u_uploadInstallImg = (data) => http.postFormData('/k7Api/uploadInstallImg', data)//上传图片
+export const u_getBluetoothKey = (data) => http.get('/rentKeyApi/getBluetoothKey', data)//获取蓝牙密码
 export const u_deleteAccount = (data) => http.postFormData('/accountapi/deleteAccount', data)//注销账号
 export const u_getTrackPlayback = (data) => http.get('/carapi/getTrackPlayback', data)
 export const u_getAllCarPoisiton = (data) => http.get('/carapi/getAllCarPoisiton', data) //替换

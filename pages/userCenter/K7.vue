@@ -136,6 +136,10 @@
 </template>
 
 <script>
+	import {
+		u_getBluetoothKey,
+		u_uploadInstallImg
+	} from '@/api/index'
 	export default {
 		data() {
 			return {
@@ -158,7 +162,8 @@
 					unlockStatus: '',
 					findCarStatus: ''
 				},
-				logList: []
+				logList: [],
+				SNinfo: {}
 			}
 		},
 		computed: {
@@ -177,6 +182,7 @@
 			}
 		},
 		methods: {
+
 			checkCanOperate() {
 				if (!this.form.idc || !this.form.code) {
 					uni.showToast({
@@ -202,14 +208,45 @@
 				return true
 			},
 
-			bindDevice() {
-				// 先调接口判断
-				this.isBind = true
-				this.addLog(`✅ 绑定成功 → IDC: ${this.form.idc}  Code: ${this.form.code}`)
-				uni.showToast({
-					title: '绑定成功',
-					icon: 'none'
+			async bindDevice() {
+				// 前置校验
+				if (!this.form.idc || !this.form.code) {
+					uni.showToast({
+						title: '请输入SN和验证码',
+						icon: 'none'
+					})
+					return
+				}
+
+				uni.showLoading({
+					title: '绑定中...'
 				})
+
+				try {
+					const res = await u_getBluetoothKey({
+						sn: this.form.idc,
+						code: this.form.code
+					})
+
+					if (res.code === 1000) {
+						this.isBind = true
+						this.SNinfo = res.content
+						uni.showToast({
+							title: '绑定成功',
+							icon: 'none'
+						})
+					} else {
+						uni.showToast({
+							title: res.msg || '绑定失败',
+							icon: 'none'
+						})
+					}
+				} catch (err) {
+					// 仅打印日志，不提示用户
+					console.error('绑定设备异常：', err)
+				} finally {
+					uni.hideLoading()
+				}
 			},
 
 			chooseImage() {
@@ -276,7 +313,7 @@
 				this.setStatus(type, mode, success ? 'success' : 'fail')
 				this.addLog(
 					`${success ? '✅' : '❌'}【${mode==='network'?'网络':'蓝牙'}】${this.actionText(type)} ${success ? '成功' : '失败'}`
-					)
+				)
 
 				if (success && (type === 'risk' || type === 'cancelRisk') && mode === 'network') {
 					uni.showModal({
