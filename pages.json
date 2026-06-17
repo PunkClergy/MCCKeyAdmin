@@ -175,7 +175,7 @@
 
 	"permission": {
 		"scope.userLocation": {
-			"desc": "你的位置信息将用于车辆定位与围栏监控"
+			"desc": "仅在你使用地图功能时获取当前位置，用于显示你与车辆的位置关系"
 		},
 		"scope.bluetooth": {
 			"desc": "需要蓝牙权限连接车辆电子钥匙"
