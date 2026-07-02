@@ -37,8 +37,8 @@ export const u_addOrUpdateCar = (data) => http.postFormData('/carapi/addOrUpdate
 export const u_carapiDeleteCar = (data) => http.postFormData('/carapi/deleteCar', data)
 export const u_efenceAlarmList = (data) => http.get('/efenceApi/efenceAlarmList', data)
 export const u_dismantleAlarmList = (data) => http.get('/efenceApi/dismantleAlarmList', data)
-export const u_maintained = (data) => utils_request_http.http.postFormData("/carapi/maintained", data)
-export const u_calibrateTotalMileage = (data) => utils_request_http.http.postFormData("/carapi/calibrateTotalMileage",
+export const u_maintained = (data) => http.postFormData("/carapi/maintained", data)
+export const u_calibrateTotalMileage = (data) => http.postFormData("/carapi/calibrateTotalMileage",
 	data)
 export const u_cancelRentKey = (data) => http.get('/rentKeyApi/cancelRentKey', data)
 export const u_rentRecord = (data) => http.get('/rentKeyApi/rentRecord', data)

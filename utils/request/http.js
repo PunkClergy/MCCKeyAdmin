@@ -219,6 +219,7 @@ http.setInterceptor({
 		let header = config.header || {}
 		header['funAreaId'] = 1760 //暂时写死参数
 		header['lang'] = language //所属语言
+		header['programType'] = 'app' //所属语言
 
 		if (token) {
 			header['token'] = token

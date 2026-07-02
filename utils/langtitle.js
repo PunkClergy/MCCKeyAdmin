@@ -37,7 +37,7 @@ export const titles = {
 	},
 	// 车务使用电子钥匙 | Valet Pickup | バレーキー発行
 	'zoneCenter/carServiceKey': {
-		'zhCn': '车务配置电子钥匙',
+		'zhCn': '车务使用电子钥匙',
 		'enUs': 'Valet Pickup',
 		'jaJp': 'バレー設定'
 	},

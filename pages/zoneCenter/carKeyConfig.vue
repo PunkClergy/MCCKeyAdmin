@@ -313,7 +313,7 @@
 				this.g_platenumbers = checked.map(i => i.platenumber).filter(Boolean)
 			},
 			handleJumpBlackInfo() {
-				uni.reLaunch({
+				uni.redirectTo({
 					url: `${this.g_source}?black=${this.g_black}&type=${this.type}&name=${this.name}&platenumbers=${this.g_platenumbers}&info=${JSON.stringify(this.info)}`
 				})
 			},
@@ -387,6 +387,7 @@
 					brakingType: this.brakingType,
 					batterylift: this.batterylift,
 					carOwnerName: this.carOwnerName,
+					isDirectReg:1,
 					id: this.id || ''
 				}
 				if (!param.platenumber) return uni.showToast({
@@ -405,6 +406,11 @@
 							title: res.msg
 						})
 						this.switchToList()
+					}else{
+						uni.showToast({
+							title: res.msg,
+							icon:'none'
+						})
 					}
 				} catch (e) {} finally {
 					uni.hideLoading()

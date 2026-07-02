@@ -1242,6 +1242,11 @@ export const tips = {
 		"enUs": "Login",
 		"jaJp": "ログイン"
 	},
+	"Register": {
+		"zhCn": "注册",
+		"enUs": "Register",
+		"jaJp": "登録"
+	},
 	"GoToLogin": {
 		"zhCn": "去登录",
 		"enUs": "Go to Login",

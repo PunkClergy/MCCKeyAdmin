@@ -223,7 +223,7 @@
 					const userKey = userRes.content
 					uni.setStorageSync('userKey', userKey)
 					uni.redirectTo({
-						url: '/pages/index/index'
+						url: '/pages/userCenter/index'
 					})
 				} catch (e) {}
 			}

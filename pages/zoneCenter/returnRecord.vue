@@ -94,7 +94,8 @@
 					const res = await u_rentRecord({
 						page: this.y_page,
 						status: 1,
-						comParam: this.comParam
+						comParam: this.comParam,
+						pageSize:10
 					})
 					if (res.code !== 1000) return
 
@@ -186,6 +187,7 @@
 		flex: 1;
 		/* 关键：占满剩余高度 */
 		width: 100%;
+		height: 90%;
 	}
 
 	/* 卡片样式 */

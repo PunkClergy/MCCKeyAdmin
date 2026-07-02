@@ -30,7 +30,7 @@
 
 
 				<button class="register-btn" :disabled="isSubmitting"
-					@tap="handleRegister">{{tips.Login[lang]}}</button>
+					@tap="handleRegister">{{tips.Register[lang]}}</button>
 
 				<view class="login-link">
 					<text>{{langs.haveanaccount}}</text>
