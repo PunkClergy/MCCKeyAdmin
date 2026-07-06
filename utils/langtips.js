@@ -1207,6 +1207,16 @@ export const tips = {
 		"enUs": "Please enter username and password",
 		"jaJp": "ユーザー名とパスワードを入力してください"
 	},
+	"EnterUsername": {
+		"zhCn": "请输入用户名",
+		"enUs": "Please enter username",
+		"jaJp": "ユーザー名とパスワード"
+	},
+	"Username": {
+		"zhCn": "用户名",
+		"enUs": "username",
+		"jaJp": "ユーザー名とパスワードを入力してください"
+	},
 	"LoginFailCheckInfo": {
 		"zhCn": "登录失败，请检查用户名和密码",
 		"enUs": "Login failed, please check your username and password",

@@ -65,9 +65,17 @@
 						</view>
 
 						<view class="middle-form-item">
-							<label>{{tips.Phone[lang]}}</label>
+							<label>{{tips.Username[lang]}}</label>
 							<view class="modal-form-region">
-								<input :placeholder="tips.EnterPhone[lang]" v-model="formData.mobile" name="mobile" />
+								<input :placeholder="tips.EnterUsername[lang]" v-model="formData.username"
+									name="username" />
+							</view>
+						</view>
+						<view class="middle-form-item">
+							<label>{{tips.Password[lang]}}</label>
+							<view class="modal-form-region">
+								<input :placeholder="tips.EnterPassword[lang]" v-model="formData.password"
+									name="password" />
 							</view>
 						</view>
 
@@ -198,7 +206,8 @@
 				}
 				this.formData = {
 					realname: item.realname,
-					mobile: item.mobile
+					username: item?.username || item.mobile,
+					password: item?.password
 				}
 			},
 
@@ -266,7 +275,8 @@
 					roleId: this.new_role.id
 				}
 
-				if (!params.realname || !params.roleId) {
+
+				if (!params.realname || !params.roleId || !params?.username || !params?.password) {
 					return
 				}
 

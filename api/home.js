@@ -20,7 +20,7 @@ export const u_houseFlowList = (data) => http.get('/unmannedStoreApi/unmannedSto
 export const u_houseFlowApirAdd = (data) => http.postFormData('/unmannedStoreApi/addOrUpdate', data)
 export const u_unmannedStoreApidel = (data) => http.postFormData('/unmannedStoreApi/del', data)
 export const u_transferAdminUser = (data) => http.postFormData('/accountapi/transferAdminUser', data)
-export const u_addOrUpdateChildUser = (data) => http.postFormData('/accountapi/addOrUpdateChildUser', data)
+export const u_addOrUpdateChildUser = (data) => http.postFormData('/accountapi/appAddOrUpdateChildUser', data)
 export const u_delChildUser = (data) => http.get('/accountapi/delChildUser', data)
 export const u_childUserList = (data) => http.get('/accountapi/childUserList', data)
 export const u_getMenuTree = (data) => http.get('/roleapi/getAppMenuTree', data)
