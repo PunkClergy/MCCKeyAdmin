@@ -2,9 +2,9 @@
     "name" : "WiseLink Auto Global",
     "appid" : "__UNI__1B5BB05",
     "description" : "WiseLink Auto Global empowers car rental enterprises, auto financial risk control, shared mobility, online car-hailing and logistics fleets with core digital car key technology. We provide a complete integrated software and hardware solution covering self-driving rental, vehicle risk control, time-sharing travel and fleet management. It supports unmanned vehicle pick-up & return, remote vehicle control and real-time trajectory tracking. Custom cloud solutions for fuel monitoring, battery level detection and driving behavior analysis are also available. Proven and mature system serving over 500,000 users worldwide, helping global automotive businesses achieve digital, unmanned and intelligent operation.",
-    "versionName" : "1.0.0",
+    "versionName" : "1.0.7",
     "package" : "net.wiselink.auto",
-    "versionCode" : 260524,
+    "versionCode" : 260706,
     "transformPx" : false,
     "app-plus" : {
         /* 5+App特有相关 */
