@@ -10,6 +10,7 @@ var info = [];
 var map; // 全局map实例
 var isMapInitialized = false; // 标记地图是否初始化
 var isFirstLoad = true; // 标记是否是首次加载
+var hasMyLocation = false; // 标记是否已拿到“我的位置”（定位与地图加载解耦）
 var vehicle_info = {};
 // 使用配置对象集中管理多语言文本
 const buttonTexts = {
@@ -57,37 +58,68 @@ window.addEventListener('message', (e) => {
  * 初始化地图
  */
 function initMap() {
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(position => {
-			currentLat = position.coords.latitude;
-			currentLng = position.coords.longitude;
+	// 先用默认中心把地图创建出来，避免 WebView 内定位失败/超时导致整页白屏
+	map = new google.maps.Map(document.getElementById('map'), {
+		zoom: zoom,
+		center: {
+			lat: 22.5431, // 默认中心（深圳），定位成功或车辆数据到达后会自动移动
+			lng: 114.0579
+		}
+	});
+	isMapInitialized = true;
 
-			map = new google.maps.Map(document.getElementById('map'), {
-				zoom: zoom,
-				center: {
+	// 若车辆数据已到达，立即渲染车辆标记（createMarkers 会自动 panTo 到目标车辆）
+	if (info.length > 0) {
+		createMarkers();
+	}
+
+	// 若定位已先行返回（定位不再依赖地图脚本，可能早于地图就绪），此处补渲染“我的位置”
+	if (hasMyLocation) {
+		setMePositioning();
+		if (markers.length === 0) {
+			map.setCenter({
+				lat: currentLat,
+				lng: currentLng
+			});
+		}
+	}
+}
+
+/**
+ * 独立请求定位授权（与 Google 地图脚本加载解耦）
+ * 页面一加载就申请定位，避免 maps.googleapis.com 加载失败/超时时
+ * 连定位授权弹窗都无法触发。拿到坐标后若地图已就绪则直接落标记，
+ * 否则等 initMap 里补渲染。
+ */
+function requestGeolocation() {
+	if (!navigator.geolocation) return;
+	navigator.geolocation.getCurrentPosition(position => {
+		currentLat = position.coords.latitude;
+		currentLng = position.coords.longitude;
+		hasMyLocation = true;
+		// 地图已就绪才落标记/移动中心；未就绪则由 initMap 补渲染
+		if (isMapInitialized) {
+			setMePositioning();
+			if (markers.length === 0) {
+				map.setCenter({
 					lat: currentLat,
 					lng: currentLng
-				},
-				animation: 'BOUNCE'
-			});
-
-			setMePositioning();
-			isMapInitialized = true;
-
-			// 如果已有数据，创建标记
-			if (info.length > 0) {
-				createMarkers();
+				});
 			}
-		}, fail => {
-			console.error('获取位置失败:', fail);
-			Toast('获取位置失败，请检查定位权限', 2000);
-		}, {
-			enableHighAccuracy: true,
-			timeout: 5000
-		});
-	} else {
-		Toast('您的浏览器不支持Geolocation API', 2000);
-	}
+		}
+	}, fail => {
+		console.warn('获取位置失败（不影响地图显示）:', fail);
+	}, {
+		enableHighAccuracy: false, // 仅粗略定位（基站/WiFi），与只保留 COARSE 权限保持一致
+		timeout: 5000
+	});
+}
+
+// 页面加载即请求定位授权，不等待、也不依赖 Google 地图脚本
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', requestGeolocation);
+} else {
+	requestGeolocation();
 }
 
 /**
