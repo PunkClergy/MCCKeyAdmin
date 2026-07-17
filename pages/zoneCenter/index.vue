@@ -134,7 +134,7 @@
 				bgcolor: '#fff',
 
 				// 状态栏适配默认值
-				height_from_head: 20,
+				height_from_head: 30,
 				head_height: 88,
 				capsule_distance_to_the_right: 15,
 
@@ -324,9 +324,15 @@
 				})
 			},
 			handleBackHome() {
-				uni.redirectTo({
-					url: '/pages/index/index'
+				uni.removeStorage({
+					key: 'funAreaId', // 需要删除的缓存key
+					success: function(res) {
+						uni.redirectTo({
+							url: '/pages/index/index'
+						})
+					}
 				})
+
 			},
 			handleGetMenuList(e) {
 				if (this.account) {

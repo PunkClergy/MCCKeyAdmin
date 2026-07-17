@@ -214,10 +214,11 @@ http.setInterceptor({
 	request: (config) => {
 		// 添加全局header（例如token）
 		const userKey = uni.getStorageSync('user_info')
+		const funAreaId = uni.getStorageSync('funAreaId')
 		const language = uni.getStorageSync('language')?.replace(/([a-z])([A-Z])/g, '$1_$2')
 		const token = userKey?.token || ''
 		let header = config.header || {}
-		header['funAreaId'] = 1760 //暂时写死参数
+		header['funAreaId'] = funAreaId //暂时写死参数
 		header['lang'] = language //所属语言
 		header['programType'] = 'app' //所属语言
 
