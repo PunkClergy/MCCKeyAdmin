@@ -1,117 +1,118 @@
 <template>
-	<view class="container" :style="{ height: screenHeight + 'px' }">
-		<view class="record-container">
-			<view class="record-tabs">
-				<view class="record-tabs-item" :class="activeTab == 1 && 'active'" @tap="activeTab = 1">
+	<view class="page-wrap" :style="{ height: screenHeight + 'px' }">
+		<view class="main-card">
+			<!-- 顶部Tab切换 -->
+			<view class="tab-header">
+				<view class="tab-item" :class="activeTab === 1 && 'tab-active'" @tap="activeTab = 1">
 					{{tips.SendKey[lang]}}
+					<view class="tab-line"></view>
 				</view>
-				<view class="record-tabs-item" :class="activeTab == 2 && 'active'" @tap="activeTab = 2">
+				<view class="tab-item" :class="activeTab === 2 && 'tab-active'" @tap="activeTab = 2">
 					{{tips.UsageLogs[lang]}}
+					<view class="tab-line"></view>
 				</view>
 			</view>
 
-			<block v-if="activeTab == 1">
-				<scroll-view scroll-y class="scroll-full" @scrolltolower="loadCarList">
-					<view v-for="(item, idx) in carList" :key="idx" class="content-item">
-						<view class="content-item-head">
+			<!-- Tab1 下发车钥匙列表 -->
+			<block v-if="activeTab === 1">
+				<scroll-view scroll-y class="scroll-container" @scrolltolower="loadCarList">
+					<view class="car-item" v-for="(item, idx) in carList" :key="idx" >
+						<!-- 卡片头部 -->
+						<view class="item-head">
 							<view class="head-left">
-								<view class="left-category">
-									<image src="/static/car_icon.png" />
-									<text>{{ item.platenumber }}</text>
+								<view class="plate-wrap">
+									<image src="/static/car_icon.png" class="car-icon" />
+									<text class="plate-text">{{ item.platenumber }}</text>
 								</view>
-								<view class="left-model" v-if="!item.bluetoothKey">
-									{{ item.vehicleSerialName || '-' }}{{ item.vehicleModeName || '' }}
-								</view>
+								<text class="model-text" v-if="!item.bluetoothKey">
+									{{ item.vehicleSerialName || '-' }} {{ item.vehicleModeName || '' }}
+								</text>
 							</view>
 						</view>
-						<view class="content-item-info">
-							<view class="info-item" :class="item.vin.length > 15 && 'long-info-item'"
-								v-if="!item.bluetoothKey">
-								<label>{{tips.VIN[lang]}}：</label><text>{{ item.vin || '-' }}</text>
+						<!-- 车辆信息区域 -->
+						<view class="info-wrap">
+							<view class="info-row" :class="item.vin.length > 15 && 'info-row-full'" v-if="!item.bluetoothKey">
+								<label class="info-label">{{tips.VIN[lang]}}：</label>
+								<text class="info-value">{{ item.vin || '-' }}</text>
 							</view>
-							<view class="info-item" :class="item.xsgw.length > 15 && 'long-info-item'"
-								v-if="!item.bluetoothKey">
-								<label>{{tips.FuelCapacity[lang]}}：</label><text>{{ item.xsgw ? item.xsgw + 'L' : '-' }}</text>
+							<view class="info-row" :class="item.xsgw.length > 15 && 'info-row-full'" v-if="!item.bluetoothKey">
+								<label class="info-label">{{tips.FuelCapacity[lang]}}：</label>
+								<text class="info-value">{{ item.xsgw ? item.xsgw + 'L' : '-' }}</text>
 							</view>
-							<view class="info-item" :class="item.carOwnerName.length > 15 && 'long-info-item'"
-								v-if="!item.bluetoothKey">
-								<label>{{tips.DevicePlatform[lang]}}：</label><text>{{ item.carOwnerName || '-' }}</text>
+							<view class="info-row" :class="item.carOwnerName.length > 15 && 'info-row-full'" v-if="!item.bluetoothKey">
+								<label class="info-label">{{tips.DevicePlatform[lang]}}：</label>
+								<text class="info-value">{{ item.carOwnerName || '-' }}</text>
 							</view>
-							<view class="info-item" :class="item.sn.length > 15 && 'long-info-item'">
-								<label>{{tips.DeviceID[lang]}}：</label><text>{{ item.sn || '-' }}</text>
+							<view class="info-row" :class="item.sn.length > 15 && 'info-row-full'">
+								<label class="info-label">{{tips.DeviceID[lang]}}：</label>
+								<text class="info-value">{{ item.sn || '-' }}</text>
 							</view>
 						</view>
-						<view class="content-item-footer">
-							<view class="footer-left"></view>
-							<view class="footer-right">
-								<view class="footer-right-btn" :data-item="item" @tap="openSendKeyModal">
-									<text>{{tips.SendKey[lang]}}</text>
-								</view>
+						<!-- 操作按钮 -->
+						<view class="item-footer">
+							<view></view>
+							<view class="btn-primary" :data-item="item" @tap="openSendKeyModal">
+								<text>{{tips.SendKey[lang]}}</text>
 							</view>
 						</view>
 					</view>
-					<view v-if="carList.length < 1"
-						style="display:flex;justify-content:center;margin-top:20rpx;font-size:24rpx;">
-						{{tips.NoData[lang]}}
+					<!-- 空状态 -->
+					<view class="empty-tip" v-if="carList.length < 1">
+						<text class="empty-text">{{tips.NoData[lang]}}</text>
 					</view>
 				</scroll-view>
 			</block>
 
-			<block v-if="activeTab == 2">
-				<view class="record-tabs-1" style="display:flex;flex-direction:column;gap:10rpx;">
-					<view class="search-box">
-						<icon type="search" size="16" class="search-icon" />
-						<input :placeholder="tips.PlateDeviceUser[lang]" class="search-input" @blur="onSearchBlur" />
+			<!-- Tab2 使用记录 已修复滚动 -->
+			<block v-if="activeTab === 2">
+				<view class="filter-area">
+					<!-- 搜索框 -->
+					<view class="search-input-wrap">
+						<icon type="search" size="32rpx" class="search-icon" />
+						<input class="search-input" :placeholder="tips.PlateDeviceUser[lang]" @blur="onSearchBlur" />
 					</view>
-					<view class="picker-container">
-						<view class="picker-btns">
-							<view class="picker-btn" :class="recordStatus == 0 && 'active'" @tap="changeRecordStatus"
-								data-id="0">
-								{{tips.InUse[lang]}}
-							</view>
-							<view class="picker-btn" :class="recordStatus == 1 && 'active'" @tap="changeRecordStatus"
-								data-id="1">
-								{{tips.Expired[lang]}}
-							</view>
+					<!-- 状态筛选标签 -->
+					<view class="status-tabs">
+						<view class="status-tab" :class="recordStatus == 0 && 'status-active'" @tap="changeRecordStatus" data-id="0">
+							{{tips.InUse[lang]}}
+						</view>
+						<view class="status-tab" :class="recordStatus == 1 && 'status-active'" @tap="changeRecordStatus" data-id="1">
+							{{tips.Expired[lang]}}
 						</view>
 					</view>
+					<view class="total-count">{{tips.Total[lang]}} {{recordTotal}} {{tips.Records[lang]}}</view>
 				</view>
-				<view class="tabs-1-conut">{{tips.Total[lang]}} {{recordTotal}} {{tips.Records[lang]}}</view>
-				<scroll-view scroll-y class="scroll-full" @scrolltolower="loadRecordList">
-					<view v-for="(item, idx) in recordList" :key="idx" class="content-card">
-						<view class="card-head">
-							<view class="card-head-left">
-								<text>{{ item.platenumber }}</text>
-								<text>{{ item.personname }}</text>
-								<text class="split-line"></text>
-								<text class="phone-text">{{ item.mobile }}</text>
+				<scroll-view scroll-y class="scroll-container" @scrolltolower="loadRecordList">
+					<view class="record-card" v-for="(item, idx) in recordList" :key="idx">
+						<view class="card-header">
+							<view class="header-left">
+								<text class="plate">{{ item.platenumber }}</text>
+								<text class="user-name">{{ item.personname }}</text>
+								<view class="split-line"></view>
+								<text class="phone">{{ item.mobile }}</text>
 							</view>
-							<view class="card-head-right">
-								<text v-if="item.status == 0" style="color:#7b7b7c;">{{tips.InUse[lang]}}</text>
-								<text v-else>{{tips.Expired[lang]}}</text>
+							<view class="header-right">
+								<text class="tag-normal" v-if="item.status == 0">{{tips.InUse[lang]}}</text>
+								<text class="tag-expire" v-else>{{tips.Expired[lang]}}</text>
 							</view>
 						</view>
-						<view class="card-info">
-							{{ (item.startdate || '-') }}
-							~
-							{{(item.enddate || '-') }}
+						<view class="card-date">
+							{{ (item.startdate || '-') }} ~ {{(item.enddate || '-') }}
 						</view>
-						<view class="card-footer1" style="display:flex;justify-content:space-between;">
+						<view class="card-op">
 							<block v-if="!item.status">
-								<view>
-									<text @tap="openEditKeyModal" :data-item="item"
-										style="float:left;">{{tips.Edit[lang]}}</text>
-								</view>
-								<view style="display:flex;flex-direction:row;">
-									<text @tap="copyLink"
-										:data-item="item">{{ copied ? tips.Copied[lang] : tips.CopyLink[lang] }}</text>
-									<text @tap="cancelRentKey" :data-item="item">{{tips.CancelCarUse[lang]}}</text>
+								<text class="op-text" @tap="openEditKeyModal" :data-item="item">{{tips.Edit[lang]}}</text>
+								<view class="op-group">
+									<text class="op-btn op-copy" @tap="copyLink" :data-item="item">
+										{{ copied ? tips.Copied[lang] : tips.CopyLink[lang] }}
+									</text>
+									<text class="op-btn op-cancel" @tap="cancelRentKey" :data-item="item">{{tips.CancelCarUse[lang]}}</text>
 								</view>
 							</block>
 							<block v-else>
 								<view></view>
-								<view style="display:flex;flex-direction:row;">
-									<text @tap="previewImages" :data-item="item">{{tips.ViewPhotos[lang]}}</text>
+								<view class="op-group">
+									<text class="op-btn op-view" @tap="previewImages" :data-item="item">{{tips.ViewPhotos[lang]}}</text>
 								</view>
 							</block>
 						</view>
@@ -119,935 +120,864 @@
 				</scroll-view>
 			</block>
 		</view>
-	</view>
 
-	<view class="modal-mask" v-if="showSendModal" @tap="closeSendKeyModal"></view>
-	<view class="modal-base-map" v-if="showSendModal" :style="{ bottom: showSearchList ? 250 : 0 + 'rpx' }">
+		<!-- 底部全局下发钥匙按钮 -->
+		<view class="fixed-bottom-btn" @tap="openGlobalSendModal">
+			<text>{{tips.SendKey[lang]}}</text>
+		</view>
 
-		<form @submit="submitSendKey">
-			<view class="modal-container">
-				<view class="modal-container-head">
-					<text>{{ tips.SendKey[lang] }}</text>
-					<image src="/static/images/right_1.png" @tap="closeSendKeyModal" />
-				</view>
-				<view class="modal-container-middle">
-					<view class="middle-form-item">
-						<label>{{ tips.PlateNo[lang] }}</label>
-						<view class="modal-form-region" style="position:relative;">
-							<view v-if="isManualInput" style="position:relative;">
-								<input @focus="onInputFocus" @blur="onInputBlur" class="temporary"
-									:placeholder="tips.EnterPlateNo[lang]" name="platenumber" :value="searchKeyword"
-									@input="onSearchInput" confirm-type="search" />
-								<view v-if="searchList.length > 0 && searchKeyword.trim() !== ''"
-									class="g_items_temporary">
-									<view v-for="(item, idx) in searchList" :key="idx" @tap="selectPlate"
-										:data-item="item" class="item-card-footer">
-										{{ item.platenumber }}
+		<!-- 下发钥匙弹窗 -->
+		<view class="modal-mask" v-if="showSendModal" @tap="closeSendKeyModal"></view>
+		<view class="modal-popup" v-if="showSendModal" :style="{ bottom: showSearchList ? 250 : 0 + 'rpx' }">
+			<form @submit="submitSendKey">
+				<view class="modal-inner">
+					<view class="modal-head">
+						<text class="modal-title">{{ tips.SendKey[lang] }}</text>
+						<image src="/static/images/right_1.png" class="close-icon" @tap="closeSendKeyModal" />
+					</view>
+					<scroll-view scroll-y class="modal-body">
+						<view class="form-item">
+							<label class="form-label">{{ tips.PlateNo[lang] }}</label>
+							<view class="form-value">
+								<view v-if="isManualInput" class="input-box">
+									<input 
+										class="form-input" 
+										@focus="onInputFocus" 
+										@blur="onInputBlur" 
+										:placeholder="tips.EnterPlateNo[lang]" 
+										name="platenumber" 
+										:value="searchKeyword"
+										@input="onSearchInput" 
+										confirm-type="search" 
+									/>
+									<view v-if="searchList.length > 0 && searchKeyword.trim() !== ''" class="search-drop">
+										<view class="drop-item" v-for="(item, idx) in searchList" :key="idx" @tap="selectPlate" :data-item="item">
+											{{ item.platenumber }}
+										</view>
 									</view>
 								</view>
+								<text v-else class="static-text">{{ selectCarData.platenumber }}</text>
 							</view>
-							<text v-else>{{ selectCarData.platenumber }}</text>
 						</view>
-					</view>
-					<view class="middle-form-item">
-						<label>{{ tips.User[lang] }}</label>
-						<view class="modal-form-region">
-							<input @focus="onInputFocus" @blur="onInputBlur" :placeholder="tips.EnterUser[lang]"
-								name="personName" style="text-align:right;font-size:28rpx;" />
+						<view class="form-item">
+							<label class="form-label">{{ tips.User[lang] }}</label>
+							<view class="form-value">
+								<input class="form-input" @focus="onInputFocus" @blur="onInputBlur" :placeholder="tips.EnterUser[lang]" name="personName" />
+							</view>
 						</view>
-					</view>
-					<!-- <view class="middle-form-item">
-						<label>{{ tips.AccountPhone[lang] }}</label>
-						<view class="modal-form-region">
-							<input @focus="onInputFocus" @blur="onInputBlur" :placeholder="tips.EnterAccountPhone[lang]"
-								name="mobile" style="text-align:right;font-size:28rpx;" />
+						<view class="form-item">
+							<label class="form-label">{{ tips.StartTime[lang] }}</label>
+							<view class="form-value picker-row">
+								<picker mode="date" data-index="startDate" @change="changeDateTime">
+									<view class="picker-box"><text>{{ startDate }}</text></view>
+								</picker>
+								<picker mode="time" data-index="startTime" @change="changeDateTime">
+									<view class="picker-box"><text>{{ startTime }}</text></view>
+								</picker>
+							</view>
 						</view>
-					</view> -->
-					<view class="middle-form-item">
-						<label>{{ tips.StartTime[lang] }}</label>
-						<view class="modal-form-region">
-							<picker mode="date" data-index="startDate" @change="changeDateTime">
-								<view class="form-item-text">
-									<text>{{ startDate }}</text>
-								</view>
-							</picker>
-							<picker mode="time" data-index="startTime" @change="changeDateTime">
-								<view class="form-item-text">
-									<text>{{ startTime }}</text>
-								</view>
-							</picker>
+						<view class="form-item">
+							<label class="form-label">{{ tips.EndTime[lang] }}</label>
+							<view class="form-value picker-row">
+								<picker mode="date" data-index="endDate" @change="changeDateTime">
+									<view class="picker-box"><text>{{ endDate }}</text></view>
+								</picker>
+								<picker mode="time" data-index="endTime" @change="changeDateTime">
+									<view class="picker-box"><text>{{ endTime }}</text></view>
+								</picker>
+							</view>
 						</view>
-					</view>
-					<view class="middle-form-item">
-						<label>{{ tips.EndTime[lang] }}</label>
-						<view class="modal-form-region">
-							<picker mode="date" data-index="endDate" @change="changeDateTime">
-								<view class="form-item-text">
-									<text>{{ endDate }}</text>
-								</view>
-							</picker>
-							<picker mode="time" data-index="endTime" @change="changeDateTime">
-								<view class="form-item-text">
-									<text>{{ endTime }}</text>
-								</view>
-							</picker>
+						<view class="form-item">
+							<label class="form-label">{{ tips.MultiUserAllowed[lang] }}</label>
+							<view class="form-value">
+								<picker mode="selector" :range="multiOptions" range-key="name" @change="changeMultiSelect" :value="multiIndex">
+									<text>{{ multiOptions[multiIndex].name }}</text>
+								</picker>
+							</view>
 						</view>
-					</view>
-					<view class="middle-form-item">
-						<label>{{ tips.MultiUserAllowed[lang] }}</label>
-						<view class="modal-form-region">
-							<picker mode="selector" :range="multiOptions" range-key="name" @change="changeMultiSelect"
-								:value="multiIndex">
-								<text>{{ multiOptions[multiIndex].name }}</text>
-							</picker>
+						<view class="form-item">
+							<label class="form-label">{{ tips.Remark[lang] }}</label>
+							<view class="form-value">
+								<input class="form-input" :placeholder="tips.EnterParkingPos[lang]" name="bak" />
+							</view>
 						</view>
-					</view>
-					<view class="middle-form-item">
-						<label>{{ tips.Remark[lang] }}</label>
-						<view class="modal-form-region">
-							<input :placeholder="tips.EnterParkingPos[lang]" name="bak"
-								style="text-align:right;font-size:28rpx;" />
-						</view>
+					</scroll-view>
+					<view class="modal-footer">
+						<button form-type="submit" class="submit-btn">{{ tips.Confirm[lang] }}</button>
 					</view>
 				</view>
-				<view class="modal-container-footer">
-					<button form-type="submit">{{ tips.Confirm[lang] }}</button>
-				</view>
-			</view>
-		</form>
-	</view>
+			</form>
+		</view>
 
-	<view class="modal-mask" v-if="showEditModal" @tap="closeEditKeyModal"></view>
-	<view class="modal-base-map" v-if="showEditModal">
-		<form @submit="submitEditKey">
-			<view class="modal-container">
-				<view class="modal-container-head">
-					<text>{{ tips.Edit[lang] }}</text>
-					<image src="/static/images/right_1.png" @tap="closeEditKeyModal" />
-				</view>
-				<view class="modal-container-middle">
-					<view class="middle-form-item">
-						<label>{{ tips.PlateNo[lang] }}</label>
-						<view class="modal-form-region">{{ editRecordData.platenumber }}</view>
+		<!-- 编辑钥匙弹窗 -->
+		<view class="modal-mask" v-if="showEditModal" @tap="closeEditKeyModal"></view>
+		<view class="modal-popup" v-if="showEditModal">
+			<form @submit="submitEditKey">
+				<view class="modal-inner">
+					<view class="modal-head">
+						<text class="modal-title">{{ tips.Edit[lang] }}</text>
+						<image src="/static/images/right_1.png" class="close-icon" @tap="closeEditKeyModal" />
 					</view>
-					<view class="middle-form-item">
-						<label>{{ tips.User[lang] }}</label>
-						<view class="modal-form-region">
-							<text>{{ editRecordData.personname }}</text>
+					<scroll-view scroll-y class="modal-body">
+						<view class="form-item">
+							<label class="form-label">{{ tips.PlateNo[lang] }}</label>
+							<view class="form-value static-text">{{ editRecordData.platenumber }}</view>
 						</view>
-					</view>
-					<!-- <view class="middle-form-item">
-						<label>{{ tips.AccountPhone[lang] }}</label>
-						<view class="modal-form-region">
-							<text>{{ editRecordData.mobile }}</text>
+						<view class="form-item">
+							<label class="form-label">{{ tips.User[lang] }}</label>
+							<view class="form-value static-text">{{ editRecordData.personname }}</view>
 						</view>
-					</view> -->
-					<view class="middle-form-item">
-						<label>{{ tips.StartTime[lang] }}</label>
-						<view class="modal-form-region">
-							<picker mode="date" data-index="startDate" @change="changeDateTime">
-								<view class="form-item-text">
-									<text>{{ startDate }}</text>
-								</view>
-							</picker>
-							<picker mode="time" data-index="startTime" @change="changeDateTime">
-								<view class="form-item-text">
-									<text>{{ startTime }}</text>
-								</view>
-							</picker>
+						<view class="form-item">
+							<label class="form-label">{{ tips.StartTime[lang] }}</label>
+							<view class="form-value picker-row">
+								<picker mode="date" data-index="startDate" @change="changeDateTime">
+									<view class="picker-box"><text>{{ startDate }}</text></view>
+								</picker>
+								<picker mode="time" data-index="startTime" @change="changeDateTime">
+									<view class="picker-box"><text>{{ startTime }}</text></view>
+								</picker>
+							</view>
 						</view>
-					</view>
-					<view class="middle-form-item">
-						<label>{{ tips.EndTime[lang] }}</label>
-						<view class="modal-form-region">
-							<picker mode="date" data-index="endDate" @change="changeDateTime">
-								<view class="form-item-text">
-									<text>{{ endDate }}</text>
-								</view>
-							</picker>
-							<picker mode="time" data-index="endTime" @change="changeDateTime">
-								<view class="form-item-text">
-									<text>{{ endTime }}</text>
-								</view>
-							</picker>
+						<view class="form-item">
+							<label class="form-label">{{ tips.EndTime[lang] }}</label>
+							<view class="form-value picker-row">
+								<picker mode="date" data-index="endDate" @change="changeDateTime">
+									<view class="picker-box"><text>{{ endDate }}</text></view>
+								</picker>
+								<picker mode="time" data-index="endTime" @change="changeDateTime">
+									<view class="picker-box"><text>{{ endTime }}</text></view>
+								</picker>
+							</view>
 						</view>
-					</view>
-					<view class="middle-form-item">
-						<label>{{ tips.MultiUserAllowed[lang] }}</label>
-						<view class="modal-form-region">
-							<picker mode="selector" :range="multiOptions" range-key="name" @change="changeMultiSelect"
-								:value="multiIndex">
-								<text>{{ multiOptions[multiIndex].name }}</text>
-							</picker>
+						<view class="form-item">
+							<label class="form-label">{{ tips.MultiUserAllowed[lang] }}</label>
+							<view class="form-value">
+								<picker mode="selector" :range="multiOptions" range-key="name" @change="changeMultiSelect" :value="multiIndex">
+									<text>{{ multiOptions[multiIndex].name }}</text>
+								</picker>
+							</view>
 						</view>
-					</view>
-					<view class="middle-form-item">
-						<label>{{ tips.Remark[lang] }}</label>
-						<view class="modal-form-region">
-							<text>{{ editRecordData.bak || '-' }}</text>
+						<view class="form-item">
+							<label class="form-label">{{ tips.Remark[lang] }}</label>
+							<view class="form-value static-text">{{ editRecordData.bak || '-' }}</view>
 						</view>
+					</scroll-view>
+					<view class="modal-footer">
+						<button form-type="submit" class="submit-btn">{{ tips.Confirm[lang] }}</button>
 					</view>
 				</view>
-				<view class="modal-container-footer">
-					<button form-type="submit">{{ tips.Confirm[lang] }}</button>
-				</view>
-			</view>
-		</form>
-	</view>
-	<view class="card-footer">
-		<view @tap="openGlobalSendModal">{{tips.SendKey[lang]}}</view>
+			</form>
+		</view>
 	</view>
 </template>
 
 <script>
-	import {
-		u_addOrUpdate,
-		u_updateRentKey,
-		u_carList,
-		u_rentRecord,
-		u_sendRentKey,
-		u_cancelRentKey
-	} from '@/api/index'
-	import {
-		titles
-	} from '@/utils/langtitle.js'
-	import {
-		tips
-	} from '@/utils/langtips.js'
-	export default {
-		data() {
-			return {
-				screenHeight: 0,
-				screenWidth: 0,
-				statusBarHeight: 0,
-				carPage: 1,
-				carList: [],
-				imgDomain: 'https://fin3.wiselink.net.cn/fin/',
-				recordList: [],
-				recordPage: 1,
-				activeTab: 1,
-				showSendModal: false,
-				startDate: '',
-				startTime: '',
-				endDate: '',
-				endTime: '',
-				copied: false,
-				showEditModal: false,
-				editRecordData: {},
-				isManualInput: false,
-				recordStatus: '0',
-				searchKeyword: '',
-				multiOptions: [{
-						name: '允许',
-						value: 1
-					},
-					{
-						name: '不允许',
-						value: 0
-					}
-				],
-				multiIndex: 0,
-				openType: 1,
-				searchList: [],
-				showSearchList: false,
-				searchTimer: null,
-				selectCarData: {},
-				vehId: '',
-				recordTotal: 0,
-				searchParam: '',
-				lang: 'zhCn',
-				tips: tips
-			}
+import {
+	u_addOrUpdate,
+	u_updateRentKey,
+	u_carList,
+	u_rentRecord,
+	u_sendRentKey,
+	u_cancelRentKey
+} from '@/api/index'
+import { titles } from '@/utils/langtitle.js'
+import { tips } from '@/utils/langtips.js'
+export default {
+	data() {
+		return {
+			screenHeight: 0,
+			screenWidth: 0,
+			statusBarHeight: 0,
+			carPage: 1,
+			carList: [],
+			imgDomain: 'https://fin3.wiselink.net.cn/fin/',
+			recordList: [],
+			recordPage: 1,
+			activeTab: 1,
+			showSendModal: false,
+			startDate: '',
+			startTime: '',
+			endDate: '',
+			endTime: '',
+			copied: false,
+			showEditModal: false,
+			editRecordData: {},
+			isManualInput: false,
+			recordStatus: '0',
+			searchKeyword: '',
+			multiOptions: [{ name: '允许', value: 1 }, { name: '不允许', value: 0 }],
+			multiIndex: 0,
+			openType: 1,
+			searchList: [],
+			showSearchList: false,
+			searchTimer: null,
+			selectCarData: {},
+			vehId: '',
+			recordTotal: 0,
+			searchParam: '',
+			lang: 'zhCn',
+			tips: tips
+		}
+	},
+	methods: {
+		changeOpenType(e) {
+			this.openType = e.detail.value
 		},
-		methods: {
-			changeOpenType(e) {
-				this.openType = e.detail.value
-			},
-			changeMultiSelect(e) {
-				this.multiIndex = e.detail.value
-			},
-			onSearchInput(e) {
-				const val = e.detail.value.trim()
-				this.searchKeyword = val
-				clearTimeout(this.searchTimer)
-				this.searchTimer = setTimeout(() => {
-					this.doSearchFilter(val)
-				}, 500)
-			},
-			onInputBlur() {
-				this.showSearchList = false
-			},
-			onInputFocus() {
-				this.showSearchList = true
-			},
-			doSearchFilter(keyword) {
-				if (!keyword) {
-					this.searchList = []
-					return
-				}
-				const lower = keyword.toLowerCase()
-				this.searchList = this.carList.filter(i => i?.platenumber?.toLowerCase().includes(lower))
-			},
-			selectPlate(e) {
-				this.searchKeyword = e.currentTarget.dataset.item.platenumber
+		changeMultiSelect(e) {
+			this.multiIndex = e.detail.value
+		},
+		onSearchInput(e) {
+			const val = e.detail.value.trim()
+			this.searchKeyword = val
+			clearTimeout(this.searchTimer)
+			this.searchTimer = setTimeout(() => {
+				this.doSearchFilter(val)
+			}, 500)
+		},
+		onInputBlur() {
+			this.showSearchList = false
+		},
+		onInputFocus() {
+			this.showSearchList = true
+		},
+		doSearchFilter(keyword) {
+			if (!keyword) {
 				this.searchList = []
-			},
-			changeRecordStatus(e) {
-				this.recordStatus = e.currentTarget.dataset.id
-				this.recordPage = 1
-				this.recordList = []
-				this.getRecordList()
-			},
-			openGlobalSendModal() {
-				this.showEditModal = false
-				this.showSendModal = true
-				this.isManualInput = true
-				this.openType = 1
-			},
-			initDateTime() {
-				const fmtDate = d => {
-					const y = d.getFullYear()
-					const m = (d.getMonth() + 1).toString().padStart(2, '0')
-					const day = d.getDate().toString().padStart(2, '0')
-					return `${y}-${m}-${day}`
-				}
-				const fmtTime = d => {
-					const h = d.getHours().toString().padStart(2, '0')
-					const mi = d.getMinutes().toString().padStart(2, '0')
-					return `${h}:${mi}`
-				}
-				const now = new Date()
-				const tomorrow = new Date(now)
-				tomorrow.setDate(now.getDate() + 1)
-				this.startDate = fmtDate(now)
-				this.endDate = fmtDate(tomorrow)
-				this.startTime = fmtTime(now)
-				this.endTime = fmtTime(now)
-			},
-			openSendKeyModal(e) {
-				const item = e.currentTarget.dataset.item
-				this.selectCarData = item
-				this.showEditModal = false
-				this.showSendModal = true
-				this.vehId = item.id
-				this.openType = 1
-			},
-			closeSendKeyModal() {
-				this.selectCarData = {}
-				this.searchKeyword = ''
-				this.showSendModal = false
-				this.isManualInput = false
-			},
-			closeEditKeyModal() {
-				this.showEditModal = false
-				this.editRecordData = {}
-			},
-			loadCarList() {
-				this.carPage++
-				this.getCarList()
-			},
-			loadRecordList() {
-				this.recordPage++
-				this.getRecordList()
-			},
-			async getCarList() {
-				try {
-					const res = await u_carList({
-						page: this.carPage
-					})
-					if (res.code === 1000) this.carList = this.carList.concat(res.content)
-				} catch (e) {}
-			},
-			onSearchBlur(e) {
-				this.searchParam = e.detail.value
-				this.recordPage = 1
-				this.recordList = []
-				this.getRecordList()
-			},
-			async getRecordList() {
-				try {
-					const res = await u_rentRecord({
-						page: this.recordPage,
-						status: this.recordStatus,
-						comParam: this.searchParam || ''
-					})
-					this.recordTotal = res.count || 0
-					console.log(res)
-					this.recordList = [...this.recordList, ...res.content]
-				} catch (e) {}
-			},
-			previewImages(e) {
-				const item = e.currentTarget.dataset.item
-				if (!item) return
-				const imgs = [item.img1, item.img2, item.img3, item.img4, item.img5].filter(Boolean)
-				if (!imgs.length) return uni.showToast({
-					title: this.tips.NoData[this.lang],
-					icon: 'none'
-				})
-				const urls = imgs.map(u => this.imgDomain + u.replace(/\\/g, '/'))
-				uni.previewImage({
-					urls
-				})
-			},
-			async submitSendKey(e) {
-				const form = e.detail.value
-				if (!form.personName) return uni.showToast({
-					title: this.tips.EnterUser[this.lang],
-					icon: 'none'
-				})
-				// if (!form.mobile) return uni.showToast({
-				// 	title: this.tips.EnterAccountPhone[this.lang],
-				// 	icon: 'none'
-				// })
-				const build = (d, t) => `${d} ${t || '00:00'}:00`
-				const params = {
-					vehId: this.vehId || '',
-					client: this.openType,
-					startDate: build(this.startDate, this.startTime),
-					endDate: build(this.endDate, this.endTime),
-					personName: form.personName,
-					// mobile: form.mobile,
-					bak: form.bak,
-					platenumber: form.platenumber || '',
-					multipleUsed: this.multiOptions[this.multiIndex].value
-				}
-				console.log(params)
-				try {
-					const res = await u_sendRentKey(params)
-					console.log(res)
-					if (res.code !== 1000) throw new Error(res.msg)
-					this.showSendModal = false
-					this.carList = []
-					this.recordList = []
-					this.recordPage = 1
-					setTimeout(() => {
-						this.getCarList()
-						this.getRecordList()
-					}, 1000)
-					uni.showModal({
-						title: this.tips.SendSuccess[this.lang],
-						content: res.msg,
-						showCancel: false
-					})
-				} catch (err) {
-					uni.showToast({
-						title: err.message || this.tips.SendFailed[this.lang],
-						icon: 'none'
-					})
-				}
-			},
-			changeDateTime(e) {
-				this[e.currentTarget.dataset.index] = e.detail.value
-			},
-			async cancelRentKey(e) {
-				try {
-					const code = e.currentTarget.dataset.item.controlcode
-					const res = await u_cancelRentKey({
-						controlCode: code
-					})
-					if (res.code === 1000) {
-						this.recordList = []
-						this.recordPage = 1
-						this.getRecordList()
-					}
-				} catch (e) {}
-			},
-			copyLink(e) {
-				console.log(e.currentTarget)
-				const txt = e.currentTarget.dataset.item.simplecode
-				uni.setClipboardData({
-					data: txt,
-					success: () => {
-						uni.showToast({
-							title: this.tips.CopySuccess[this.lang],
-							icon: 'none'
-						})
-						this.copied = true
-					}
-				})
-			},
-			openEditKeyModal(e) {
-				const item = e.currentTarget.dataset.item
-				this.showSendModal = false
-				this.openType = item.client || 0
-				this.showEditModal = true
-				this.editRecordData = item
-				this.multiIndex = item.multipleUsed == 0 ? 1 : 0
-			},
-			async submitEditKey() {
-				const build = (d, t) => `${d} ${t || '00:00'}:00`
-				const params = {
-					client: this.openType,
-					controlCode: this.editRecordData.controlcode,
-					startDate: build(this.startDate, this.startTime),
-					endDate: build(this.endDate, this.endTime),
-					multipleUsed: this.multiOptions[this.multiIndex].value
-				}
-				try {
-					const res = await u_updateRentKey(params)
-					if (res.code === 1000) {
-						this.editRecordData = {}
-						this.showEditModal = false
-						this.recordList = []
-						this.recordPage = 1
-						this.getRecordList()
-						uni.showModal({
-							title: this.tips.Tip[this.lang],
-							content: res.msg,
-							showCancel: false
-						})
-					}
-				} catch (e) {}
+				return
 			}
+			const lower = keyword.toLowerCase()
+			this.searchList = this.carList.filter(i => i?.platenumber?.toLowerCase().includes(lower))
 		},
-		onLoad() {
-			uni.getSystemInfo({
-				success: res => {
-					this.screenHeight = res.windowHeight
-					this.screenWidth = res.windowWidth
-					this.statusBarHeight = res.statusBarHeight
-				}
-			})
-			this.getCarList()
+		selectPlate(e) {
+			this.searchKeyword = e.currentTarget.dataset.item.platenumber
+			this.searchList = []
+		},
+		changeRecordStatus(e) {
+			this.recordStatus = e.currentTarget.dataset.id
+			this.recordPage = 1
+			this.recordList = []
 			this.getRecordList()
 		},
-		onReady() {
-			this.initDateTime()
+		openGlobalSendModal() {
+			this.showEditModal = false
+			this.showSendModal = true
+			this.isManualInput = true
+			this.openType = 1
 		},
-		onShow() {
-			this.lang = uni.getStorageSync('language') || 'zhCn';
-			const pageRoute = 'zoneCenter/sendKeyToRenter';
-			uni.setNavigationBarTitle({
-				title: titles[pageRoute][this.lang]
-			});
-			this.multiOptions = [{
-					name: this.tips.Allow[this.lang],
-					value: 1
-				},
-				{
-					name: this.tips.Disallow[this.lang],
-					value: 0
+		initDateTime() {
+			const fmtDate = d => {
+				const y = d.getFullYear()
+				const m = (d.getMonth() + 1).toString().padStart(2, '0')
+				const day = d.getDate().toString().padStart(2, '0')
+				return `${y}-${m}-${day}`
+			}
+			const fmtTime = d => {
+				const h = d.getHours().toString().padStart(2, '0')
+				const mi = d.getMinutes().toString().padStart(2, '0')
+				return `${h}:${mi}`
+			}
+			const now = new Date()
+			const tomorrow = new Date(now)
+			tomorrow.setDate(now.getDate() + 1)
+			this.startDate = fmtDate(now)
+			this.endDate = fmtDate(tomorrow)
+			this.startTime = fmtTime(now)
+			this.endTime = fmtTime(now)
+		},
+		openSendKeyModal(e) {
+			const item = e.currentTarget.dataset.item
+			this.selectCarData = item
+			this.showEditModal = false
+			this.showSendModal = true
+			this.vehId = item.id
+			this.openType = 1
+		},
+		closeSendKeyModal() {
+			this.selectCarData = {}
+			this.searchKeyword = ''
+			this.showSendModal = false
+			this.isManualInput = false
+		},
+		closeEditKeyModal() {
+			this.showEditModal = false
+			this.editRecordData = {}
+		},
+		loadCarList() {
+			this.carPage++
+			this.getCarList()
+		},
+		loadRecordList() {
+			this.recordPage++
+			this.getRecordList()
+		},
+		async getCarList() {
+			try {
+				const res = await u_carList({ page: this.carPage })
+				if (res.code === 1000) this.carList = this.carList.concat(res.content)
+			} catch (e) {}
+		},
+		onSearchBlur(e) {
+			this.searchParam = e.detail.value
+			this.recordPage = 1
+			this.recordList = []
+			this.getRecordList()
+		},
+		async getRecordList() {
+			try {
+				const res = await u_rentRecord({
+					page: this.recordPage,
+					status: this.recordStatus,
+					comParam: this.searchParam || ''
+				})
+				this.recordTotal = res.count || 0
+				this.recordList = [...this.recordList, ...res.content]
+			} catch (e) {}
+		},
+		previewImages(e) {
+			const item = e.currentTarget.dataset.item
+			if (!item) return
+			const imgs = [item.img1, item.img2, item.img3, item.img4, item.img5].filter(Boolean)
+			if (!imgs.length) return uni.showToast({ title: this.tips.NoData[this.lang], icon: 'none' })
+			const urls = imgs.map(u => this.imgDomain + u.replace(/\\/g, '/'))
+			uni.previewImage({ urls })
+		},
+		async submitSendKey(e) {
+			const form = e.detail.value
+			if (!form.personName) return uni.showToast({ title: this.tips.EnterUser[this.lang], icon: 'none' })
+			const build = (d, t) => `${d} ${t || '00:00'}:00`
+			const params = {
+				vehId: this.vehId || '',
+				client: this.openType,
+				startDate: build(this.startDate, this.startTime),
+				endDate: build(this.endDate, this.endTime),
+				personName: form.personName,
+				bak: form.bak,
+				platenumber: form.platenumber || '',
+				multipleUsed: this.multiOptions[this.multiIndex].value
+			}
+			try {
+				const res = await u_sendRentKey(params)
+				if (res.code !== 1000) throw new Error(res.msg)
+				this.showSendModal = false
+				this.carList = []
+				this.recordList = []
+				this.recordPage = 1
+				setTimeout(() => {
+					this.getCarList()
+					this.getRecordList()
+				}, 1000)
+				uni.showModal({ title: this.tips.SendSuccess[this.lang], content: res.msg, showCancel: false })
+			} catch (err) {
+				uni.showToast({ title: err.message || this.tips.SendFailed[this.lang], icon: 'none' })
+			}
+		},
+		changeDateTime(e) {
+			this[e.currentTarget.dataset.index] = e.detail.value
+		},
+		async cancelRentKey(e) {
+			try {
+				const code = e.currentTarget.dataset.item.controlcode
+				const res = await u_cancelRentKey({ controlCode: code })
+				if (res.code === 1000) {
+					this.recordList = []
+					this.recordPage = 1
+					this.getRecordList()
 				}
-			];
-			this.initDateTime();
+			} catch (e) {}
+		},
+		copyLink(e) {
+			const txt = e.currentTarget.dataset.item.simplecode
+			uni.setClipboardData({
+				data: txt,
+				success: () => {
+					uni.showToast({ title: this.tips.CopySuccess[this.lang], icon: 'none' })
+					this.copied = true
+				}
+			})
+		},
+		openEditKeyModal(e) {
+			const item = e.currentTarget.dataset.item
+			this.showSendModal = false
+			this.openType = item.client || 0
+			this.showEditModal = true
+			this.editRecordData = item
+			this.multiIndex = item.multipleUsed == 0 ? 1 : 0
+		},
+		async submitEditKey() {
+			const build = (d, t) => `${d} ${t || '00:00'}:00`
+			const params = {
+				client: this.openType,
+				controlCode: this.editRecordData.controlcode,
+				startDate: build(this.startDate, this.startTime),
+				endDate: build(this.endDate, this.endTime),
+				multipleUsed: this.multiOptions[this.multiIndex].value
+			}
+			try {
+				const res = await u_updateRentKey(params)
+				if (res.code === 1000) {
+					this.editRecordData = {}
+					this.showEditModal = false
+					this.recordList = []
+					this.recordPage = 1
+					this.getRecordList()
+					uni.showModal({ title: this.tips.Tip[this.lang], content: res.msg, showCancel: false })
+				}
+			} catch (e) {}
 		}
+	},
+	onLoad() {
+		uni.getSystemInfo({
+			success: res => {
+				this.screenHeight = res.windowHeight
+				this.screenWidth = res.windowWidth
+				this.statusBarHeight = res.statusBarHeight
+			}
+		})
+		this.getCarList()
+		this.getRecordList()
+	},
+	onReady() {
+		this.initDateTime()
+	},
+	onShow() {
+		this.lang = uni.getStorageSync('language') || 'zhCn';
+		const pageRoute = 'zoneCenter/sendKeyToRenter';
+		uni.setNavigationBarTitle({ title: titles[pageRoute][this.lang] });
+		this.multiOptions = [
+			{ name: this.tips.Allow[this.lang], value: 1 },
+			{ name: this.tips.Disallow[this.lang], value: 0 }
+		];
+		this.initDateTime();
 	}
+}
 </script>
 
 <style scoped>
-	::-webkit-scrollbar {
-		width: 0;
-		height: 0;
-		display: none
-	}
+/* 全局滚动条隐藏 */
+::-webkit-scrollbar,
+scroll-view::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+	display: none;
+}
 
-	scroll-view::-webkit-scrollbar {
-		display: none
-	}
+/* 页面容器 */
+.page-wrap {
+	background-color: #f5f7fa;
+	padding: 20rpx 16rpx;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+}
 
-	.container {
-		height: 100vh;
-		padding: 10rpx 4rpx;
-		background-color: #f7f9fc;
-		box-sizing: border-box
-	}
+/* 主内容卡片 */
+.main-card {
+	width: 100%;
+	flex: 1;
+	background-color: #ffffff;
+	border-radius: 16rpx;
+	box-shadow: 0 1rpx 6rpx rgba(0,0,0,0.04);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
 
-	.record-container {
-		width: 96%;
-		margin: auto;
-		position: relative;
-		border-radius: 12rpx;
-		background-color: #EFF1FC;
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		overflow: hidden;
-		gap: 15rpx
-	}
+/* Tab头部 */
+.tab-header {
+	display: flex;
+	position: relative;
+	background: #ffffff;
+	flex-shrink: 0;
+}
+.tab-item {
+	flex: 1;
+	height: 88rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 30rpx;
+	font-weight: 500;
+	color: #6b7280;
+	position: relative;
+	transition: all 0.24s ease;
+}
+.tab-active {
+	color: #1677ff;
+	font-weight: 600;
+}
+.tab-line {
+	position: absolute;
+	bottom: 0;
+	width: 80rpx;
+	height: 6rpx;
+	border-radius: 3rpx;
+	background: transparent;
+	transition: all 0.24s ease;
+}
+.tab-active .tab-line {
+	background: #1677ff;
+}
 
-	.record-tabs {
-		display: flex;
-		height: 50px;
-		background-color: #f8f9fa;
-		border-radius: 12rpx 12rpx 0 0;
-		flex-shrink: 0
-	}
+/* 滚动容器 核心修复滚动失效 */
+.scroll-container {
+	flex: 1;
+	padding: 16rpx 16rpx 120rpx;
+	box-sizing: border-box;
+	height: 0;
+	overflow: hidden;
+}
 
-	.record-tabs-item {
-		border-radius: 12rpx;
-		width: 50%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		font-family: PingFang SC;
-		font-weight: 500;
-		font-size: 28rpx;
-		color: #333;
-		font-weight: 700;
-		transition: all .3s
-	}
+/* 车辆卡片项 */
+.car-item {
+	background: #ffffff;
+	border-radius: 12rpx;
+	box-shadow: 0 1rpx 6rpx rgba(0,0,0,0.04);
+	margin-bottom: 20rpx;
+	overflow: hidden;
+	border: 1rpx solid #eee;
+}
+.item-head {
+	padding: 24rpx 24rpx 16rpx;
+	border-bottom: 1rpx solid #e5e7eb;
+}
+.head-left {
+	display: flex;
+	flex-direction: column;
+	gap: 8rpx;
+}
+.plate-wrap {
+	display: flex;
+	align-items: center;
+	gap: 12rpx;
+}
+.car-icon {
+	width: 36rpx;
+	height: 28rpx;
+}
+.plate-text {
+	font-size: 32rpx;
+	font-weight: 600;
+	color: #1f2937;
+}
+.model-text {
+	font-size: 26rpx;
+	color: #6b7280;
+}
+.info-wrap {
+	padding: 16rpx 24rpx;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16rpx 20rpx;
+	border-bottom: 1rpx solid #e5e7eb;
+}
+.info-row {
+	width: calc(50% - 12rpx);
+	font-size: 26rpx;
+	display: flex;
+}
+.info-row-full {
+	width: 100%;
+}
+.info-label {
+	color: #9ca3af;
+	min-width: 140rpx;
+}
+.info-value {
+	color: #1f2937;
+	flex: 1;
+}
+.item-footer {
+	padding: 20rpx 24rpx;
+	display: flex;
+	justify-content: flex-end;
+}
+.btn-primary {
+	padding: 10rpx 32rpx;
+	background: linear-gradient(135deg, #1677ff 0%, #4096ff 100%);
+	color: #fff;
+	font-size: 26rpx;
+	border-radius: 24rpx;
+}
 
-	.record-tabs-item.active {
-		background-color: #6a9bee;
-		color: #fff
-	}
+/* 空状态 */
+.empty-tip {
+	padding: 80rpx 0;
+	display: flex;
+	justify-content: center;
+}
+.empty-text {
+	font-size: 28rpx;
+	color: #9ca3af;
+}
 
-	.record-tabs-1 {
-		flex-shrink: 0;
-		padding: 0 10rpx
-	}
+/* ========== 记录筛选区域 修复压缩问题 flex-shrink:0 ========== */
+.filter-area {
+	padding: 16rpx 20rpx;
+	display: flex;
+	flex-direction: column;
+	gap: 16rpx;
+	flex-shrink: 0;
+}
+.search-input-wrap {
+	display: flex;
+	align-items: center;
+	background: #f3f4f6;
+	border-radius: 24rpx;
+	padding: 14rpx 24rpx;
+	gap: 12rpx;
+}
+.search-icon {
+	color: #9ca3af;
+}
+.search-input {
+	flex: 1;
+	font-size: 28rpx;
+	color: #1f2937;
+}
+.status-tabs {
+	display: flex;
+	gap: 16rpx;
+}
+.status-tab {
+	padding: 10rpx 28rpx;
+	font-size: 26rpx;
+	border-radius: 24rpx;
+	background: #f3f4f6;
+	color: #6b7280;
+	transition: all 0.2s;
+}
+.status-active {
+	background: #e6f0ff;
+	color: #1677ff;
+}
+.total-count {
+	font-size: 24rpx;
+	color: #9ca3af;
+}
 
-	.search-box {
-		display: flex;
-		align-items: center;
-		border: 1px solid #f0f0f0;
-		border-radius: 40rpx;
-		padding: 4px 12px;
-		width: 96%;
-		background-color: #f8f9fa;
-		flex-shrink: 0
-	}
+/* 记录卡片 */
+.record-card {
+	background: #ffffff;
+	border-radius: 12rpx;
+	box-shadow: 0 1rpx 6rpx rgba(0,0,0,0.04);
+	padding: 24rpx;
+	margin-bottom: 20rpx;
+	border: 1rpx solid #eee;
+}
+.card-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 16rpx;
+	border-bottom: 1rpx solid #e5e7eb;
+	margin-bottom: 16rpx;
+}
+.header-left {
+	display: flex;
+	align-items: center;
+	gap: 16rpx;
+	font-size: 28rpx;
+	color: #1f2937;
+}
+.split-line {
+	width: 1rpx;
+	height: 40rpx;
+	background: #e5e7eb;
+}
+.phone {
+	color: #6b7280;
+	font-size: 26rpx;
+}
+.tag-normal {
+	padding: 6rpx 16rpx;
+	font-size: 24rpx;
+	border-radius: 8rpx;
+	background: #e6f0ff;
+	color: #1677ff;
+}
+.tag-expire {
+	padding: 6rpx 16rpx;
+	font-size: 24rpx;
+	border-radius: 8rpx;
+	background: #f2f3f5;
+	color: #86909c;
+}
+.card-date {
+	font-size: 26rpx;
+	color: #6b7280;
+	padding-bottom: 16rpx;
+	border-bottom: 1rpx solid #e5e7eb;
+	margin-bottom: 16rpx;
+}
+.card-op {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 26rpx;
+}
+.op-text {
+	color: #1677ff;
+}
+.op-group {
+	display: flex;
+	gap: 12rpx;
+}
+.op-btn {
+	padding: 8rpx 20rpx;
+	border-radius: 12rpx;
+	font-size: 24rpx;
+}
+.op-copy {
+	border: 1rpx solid #1677ff;
+	color: #1677ff;
+}
+.op-cancel {
+	border: 1rpx solid #f53f3f;
+	color: #f53f3f;
+}
+.op-view {
+	border: 1rpx solid #6b7280;
+	color: #6b7280;
+}
 
-	.tabs-1-conut {
-		flex-shrink: 0;
-		padding: 0 10px;
-		text-align: center;
-		font-size: 22rpx;
-		color: #999
-	}
+/* 底部固定按钮 */
+.fixed-bottom-btn {
+	width: 80%;
+	margin: 30rpx auto;
+	position: sticky;
+	bottom: 30rpx;
+	z-index: 10;
+	text-align: center;
+	padding: 16rpx;
+	background: linear-gradient(135deg, #1677ff 0%, #4096ff 100%);
+	color: #fff;
+	font-size: 32rpx;
+	font-weight: 500;
+	border-radius: 24rpx;
+	box-shadow: 0 6rpx 20rpx rgba(22,119,255,0.3);
+}
 
-	.scroll-full {
-		flex: 1;
-		width: 100%;
-		gap: 10rpx
-	}
+/* ========== 弹窗样式 ========== */
+.modal-mask {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.45);
+	z-index: 998;
+}
+.modal-popup {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #ffffff;
+	border-radius: 24rpx 24rpx 0 0;
+	z-index: 999;
+	padding: 32rpx 24rpx;
+}
+.modal-inner {
+	max-height: 72vh;
+	display: flex;
+	flex-direction: column;
+}
+.modal-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 24rpx;
+	border-bottom: 1rpx solid #e5e7eb;
+	margin-bottom: 24rpx;
+}
+.modal-title {
+	font-size: 36rpx;
+	font-weight: 600;
+	color: #1f2937;
+}
+.close-icon {
+	width: 32rpx;
+	height: 32rpx;
+}
+.modal-body {
+	flex: 1;
+	overflow-y: auto;
+	padding-bottom: 24rpx;
+}
+.form-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20rpx 0;
+	border-bottom: 1rpx solid #e5e7eb;
+}
+.form-label {
+	font-size: 28rpx;
+	color: #6b7280;
+	min-width: 160rpx;
+}
+.form-value {
+	flex: 1;
+	text-align: right;
+	font-size: 28rpx;
+	color: #1f2937;
+}
+.form-input {
+	text-align: right;
+	width: 100%;
+}
+.input-box {
+	position: relative;
+}
+.search-drop {
+	position: absolute;
+	top: 70rpx;
+	left: 0;
+	right: 0;
+	background: #ffffff;
+	border-radius: 12rpx;
+	box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.06);
+	z-index: 9999;
+	overflow: hidden;
+}
+.drop-item {
+	height: 80rpx;
+	line-height: 80rpx;
+	padding: 0 20rpx;
+	border-bottom: 1rpx solid #e5e7eb;
+	font-size: 28rpx;
+	color: #1f2937;
+}
+.picker-row {
+	display: flex;
+	gap: 16rpx;
+	justify-content: flex-end;
+}
+.picker-box {
+	padding: 10rpx 20rpx;
+	background: #f3f4f6;
+	border-radius: 12rpx;
+}
+.static-text {
+	color: #6b7280;
+}
+.modal-footer {
+	padding-top: 24rpx;
+}
+.submit-btn {
+	width: 100%;
+	height: 88rpx;
+	background: linear-gradient(135deg, #1677ff 0%, #4096ff 100%);
+	color: #fff;
+	font-size: 32rpx;
+	font-weight: 500;
+	border-radius: 24rpx;
+	border: none;
+}
 
-	.content-item {
-		margin: 15rpx;
-		background-color: #fff;
-		border-radius: 8px;
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04)
-	}
-
-	.content-item-head {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		border-bottom: 1px solid #f5f5f5;
-		padding: 10rpx
-	}
-
-	.head-left {
-		display: flex;
-		align-items: center;
-		gap: 20rpx
-	}
-
-	.left-category {
-		display: flex;
-		align-items: center;
-		font-weight: 500;
-		font-size: 26rpx;
-		color: #555;
-		gap: 10rpx
-	}
-
-	.left-category image {
-		width: 30rpx;
-		height: 24rpx
-	}
-
-	.left-model {
-		font-size: 24rpx;
-		color: #666
-	}
-
-	.content-item-info {
-		display: flex;
-		flex-wrap: wrap;
-		padding: 10rpx;
-		gap: 20rpx;
-		border-bottom: 1px solid #f5f5f5
-	}
-
-	.info-item {
-		flex: 0 0 48%;
-		font-size: 24rpx;
-		color: #666
-	}
-
-	.long-info-item {
-		flex-basis: 100% !important
-	}
-
-	.content-item-footer {
-		display: flex;
-		padding: 15rpx;
-		justify-content: space-between
-	}
-
-	.footer-right-btn {
-		background-color: #6a9bee;
-		color: #fff;
-		border-radius: 8rpx;
-		padding: 4rpx 15rpx;
-		font-size: 22rpx;
-		font-weight: 500
-	}
-
-	.content-card {
-		border: 1px solid #f0f0f0;
-		margin: 12rpx;
-		padding: 12rpx;
-		border-radius: 8rpx;
-		background-color: #fff
-	}
-
-	.card-head {
-		border-bottom: 1px solid #f5f5f5;
-		height: 60rpx;
-		display: flex;
-		align-items: center;
-		justify-content: space-between
-	}
-
-	.card-head-left {
-		display: flex;
-		align-items: center;
-		gap: 20rpx;
-		font-weight: 500;
-		font-size: 26rpx;
-		color: #555
-	}
-
-	.split-line {
-		border-left: 1px solid #f0f0f0;
-		width: 1px;
-		height: 35rpx
-	}
-
-	.card-info {
-		border-bottom: 1px solid #f5f5f5;
-		color: #333;
-		font-size: 14px;
-		padding: 10px;
-	}
-
-	.card-footer1 {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		height: 60rpx;
-		font-size: 22rpx;
-		padding-top: 10rpx
-	}
-
-	.card-footer1 text {
-		border: 1px solid #f0f0f0;
-		padding: 10rpx 20rpx;
-		border-radius: 8rpx;
-		background-color: #6a9bee;
-		color: #fff;
-		margin-left: 10rpx
-	}
-
-	.modal-mask {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: rgba(0, 0, 0, .4);
-		z-index: 998
-	}
-
-	.modal-base-map {
-		position: fixed;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: #fff;
-		border-radius: 20rpx 20rpx 0 0;
-		z-index: 999;
-		padding: 20rpx
-	}
-
-	.modal-container {
-		max-height: 70vh;
-		display: flex;
-		flex-direction: column
-	}
-
-	.modal-container-head {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		height: 60rpx;
-		border-bottom: 1px solid #f5f5f5;
-		margin-bottom: 20rpx
-	}
-
-	.modal-container-head text {
-		font-weight: 500;
-		font-size: 34rpx;
-		color: #555
-	}
-
-	.modal-container-head image {
-		width: 24rpx;
-		height: 24rpx
-	}
-
-	.modal-container-middle {
-		flex: 1;
-		overflow-y: auto;
-		display: flex;
-		flex-direction: column;
-		gap: 20rpx;
-		padding-bottom: 20rpx
-	}
-
-	.modal-container-footer {
-		height: 80rpx;
-		display: flex;
-		justify-content: center;
-		align-items: center
-	}
-
-	.modal-container-footer button {
-		background: linear-gradient(88deg, #6a9bee, #5a8de1);
-		border-radius: 36rpx;
-		font-weight: 500;
-		font-size: 34rpx;
-		color: #fff;
-		width: 50%;
-		height: 90%;
-		border: none
-	}
-
-	.middle-form-item {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		width: 90%;
-		margin: 0 auto
-	}
-
-	.middle-form-item label {
-		font-weight: 500;
-		font-size: 28rpx;
-		color: #666;
-		min-width: 120rpx
-	}
-
-	.modal-form-region {
-		flex: 1;
-		text-align: right;
-		color: #666;
-		display: flex;
-		flex-direction: row;
-		justify-content: flex-end;
-		font-size: 26rpx;
-		gap: 10rpx
-	}
-
-	.temporary {
-		text-align: right;
-		font-size: 28rpx;
-		width: 100%;
-		color: #666
-	}
-
-	.g_items_temporary {
-		position: absolute;
-		top: 60rpx;
-		left: 0;
-		right: 0;
-		background: #fff;
-		z-index: 10000;
-		border-radius: 10rpx;
-		padding: 20rpx;
-		box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, .05)
-	}
-
-	.item-card-footer {
-		height: 70rpx;
-		line-height: 70rpx;
-		padding: 0 10rpx;
-		border-bottom: 1px solid #f5f5f5;
-		color: #666
-	}
-
-	.radio-group {
-		display: flex;
-		gap: 60rpx
-	}
-
-	.radio-item {
-		display: flex;
-		align-items: center;
-		font-size: 30rpx;
-		color: #666
-	}
-
-	.card-footer {
-		position: fixed;
-		bottom: 120rpx;
-		width: 100%;
-		display: flex;
-		justify-content: center;
-		z-index: 10
-	}
-
-	.card-footer view {
-		width: 40%;
-		background: linear-gradient(88deg, #6a9bee, #5a8de1);
-		padding: 10rpx;
-		border-radius: 36rpx;
-		color: #fff;
-		text-align: center;
-		font-weight: 500;
-		font-size: 30rpx
-	}
-
-	.picker-container {
-		width: 100%;
-		display: flex;
-		flex-direction: row;
-		gap: 20rpx;
-		align-items: center;
-		font-size: 26rpx;
-		color: #333;
-		margin-top: 8rpx
-	}
-
-	.picker-btns {
-		display: flex;
-		flex-direction: row;
-		gap: 16rpx
-	}
-
-	.picker-btn {
-		background-color: #e8ebf2;
-		color: #666;
-		border-radius: 30rpx;
-		padding: 10rpx 24rpx;
-		font-size: 24rpx;
-		transition: all .2s ease
-	}
-
-	.picker-btn.active {
-		background-color: #6a9bee;
-		color: #fff
-	}
-
-	.search-input {
-		font-size: 24rpx
-	}
-
-	.card-head-right {
-		font-size: 24rpx;
-		font-weight: 700
-	}
+/* iOS滚动回弹兼容 */
+::v-deep uni-scroll-view,
+::v-deep .uni-scroll-view-content {
+	overscroll-behavior: none;
+}
 </style>

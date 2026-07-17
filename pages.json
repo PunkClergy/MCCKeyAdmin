@@ -30,7 +30,7 @@
 					"path": "sendKeyToRenter",
 					"style": {
 						"navigationBarTitleText": "发送钥匙",
-						"navigationBarBackgroundColor": "#EFF1FC"
+						"navigationBarBackgroundColor": "#fff"
 
 					}
 				},
@@ -197,8 +197,8 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarBackgroundColor": "#ffffff",
+		"backgroundColor": "#ffffff"
 	},
 	"uniIdRouter": {}
 }
