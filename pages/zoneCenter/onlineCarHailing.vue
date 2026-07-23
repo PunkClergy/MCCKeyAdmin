@@ -1,108 +1,99 @@
 <template>
 	<view class="container">
 		<!-- 主内容区域 -->
-		<view class="record-container"
-			:style="`height: ${c_screen_height-(navBarHeight + statusBarHeight)}px;margin-top: ${navBarHeight + statusBarHeight}px;`">
+		<view class="record-container">
 			<!-- Tab切换 -->
 			<view class="record-tabs" @tap="handleSwitchTab">
 				<view class="record-tabs-item"
-					:style="`background-color: ${c_activeTab == 1 ? '#000' : '#fff'}`">
-					车辆列表</view>
+					:style="{backgroundColor: c_activeTab === 1 ? '#64B5F6' : '#fff',color: c_activeTab === 1 ? '#fff' : '#010101'}">
+					车辆列表
+				</view>
 				<view class="record-tabs-item"
-					:style="`background-color: ${c_activeTab == 2 ? '#000' : '#fff'}`">
-					{{btnState}}车辆
+					:style="{backgroundColor: c_activeTab === 2 ? '#64B5F6' : '#fff',color: c_activeTab === 2 ? '#fff' : '#010101'}">
+					{{ btnState }}车辆
 				</view>
 			</view>
 
 			<!-- 车辆列表Tab -->
-			<block v-if="c_activeTab == 1">
-				<view class="record-tabs-1" style="display: flex;flex-direction: column;">
+			<view v-if="c_activeTab === 1">
+				<view class="record-tabs-1">
 					<view class="search-box">
 						<input placeholder="车牌号/设备号/车型/车系" class="search-input" @blur="bindblurSea"
 							v-model="comParam" />
 					</view>
 				</view>
-				<view class="tabs-1-conut"
-					:style="`display: flex;justify-content: ${g_flagMulti?'space-between':'center'}`">
+				<view class="tabs-1-conut" :style="{justifyContent: g_flagMulti ? 'space-between' : 'center'}">
 					<view></view>
-					<view>共有{{g_total}}条记录</view>
+					<view>共有{{ g_total }}条记录</view>
 				</view>
-				<scroll-view scroll-y :style="`height:${c_screen_height-(navBarHeight + statusBarHeight + 10 + 50)}px;`"
-					@scrolltolower="handleLower" refresher-enabled :refresher-triggered="g_triggered"
-					@refresherrefresh="handleRefresh">
-					<block v-for="(item,index) in g_items" :key="index">
-						<view class="content-item">
-							<view class="content-item-head">
-								<view class="head-left">
-									<view class="left-category">
-										<image src="/static/car_icon.png" />
-										<text>{{item.platenumber}}</text>
-									</view>
-									<view class="left-split_line"></view>
-									<view class="left-model">
-										{{item.vehicleSerialName||'-'}}{{item.vehicleModeName||''}}
-									</view>
+				<scroll-view scroll-y :style="{height: listScrollHeight + 'px'}" @scrolltolower="handleLower"
+					refresher-enabled :refresher-triggered="g_triggered" @refresherrefresh="handleRefresh">
+					<view v-for="item in g_items" :key="item.id" class="content-item">
+						<view class="content-item-head">
+							<view class="head-left">
+								<view class="left-category">
+									<image src="/static/car_icon.png" />
+									<text>{{ item.platenumber }}</text>
 								</view>
-								<view class="head-right" v-if="!g_flagMulti">
-									<image src="/static/images/_edit.png" :data-item="item" @tap="handleEdit" />
-									<image src="/static/images/_delete.png" :data-item="item" @tap="handleDelete" />
+								<view class="left-split_line"></view>
+								<view class="left-model">
+									{{ item.vehicleSerialName || '-' }}{{ item.vehicleModeName || '' }}
 								</view>
 							</view>
-							<view class="content-item-info">
-								<view class="info-item" :class="item.sn.length > 15 ? 'long-info-item' : ''">
-									<label>设备号 ：</label>
-									<text>{{item.sn||'-'}}</text>
+							<view class="head-right" v-if="!g_flagMulti">
+								<image src="/static/images/_edit.png" :data-item="item" @tap="handleEdit" />
+								<image src="/static/images/_delete.png" :data-item="item" @tap="handleDelete" />
+							</view>
+						</view>
+						<view class="content-item-info">
+							<view class="info-item" :class="item.sn.length > 15 ? 'long-info-item' : ''">
+								<label>设备号 ：</label>
+								<text>{{ item.sn || '-' }}</text>
+							</view>
+						</view>
+						<view class="content-item-footer" v-if="g_source">
+							<view class="footer-left"></view>
+							<view class="footer-right">
+								<view class="footer-right-btn" :data-item="item" @tap="handleSelectJump"
+									v-if="!g_flagMulti">
+									<text>选择此车</text>
+								</view>
+								<checkbox-group @change="handleChangeBlack">
+									<checkbox style="transform: scale(0.7);" />
+								</checkbox-group>
+							</view>
+						</view>
+						<view class="content-item-footer" v-else>
+							<view class="footer-left" style="max-width: 70%;">
+								<view v-for="(g_item, index) in item.driverList" :key="index">
+									<view style="display: flex;gap: 15rpx;line-height: 50rpx;">
+										<text>{{ g_item.drivername }}12</text>
+										<text>{{ g_item.drivermobile }}</text>
+										<text style="color:#1b64b1;" :data-item="g_item"
+											@tap="handleUnBindDriver">解绑</text>
+									</view>
+									<view>
+										<text style="font-size: 22rpx;font-weight: 500;">
+											{{ g_item.rentstartdate }} - {{ g_item.rentenddate }}
+										</text>
+									</view>
 								</view>
 							</view>
-							<view class="content-item-footer" v-if="g_source">
-								<view class="footer-left"></view>
-								<view class="footer-right">
-									<view class="footer-right-btn" :data-item="item" @tap="handleSelectJump"
-										v-if="!g_flagMulti">
-										<text>选择此车</text>
-									</view>
-									<checkbox-group :data-item="item" @change="handleChangeBlack">
-										<checkbox style="transform: scale(0.7);" />
-									</checkbox-group>
-								</view>
-							</view>
-							<view class="content-item-footer" v-else>
-								<view class="footer-left" style="max-width: 70%;">
-									<block v-for="(g_item,index) in item.driverList" :key="index">
-										<view style="display: flex;gap: 15rpx;line-height: 50rpx;">
-											<text>{{g_item.drivername}}12</text>
-											<text>{{g_item.drivermobile}}</text>
-											<text style="color:#1b64b1;" :data-item="g_item"
-												@tap="handleUnBindDriver">解绑</text>
-										</view>
-										<view>
-											<text style="font-size: 22rpx;font-weight: 500;">{{g_item.rentstartdate}} -
-												{{g_item.rentenddate}}</text>
-										</view>
-									</block>
-								</view>
-								<view class="footer-right" style="display: flex;gap: 10rpx;">
-									<view class="footer-right-btn" :data-item="item" @tap="handleShowSendNetKeyModal">
-										<text>绑定用车人</text>
-									</view>
+							<view class="footer-right" style="display: flex;gap: 10rpx;">
+								<view class="footer-right-btn" :data-item="item" @tap="handleShowSendNetKeyModal">
+									<text>绑定用车人</text>
 								</view>
 							</view>
 						</view>
-					</block>
-					<block v-if="g_items.length<1">
-						<view
-							style="display: flex;flex-direction: row;color: #333;justify-content: center;margin-top: 20rpx;font-size: 24rpx;">
-							暂无车辆</view>
-					</block>
+					</view>
+					<view v-if="g_items.length < 1" class="empty-tip">暂无车辆</view>
 				</scroll-view>
-			</block>
+			</view>
 
 			<!-- 新增/修改车辆Tab -->
-			<block v-if="c_activeTab == 2">
-				<scroll-view scroll-y
-					:style="`height:${c_screen_height-(navBarHeight + statusBarHeight + 10 + 50)}px;`">
+			<view v-if="c_activeTab === 2">
+				<scroll-view scroll-y :style="{height: listScrollHeight + 'px'}">
 					<view class="card-info">
-						<!-- 车牌号 -->
 						<view class="card-info-item">
 							<label>车牌号<text style="color:red">*</text></label>
 							<view class="card-info-item-input">
@@ -110,7 +101,6 @@
 									@input="handleBindinput" />
 							</view>
 						</view>
-						<!-- 设备号 -->
 						<view class="card-info-item">
 							<label>设备号<text style="color:red">*</text></label>
 							<view class="card-info-item-input">
@@ -118,7 +108,6 @@
 									@input="handleBindinput" />
 							</view>
 						</view>
-						<!-- code -->
 						<view class="card-info-item">
 							<label>code<text style="color:red">*</text></label>
 							<view class="card-info-item-input">
@@ -126,7 +115,6 @@
 									@input="handleBindinput" />
 							</view>
 						</view>
-						<!-- 车系 -->
 						<view class="card-info-item">
 							<label>车系</label>
 							<view class="card-info-item-input">
@@ -134,7 +122,6 @@
 									data-item="vehicleSerialName" @input="handleBindinput" />
 							</view>
 						</view>
-						<!-- 车型 -->
 						<view class="card-info-item">
 							<label>车型</label>
 							<view class="card-info-item-input">
@@ -142,7 +129,6 @@
 									@input="handleBindinput" />
 							</view>
 						</view>
-						<!-- 年款 -->
 						<view class="card-info-item">
 							<label>年款</label>
 							<view class="card-info-item-input">
@@ -150,7 +136,6 @@
 									@input="handleBindinput" />
 							</view>
 						</view>
-						<!-- 当前总里程 -->
 						<view class="card-info-item">
 							<label>当前总里程(km)</label>
 							<view class="card-info-item-input">
@@ -158,7 +143,6 @@
 									@input="handleBindinput" />
 							</view>
 						</view>
-						<!-- 已保养里程 -->
 						<view class="card-info-item">
 							<label>已保养里程(km)</label>
 							<view class="card-info-item-input">
@@ -166,7 +150,6 @@
 									data-item="maintainMileage" @input="handleBindinput" />
 							</view>
 						</view>
-						<!-- 保养周期里程 -->
 						<view class="card-info-item">
 							<label>保养周期里程(km)</label>
 							<view class="card-info-item-input">
@@ -176,108 +159,91 @@
 						</view>
 					</view>
 					<view class="card-footer" @tap="handleSubmit">
-						<text>确认{{btnState}}</text>
+						<text>确认{{ btnState }}</text>
 					</view>
 				</scroll-view>
-			</block>
-		</view>
-	</view>
-
-	<!-- 绑定用车人弹窗 -->
-	<block>
-		<view class="modal-mask" v-if="net_send_key_show_momal" @tap="handleHideSengKeyModal"></view>
-		<view class="modal-base-map" v-if="net_send_key_show_momal">
-			<form @submit="handleNetFormSubmit">
-				<view class="modal-container">
-					<view class="modal-container-head">
-						<text>绑定用车人</text>
-						<!-- <image src="/assets/images/home/right_1.png" @tap="handleHideSengKeyModal" /> -->
-					</view>
-					<view class="modal-container-middle">
-						<view class="middle-form-item">
-							<label>车牌号</label>
-							<view class="modal-form-region">
-								{{cellData.platenumber}}
-							</view>
-						</view>
-						<view class="middle-form-item">
-							<label>绑定用车人</label>
-							<view class="modal-form-region">
-								<input placeholder="请输入使用人" name="personName"
-									style="text-align: right;font-size: 28rpx;" />
-							</view>
-						</view>
-						<view class="middle-form-item">
-							<label>手机号</label>
-							<view class="modal-form-region">
-								<input placeholder="请输入手机号" name="mobile" style="text-align: right;font-size: 28rpx;" />
-							</view>
-						</view>
-						<view class="middle-form-item">
-							<label>开始时间</label>
-							<view class="modal-form-region">
-								<picker mode="date" data-index="startDate" @change="bindTimeChange">
-									<view class="form-item-text">
-										<text>{{startDate}}</text>
-									</view>
-								</picker>
-								<picker mode="time" data-index="startTime" @change="bindTimeChange">
-									<view class="form-item-text">
-										<text>{{startTime}}</text>
-									</view>
-								</picker>
-							</view>
-						</view>
-						<view class="middle-form-item">
-							<label>结束时间</label>
-							<view class="modal-form-region">
-								<picker mode="date" data-index="endDate" @change="bindTimeChange">
-									<view class="form-item-text">
-										<text>{{endDate}}</text>
-									</view>
-								</picker>
-								<picker mode="time" data-index="endTime" @change="bindTimeChange">
-									<view class="form-item-text">
-										<text>{{endTime}}</text>
-									</view>
-								</picker>
-							</view>
-						</view>
-					</view>
-					<view class="modal-container-footer">
-						<button form-type="submit">确认</button>
-					</view>
-				</view>
-			</form>
-		</view>
-	</block>
-
-	<!-- 免责弹窗 -->
-	<view class="modal-mask" v-if="showDisclaimerModal" @tap="closeDisclaimerModal">
-		<view class="modal-wrap" @tap.stop>
-			<view class="modal-title">免责条款</view>
-			<view class="modal-content">
-				设备安装完成后，建议您使用 K7 模块做基础预检，检测记录会留存存档，后续设备出现问题时，能帮助我们更快排查维修，给您更完善的售后保障～
-				<text>若您选择【免检注册】，将会跳过本次 K7 预检流程。</text>
-				<text class="warn-text">温馨小提示：如果未完成预检就注册设备，后续设备产生故障，我们将无法提供售后排查与维修服务，相关损失需要您自行承担，还请您仔细考虑后再确认哦。</text>
 			</view>
-			<view class="modal-buttons">
-				<view class="btn-cancel" @tap="modalGoCheck">去检测</view>
-				<view class="btn-confirm" @tap="modalSkipCheck">免检注册</view>
+		</view>
+
+		<!-- 绑定用车人弹窗 -->
+		<view v-if="net_send_key_show_momal">
+			<view class="modal-mask" @tap="handleHideSengKeyModal"></view>
+			<view class="modal-base-map">
+				<form @submit="handleNetFormSubmit">
+					<view class="modal-container">
+						<view class="modal-container-head">
+							<text>绑定用车人</text>
+						</view>
+						<view class="modal-container-middle">
+							<view class="middle-form-item">
+								<label>车牌号</label>
+								<view class="modal-form-region">{{ cellData.platenumber }}</view>
+							</view>
+							<view class="middle-form-item">
+								<label>绑定用车人</label>
+								<view class="modal-form-region">
+									<input placeholder="请输入使用人" name="personName"
+										style="text-align: right;font-size: 28rpx;" />
+								</view>
+							</view>
+							<view class="middle-form-item">
+								<label>手机号</label>
+								<view class="modal-form-region">
+									<input placeholder="请输入手机号" name="mobile"
+										style="text-align: right;font-size: 28rpx;" />
+								</view>
+							</view>
+							<view class="middle-form-item">
+								<label>开始时间</label>
+								<view class="modal-form-region">
+									<picker mode="date" data-index="startDate" @change="bindTimeChange">
+										<view class="form-item-text"><text>{{ startDate }}</text></view>
+									</picker>
+									<picker mode="time" data-index="startTime" @change="bindTimeChange">
+										<view class="form-item-text"><text>{{ startTime }}</text></view>
+									</picker>
+								</view>
+							</view>
+							<view class="middle-form-item">
+								<label>结束时间</label>
+								<view class="modal-form-region">
+									<picker mode="date" data-index="endDate" @change="bindTimeChange">
+										<view class="form-item-text"><text>{{ endDate }}</text></view>
+									</picker>
+									<picker mode="time" data-index="endTime" @change="bindTimeChange">
+										<view class="form-item-text"><text>{{ endTime }}</text></view>
+									</picker>
+								</view>
+							</view>
+						</view>
+						<view class="modal-container-footer">
+							<button form-type="submit">确认</button>
+						</view>
+					</view>
+				</form>
+			</view>
+		</view>
+
+		<!-- 免责弹窗 -->
+		<view v-if="showDisclaimerModal" class="modal-mask" @tap="closeDisclaimerModal">
+			<view class="modal-wrap" @tap.stop>
+				<view class="modal-title">免责条款</view>
+				<view class="modal-content">
+					设备安装完成后，建议您使用 K7 模块做基础预检，检测记录会留存存档，后续设备出现问题时，能帮助我们更快排查维修，给您更完善的售后保障～
+					<text>若您选择【免检注册】，将会跳过本次 K7 预检流程。</text>
+					<text
+						class="warn-text">温馨小提示：如果未完成预检就注册设备，后续设备产生故障，我们将无法提供售后排查与维修服务，相关损失需要您自行承担，还请您仔细考虑后再确认哦。</text>
+				</view>
+				<view class="modal-buttons">
+					<view class="btn-cancel" @tap="modalGoCheck">去检测</view>
+					<view class="btn-confirm" @tap="modalSkipCheck">免检注册</view>
+				</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	/**
-	 * 车辆管理页面接口导入
-	 * u_wycRentVehicleList: 获取租赁车辆列表接口
-	 * u_addOrUpdateCar: 新增/编辑车辆接口
-	 * u_carapiDeleteCar: 删除车辆接口
-	 * u_bindOrUpdateDriver: 绑定/更新用车司机接口
-	 * u_unBindDriver: 解绑车辆司机接口
-	 */
 	import {
 		u_wycRentVehicleList,
 		u_addOrUpdateCar,
@@ -289,155 +255,120 @@
 	export default {
 		data() {
 			return {
-				// 设备窗口信息
 				c_screen_height: 0,
-				c_screen_width: 0,
 				statusBarHeight: 0,
 				navBarHeight: 44,
-				s_background_tabs_1: '',
-				s_background_tabs_2: '',
-				s_background_tabs_active_1: '',
-				s_background_tabs_active_2: '',
-				searchBarHeight: 80,
-				totalNavHeight: (0) + (44),
-				// 列表分页参数
+
 				g_page: 1,
 				g_items: [],
 				g_total: 0,
 				g_triggered: false,
-				isRefreshing: false, // 新增刷新锁，防止并发卡死loading
+				isRefreshing: false,
 				c_activeTab: 1,
 				comParam: '',
-				// 新增编辑车辆表单参数
+
 				params: {},
 				btnState: '新增',
 				id: '',
 				batterylift: '一键启动',
 				carOwnerNameValue: '',
 				carOwnerName: '智信通',
-				// 页面跳转携带标识
+
 				g_source: '',
 				g_flagMulti: '',
-				// 绑定用车人弹窗控制
+
 				net_send_key_show_momal: false,
 				cellData: {},
 				vehId: '',
-				// 用车人时间选择
 				startDate: '2025-03-20',
 				startTime: '19:00',
 				endDate: '2025-03-20',
 				endTime: '19:00',
-				oilendDate: '',
-				oilendTime: '',
-				// 免责弹窗
+
 				showDisclaimerModal: false
 			}
 		},
+		computed: {
+			recordContainerStyle() {
+				const top = this.navBarHeight + this.statusBarHeight
+				const height = this.c_screen_height - top
+				return {
+					height: `${height}px`,
+					marginTop: `${top}px`
+				}
+			},
+			listScrollHeight() {
+				const base = this.c_screen_height - (this.navBarHeight + this.statusBarHeight + 10 + 50)
+				return base
+			}
+		},
 		onLoad(options) {
-			// 接收页面跳转参数
 			this.initCarryParams(options)
-			// 初始化车辆列表
 			this.initList()
 		},
 		onShow() {
-			// 预转换tab背景图base64
 			this.initialiImageBaseConversion()
 		},
 		onReady() {
-			// 初始化当前日期时间
 			this.handleCurrentDate()
 		},
 		methods: {
-			/**
-			 * 搜索输入框失焦，重置分页并刷新车辆列表
-			 * @param {Object} evt 事件对象
-			 */
-			bindblurSea(evt) {
+			bindblurSea() {
 				this.g_page = 1
 				this.g_items = []
 				this.initList()
 			},
-			/**
-			 * 日期/时间选择器变更回调
-			 * @param {Object} evt 事件对象，dataset.index区分时间字段
-			 */
 			bindTimeChange(evt) {
 				const category = evt.currentTarget.dataset.index
-				const value = evt.detail.value
-				this[category] = value
+				this[category] = evt.detail.value
 			},
-			/**
-			 * 删除车辆 - 调用u_carapiDeleteCar接口
-			 * @param {Object} evt 事件对象，dataset.item为当前车辆数据
-			 */
 			handleDelete(evt) {
 				uni.showModal({
 					title: '提示',
 					content: '确认删除？',
-					complete: (res) => {
+					complete: async (res) => {
 						if (res.confirm) {
-							const info = evt.currentTarget.dataset.item
-							const apiUrl = getApp().data.k1swUrl + u_carapiDeleteCar.URL
+
 							const param = {
 								sn: info?.sn,
 								code: info?.code
 							}
-							byPost(apiUrl, param, (response) => {
-								// 接口返回成功刷新列表
-								if (response.data.code === 1000) {
-									this.c_activeTab = 1
-									this.g_page = 1
-									this.g_items = []
-									getApp().data.reflag = 1
-									this.initList()
-								}
-							})
+							const response = await u_carapiDeleteCar(param)
+							if (response.code === 1000) {
+								this.c_activeTab = 1
+								this.g_page = 1
+								this.g_items = []
+								this.initList()
+							}
+
 						}
 					}
 				})
 			},
-			/**
-			 * 解析onLoad跳转携带参数
-			 * @param {Object} evt 页面options参数
-			 */
 			initCarryParams(evt) {
 				const {
 					source,
-					flagMulti,
-					info
+					flagMulti
 				} = evt
 				this.g_source = source
 				this.g_flagMulti = flagMulti
-				if (info) this.info = JSON.parse(info)
 			},
-			/**
-			 * 选中车辆跳转回来源页面
-			 * @param {Object} evt 事件对象，dataset.item车辆详情
-			 */
 			handleSelectJump(evt) {
 				const item = evt.currentTarget.dataset.item
 				uni.redirectTo({
 					url: `${this.g_source}?datails=${JSON.stringify(item)}`
 				})
 			},
-			/**
-			 * 打开绑定用车人弹窗，缓存当前车辆数据
-			 * @param {Object} evt 事件对象，dataset.item车辆数据
-			 */
 			handleShowSendNetKeyModal(evt) {
 				const info = evt.currentTarget.dataset.item
 				this.cellData = info
 				this.net_send_key_show_momal = true
 				this.vehId = info.id
 			},
-			// 关闭绑定用车人弹窗，清空缓存车辆数据
 			handleHideSengKeyModal() {
 				this.cellData = {}
 				this.net_send_key_show_momal = false
 			},
-			/**
-			 * 初始化当前系统日期、次日日期、默认时分
-			 */
 			handleCurrentDate() {
 				const formatDate = (date) => {
 					const year = date.getFullYear()
@@ -456,18 +387,12 @@
 				const currentDate = formatDate(now)
 				const tomorrowDate = formatDate(tomorrow)
 				const currentTime = formatTime(now)
-				this.oilendDate = currentDate
-				this.oilendTime = currentTime
 				this.startDate = currentDate
 				this.endDate = tomorrowDate
 				this.startTime = currentTime
 				this.endTime = currentTime
 			},
-			/**
-			 * 提交绑定用车人表单 - 调用u_bindOrUpdateDriver接口
-			 * @param {Object} evt form表单提交事件
-			 */
-			handleNetFormSubmit(evt) {
+			async handleNetFormSubmit(evt) {
 				const {
 					startDate,
 					startTime,
@@ -476,7 +401,6 @@
 					vehId
 				} = this
 				const formData = evt.detail.value
-				// 表单校验
 				const validations = [{
 						field: formData.personName,
 						message: '请输入使用人'
@@ -488,9 +412,12 @@
 				]
 				const validationError = validations.find(item => !item.field)
 				if (validationError) {
+					uni.showToast({
+						title: validationError.message,
+						icon: 'none'
+					})
 					return
 				}
-				// 拼接起止时间
 				const buildDateTime = (date, time) => `${date || ''} ${time ? `${time}:00` : '00:00:00'}`.trim()
 				const requestParams = {
 					vehId,
@@ -499,46 +426,42 @@
 					drivername: formData.personName,
 					drivermobile: formData.mobile
 				}
-				const baseURL = getApp().data.k1swUrl
-				const submitRequest = async () => {
-					try {
-						byPost(`${baseURL}${u_bindOrUpdateDriver.URL}`, requestParams, (response) => {
-							if (response.data.code === 1000) {
-								// 绑定成功关闭弹窗刷新列表
-								this.net_send_key_show_momal = false
-								this.g_items = []
-								this.initList()
-								this.handleCurrentDate()
-							}
-						}, () => {})
-					} catch (error) {
-						console.error('绑定用车人接口异常：', error.message)
-					}
+
+				const response = await u_bindOrUpdateDriver(requestParams)
+				console.log(response)
+				if (response.code === 1000) {
+					this.net_send_key_show_momal = false
+					this.g_items = []
+					this.initList()
+					this.handleCurrentDate()
 				}
-				submitRequest()
+
 			},
-			/**
-			 * 解绑司机 - 调用u_unBindDriver接口
-			 * @param {Object} evt 解绑按钮事件，dataset.item司机ID
-			 */
-			handleUnBindDriver(evt) {
-				const driverId = evt?.currentTarget?.dataset?.item?.id || ''
-				byPost(getApp().data.k1swUrl + u_unBindDriver.URL, {
-					driverId
-				}, (response) => {
-					if (response?.data.code === 1000) {
-						// 解绑成功重置列表
-						this.g_page = 1
-						this.g_items = []
-						this.initList()
+			async handleUnBindDriver(evt) {
+
+				uni.showModal({
+					title: '提示',
+					content: '确认解绑？！',
+					confirmText: '确认解绑',
+					cancelText: '取消',
+					success: async (res) => {
+						if (!res.confirm) return
+						const driverId = evt?.currentTarget?.dataset?.item?.id || ''
+						const response = await u_unBindDriver({
+							driverId
+						})
+						if (response?.code === 1000) {
+							this.g_page = 1
+							this.g_items = []
+							this.initList()
+						}
 					}
 				})
+
+
+
 			},
-			/**
-			 * 预加载Tab背景图并转换base64
-			 */
 			initialiImageBaseConversion() {
-				const _this = this
 				const imageMap = [{
 						path: '/assets/images/home/1-1.png',
 						key: 's_background_tabs_1'
@@ -575,25 +498,18 @@
 					})
 				})
 			},
-			/**
-			 * 获取车辆列表接口 - u_wycRentVehicleList
-			 * @async
-			 * @desc 分页加载车辆数据，搜索、下拉刷新、触底加载共用
-			 */
 			async initList() {
 				const param = {
 					page: this.g_page,
 					comParam: this.comParam || ""
 				}
 				try {
-					// 调用车辆列表接口
 					const response = await u_wycRentVehicleList(param)
 					if (response.code === 1000) {
-						// 非第一页无数据则不再追加
 						if (!(this.g_page > 1 && response.data.content.length === 0)) {
 							this.g_items = this.g_items.concat(response.content)
 						}
-						this.g_total = Number(response.count || 0).toLocaleString()
+						this.g_total = Number(response.count || 0)
 					} else {
 						console.error('车辆列表接口返回错误', response)
 						uni.showToast({
@@ -609,12 +525,10 @@
 					})
 				}
 			},
-			// scroll-view触底，分页+1加载下一页
 			handleLower() {
 				this.g_page += 1
 				this.initList()
 			},
-			// 下拉刷新核心修复方法，解决loading无法关闭
 			async handleRefresh() {
 				if (this.isRefreshing) return
 				this.isRefreshing = true
@@ -630,39 +544,19 @@
 						icon: 'none'
 					})
 				} finally {
-					// 无论成功失败强制关闭loading
 					setTimeout(() => {
 						this.g_triggered = false
 						this.isRefreshing = false
 					}, 100)
 				}
 			},
-			/**
-			 * 输入框双向绑定赋值到params表单对象
-			 * @param {Object} evt input输入事件，dataset.item对应字段名
-			 */
 			handleBindinput(evt) {
 				const key = evt.currentTarget.dataset.item
 				this.params[key] = evt.detail.value
 			},
-			// 切换启动方式（废弃，保留兼容）
-			handleBatterylift(evt) {
-				this.batterylift = evt.currentTarget.dataset.item
-			},
-			// 切换所属平台
-			handleCarOwnerName(evt) {
-				this.carOwnerName = evt.currentTarget.dataset.item
-			},
-			// 自定义平台名称输入赋值
-			handleCarOwnerNameBindinput(evt) {
-				this.carOwnerNameValue = evt.detail.value
-			},
-			/**
-			 * 提交新增/编辑车辆 - 调用u_addOrUpdateCar接口
-			 * @param {Number} evt 1代表免检注册，其余正常提交
-			 */
-			handleSubmit(evt) {
-				const apiUrl = getApp().data.k1swUrl + u_addOrUpdateCar.URL
+			async handleSubmit(evt) {
+				console.log(evt, '222')
+				// const apiUrl = getApp().data.k1swUrl + u_addOrUpdateCar.URL
 				const param = {
 					id: this.id || '',
 					...this.params,
@@ -670,7 +564,7 @@
 					batterylift: this.batterylift,
 					carOwnerName: this.carOwnerName === '智信通' ? this.carOwnerName : this.carOwnerNameValue
 				}
-				// 必填项校验
+				console.log(param, '0000000')
 				const validations = [{
 						field: param.platenumber,
 						message: '请填写车牌号'
@@ -685,37 +579,38 @@
 					}
 				]
 				for (const item of validations) {
+					console.log(1234567)
 					if (!item.field?.trim()) {
+						uni.showToast({
+							title: item.message,
+							icon: 'none'
+						})
 						return
 					}
 				}
+				const response = await u_addOrUpdateCar(param)
+				console.log(response)
+				if (response.code === 1000) {
+					this.c_activeTab = 1
+					this.params = {}
+					this.btnState = '新增'
+					this.id = ''
+					this.batterylift = '一键启动'
+					this.carOwnerNameValue = ''
+					this.carOwnerName = '智信通'
+					this.g_items = []
+					this.g_page = 1
+					this.initList()
+				} else if (response.code === 7000) {
+					this.showDisclaimerModal = true
+				} else {
+					uni.showToast({
+						title: response.msg,
+						icon: 'none'
+					})
+				}
 
-				byPost(apiUrl, param, (response) => {
-					if (response.data.code === 1000) {
-						// 提交成功切回列表页重置表单
-						this.c_activeTab = 1
-						this.params = {}
-						this.btnState = '新增'
-						this.id = ''
-						this.batterylift = '一键启动'
-						this.carOwnerNameValue = ''
-						this.carOwnerName = '智信通'
-						this.g_items = []
-						this.g_page = 1
-						getApp().data.reflag = 1
-						this.initList()
-					} else if (response.data.code === 7000) {
-						// 需要弹出预检免责弹窗
-						this.showDisclaimerModal = true
-					} else {
-						console.error('新增/编辑车辆失败', response.data.msg)
-					}
-				})
 			},
-			/**
-			 * 编辑车辆，回显车辆数据到表单
-			 * @param {Object} evt 编辑按钮事件，dataset.item车辆完整数据
-			 */
 			handleEdit(evt) {
 				const info = evt.currentTarget.dataset.item
 				this.c_activeTab = 2
@@ -738,43 +633,35 @@
 				this.batterylift = info?.batterylift || '一键启动'
 				this.carOwnerName = info?.carOwnerName
 			},
-			/**
-			 * Tab切换事件
-			 * @param {Object} e tab点击事件
-			 */
-			handleSwitchTab(e) {
-				if (this.c_activeTab == 2) {
+			handleSwitchTab() {
+				if (this.c_activeTab === 2) {
 					this.c_activeTab = 1
 					this.id = ''
 					this.btnState = '新增'
 					this.params = {}
-				} else if (this.c_activeTab !== 2) {
+				} else {
 					this.c_activeTab = 2
 				}
-
 			},
-			// 关闭预检免责弹窗
 			closeDisclaimerModal() {
 				this.showDisclaimerModal = false
 			},
-			// 跳转K7设备检测页面
 			modalGoCheck() {
 				this.closeDisclaimerModal()
 				uni.redirectTo({
 					url: '/pages/ToInternalStaff/K7/index'
 				})
 			},
-			// 免检注册，直接调用提交接口并传入标识1
 			modalSkipCheck() {
 				this.closeDisclaimerModal()
 				this.handleSubmit(1)
-			}
+			},
+			handleChangeBlack() {}
 		}
 	}
 </script>
 
 <style scoped>
-	/* 全局页面浅蓝浅色背景 */
 	page {
 		background: #EFF5FF;
 	}
@@ -782,11 +669,11 @@
 	.container {
 		min-height: 100vh;
 		padding: 10rpx 4rpx;
+		background: #EFF5FF;
 	}
 
 	.record-container {
 		width: 96%;
-		height: 90vh;
 		margin: auto;
 		position: relative;
 		border-radius: 12rpx;
@@ -833,7 +720,6 @@
 		padding: 10px;
 	}
 
-	/* 列表项 */
 	.content-item {
 		margin: 15rpx;
 		background-color: #ffffff;
@@ -952,7 +838,6 @@
 		padding: 4rpx 15rpx;
 	}
 
-	/* 新增编辑卡片 */
 	.card-info {
 		flex: 1;
 		overflow-y: auto;
@@ -960,6 +845,7 @@
 
 	.card-info-item {
 		display: flex;
+		align-items: center;
 		justify-content: space-between;
 		border-bottom: 1px solid #f0f0f0;
 		padding: 20rpx;
@@ -973,41 +859,43 @@
 		display: flex;
 		gap: 6rpx;
 		align-items: flex-start;
+		flex-shrink: 0;
+		min-width: 160rpx;
+	}
+
+	.card-info-item-input {
+		flex: 1;
+		margin-left: 20rpx;
 	}
 
 	.card-info-item-input input {
+		width: 100%;
 		text-align: right;
 		font-family: PingFang SC;
 		font-weight: 500;
-		font-size: 26rpx;
+		font-size: 24rpx;
 		color: #333333;
+		padding-left: 10rpx;
 	}
 
+	/* 提交按钮修复 */
 	.card-footer {
 		width: 90%;
-		height: 50px;
-		color: #fff;
+		margin: 40rpx auto;
+		border-radius: 36rpx;
+		background: linear-gradient(88deg, #1576DC, #1B64B1);
+		box-shadow: 0rpx 1rpx 13rpx 0rpx rgba(51, 63, 92, 0.31);
+		padding: 24rpx 0;
 		text-align: center;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: auto;
+	}
+
+	.card-footer text {
 		font-family: PingFang SC;
 		font-weight: bold;
 		font-size: 34rpx;
-		background-color: #1576dc;
-		border-radius: 12rpx;
+		color: #fff;
 	}
 
-	.card-footer view {
-		width: 40%;
-		background: linear-gradient(88deg, #1576DC, #1B64B1);
-		box-shadow: 0rpx 1rpx 13rpx 0rpx rgba(51, 63, 92, 0.31);
-		border-radius: 36rpx;
-		padding: 10rpx;
-	}
-
-	/* 搜索框 */
 	.search-box {
 		display: flex;
 		align-items: center;
@@ -1015,10 +903,6 @@
 		border-radius: 40rpx;
 		padding: 4px 12px;
 		width: 92%;
-	}
-
-	.search-icon {
-		margin-right: 8px;
 	}
 
 	.search-input {
@@ -1029,7 +913,14 @@
 		font-size: 22rpx;
 	}
 
-	/* 弹窗样式 */
+	.empty-tip {
+		display: flex;
+		justify-content: center;
+		margin-top: 20rpx;
+		font-size: 24rpx;
+		color: #333;
+	}
+
 	.modal-mask {
 		position: fixed;
 		top: 0;
@@ -1047,7 +938,7 @@
 		bottom: 0;
 		background: #fff;
 		border-radius: 20rpx;
-		z-index: 998;
+		z-index: 999;
 		padding: 20rpx;
 	}
 
@@ -1068,11 +959,6 @@
 		font-weight: bold;
 		font-size: 34rpx;
 		color: #333333;
-	}
-
-	.modal-container-head image {
-		width: 24rpx;
-		height: 24rpx;
 	}
 
 	.modal-container-middle {
@@ -1143,12 +1029,15 @@
 		align-items: center;
 	}
 
-	/* 免责弹窗 */
 	.modal-wrap {
 		width: 82%;
 		background: #fff;
 		border-radius: 16rpx;
 		overflow: hidden;
+		position: fixed;
+		left: 9%;
+		top: 30vh;
+		z-index: 999;
 	}
 
 	.modal-title {
@@ -1196,7 +1085,6 @@
 		font-weight: 500;
 	}
 
-	/* checkbox自定义 */
 	::v-deep .wx-checkbox-input {
 		border: 1px solid #64B5F6 !important;
 		border-radius: 3px;
