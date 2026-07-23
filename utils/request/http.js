@@ -61,14 +61,6 @@ class Http {
 				requestData = formData
 			}
 
-			// 打印调试信息
-			console.log('发送请求:', {
-				url,
-				method: mergedConfig.method,
-				data: requestData,
-				header: mergedConfig.header
-			})
-
 			const response = await uni.request({
 				url,
 				method: mergedConfig.method,

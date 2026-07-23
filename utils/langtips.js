@@ -199,7 +199,7 @@ export const tips = {
 	},
 	// 租车公司电子钥匙 | Rental E‑Key | レンタルキー
 	'RentalEKey': {
-		'zhCn': '租车公司电子钥匙',
+		'zhCn': '电子钥匙',
 		'enUs': 'Rental E‑Key',
 		'jaJp': 'レンタルキー'
 	},
