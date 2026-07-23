@@ -223,6 +223,7 @@ http.setInterceptor({
 		header['programType'] = 'app' //所属语言
 
 		if (token) {
+			console.log(header,'')
 			header['token'] = token
 		}
 

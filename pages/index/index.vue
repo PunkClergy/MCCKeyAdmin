@@ -344,6 +344,7 @@
 					  
 					})
 					const path = e.currentTarget.dataset.info?.path
+					console.log(path)
 						uni.navigateTo({
 							url: `${path}`
 						})

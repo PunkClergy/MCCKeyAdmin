@@ -127,6 +127,13 @@
 						"navigationBarTitleText": "移交管理员",
 						"navigationBarBackgroundColor": "#EFF1FC"
 					}
+				},
+				{
+					"path": "onlineCarHailing",
+					"style": {
+						"navigationBarTitleText": "网约车列表",
+						"navigationBarBackgroundColor": "#EFF1FC"
+					}
 				}
 
 			]

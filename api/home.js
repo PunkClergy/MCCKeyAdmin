@@ -54,8 +54,9 @@ export const u_wxLogin = (data) => http.postFormData('/userapi/zcyWxLogin', data
 export const u_login = (data) => http.postFormData('/userapi/zcyLogin', data)
 export const u_getControlCodeByMobile = (data) => http.get('/renterApi/getControlCodeByMobile', data)
 
-
-
+export const u_wycRentVehicleList = (data) => http.get('/rentKeyApi/wycRentVehicleList', data)
+export const u_bindOrUpdateDriver = (data) => http.postFormData('/rentKeyApi/bindOrUpdateDriver', data)
+export const u_unBindDriver = (data) => http.postFormData('/rentKeyApi/unBindDriver', data)
 
 
 
