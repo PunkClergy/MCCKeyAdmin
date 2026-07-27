@@ -49,6 +49,13 @@
 					}
 				},
 				{
+					"path": "netKeySending",
+					"style": {
+						"navigationBarTitleText": "钥匙发送租车人",
+						"navigationBarBackgroundColor": "#EFF1FC"
+					}
+				},
+				{
 					"path": "trajectory",
 					"style": {
 						"navigationBarTitleText": "车辆轨迹",
