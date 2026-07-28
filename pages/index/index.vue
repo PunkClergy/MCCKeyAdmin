@@ -372,7 +372,32 @@
 		onShow() {
 			uni.removeStorageSync('funAreaId');
 			this.inIsShowInfo()
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			// 1. 先拿缓存，有缓存一律用缓存（安卓/iOS 通用）
+			const cacheLang = uni.getStorageSync('language')
+			if (cacheLang) {
+			  this.lang = cacheLang
+			  return
+			}
+		
+			// 2. 没有缓存 → 分平台处理
+			const systemInfo = uni.getSystemInfoSync()
+			const platform = systemInfo.platform // 平台：ios / android
+		
+			if (platform === 'ios') {
+			  // ==================== iOS 逻辑 ====================
+			  // 无缓存 → 直接强制设置为 zhCn
+			  this.lang = 'zhCn'
+			  uni.setStorageSync('language', 'zhCn')
+			} else {
+			  // ==================== 安卓 逻辑（你原来的代码） ====================
+			  const language = systemInfo.language
+			  const [prefix, suffix] = language.split(/[-_]/)
+			  const processedSuffix = suffix.charAt(0).toUpperCase() + suffix.slice(1).toLowerCase()
+			  const lang = prefix.toLowerCase() + processedSuffix
+			  
+			  this.lang = lang
+			  uni.setStorageSync('language', lang)
+			}
 		},
 		onReady() {
 			this.initLoginStatus()
