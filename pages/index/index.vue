@@ -54,7 +54,7 @@
 						<text class="blue-mark"></text>
 						<text class="zone-title">功能专区</text>
 					</view>
-					<view class="zone-more">更多专区</view>
+					<!-- <view class="zone-more">更多专区</view> -->
 				</view>
 
 				<view class="special-zone" v-for="(item,index) in groupedZoneList" :key="index">

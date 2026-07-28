@@ -52,7 +52,7 @@
 					:style="{ '--item-count': item.list.length }">
 					<view class="zone-item" v-for="(zoneItem,idx) in item.list" :key="idx">
 						<view class="zone-out"
-							:style="{ backgroundColor: zoneItem.bgcolor,border: zoneItem.namezhCn ? '1rpx solid #f0f0f0' : 'none'}"
+							:style="{ backgroundColor: zoneItem.bgcolor}"
 							:data-info="zoneItem" @tap="handleGetMenuList">
 							<image class="zone-img" :src="'https://k1sw.wiselink.net.cn/img/' + zoneItem.icon" />
 							<view class="zone-text-area">
