@@ -205,7 +205,7 @@
 		}
 	},
 	"requiredPrivateInfos": [
-		"getLocation", "startBluetoothDevicesDiscovery", "saveImageToPhotosAlbum", "camera", "notification"
+		// "getLocation", "startBluetoothDevicesDiscovery", "saveImageToPhotosAlbum", "camera", "notification"
 	],
 
 	"globalStyle": {
