@@ -29,9 +29,23 @@
 			</view>
 		</view>
 
-		<view class="float-button">
-			<image src="/static/images/tel400.png" style="width: 80rpx;height: 80rpx;"
-				@tap="handleMakePhoneCallWithConfirm" />
+		<!-- ========== 自定义语言选择弹窗 ========== -->
+		<view class="lang-picker-mask" v-if="showLangPicker" @tap="closeLangPicker">
+			<view class="lang-picker-container" @tap.stop>
+				<view class="lang-picker-title">{{ lang === 'zhCn' ? '选择语言' : 'Select Language' }}</view>
+				<scroll-view class="lang-picker-list" scroll-y>
+					<view v-for="(item, idx) in langList" :key="idx" class="lang-picker-item"
+						@tap="selectLanguage(item.value)">
+						<text class="lang-picker-item__name">{{ item.name }}</text>
+						<text v-if="lang === item.value" class="lang-picker-item__check">✓</text>
+					</view>
+				</scroll-view>
+				<view class="lang-picker-footer">
+					<view class="lang-picker-btn lang-picker-btn-cancel" @tap="closeLangPicker">
+						{{ lang === 'zhCn' ? '取消' : 'Cancel' }}
+					</view>
+				</view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -63,6 +77,55 @@
 				capsule_distance_to_the_right: 0,
 				account: '',
 				lang: 'zhCn',
+
+				// 语言列表（提取为 data 属性，便于多处复用）
+				langList: [{
+						name: '中文',
+						value: 'zhCn'
+					},
+					{
+						name: 'English',
+						value: 'enUs'
+					},
+					{
+						name: 'にほんご',
+						value: 'jaJp'
+					},
+					{
+						name: 'Bahasa Melayu',
+						value: 'msMy'
+					},
+					{
+						name: 'Português (Brasil)',
+						value: 'ptBr'
+					},
+					{
+						name: 'Oʻzbekcha',
+						value: 'uzUz'
+					},
+					{
+						name: 'English (Singapore)',
+						value: 'enSg'
+					},
+					{
+						name: 'ภาษาไทย',
+						value: 'thTh'
+					},
+					{
+						name: 'Bahasa Indonesia',
+						value: 'idId'
+					},
+					{
+						name: 'English (Australia)',
+						value: 'enAu'
+					},
+					{
+						name: 'English (New Zealand)',
+						value: 'enNz'
+					}
+				],
+				// 控制弹窗显示
+				showLangPicker: false,
 			}
 		},
 
@@ -172,6 +235,41 @@
 				})
 			},
 
+			// ========== 自定义语言弹窗相关 ==========
+			// 显示弹窗
+			showLangPickerModal() {
+				this.showLangPicker = true
+			},
+			// 关闭弹窗（点击遮罩或取消按钮）
+			closeLangPicker() {
+				this.showLangPicker = false
+			},
+			// 选择语言
+			async selectLanguage(value) {
+				// 如果选择的是当前语言，不重复操作
+				if (value === this.lang) {
+					this.closeLangPicker()
+					return
+				}
+
+				// 保存语言
+				uni.setStorageSync('language', value)
+				this.lang = value
+
+				// 更新导航栏标题
+				const pageRoute = 'userCenter/index'
+				uni.setNavigationBarTitle({
+					title: titles[pageRoute][value]
+				})
+
+				// 刷新列表数据（使列表文本按新语言显示）
+				await this.initDirectoryStructure()
+				await this.initBottomDirectory()
+
+				// 关闭弹窗
+				this.closeLangPicker()
+			},
+
 			handleFunExe(evt) {
 				if (!this.account) return uni.redirectTo({
 					url: '/pages/login/index'
@@ -180,40 +278,9 @@
 				const info = evt.currentTarget.dataset.info
 				if (!info?.pagePath) return
 
+				// ===== 语言切换：使用自定义弹窗 =====
 				if (info.pagePath === 'Language') {
-					const langList = [{
-							name: '中文',
-							value: 'zhCn'
-						},
-						{
-							name: 'English',
-							value: 'enUs'
-						},
-						// {
-						// 	name: 'にほんご',
-						// 	value: 'jaJp'
-						// }
-					]
-					uni.showActionSheet({
-						itemList: langList.map(item => item.name),
-						success: async (res) => {
-							const {
-								name,
-								value
-							} = langList[res.tapIndex]
-
-							uni.setStorageSync('language', value)
-							this.lang = value
-
-							const pageRoute = 'userCenter/index'
-							uni.setNavigationBarTitle({
-								title: titles[pageRoute][value]
-							})
-
-							await this.initDirectoryStructure()
-							await this.initBottomDirectory()
-						}
-					})
+					this.showLangPickerModal()
 					return
 				}
 
@@ -234,9 +301,8 @@
 					})
 					return
 				}
-				
+
 				if (info?.pagePath === 'Delete') {
-					// 注销账号 - 二次确认弹窗
 					uni.showModal({
 						title: this.lang === 'zhCn' ? '注销账号' : 'Delete Account',
 						content: this.lang === 'zhCn' ?
@@ -247,16 +313,12 @@
 						confirmColor: '#FF3B30',
 						success: async (res) => {
 							if (res.confirm) {
-								// 显示加载
 								uni.showLoading({
 									title: this.lang === 'zhCn' ? '注销中...' : 'Deleting...'
 								})
 
 								try {
-									// 调用注销接口
 									const res = await u_deleteAccount({})
-
-									// 接口成功
 									if (res.code === 1000) {
 										uni.hideLoading()
 										uni.showToast({
@@ -264,8 +326,6 @@
 												'Deleted successfully',
 											icon: 'success'
 										})
-
-										// 清除本地缓存并跳首页
 										uni.clearStorageSync()
 										setTimeout(() => {
 											uni.reLaunch({
@@ -273,7 +333,6 @@
 											})
 										}, 1500)
 									} else {
-										// 接口失败
 										uni.hideLoading()
 										uni.showToast({
 											title: res.msg || (this.lang === 'zhCn' ? '注销失败' :
@@ -542,5 +601,88 @@
 		text-align: center;
 		padding: 0 40rpx;
 		line-height: 1.5;
+	}
+
+	/* ========== 自定义语言弹窗样式 ========== */
+	.lang-picker-mask {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, 0.5);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 9999;
+	}
+
+	.lang-picker-container {
+		width: 85%;
+		max-height: 70vh;
+		background-color: #fff;
+		border-radius: 32rpx;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		padding: 30rpx 0 20rpx;
+		box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.3);
+	}
+
+	.lang-picker-title {
+		text-align: center;
+		font-size: 32rpx;
+		font-weight: bold;
+		color: #333;
+		padding: 0 30rpx 20rpx;
+		border-bottom: 1rpx solid #eee;
+	}
+
+	.lang-picker-list {
+		flex: 1;
+		max-height: 400rpx;
+		overflow-y: auto;
+		padding: 10rpx 0;
+	}
+
+	.lang-picker-item {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 28rpx 40rpx;
+		border-bottom: 1rpx solid #f5f5f5;
+		font-size: 30rpx;
+		color: #333;
+	}
+
+	.lang-picker-item:active {
+		background-color: #f5f5f5;
+	}
+
+	.lang-picker-item__check {
+		color: #3498db;
+		font-size: 34rpx;
+		font-weight: bold;
+	}
+
+	.lang-picker-footer {
+		padding: 20rpx 30rpx 0;
+		border-top: 1rpx solid #eee;
+		display: flex;
+		justify-content: center;
+	}
+
+	.lang-picker-btn {
+		width: 100%;
+		text-align: center;
+		padding: 20rpx 0;
+		font-size: 30rpx;
+		border-radius: 40rpx;
+		background-color: #f5f5f5;
+		color: #666;
+	}
+
+	.lang-picker-btn-cancel:active {
+		background-color: #e8e8e8;
 	}
 </style>

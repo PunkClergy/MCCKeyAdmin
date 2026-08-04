@@ -69,20 +69,6 @@
 			</view>
 
 			<!-- 使用指南 -->
-			<view class="full-width-swiper" v-if="fullBannerList.length>0">
-				<view class="full-width-use">
-					<image src="/static/images/useGuideIcon.png" />
-					<text>{{tips.UserGuide[lang]}}</text>
-				</view>
-				<swiper indicator-dots="false" autoplay interval="4000" duration="500"
-					:style="{ height: s_use_height + 'px' }">
-					<swiper-item v-for="(item,index) in fullBannerList" :key="index" :data-info="item">
-						<image :src="'https://k1sw.wiselink.net.cn/img/' + item.imgpath" class="full-banner-img"
-							data-flag="use" :data-url="item.bookPath" :data-title="item.title" @tap="handlePlayVideo"
-							@load="LoadOnUseGuideImageLoad" mode="widthFix" />
-					</swiper-item>
-				</swiper>
-			</view>
 		</scroll-view>
 
 		<!-- 底部tabbar -->
@@ -97,11 +83,6 @@
 					{{ item['text' + lang]  }}
 				</text>
 			</view>
-		</view>
-
-		<!-- 悬浮按钮 -->
-		<view class="float-button">
-			<image src="/static/images/tel400.png" @tap="handleMakePhoneCallWithConfirm" />
 		</view>
 	</view>
 </template>
