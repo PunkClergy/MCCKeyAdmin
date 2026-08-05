@@ -27,7 +27,8 @@
             "FacialRecognitionVerify" : {},
             "Fingerprint" : {},
             "Share" : {},
-            "OAuth" : {}
+            "OAuth" : {},
+            "VideoPlayer" : {}
         },
         /* 模块配置 */
         "distribute" : {

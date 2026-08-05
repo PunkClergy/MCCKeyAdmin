@@ -1284,5 +1284,21 @@ export const tips = {
 		"zhCn": "请求失败，请稍后重试",
 		"enUs": "Request failed, please try again later",
 		"jaJp": "リクエストに失敗しました。しばらくしてから再試行してください"
-	}
+	},
+	"FunctionZone": {
+		"zhCn": "功能专区",
+		"enUs": "Function Zone",
+		"jaJp": ""
+	},
+	"MoreZones": {
+		"zhCn": "更多专区",
+		"enUs": "More Zones",
+		"jaJp": ""
+	},
+	"Pleaseselectthezoneyouwishtodisplay": {
+		"zhCn": "请选择您想要显示的专区",
+		"enUs": "Please select zone(s) to display",
+		"jaJp": ""
+	},
+	
 };

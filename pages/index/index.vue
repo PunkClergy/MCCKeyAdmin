@@ -1,211 +1,351 @@
 <template>
 	<view class="container">
+		<!-- 自定义头部 -->
 		<view class="custom-header" :style="headerStyle">
 			<view class="custom-header-outer-layer">
-				<image class="custom-header-outer-layer-image" src="/static/images/logo.png" @tap="handleBackHome">
-				</image>
+				<image class="custom-header-outer-layer-image" src="/static/images/logo.png" @tap="goHome" />
 				<view class="custom-header-outer-layer-title">WiseLink Auto Global</view>
 				<view class="custom-header-outer-layer_user_name">
-					<text v-if="account">{{ account }}</text>
-					<view v-else @tap="handleOnExistingAccountTap" class="login-wrapper">
+					<text v-if="userAccount">{{ userAccount }}</text>
+					<view v-else @tap="goToLogin" class="login-wrapper">
 						<text>{{ tips.PleaseLogin[lang] }}</text>
 						<image src="/static/images/right_1.png" />
 					</view>
 				</view>
 			</view>
-			<view class="subtitle" :style="{ fontSize: (stfontSize || 11) + 'px' }">
-				{{ subtitle }}
+			<view class="subtitle" :style="{ fontSize: (subtitleFontSize || 11) + 'px' }">
+				{{ subtitleText }}
 			</view>
 		</view>
-		<scroll-view class="content" scroll-y :style="contentStyle">
-			<!-- ====== 轮播图 ====== -->
+
+		<!-- 主内容（弹窗打开时模糊） -->
+		<scroll-view class="content" :class="showZonePopup ? 'blur-content' : ''" scroll-y :style="contentStyle">
+			<!-- 轮播 -->
 			<view class="swiper-container">
 				<swiper indicator-dots="false" autoplay interval="3000" duration="500"
-					:style="{ height: s_banner_height + 'px' }">
-					<!-- 遍历 banners 数据，图片地址由 fileType 决定（直接图片或视频封面） -->
-					<swiper-item v-for="(item, index) in g_banner_image" :key="index">
-						<image @tap="handleJumpInfo" :data-item="item"
-							:src="c_link + '/img/' + (item.fileType == 1 ? item.img : item.videoImg)" class="banner-img"
-							mode="widthFix" data-flag="banner" @load="LoadOnUseGuideImageLoad" />
+					:style="{ height: bannerHeight + 'px' }">
+					<swiper-item v-for="(item, index) in bannerList" :key="index">
+						<image @tap="handleBannerClick" :data-item="item"
+							:src="baseImageUrl + '/img/' + (item.fileType == 1 ? item.img : item.videoImg)"
+							class="banner-img" mode="widthFix" data-flag="banner" @load="updateBannerHeight" />
 					</swiper-item>
 				</swiper>
 			</view>
 
-			<!-- ====== 功能专区（卡片样式，与使用指南视觉统一） ====== -->
-			<view class="special-zone-container">
-				<!-- 区块头部：蓝色装饰条 + 标题 -->
+			<!-- 功能专区 -->
+			<view class="special-zone-container" v-if="groupedZoneList.length">
 				<view class="zone-header">
 					<view class="zone-header-left">
 						<view class="blue-mark"></view>
-						<text class="zone-title">功能专区</text>
+						<text class="zone-title">{{tips.FunctionZone[lang] }}</text>
 					</view>
-					<view class="zone-more">更多专区</view>
+					<view class="zone-more" @tap="openZoneSelector">{{tips.MoreZones[lang]}}</view>
 				</view>
-				<!-- 功能项列表：按 serial_number 分组，每行两个 -->
-				<view class="special-zone" v-for="(item, index) in groupedZoneList" :key="index">
-					<view class="zone-item" v-for="(zoneItem, idx) in item.list" :key="idx">
+				<view class="special-zone" v-for="(group, index) in groupedZoneList" :key="index">
+					<view class="zone-item" v-for="(zone, idx) in group.list" :key="idx">
 						<view class="zone-out"
-							:style="{ backgroundColor: zoneItem.bgcolor, border: zoneItem.namezhCn ? '1rpx solid #f0f0f0' : 'none' }"
-							:data-info="zoneItem" @tap="handleGetMenuList">
-							<!-- 功能图标 -->
-							<image class="zone-img" :src="'https://k1sw.wiselink.net.cn/img/' + zoneItem.icon" />
-							<!-- 功能名称和描述（多语言支持） -->
+							:style="{ backgroundColor: zone.bgcolor, border: zone.namezhCn ? '1rpx solid #f0f0f0' : 'none' }"
+							:data-info="zone" @tap="handleZoneItemClick">
+							<image class="zone-img" :src="baseImageUrl + '/img/' + zone.icon" />
 							<view class="zone-text-area">
-								<view class="zone-name">{{ zoneItem['name' + lang] }}</view>
-								<view class="zone-desc">{{ zoneItem['subtitle' + lang] }}</view>
+								<view class="zone-name">{{ zone['name' + lang] }}</view>
+								<view class="zone-desc">{{ zone['subtitle' + lang] }}</view>
 							</view>
 						</view>
 					</view>
 				</view>
 			</view>
 
-			<view class="guide-wrapper" v-if="fullBannerList.length > 0">
-				<!-- 卡片头部：蓝色装饰图标 + “使用指南”文本（多语言） -->
+			<!-- 视频列表 -->
+			<view class="guide-wrapper" v-if="guideVideoList.length">
 				<view class="guide-header">
 					<image src="/static/images/useGuideIcon.png" />
 					<text>{{ tips.UserGuide[lang] }}</text>
 				</view>
-
-				<!-- 循环渲染每一个视频项 -->
-				<view class="guide-item" v-for="(item, index) in fullBannerList" :key="index">
-					<!-- 添加 controls 属性以提供播放控制条 -->
-					<video :src="item.videoUrl || ''" style="width: 100%;" controls></video>
-					<!-- 视频描述：假设字段为 title 或 desc，根据实际接口结构调整 -->
-					<view class="guide-desc">{{ item.title || item.desc || '视频说明' }}</view>
+				<view class="guide-item" v-for="(item, index) in guideVideoList" :key="index">
+					<DomVideoPlayer ref="domVideoPlayer"
+						src="https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/uni-app-video-courses.mp4"
+						:autoplay="false" poster="/static/images/useGuideIcon.png" loop controls />
+					<view class="guide-desc">{{ item.title || item.desc  }}</view>
 				</view>
 			</view>
 		</scroll-view>
 
-		<!-- ============================================================
-			底部 TabBar（固定定位）
-			从接口获取菜单列表，高亮当前选中项，点击切换页面
-		============================================================ -->
+		<!-- 底部 TabBar -->
 		<view class="tabbar" :style="{ height: tabBarHeight + 'px' }">
-			<view class="tab-item" :class="currentTab === index ? 'active' : ''" v-for="(item, index) in tabList"
-				:key="index" @tap="handleSwitchTabNavigation" :data-index="index">
-				<!-- 选中/未选中状态显示不同图标 -->
+			<view class="tab-item" :class="currentTab === index ? 'active' : ''" v-for="(item, index) in tabBarList"
+				:key="index" @tap="switchTab" :data-index="index">
 				<image class="tab-icon" mode="widthFix"
-					:src="'https://k1sw.wiselink.net.cn/img/' + item.selectedIconPath" v-if="currentTab === index" />
-				<image class="tab-icon" mode="widthFix" :src="'https://k1sw.wiselink.net.cn/img/' + item.iconPath"
-					v-else />
+					:src="baseImageUrl + '/img/' + (currentTab === index ? item.selectedIconPath : item.iconPath)" />
 				<text>{{ item['text' + lang] }}</text>
+			</view>
+		</view>
+
+		<!-- 专区选择弹窗 -->
+		<view class="popup-mask" v-if="showZonePopup" @tap="closeZoneSelector">
+			<view class="popup-panel" @tap.stop>
+				<view class="popup-header">
+					<text class="popup-title">{{tips.Pleaseselectthezoneyouwishtodisplay[lang]}}</text>
+					<view class="popup-close-btn" @tap="closeZoneSelector">✕</view>
+				</view>
+				<scroll-view class="popup-list" scroll-y>
+					<label class="popup-item" v-for="(item, index) in zoneSelectList" :key="index"
+						@tap="toggleZoneSelection(item)">
+						<checkbox :value="String(item.id)" :checked="isZoneSelected(item.id)" color="#4F7CFF"
+							style="transform:scale(0.8); margin-right:20rpx;" />
+						<image class="popup-item-icon" :src="baseImageUrl + '/img/' + item.icon" mode="widthFix" />
+						<view class="popup-item-info">
+							<text class="popup-item-name">{{ item['name' + lang] }}</text>
+							<text class="popup-item-desc">{{ item['subtitle' + lang] }}</text>
+						</view>
+					</label>
+				</scroll-view>
+				<view class="popup-footer">
+					<button class="popup-btn cancel" @tap="closeZoneSelector">取消</button>
+					<button class="popup-btn confirm" @tap="confirmZoneSelection">确定</button>
+				</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	// ================================================================
-	// 导入依赖：polyfill、API 接口、多语言提示词
-	// ================================================================
 	import 'url-search-params-polyfill';
 	import {
-		u_getHomeArea, // 获取功能专区数据
-		u_bannerlist20, // 获取轮播图
-		u_getQrcodeImg, // 获取个人二维码（暂时未使用）
-		u_navlist20, // 获取底部导航菜单
-		u_booklist, // 获取使用指南列表
-		u_isShowInfo // 获取信息展示开关（未完全使用）
-	} from '@/api/index'
+		u_getHomeArea,
+		u_bannerlist20,
+		u_getQrcodeImg,
+		u_navlist20,
+		u_booklist,
+		u_isShowInfo,
+		u_leveOneMenu,
+		u_setHomeMenu
+	} from '@/api/index';
 	import {
 		tips
-	} from '@/utils/langtips.js'
+	} from '@/utils/langtips.js';
+
+	// 常量
+	const IMG_BASE_URL = 'https://k1sw.wiselink.net.cn/';
+	const SERVICE_PHONE = '400-090-5050';
 
 	export default {
 		data() {
 			return {
-				// -------- UI 相关 --------
-				tabBarHeight: 80, // 底部 tabBar 高度（px）
-				currentTab: 0, // 当前选中的 tab 索引
-				c_link: 'https://k1sw.wiselink.net.cn/', // 图片资源基础 URL
+				// UI 状态
+				tabBarHeight: 80,
+				currentTab: 0,
+				showZonePopup: false,
 
-				// -------- 轮播图 --------
-				g_banner_image: [], // 轮播图数据列表
-				s_banner_height: '', // 轮播图动态计算的高度（根据图片宽高比）
+				// 用户数据
+				userAccount: '',
+				qrCodeImage: '',
 
-				// -------- 使用指南 --------
-				fullBannerList: [], // 使用指南视频列表
+				// 语言
+				lang: 'zhCn',
+				tips: tips,
 
-				// -------- 头部适配 --------
-				bgcolor: '#fff', // 背景色（暂未使用）
-				height_from_head: 30, // 状态栏高度
-				head_height: 88, // 整个头部高度（状态栏+标题栏）
-				capsule_distance_to_the_right: 15, // 胶囊按钮右侧间距（用于适配不同机型）
+				// 头部
+				statusBarHeight: 30,
+				headerHeight: 88,
+				rightPadding: 15,
+				subtitleText: '',
+				subtitleFontSize: null,
 
-				// -------- 功能专区 --------
-				zoneList: [], // 原始功能列表（从接口获取）
-				groupedZoneList: [], // 按 serial_number 分组后的功能列表
+				// 轮播
+				bannerList: [],
+				bannerHeight: '',
 
-				// -------- 底部导航 --------
-				tabList: [], // 菜单列表
+				// 专区
+				zoneList: [],
+				selectedZoneIds: [],
+				tempSelectedZoneIds: [],
+				zoneSelectList: [],
 
-				// -------- 其他 --------
-				servicePhone: '400-090-5050', // 客服电话（暂未用）
-				personal_qr_code: '', // 个人二维码（暂未用）
-				account: '', // 当前登录用户名/公司名
-				subtitle: '', // 副标题（来自路由参数）
-				stfontSize: '', // 副标题字体大小（来自路由参数）
-				tips: tips, // 多语言提示词对象
-				lang: 'zhCn', // 当前语言，默认中文
-				isShowInfo: null // 信息展示开关（从接口获取）
-			}
+				// 视频
+				guideVideoList: [],
+
+				// 底部 Tab
+				tabBarList: [],
+
+				// 其他
+				showInfoFlag: null,
+				baseImageUrl: IMG_BASE_URL,
+				servicePhoneNumber: SERVICE_PHONE,
+			};
 		},
+
 		computed: {
-			/**
-			 * 头部样式：动态计算内边距和高度
-			 * 使用 initSystemInfo 中获取的状态栏高度和胶囊按钮位置
-			 */
 			headerStyle() {
 				return {
-					paddingTop: this.height_from_head + 'px',
-					paddingLeft: this.capsule_distance_to_the_right + 'px',
-					paddingRight: this.capsule_distance_to_the_right + 'px',
-					height: this.head_height + 'px',
+					paddingTop: this.statusBarHeight + 'px',
+					paddingLeft: this.rightPadding + 'px',
+					paddingRight: this.rightPadding + 'px',
+					height: this.headerHeight + 'px',
 					display: 'flex',
 					flexDirection: 'column',
-					justifyContent: 'center'
-				}
+					justifyContent: 'center',
+				};
 			},
-			/**
-			 * 内容区域样式：根据头部和底部高度定位
-			 */
 			contentStyle() {
 				return {
-					top: this.head_height + 'px',
-					bottom: this.tabBarHeight + 'px'
-				}
-			}
+					top: this.headerHeight + 'px',
+					bottom: this.tabBarHeight + 'px',
+				};
+			},
+			groupedZoneList() {
+				// 根据选中的 ID 过滤专区，并按 serial_number 分组
+				const filtered = this.zoneList;
+				const map = {};
+				filtered.forEach(item => {
+					const key = item.serial_number || 1;
+					if (!map[key]) map[key] = [];
+					map[key].push(item);
+				});
+				return Object.keys(map)
+					.sort((a, b) => a - b)
+					.map(key => ({
+						serial_number: +key,
+						list: map[key],
+					}));
+			},
 		},
+
 		methods: {
-			// ---------- 系统信息初始化 ----------
-			/**
-			 * 获取状态栏高度和胶囊按钮位置，计算头部高度和边距
-			 * 用于适配刘海屏等异形屏
-			 */
+			// ---------- 初始化 ----------
 			initSystemInfo() {
 				try {
 					const {
 						statusBarHeight,
 						screenWidth
-					} = uni.getWindowInfo()
-					const menu = uni.getMenuButtonBoundingClientRect()
-					if (!menu) return
-					const headerHeight = menu.height + (menu.top - statusBarHeight) * 2
-					const rightPadding = screenWidth - menu.right
-					this.height_from_head = statusBarHeight
-					this.head_height = statusBarHeight + headerHeight
-					this.capsule_distance_to_the_right = rightPadding
+					} = uni.getWindowInfo();
+					const menu = uni.getMenuButtonBoundingClientRect();
+					if (!menu) return;
+					const headerHeight = menu.height + (menu.top - statusBarHeight) * 2;
+					this.statusBarHeight = statusBarHeight;
+					this.headerHeight = statusBarHeight + headerHeight;
+					this.rightPadding = screenWidth - menu.right;
 				} catch (e) {
-					console.log('获取状态栏信息失败')
+					console.warn('获取系统信息失败');
 				}
 			},
 
-			// ---------- 轮播图点击跳转 ----------
-			/**
-			 * 点击轮播图跳转：若 fileType==1 直接跳转本地路径，否则跳转 webView 显示图片
-			 * @param {Event} evt - 点击事件对象，携带 item 数据
-			 */
-			handleJumpInfo(evt) {
+			loadLanguage() {
+				const cached = uni.getStorageSync('language');
+				if (cached) {
+					this.lang = cached;
+					return;
+				}
+				const {
+					platform,
+					language
+				} = uni.getSystemInfoSync();
+				if (platform === 'ios') {
+					this.lang = 'zhCn';
+				} else {
+					const [prefix, suffix] = language.split(/[-_]/);
+					const processedSuffix = suffix.charAt(0).toUpperCase() + suffix.slice(1).toLowerCase();
+					this.lang = prefix.toLowerCase() + processedSuffix;
+				}
+				uni.setStorageSync('language', this.lang);
+			},
+
+			loadUserAccount() {
+				uni.getStorage({
+					key: 'user_info',
+					success: res => {
+						this.userAccount = res?.data?.companyName || res?.data?.username || '';
+					},
+				});
+			},
+
+			loadSelectedZoneIds() {
+				// 仅当 selectedZoneIds 为空时从存储恢复（兜底）
+				if (this.selectedZoneIds.length === 0) {
+					const saved = uni.getStorageSync('selectedZoneIds');
+					if (saved && Array.isArray(saved) && saved.length) {
+						this.selectedZoneIds = saved;
+					}
+				}
+			},
+
+			// ---------- API 请求 ----------
+			async fetchBannerList() {
+				try {
+					const res = await u_bannerlist20({
+						terminalId: 0
+					});
+					if (res?.content) this.bannerList = res.content;
+				} catch (e) {
+					/* ignore */
+				}
+			},
+
+			async fetchTabBarList() {
+				try {
+					const res = await u_navlist20({});
+					if (res.code === 1000) this.tabBarList = res.content;
+				} catch (e) {
+					/* ignore */
+				}
+			},
+
+			async fetchZoneList() {
+				try {
+					const res = await u_getHomeArea({});
+					if (res.code === 1000) {
+						this.zoneList = res.content;
+						// 将选中状态直接设置为当前 zoneList 的所有 id
+						this.selectedZoneIds = this.zoneList.map(item => item.id);
+						// 同步存入 storage
+						uni.setStorageSync('selectedZoneIds', this.selectedZoneIds);
+					}
+				} catch (e) {
+					/* ignore */
+				}
+			},
+
+			async fetchGuideVideoList() {
+				try {
+					const res = await u_booklist({});
+					if (res.code === 1000) this.guideVideoList = res.content;
+				} catch (e) {
+					/* ignore */
+				}
+			},
+
+			async fetchQrCode() {
+				try {
+					const res = await u_getQrcodeImg({});
+					if (res.statusCode === 200) this.qrCodeImage = res.content.img;
+				} catch (e) {
+					/* ignore */
+				}
+			},
+
+			async fetchShowInfo() {
+				try {
+					const res = await u_isShowInfo({});
+					if (res.code === 1000) this.showInfoFlag = res.content;
+				} catch (e) {
+					/* ignore */
+				}
+			},
+
+			// ---------- 交互事件 ----------
+			goHome() {
+				uni.redirectTo({
+					url: '/pages/index/index'
+				});
+			},
+
+			goToLogin() {
+				uni.navigateTo({
+					url: '/pages/login/index'
+				});
+			},
+
+			handleBannerClick(evt) {
 				const {
 					item = {}
 				} = evt?.currentTarget?.dataset || {};
@@ -214,9 +354,11 @@
 					path: localPath,
 					img
 				} = item;
-				const IMG_BASE_URL = 'https://k3a.wiselink.net.cn/img/';
-				const targetPath = fileType === 1 ? localPath : `${IMG_BASE_URL}${img || ''}`;
-				const navigateUrl = fileType === 1 ? targetPath :
+				const targetPath = fileType === 1 ?
+					localPath :
+					`${this.baseImageUrl}img/${img || ''}`;
+				const navigateUrl = fileType === 1 ?
+					targetPath :
 					`/pages/agreementWebView/agreementWebView?url=${encodeURIComponent(targetPath)}`;
 				if (!navigateUrl) {
 					uni.showToast({
@@ -230,262 +372,155 @@
 				});
 			},
 
-			// ---------- 拨打电话（暂未使用） ----------
-			handleMakePhoneCallWithConfirm() {
-				uni.showModal({
-					title: '拨打电话',
-					content: `是否拨打客服电话：${this.servicePhone}`,
-					success: (res) => {
-						if (res.confirm) uni.makePhoneCall({
-							phoneNumber: this.servicePhone
-						});
-					}
-				});
+			updateBannerHeight(e) {
+				const {
+					width,
+					height
+				} = e.detail;
+				if (!width || !height) return;
+				const {
+					windowWidth
+				} = uni.getSystemInfoSync();
+				this.bannerHeight = (height / width) * windowWidth;
 			},
 
-			// ---------- 未登录点击跳转登录 ----------
-			handleOnExistingAccountTap() {
-				uni.navigateTo({
-					url: '/pages/login/index'
-				})
-			},
-
-			// ---------- 数据获取 ----------
-			/**
-			 * 获取轮播图数据
-			 */
-			async initialGetBanner() {
-				try {
-					const d = await u_bannerlist20({
-						terminalId: 0
-					});
-					if (d?.content) this.g_banner_image = d.content
-				} catch (e) {}
-			},
-
-			/**
-			 * 从本地存储读取用户信息，显示用户名
-			 */
-			initLoginStatus() {
-				uni.getStorage({
-					key: 'user_info',
-					success: res => {
-						this.account = res?.data?.companyName || res?.data?.username
-					}
-				});
-			},
-
-			/**
-			 * 获取个人二维码（暂未使用）
-			 */
-			async initQrCode() {
-				try {
-					const res = await u_getQrcodeImg({})
-					if (res.statusCode === 200) this.personal_qr_code = res.content.img
-				} catch (e) {}
-			},
-
-			/**
-			 * 获取底部导航菜单
-			 */
-			async initBottomDirectory() {
-				try {
-					const res = await u_navlist20({})
-					if (res.code === 1000) this.tabList = res.content
-				} catch (e) {}
-			},
-
-			/**
-			 * 获取功能专区列表，并分组
-			 */
-			async initZoneInfo() {
-				try {
-					const ReturnData = await u_getHomeArea({});
-					if (ReturnData.code === 1000) {
-						this.zoneList = ReturnData.content;
-						this.groupZoneByXu()
-					}
-				} catch (e) {}
-			},
-
-			/**
-			 * 将功能列表按 serial_number 分组
-			 * 每组显示为一行两个
-			 */
-			groupZoneByXu() {
-				const map = {}
-				this.zoneList.forEach(item => {
-					const k = item.serial_number || 1
-					if (!map[k]) map[k] = []
-					map[k].push(item)
-				})
-				this.groupedZoneList = Object.keys(map).sort((a, b) => a - b).map(k => ({
-					serial_number: +k,
-					list: map[k]
-				}))
-			},
-
-			/**
-			 * 获取使用指南列表
-			 */
-			async initBookList() {
-				try {
-					const res = await u_booklist({})
-					if (res.code === 1000) this.fullBannerList = res.content
-				} catch (e) {}
-			},
-
-			// ---------- 图片加载完成回调 ----------
-			/**
-			 * 轮播图或使用指南图片加载完成后，根据宽高比计算高度
-			 * 使轮播图自适应屏幕宽度
-			 * @param {Event} e - 图片加载事件
-			 */
-			LoadOnUseGuideImageLoad(e) {
-				try {
-					const {
-						width,
-						height
-					} = e.detail
-					if (!width || !height) return
-					const {
-						windowWidth
-					} = uni.getSystemInfoSync()
-					const h = height / width * windowWidth
-					const f = e.currentTarget.dataset.flag
-					if (f === 'banner') this.s_banner_height = h
-				} catch (e) {}
-			},
-
-			/**
-			 * 获取信息展示开关（暂未完全使用）
-			 */
-			async inIsShowInfo() {
-				try {
-					const res = await u_isShowInfo({})
-					if (res.code === 1000) this.isShowInfo = res.content
-				} catch (e) {}
-			},
-
-			// ---------- 导航切换 ----------
-			/**
-			 * 底部 Tab 点击切换：根据索引跳转到对应页面
-			 * @param {Event} e - 点击事件
-			 */
-			handleSwitchTabNavigation(e) {
-				const idx = e.currentTarget.dataset.index
-				const url = this.tabList[idx]?.pagePath
-				if (url) uni.redirectTo({
-					url: `/${url}`
-				})
-			},
-
-			/**
-			 * Logo 点击返回首页
-			 */
-			handleBackHome() {
-				uni.redirectTo({
-					url: '/pages/index/index'
-				})
-			},
-
-			/**
-			 * 功能专区点击处理：若已登录则跳转，否则跳转登录
-			 * @param {Event} e - 点击事件，携带功能区 id 和路径
-			 */
-			handleGetMenuList(e) {
-				if (this.account) {
-					// 存储功能区 id 供后续页面使用
-					uni.setStorage({
-						key: 'funAreaId',
-						data: e?.currentTarget?.dataset?.info?.id,
-					})
-					const path = e.currentTarget.dataset.info?.path
-					uni.navigateTo({
-						url: `${path}`
-					})
-				} else {
+			handleZoneItemClick(e) {
+				if (!this.userAccount) {
 					uni.redirectTo({
 						url: '/pages/login/index'
-					})
+					});
+					return;
 				}
+				const zone = e?.currentTarget?.dataset?.info || {};
+				uni.setStorage({
+					key: 'funAreaId',
+					data: zone.id
+				});
+				if (zone.path) uni.navigateTo({
+					url: zone.path
+				});
+			},
+
+			async openZoneSelector() {
+				if (!this.userAccount) {
+					uni.redirectTo({
+						url: '/pages/login/index'
+					});
+					return;
+				}
+				try {
+					const res = await u_leveOneMenu();
+					this.zoneSelectList = res?.content || [];
+					// 直接使用最新的 selectedZoneIds
+					this.tempSelectedZoneIds = [...this.selectedZoneIds];
+					this.showZonePopup = true;
+				} catch (e) {
+					/* ignore */
+				}
+			},
+
+			closeZoneSelector() {
+				this.showZonePopup = false;
+			},
+
+			toggleZoneSelection(item) {
+				const id = item.id;
+				const index = this.tempSelectedZoneIds.indexOf(id);
+				if (index > -1) {
+					this.tempSelectedZoneIds.splice(index, 1);
+				} else {
+					this.tempSelectedZoneIds.push(id);
+				}
+			},
+
+			isZoneSelected(id) {
+				return this.tempSelectedZoneIds.includes(id);
+			},
+
+			async confirmZoneSelection() {
+				if (!this.tempSelectedZoneIds.length) {
+					uni.showToast({
+						title: '请至少选择一个专区',
+						icon: 'none'
+					});
+					return;
+				}
+				const response = await u_setHomeMenu({
+					menuIds: this.tempSelectedZoneIds
+				});
+				if (response?.code == 1000) {
+					// 刷新专区列表，内部会自动更新 selectedZoneIds 和存储
+					this.fetchZoneList();
+					this.closeZoneSelector();
+				} else {
+					uni.showToast({
+						title: response.msg,
+						icon: 'none'
+					});
+				}
+			},
+
+			switchTab(e) {
+				const idx = e.currentTarget.dataset.index;
+				const url = this.tabBarList[idx]?.pagePath;
+				if (url) uni.redirectTo({
+					url: `/${url}`
+				});
+			},
+
+			callServicePhone() {
+				uni.showModal({
+					title: '拨打电话',
+					content: `是否拨打客服电话：${this.servicePhoneNumber}`,
+					success: (res) => {
+						if (res.confirm) {
+							uni.makePhoneCall({
+								phoneNumber: this.servicePhoneNumber
+							});
+						}
+					},
+				});
 			},
 		},
 
-		// ---------- 生命周期 ----------
 		onLoad(options) {
-			// 初始化 UI 适配
-			this.initSystemInfo()
-			// 加载各模块数据
-			this.initialGetBanner()
-			this.initBottomDirectory()
-			this.initZoneInfo()
-			this.initBookList()
-			// 从路由参数获取副标题和字体大小
-			this.subtitle = options?.subtitle
-			this.stfontSize = options?.stfontSize
+			this.initSystemInfo();
+			// 兜底加载存储中的选中状态（当网络请求失败时显示）
+			this.loadSelectedZoneIds();
+			this.fetchBannerList();
+			this.fetchTabBarList();
+			this.fetchZoneList(); // 会覆盖上述兜底值，保证最新
+			this.fetchGuideVideoList();
+			this.subtitleText = options?.subtitle || '';
+			this.subtitleFontSize = options?.stfontSize || null;
 		},
 
-		/**
-		 * 页面显示时：清除缓存的功能区 id，获取信息展示开关，
-		 * 并根据系统语言设置当前语言（优先使用缓存）
-		 */
 		onShow() {
 			uni.removeStorageSync('funAreaId');
-			this.inIsShowInfo()
-			const cacheLang = uni.getStorageSync('language')
-			if (cacheLang) {
-				this.lang = cacheLang
-				return
-			}
-			// 无缓存时根据平台设置默认语言
-			const systemInfo = uni.getSystemInfoSync()
-			const platform = systemInfo.platform
-			if (platform === 'ios') {
-				this.lang = 'zhCn'
-				uni.setStorageSync('language', 'zhCn')
-			} else {
-				const language = systemInfo.language
-				const [prefix, suffix] = language.split(/[-_]/)
-				const processedSuffix = suffix.charAt(0).toUpperCase() + suffix.slice(1).toLowerCase()
-				this.lang = prefix.toLowerCase() + processedSuffix
-				uni.setStorageSync('language', this.lang)
-			}
+			this.loadLanguage();
+			this.fetchShowInfo();
 		},
 
-		/**
-		 * 页面渲染完成：读取用户登录状态和二维码
-		 */
 		onReady() {
-			this.initLoginStatus()
-			this.initQrCode()
-		}
-	}
+			this.loadUserAccount();
+			this.fetchQrCode();
+		},
+	};
 </script>
 
 <style scoped>
-	/* ================================================================
-	       全局样式重置：隐藏滚动条
-	       ================================================================ */
 	::-webkit-scrollbar {
 		display: none;
 	}
 
-	/* ================================================================
-	       页面容器：全屏，浅蓝色背景，防止溢出
-	       ================================================================ */
 	.container {
 		width: 100vw;
 		min-height: 100vh;
-		background: #ADD8E6;
+		background: linear-gradient(145deg, #e3f2fd 0%, #81d4fa 80%, #81d4fa 100%);
 		box-sizing: border-box;
 		overflow: hidden;
 	}
 
-	/* ================================================================
-	       自定义头部（完全原始样式，无额外美化）
-	       固定定位，透明背景，内容由 JS 动态控制
-	       ================================================================ */
 	.custom-header {
 		position: fixed;
 		top: 0;
@@ -496,7 +531,6 @@
 		box-sizing: border-box;
 	}
 
-	/* 头部外层：flex 水平布局，间距 20rpx */
 	.custom-header-outer-layer {
 		display: flex;
 		align-items: center;
@@ -504,13 +538,11 @@
 		gap: 20rpx;
 	}
 
-	/* Logo 图标尺寸 */
 	.custom-header-outer-layer-image {
 		width: 46rpx;
 		height: 46rpx;
 	}
 
-	/* 标题：占据剩余空间，加粗 */
 	.custom-header-outer-layer-title {
 		flex: 1;
 		font-size: 36rpx;
@@ -518,33 +550,28 @@
 		color: #333;
 	}
 
-	/* 用户名区域：水平排列 */
 	.custom-header-outer-layer_user_name {
 		display: flex;
 		align-items: center;
 		gap: 8rpx;
 	}
 
-	/* 未登录时的“请登录”包装器 */
 	.login-wrapper {
 		display: flex;
 		align-items: center;
 		gap: 6rpx;
 	}
 
-	/* 用户名或“请登录”文字样式 */
 	.custom-header-outer-layer_user_name text {
 		font-size: 28rpx;
 		color: #333;
 	}
 
-	/* 右侧箭头图标 */
 	.custom-header-outer-layer_user_name image {
 		width: 26rpx;
 		height: 26rpx;
 	}
 
-	/* 副标题：位于头部下方，颜色略浅 */
 	.subtitle {
 		margin-top: 6rpx;
 		color: #666;
@@ -552,10 +579,6 @@
 		font-size: 24rpx;
 	}
 
-	/* ================================================================
-	       内容区域（滚动）：
-	       固定定位，避开头部和底部，内边距保持内容与边缘距离
-	       ================================================================ */
 	.content {
 		position: fixed;
 		left: 0;
@@ -563,25 +586,24 @@
 		box-sizing: border-box;
 		padding: 0 20rpx 30rpx;
 		-webkit-overflow-scrolling: touch;
+		transition: filter 0.3s ease;
 	}
 
-	/* ================================================================
-	       轮播图容器：与顶部有间距
-	       ================================================================ */
+	.blur-content {
+		filter: blur(8px);
+		pointer-events: none;
+	}
+
 	.swiper-container {
 		width: 100%;
 		margin-top: 20rpx;
 	}
 
-	/* 轮播图片：宽度100%，圆角 */
 	.banner-img {
 		width: 100%;
 		border-radius: 24rpx;
 	}
 
-	/* ================================================================
-	       功能专区 — 卡片样式（白色背景，圆角，阴影）
-	       ================================================================ */
 	.special-zone-container {
 		width: 100%;
 		margin-top: 30rpx;
@@ -592,7 +614,6 @@
 		box-sizing: border-box;
 	}
 
-	/* 区域头部：标题 + 蓝色装饰条 */
 	.zone-header {
 		display: flex;
 		justify-content: space-between;
@@ -606,7 +627,6 @@
 		gap: 12rpx;
 	}
 
-	/* 蓝色装饰条（渐变） */
 	.blue-mark {
 		display: block;
 		width: 8rpx;
@@ -621,7 +641,18 @@
 		color: #1E293B;
 	}
 
-	/* 功能网格：每行两列，间距 20rpx */
+	.zone-more {
+		font-size: 28rpx;
+		color: #4F7CFF;
+		font-weight: 500;
+		padding: 8rpx 16rpx;
+		transition: background 0.2s;
+	}
+
+	.zone-more:active {
+		background: rgba(79, 124, 255, 0.2);
+	}
+
 	.special-zone {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -637,7 +668,6 @@
 		width: 100%;
 	}
 
-	/* 每个功能项卡片：圆角，flex 水平排列，带背景色或边框 */
 	.zone-out {
 		width: 100%;
 		border-radius: 32rpx;
@@ -653,20 +683,17 @@
 		border: 1rpx solid rgba(0, 0, 0, 0.02) !important;
 	}
 
-	/* 点击反馈：轻微缩放和阴影变化 */
 	.zone-out:active {
 		transform: scale(0.96);
 		box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
 	}
 
-	/* 功能图标 */
 	.zone-img {
 		width: 64rpx;
 		height: 44rpx;
 		flex-shrink: 0;
 	}
 
-	/* 文字区域：垂直排列，左对齐 */
 	.zone-text-area {
 		display: flex;
 		flex-direction: column;
@@ -688,10 +715,6 @@
 		margin-top: 4rpx;
 	}
 
-	/* ================================================================
-	       使用指南大卡片（与功能专区风格一致）
-	       头部被提取到外层，内容循环渲染
-	       ================================================================ */
 	.guide-wrapper {
 		width: 100%;
 		margin-top: 30rpx;
@@ -702,7 +725,6 @@
 		box-sizing: border-box;
 	}
 
-	/* 卡片头部：蓝色装饰条 + 标题 */
 	.guide-header {
 		display: flex;
 		align-items: center;
@@ -723,7 +745,6 @@
 		color: #1E293B;
 	}
 
-	/* 每个视频项 */
 	.guide-item {
 		margin-bottom: 24rpx;
 	}
@@ -732,23 +753,19 @@
 		margin-bottom: 0;
 	}
 
-	/* 视频描述文字 */
 	.guide-desc {
 		font-size: 30rpx;
 		color: #333;
 		margin-top: 12rpx;
 	}
 
-	/* ================================================================
-	       底部 TabBar：固定底部，水平均匀分布
-	       ================================================================ */
 	.tabbar {
 		position: fixed;
 		bottom: 0;
 		left: 0;
 		width: 100%;
-		background: #ADD8E6;
-		box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.08);
+		background: #81d4fa;
+		box-shadow: -2rpx -2rpx 10rpx -10rpx #81d4fa;
 		display: flex;
 		align-items: center;
 		justify-content: space-around;
@@ -764,18 +781,161 @@
 	}
 
 	.tab-icon {
-		width: 46rpx;
-		height: 46rpx;
+		width: 50rpx;
+		height: 50rpx;
 	}
 
-	/* 默认文字颜色为灰色 */
 	.tab-item text {
-		font-size: 22rpx;
-		color: #999;
+		font-size: 26rpx;
+		color: #333;
 	}
 
-	/* 选中状态文字颜色为蓝色 */
 	.tab-item.active text {
 		color: #3498db;
+		font-weight: bold;
+	}
+
+	/* 弹窗 */
+	.popup-mask {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.5);
+		z-index: 200;
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		animation: fadeIn 0.3s ease;
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+
+		to {
+			opacity: 1;
+		}
+	}
+
+	.popup-panel {
+		width: 100%;
+		max-height: 75vh;
+		background: #FFFFFF;
+		border-radius: 32rpx 32rpx 0 0;
+		padding: 30rpx 20rpx 20rpx;
+		box-sizing: border-box;
+		animation: slideUp 0.3s ease;
+		display: flex;
+		flex-direction: column;
+	}
+
+	@keyframes slideUp {
+		from {
+			transform: translateY(100%);
+		}
+
+		to {
+			transform: translateY(0);
+		}
+	}
+
+	.popup-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-bottom: 20rpx;
+		border-bottom: 1rpx solid #f0f0f0;
+		margin-bottom: 16rpx;
+		flex-shrink: 0;
+	}
+
+	.popup-title {
+		font-size: 34rpx;
+		font-weight: 600;
+		color: #1E293B;
+	}
+
+	.popup-close-btn {
+		font-size: 40rpx;
+		color: #999;
+		padding: 10rpx;
+	}
+
+	.popup-list {
+		max-height: 50vh;
+		overflow-y: auto;
+		flex: 1;
+	}
+
+	.popup-item {
+		display: flex;
+		align-items: center;
+		padding: 20rpx 10rpx;
+		border-bottom: 1rpx solid #f5f5f5;
+	}
+
+	.popup-item:active {
+		background: #f8f8f8;
+	}
+
+	.popup-item-icon {
+		width: 48rpx;
+		height: 48rpx;
+		flex-shrink: 0;
+		margin-right: 20rpx;
+	}
+
+	.popup-item-info {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 4rpx;
+	}
+
+	.popup-item-name {
+		font-size: 30rpx;
+		font-weight: 500;
+		color: #1E293B;
+	}
+
+	.popup-item-desc {
+		font-size: 24rpx;
+		color: #94A3B8;
+	}
+
+	.popup-footer {
+		display: flex;
+		justify-content: space-between;
+		padding-top: 20rpx;
+		border-top: 1rpx solid #f0f0f0;
+		flex-shrink: 0;
+		gap: 20rpx;
+	}
+
+	.popup-btn {
+		flex: 1;
+		height: 80rpx;
+		line-height: 80rpx;
+		border-radius: 40rpx;
+		font-size: 30rpx;
+		border: none;
+		text-align: center;
+	}
+
+	.popup-btn.cancel {
+		background: #f5f5f5;
+		color: #666;
+	}
+
+	.popup-btn.confirm {
+		background: #4F7CFF;
+		color: #fff;
+	}
+
+	.popup-btn:active {
+		opacity: 0.8;
 	}
 </style>
