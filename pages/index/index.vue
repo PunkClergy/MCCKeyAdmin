@@ -101,8 +101,8 @@
 					</label>
 				</scroll-view>
 				<view class="popup-footer">
-					<button class="popup-btn cancel" @tap="closeZoneSelector">取消</button>
-					<button class="popup-btn confirm" @tap="confirmZoneSelection">确定</button>
+					<button class="popup-btn cancel" @tap="closeZoneSelector">{{tip.Cancel[lang]}}</button>
+					<button class="popup-btn confirm" @tap="confirmZoneSelection">{{tip.Confirm[lang]}}</button>
 				</view>
 			</view>
 		</view>
@@ -439,10 +439,6 @@
 
 			async confirmZoneSelection() {
 				if (!this.tempSelectedZoneIds.length) {
-					uni.showToast({
-						title: '请至少选择一个专区',
-						icon: 'none'
-					});
 					return;
 				}
 				const response = await u_setHomeMenu({
@@ -465,20 +461,6 @@
 				const url = this.tabBarList[idx]?.pagePath;
 				if (url) uni.redirectTo({
 					url: `/${url}`
-				});
-			},
-
-			callServicePhone() {
-				uni.showModal({
-					title: '拨打电话',
-					content: `是否拨打客服电话：${this.servicePhoneNumber}`,
-					success: (res) => {
-						if (res.confirm) {
-							uni.makePhoneCall({
-								phoneNumber: this.servicePhoneNumber
-							});
-						}
-					},
 				});
 			},
 		},
