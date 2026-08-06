@@ -85,3 +85,4 @@ export const u_sendRentKey = (data) => http.get('/rentKeyApi/appSendRentKey', da
 export const u_updateRentKey = (data) => http.postFormData('/rentKeyApi/updateRentKey', data) //修改
 export const u_leveOneMenu = (data) => http.get('/appHomeApi/leveOneMenu', data) //获取所有专区
 export const u_setHomeMenu = (data) => http.postFormData('/appHomeApi/setHomeMenu', data) //修改显示专区
+export const u_videoList = (data) => http.get('/appHomeApi/videoFeed', data) //获取指南视频

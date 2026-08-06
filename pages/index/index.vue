@@ -64,8 +64,9 @@
 				</view>
 				<view class="guide-item" v-for="(item, index) in guideVideoList" :key="index">
 					<DomVideoPlayer ref="domVideoPlayer"
-						src="https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/uni-app-video-courses.mp4"
-						:autoplay="false" poster="/static/images/useGuideIcon.png" loop controls />
+						:src="item?.filepath ? `${baseImageUrl}/img/${encodeURI(item.filepath)}` : ''"
+						:poster="item?.preview ? `${baseImageUrl}/img/${encodeURI(item.preview)}` : ''"
+						:autoplay="false" :loop="true" :controls="true" />
 					<view class="guide-desc">{{ item.title || item.desc  }}</view>
 				</view>
 			</view>
@@ -101,8 +102,8 @@
 					</label>
 				</scroll-view>
 				<view class="popup-footer">
-					<button class="popup-btn cancel" @tap="closeZoneSelector">{{tip.Cancel[lang]}}</button>
-					<button class="popup-btn confirm" @tap="confirmZoneSelection">{{tip.Confirm[lang]}}</button>
+					<button class="popup-btn cancel" @tap="closeZoneSelector">{{tips?.Cancel[lang]}}</button>
+					<button class="popup-btn confirm" @tap="confirmZoneSelection">{{tips?.Confirm[lang]}}</button>
 				</view>
 			</view>
 		</view>
@@ -116,10 +117,10 @@
 		u_bannerlist20,
 		u_getQrcodeImg,
 		u_navlist20,
-		u_booklist,
 		u_isShowInfo,
 		u_leveOneMenu,
-		u_setHomeMenu
+		u_setHomeMenu,
+		u_videoList
 	} from '@/api/index';
 	import {
 		tips
@@ -307,7 +308,7 @@
 
 			async fetchGuideVideoList() {
 				try {
-					const res = await u_booklist({});
+					const res = await u_videoList({});
 					if (res.code === 1000) this.guideVideoList = res.content;
 				} catch (e) {
 					/* ignore */
@@ -411,7 +412,6 @@
 				try {
 					const res = await u_leveOneMenu();
 					this.zoneSelectList = res?.content || [];
-					// 直接使用最新的 selectedZoneIds
 					this.tempSelectedZoneIds = [...this.selectedZoneIds];
 					this.showZonePopup = true;
 				} catch (e) {
