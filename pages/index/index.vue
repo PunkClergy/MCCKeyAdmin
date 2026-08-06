@@ -56,18 +56,50 @@
 				</view>
 			</view>
 
-			<!-- 视频列表 -->
+			<!-- 视频列表（一行两个，不足靠左） -->
 			<view class="guide-wrapper" v-if="guideVideoList.length">
 				<view class="guide-header">
 					<image src="/static/images/useGuideIcon.png" />
 					<text>{{ tips.UserGuide[lang] }}</text>
 				</view>
-				<view class="guide-item" v-for="(item, index) in guideVideoList" :key="index">
-					<DomVideoPlayer ref="domVideoPlayer"
-						:src="item?.filepath ? `${baseImageUrl}/img/${encodeURI(item.filepath)}` : ''"
-						:poster="item?.preview ? `${baseImageUrl}/img/${encodeURI(item.preview)}` : ''"
-						:autoplay="false" :loop="true" :controls="true" />
-					<view class="guide-desc">{{ item.title || item.desc  }}</view>
+				<view class="guide-list">
+					<view class="guide-item" v-for="(item, index) in guideVideoList" :key="index">
+						<!-- 视频容器 -->
+						<view class="video-wrapper">
+							<!-- 缩略图加载中的 loading -->
+							<view v-if="item.thumbnailLoading" class="thumbnail-loading">
+								<view class="loading-spinner"></view>
+							</view>
+							<!-- 缩略图（初始显示） -->
+							<image
+								v-if="!item.showVideo"
+								class="video-thumbnail"
+								:src="item.poster"
+								mode="aspectFill"
+								@tap="loadAndPlayVideo(index)"
+								@load="handleThumbnailLoad(index)"
+								@error="handleThumbnailError(index)"
+							/>
+							<!-- 播放按钮（缩略图上） -->
+							<view v-if="!item.showVideo" class="play-icon-wrapper" @tap.stop="loadAndPlayVideo(index)">
+								<image src="/static/images/play-icon.png" class="play-icon" mode="widthFix" />
+							</view>
+							<!-- 视频组件（加载后显示） -->
+							<DomVideoPlayer
+								v-else
+								ref="domVideoPlayer"
+								@play="onVideoPlay(index)"
+								:src="item.videoSrc"
+								:poster="item.poster"
+								:autoplay="false"
+								:loop="true"
+								:controls="true"
+								preload="none"
+								style="width:100%;height:100%;display:block;"
+							/>
+						</view>
+						<view class="guide-desc">{{ item.title || item.desc }}</view>
+					</view>
 				</view>
 			</view>
 		</scroll-view>
@@ -165,6 +197,8 @@
 
 				// 视频
 				guideVideoList: [],
+				// 程序触发播放标记，防止事件递归
+				_programmaticPlay: false,
 
 				// 底部 Tab
 				tabBarList: [],
@@ -306,10 +340,19 @@
 				}
 			},
 
+			// 【修改】视频列表 - 初始化时不加载视频，只保留封面图，并增加 showVideo 和 thumbnailLoading 控制
 			async fetchGuideVideoList() {
 				try {
 					const res = await u_videoList({});
-					if (res.code === 1000) this.guideVideoList = res.content;
+					if (res.code === 1000) {
+						this.guideVideoList = res.content.map(item => ({
+							...item,
+							videoSrc: '', // 初始为空，不加载
+							poster: item.preview ? `${this.baseImageUrl}img/${item.preview}` : '',
+							showVideo: false, // 控制视频组件显隐
+							thumbnailLoading: true, // 缩略图加载中状态
+						}));
+					}
 				} catch (e) {
 					/* ignore */
 				}
@@ -463,6 +506,108 @@
 					url: `/${url}`
 				});
 			},
+
+			// ---------- 缩略图加载事件 ----------
+			handleThumbnailLoad(index) {
+				this.guideVideoList[index].thumbnailLoading = false;
+			},
+			handleThumbnailError(index) {
+				// 加载失败也隐藏 loading，可显示默认占位（这里不额外处理）
+				this.guideVideoList[index].thumbnailLoading = false;
+			},
+
+			// ---------- 【核心修复】点击缩略图加载并播放视频（解决 AbortError） ----------
+			loadAndPlayVideo(index) {
+				const item = this.guideVideoList[index];
+				if (!item) return;
+
+				// 定义实际播放函数
+				const playVideo = () => {
+					const player = this.$refs.domVideoPlayer[index];
+					if (!player || typeof player.play !== 'function') return;
+
+					// 标记为程序触发
+					this._programmaticPlay = true;
+
+					// 获取所有播放器引用
+					const otherPlayers = this.$refs.domVideoPlayer;
+					const pausePromises = [];
+
+					// 暂停其他所有视频，并收集暂停操作的 Promise
+					if (otherPlayers && Array.isArray(otherPlayers)) {
+						otherPlayers.forEach((p, idx) => {
+							if (idx !== index && p && typeof p.pause === 'function') {
+								try {
+									const pauseResult = p.pause();
+									// 如果 pause 返回 Promise（标准 HTML5），则等待它完成
+									if (pauseResult && typeof pauseResult.then === 'function') {
+										pausePromises.push(pauseResult.catch(() => {}));
+									}
+								} catch (e) {
+									// 忽略 pause 可能抛出的异常
+								}
+							}
+						});
+					}
+
+					// 等待所有其他视频暂停完成后，再播放当前视频
+					Promise.all(pausePromises)
+						.then(() => {
+							// 再次确认播放器仍然存在且未切换
+							const currentPlayer = this.$refs.domVideoPlayer[index];
+							if (!currentPlayer) return;
+
+							const playPromise = currentPlayer.play();
+							if (playPromise && typeof playPromise.then === 'function') {
+								playPromise
+									.then(() => {
+										// 播放成功
+										this._programmaticPlay = false;
+									})
+									.catch(error => {
+										// 如果是 AbortError 或其他用户中断，忽略
+										// 或者记录日志，但不必抛出
+										console.warn('Video play failed:', error.name || error.message);
+										this._programmaticPlay = false;
+									});
+							} else {
+								// 某些旧版浏览器 play 不返回 Promise，直接认为成功
+								this._programmaticPlay = false;
+							}
+						})
+						.catch(() => {
+							this._programmaticPlay = false;
+						});
+				};
+
+				// 如果已加载，直接播放
+				if (item.showVideo) {
+					playVideo();
+					return;
+				}
+
+				// 首次加载：隐藏 loading
+				item.thumbnailLoading = false;
+				// 显示视频组件，设置视频地址
+				const realUrl = `${this.baseImageUrl}img/${item.filepath}`;
+				this.$set(item, 'showVideo', true);
+				this.$set(item, 'videoSrc', realUrl);
+
+				// 等待 DOM 更新后，延迟 2 秒播放（给视频加载一些缓冲）
+				this.$nextTick(() => {
+					setTimeout(playVideo, 2000);
+				});
+			},
+
+			// ---------- 简化互斥事件处理 ----------
+			onVideoPlay(playingIndex) {
+				// 如果是程序触发的播放，忽略事件，避免重复暂停
+				if (this._programmaticPlay) {
+					return;
+				}
+				// 这里可以添加用户手动播放的埋点或逻辑
+				console.log(`Video ${playingIndex} started by user action.`);
+			}
 		},
 
 		onLoad(options) {
@@ -697,6 +842,7 @@
 		margin-top: 4rpx;
 	}
 
+	/* 视频列表样式 */
 	.guide-wrapper {
 		width: 100%;
 		margin-top: 30rpx;
@@ -727,18 +873,101 @@
 		color: #1E293B;
 	}
 
-	.guide-item {
-		margin-bottom: 24rpx;
+	.guide-list {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 20rpx;
+		margin-top: 16rpx;
 	}
 
-	.guide-item:last-child {
-		margin-bottom: 0;
+	.guide-item {
+		display: flex;
+		flex-direction: column;
+	}
+
+	/* 视频容器 - 相对定位，固定宽高比 */
+	.video-wrapper {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		border-radius: 12rpx;
+		overflow: hidden;
+		background: #000;
+	}
+
+	/* 缩略图样式 */
+	.video-thumbnail {
+		width: 100%;
+		height: 100%;
+		border-radius: 12rpx;
+		background: #000;
+		object-fit: cover;
+	}
+
+	/* 播放按钮 */
+	.play-icon-wrapper {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		pointer-events: auto;
+		z-index: 2;
+	}
+	.play-icon {
+		width: 80rpx;
+		height: 80rpx;
+		opacity: 0.9;
+	}
+
+	/* 视频组件样式：确保填充容器 */
+	.guide-item video,
+	.guide-item .dom-video-player {
+		width: 100% !important;
+		height: 100% !important;
+		border-radius: 12rpx;
+		background: #000;
+		display: block;
+	}
+
+	/* 缩略图加载中的 loading 遮罩 */
+	.thumbnail-loading {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #f0f0f0;
+		z-index: 1;
+		border-radius: 12rpx;
+	}
+
+	.loading-spinner {
+		width: 60rpx;
+		height: 60rpx;
+		border: 6rpx solid #e0e0e0;
+		border-top: 6rpx solid #4F7CFF;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+	}
+
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
 	}
 
 	.guide-desc {
-		font-size: 30rpx;
+		font-size: 28rpx;
 		color: #333;
-		margin-top: 12rpx;
+		margin-top: 8rpx;
+		line-height: 1.4;
+		word-break: break-all;
 	}
 
 	.tabbar {
@@ -796,7 +1025,6 @@
 		from {
 			opacity: 0;
 		}
-
 		to {
 			opacity: 1;
 		}
@@ -818,7 +1046,6 @@
 		from {
 			transform: translateY(100%);
 		}
-
 		to {
 			transform: translateY(0);
 		}
