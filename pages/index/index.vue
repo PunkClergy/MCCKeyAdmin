@@ -441,7 +441,7 @@
 					data: zone.id
 				});
 				if (zone.path) uni.navigateTo({
-					url: zone.path
+					url: `${zone.path}?name=${zone['name'+this.lang]}`
 				});
 			},
 
