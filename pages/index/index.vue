@@ -889,7 +889,7 @@
 	.video-wrapper {
 		position: relative;
 		width: 100%;
-		aspect-ratio: 16 / 9;
+		aspect-ratio: 2 / 3;
 		border-radius: 12rpx;
 		overflow: hidden;
 		background: #000;

@@ -1,98 +1,162 @@
 export const titles = {
-	// 角色与权限 | Role and Permissions | ロールと権限
-	'zoneCenter/rolePermission': {
-		'zhCn': '角色与权限',
-		'enUs': 'Role Perms',
-		'jaJp': 'ロール／権限'
+	"zoneCenter/rolePermission": {
+		"zhCn": "角色与权限",
+		"enUs": "Role Perms",
+		"msMy": "Peranan & Kebenaran",
+		"ptBr": "Funções e Permissões",
+		"taSg": "பாத்திரங்கள் & அனுமதிகள்",
+		"thTh": "บทบาทและสิทธิ์",
+		"idId": "Peran & Izin",
+		"miNz": "Ngā tūranga me ngā whakaaetanga"
 	},
-	// 设备拆除提醒 | Tamper Alarm | 改ざんアラーム
-	'zoneCenter/alarmDeviceRemove': {
-		'zhCn': '设备拆除提醒',
-		'enUs': 'Tamper Alarm',
-		'jaJp': '改ざん検知'
+	"zoneCenter/alarmDeviceRemove": {
+		"zhCn": "设备拆除提醒",
+		"enUs": "Tamper Alarm",
+		"msMy": "Peringatan Peranti Dikeluarkan",
+		"ptBr": "Alarme de Violação",
+		"taSg": "சாதனம் அகற்றல் எச்சரிக்கை",
+		"thTh": "แจ้งเตือนอุปกรณ์ถูกถอดออก",
+		"idId": "Peringatan Perangkat Dilepas",
+		"miNz": "Matohu whakakōpeka taputapu"
 	},
-	// 移交管理员 | Transfer Admin | 管理者引継ぎ
-	'zoneCenter/transferAdmin': {
-		'zhCn': '移交管理员',
-		'enUs': 'Transfer Admin',
-		'jaJp': '管理者引継ぎ'
+	"zoneCenter/transferAdmin": {
+		"zhCn": "移交管理员",
+		"enUs": "Transfer Admin",
+		"msMy": "Pindah Pentadbir",
+		"ptBr": "Transferir Administrador",
+		"taSg": "நிர்வாகியை மாற்றவும்",
+		"thTh": "โอนสิทธิ์ผู้ดูแลระบบ",
+		"idId": "Serahkan Administrator",
+		"miNz": "Whakawhiti kaiwhakahaere"
 	},
-	// 人员与角色 | Staff & Roles | ユーザーとロール
-	'zoneCenter/userRole': {
-		'zhCn': '人员与角色',
-		'enUs': 'Staff & Roles',
-		'jaJp': 'ユーザー／ロール'
+	"zoneCenter/userRole": {
+		"zhCn": "人员与角色",
+		"enUs": "Staff & Roles",
+		"msMy": "Kakitangan & Peranan",
+		"ptBr": "Equipe e Funções",
+		"taSg": "பணியாளர்கள் & பாத்திரங்கள்",
+		"thTh": "บุคลากรและบทบาท",
+		"idId": "Staf & Peran",
+		"miNz": "Ngā kaimahi me ngā tūranga"
 	},
-	// 轨迹查询 | Track Playback | 走行軌跡
-	'zoneCenter/trajectory': {
-		'zhCn': '轨迹查询',
-		'enUs': 'Track Playback',
-		'jaJp': '走行軌跡'
+	"zoneCenter/trajectory": {
+		"zhCn": "轨迹查询",
+		"enUs": "Track Playback",
+		"msMy": "Main Semula Laluan",
+		"ptBr": "Reprodução de Trajeto",
+		"taSg": "பாதை மீண்டும் இயக்கம்",
+		"thTh": "เล่นย้อนรอยเส้นทาง",
+		"idId": "Pemutaran Jejak Perjalanan",
+		"miNz": "Takahanga ara"
 	},
-	// 风控管理 | Risk Management | 遠隔制御管理
-	'zoneCenter/riskManagement': {
-		'zhCn': '远程控车风控',
-		'enUs': 'Risk Management',
-		'jaJp': '遠隔制御管理'
+	"zoneCenter/riskManagement": {
+		"zhCn": "远程控车风控",
+		"enUs": "Risk Management",
+		"msMy": "Pengurusan Risiko Kawalan Jauh Kenderaan",
+		"ptBr": "Gestão de Risco de Controle Remoto",
+		"taSg": "தொலை வாகன கட்டுப்பாடு இடர் மேலாண்மை",
+		"thTh": "จัดการความเสี่ยงควบคุมรถระยะไกล",
+		"idId": "Manajemen Risiko Kontrol Jarak Jauh Kendaraan",
+		"miNz": "Whakahaere mō ngā mōrearea waka mamao"
 	},
-	// 车务使用电子钥匙 | Valet Pickup | バレーキー発行
-	'zoneCenter/carServiceKey': {
-		'zhCn': '车务使用电子钥匙',
-		'enUs': 'Valet Pickup',
-		'jaJp': 'バレー設定'
+	"zoneCenter/carServiceKey": {
+		"zhCn": "车务使用电子钥匙",
+		"enUs": "Valet Pickup",
+		"msMy": "Kunci Elektronik Perkhidmatan Kereta",
+		"ptBr": "Chave Eletrônica Manobrista",
+		"taSg": "வாகன சேவை மின்னணு சாவி",
+		"thTh": "กุญแจอิเล็กทรอนิกส์สำหรับพนักงานรถ",
+		"idId": "Kunci Elektronik Petugas Layanan Mobil",
+		"miNz": "Kī hiko mō te kaimahi waka"
 	},
-	// 还车记录 | Return Logs | 返却履歴
-	'zoneCenter/rentRecordList': {
-		'zhCn': '还车记录',
-		'enUs': 'Return Logs',
-		'jaJp': '返却履歴'
+	"zoneCenter/rentRecordList": {
+		"zhCn": "还车记录",
+		"enUs": "Return Logs",
+		"msMy": "Rekod Pemulangan Kereta",
+		"ptBr": "Registros de Devolução",
+		"taSg": "வாகன திரும்பப் பதிவுகள்",
+		"thTh": "ประวัติการคืนรถ",
+		"idId": "Catatan Pengembalian Kendaraan",
+		"miNz": "Ngā rārangi whakahoki waka"
 	},
-	// 保养提醒 | Service Reminder | 点検通知
-	'zoneCenter/maintainRemind': {
-		'zhCn': '保养提醒',
-		'enUs': 'Service Reminder',
-		'jaJp': '点検通知'
+	"zoneCenter/maintainRemind": {
+		"zhCn": "保养提醒",
+		"enUs": "Service Reminder",
+		"msMy": "Peringatan Penyelenggaraan",
+		"ptBr": "Lembrete de Manutenção",
+		"taSg": "பராமரிப்பு நினைவூட்டல்",
+		"thTh": "การแจ้งเตือนบำรุงรักษา",
+		"idId": "Pengingat Perawatan",
+		"miNz": "Whakamahara tiaki waka"
 	},
-	// 车务配置电子钥匙 | Valet E‑Key | バレー鍵設定
-	'zoneCenter/bizKeyConfig': {
-		'zhCn': '车务配置电子钥匙',
-		'enUs': 'Valet E‑Key',
-		'jaJp': 'バレー鍵設定'
+	"zoneCenter/bizKeyConfig": {
+		"zhCn": "车务配置电子钥匙",
+		"enUs": "Valet E‑Key",
+		"msMy": "Konfigurasi Kunci Elektronik Perkhidmatan",
+		"ptBr": "Configurar Chave Eletrônica Manobrista",
+		"taSg": "சேவை மின்னணு சாவி அமைப்பு",
+		"thTh": "ตั้งค่ากุญแจอิเล็กทรอนิกส์พนักงานรถ",
+		"idId": "Konfigurasi Kunci Elektronik Petugas Layanan",
+		"miNz": "Whirihora kī hiko kaimahi waka"
 	},
-	// 车辆配置电子钥匙 | E‑Key Setup | 車両キー設定
-	'zoneCenter/carKeyConfig': {
-		'zhCn': '车辆配置电子钥匙',
-		'enUs': 'E‑Key Setup',
-		'jaJp': '車両キー設定'
+	"zoneCenter/carKeyConfig": {
+		"zhCn": "车辆配置电子钥匙",
+		"enUs": "E‑Key Setup",
+		"msMy": "Persediaan Kunci Elektronik Kenderaan",
+		"ptBr": "Configuração da Chave Eletrônica do Veículo",
+		"taSg": "வாகன மின்னணு சாவி அமைப்பு",
+		"thTh": "ตั้งค่ากุญแจอิเล็กทรอนิกส์ของรถ",
+		"idId": "Pengaturan Kunci Elektronik Kendaraan",
+		"miNz": "Whirihora kī hiko o te waka"
 	},
-	// 发送钥匙 | Send Key | キー発行
-	'zoneCenter/sendKeyToRenter': {
-		'zhCn': '发送钥匙',
-		'enUs': 'Send Key',
-		'jaJp': 'キー発行'
+	"zoneCenter/sendKeyToRenter": {
+		"zhCn": "发送钥匙",
+		"enUs": "Send Key",
+		"msMy": "Hantar Kunci",
+		"ptBr": "Enviar Chave",
+		"taSg": "சாவி அனுப்பு",
+		"thTh": "ส่งกุญแจ",
+		"idId": "Kirim Kunci",
+		"miNz": "Tukua te kī"
 	},
-	// 完善客户资料 | Improve Profile | 顧客情報入力
-	'zoneCenter/completeCustomerInfo': {
-		'zhCn': '完善客户资料',
-		'enUs': 'Improve Customer Profile',
-		'jaJp': '顧客情報入力'
+	"zoneCenter/completeCustomerInfo": {
+		"zhCn": "完善客户资料",
+		"enUs": "Improve Customer Profile",
+		"msMy": "Lengkapkan Maklumat Pelanggan",
+		"ptBr": "Completar Dados do Cliente",
+		"taSg": "வாடிக்கையாளர் தகவலை முழுமையாக்கு",
+		"thTh": "กรอกข้อมูลลูกค้าให้สมบูรณ์",
+		"idId": "Lengkapi Data Pelanggan",
+		"miNz": "Whakaoti kōrero mō te kiritaki"
 	},
-	// 个人中心 | User Center | マイページ
-	'userCenter/index': {
-		'zhCn': '个人中心',
-		'enUs': 'User Center',
-		'jaJp': 'マイページ'
+	"userCenter/index": {
+		"zhCn": "个人中心",
+		"enUs": "User Center",
+		"msMy": "Pusat Pengguna",
+		"ptBr": "Central do Usuário",
+		"taSg": "பயனர் மையம்",
+		"thTh": "ศูนย์ผู้ใช้งาน",
+		"idId": "Pusat Pengguna",
+		"miNz": "Pokapū kaiwhakamahi"
 	},
-	// 登录
-	'login/index': {
-		'zhCn': '智信通',
-		'enUs': 'WiseLink Auto Global',
-		'jaJp': 'マイページ'
+	"login/index": {
+		"zhCn": "智信通",
+		"enUs": "WiseLink Auto Global",
+		"msMy": "WiseLink Auto Global",
+		"ptBr": "WiseLink Auto Global",
+		"taSg": "WiseLink Auto Global",
+		"thTh": "WiseLink Auto Global",
+		"idId": "WiseLink Auto Global",
+		"miNz": "WiseLink Auto Global"
 	},
-	// 登录
 	"userCenter/register": {
 		"zhCn": "注册账号",
 		"enUs": "Register Account",
-		"jaJp": "アカウント登録"
+		"msMy": "Daftar Akaun",
+		"ptBr": "Registrar Conta",
+		"taSg": "கணக்கு பதிவு செய்க",
+		"thTh": "ลงทะเบียนบัญชี",
+		"idId": "Daftar Akun",
+		"miNz": "Rēhita pūkete"
 	}
-};
+}

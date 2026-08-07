@@ -80,48 +80,36 @@
 
 				// 语言列表（提取为 data 属性，便于多处复用）
 				langList: [{
-						name: '中文',
+						name: '中文', //中文【中国】
 						value: 'zhCn'
 					},
 					{
-						name: 'English',
+						name: 'English', //英语(美式)【美国】
 						value: 'enUs'
 					},
 					{
-						name: 'にほんご',
-						value: 'jaJp'
-					},
-					{
-						name: 'Bahasa Melayu',
+						name: 'Bahasa Melayu', //马来语【马来西亚】
 						value: 'msMy'
 					},
 					{
-						name: 'Português (Brasil)',
+						name: 'Português (Brasil)', //巴西葡萄牙语【巴西】
 						value: 'ptBr'
 					},
 					{
-						name: 'Oʻzbekcha',
-						value: 'uzUz'
+						name: 'தமிழ் (Singapore)', //泰米尔语【新加坡】
+						value: 'taSg'
 					},
 					{
-						name: 'English (Singapore)',
-						value: 'enSg'
-					},
-					{
-						name: 'ภาษาไทย',
+						name: 'ภาษาไทย', //泰语【泰国】
 						value: 'thTh'
 					},
 					{
-						name: 'Bahasa Indonesia',
+						name: 'Bahasa Indonesia', //印度尼西亚语【印度尼西亚】
 						value: 'idId'
 					},
 					{
-						name: 'English (Australia)',
-						value: 'enAu'
-					},
-					{
-						name: 'English (New Zealand)',
-						value: 'enNz'
+						name: 'Te Reo Māori', //毛利语【新西兰】
+						value: 'miNz'
 					}
 				],
 				// 控制弹窗显示

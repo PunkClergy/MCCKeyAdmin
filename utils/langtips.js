@@ -1,1304 +1,2252 @@
 export const tips = {
-	// 拨打电话 | Make a Call | 発信
-	'MakeACall': {
-		'zhCn': '拨打电话',
-		'enUs': 'Make a Call',
-		'jaJp': '発信'
-	},
-	// 是否拨打客服电话 | Do you want to call customer service | サポートへ連絡
-	'DoYouWantToCallCustomerService': {
-		'zhCn': '是否拨打客服电话',
-		'enUs': 'Do you want to call customer service',
-		'jaJp': 'サポートへ連絡しますか'
-	},
-	// 拨打 | Call | 発信
-	'Call': {
-		'zhCn': '拨打',
-		'enUs': 'Call',
-		'jaJp': '発信'
-	},
-	// 确认 | Confirm | 確認
-	'Confirm': {
-		'zhCn': '确认',
-		'enUs': 'Confirm',
-		'jaJp': '確認'
-	},
-	// 取消 | Cancel | キャンセル
-	'Cancel': {
-		'zhCn': '取消',
-		'enUs': 'Cancel',
-		'jaJp': 'キャンセル'
-	},
-	// 拨号失败 | Dial failed | 発信失敗
-	'DialFailed': {
-		'zhCn': '拨号失败',
-		'enUs': 'Dial failed',
-		'jaJp': '発信失敗'
-	},
-	// 提示 | Tip | ヒント
-	'Tip': {
-		'zhCn': '提示',
-		'enUs': 'Tip',
-		'jaJp': 'ヒント'
-	},
-	// 退出并清除缓存 | Exit and clear all cache | 終了してキャッシュ削除
-	'ExitClearCache': {
-		'zhCn': '确定要退出并清除所有缓存吗?',
-		'enUs': 'Are you sure to exit and clear all cache?',
-		'jaJp': '終了してすべてのキャッシュを削除しますか？'
-	},
-	// 我的资料 | My Profile | マイプロフィール
-	'MyProfile': {
-		'zhCn': '我的资料',
-		'enUs': 'My Profile',
-		'jaJp': 'マイプロフィール'
-	},
-	// 企业名称 | Company Name | 会社名
-	'CompanyName': {
-		'zhCn': '企业名称',
-		'enUs': 'Company Name',
-		'jaJp': '会社名'
-	},
-	// 请输入企业名称 | Please enter company name | 会社名を入力
-	'PleaseEnterCompanyName': {
-		'zhCn': '请输入企业名称',
-		'enUs': 'Please enter company name',
-		'jaJp': '会社名を入力してください'
-	},
-	// 联系人 | Contact Person | 担当者
-	'ContactPerson': {
-		'zhCn': '联系人',
-		'enUs': 'Contact Person',
-		'jaJp': '担当者'
-	},
-	// 请输入联系人 | Please enter contact person | 担当者を入力
-	'PleaseEnterContactPerson': {
-		'zhCn': '请输入联系人',
-		'enUs': 'Please enter contact person',
-		'jaJp': '担当者を入力してください'
-	},
-	// 联系电话 | Contact Phone | 電話番号
-	'ContactPhone': {
-		'zhCn': '联系电话',
-		'enUs': 'Contact Phone',
-		'jaJp': '電話番号'
-	},
-	// 请输入联系电话 | Please enter contact phone | 電話番号を入力
-	'PleaseEnterContactPhone': {
-		'zhCn': '请输入联系电话',
-		'enUs': 'Please enter contact phone',
-		'jaJp': '電話番号を入力してください'
-	},
-	// 备注 | Remarks | 備考
-	'Remarks': {
-		'zhCn': '备注',
-		'enUs': 'Remarks',
-		'jaJp': '備考'
-	},
-	// 请输入备注 | Please enter remarks | 備考を入力
-	'PleaseEnterRemarks': {
-		'zhCn': '请输入备注',
-		'enUs': 'Please enter remarks',
-		'jaJp': '備考を入力してください'
-	},
-	// 开票信息 | Billing Information | 請求書情報
-	'BillingInfo': {
-		'zhCn': '开票信息',
-		'enUs': 'Billing Information',
-		'jaJp': '請求書情報'
-	},
-	// 开票名称 | Billing Name | 請求書宛名
-	'BillingName': {
-		'zhCn': '开票名称',
-		'enUs': 'Billing Name',
-		'jaJp': '請求書宛名'
-	},
-	// 请输入开票名称 | Please enter billing name | 請求書宛名を入力
-	'PleaseEnterBillingName': {
-		'zhCn': '请输入开票名称',
-		'enUs': 'Please enter billing name',
-		'jaJp': '請求書宛名を入力してください'
-	},
-	// 纳税人识别号 | Taxpayer ID | 法人番号
-	'TaxpayerId': {
-		'zhCn': '纳税人识别号',
-		'enUs': 'Taxpayer ID',
-		'jaJp': '法人番号'
-	},
-	// 请输入纳税人识别号 | Please enter taxpayer ID | 法人番号を入力
-	'PleaseEnterTaxpayerId': {
-		'zhCn': '请输入纳税人识别号',
-		'enUs': 'Please enter taxpayer ID',
-		'jaJp': '法人番号を入力してください'
-	},
-	// 请输入电话 | Please enter phone | 電話番号を入力
-	'PleaseEnterPhone': {
-		'zhCn': '请输入电话',
-		'enUs': 'Please enter phone',
-		'jaJp': '電話番号を入力してください'
-	},
-	// 地址 | Address | 住所
-	'Address': {
-		'zhCn': '地址',
-		'enUs': 'Address',
-		'jaJp': '住所'
-	},
-	// 请输入地址 | Please enter address | 住所を入力
-	'PleaseEnterAddress': {
-		'zhCn': '请输入地址',
-		'enUs': 'Please enter address',
-		'jaJp': '住所を入力してください'
-	},
-	// 开户行 | Bank Name | 銀行名
-	'BankName': {
-		'zhCn': '开户行',
-		'enUs': 'Bank Name',
-		'jaJp': '銀行名'
-	},
-	// 请输入开户行 | Please enter bank name | 銀行名を入力
-	'PleaseEnterBankName': {
-		'zhCn': '请输入开户行',
-		'enUs': 'Please enter bank name',
-		'jaJp': '銀行名を入力してください'
-	},
-	// 开户账号 | Bank Account | 口座番号
-	'BankAccount': {
-		'zhCn': '开户账号',
-		'enUs': 'Bank Account',
-		'jaJp': '口座番号'
-	},
-	// 请输入开户账号 | Please enter bank account | 口座番号を入力
-	'PleaseEnterBankAccount': {
-		'zhCn': '请输入开户账号',
-		'enUs': 'Please enter bank account',
-		'jaJp': '口座番号を入力してください'
-	},
-	// 请登录 | Please Login | ログインしてください
-	'PleaseLogin': {
-		'zhCn': '请登录',
-		'enUs': 'Please Login',
-		'jaJp': 'ログインしてください'
-	},
-	// 欢迎使用 | Welcome to use | ようこそ
-	'WelcomeUse': {
-		'zhCn': '欢迎使用',
-		'enUs': 'Welcome to Use',
-		'jaJp': 'ようこそ'
-	},
-	// 正在为您准备优质服务 | Preparing high‑quality services for you | 準備中
-	'PreparingService': {
-		'zhCn': '正在为您准备优质服务',
-		'enUs': 'Preparing high‑quality services for you',
-		'jaJp': '準備中'
-	},
-	// 智信通 | WiseLink Auto | 智信通
-	'ZhiXinTong': {
-		'zhCn': '智信通',
-		'enUs': 'WiseLink Auto',
-		'jaJp': '智信通'
-	},
-	// 租车公司电子钥匙 | Rental E‑Key | レンタルキー
-	'RentalEKey': {
-		'zhCn': '电子钥匙',
-		'enUs': 'Rental E‑Key',
-		'jaJp': 'レンタルキー'
-	},
-	// 使用指南 | User Guide | 使い方
-	'UserGuide': {
-		'zhCn': '使用指南',
-		'enUs': 'User Guide',
-		'jaJp': '使い方'
-	},
-	// 发送钥匙 | Send Key | キー発行
-	'SendKey': {
-		'zhCn': '发送钥匙',
-		'enUs': 'Send Key',
-		'jaJp': 'キー発行'
-	},
-	// 使用记录 | Usage Logs | 利用履歴
-	'UsageLogs': {
-		'zhCn': '使用记录',
-		'enUs': 'Usage Logs',
-		'jaJp': '利用履歴'
-	},
-	// 车架号 | VIN | 車台番号
-	'VIN': {
-		'zhCn': '车架号',
-		'enUs': 'VIN',
-		'jaJp': '車台番号'
-	},
-	// 油箱容积 | Fuel Capacity | 燃料タンク容量
-	'FuelCapacity': {
-		'zhCn': '油箱容积',
-		'enUs': 'Fuel Capacity',
-		'jaJp': '燃料タンク容量'
-	},
-	// 设备平台 | Device Platform | デバイスプラットフォーム
-	'DevicePlatform': {
-		'zhCn': '设备平台',
-		'enUs': 'Device Platform',
-		'jaJp': 'デバイスプラットフォーム'
-	},
-	// 设备号 | Device ID | デバイスID
-	'DeviceID': {
-		'zhCn': '设备号',
-		'enUs': 'Device ID',
-		'jaJp': 'デバイスID'
-	},
-	// 暂无数据 | No Data | データなし
-	'NoData': {
-		'zhCn': '暂无数据',
-		'enUs': 'No Data',
-		'jaJp': 'データなし'
-	},
-	// 车牌号/设备号/使用人 | Plate/Device ID/User | ナンバー／ID／利用者
-	'PlateDeviceUser': {
-		'zhCn': '车牌号/设备号/使用人',
-		'enUs': 'Plate/Device ID/User',
-		'jaJp': 'ナンバー／ID／利用者'
-	},
-	// 使用中 | In Use | 利用中
-	'InUse': {
-		'zhCn': '使用中',
-		'enUs': 'In Use',
-		'jaJp': '利用中'
-	},
-	// 已过期 | Expired | 期限切れ
-	'Expired': {
-		'zhCn': '已过期',
-		'enUs': 'Expired',
-		'jaJp': '期限切れ'
-	},
-	// 已取消 | Cancelled | キャンセル済
-	'Cancelled': {
-		'zhCn': '已取消',
-		'enUs': 'Cancelled',
-		'jaJp': 'キャンセル済'
-	},
-	// 修改 | Edit | 編集
-	'Edit': {
-		'zhCn': '修改',
-		'enUs': 'Edit',
-		'jaJp': '編集'
-	},
-	// 已复制 | Copied | コピー完了
-	'Copied': {
-		'zhCn': '已复制',
-		'enUs': 'Copied',
-		'jaJp': 'コピー完了'
-	},
-	// 复制链接 | Copy Link | リンクをコピー
-	'CopyLink': {
-		'zhCn': '复制链接',
-		'enUs': 'Copy Link',
-		'jaJp': 'リンクをコピー'
-	},
-	// 取消用车 | Cancel Use | 利用キャンセル
-	'CancelCarUse': {
-		'zhCn': '取消用车',
-		'enUs': 'Cancel Use',
-		'jaJp': '利用キャンセル'
-	},
-	// 查看照片 | View Photos | 写真を見る
-	'ViewPhotos': {
-		'zhCn': '查看照片',
-		'enUs': 'View Photos',
-		'jaJp': '写真を見る'
-	},
-	// 车牌号 | Plate No | ナンバープレート
-	'PlateNo': {
-		'zhCn': '车牌号',
-		'enUs': 'Plate No',
-		'jaJp': 'ナンバープレート'
-	},
-	// 请输入车牌号 | Enter Plate No | ナンバーを入力
-	'EnterPlateNo': {
-		'zhCn': '请输入车牌号',
-		'enUs': 'Enter Plate No',
-		'jaJp': 'ナンバーを入力してください'
-	},
-	// 使用人 | User | 利用者
-	'User': {
-		'zhCn': '使用人',
-		'enUs': 'User',
-		'jaJp': '利用者'
-	},
-	// 请输入使用人 | Enter User | 利用者を入力
-	'EnterUser': {
-		'zhCn': '请输入使用人',
-		'enUs': 'Enter User',
-		'jaJp': '利用者を入力してください'
-	},
-	// 账号/手机号 | Account/Phone | アカウント／電話番号
-	'AccountPhone': {
-		'zhCn': '账号/手机号',
-		'enUs': 'Account/Phone',
-		'jaJp': 'アカウント／電話番号'
-	},
-	// 请输入手机号/账号 | Enter Phone/Account | 電話番号またはアカウントを入力
-	'EnterAccountPhone': {
-		'zhCn': '请输入手机号/账号',
-		'enUs': 'Enter Phone/Account',
-		'jaJp': '電話番号またはアカウントを入力'
-	},
-	// 开始时间 | Start Time | 開始時間
-	'StartTime': {
-		'zhCn': '开始时间',
-		'enUs': 'Start Time',
-		'jaJp': '開始時間'
-	},
-	// 结束时间 | End Time | 終了時間
-	'EndTime': {
-		'zhCn': '结束时间',
-		'enUs': 'End Time',
-		'jaJp': '終了時間'
-	},
-	// 是否允许多人使用 | Allow Multiple Users | 複数人利用許可
-	'MultiUserAllowed': {
-		'zhCn': '是否允许多人使用',
-		'enUs': 'Allow Multiple Users',
-		'jaJp': '複数人利用許可'
-	},
-	// 备注 | Remark | 備考
-	'Remark': {
-		'zhCn': '备注',
-		'enUs': 'Remark',
-		'jaJp': '備考'
-	},
-	// 请输入车位号或车辆位置 | Enter Parking No. or Location | 駐車場番号または位置を入力
-	'EnterParkingPos': {
-		'zhCn': '请输入车位号或车辆位置',
-		'enUs': 'Enter Parking No. or Location',
-		'jaJp': '駐車場番号または位置を入力'
-	},
-
-	'Total': {
-		'zhCn': '共',
-		'enUs': 'Total',
-		'jaJp': '合計'
-	},
-
-	'Records': {
-		'zhCn': '记录',
-		'enUs': 'records',
-		'jaJp': '件'
-	},
-	// 允许 | Allow | 許可
-	'Allow': {
-		'zhCn': '允许',
-		'enUs': 'Allow',
-		'jaJp': '許可'
-	},
-	// 不允许 | Disallow | 不許可
-	'Disallow': {
-		'zhCn': '不允许',
-		'enUs': 'Disallow',
-		'jaJp': '不許可'
-	},
-	// 发送成功 | Send Successfully | 送信完了
-	'SendSuccess': {
-		'zhCn': '发送成功',
-		'enUs': 'Send Successfully',
-		'jaJp': '送信完了'
-	},
-	// 发送失败 | Send Failed | 送信失敗
-	'SendFailed': {
-		'zhCn': '发送失败',
-		'enUs': 'Send Failed',
-		'jaJp': '送信失敗'
-	},
-	// 复制成功 | Copy Successfully | コピー完了
-	'CopySuccess': {
-		'zhCn': '复制成功',
-		'enUs': 'Copy Successfully',
-		'jaJp': 'コピー完了'
-	},
-	// 车辆列表 | Car List | 車両一覧
-	'CarList': {
-		'zhCn': '车辆列表',
-		'enUs': 'Car List',
-		'jaJp': '車両一覧'
-	},
-	// 车辆 | Car | 車両
-	'Car': {
-		'zhCn': '车辆',
-		'enUs': 'Car',
-		'jaJp': '車両'
-	},
-	// 新增 | Add | 追加
-	'Add': {
-		'zhCn': '新增',
-		'enUs': 'Add',
-		'jaJp': '追加'
-	},
-	// 删除 | Delete | 削除
-	'Delete': {
-		'zhCn': '删除',
-		'enUs': 'Delete',
-		'jaJp': '削除'
-	},
-	// 搜索占位 | Search Placeholder | 検索
-	'SearchPlaceholder': {
-		'zhCn': '车牌号/设备号/车型/车系',
-		'enUs': 'Plate/SN/Model/Series',
-		'jaJp': 'ナンバー／ID／モデル／シリーズ'
-	},
-	// 共有 | Total | 合計
-	'TotalRecords': {
-		'zhCn': '共有',
-		'enUs': 'Total ',
-		'jaJp': '合計'
-	},
-	// 条记录 | Items | 件
-	'Items': {
-		'zhCn': '条记录',
-		'enUs': ' items',
-		'jaJp': '件'
-	},
-	// 全选 | Select All | すべて選択
-	'SelectAll': {
-		'zhCn': '全选',
-		'enUs': 'Select All',
-		'jaJp': 'すべて選択'
-	},
-	// 设备号 | Device SN | デバイスID
-	'DeviceSN': {
-		'zhCn': '设备号',
-		'enUs': 'Device SN',
-		'jaJp': 'デバイスID'
-	},
-	// 生效周期 | Effective Period | 有効期間
-	'EffectivePeriod': {
-		'zhCn': '生效周期',
-		'enUs': 'Effective Period',
-		'jaJp': '有効期間'
-	},
-	// 选择此车 | Select This Car | この車を選択
-	'SelectThisCar': {
-		'zhCn': '选择此车',
-		'enUs': 'Select This Car',
-		'jaJp': 'この車を選択'
-	},
-	// 车牌号 | Plate Number | ナンバープレート
-	'PlateNumber': {
-		'zhCn': '车牌号',
-		'enUs': 'Plate Number',
-		'jaJp': 'ナンバープレート'
-	},
-	// 车系 | Vehicle Series | 車種シリーズ
-	'VehicleSeries': {
-		'zhCn': '车系',
-		'enUs': 'Vehicle Series',
-		'jaJp': '車種シリーズ'
-	},
-	// 车型 | Vehicle Model | 車種
-	'VehicleModel': {
-		'zhCn': '车型',
-		'enUs': 'Vehicle Model',
-		'jaJp': '車種'
-	},
-	// 年款 | Model Year | 年式
-	'ModelYear': {
-		'zhCn': '年款',
-		'enUs': 'Model Year',
-		'jaJp': '年式'
-	},
-	// 当前总里程 | Total Mileage | 総走行距離
-	'TotalMileage': {
-		'zhCn': '当前总里程',
-		'enUs': 'Total Mileage',
-		'jaJp': '総走行距離'
-	},
-	// 已保养里程 | Maintain Mileage | 最終整備時走行距離
-	'MaintainMileage': {
-		'zhCn': '已保养里程',
-		'enUs': 'Maintain Mileage',
-		'jaJp': '最終整備時走行距離'
-	},
-	// 保养周期里程 | Maintain Interval | 整備間隔
-	'MaintainInterval': {
-		'zhCn': '保养周期里程',
-		'enUs': 'Maintain Interval',
-		'jaJp': '整備間隔'
-	},
-	// 提示 | Tips | ヒント
-	'Tips': {
-		'zhCn': '提示',
-		'enUs': 'Tips',
-		'jaJp': 'ヒント'
-	},
-	// 确认删除 | Confirm Delete | 削除確認
-	'ConfirmDelete': {
-		'zhCn': '确认删除？',
-		'enUs': 'Confirm Delete?',
-		'jaJp': '削除してよろしいですか？'
-	},
-	// 空 | Empty | 空
-	'Empty': {
-		'zhCn': '空',
-		'enUs': 'Empty',
-		'jaJp': '空'
-	},
-	// 请输入车牌号 | Please Enter Plate | ナンバーを入力
-	'PleaseEnterPlate': {
-		'zhCn': '请输入车牌号',
-		'enUs': 'Please Enter Plate',
-		'jaJp': 'ナンバーを入力してください'
-	},
-	// 请输入设备号 | Please Enter SN | デバイスIDを入力
-	'PleaseEnterSN': {
-		'zhCn': '请输入设备号',
-		'enUs': 'Please Enter SN',
-		'jaJp': 'デバイスIDを入力してください'
-	},
-	// 请输入code | Please Enter Code | コードを入力
-	'PleaseEnterCode': {
-		'zhCn': '请输入code',
-		'enUs': 'Please Enter Code',
-		'jaJp': 'コードを入力してください'
-	},
-	// 请输入车系 | Please Enter Series | シリーズを入力
-	'PleaseEnterSeries': {
-		'zhCn': '请输入车系',
-		'enUs': 'Please Enter Series',
-		'jaJp': 'シリーズを入力してください'
-	},
-	// 请输入车型 | Please Enter Model | モデルを入力
-	'PleaseEnterModel': {
-		'zhCn': '请输入车型',
-		'enUs': 'Please Enter Model',
-		'jaJp': 'モデルを入力してください'
-	},
-	// 请输入年款 | Please Enter Year | 年式を入力
-	'PleaseEnterYear': {
-		'zhCn': '请输入年款',
-		'enUs': 'Please Enter Year',
-		'jaJp': '年式を入力してください'
-	},
-	// 请输入车辆当前里程 | Please Enter Total Mileage | 現在の走行距離を入力
-	'PleaseEnterTotalMileage': {
-		'zhCn': '请输入车辆当前里程',
-		'enUs': 'Please Enter Total Mileage',
-		'jaJp': '現在の走行距離を入力してください'
-	},
-	// 请输入已保养里程 | Please Enter Maintain Mileage | 最終整備時走行距離を入力
-	'PleaseEnterMaintainMileage': {
-		'zhCn': '请输入已保养里程',
-		'enUs': 'Please Enter Maintain Mileage',
-		'jaJp': '最終整備時走行距離を入力してください'
-	},
-	// 请输入保养周期里程 | Please Enter Maintain Interval | 整備間隔を入力
-	'PleaseEnterMaintainInterval': {
-		'zhCn': '请输入保养周期里程',
-		'enUs': 'Please Enter Maintain Interval',
-		'jaJp': '整備間隔を入力してください'
-	},
-	// 账号 | Account | アカウント
-	'Account': {
-		'zhCn': '账号',
-		'enUs': 'Account',
-		'jaJp': 'アカウント'
-	},
-	// 联系电话 | Phone | 電話番号
-	'Phone': {
-		'zhCn': '联系电话',
-		'enUs': 'Phone',
-		'jaJp': '電話番号'
-	},
-	// 已绑定车辆 | Bound Cars | 紐付け車両
-	'BoundCars': {
-		'zhCn': '已绑定车辆',
-		'enUs': 'Bound Cars',
-		'jaJp': '紐付け車両'
-	},
-	// 解绑所有车辆 | Unbind All | すべて解除
-	'UnbindAll': {
-		'zhCn': '解绑所有车辆',
-		'enUs': 'Unbind All',
-		'jaJp': 'すべて解除'
-	},
-	// 解绑 | Unbind | 解除
-	'Unbind': {
-		'zhCn': '解绑',
-		'enUs': 'Unbind',
-		'jaJp': '解除'
-	},
-	// 绑定车辆 | Bind Car | 車両を紐付け
-	'BindCar': {
-		'zhCn': '绑定车辆',
-		'enUs': 'Bind Car',
-		'jaJp': '車両を紐付け'
-	},
-	// 重要提示 | Important Tip | 重要
-	'ImportantTip': {
-		'zhCn': '重要提示',
-		'enUs': 'Important Tip',
-		'jaJp': '重要'
-	},
-	// 确定要解绑吗？ | Confirm Unbind | 解除しますか？
-	'ConfirmUnbind': {
-		'zhCn': '确定要解绑吗？',
-		'enUs': 'Confirm Unbind?',
-		'jaJp': '解除しますか？'
-	},
-	// 车辆总数 | Total Cars | 車両総数
-	'TotalCars': {
-		'zhCn': '车辆总数',
-		'enUs': 'Total Cars',
-		'jaJp': '車両総数'
-	},
-	// 辆车需要保养 | Cars Need Maintenance | 台整備必要
-	'NeedMaintenance': {
-		'zhCn': '辆车需要保养',
-		'enUs': 'Cars Need Maintenance',
-		'jaJp': '台整備必要'
-	},
-	// 车辆保养提醒 | Car Maintenance Reminder | 車両整備リマインダー
-	'CarMaintenanceReminder': {
-		'zhCn': '车辆保养提醒',
-		'enUs': 'Car Maintenance Reminder',
-		'jaJp': '車両整備リマインダー'
-	},
-	// 离保养里程 | Remaining Maintenance | 整備まで残り
-	'RemainingMaintenance': {
-		'zhCn': '离保养里程',
-		'enUs': 'Remaining Maintenance',
-		'jaJp': '整備まで残り'
-	},
-	// 公里 | KM | km
-	'KM': {
-		'zhCn': '公里',
-		'enUs': 'KM',
-		'jaJp': 'km'
-	},
-	// 里程校准 | Calibrate | キャリブレーション
-	'Calibrate': {
-		'zhCn': '校准',
-		'enUs': 'Calibrate',
-		'jaJp': 'キャリブレーション'
-	},
-	// 保养周期 | Maintenance Cycle | 整備サイクル
-	'MaintenanceCycle': {
-		'zhCn': '保养周期',
-		'enUs': 'Maintenance Cycle',
-		'jaJp': '整備サイクル'
-	},
-	// 记录时间 | Record Time | 記録時間
-	'RecordTime': {
-		'zhCn': '记录时间',
-		'enUs': 'Record Time',
-		'jaJp': '記録時間'
-	},
-	// 保养确认 | Maintenance Confirm | 整備確認
-	'MaintenanceConfirm': {
-		'zhCn': '保养确认',
-		'enUs': 'Maintenance Confirm',
-		'jaJp': '整備確認'
-	},
-	// 暂无符合条件的保养提醒记录 | No Maintenance Records | 該当する整備記録なし
-	'NoMaintenanceRecords': {
-		'zhCn': '暂无符合条件的保养提醒记录',
-		'enUs': 'No Maintenance Records',
-		'jaJp': '該当する整備記録なし'
-	},
-	// 筛选条件 | Filter Conditions | 絞り込み条件
-	'FilterConditions': {
-		'zhCn': '筛选条件',
-		'enUs': 'Filter Conditions',
-		'jaJp': '絞り込み条件'
-	},
-	// 保养状态 | Maintenance Status | 整備ステータス
-	'MaintenanceStatus': {
-		'zhCn': '保养状态',
-		'enUs': 'Maintenance Status',
-		'jaJp': '整備ステータス'
-	},
-	// 请选择状态 | Please Select Status | ステータスを選択
-	'PleaseSelectStatus': {
-		'zhCn': '请选择状态',
-		'enUs': 'Please Select Status',
-		'jaJp': 'ステータスを選択してください'
-	},
-	// 里程校准 | Mileage Calibration | 走行距離校正
-	'MileageCalibration': {
-		'zhCn': '里程校准',
-		'enUs': 'Mileage Calibration',
-		'jaJp': '走行距離校正'
-	},
-	// 请输入校准里程 | Enter Calibrate Mileage | 校正距離を入力
-	'PleaseEnterCalibrateMileage': {
-		'zhCn': '请输入校准里程',
-		'enUs': 'Enter Calibrate Mileage',
-		'jaJp': '校正距離を入力してください'
-	},
-	// 温馨提示 | Warm Tip | お知らせ
-	'WarmTip': {
-		'zhCn': '温馨提示',
-		'enUs': 'Warm Tip',
-		'jaJp': 'お知らせ'
-	},
-	// 确认已完成保养？ | Confirm Maintenance Completed | 整備完了確認
-	'ConfirmMaintenanceCompleted': {
-		'zhCn': '确认已完成保养？',
-		'enUs': 'Confirm Maintenance Completed?',
-		'jaJp': '整備を完了しましたか？'
-	},
-	// 提交中 | Submitting | 送信中
-	'Submitting': {
-		'zhCn': '提交中...',
-		'enUs': 'Submitting...',
-		'jaJp': '送信中...'
-	},
-	// 保养成功 | Maintenance Success | 整備完了
-	'MaintenanceSuccess': {
-		'zhCn': '保养成功',
-		'enUs': 'Maintenance Success',
-		'jaJp': '整備完了'
-	},
-	// 操作失败 | Operation Failed | 操作失敗
-	'OperationFailed': {
-		'zhCn': '操作失败',
-		'enUs': 'Operation Failed',
-		'jaJp': '操作失敗'
-	},
-	// 请输入有效里程 | Enter Valid Mileage | 有効な距離を入力
-	'PleaseEnterValidMileage': {
-		'zhCn': '请输入有效里程',
-		'enUs': 'Enter Valid Mileage',
-		'jaJp': '有効な距離を入力してください'
-	},
-	// 校准中 | Calibrating | 校正中
-	'Calibrating': {
-		'zhCn': '校准中...',
-		'enUs': 'Calibrating...',
-		'jaJp': '校正中...'
-	},
-	// 校准成功 | Calibrate Success | 校正完了
-	'CalibrateSuccess': {
-		'zhCn': '校准成功',
-		'enUs': 'Calibrate Success',
-		'jaJp': '校正完了'
-	},
-	// 校准失败 | Calibrate Failed | 校正失敗
-	'CalibrateFailed': {
-		'zhCn': '校准失败',
-		'enUs': 'Calibrate Failed',
-		'jaJp': '校正失敗'
-	},
-	// 筛选出 | Filtered Out | 絞り込み結果
-	'FilteredOut': {
-		'zhCn': '筛选出',
-		'enUs': 'Filtered Out ',
-		'jaJp': '絞り込み結果'
-	},
-	// 全部 | All | すべて
-	'All': {
-		'zhCn': '全部',
-		'enUs': 'All',
-		'jaJp': 'すべて'
-	},
-	// 待保养 | Pending | 整備待ち
-	'PendingMaintenance': {
-		'zhCn': '待保养',
-		'enUs': 'Pending',
-		'jaJp': '整備待ち'
-	},
-	// 已保养 | Maintained | 整備済み
-	'Maintained': {
-		'zhCn': '已保养',
-		'enUs': 'Maintained',
-		'jaJp': '整備済み'
-	},
-	// 已加载全部 | All Loaded | すべて読み込み済
-	'LoadedAll': {
-		'zhCn': '已加载全部',
-		'enUs': 'All Loaded',
-		'jaJp': 'すべて読み込み済'
-	},
-	// 暂无照片 | No Photos | 写真なし
-	'NoPhotos': {
-		'zhCn': '暂无照片',
-		'enUs': 'No Photos',
-		'jaJp': '写真なし'
-	},
-	// 请选择车辆 | Select Car | 車両を選択
-	'PleaseSelectCar': {
-		'zhCn': '请选择车辆',
-		'enUs': 'Select Car',
-		'jaJp': '車両を選択してください'
-	},
-	// 重新选择 | Re-select | 再選択
-	'ReSelect': {
-		'zhCn': '重新选择',
-		'enUs': 'Re-select',
-		'jaJp': '再選択'
-	},
-	// 数据加载失败 | Data Load Failed | データ読込失敗
-	'DataLoadFailed': {
-		'zhCn': '数据加载失败',
-		'enUs': 'Data Load Failed',
-		'jaJp': 'データ読込失敗'
-	},
-	// 设备信息获取失败 | Device Info Failed | デバイス情報取得失敗
-	'DeviceInfoFailed': {
-		'zhCn': '设备信息获取失败',
-		'enUs': 'Device Info Failed',
-		'jaJp': 'デバイス情報取得失敗'
-	},
-	// 请先选择车辆 | Select Car First | まず車両を選択
-	'PleaseSelectCarFirst': {
-		'zhCn': '请先选择车辆',
-		'enUs': 'Select Car First',
-		'jaJp': 'まず車両を選択してください'
-	},
-	// 轨迹查询 | Track Playback | 走行軌跡
-	'TrackPlayback': {
-		'zhCn': '轨迹查询',
-		'enUs': 'Track Playback',
-		'jaJp': '走行軌跡'
-	},
-	// 请选择日期区间 | Select Start & End Date | 期間を選択
-	'PleaseSelectDateRange': {
-		'zhCn': '请选择开始和结束日期',
-		'enUs': 'Select Start & End Date',
-		'jaJp': '期間を選択してください'
-	},
-	// 请选择 | Please Select | 選択してください
-	'PleaseSelect': {
-		'zhCn': '请选择',
-		'enUs': 'Please Select',
-		'jaJp': '選択してください'
-	},
-	// 请选择完整日期 | Select full date range | 期間を正しく選択
-	'PleaseSelectFullDate': {
-		'zhCn': '请选择完整的日期区间',
-		'enUs': 'Select full date range',
-		'jaJp': '期間を正しく選択してください'
-	},
-	// 轨迹加载成功 | Track Load Success | 軌跡読込完了
-	'TrackLoadSuccess': {
-		'zhCn': '轨迹加载成功',
-		'enUs': 'Track Load Success',
-		'jaJp': '軌跡読込完了'
-	},
-	// 暂无轨迹数据 | No Track Data | 軌跡データなし
-	'NoTrackData': {
-		'zhCn': '暂无轨迹数据',
-		'enUs': 'No Track Data',
-		'jaJp': '軌跡データなし'
-	},
-	// 轨迹请求失败 | Track Request Failed | 軌跡取得失敗
-	'TrackRequestFailed': {
-		'zhCn': '轨迹请求异常，请重试',
-		'enUs': 'Track Request Failed',
-		'jaJp': '軌跡取得に失敗しました'
-	},
-	// 开始日期 | Start Date | 開始日
-	'StartDate': {
-		'zhCn': '开始日期',
-		'enUs': 'Start Date',
-		'jaJp': '開始日'
-	},
-	// 结束日期 | End Date | 終了日
-	'EndDate': {
-		'zhCn': '结束日期',
-		'enUs': 'End Date',
-		'jaJp': '終了日'
-	},
-	// 超级管理员 | Super Admin | スーパー管理者
-	'SuperAdmin': {
-		'zhCn': '超级管理员',
-		'enUs': 'Super Admin',
-		'jaJp': 'スーパー管理者'
-	},
-	// 角色 | Role | ロール
-	'Role': {
-		'zhCn': '角色',
-		'enUs': 'Role',
-		'jaJp': 'ロール'
-	},
-	// 姓名 | Name | 氏名
-	'Name': {
-		'zhCn': '姓名',
-		'enUs': 'Name',
-		'jaJp': '氏名'
-	},
-	// 请输入姓名 | Enter Name | 氏名を入力
-	'EnterName': {
-		'zhCn': '请输入姓名',
-		'enUs': 'Enter Name',
-		'jaJp': '氏名を入力してください'
-	},
-	// 请输入手机号 | Enter Phone | 電話番号を入力
-	'EnterPhone': {
-		'zhCn': '请输入手机号',
-		'enUs': 'Enter Phone',
-		'jaJp': '電話番号を入力してください'
-	},
-	// 请选择角色 | Select Role | ロールを選択
-	'SelectRole': {
-		'zhCn': '请选择角色',
-		'enUs': 'Select Role',
-		'jaJp': 'ロールを選択してください'
-	},
-	// 确认删除当前人员吗 | Confirm to delete this user | このユーザーを削除しますか
-	'ConfirmDeleteUser': {
-		'zhCn': '确认删除当前人员吗',
-		'enUs': 'Confirm to delete this user?',
-		'jaJp': 'このユーザーを削除しますか？'
-	},
-	// 移交管理员 | Transfer Admin | 管理者引継ぎ
-	'TransferAdmin': {
-		'zhCn': '移交管理员',
-		'enUs': 'Transfer Admin',
-		'jaJp': '管理者引継ぎ'
-	},
-	// 确认移交管理员 | Confirm Transfer Admin | 管理者を引き継ぎますか
-	'ConfirmTransferAdmin': {
-		'zhCn': '确认移交管理员',
-		'enUs': 'Confirm Transfer Admin',
-		'jaJp': '管理者を引き継ぎますか？'
-	},
-	// 异常记录总数 | Total Abnormal Records | 異常記録総数
-	'AbnormalRecordTotal': {
-		'zhCn': '异常记录总数',
-		'enUs': 'Total Abnormal Records',
-		'jaJp': '異常記録総数'
-	},
-	// 今日新增异常 | Today New Abnormal | 本日の新規異常
-	'TodayNewAbnormal': {
-		'zhCn': '今日新增异常',
-		'enUs': 'Today New Abnormal',
-		'jaJp': '本日の新規異常'
-	},
-	// 疑似拆除异常记录 | Suspected Removal Records | 不正取り外し疑い
-	'SuspectedRemovalAbnormal': {
-		'zhCn': '疑似拆除异常记录',
-		'enUs': 'Suspected Removal Records',
-		'jaJp': '不正取り外し疑い'
-	},
-	// 筛选 | Filter | 絞り込み
-	'Filter': {
-		'zhCn': '筛选',
-		'enUs': 'Filter',
-		'jaJp': '絞り込み'
-	},
-	// 疑似拆除 | Suspected Removal | 不正取り外し疑い
-	'SuspectedRemoval': {
-		'zhCn': '疑似拆除',
-		'enUs': 'Suspected Removal',
-		'jaJp': '不正取り外し疑い'
-	},
-	// 涉及车辆 | Related Vehicle | 対象車両
-	'RelatedVehicle': {
-		'zhCn': '涉及车辆',
-		'enUs': 'Related Vehicle',
-		'jaJp': '対象車両'
-	},
-	// 查看位置 | View Location | 位置を確認
-	'ViewLocation': {
-		'zhCn': '查看位置',
-		'enUs': 'View Location',
-		'jaJp': '位置を確認'
-	},
-	// 暂无符合条件的疑似拆除异常记录 | No matching suspected removal records | 該当する不正取り外し記録なし
-	'NoSuspectedRemovalRecords': {
-		'zhCn': '暂无符合条件的疑似拆除异常记录',
-		'enUs': 'No matching suspected removal records',
-		'jaJp': '該当する不正取り外し記録なし'
-	},
-	// 位置信息 | Location Info | 位置情報
-	'LocationInfo': {
-		'zhCn': '位置信息',
-		'enUs': 'Location Info',
-		'jaJp': '位置情報'
-	},
-	// 详细地址 | Detailed Address | 詳細住所
-	'DetailedAddress': {
-		'zhCn': '详细地址',
-		'enUs': 'Detailed Address',
-		'jaJp': '詳細住所'
-	},
-	// 暂无地址信息 | No Address Info | 住所情報なし
-	'NoAddressInfo': {
-		'zhCn': '暂无地址信息',
-		'enUs': 'No Address Info',
-		'jaJp': '住所情報なし'
-	},
-	// 关闭 | Close | 閉じる
-	'Close': {
-		'zhCn': '关闭',
-		'enUs': 'Close',
-		'jaJp': '閉じる'
-	},
-	// 选择日期 | Select Date | 日付を選択
-	'SelectDate': {
-		'zhCn': '选择日期',
-		'enUs': 'Select Date',
-		'jaJp': '日付を選択'
-	},
-	// 车牌号 | License Plate | ナンバープレート
-	'LicensePlate': {
-		'zhCn': '车牌号',
-		'enUs': 'License Plate',
-		'jaJp': 'ナンバープレート'
-	},
-	// 请输入车牌号 | Enter License Plate | ナンバーを入力
-	'EnterLicensePlate': {
-		'zhCn': '请输入车牌号',
-		'enUs': 'Enter License Plate',
-		'jaJp': 'ナンバーを入力してください'
-	},
-	// 重置 | Reset | リセット
-	'Reset': {
-		'zhCn': '重置',
-		'enUs': 'Reset',
-		'jaJp': 'リセット'
-	},
-	// 确认筛选 | Confirm Filter | 絞り込み確定
-	'ConfirmFilter': {
-		'zhCn': '确认筛选',
-		'enUs': 'Confirm Filter',
-		'jaJp': '絞り込みを確定'
-	},
-	// 导航失败 | Navigation Failed | ナビ失敗
-	'NavigationFailed': {
-		'zhCn': '导航失败',
-		'enUs': 'Navigation Failed',
-		'jaJp': 'ナビ失敗'
-	},
-	// 无法打开地图 | Cannot Open Map | マップを開けない
-	'CannotOpenMap': {
-		'zhCn': '无法打开地图',
-		'enUs': 'Cannot Open Map',
-		'jaJp': 'マップを開けません'
-	},
-	// 角色列表 | Role List | ロール一覧
-	'RoleList': {
-		'zhCn': '角色列表',
-		'enUs': 'Role List',
-		'jaJp': 'ロール一覧'
-	},
-	// 基础信息 | Basic Info | 基本情報
-	'BasicInfo': {
-		'zhCn': '基础信息',
-		'enUs': 'Basic Info',
-		'jaJp': '基本情報'
-	},
-	// 角色名称 | Role Name | ロール名
-	'RoleName': {
-		'zhCn': '角色名称',
-		'enUs': 'Role Name',
-		'jaJp': 'ロール名'
-	},
-	// 请输入角色名称 | Enter Role Name | ロール名を入力
-	'EnterRoleName': {
-		'zhCn': '请输入角色名称',
-		'enUs': 'Enter Role Name',
-		'jaJp': 'ロール名を入力してください'
-	},
-	// 权限设置 | Permission Settings | 権限設定
-	'PermissionSettings': {
-		'zhCn': '权限设置',
-		'enUs': 'Permission Settings',
-		'jaJp': '権限設定'
-	},
-	// 智车钥
-	'WiseLinkAutoRide': {
-		'zhCn': '智车钥',
-		'enUs': 'WiseLink Auto Ride'
-	},
-	// 个人中心
+	"MakeACall": {
+		"zhCn": "拨打电话",
+		"enUs": "Make a Call",
+		"msMy": "Buat Panggilan",
+		"ptBr": "Fazer Chamada",
+		"taSg": "அழைப்பை மேற்கொள்ளுங்கள்",
+		"thTh": "โทรออก",
+		"idId": "Lakukan Panggilan",
+		"miNz": "Waea atu"
+	},
+	"DoYouWantToCallCustomerService": {
+		"zhCn": "是否拨打客服电话",
+		"enUs": "Do you want to call customer service",
+		"msMy": "Adakah anda mahu hubungi perkhidmatan pelanggan",
+		"ptBr": "Deseja ligar para o atendimento ao cliente",
+		"taSg": "வாடிக்கையாளர் சேவைக்கு அழைக்க விரும்புகிறீர்களா",
+		"thTh": "ต้องการโทรหาฝ่ายบริการลูกค้าหรือไม่",
+		"idId": "Apakah anda ingin menghubungi layanan pelanggan",
+		"miNz": "Kei te hiahia koe ki te waea ki te ratonga kiritaki"
+	},
+	"Call": {
+		"zhCn": "拨打",
+		"enUs": "Call",
+		"msMy": "Panggil",
+		"ptBr": "Ligar",
+		"taSg": "அழைப்பு",
+		"thTh": "โทร",
+		"idId": "Panggil",
+		"miNz": "Waea"
+	},
+	"Confirm": {
+		"zhCn": "确认",
+		"enUs": "Confirm",
+		"msMy": "Sahkan",
+		"ptBr": "Confirmar",
+		"taSg": "உறுதிப்படுத்து",
+		"thTh": "ยืนยัน",
+		"idId": "Konfirmasi",
+		"miNz": "Whakaū"
+	},
+	"Cancel": {
+		"zhCn": "取消",
+		"enUs": "Cancel",
+		"msMy": "Batal",
+		"ptBr": "Cancelar",
+		"taSg": "ரத்து செய்",
+		"thTh": "ยกเลิก",
+		"idId": "Batal",
+		"miNz": "Whakakore"
+	},
+	"DialFailed": {
+		"zhCn": "拨号失败",
+		"enUs": "Dial failed",
+		"msMy": "Panggilan gagal",
+		"ptBr": "Falha na chamada",
+		"taSg": "அழைப்பு தோல்வி",
+		"thTh": "การโทรล้มเหลว",
+		"idId": "Panggilan gagal",
+		"miNz": "I rahua te waea"
+	},
+	"Tip": {
+		"zhCn": "提示",
+		"enUs": "Tip",
+		"msMy": "Petua",
+		"ptBr": "Dica",
+		"taSg": "குறிப்பு",
+		"thTh": "คำแนะนำ",
+		"idId": "Tips",
+		"miNz": "Tohu"
+	},
+	"ExitClearCache": {
+		"zhCn": "确定要退出并清除所有缓存吗?",
+		"enUs": "Are you sure to exit and clear all cache?",
+		"msMy": "Adakah anda pasti mahu keluar dan padam semua cache?",
+		"ptBr": "Tem certeza de sair e limpar todo o cache?",
+		"taSg": "வெளியேறி அனைத்து தற்காலிக சேமிப்புகளையும் அழிக்க உறுதியா?",
+		"thTh": "แน่ใจหรือไม่ที่จะออกและลบแคชทั้งหมด",
+		"idId": "Apakah anda yakin ingin keluar dan menghapus semua cache?",
+		"miNz": "Kei te tino hiahia koe ki te puta me te ūkui katoa te keteroki?"
+	},
+	"MyProfile": {
+		"zhCn": "我的资料",
+		"enUs": "My Profile",
+		"msMy": "Profil Saya",
+		"ptBr": "Meu Perfil",
+		"taSg": "எனது சுயவிவரம்",
+		"thTh": "ข้อมูลส่วนตัวของฉัน",
+		"idId": "Profil Saya",
+		"miNz": "Taku kōrero whaiaro"
+	},
+	"CompanyName": {
+		"zhCn": "企业名称",
+		"enUs": "Company Name",
+		"msMy": "Nama Syarikat",
+		"ptBr": "Nome da Empresa",
+		"taSg": "நிறுவன பெயர்",
+		"thTh": "ชื่อบริษัท",
+		"idId": "Nama Perusahaan",
+		"miNz": "Ingoa kamupene"
+	},
+	"PleaseEnterCompanyName": {
+		"zhCn": "请输入企业名称",
+		"enUs": "Please enter company name",
+		"msMy": "Sila masukkan nama syarikat",
+		"ptBr": "Por favor insira o nome da empresa",
+		"taSg": "நிறுவன பெயரை உள்ளிடவும்",
+		"thTh": "กรุณากรอกชื่อบริษัท",
+		"idId": "Silakan masukkan nama perusahaan",
+		"miNz": "Tena koa whakauru mai te ingoa kamupene"
+	},
+	"ContactPerson": {
+		"zhCn": "联系人",
+		"enUs": "Contact Person",
+		"msMy": "Orang Dihubungi",
+		"ptBr": "Pessoa de Contato",
+		"taSg": "தொடர்பு நபர்",
+		"thTh": "ผู้ติดต่อ",
+		"idId": "Orang Kontak",
+		"miNz": "Tangata whakapā"
+	},
+	"PleaseEnterContactPerson": {
+		"zhCn": "请输入联系人",
+		"enUs": "Please enter contact person",
+		"msMy": "Sila masukkan orang dihubungi",
+		"ptBr": "Por favor insira a pessoa de contato",
+		"taSg": "தொடர்பு நபரின் பெயரை உள்ளிடவும்",
+		"thTh": "กรุณากรอกชื่อผู้ติดต่อ",
+		"idId": "Silakan masukkan orang kontak",
+		"miNz": "Tena koa whakauru mai te tangata whakapā"
+	},
+	"ContactPhone": {
+		"zhCn": "联系电话",
+		"enUs": "Contact Phone",
+		"msMy": "Telefon Dihubungi",
+		"ptBr": "Telefone de Contato",
+		"taSg": "தொடர்பு தொலைபேசி",
+		"thTh": "หมายเลขโทรศัพท์ติดต่อ",
+		"idId": "Telepon Kontak",
+		"miNz": "Waea whakapā"
+	},
+	"PleaseEnterContactPhone": {
+		"zhCn": "请输入联系电话",
+		"enUs": "Please enter contact phone",
+		"msMy": "Sila masukkan nombor telefon dihubungi",
+		"ptBr": "Por favor insira o telefone de contato",
+		"taSg": "தொடர்பு தொலைபேசி எண்ணை உள்ளிடவும்",
+		"thTh": "กรุณากรอกหมายเลขโทรศัพท์ติดต่อ",
+		"idId": "Silakan masukkan nomor telepon kontak",
+		"miNz": "Tena koa whakauru mai te nama waea whakapā"
+	},
+	"Remarks": {
+		"zhCn": "备注",
+		"enUs": "Remarks",
+		"msMy": "Catatan",
+		"ptBr": "Observações",
+		"taSg": "குறிப்புகள்",
+		"thTh": "หมายเหตุ",
+		"idId": "Catatan",
+		"miNz": "Ngā kōrero tuku iho"
+	},
+	"PleaseEnterRemarks": {
+		"zhCn": "请输入备注",
+		"enUs": "Please enter remarks",
+		"msMy": "Sila masukkan catatan",
+		"ptBr": "Por favor insira observações",
+		"taSg": "குறிப்புகளை உள்ளிடவும்",
+		"thTh": "กรุณากรอกหมายเหตุ",
+		"idId": "Silakan masukkan catatan",
+		"miNz": "Tena koa whakauru mai ngā kōrero tuku iho"
+	},
+	"BillingInfo": {
+		"zhCn": "开票信息",
+		"enUs": "Billing Information",
+		"msMy": "Maklumat Pengebilan",
+		"ptBr": "Informações de Faturamento",
+		"taSg": "பில் தகவல்",
+		"thTh": "ข้อมูลใบแจ้งหนี้",
+		"idId": "Informasi Penagihan",
+		"miNz": "Ngā kōrero nama"
+	},
+	"BillingName": {
+		"zhCn": "开票名称",
+		"enUs": "Billing Name",
+		"msMy": "Nama Pengebilan",
+		"ptBr": "Nome da Fatura",
+		"taSg": "பில் பெயர்",
+		"thTh": "ชื่อสำหรับใบแจ้งหนี้",
+		"idId": "Nama Penagihan",
+		"miNz": "Ingoa nama"
+	},
+	"PleaseEnterBillingName": {
+		"zhCn": "请输入开票名称",
+		"enUs": "Please enter billing name",
+		"msMy": "Sila masukkan nama pengebilan",
+		"ptBr": "Por favor insira o nome da fatura",
+		"taSg": "பில் பெயரை உள்ளிடவும்",
+		"thTh": "กรุณากรอกชื่อสำหรับใบแจ้งหนี้",
+		"idId": "Silakan masukkan nama penagihan",
+		"miNz": "Tena koa whakauru mai te ingoa nama"
+	},
+	"TaxpayerId": {
+		"zhCn": "纳税人识别号",
+		"enUs": "Taxpayer ID",
+		"msMy": "ID Pembayar Cukai",
+		"ptBr": "CPF/CNPJ",
+		"taSg": "வரி செலுத்துபவர் அடையாள எண்",
+		"thTh": "หมายเลขประจำตัวผู้เสียภาษี",
+		"idId": "ID Wajib Pajak",
+		"miNz": "Tau kaitākete"
+	},
+	"PleaseEnterTaxpayerId": {
+		"zhCn": "请输入纳税人识别号",
+		"enUs": "Please enter taxpayer ID",
+		"msMy": "Sila masukkan ID pembayar cukai",
+		"ptBr": "Por favor insira CPF/CNPJ",
+		"taSg": "வரி செலுத்துபவர் அடையாள எண்ணை உள்ளிடவும்",
+		"thTh": "กรุณากรอกหมายเลขประจำตัวผู้เสียภาษี",
+		"idId": "Silakan masukkan ID wajib pajak",
+		"miNz": "Tena koa whakauru mai te tau kaitākete"
+	},
+	"PleaseEnterPhone": {
+		"zhCn": "请输入电话",
+		"enUs": "Please enter phone",
+		"msMy": "Sila masukkan nombor telefon",
+		"ptBr": "Por favor insira o telefone",
+		"taSg": "தொலைபேசி எண்ணை உள்ளிடவும்",
+		"thTh": "กรุณากรอกหมายเลขโทรศัพท์",
+		"idId": "Silakan masukkan nomor telepon",
+		"miNz": "Tena koa whakauru mai te nama waea"
+	},
+	"Address": {
+		"zhCn": "地址",
+		"enUs": "Address",
+		"msMy": "Alamat",
+		"ptBr": "Endereço",
+		"taSg": "முகவரி",
+		"thTh": "ที่อยู่",
+		"idId": "Alamat",
+		"miNz": "Wāhi noho"
+	},
+	"PleaseEnterAddress": {
+		"zhCn": "请输入地址",
+		"enUs": "Please enter address",
+		"msMy": "Sila masukkan alamat",
+		"ptBr": "Por favor insira o endereço",
+		"taSg": "முகவரியை உள்ளிடவும்",
+		"thTh": "กรุณากรอกที่อยู่",
+		"idId": "Silakan masukkan alamat",
+		"miNz": "Tena koa whakauru mai te wāhi noho"
+	},
+	"BankName": {
+		"zhCn": "开户行",
+		"enUs": "Bank Name",
+		"msMy": "Nama Bank",
+		"ptBr": "Nome do Banco",
+		"taSg": "வங்கி பெயர்",
+		"thTh": "ชื่อธนาคาร",
+		"idId": "Nama Bank",
+		"miNz": "Ingoa peeke"
+	},
+	"PleaseEnterBankName": {
+		"zhCn": "请输入开户行",
+		"enUs": "Please enter bank name",
+		"msMy": "Sila masukkan nama bank",
+		"ptBr": "Por favor insira o nome do banco",
+		"taSg": "வங்கி பெயரை உள்ளிடவும்",
+		"thTh": "กรุณากรอกชื่อธนาคาร",
+		"idId": "Silakan masukkan nama bank",
+		"miNz": "Tena koa whakauru mai te ingoa peeke"
+	},
+	"BankAccount": {
+		"zhCn": "开户账号",
+		"enUs": "Bank Account",
+		"msMy": "Akaun Bank",
+		"ptBr": "Conta Bancária",
+		"taSg": "வங்கி கணக்கு",
+		"thTh": "บัญชีธนาคาร",
+		"idId": "Rekening Bank",
+		"miNz": "Pūkete peeke"
+	},
+	"PleaseEnterBankAccount": {
+		"zhCn": "请输入开户账号",
+		"enUs": "Please enter bank account",
+		"msMy": "Sila masukkan nombor akaun bank",
+		"ptBr": "Por favor insira a conta bancária",
+		"taSg": "வங்கி கணக்கு எண்ணை உள்ளிடவும்",
+		"thTh": "กรุณากรอกหมายเลขบัญชีธนาคาร",
+		"idId": "Silakan masukkan nomor rekening bank",
+		"miNz": "Tena koa whakauru mai te nama pūkete peeke"
+	},
+	"PleaseLogin": {
+		"zhCn": "请登录",
+		"enUs": "Please Login",
+		"msMy": "Sila log masuk",
+		"ptBr": "Por favor faça login",
+		"taSg": "உள்நுழையவும்",
+		"thTh": "กรุณาเข้าสู่ระบบ",
+		"idId": "Silakan masuk",
+		"miNz": "Tena koa takiuru mai"
+	},
+	"WelcomeUse": {
+		"zhCn": "欢迎使用",
+		"enUs": "Welcome to Use",
+		"msMy": "Selamat Datang",
+		"ptBr": "Bem‑vindo ao uso",
+		"taSg": "பயன்படுத்த வரவேற்கிறோம்",
+		"thTh": "ยินดีที่ได้รู้จัก",
+		"idId": "Selamat Datang",
+		"miNz": "Nau mai ki te whakamahi"
+	},
+	"PreparingService": {
+		"zhCn": "正在为您准备优质服务",
+		"enUs": "Preparing high‑quality services for you",
+		"msMy": "Sedang menyediakan perkhidmatan berkualiti untuk anda",
+		"ptBr": "Preparando serviços de alta qualidade para você",
+		"taSg": "உங்களுக்கு உயர்தர சேவைகளை தயார் செய்கிறது",
+		"thTh": "กำลังเตรียมบริการคุณภาพสูงสำหรับคุณ",
+		"idId": "Sedang menyiapkan layanan berkualitas untuk anda",
+		"miNz": "Kei te whakarite ratonga kounga mōu"
+	},
+	"ZhiXinTong": {
+		"zhCn": "智信通",
+		"enUs": "WiseLink Auto",
+		"msMy": "WiseLink Auto",
+		"ptBr": "WiseLink Auto",
+		"taSg": "WiseLink Auto",
+		"thTh": "WiseLink Auto",
+		"idId": "WiseLink Auto",
+		"miNz": "WiseLink Auto"
+	},
+	"RentalEKey": {
+		"zhCn": "电子钥匙",
+		"enUs": "Rental E‑Key",
+		"msMy": "Kunci Elektronik Sewa",
+		"ptBr": "Chave Eletrônica de Aluguel",
+		"taSg": "வாடகை மின்னணு சாவி",
+		"thTh": "กุญแจอิเล็กทรอนิกส์รถเช่า",
+		"idId": "Kunci Elektronik Sewa",
+		"miNz": "Kī hiko rēti"
+	},
+	"UserGuide": {
+		"zhCn": "使用指南",
+		"enUs": "User Guide",
+		"msMy": "Panduan Pengguna",
+		"ptBr": "Guia do Usuário",
+		"taSg": "பயனர் வழிகாட்டி",
+		"thTh": "คู่มือผู้ใช้",
+		"idId": "Panduan Pengguna",
+		"miNz": "Aratohu kaiwhakamahi"
+	},
+	"SendKey": {
+		"zhCn": "发送钥匙",
+		"enUs": "Send Key",
+		"msMy": "Hantar Kunci",
+		"ptBr": "Enviar Chave",
+		"taSg": "சாவி அனுப்பு",
+		"thTh": "ส่งกุญแจ",
+		"idId": "Kirim Kunci",
+		"miNz": "Tukua te kī"
+	},
+	"UsageLogs": {
+		"zhCn": "使用记录",
+		"enUs": "Usage Logs",
+		"msMy": "Log Penggunaan",
+		"ptBr": "Registros de Uso",
+		"taSg": "பயன்பாட்டு பதிவுகள்",
+		"thTh": "ประวัติการใช้งาน",
+		"idId": "Catatan Penggunaan",
+		"miNz": "Ngā rārangi whakamahi"
+	},
+	"VIN": {
+		"zhCn": "车架号",
+		"enUs": "VIN",
+		"msMy": "VIN",
+		"ptBr": "VIN",
+		"taSg": "வாகன அடையாள எண் (VIN)",
+		"thTh": "หมายเลขตัวถัง (VIN)",
+		"idId": "VIN",
+		"miNz": "VIN"
+	},
+	"FuelCapacity": {
+		"zhCn": "油箱容积",
+		"enUs": "Fuel Capacity",
+		"msMy": "Kapasiti Tangki Minyak",
+		"ptBr": "Capacidade do Tanque de Combustível",
+		"taSg": "எரிபொருள் தொட்டி திறன்",
+		"thTh": "ความจุถังน้ำมัน",
+		"idId": "Kapasitas Tangki Bahan Bakar",
+		"miNz": "Rōrahi pūkoro hinu"
+	},
+	"DevicePlatform": {
+		"zhCn": "设备平台",
+		"enUs": "Device Platform",
+		"msMy": "Platform Peranti",
+		"ptBr": "Plataforma do Dispositivo",
+		"taSg": "சாதன தளம்",
+		"thTh": "แพลตฟอร์มอุปกรณ์",
+		"idId": "Platform Perangkat",
+		"miNz": "Papa taputapu"
+	},
+	"DeviceID": {
+		"zhCn": "设备号",
+		"enUs": "Device ID",
+		"msMy": "ID Peranti",
+		"ptBr": "ID do Dispositivo",
+		"taSg": "சாதன அடையாள எண்",
+		"thTh": "รหัสอุปกรณ์",
+		"idId": "ID Perangkat",
+		"miNz": "ID taputapu"
+	},
+	"NoData": {
+		"zhCn": "暂无数据",
+		"enUs": "No Data",
+		"msMy": "Tiada Data",
+		"ptBr": "Sem Dados",
+		"taSg": "தரவு இல்லை",
+		"thTh": "ไม่มีข้อมูล",
+		"idId": "Tidak Ada Data",
+		"miNz": "Kāore he raraunga"
+	},
+	"PlateDeviceUser": {
+		"zhCn": "车牌号/设备号/使用人",
+		"enUs": "Plate/Device ID/User",
+		"msMy": "No. Plat / ID Peranti / Pengguna",
+		"ptBr": "Placa / ID do Dispositivo / Usuário",
+		"taSg": "தகடு எண் / சாதன் ஐடி / பயனர்",
+		"thTh": "ทะเบียนรถ / รหัสอุปกรณ์ / ผู้ใช้",
+		"idId": "Plat / ID Perangkat / Pengguna",
+		"miNz": "Tau pereti / ID taputapu / kaiwhakamahi"
+	},
+	"InUse": {
+		"zhCn": "使用中",
+		"enUs": "In Use",
+		"msMy": "Sedang Digunakan",
+		"ptBr": "Em Uso",
+		"taSg": "பயன்பாட்டில் உள்ளது",
+		"thTh": "กำลังใช้งาน",
+		"idId": "Sedang Digunakan",
+		"miNz": "Kei te whakamahia"
+	},
+	"Expired": {
+		"zhCn": "已过期",
+		"enUs": "Expired",
+		"msMy": "Tamat Tempoh",
+		"ptBr": "Expirado",
+		"taSg": "காலாவதியானது",
+		"thTh": "หมดอายุ",
+		"idId": "Kedaluwarsa",
+		"miNz": "Kua pau"
+	},
+	"Cancelled": {
+		"zhCn": "已取消",
+		"enUs": "Cancelled",
+		"msMy": "Dibatalkan",
+		"ptBr": "Cancelado",
+		"taSg": "ரத்து செய்யப்பட்டது",
+		"thTh": "ยกเลิกแล้ว",
+		"idId": "Dibatalkan",
+		"miNz": "Kua whakakorehia"
+	},
+	"Edit": {
+		"zhCn": "修改",
+		"enUs": "Edit",
+		"msMy": "Sunting",
+		"ptBr": "Editar",
+		"taSg": "திருத்து",
+		"thTh": "แก้ไข",
+		"idId": "Edit",
+		"miNz": "Whakatika"
+	},
+	"Copied": {
+		"zhCn": "已复制",
+		"enUs": "Copied",
+		"msMy": "Disalin",
+		"ptBr": "Copiado",
+		"taSg": "நகலெடுக்கப்பட்டது",
+		"thTh": "คัดลอกแล้ว",
+		"idId": "Tersalin",
+		"miNz": "Kua tāruatia"
+	},
+	"CopyLink": {
+		"zhCn": "复制链接",
+		"enUs": "Copy Link",
+		"msMy": "Salin Pautan",
+		"ptBr": "Copiar Link",
+		"taSg": "இணைப்பை நகலெடு",
+		"thTh": "คัดลอกลิงก์",
+		"idId": "Salin Tautan",
+		"miNz": "Tārua te hononga"
+	},
+	"CancelCarUse": {
+		"zhCn": "取消用车",
+		"enUs": "Cancel Use",
+		"msMy": "Batal Penggunaan Kenderaan",
+		"ptBr": "Cancelar Uso do Veículo",
+		"taSg": "வாகன பயன்பாட்டை ரத்து செய்",
+		"thTh": "ยกเลิกการใช้รถ",
+		"idId": "Batal Penggunaan Kendaraan",
+		"miNz": "Whakakore te whakamahi waka"
+	},
+	"ViewPhotos": {
+		"zhCn": "查看照片",
+		"enUs": "View Photos",
+		"msMy": "Lihat Gambar",
+		"ptBr": "Ver Fotos",
+		"taSg": "புகைப்படங்களைப் பார்",
+		"thTh": "ดูรูปภาพ",
+		"idId": "Lihat Foto",
+		"miNz": "Tirohia ngā whakaahua"
+	},
+	"PlateNo": {
+		"zhCn": "车牌号",
+		"enUs": "Plate No",
+		"msMy": "No. Plat",
+		"ptBr": "Número da Placa",
+		"taSg": "தகடு எண்",
+		"thTh": "หมายเลขทะเบียนรถ",
+		"idId": "Nomor Plat",
+		"miNz": "Tau pereti"
+	},
+	"EnterPlateNo": {
+		"zhCn": "请输入车牌号",
+		"enUs": "Enter Plate No",
+		"msMy": "Masukkan no. plat",
+		"ptBr": "Insira o número da placa",
+		"taSg": "தகடு எண்ணை உள்ளிடவும்",
+		"thTh": "กรุณากรอกหมายเลขทะเบียนรถ",
+		"idId": "Masukkan nomor plat",
+		"miNz": "Whakauru mai te tau pereti"
+	},
+	"User": {
+		"zhCn": "使用人",
+		"enUs": "User",
+		"msMy": "Pengguna",
+		"ptBr": "Usuário",
+		"taSg": "பயனர்",
+		"thTh": "ผู้ใช้",
+		"idId": "Pengguna",
+		"miNz": "Kaiwhakamahi"
+	},
+	"EnterUser": {
+		"zhCn": "请输入使用人",
+		"enUs": "Enter User",
+		"msMy": "Masukkan nama pengguna",
+		"ptBr": "Insira o usuário",
+		"taSg": "பயனர் பெயரை உள்ளிடவும்",
+		"thTh": "กรุณากรอกชื่อผู้ใช้",
+		"idId": "Masukkan nama pengguna",
+		"miNz": "Whakauru mai te ingoa kaiwhakamahi"
+	},
+	"AccountPhone": {
+		"zhCn": "账号/手机号",
+		"enUs": "Account/Phone",
+		"msMy": "Akaun / Telefon",
+		"ptBr": "Conta / Telefone",
+		"taSg": "கணக்கு / தொலைபேசி",
+		"thTh": "บัญชี / หมายเลขโทรศัพท์",
+		"idId": "Akun / Telepon",
+		"miNz": "Pūkete / Waea"
+	},
+	"EnterAccountPhone": {
+		"zhCn": "请输入手机号/账号",
+		"enUs": "Enter Phone/Account",
+		"msMy": "Masukkan telefon / akaun",
+		"ptBr": "Insira telefone / conta",
+		"taSg": "தொலைபேசி அல்லது கணக்கை உள்ளிடவும்",
+		"thTh": "กรุณากรอกหมายเลขโทรศัพท์หรือบัญชี",
+		"idId": "Masukkan telepon / akun",
+		"miNz": "Whakauru mai te waea, pūkete rānei"
+	},
+	"StartTime": {
+		"zhCn": "开始时间",
+		"enUs": "Start Time",
+		"msMy": "Masa Mula",
+		"ptBr": "Hora de Início",
+		"taSg": "தொடக்க நேரம்",
+		"thTh": "เวลาเริ่มต้น",
+		"idId": "Waktu Mulai",
+		"miNz": "Wā tīmata"
+	},
+	"EndTime": {
+		"zhCn": "结束时间",
+		"enUs": "End Time",
+		"msMy": "Masa Tamat",
+		"ptBr": "Hora de Término",
+		"taSg": "முடிவு நேரம்",
+		"thTh": "เวลาสิ้นสุด",
+		"idId": "Waktu Selesai",
+		"miNz": "Wā mutu"
+	},
+	"MultiUserAllowed": {
+		"zhCn": "是否允许多人使用",
+		"enUs": "Allow Multiple Users",
+		"msMy": "Benarkan berbilang pengguna",
+		"ptBr": "Permitir Vários Usuários",
+		"taSg": "பல பயனர்களை அனுமதிக்கலாமா",
+		"thTh": "อนุญาตให้หลายคนใช้งานหรือไม่",
+		"idId": "Izinkan Banyak Pengguna",
+		"miNz": "Whakaaetia ngā kaiwhakamahi maha"
+	},
+	"Remark": {
+		"zhCn": "备注",
+		"enUs": "Remark",
+		"msMy": "Catatan",
+		"ptBr": "Observação",
+		"taSg": "குறிப்பு",
+		"thTh": "หมายเหตุ",
+		"idId": "Catatan",
+		"miNz": "Kōrero tuku iho"
+	},
+	"EnterParkingPos": {
+		"zhCn": "请输入车位号或车辆位置",
+		"enUs": "Enter Parking No. or Location",
+		"msMy": "Masukkan no. tempat letak kereta atau lokasi kenderaan",
+		"ptBr": "Insira número da vaga ou localização do veículo",
+		"taSg": "பார்க்கிங் எண் அல்லது வாகன இருப்பிடத்தை உள்ளிடவும்",
+		"thTh": "กรุณากรอกหมายเลขที่จอดรถหรือตำแหน่งรถ",
+		"idId": "Masukkan nomor parkir atau lokasi kendaraan",
+		"miNz": "Whakauru mai te tau wāhi tū waka, te wāhi rānei o te waka"
+	},
+	"Total": {
+		"zhCn": "共",
+		"enUs": "Total",
+		"msMy": "Jumlah",
+		"ptBr": "Total",
+		"taSg": "மொத்தம்",
+		"thTh": "ทั้งหมด",
+		"idId": "Total",
+		"miNz": "Katoa"
+	},
+	"Records": {
+		"zhCn": "记录",
+		"enUs": "records",
+		"msMy": "rekod",
+		"ptBr": "registros",
+		"taSg": "பதிவுகள்",
+		"thTh": "รายการ",
+		"idId": "catatan",
+		"miNz": "ngā rārangi"
+	},
+	"Allow": {
+		"zhCn": "允许",
+		"enUs": "Allow",
+		"msMy": "Benarkan",
+		"ptBr": "Permitir",
+		"taSg": "அனுமதி",
+		"thTh": "อนุญาต",
+		"idId": "Izinkan",
+		"miNz": "Whakaae"
+	},
+	"Disallow": {
+		"zhCn": "不允许",
+		"enUs": "Disallow",
+		"msMy": "Tidak Benarkan",
+		"ptBr": "Não Permitir",
+		"taSg": "அனுமதிக்காதே",
+		"thTh": "ไม่อนุญาต",
+		"idId": "Tidak Izinkan",
+		"miNz": "Whakakahore"
+	},
+	"SendSuccess": {
+		"zhCn": "发送成功",
+		"enUs": "Send Successfully",
+		"msMy": "Berjaya Dihantar",
+		"ptBr": "Enviado com Sucesso",
+		"taSg": "அனுப்புதல் வெற்றி",
+		"thTh": "ส่งสำเร็จ",
+		"idId": "Berhasil Dikirim",
+		"miNz": "I angitu te tuku"
+	},
+	"SendFailed": {
+		"zhCn": "发送失败",
+		"enUs": "Send Failed",
+		"msMy": "Gagal Dihantar",
+		"ptBr": "Falha ao Enviar",
+		"taSg": "அனுப்புதல் தோல்வி",
+		"thTh": "ส่งล้มเหลว",
+		"idId": "Gagal Dikirim",
+		"miNz": "I rahua te tuku"
+	},
+	"CopySuccess": {
+		"zhCn": "复制成功",
+		"enUs": "Copy Successfully",
+		"msMy": "Berjaya Disalin",
+		"ptBr": "Copiado com Sucesso",
+		"taSg": "நகலெடுப்பு வெற்றி",
+		"thTh": "คัดลอกสำเร็จ",
+		"idId": "Berhasil Disalin",
+		"miNz": "I angitu te tārua"
+	},
+	"CarList": {
+		"zhCn": "车辆列表",
+		"enUs": "Car List",
+		"msMy": "Senarai Kereta",
+		"ptBr": "Lista de Carros",
+		"taSg": "கார் பட்டியல்",
+		"thTh": "รายการรถยนต์",
+		"idId": "Daftar Kendaraan",
+		"miNz": "Rārangi waka",
+		"jaJp": "車両一覧"
+	},
+	"Car": {
+		"zhCn": "车辆",
+		"enUs": "Car",
+		"msMy": "Kereta",
+		"ptBr": "Carro",
+		"taSg": "கார்",
+		"thTh": "รถยนต์",
+		"idId": "Kendaraan",
+		"miNz": "Waka",
+		"jaJp": "車両"
+	},
+	"Add": {
+		"zhCn": "新增",
+		"enUs": "Add",
+		"msMy": "Tambah",
+		"ptBr": "Adicionar",
+		"taSg": "சேர்",
+		"thTh": "เพิ่ม",
+		"idId": "Tambah",
+		"miNz": "Tāpiri",
+		"jaJp": "追加"
+	},
+	"Delete": {
+		"zhCn": "删除",
+		"enUs": "Delete",
+		"msMy": "Padam",
+		"ptBr": "Excluir",
+		"taSg": "நீக்கு",
+		"thTh": "ลบ",
+		"idId": "Hapus",
+		"miNz": "Muku",
+		"jaJp": "削除"
+	},
+	"SearchPlaceholder": {
+		"zhCn": "车牌号/设备号/车型/车系",
+		"enUs": "Plate/SN/Model/Series",
+		"msMy": "No. Plat / SN / Model / Siri",
+		"ptBr": "Placa/SN/Modelo/Série",
+		"taSg": "தகடு எண் / சாதன் எண் / மாதிரி / தொடர்",
+		"thTh": "ทะเบียนรถ / SN / รุ่นรถ / ซีรีส์",
+		"idId": "Plat / SN / Model / Seri",
+		"miNz": "Tau pereti / SN / tauira / raupapa",
+		"jaJp": "ナンバー／ID／モデル／シリーズ"
+	},
+	"TotalRecords": {
+		"zhCn": "共有",
+		"enUs": "Total ",
+		"msMy": "Jumlah ",
+		"ptBr": "Total ",
+		"taSg": "மொத்தம் ",
+		"thTh": "ทั้งหมด ",
+		"idId": "Total ",
+		"miNz": "Katoa ",
+		"jaJp": "合計"
+	},
+	"Items": {
+		"zhCn": "条记录",
+		"enUs": " items",
+		"msMy": " item",
+		"ptBr": " itens",
+		"taSg": " பதிவுகள்",
+		"thTh": " รายการ",
+		"idId": " item",
+		"miNz": " ngā rārangi",
+		"jaJp": "件"
+	},
+	"SelectAll": {
+		"zhCn": "全选",
+		"enUs": "Select All",
+		"msMy": "Pilih Semua",
+		"ptBr": "Selecionar Tudo",
+		"taSg": "அனைத்தையும் தேர்ந்தெடு",
+		"thTh": "เลือกทั้งหมด",
+		"idId": "Pilih Semua",
+		"miNz": "Kōwhiri katoa",
+		"jaJp": "すべて選択"
+	},
+	"DeviceSN": {
+		"zhCn": "设备号",
+		"enUs": "Device SN",
+		"msMy": "SN Peranti",
+		"ptBr": "SN do Dispositivo",
+		"taSg": "சாதன வரிசை எண்",
+		"thTh": "SN อุปกรณ์",
+		"idId": "SN Perangkat",
+		"miNz": "SN taputapu",
+		"jaJp": "デバイスID"
+	},
+	"EffectivePeriod": {
+		"zhCn": "生效周期",
+		"enUs": "Effective Period",
+		"msMy": "Tempoh Berkuat‑kuasa",
+		"ptBr": "Período de Vigência",
+		"taSg": "செயல்படும் காலம்",
+		"thTh": "ระยะเวลาที่มีผล",
+		"idId": "Masa Berlaku",
+		"miNz": "Wā whai hua",
+		"jaJp": "有効期間"
+	},
+	"SelectThisCar": {
+		"zhCn": "选择此车",
+		"enUs": "Select This Car",
+		"msMy": "Pilih Kereta Ini",
+		"ptBr": "Selecionar Este Carro",
+		"taSg": "இந்த காரைத் தேர்ந்தெடு",
+		"thTh": "เลือกรถคันนี้",
+		"idId": "Pilih Kendaraan Ini",
+		"miNz": "Kōwhiri tēnei waka",
+		"jaJp": "この車を選択"
+	},
+	"PlateNumber": {
+		"zhCn": "车牌号",
+		"enUs": "Plate Number",
+		"msMy": "No. Plat",
+		"ptBr": "Número da Placa",
+		"taSg": "தகடு எண்",
+		"thTh": "หมายเลขทะเบียนรถ",
+		"idId": "Nomor Plat",
+		"miNz": "Tau pereti",
+		"jaJp": "ナンバープレート"
+	},
+	"VehicleSeries": {
+		"zhCn": "车系",
+		"enUs": "Vehicle Series",
+		"msMy": "Siri Kenderaan",
+		"ptBr": "Série do Veículo",
+		"taSg": "வாகன தொடர்",
+		"thTh": "ซีรีส์รถยนต์",
+		"idId": "Seri Kendaraan",
+		"miNz": "Raupapa waka",
+		"jaJp": "車種シリーズ"
+	},
+	"VehicleModel": {
+		"zhCn": "车型",
+		"enUs": "Vehicle Model",
+		"msMy": "Model Kenderaan",
+		"ptBr": "Modelo do Veículo",
+		"taSg": "வாகன மாதிரி",
+		"thTh": "รุ่นรถยนต์",
+		"idId": "Model Kendaraan",
+		"miNz": "Tauira waka",
+		"jaJp": "車種"
+	},
+	"ModelYear": {
+		"zhCn": "年款",
+		"enUs": "Model Year",
+		"msMy": "Tahun Model",
+		"ptBr": "Ano do Modelo",
+		"taSg": "மாதிரி ஆண்டு",
+		"thTh": "ปีรุ่นรถ",
+		"idId": "Tahun Model",
+		"miNz": "Tau tauira",
+		"jaJp": "年式"
+	},
+	"TotalMileage": {
+		"zhCn": "当前总里程",
+		"enUs": "Total Mileage",
+		"msMy": "Jumlah Jarak Perjalanan",
+		"ptBr": "Quilometragem Total",
+		"taSg": "மொத்த பயண தூரம்",
+		"thTh": "ระยะทางรวม",
+		"idId": "Total Jarak Tempuh",
+		"miNz": "Te katoa o te tawhiti haere",
+		"jaJp": "総走行距離"
+	},
+	"MaintainMileage": {
+		"zhCn": "已保养里程",
+		"enUs": "Maintain Mileage",
+		"msMy": "Jarak Perjalanan Penyelenggaraan",
+		"ptBr": "Quilometragem da Manutenção",
+		"taSg": "பராமரிப்பு பயண தூரம்",
+		"thTh": "ระยะทางเมื่อทำการบำรุงรักษา",
+		"idId": "Jarak Tempuh Perawatan",
+		"miNz": "Tawhiti tiaki",
+		"jaJp": "最終整備時走行距離"
+	},
+	"MaintainInterval": {
+		"zhCn": "保养周期里程",
+		"enUs": "Maintain Interval",
+		"msMy": "Selang Penyelenggaraan",
+		"ptBr": "Intervalo de Manutenção",
+		"taSg": "பராமரிப்பு இடைவெளி",
+		"thTh": "ช่วงการบำรุงรักษา",
+		"idId": "Interval Perawatan",
+		"miNz": "Wāhi tiaki",
+		"jaJp": "整備間隔"
+	},
+	"Tips": {
+		"zhCn": "提示",
+		"enUs": "Tips",
+		"msMy": "Petua",
+		"ptBr": "Dicas",
+		"taSg": "குறிப்புகள்",
+		"thTh": "คำแนะนำ",
+		"idId": "Tips",
+		"miNz": "Ngā tohutohu",
+		"jaJp": "ヒント"
+	},
+	"ConfirmDelete": {
+		"zhCn": "确认删除？",
+		"enUs": "Confirm Delete?",
+		"msMy": "Sahkan Padam?",
+		"ptBr": "Confirmar Exclusão?",
+		"taSg": "நீக்குவதை உறுதிப்படுத்துகிறீர்களா?",
+		"thTh": "ยืนยันการลบ?",
+		"idId": "Konfirmasi Hapus?",
+		"miNz": "Whakaū te muku?",
+		"jaJp": "削除してよろしいですか？"
+	},
+	"Empty": {
+		"zhCn": "空",
+		"enUs": "Empty",
+		"msMy": "Kosong",
+		"ptBr": "Vazio",
+		"taSg": "காலம்",
+		"thTh": "ว่างเปล่า",
+		"idId": "Kosong",
+		"miNz": "Kore kau",
+		"jaJp": "空"
+	},
+	"PleaseEnterPlate": {
+		"zhCn": "请输入车牌号",
+		"enUs": "Please Enter Plate",
+		"msMy": "Sila masukkan no. plat",
+		"ptBr": "Por favor insira a placa",
+		"taSg": "தகடு எண்ணை உள்ளிடவும்",
+		"thTh": "กรุณากรอกหมายเลขทะเบียนรถ",
+		"idId": "Silakan masukkan nomor plat",
+		"miNz": "Tena koa whakauru mai te tau pereti",
+		"jaJp": "ナンバーを入力してください"
+	},
+	"PleaseEnterSN": {
+		"zhCn": "请输入设备号",
+		"enUs": "Please Enter SN",
+		"msMy": "Sila masukkan SN peranti",
+		"ptBr": "Por favor insira o SN do dispositivo",
+		"taSg": "சாதன வரிசை எண்ணை உள்ளிடவும்",
+		"thTh": "กรุณากรอก SN อุปกรณ์",
+		"idId": "Silakan masukkan SN perangkat",
+		"miNz": "Tena koa whakauru mai te SN taputapu",
+		"jaJp": "デバイスIDを入力してください"
+	},
+	"PleaseEnterCode": {
+		"zhCn": "请输入code",
+		"enUs": "Please Enter Code",
+		"msMy": "Sila masukkan kod",
+		"ptBr": "Por favor insira o código",
+		"taSg": "குறியீட்டை உள்ளிடவும்",
+		"thTh": "กรุณากรอกโค้ด",
+		"idId": "Silakan masukkan kode",
+		"miNz": "Tena koa whakauru mai te waehere",
+		"jaJp": "コードを入力してください"
+	},
+	"PleaseEnterSeries": {
+		"zhCn": "请输入车系",
+		"enUs": "Please Enter Series",
+		"msMy": "Sila masukkan siri kenderaan",
+		"ptBr": "Por favor insira a série do veículo",
+		"taSg": "வாகன தொடரை உள்ளிடவும்",
+		"thTh": "กรุณากรอกซีรีส์รถยนต์",
+		"idId": "Silakan masukkan seri kendaraan",
+		"miNz": "Tena koa whakauru mai te raupapa waka",
+		"jaJp": "シリーズを入力してください"
+	},
+	"PleaseEnterModel": {
+		"zhCn": "请输入车型",
+		"enUs": "Please Enter Model",
+		"msMy": "Sila masukkan model kenderaan",
+		"ptBr": "Por favor insira o modelo do veículo",
+		"taSg": "வாகன மாதிரியை உள்ளிடவும்",
+		"thTh": "กรุณากรอกรุ่นรถยนต์",
+		"idId": "Silakan masukkan model kendaraan",
+		"miNz": "Tena koa whakauru mai te tauira waka",
+		"jaJp": "モデルを入力してください"
+	},
+	"PleaseEnterYear": {
+		"zhCn": "请输入年款",
+		"enUs": "Please Enter Year",
+		"msMy": "Sila masukkan tahun model",
+		"ptBr": "Por favor insira o ano do modelo",
+		"taSg": "மாதிரி ஆண்டை உள்ளிடவும்",
+		"thTh": "กรุณากรอกปีรุ่นรถ",
+		"idId": "Silakan masukkan tahun model",
+		"miNz": "Tena koa whakauru mai te tau tauira",
+		"jaJp": "年式を入力してください"
+	},
+	"PleaseEnterTotalMileage": {
+		"zhCn": "请输入车辆当前里程",
+		"enUs": "Please Enter Total Mileage",
+		"msMy": "Sila masukkan jumlah jarak perjalanan semasa",
+		"ptBr": "Por favor insira a quilometragem total atual",
+		"taSg": "தற்போதைய மொத்த பயண தூரத்தை உள்ளிடவும்",
+		"thTh": "กรุณากรอกระยะทางรวมปัจจุบัน",
+		"idId": "Silakan masukkan total jarak tempuh saat ini",
+		"miNz": "Tena koa whakauru mai te katoa o te tawhiti haere",
+		"jaJp": "現在の走行距離を入力してください"
+	},
+	"PleaseEnterMaintainMileage": {
+		"zhCn": "请输入已保养里程",
+		"enUs": "Please Enter Maintain Mileage",
+		"msMy": "Sila masukkan jarak perjalanan penyelenggaraan",
+		"ptBr": "Por favor insira a quilometragem da manutenção",
+		"taSg": "பராமரிப்பு பயண தூரத்தை உள்ளிடவும்",
+		"thTh": "กรุณากรอกระยะทางเมื่อทำการบำรุงรักษา",
+		"idId": "Silakan masukkan jarak tempuh perawatan",
+		"miNz": "Tena koa whakauru mai te tawhiti tiaki",
+		"jaJp": "最終整備時走行距離を入力してください"
+	},
+	"PleaseEnterMaintainInterval": {
+		"zhCn": "请输入保养周期里程",
+		"enUs": "Please Enter Maintain Interval",
+		"msMy": "Sila masukkan selang penyelenggaraan",
+		"ptBr": "Por favor insira o intervalo de manutenção",
+		"taSg": "பராமரிப்பு இடைவெளியை உள்ளிடவும்",
+		"thTh": "กรุณากรอกช่วงการบำรุงรักษา",
+		"idId": "Silakan masukkan interval perawatan",
+		"miNz": "Tena koa whakauru mai te wāhi tiaki",
+		"jaJp": "整備間隔を入力してください"
+	},
+	"Account": {
+		"zhCn": "账号",
+		"enUs": "Account",
+		"msMy": "Akaun",
+		"ptBr": "Conta",
+		"taSg": "கணக்கு",
+		"thTh": "บัญชี",
+		"idId": "Akun",
+		"miNz": "Pūkete",
+		"jaJp": "アカウント"
+	},
+	"Phone": {
+		"zhCn": "联系电话",
+		"enUs": "Phone",
+		"msMy": "Telefon",
+		"ptBr": "Telefone",
+		"taSg": "தொலைபேசி",
+		"thTh": "หมายเลขโทรศัพท์",
+		"idId": "Telepon",
+		"miNz": "Waea",
+		"jaJp": "電話番号"
+	},
+	"BoundCars": {
+		"zhCn": "已绑定车辆",
+		"enUs": "Bound Cars",
+		"msMy": "Kereta Terikat",
+		"ptBr": "Carros Vinculados",
+		"taSg": "பிணைக்கப்பட்ட வாகனங்கள்",
+		"thTh": "รถที่ผูกไว้",
+		"idId": "Kendaraan Terikat",
+		"miNz": "Ngā waka herehia",
+		"jaJp": "紐付け車両"
+	},
+	"UnbindAll": {
+		"zhCn": "解绑所有车辆",
+		"enUs": "Unbind All",
+		"msMy": "Nyahikat Semua",
+		"ptBr": "Desvincular Tudo",
+		"taSg": "அனைத்து வாகனங்களையும் பிரி",
+		"thTh": "ยกเลิกการผูกทั้งหมด",
+		"idId": "Lepas Semua",
+		"miNz": "Wetewete katoa",
+		"jaJp": "すべて解除"
+	},
+	"Unbind": {
+		"zhCn": "解绑",
+		"enUs": "Unbind",
+		"msMy": "Nyahikat",
+		"ptBr": "Desvincular",
+		"taSg": "பிரி",
+		"thTh": "ยกเลิกการผูก",
+		"idId": "Lepas",
+		"miNz": "Wetewete",
+		"jaJp": "解除"
+	},
+	"BindCar": {
+		"zhCn": "绑定车辆",
+		"enUs": "Bind Car",
+		"msMy": "Ikat Kereta",
+		"ptBr": "Vincular Carro",
+		"taSg": "வாகனத்தை பிணை",
+		"thTh": "ผูกรถยนต์",
+		"idId": "Ikat Kendaraan",
+		"miNz": "Here waka",
+		"jaJp": "車両を紐付け"
+	},
+	"ImportantTip": {
+		"zhCn": "重要提示",
+		"enUs": "Important Tip",
+		"msMy": "Petua Penting",
+		"ptBr": "Dica Importante",
+		"taSg": "முக்கிய குறிப்பு",
+		"thTh": "ข้อควรระวังสำคัญ",
+		"idId": "Peringatan Penting",
+		"miNz": "Tohutohu nui",
+		"jaJp": "重要"
+	},
+	"ConfirmUnbind": {
+		"zhCn": "确定要解绑吗？",
+		"enUs": "Confirm Unbind?",
+		"msMy": "Sahkan Nyahikat?",
+		"ptBr": "Confirmar Desvinculação?",
+		"taSg": "பிணைப்பை நீக்க உறுதியா?",
+		"thTh": "ยืนยันการยกเลิกการผูก?",
+		"idId": "Konfirmasi Lepas?",
+		"miNz": "Whakaū te wetewete?",
+		"jaJp": "解除しますか？"
+	},
+	"TotalCars": {
+		"zhCn": "车辆总数",
+		"enUs": "Total Cars",
+		"msMy": "Jumlah Kereta",
+		"ptBr": "Total de Carros",
+		"taSg": "மொத்த வாகனங்கள்",
+		"thTh": "จำนวนรถทั้งหมด",
+		"idId": "Total Kendaraan",
+		"miNz": "Katoa ngā waka",
+		"jaJp": "車両総数"
+	},
+	"NeedMaintenance": {
+		"zhCn": "辆车需要保养",
+		"enUs": "Cars Need Maintenance",
+		"msMy": "Kereta Perlu Penyelenggaraan",
+		"ptBr": "Carros Necessitam de Manutenção",
+		"taSg": "வாகனங்களுக்கு பராமரிப்பு தேவை",
+		"thTh": "รถที่ต้องการบำรุงรักษา",
+		"idId": "Kendaraan Butuh Perawatan",
+		"miNz": "Ngā waka e hiahia ana ki te tiaki",
+		"jaJp": "台整備必要"
+	},
+	"CarMaintenanceReminder": {
+		"zhCn": "车辆保养提醒",
+		"enUs": "Car Maintenance Reminder",
+		"msMy": "Peringatan Penyelenggaraan Kereta",
+		"ptBr": "Lembrete de Manutenção do Veículo",
+		"taSg": "வாகன பராமரிப்பு நினைவூட்டல்",
+		"thTh": "การแจ้งเตือนบำรุงรักษารถยนต์",
+		"idId": "Pengingat Perawatan Kendaraan",
+		"miNz": "Whakamahara tiaki waka",
+		"jaJp": "車両整備リマインダー"
+	},
+	"RemainingMaintenance": {
+		"zhCn": "离保养里程",
+		"enUs": "Remaining Maintenance",
+		"msMy": "Baki Jarak Penyelenggaraan",
+		"ptBr": "Quilometragem Restante para Manutenção",
+		"taSg": "பராமரிப்புக்கு மீதமுள்ள தூரம்",
+		"thTh": "ระยะทางที่เหลือก่อนบำรุงรักษา",
+		"idId": "Sisa Jarak Perawatan",
+		"miNz": "Tawhiti e toe ana ki te tiaki",
+		"jaJp": "整備まで残り"
+	},
+	"KM": {
+		"zhCn": "公里",
+		"enUs": "KM",
+		"msMy": "KM",
+		"ptBr": "KM",
+		"taSg": "கி.மீ",
+		"thTh": "กม.",
+		"idId": "KM",
+		"miNz": "km",
+		"jaJp": "km"
+	},
+	"Calibrate": {
+		"zhCn": "校准",
+		"enUs": "Calibrate",
+		"msMy": "Kalibrasi",
+		"ptBr": "Calibrar",
+		"taSg": "அளவீடு செய்",
+		"thTh": "ปรับเทียบ",
+		"idId": "Kalibrasi",
+		"miNz": "Whakatika ine",
+		"jaJp": "キャリブレーション"
+	},
+	"MaintenanceCycle": {
+		"zhCn": "保养周期",
+		"enUs": "Maintenance Cycle",
+		"msMy": "Kitaran Penyelenggaraan",
+		"ptBr": "Ciclo de Manutenção",
+		"taSg": "பராமரிப்பு சுழற்சி",
+		"thTh": "รอบการบำรุงรักษา",
+		"idId": "Siklus Perawatan",
+		"miNz": "Huringa tiaki",
+		"jaJp": "整備サイクル"
+	},
+	"RecordTime": {
+		"zhCn": "记录时间",
+		"enUs": "Record Time",
+		"msMy": "Masa Rekod",
+		"ptBr": "Hora do Registro",
+		"taSg": "பதிவு நேரம்",
+		"thTh": "เวลาบันทึก",
+		"idId": "Waktu Catatan",
+		"miNz": "Wā rārangi",
+		"jaJp": "記録時間"
+	},
+	"MaintenanceConfirm": {
+		"zhCn": "保养确认",
+		"enUs": "Maintenance Confirm",
+		"msMy": "Pengesahan Penyelenggaraan",
+		"ptBr": "Confirmação de Manutenção",
+		"taSg": "பராமரிப்பு உறுதிப்படுத்தல்",
+		"thTh": "ยืนยันการบำรุงรักษา",
+		"idId": "Konfirmasi Perawatan",
+		"miNz": "Whakaū tiaki",
+		"jaJp": "整備確認"
+	},
+	"NoMaintenanceRecords": {
+		"zhCn": "暂无符合条件的保养提醒记录",
+		"enUs": "No Maintenance Records",
+		"msMy": "Tiada rekod penyelenggaraan yang sepadan",
+		"ptBr": "Sem registros de manutenção correspondentes",
+		"taSg": "பொருத்தமான பராமரிப்பு பதிவுகள் இல்லை",
+		"thTh": "ไม่มีรายการบำรุงรักษาที่ตรงเงื่อนไข",
+		"idId": "Tidak ada catatan perawatan yang sesuai",
+		"miNz": "Kāore he rārangi tiaki e taurite ana",
+		"jaJp": "該当する整備記録なし"
+	},
+	"FilterConditions": {
+		"zhCn": "筛选条件",
+		"enUs": "Filter Conditions",
+		"msMy": "Syarat‑syarat Penapis",
+		"ptBr": "Condições de Filtro",
+		"taSg": "வடிகட்டி நிபந்தனைகள்",
+		"thTh": "เงื่อนไขการกรอง",
+		"idId": "Kondisi Filter",
+		"miNz": "Ngā tikanga tātari",
+		"jaJp": "絞り込み条件"
+	},
+	"MaintenanceStatus": {
+		"zhCn": "保养状态",
+		"enUs": "Maintenance Status",
+		"msMy": "Status Penyelenggaraan",
+		"ptBr": "Status de Manutenção",
+		"taSg": "பராமரிப்பு நிலை",
+		"thTh": "สถานะการบำรุงรักษา",
+		"idId": "Status Perawatan",
+		"miNz": "Tūnga tiaki",
+		"jaJp": "整備ステータス"
+	},
+	"PleaseSelectStatus": {
+		"zhCn": "请选择状态",
+		"enUs": "Please Select Status",
+		"msMy": "Sila pilih status",
+		"ptBr": "Por favor selecione o status",
+		"taSg": "நிலையைத் தேர்ந்தெடுக்கவும்",
+		"thTh": "กรุณาเลือกสถานะ",
+		"idId": "Silakan pilih status",
+		"miNz": "Tena koa kōwhiria te tūnga",
+		"jaJp": "ステータスを選択してください"
+	},
+	"MileageCalibration": {
+		"zhCn": "里程校准",
+		"enUs": "Mileage Calibration",
+		"msMy": "Kalibrasi Jarak Perjalanan",
+		"ptBr": "Calibração de Quilometragem",
+		"taSg": "பயண தூர அளவீடு",
+		"thTh": "การปรับเทียบระยะทาง",
+		"idId": "Kalibrasi Jarak Tempuh",
+		"miNz": "Whakatika ine tawhiti haere",
+		"jaJp": "走行距離校正"
+	},
+	"PleaseEnterCalibrateMileage": {
+		"zhCn": "请输入校准里程",
+		"enUs": "Enter Calibrate Mileage",
+		"msMy": "Sila masukkan jarak perjalanan kalibrasi",
+		"ptBr": "Por favor insira a quilometragem para calibração",
+		"taSg": "அளவீடு செய்யும் பயண தூரத்தை உள்ளிடவும்",
+		"thTh": "กรุณากรอกระยะทางสำหรับปรับเทียบ",
+		"idId": "Silakan masukkan jarak tempuh kalibrasi",
+		"miNz": "Tena koa whakauru mai te tawhiti ine",
+		"jaJp": "校正距離を入力してください"
+	},
+	"WarmTip": {
+		"zhCn": "温馨提示",
+		"enUs": "Warm Tip",
+		"msMy": "Petua Mesra",
+		"ptBr": "Dica Amigável",
+		"taSg": "அன்பான குறிப்பு",
+		"thTh": "ข้อความแจ้งเตือน",
+		"idId": "Peringatan Hangat",
+		"miNz": "Tohutohu atawhai",
+		"jaJp": "お知らせ"
+	},
+	"ConfirmMaintenanceCompleted": {
+		"zhCn": "确认已完成保养？",
+		"enUs": "Confirm Maintenance Completed?",
+		"msMy": "Sahkan penyelenggaraan selesai?",
+		"ptBr": "Confirmar conclusão da manutenção?",
+		"taSg": "பராமரிப்பு முடிந்ததை உறுதிப்படுத்துகிறீர்களா?",
+		"thTh": "ยืนยันว่าบำรุงรักษาเสร็จสิ้นแล้ว?",
+		"idId": "Konfirmasi perawatan selesai?",
+		"miNz": "Whakaū kua oti te tiaki?",
+		"jaJp": "整備を完了しましたか？"
+	},
+	"Submitting": {
+		"zhCn": "提交中...",
+		"enUs": "Submitting...",
+		"msMy": "Sedang menghantar...",
+		"ptBr": "Enviando...",
+		"taSg": "சமர்ப்பிக்கிறது...",
+		"thTh": "กำลังส่งข้อมูล...",
+		"idId": "Sedang mengirim...",
+		"miNz": "Kei te tuku...",
+		"jaJp": "送信中..."
+	},
+	"MaintenanceSuccess": {
+		"zhCn": "保养成功",
+		"enUs": "Maintenance Success",
+		"msMy": "Penyelenggaraan Berjaya",
+		"ptBr": "Manutenção Concluída",
+		"taSg": "பராமரிப்பு வெற்றி",
+		"thTh": "บำรุงรักษาสำเร็จ",
+		"idId": "Perawatan Berhasil",
+		"miNz": "I angitu te tiaki",
+		"jaJp": "整備完了"
+	},
+	"OperationFailed": {
+		"zhCn": "操作失败",
+		"enUs": "Operation Failed",
+		"msMy": "Operasi Gagal",
+		"ptBr": "Operação Falhou",
+		"taSg": "செயல்பாடு தோல்வி",
+		"thTh": "การดำเนินการล้มเหลว",
+		"idId": "Operasi Gagal",
+		"miNz": "I rahua te mahi",
+		"jaJp": "操作失敗"
+	},
+	"PleaseEnterValidMileage": {
+		"zhCn": "请输入有效里程",
+		"enUs": "Enter Valid Mileage",
+		"msMy": "Sila masukkan jarak perjalanan yang sah",
+		"ptBr": "Por favor insira uma quilometragem válida",
+		"taSg": "சரியான பயண தூரத்தை உள்ளிடவும்",
+		"thTh": "กรุณากรอกระยะทางที่ถูกต้อง",
+		"idId": "Silakan masukkan jarak tempuh yang valid",
+		"miNz": "Tena koa whakauru mai te tawhiti whaimana",
+		"jaJp": "有効な距離を入力してください"
+	},
+	"Calibrating": {
+		"zhCn": "校准中...",
+		"enUs": "Calibrating...",
+		"msMy": "Sedang mengkalibrasi...",
+		"ptBr": "Calibrando...",
+		"taSg": "அளவீடு செய்கிறது...",
+		"thTh": "กำลังปรับเทียบ...",
+		"idId": "Sedang mengkalibrasi...",
+		"miNz": "Kei te whakatika ine...",
+		"jaJp": "校正中..."
+	},
+	"CalibrateSuccess": {
+		"zhCn": "校准成功",
+		"enUs": "Calibrate Success",
+		"msMy": "Penentukuran Berjaya",
+		"ptBr": "Calibração bem‑sucedida",
+		"taSg": "கலிபரேசன் வெற்றி",
+		"thTh": "การสอบเทียบสำเร็จ",
+		"idId": "Kalibrasi Berhasil",
+		"miNz": "Kua angitu te whakatika"
+	},
+	"CalibrateFailed": {
+		"zhCn": "校准失败",
+		"enUs": "Calibrate Failed",
+		"msMy": "Penentukuran Gagal",
+		"ptBr": "Falha na calibração",
+		"taSg": "கலிபரேசன் தோல்வி",
+		"thTh": "การสอบเทียบล้มเหลว",
+		"idId": "Kalibrasi Gagal",
+		"miNz": "I rahua te whakatika"
+	},
+	"FilteredOut": {
+		"zhCn": "筛选出",
+		"enUs": "Filtered Out",
+		"msMy": "Ditapis Keluar",
+		"ptBr": "Filtrado",
+		"taSg": "வடிகட்டப்பட்டது",
+		"thTh": "กรองออก",
+		"idId": "Difilter Keluar",
+		"miNz": "Kua tātarihia"
+	},
+	"All": {
+		"zhCn": "全部",
+		"enUs": "All",
+		"msMy": "Semua",
+		"ptBr": "Todos",
+		"taSg": "அனைத்தும்",
+		"thTh": "ทั้งหมด",
+		"idId": "Semua",
+		"miNz": "Katoa"
+	},
+	"PendingMaintenance": {
+		"zhCn": "待保养",
+		"enUs": "Pending",
+		"msMy": "Menunggu Penyelenggaraan",
+		"ptBr": "Aguardando manutenção",
+		"taSg": "பராமரிப்பு நிலுவையில்",
+		"thTh": "รอการบำรุงรักษา",
+		"idId": "Menunggu Perawatan",
+		"miNz": "Tatari te tiaki"
+	},
+	"Maintained": {
+		"zhCn": "已保养",
+		"enUs": "Maintained",
+		"msMy": "Telah Diselenggara",
+		"ptBr": "Manutenção realizada",
+		"taSg": "பராமரிக்கப்பட்டது",
+		"thTh": "บำรุงรักษาแล้ว",
+		"idId": "Sudah Dirawat",
+		"miNz": "Kua tiakina"
+	},
+	"LoadedAll": {
+		"zhCn": "已加载全部",
+		"enUs": "All Loaded",
+		"msMy": "Semua Dimuatkan",
+		"ptBr": "Todos carregados",
+		"taSg": "அனைத்தும் ஏற்றப்பட்டது",
+		"thTh": "โหลดข้อมูลทั้งหมดแล้ว",
+		"idId": "Semua Telah Dimuat",
+		"miNz": "Katoa kua utaina"
+	},
+	"NoPhotos": {
+		"zhCn": "暂无照片",
+		"enUs": "No Photos",
+		"msMy": "Tiada Gambar",
+		"ptBr": "Sem fotos",
+		"taSg": "புகைப்படங்கள் இல்லை",
+		"thTh": "ไม่มีรูปภาพ",
+		"idId": "Tidak Ada Foto",
+		"miNz": "Kāore he whakaahua"
+	},
+	"PleaseSelectCar": {
+		"zhCn": "请选择车辆",
+		"enUs": "Select Car",
+		"msMy": "Sila Pilih Kenderaan",
+		"ptBr": "Selecione o veículo",
+		"taSg": "வாகனத்தைத் தேர்ந்தெடுக்கவும்",
+		"thTh": "กรุณาเลือกยานพาหนะ",
+		"idId": "Silakan Pilih Kendaraan",
+		"miNz": "Tīpakohia te waka"
+	},
+	"ReSelect": {
+		"zhCn": "重新选择",
+		"enUs": "Re‑select",
+		"msMy": "Pilih Semula",
+		"ptBr": "Selecionar novamente",
+		"taSg": "மீண்டும் தேர்ந்தெடுக்கவும்",
+		"thTh": "เลือกใหม่",
+		"idId": "Pilih Ulang",
+		"miNz": "Tīpako anō"
+	},
+	"DataLoadFailed": {
+		"zhCn": "数据加载失败",
+		"enUs": "Data Load Failed",
+		"msMy": "Gagal Memuat Data",
+		"ptBr": "Falha ao carregar dados",
+		"taSg": "தரவு ஏற்றுதல் தோல்வி",
+		"thTh": "โหลดข้อมูลล้มเหลว",
+		"idId": "Gagal Memuat Data",
+		"miNz": "I rahua te uta raraunga"
+	},
+	"DeviceInfoFailed": {
+		"zhCn": "设备信息获取失败",
+		"enUs": "Device Info Failed",
+		"msMy": "Gagal Dapatkan Maklumat Peranti",
+		"ptBr": "Falha ao obter informações do dispositivo",
+		"taSg": "சாதனத் தகவல் பெறுதல் தோல்வி",
+		"thTh": "รับข้อมูลอุปกรณ์ล้มเหลว",
+		"idId": "Gagal Mendapatkan Info Perangkat",
+		"miNz": "I rahua te tiki korero taputapu"
+	},
+	"PleaseSelectCarFirst": {
+		"zhCn": "请先选择车辆",
+		"enUs": "Select Car First",
+		"msMy": "Sila Pilih Kenderaan Dahulu",
+		"ptBr": "Selecione o veículo primeiro",
+		"taSg": "முதலில் வாகனத்தைத் தேர்ந்தெடுக்கவும்",
+		"thTh": "กรุณาเลือกยานพาหนะก่อน",
+		"idId": "Silakan Pilih Kendaraan Terlebih Dahulu",
+		"miNz": "Tīpakohia te waka i te tuatahi"
+	},
+	"TrackPlayback": {
+		"zhCn": "轨迹查询",
+		"enUs": "Track Playback",
+		"msMy": "Main Semula Jejak",
+		"ptBr": "Reprodução de trajeto",
+		"taSg": "பாதை மீண்டும் இயக்கம்",
+		"thTh": "เล่นย้อนรอยเส้นทาง",
+		"idId": "Pemutaran Jejak",
+		"miNz": "Whakaara ano te ara"
+	},
+	"PleaseSelectDateRange": {
+		"zhCn": "请选择开始和结束日期",
+		"enUs": "Select Start & End Date",
+		"msMy": "Sila Pilih Tarikh Mula dan Tamat",
+		"ptBr": "Selecione data de início e fim",
+		"taSg": "தொடக்க மற்றும் முடிவு தேதியைத் தேர்ந்தெடுக்கவும்",
+		"thTh": "กรุณาเลือกวันที่เริ่มต้นและสิ้นสุด",
+		"idId": "Silakan Pilih Tanggal Mulai dan Selesai",
+		"miNz": "Tīpakohia te rā tīmata me te rā mutunga"
+	},
+	"PleaseSelect": {
+		"zhCn": "请选择",
+		"enUs": "Please Select",
+		"msMy": "Sila Pilih",
+		"ptBr": "Por favor selecione",
+		"taSg": "தேர்ந்தெடுக்கவும்",
+		"thTh": "กรุณาเลือก",
+		"idId": "Silakan Pilih",
+		"miNz": "Tīpakohia koa"
+	},
+	"PleaseSelectFullDate": {
+		"zhCn": "请选择完整的日期区间",
+		"enUs": "Select full date range",
+		"msMy": "Sila Pilih Julat Tarikh Penuh",
+		"ptBr": "Selecione intervalo de datas completo",
+		"taSg": "முழு தேதி வரம்பைத் தேர்ந்தெடுக்கவும்",
+		"thTh": "กรุณาเลือกช่วงวันที่สมบูรณ์",
+		"idId": "Silakan Pilih Rentang Tanggal Lengkap",
+		"miNz": "Tīpakohia te awhe rā katoa"
+	},
+	"TrackLoadSuccess": {
+		"zhCn": "轨迹加载成功",
+		"enUs": "Track Load Success",
+		"msMy": "Jejak Berjaya Dimuatkan",
+		"ptBr": "Trajeto carregado com sucesso",
+		"taSg": "பாதை ஏற்றுதல் வெற்றி",
+		"thTh": "โหลดเส้นทางสำเร็จ",
+		"idId": "Jejak Berhasil Dimuat",
+		"miNz": "Kua angitu te uta ara"
+	},
+	"NoTrackData": {
+		"zhCn": "暂无轨迹数据",
+		"enUs": "No Track Data",
+		"msMy": "Tiada Data Jejak",
+		"ptBr": "Sem dados de trajeto",
+		"taSg": "பாதை தரவு இல்லை",
+		"thTh": "ไม่มีข้อมูลเส้นทาง",
+		"idId": "Tidak Ada Data Jejak",
+		"miNz": "Kāore he raraunga ara"
+	},
+	"TrackRequestFailed": {
+		"zhCn": "轨迹请求异常，请重试",
+		"enUs": "Track Request Failed",
+		"msMy": "Permintaan jejak gagal, sila cuba semula",
+		"ptBr": "Falha na solicitação do trajeto, tente novamente",
+		"taSg": "பாதை கோரிக்கை தோல்வி, மீண்டும் முயற்சிக்கவும்",
+		"thTh": "ขอข้อมูลเส้นทางล้มเหลว กรุณาลองอีกครั้ง",
+		"idId": "Permintaan jejak gagal, silakan coba lagi",
+		"miNz": "I rahua te tono ara, ngana anō"
+	},
+	"StartDate": {
+		"zhCn": "开始日期",
+		"enUs": "Start Date",
+		"msMy": "Tarikh Mula",
+		"ptBr": "Data de início",
+		"taSg": "தொடக்க தேதி",
+		"thTh": "วันที่เริ่มต้น",
+		"idId": "Tanggal Mulai",
+		"miNz": "Rā tīmata"
+	},
+	"EndDate": {
+		"zhCn": "结束日期",
+		"enUs": "End Date",
+		"msMy": "Tarikh Tamat",
+		"ptBr": "Data de fim",
+		"taSg": "முடிவு தேதி",
+		"thTh": "วันที่สิ้นสุด",
+		"idId": "Tanggal Selesai",
+		"miNz": "Rā mutunga"
+	},
+	"SuperAdmin": {
+		"zhCn": "超级管理员",
+		"enUs": "Super Admin",
+		"msMy": "Pentadbir Super",
+		"ptBr": "Super Administrador",
+		"taSg": "மேலும் நிர்வாகி",
+		"thTh": "ผู้ดูแลระบบระดับสูง",
+		"idId": "Super Admin",
+		"miNz": "Kaiwhakahaere nui"
+	},
+	"Role": {
+		"zhCn": "角色",
+		"enUs": "Role",
+		"msMy": "Peranan",
+		"ptBr": "Função",
+		"taSg": "பங்கு",
+		"thTh": "บทบาท",
+		"idId": "Peran",
+		"miNz": "Tūranga"
+	},
+	"Name": {
+		"zhCn": "姓名",
+		"enUs": "Name",
+		"msMy": "Nama",
+		"ptBr": "Nome",
+		"taSg": "பெயர்",
+		"thTh": "ชื่อ",
+		"idId": "Nama",
+		"miNz": "Ingoa"
+	},
+	"EnterName": {
+		"zhCn": "请输入姓名",
+		"enUs": "Enter Name",
+		"msMy": "Sila Masukkan Nama",
+		"ptBr": "Digite o nome",
+		"taSg": "பெயரை உள்ளிடவும்",
+		"thTh": "กรุณากรอกชื่อ",
+		"idId": "Silakan Masukkan Nama",
+		"miNz": "Whakauruhia te ingoa"
+	},
+	"EnterPhone": {
+		"zhCn": "请输入手机号",
+		"enUs": "Enter Phone",
+		"msMy": "Sila Masukkan Nombor Telefon",
+		"ptBr": "Digite o número de telefone",
+		"taSg": "தொலைபேசி எண்ணை உள்ளிடவும்",
+		"thTh": "กรุณากรอกหมายเลขโทรศัพท์",
+		"idId": "Silakan Masukkan Nomor Telepon",
+		"miNz": "Whakauruhia te nama waea"
+	},
+	"SelectRole": {
+		"zhCn": "请选择角色",
+		"enUs": "Select Role",
+		"msMy": "Sila Pilih Peranan",
+		"ptBr": "Selecione a função",
+		"taSg": "பங்கைத் தேர்ந்தெடுக்கவும்",
+		"thTh": "กรุณาเลือกบทบาท",
+		"idId": "Silakan Pilih Peran",
+		"miNz": "Tīpakohia te tūranga"
+	},
+	"ConfirmDeleteUser": {
+		"zhCn": "确认删除当前人员吗",
+		"enUs": "Confirm to delete this user?",
+		"msMy": "Sahkan untuk memadam pengguna ini?",
+		"ptBr": "Confirmar exclusão deste utilizador?",
+		"taSg": "இந்த பயனரை நீக்க உறுதி செய்கிறீர்களா?",
+		"thTh": "ยืนยันการลบผู้ใช้นี้หรือไม่",
+		"idId": "Konfirmasi hapus pengguna ini?",
+		"miNz": "Whakaaetia te muku i tenei kaiwhakamahi?"
+	},
+	"TransferAdmin": {
+		"zhCn": "移交管理员",
+		"enUs": "Transfer Admin",
+		"msMy": "Pindah Pentadbir",
+		"ptBr": "Transferir administrador",
+		"taSg": "நிர்வாகியை மாற்றவும்",
+		"thTh": "โอนสิทธิ์ผู้ดูแลระบบ",
+		"idId": "Transfer Admin",
+		"miNz": "Whakawhiti kaiwhakahaere"
+	},
+	"ConfirmTransferAdmin": {
+		"zhCn": "确认移交管理员",
+		"enUs": "Confirm Transfer Admin",
+		"msMy": "Sahkan Pindah Pentadbir",
+		"ptBr": "Confirmar transferência de administrador",
+		"taSg": "நிர்வாகி மாற்றத்தை உறுதி செய்க",
+		"thTh": "ยืนยันการโอนสิทธิ์ผู้ดูแลระบบ",
+		"idId": "Konfirmasi Transfer Admin",
+		"miNz": "Whakaaetia te whakawhiti kaiwhakahaere"
+	},
+	"AbnormalRecordTotal": {
+		"zhCn": "异常记录总数",
+		"enUs": "Total Abnormal Records",
+		"msMy": "Jumlah Rekod Tidak Normal",
+		"ptBr": "Total de registros anormais",
+		"taSg": "மொத்த அசாதாரண பதிவுகள்",
+		"thTh": "จำนวนบันทึกผิดปกติทั้งหมด",
+		"idId": "Total Catatan Tidak Normal",
+		"miNz": "Te tapeke o ngā rekoata kōhē"
+	},
+	"TodayNewAbnormal": {
+		"zhCn": "今日新增异常",
+		"enUs": "Today New Abnormal",
+		"msMy": "Rekod Tidak Normal Baharu Hari Ini",
+		"ptBr": "Novas anomalias de hoje",
+		"taSg": "இன்றைய புதிய அசாதாரண நிகழ்வு",
+		"thTh": "บันทึกผิดปกติใหม่วันนี้",
+		"idId": "Abnormal Baru Hari Ini",
+		"miNz": "Ngā kōhē hou o tēnei rā"
+	},
+	"SuspectedRemovalAbnormal": {
+		"zhCn": "疑似拆除异常记录",
+		"enUs": "Suspected Removal Records",
+		"msMy": "Rekod Disyaki Dikeluarkan",
+		"ptBr": "Registros de suspeita de remoção",
+		"taSg": "அகற்றல் சந்தேகப் பதிவுகள்",
+		"thTh": "บันทึกสงสัยว่าถูกถอดออก",
+		"idId": "Catatan Dugaan Pencabutan",
+		"miNz": "Ngā rekoata whakapae tangohanga"
+	},
+	"Filter": {
+		"zhCn": "筛选",
+		"enUs": "Filter",
+		"msMy": "Tapis",
+		"ptBr": "Filtrar",
+		"taSg": "வடிகட்டி",
+		"thTh": "กรอง",
+		"idId": "Filter",
+		"miNz": "Tātari"
+	},
+	"SuspectedRemoval": {
+		"zhCn": "疑似拆除",
+		"enUs": "Suspected Removal",
+		"msMy": "Disyaki Dikeluarkan",
+		"ptBr": "Suspeita de remoção",
+		"taSg": "அகற்றல் சந்தேகம்",
+		"thTh": "สงสัยว่าถูกถอดออก",
+		"idId": "Dugaan Pencabutan",
+		"miNz": "Whakapae tangohanga"
+	},
+	"RelatedVehicle": {
+		"zhCn": "涉及车辆",
+		"enUs": "Related Vehicle",
+		"msMy": "Kenderaan Berkaitan",
+		"ptBr": "Veículo relacionado",
+		"taSg": "தொடர்புடைய வாகனம்",
+		"thTh": "ยานพาหนะที่เกี่ยวข้อง",
+		"idId": "Kendaraan Terkait",
+		"miNz": "Waka e whai wāhi ana"
+	},
+	"ViewLocation": {
+		"zhCn": "查看位置",
+		"enUs": "View Location",
+		"msMy": "Lihat Lokasi",
+		"ptBr": "Ver localização",
+		"taSg": "இடத்தைப் பார்க்கவும்",
+		"thTh": "ดูตำแหน่ง",
+		"idId": "Lihat Lokasi",
+		"miNz": "Tirohia te tauwāhi"
+	},
+	"NoSuspectedRemovalRecords": {
+		"zhCn": "暂无符合条件的疑似拆除异常记录",
+		"enUs": "No matching suspected removal records",
+		"msMy": "Tiada rekod disyaki dikeluarkan yang sepadan",
+		"ptBr": "Nenhum registro de suspeita de remoção correspondente",
+		"taSg": "பொருத்தமான அகற்றல் சந்தேகப் பதிவுகள் இல்லை",
+		"thTh": "ไม่มีบันทึกสงสัยถอดออกที่ตรงเงื่อนไข",
+		"idId": "Tidak ada catatan dugaan pencabutan yang cocok",
+		"miNz": "Kāore he rekoata whakapae tangohanga e taurite ana"
+	},
+	"LocationInfo": {
+		"zhCn": "位置信息",
+		"enUs": "Location Info",
+		"msMy": "Maklumat Lokasi",
+		"ptBr": "Informações de localização",
+		"taSg": "இடத் தகவல்",
+		"thTh": "ข้อมูลตำแหน่ง",
+		"idId": "Info Lokasi",
+		"miNz": "Korero tauwāhi"
+	},
+	"DetailedAddress": {
+		"zhCn": "详细地址",
+		"enUs": "Detailed Address",
+		"msMy": "Alamat Terperinci",
+		"ptBr": "Endereço detalhado",
+		"taSg": "விரிவான முகவரி",
+		"thTh": "ที่อยู่รายละเอียด",
+		"idId": "Alamat Lengkap",
+		"miNz": "Wāhi noho taipitopito"
+	},
+	"NoAddressInfo": {
+		"zhCn": "暂无地址信息",
+		"enUs": "No Address Info",
+		"msMy": "Tiada Maklumat Alamat",
+		"ptBr": "Sem informações de endereço",
+		"taSg": "முகவரித் தகவல் இல்லை",
+		"thTh": "ไม่มีข้อมูลที่อยู่",
+		"idId": "Tidak Ada Info Alamat",
+		"miNz": "Kāore he korero wāhi noho"
+	},
+	"Close": {
+		"zhCn": "关闭",
+		"enUs": "Close",
+		"msMy": "Tutup",
+		"ptBr": "Fechar",
+		"taSg": "மூடு",
+		"thTh": "ปิด",
+		"idId": "Tutup",
+		"miNz": "Katia"
+	},
+	"SelectDate": {
+		"zhCn": "选择日期",
+		"enUs": "Select Date",
+		"msMy": "Pilih Tarikh",
+		"ptBr": "Selecione a data",
+		"taSg": "தேதியைத் தேர்ந்தெடுக்கவும்",
+		"thTh": "เลือกวันที่",
+		"idId": "Pilih Tanggal",
+		"miNz": "Tīpakohia te rā"
+	},
+	"LicensePlate": {
+		"zhCn": "车牌号",
+		"enUs": "License Plate",
+		"msMy": "Plat Nombor",
+		"ptBr": "Placa do veículo",
+		"taSg": "வாகன உரிமத் தட்டு",
+		"thTh": "ป้ายทะเบียนรถ",
+		"idId": "Plat Nomor",
+		"miNz": "Papa raihana waka"
+	},
+	"EnterLicensePlate": {
+		"zhCn": "请输入车牌号",
+		"enUs": "Enter License Plate",
+		"msMy": "Sila Masukkan Plat Nombor",
+		"ptBr": "Digite a placa do veículo",
+		"taSg": "வாகன உரிமத் தட்டு எண்ணை உள்ளிடவும்",
+		"thTh": "กรุณากรอกหมายเลขทะเบียนรถ",
+		"idId": "Silakan Masukkan Plat Nomor",
+		"miNz": "Whakauruhia te papa raihana waka"
+	},
+	"Reset": {
+		"zhCn": "重置",
+		"enUs": "Reset",
+		"msMy": "Tetap Semula",
+		"ptBr": "Redefinir",
+		"taSg": "மீட்டமை",
+		"thTh": "รีเซ็ต",
+		"idId": "Reset",
+		"miNz": "Tautuhi anō"
+	},
+	"ConfirmFilter": {
+		"zhCn": "确认筛选",
+		"enUs": "Confirm Filter",
+		"msMy": "Sahkan Tapis",
+		"ptBr": "Confirmar filtro",
+		"taSg": "வடிகட்டலை உறுதி செய்க",
+		"thTh": "ยืนยันการกรอง",
+		"idId": "Konfirmasi Filter",
+		"miNz": "Whakaaetia te tātari"
+	},
+	"NavigationFailed": {
+		"zhCn": "导航失败",
+		"enUs": "Navigation Failed",
+		"msMy": "Navigasi Gagal",
+		"ptBr": "Falha na navegação",
+		"taSg": "வழிசெலுத்தல் தோல்வி",
+		"thTh": "นำทางล้มเหลว",
+		"idId": "Navigasi Gagal",
+		"miNz": "I rahua te whakatere"
+	},
+	"CannotOpenMap": {
+		"zhCn": "无法打开地图",
+		"enUs": "Cannot Open Map",
+		"msMy": "Tidak Buka Peta",
+		"ptBr": "Não foi possível abrir o mapa",
+		"taSg": "வரைபடத்தைத் திறக்க முடியாது",
+		"thTh": "ไม่สามารถเปิดแผนที่ได้",
+		"idId": "Tidak Dapat Membuka Peta",
+		"miNz": "Kāore e taea te whakatuwhera mapi"
+	},
+	"RoleList": {
+		"zhCn": "角色列表",
+		"enUs": "Role List",
+		"msMy": "Senarai Peranan",
+		"ptBr": "Lista de funções",
+		"taSg": "பங்கு பட்டியல்",
+		"thTh": "รายการบทบาท",
+		"idId": "Daftar Peran",
+		"miNz": "Rārangi tūranga"
+	},
+	"BasicInfo": {
+		"zhCn": "基础信息",
+		"enUs": "Basic Info",
+		"msMy": "Maklumat Asas",
+		"ptBr": "Informações básicas",
+		"taSg": "அடிப்படைத் தகவல்",
+		"thTh": "ข้อมูลพื้นฐาน",
+		"idId": "Info Dasar",
+		"miNz": "Korero taketake"
+	},
+	"RoleName": {
+		"zhCn": "角色名称",
+		"enUs": "Role Name",
+		"msMy": "Nama Peranan",
+		"ptBr": "Nome da função",
+		"taSg": "பங்கு பெயர்",
+		"thTh": "ชื่อบทบาท",
+		"idId": "Nama Peran",
+		"miNz": "Ingoa tūranga"
+	},
+	"EnterRoleName": {
+		"zhCn": "请输入角色名称",
+		"enUs": "Enter Role Name",
+		"msMy": "Sila Masukkan Nama Peranan",
+		"ptBr": "Digite o nome da função",
+		"taSg": "பங்கு பெயரை உள்ளிடவும்",
+		"thTh": "กรุณากรอกชื่อบทบาท",
+		"idId": "Silakan Masukkan Nama Peran",
+		"miNz": "Whakauruhia te ingoa tūranga"
+	},
+	"PermissionSettings": {
+		"zhCn": "权限设置",
+		"enUs": "Permission Settings",
+		"msMy": "Tetapan Kebenaran",
+		"ptBr": "Configurações de permissões",
+		"taSg": "அனுமதி அமைப்புகள்",
+		"thTh": "การตั้งค่าสิทธิ์",
+		"idId": "Pengaturan Izin",
+		"miNz": "Ngā tautuhinga whakaaetanga"
+	},
+	"WiseLinkAutoRide": {
+		"zhCn": "智车钥",
+		"enUs": "WiseLink Auto Ride",
+		"msMy": "WiseLink Auto Ride",
+		"ptBr": "WiseLink Auto Ride",
+		"taSg": "WiseLink Auto Ride",
+		"thTh": "WiseLink Auto Ride",
+		"idId": "WiseLink Auto Ride",
+		"miNz": "WiseLink Auto Ride"
+	},
 	"PersonalCenter": {
 		"zhCn": "个人中心",
 		"enUs": "Center",
-		"jaJp": "マイページ"
+		"msMy": "Pusat Peribadi",
+		"ptBr": "Centro pessoal",
+		"taSg": "தனிப்பட்ட மையம்",
+		"thTh": "ศูนย์ส่วนตัว",
+		"idId": "Pusat Pribadi",
+		"miNz": "Pokapū whaiaro"
 	},
-
-
-	// 加载中
 	"Loading": {
 		"zhCn": "加载中",
 		"enUs": "Loading",
-		"jaJp": "読み込み中"
+		"msMy": "Sedang Memuat",
+		"ptBr": "Carregando",
+		"taSg": "ஏற்றுகிறது",
+		"thTh": "กำลังโหลด",
+		"idId": "Sedang Memuat",
+		"miNz": "Kei te uta"
 	},
-
-	// 操作成功
 	"OperateSuccess": {
 		"zhCn": "操作成功",
 		"enUs": "Operation successful",
-		"jaJp": "操作に成功しました"
+		"msMy": "Operasi Berjaya",
+		"ptBr": "Operação bem‑sucedida",
+		"taSg": "செயல்பாடு வெற்றி",
+		"thTh": "ดำเนินการสำเร็จ",
+		"idId": "Operasi Berhasil",
+		"miNz": "I angitu te mahi"
 	},
-	// 联系智信通
 	"ContactZhitongxin": {
 		"zhCn": "联系智信通",
 		"enUs": "Contact Us",
-		"jaJp": "ジートンシンに連絡"
+		"msMy": "Hubungi Kami",
+		"ptBr": "Contate‑nos",
+		"taSg": "எங்களைத் தொடர்பு கொள்ளவும்",
+		"thTh": "ติดต่อเรา",
+		"idId": "Hubungi Kami",
+		"miNz": "Whakapā mai"
 	},
-	// 语言设置
 	"LanguageSettings": {
 		"zhCn": "语言设置",
 		"enUs": "Language",
-		"jaJp": "言語設定"
+		"msMy": "Tetapan Bahasa",
+		"ptBr": "Configuração de idioma",
+		"taSg": "மொழி அமைப்பு",
+		"thTh": "การตั้งค่าภาษา",
+		"idId": "Pengaturan Bahasa",
+		"miNz": "Tautuhinga reo"
 	},
-	// 退出登录
 	"Logout": {
 		"zhCn": "退出登录",
 		"enUs": "Logout",
-		"jaJp": "ログアウト"
+		"msMy": "Log Keluar",
+		"ptBr": "Sair",
+		"taSg": "வெளியேறு",
+		"thTh": "ออกจากระบบ",
+		"idId": "Keluar",
+		"miNz": "Whakawhiti atu"
 	},
-	// 拨打电话
 	"CallPhone": {
 		"zhCn": "拨打电话",
 		"enUs": "Call Phone",
-		"jaJp": "電話をかける"
+		"msMy": "Buat Panggilan Telefon",
+		"ptBr": "Fazer chamada telefônica",
+		"taSg": "தொலைபேசி அழைப்பு",
+		"thTh": "โทรออก",
+		"idId": "Lakukan Panggilan Telepon",
+		"miNz": "Waea atu"
 	},
-	// 是否拨打客服电话
 	"IsCallServicePhone": {
 		"zhCn": "是否拨打客服电话",
 		"enUs": "Call customer service phone",
-		"jaJp": "カスタマーサービスに電話しますか"
+		"msMy": "Buat panggilan perkhidmatan pelanggan?",
+		"ptBr": "Deseja ligar para o atendimento ao cliente?",
+		"taSg": "வாடிக்கையாளர் சேவைக்கு அழைக்க வேண்டுமா?",
+		"thTh": "ต้องการโทรหาฝ่ายบริการลูกค้าหรือไม่",
+		"idId": "Apakah ingin menelepon layanan pelanggan?",
+		"miNz": "Me waea atu ki te ratonga kiritaki?"
 	},
-
-
-	// 确定退出登录吗
 	"ConfirmLogout": {
 		"zhCn": "确定退出登录吗",
 		"enUs": "Are you sure to logout?",
-		"jaJp": "ログアウトしてもよろしいですか"
+		"msMy": "Anda pasti mahu log keluar?",
+		"ptBr": "Tem certeza que deseja sair?",
+		"taSg": "வெளியேற விரும்புகிறீர்களா?",
+		"thTh": "ยืนยันออกจากระบบใช่หรือไม่",
+		"idId": "Apakah anda yakin ingin keluar?",
+		"miNz": "Kei te tino hiahia koe ki te whakawhiti atu?"
 	},
-
 	"ServiceIntro": {
-		"zhCn": "WiseLink Auto Ride 面向全球个人车主、租车用户、出行人群的C端服务入口，聚焦便捷租车、智能出行、车辆服务，主打轻松出行、随行随心的用户体验。",
+		"zhCn": "WiseLink Auto Ride 面向全球个人车主、租车用户、出行人群的 C 端服务入口，聚焦便捷租车、智能出行、车辆服务，主打轻松出行、随行随心的用户体验。",
 		"enUs": "WiseLink Auto Ride A C‑end service portal for global individual car owners, car rental users and travelers, focusing on convenient car rental, smart mobility and vehicle services, delivering a user experience of easy and free‑style travel.",
-		"jaJp": "WiseLink Auto Ride 世界の個人車主、レンタカーユーザー、移動者向けC端サービス窓口で、便利なレンタカー、スマートモビリティ、車両サービスに注力し、気軽で自由な移動体験を提供します。"
+		"msMy": "WiseLink Auto Ride ialah portal perkhidmatan pengguna akhir C untuk pemilik kereta individu, pengguna sewa kereta dan pengembara di seluruh dunia, memberi tumpuan kepada penyewaan kereta mudah, mobiliti pintar dan perkhidmatan kenderaan, memberikan pengalaman perjalanan yang santai dan bebas.",
+		"ptBr": "WiseLink Auto Ride é um portal de serviço para o usuário final C para proprietários de veículos individuais, usuários de aluguel de carros e viajantes globais, com foco em aluguel de carros conveniente, mobilidade inteligente e serviços veiculares, proporcionando uma experiência de viagem prática e flexível.",
+		"taSg": "WiseLink Auto Ride உலகளாவிய தனிநபர் கார் உரிமையாளர்கள், கார் வாடகை பயனர்கள் மற்றும் பயணிகளுக்கான C-இறுதி சேவை நுழைவாயில், வசதியான கார் வாடகை, ஸ்மார்ட் பயணம் மற்றும் வாகன சேவைகளில் கவனம் செலுத்தி, இலகுவான மற்றும் சுதந்திரமான பயண அனுபவத்தை வழங்குகிறது.",
+		"thTh": "WiseLink Auto Ride พอร์ทัลบริการผู้ใช้ปลายทาง C สำหรับเจ้าของรถส่วนบุคคล ผู้เช่ารถและผู้เดินทางทั่วโลก มุ่งเน้นไปที่การเช่ารถที่สะดวก การเดินทางอัจฉริยะ และบริการยานพาหนะ มอบประสบการณ์การเดินทางที่ผ่อนคลายและอิสระ",
+		"idId": "WiseLink Auto Ride portal layanan pengguna akhir C bagi pemilik kendaraan pribadi, pengguna sewa mobil dan wisatawan global, berfokus pada penyewaan mobil praktis, mobilitas cerdas dan layanan kendaraan, menghadirkan pengalaman perjalanan yang santai dan fleksibel.",
+		"miNz": "WiseLink Auto Ride he tomokanga ratonga kaiwhakamahi mutunga‑C mō ngā rangatira waka takitahi, ngā kaiwhakamahi rīta waka me ngā hunga haere huri noa te ao, e arotahi ana ki te rīta waka māmā, te nekeneke atamai me ngā ratonga waka, e tuku ana i te wheako haere māmā me te watea."
 	},
 	"BPlatformIntro": {
-		"zhCn": "WiseLink Auto Global面向全球车企、租赁公司、服务商、商户的B端管理平台，聚合全球车源、业务管控、渠道运维、国际业务一体化运营，主打全球化、专业化、企业级商务服务",
+		"zhCn": "WiseLink Auto Global 面向全球车企、租赁公司、服务商、商户的 B 端管理平台，聚合全球车源、业务管控、渠道运维、国际业务一体化运营，主打全球化、专业化、企业级商务服务",
 		"enUs": "WiseLink Auto Global B‑side management platform for global automakers, rental companies, service providers and merchants, integrating global vehicle resources, business control, channel operation and maintenance, and integrated international business operations, featuring global, professional and enterprise‑level business services",
-		"jaJp": "WiseLink Auto Global 世界の自動車メーカー、レンタカー会社、サービスプロバイダー、事業者向けB端管理プラットフォーム。世界の車両リソース、業務管理、チャネル運用保守、国際業務の一体的運営を集約し、グローバル・専門的・エンタープライズ級のビジネスサービスを提供します"
+		"msMy": "WiseLink Auto Global platform pengurusan perniagaan B untuk pengeluar kereta, syarikat sewa, penyedia perkhidmatan dan peniaga di seluruh dunia, mengagregat sumber kenderaan global, kawalan perniagaan, operasi & penyelenggaraan saluran serta operasi perniagaan antarabangsa bersepadu, menampilkan perkhidmatan perniagaan bertaraf perusahaan yang global dan profesional.",
+		"ptBr": "WiseLink Auto Global plataforma de gestão lado B para fabricantes de veículos, locadoras, provedores de serviço e comerciantes globais, agrega recursos veiculares mundiais, controle de negócios, operação e manutenção de canais e operação integrada de negócios internacionais, com serviços comerciais globais, profissionais e empresariais.",
+		"taSg": "WiseLink Auto Global உலகளாவிய வாகன உற்பத்தியாளர்கள், வாடகை நிறுவனங்கள், சேவை வழங்குநர்கள் மற்றும் வணிகர்களுக்கான B‑பக்க மேலாண்மை தளம், உலகளாவிய வாகன வளங்கள், வணிகக் கட்டுப்பாடு, சேனல் செயல்பாடு மற்றும் பராமரிப்பு மற்றும் ஒருங்கிணைந்த சர்வதேச வணிக செயல்பாடுகளை ஒருங்கிணைக்கிறது, உலகளாவிய, தொழில்முறை மற்றும் நிறுவன அளவிலான வணிக சேவைகளைக் கொண்டுள்ளது.",
+		"thTh": "WiseLink Auto Global แพลตฟอร์มจัดการฝั่ง B สำหรับผู้ผลิตรถยนต์ บริษัทเช่ารถ ผู้ให้บริการ และผู้ค้าทั่วโลก รวมทรัพยากรยานพาหนะทั่วโลก การควบคุมธุรกิจ การดำเนินงานและบำรุงรักษาช่องทาง และการดำเนินธุรกิจระหว่างประเทศแบบบูรณาการ มุ่งเน้นบริการธุรกิจระดับองค์กรที่เป็นสากลและมืออาชีพ",
+		"idId": "WiseLink Auto Global platform manajemen sisi‑B untuk produsen kendaraan, perusahaan sewa, penyedia layanan dan pedagang sedunia, menggabungkan sumber daya kendaraan global, kendali bisnis, operasi & pemeliharaan saluran serta operasi bisnis internasional terpadu, menyajikan layanan bisnis tingkat perusahaan yang global dan profesional.",
+		"miNz": "WiseLink Auto Global he tūāpapa whakahaere taha‑B mō ngā kaihanga waka, ngā kamupene rīta, ngā kaiwhakarato ratonga me ngā kaihokohoko huri noa te ao, e whakakao ana i ngā rauemi waka o te ao, te whakahaere pakihi, te whakahaere me te tiaki hongere, me ngā mahi pakihi o te ao, e whakaatu ana i ngā ratonga pakihi o te ao, ngaio, taumata‑pakihi."
 	},
 	"footInfo": {
 		"zhCn": "智信通",
 		"enUs": "WiseLink Auto",
-		"jaJp": "WiseLink Auto"
+		"msMy": "WiseLink Auto",
+		"ptBr": "WiseLink Auto",
+		"taSg": "WiseLink Auto",
+		"thTh": "WiseLink Auto",
+		"idId": "WiseLink Auto",
+		"miNz": "WiseLink Auto"
 	},
-
-	// 请输入账号或手机号
 	"EnterAccountOrPhone": {
 		"zhCn": "请输入账号或手机号",
 		"enUs": "Enter account or phone number",
-		"jaJp": "アカウントまたは電話番号を入力してください"
+		"msMy": "Masukkan akaun atau nombor telefon",
+		"ptBr": "Insira a conta ou número de telefone",
+		"taSg": "கணக்கு அல்லது தொலைபேசி எண்ணை உள்ளிடவும்",
+		"thTh": "กรุณากรอกบัญชีหรือหมายเลขโทรศัพท์",
+		"idId": "Masukkan akun atau nomor telepon",
+		"miNz": "Whakauruhia te pūkete, te nama waea rānei"
 	},
-	// 密码
 	"Password": {
 		"zhCn": "密码",
 		"enUs": "Password",
-		"jaJp": "パスワード"
+		"msMy": "Kata laluan",
+		"ptBr": "Senha",
+		"taSg": "கடவுச்சொல்",
+		"thTh": "รหัสผ่าน",
+		"idId": "Kata sandi",
+		"miNz": "Kupuhipa"
 	},
-	// 请输入密码
 	"EnterPassword": {
 		"zhCn": "请输入密码",
 		"enUs": "Enter password",
-		"jaJp": "パスワードを入力してください"
+		"msMy": "Masukkan kata laluan",
+		"ptBr": "Insira a senha",
+		"taSg": "கடவுச்சொல்லை உள்ளிடவும்",
+		"thTh": "กรุณากรอกรหัสผ่าน",
+		"idId": "Masukkan kata sandi",
+		"miNz": "Whakauruhia te kupuhipa"
 	},
 	"EnterUsernameAndPwd": {
 		"zhCn": "请输入用户名和密码",
 		"enUs": "Please enter username and password",
-		"jaJp": "ユーザー名とパスワードを入力してください"
+		"msMy": "Sila masukkan nama pengguna dan kata laluan",
+		"ptBr": "Por favor insira nome de usuário e senha",
+		"taSg": "பயனர் பெயர் மற்றும் கடவுச்சொல்லை உள்ளிடவும்",
+		"thTh": "กรุณากรอกชื่อผู้ใช้และรหัสผ่าน",
+		"idId": "Silakan masukkan nama pengguna dan kata sandi",
+		"miNz": "Whakauruhia te ingoa kaiwhakamahi me te kupuhipa"
 	},
 	"EnterUsername": {
 		"zhCn": "请输入用户名",
 		"enUs": "Please enter username",
-		"jaJp": "ユーザー名とパスワード"
+		"msMy": "Sila masukkan nama pengguna",
+		"ptBr": "Por favor insira o nome de usuário",
+		"taSg": "பயனர் பெயரை உள்ளிடவும்",
+		"thTh": "กรุณากรอกชื่อผู้ใช้",
+		"idId": "Silakan masukkan nama pengguna",
+		"miNz": "Whakauruhia te ingoa kaiwhakamahi"
 	},
 	"Username": {
 		"zhCn": "用户名",
 		"enUs": "username",
-		"jaJp": "ユーザー名とパスワードを入力してください"
+		"msMy": "Nama pengguna",
+		"ptBr": "nome de usuário",
+		"taSg": "பயனர் பெயர்",
+		"thTh": "ชื่อผู้ใช้",
+		"idId": "nama pengguna",
+		"miNz": "ingoa kaiwhakamahi"
 	},
 	"LoginFailCheckInfo": {
 		"zhCn": "登录失败，请检查用户名和密码",
 		"enUs": "Login failed, please check your username and password",
-		"jaJp": "ログインに失敗しました。ユーザー名とパスワードを確認してください"
+		"msMy": "Gagal log masuk, sila semak nama pengguna dan kata laluan anda",
+		"ptBr": "Falha no login, verifique seu nome de usuário e senha",
+		"taSg": "உள்நுழைவு தோல்வியுற்றது, பயனர் பெயரையும் கடவுச்சொல்லையும் சரிபார்க்கவும்",
+		"thTh": "เข้าสู่ระบบล้มเหลว โปรดตรวจสอบชื่อผู้ใช้และรหัสผ่าน",
+		"idId": "Gagal masuk, silakan periksa nama pengguna dan kata sandi Anda",
+		"miNz": "I rahua te takiuru, tirohia tō ingoa kaiwhakamahi me tō kupuhipa"
 	},
 	"RegisterAccount": {
 		"zhCn": "注册账号",
 		"enUs": "Register Account",
-		"jaJp": "アカウント登録"
+		"msMy": "Daftar Akaun",
+		"ptBr": "Cadastrar Conta",
+		"taSg": "கணக்கைப் பதிவுசெய்க",
+		"thTh": "ลงทะเบียนบัญชี",
+		"idId": "Daftar Akun",
+		"miNz": "Rēhita Pūkete"
 	},
 	"zhixintong": {
 		"zhCn": "智信通",
 		"enUs": "WiseLink Auto Global",
-		"jaJp": "WiseLink Auto Global"
+		"msMy": "WiseLink Auto Global",
+		"ptBr": "WiseLink Auto Global",
+		"taSg": "WiseLink Auto Global",
+		"thTh": "WiseLink Auto Global",
+		"idId": "WiseLink Auto Global",
+		"miNz": "WiseLink Auto Global"
 	},
 	"ZhitongxinProvider": {
 		"zhCn": "智信通汽车出行技术服务运营提供商",
 		"enUs": "Zhitongxin Provider of Automobile Mobility Technology Services and Operations",
-		"jaJp": "智信通　自動車モビリティ技術サービス運営事業者"
+		"msMy": "Penyedia perkhidmatan operasi teknologi mobiliti automotif Zhitongxin",
+		"ptBr": "Zhitongxin Provedor de serviços e operações de tecnologia de mobilidade automotiva",
+		"taSg": "Zhitongxin வாகன இயக்க தொழில்நுட்ப சேவைகள் மற்றும் செயல்பாடுகளின் வழங்குநர்",
+		"thTh": "Zhitongxin ผู้ให้บริการดำเนินงานเทคโนโลยีด้านการเดินทางยานยนต์",
+		"idId": "Zhitongxin Penyedia layanan & operasi teknologi mobilitas otomotif",
+		"miNz": "Zhitongxin Kaiwhakarato ratonga hangarau nekeneke waka me ngā mahi whakahaere."
 	},
 	"ConfirmPassword": {
 		"zhCn": "确认密码",
 		"enUs": "Confirm Password",
-		"jaJp": "パスワード確認"
+		"msMy": "Sahkan Kata Laluan",
+		"ptBr": "Confirmar Senha",
+		"taSg": "கடவுச்சொல்லை உறுதிப்படுத்தவும்",
+		"thTh": "ยืนยันรหัสผ่าน",
+		"idId": "Konfirmasi Kata Sandi",
+		"miNz": "Whakaū te Kupuhipa"
 	},
 	"ReEnterPassword": {
 		"zhCn": "请再次输入密码",
 		"enUs": "Please enter password again",
-		"jaJp": "パスワードをもう一度入力してください"
+		"msMy": "Sila masukkan kata laluan sekali lagi",
+		"ptBr": "Por favor digite a senha novamente",
+		"taSg": "கடவுச்சொல்லை மீண்டும் உள்ளிடவும்",
+		"thTh": "กรุณากรอกรหัสผ่านอีกครั้ง",
+		"idId": "Silakan masukkan kata sandi kembali",
+		"miNz": "Whakauruhia ano te kupuhipa"
 	},
 	"Login": {
 		"zhCn": "登录",
 		"enUs": "Login",
-		"jaJp": "ログイン"
+		"msMy": "Log Masuk",
+		"ptBr": "Entrar",
+		"taSg": "உள்நுழை",
+		"thTh": "เข้าสู่ระบบ",
+		"idId": "Masuk",
+		"miNz": "Takiuru"
 	},
 	"Register": {
 		"zhCn": "注册",
 		"enUs": "Register",
-		"jaJp": "登録"
+		"msMy": "Daftar",
+		"ptBr": "Cadastrar",
+		"taSg": "பதிவு செய்க",
+		"thTh": "ลงทะเบียน",
+		"idId": "Daftar",
+		"miNz": "Rēhita"
 	},
 	"GoToLogin": {
 		"zhCn": "去登录",
 		"enUs": "Go to Login",
-		"jaJp": "ログインへ"
+		"msMy": "Pergi Log Masuk",
+		"ptBr": "Ir para Login",
+		"taSg": "உள்நுழைவு பக்கத்திற்குச் செல்லவும்",
+		"thTh": "ไปหน้าเข้าสู่ระบบ",
+		"idId": "Pergi ke Halaman Masuk",
+		"miNz": "Haere ki te whārangi takiuru"
 	},
 	"PwdNotMatch": {
 		"zhCn": "两次输入的密码不一致",
 		"enUs": "The two passwords you entered do not match",
-		"jaJp": "入力した2つのパスワードが一致しません"
+		"msMy": "Dua kata laluan yang anda masukkan tidak sepadan",
+		"ptBr": "As duas senhas digitadas não correspondem",
+		"taSg": "நீங்கள் உள்ளிட்ட இரண்டு கடவுச்சொற்கள் பொருந்தவில்லை",
+		"thTh": "รหัสผ่านที่กรอกสองครั้งไม่ตรงกัน",
+		"idId": "Dua kata sandi yang dimasukkan tidak cocok",
+		"miNz": "Kāore ngā kupuhipa e rua i tāuru koe e ōrite"
 	},
-	// 注册成功
 	"RegisterSuccess": {
 		"zhCn": "注册成功",
 		"enUs": "Registration successful",
-		"jaJp": "登録完了"
+		"msMy": "Pendaftaran berjaya",
+		"ptBr": "Cadastro realizado com sucesso",
+		"taSg": "பதிவு வெற்றிகரமாக முடிந்தது",
+		"thTh": "ลงทะเบียนสำเร็จ",
+		"idId": "Pendaftaran berhasil",
+		"miNz": "I angitu te rēhita"
 	},
-	// 注册失败
 	"RegisterFail": {
 		"zhCn": "注册失败",
 		"enUs": "Registration failed",
-		"jaJp": "登録失敗"
+		"msMy": "Pendaftaran gagal",
+		"ptBr": "Falha no cadastro",
+		"taSg": "பதிவு தோல்வியுற்றது",
+		"thTh": "ลงทะเบียนล้มเหลว",
+		"idId": "Pendaftaran gagal",
+		"miNz": "I rahua te rēhita"
 	},
-	// 请求失败，请稍后重试
 	"RequestFailRetry": {
 		"zhCn": "请求失败，请稍后重试",
 		"enUs": "Request failed, please try again later",
-		"jaJp": "リクエストに失敗しました。しばらくしてから再試行してください"
+		"msMy": "Permintaan gagal, sila cuba semula kemudian",
+		"ptBr": "Falha na solicitação, tente novamente mais tarde",
+		"taSg": "கோரிக்கை தோல்வியுற்றது, பிறகு முயற்சிக்கவும்",
+		"thTh": "คำขอล้มเหลว โปรดลองอีกครั้งภายหลัง",
+		"idId": "Permintaan gagal, silakan coba lagi nanti",
+		"miNz": "I rahua te tono, ngana anō ā muri ake"
 	},
 	"FunctionZone": {
 		"zhCn": "功能专区",
 		"enUs": "Function Zone",
-		"jaJp": ""
+		"msMy": "Zon Fungsi",
+		"ptBr": "Zona de Funções",
+		"taSg": "செயல்பாட்டு மண்டலம்",
+		"thTh": "โซนฟังก์ชัน",
+		"idId": "Zona Fungsi",
+		"miNz": "Rohe Mahi"
 	},
 	"MoreZones": {
 		"zhCn": "更多专区",
 		"enUs": "More Zones",
-		"jaJp": ""
+		"msMy": "Lebih Banyak Zon",
+		"ptBr": "Mais Zonas",
+		"taSg": "மேலும் மண்டலங்கள்",
+		"thTh": "โซนเพิ่มเติม",
+		"idId": "Zona Lainnya",
+		"miNz": "Ētahi atu Rohe"
 	},
 	"Pleaseselectthezoneyouwishtodisplay": {
 		"zhCn": "请选择您想要显示的专区",
-		"enUs": "Please select zone(s) to display",
-		"jaJp": ""
-	},
-	
-};
+		"enUs": "Please select zone (s) to display",
+		"msMy": "Sila pilih zon yang anda ingin paparkan",
+		"ptBr": "Por favor selecione as zonas que deseja exibir",
+		"taSg": "நீங்கள் காட்ட விரும்பும் மண்டலத்தைத் தேர்ந்தெடுக்கவும்",
+		"thTh": "กรุณาเลือกโซนที่ต้องการแสดง",
+		"idId": "Silakan pilih zona yang ingin ditampilkan",
+		"miNz": "Kōwhirihia ngā rohe e hiahia ana koe kia whakaatuhia"
+	}
+}
