@@ -164,7 +164,7 @@ class Http {
 // 创建实例
 export const http = new Http({
 	// baseURL: 'https://k1sw.wiselink.net.cn', // 你的基础地址
-	baseURL: 'http://192.168.10.100:8689/' ,
+	baseURL: 'http://192.168.10.100:8689' ,
 
 })
 

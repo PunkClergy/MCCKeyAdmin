@@ -48,8 +48,8 @@
 							:data-info="zone" @tap="handleZoneItemClick">
 							<image class="zone-img" :src="baseImageUrl + '/img/' + zone.icon" />
 							<view class="zone-text-area">
-								<view class="zone-name">{{ zone['name' + lang] }}</view>
-								<view class="zone-desc">{{ zone['subtitle' + lang] }}</view>
+								<view class="zone-name">{{ zone.multiName }}</view>
+								<view class="zone-desc">{{ zone.multiSubtitle }}</view>
 							</view>
 						</view>
 					</view>
@@ -71,32 +71,17 @@
 								<view class="loading-spinner"></view>
 							</view>
 							<!-- 缩略图（初始显示） -->
-							<image
-								v-if="!item.showVideo"
-								class="video-thumbnail"
-								:src="item.poster"
-								mode="aspectFill"
-								@tap="loadAndPlayVideo(index)"
-								@load="handleThumbnailLoad(index)"
-								@error="handleThumbnailError(index)"
-							/>
+							<image v-if="!item.showVideo" class="video-thumbnail" :src="item.poster" mode="aspectFill"
+								@tap="loadAndPlayVideo(index)" @load="handleThumbnailLoad(index)"
+								@error="handleThumbnailError(index)" />
 							<!-- 播放按钮（缩略图上） -->
 							<view v-if="!item.showVideo" class="play-icon-wrapper" @tap.stop="loadAndPlayVideo(index)">
 								<image src="/static/images/play-icon.png" class="play-icon" mode="widthFix" />
 							</view>
 							<!-- 视频组件（加载后显示） -->
-							<DomVideoPlayer
-								v-else
-								ref="domVideoPlayer"
-								@play="onVideoPlay(index)"
-								:src="item.videoSrc"
-								:poster="item.poster"
-								:autoplay="false"
-								:loop="true"
-								:controls="true"
-								preload="none"
-								style="width:100%;height:100%;display:block;"
-							/>
+							<DomVideoPlayer v-else ref="domVideoPlayer" @play="onVideoPlay(index)" :src="item.videoSrc"
+								:poster="item.poster" :autoplay="false" :loop="true" :controls="true" preload="none"
+								style="width:100%;height:100%;display:block;" />
 						</view>
 						<view class="guide-desc">{{ item.title || item.desc }}</view>
 					</view>
@@ -128,8 +113,8 @@
 							style="transform:scale(0.8); margin-right:20rpx;" />
 						<image class="popup-item-icon" :src="baseImageUrl + '/img/' + item.icon" mode="widthFix" />
 						<view class="popup-item-info">
-							<text class="popup-item-name">{{ item['name' + lang] }}</text>
-							<text class="popup-item-desc">{{ item['subtitle' + lang] }}</text>
+							<text class="popup-item-name">{{ item.multiName }}</text>
+							<text class="popup-item-desc">{{ item.multiSubtitle }}</text>
 						</view>
 					</label>
 				</scroll-view>
@@ -441,7 +426,7 @@
 					data: zone.id
 				});
 				if (zone.path) uni.navigateTo({
-					url: `${zone.path}?name=${zone['name'+this.lang]}`
+					url: `${zone.path}?name=${zone.multiName}`
 				});
 			},
 
@@ -836,7 +821,7 @@
 	}
 
 	.zone-desc {
-		font-size: 22rpx;
+		font-size: 20rpx;
 		color: #64748B;
 		line-height: 1.4;
 		margin-top: 4rpx;
@@ -917,6 +902,7 @@
 		pointer-events: auto;
 		z-index: 2;
 	}
+
 	.play-icon {
 		width: 80rpx;
 		height: 80rpx;
@@ -958,8 +944,13 @@
 	}
 
 	@keyframes spin {
-		0% { transform: rotate(0deg); }
-		100% { transform: rotate(360deg); }
+		0% {
+			transform: rotate(0deg);
+		}
+
+		100% {
+			transform: rotate(360deg);
+		}
 	}
 
 	.guide-desc {
@@ -1025,6 +1016,7 @@
 		from {
 			opacity: 0;
 		}
+
 		to {
 			opacity: 1;
 		}
@@ -1046,6 +1038,7 @@
 		from {
 			transform: translateY(100%);
 		}
+
 		to {
 			transform: translateY(0);
 		}

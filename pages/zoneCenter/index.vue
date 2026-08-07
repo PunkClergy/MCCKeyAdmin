@@ -57,10 +57,10 @@
 							<image class="zone-img" :src="'https://k1sw.wiselink.net.cn/img/' + zoneItem.icon" />
 							<view class="zone-text-area">
 								<view class="zone-name">
-									{{ zoneItem['name' + lang]  }}
+									{{ zoneItem.multiName  }}
 								</view>
 								<view class="zone-desc">
-									{{ zoneItem['subtitle' + lang]  }}
+									{{ zoneItem.multiSubtitle  }}
 								</view>
 							</view>
 						</view>
