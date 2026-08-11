@@ -76,11 +76,11 @@
 								@error="handleThumbnailError(index)" />
 							<!-- 播放按钮（缩略图上） -->
 							<view v-if="!item.showVideo" class="play-icon-wrapper" @tap.stop="loadAndPlayVideo(index)">
-								<image src="/static/car_icon.png" class="play-icon" mode="widthFix" />
+								<image src="/static/images/play.png" class="play-icon" mode="widthFix" />
 							</view>
 							<!-- 视频组件（加载后显示） -->
 							<DomVideoPlayer v-else ref="domVideoPlayer" @play="onVideoPlay(index)" :src="item.videoSrc"
-								:poster="item.poster" :autoplay="false" :loop="true" :controls="true" preload="none"
+								:poster="item.poster" :autoplay="false" :preload="auto" :loop="true" :controls="true" preload="none"
 								style="width:100%;height:100%;display:block;" />
 						</view>
 						<view class="guide-desc">{{ item.title || item.desc }}</view>
@@ -143,52 +143,34 @@
 		tips
 	} from '@/utils/langtips.js';
 
-	// 常量
 	const IMG_BASE_URL = 'https://k1sw.wiselink.net.cn/';
 	const SERVICE_PHONE = '400-090-5050';
 
 	export default {
 		data() {
 			return {
-				// UI 状态
 				tabBarHeight: 80,
 				currentTab: 0,
 				showZonePopup: false,
-
-				// 用户数据
 				userAccount: '',
 				qrCodeImage: '',
-
-				// 语言
 				lang: 'zhCn',
 				tips: tips,
-
-				// 头部
 				statusBarHeight: 30,
 				headerHeight: 88,
 				rightPadding: 15,
 				subtitleText: '',
 				subtitleFontSize: null,
-
-				// 轮播
 				bannerList: [],
 				bannerHeight: '',
-
-				// 专区
 				zoneList: [],
 				selectedZoneIds: [],
 				tempSelectedZoneIds: [],
 				zoneSelectList: [],
-
-				// 视频
 				guideVideoList: [],
-				// 程序触发播放标记，防止事件递归
+				currentPlayingIndex: -1,
 				_programmaticPlay: false,
-
-				// 底部 Tab
 				tabBarList: [],
-
-				// 其他
 				showInfoFlag: null,
 				baseImageUrl: IMG_BASE_URL,
 				servicePhoneNumber: SERVICE_PHONE,
@@ -214,7 +196,6 @@
 				};
 			},
 			groupedZoneList() {
-				// 根据选中的 ID 过滤专区，并按 serial_number 分组
 				const filtered = this.zoneList;
 				const map = {};
 				filtered.forEach(item => {
@@ -280,7 +261,6 @@
 			},
 
 			loadSelectedZoneIds() {
-				// 仅当 selectedZoneIds 为空时从存储恢复（兜底）
 				if (this.selectedZoneIds.length === 0) {
 					const saved = uni.getStorageSync('selectedZoneIds');
 					if (saved && Array.isArray(saved) && saved.length) {
@@ -296,18 +276,14 @@
 						terminalId: 0
 					});
 					if (res?.content) this.bannerList = res.content;
-				} catch (e) {
-					/* ignore */
-				}
+				} catch (e) { /* ignore */ }
 			},
 
 			async fetchTabBarList() {
 				try {
 					const res = await u_navlist20({});
 					if (res.code === 1000) this.tabBarList = res.content;
-				} catch (e) {
-					/* ignore */
-				}
+				} catch (e) { /* ignore */ }
 			},
 
 			async fetchZoneList() {
@@ -315,50 +291,39 @@
 					const res = await u_getHomeArea({});
 					if (res.code === 1000) {
 						this.zoneList = res.content;
-						// 将选中状态直接设置为当前 zoneList 的所有 id
 						this.selectedZoneIds = this.zoneList.map(item => item.id);
-						// 同步存入 storage
 						uni.setStorageSync('selectedZoneIds', this.selectedZoneIds);
 					}
-				} catch (e) {
-					/* ignore */
-				}
+				} catch (e) { /* ignore */ }
 			},
 
-			// 【修改】视频列表 - 初始化时不加载视频，只保留封面图，并增加 showVideo 和 thumbnailLoading 控制
 			async fetchGuideVideoList() {
 				try {
 					const res = await u_videoList({});
 					if (res.code === 1000) {
 						this.guideVideoList = res.content.map(item => ({
 							...item,
-							videoSrc: '', // 初始为空，不加载
+							videoSrc: '',
 							poster: item.preview ? `${this.baseImageUrl}img/${item.preview}` : '',
-							showVideo: false, // 控制视频组件显隐
-							thumbnailLoading: true, // 缩略图加载中状态
+							showVideo: false,
+							thumbnailLoading: true,
 						}));
 					}
-				} catch (e) {
-					/* ignore */
-				}
+				} catch (e) { /* ignore */ }
 			},
 
 			async fetchQrCode() {
 				try {
 					const res = await u_getQrcodeImg({});
 					if (res.statusCode === 200) this.qrCodeImage = res.content.img;
-				} catch (e) {
-					/* ignore */
-				}
+				} catch (e) { /* ignore */ }
 			},
 
 			async fetchShowInfo() {
 				try {
 					const res = await u_isShowInfo({});
 					if (res.code === 1000) this.showInfoFlag = res.content;
-				} catch (e) {
-					/* ignore */
-				}
+				} catch (e) { /* ignore */ }
 			},
 
 			// ---------- 交互事件 ----------
@@ -442,9 +407,7 @@
 					this.zoneSelectList = res?.content || [];
 					this.tempSelectedZoneIds = [...this.selectedZoneIds];
 					this.showZonePopup = true;
-				} catch (e) {
-					/* ignore */
-				}
+				} catch (e) { /* ignore */ }
 			},
 
 			closeZoneSelector() {
@@ -473,7 +436,6 @@
 					menuIds: this.tempSelectedZoneIds
 				});
 				if (response?.code == 1000) {
-					// 刷新专区列表，内部会自动更新 selectedZoneIds 和存储
 					this.fetchZoneList();
 					this.closeZoneSelector();
 				} else {
@@ -497,111 +459,142 @@
 				this.guideVideoList[index].thumbnailLoading = false;
 			},
 			handleThumbnailError(index) {
-				// 加载失败也隐藏 loading，可显示默认占位（这里不额外处理）
 				this.guideVideoList[index].thumbnailLoading = false;
 			},
 
-			// ---------- 【核心修复】点击缩略图加载并播放视频（解决 AbortError） ----------
+			// ---------- 【关键修复】暂停其他视频：直接操作原生 video 元素 ----------
+			pauseOtherVideos(exceptIndex) {
+				const players = this.$refs.domVideoPlayer;
+				if (!players) return;
+				// 确保是数组
+				const list = Array.isArray(players) ? players : [players];
+				list.forEach((player, idx) => {
+					if (idx === exceptIndex || !player) return;
+					// 尝试获取组件根元素下的 video 标签
+					let videoEl = null;
+					if (player.$el) {
+						// 如果是 Vue 组件实例，通过 $el 查找 video
+						videoEl = player.$el.querySelector?.('video') || player.$el;
+					} else if (player.tagName && player.tagName.toLowerCase() === 'video') {
+						// 如果本身就是 video 元素
+						videoEl = player;
+					}
+					if (videoEl && typeof videoEl.pause === 'function') {
+						try {
+							videoEl.pause();
+						} catch (e) {
+							console.warn(`暂停视频 ${idx} 失败:`, e);
+						}
+					} else {
+						// 降级：尝试调用组件的 pause 方法（如果存在）
+						if (typeof player.pause === 'function') {
+							try {
+								player.pause();
+							} catch (e) {
+								console.warn(`组件 pause 方法调用失败 ${idx}:`, e);
+							}
+						}
+					}
+				});
+			},
+
+			// ---------- 加载并播放视频 ----------
 			loadAndPlayVideo(index) {
 				const item = this.guideVideoList[index];
 				if (!item) return;
 
-				// 定义实际播放函数
-				const playVideo = () => {
-					const player = this.$refs.domVideoPlayer[index];
-					if (!player || typeof player.play !== 'function') return;
-
-					// 标记为程序触发
-					this._programmaticPlay = true;
-
-					// 获取所有播放器引用
-					const otherPlayers = this.$refs.domVideoPlayer;
-					const pausePromises = [];
-
-					// 暂停其他所有视频，并收集暂停操作的 Promise
-					if (otherPlayers && Array.isArray(otherPlayers)) {
-						otherPlayers.forEach((p, idx) => {
-							if (idx !== index && p && typeof p.pause === 'function') {
-								try {
-									const pauseResult = p.pause();
-									// 如果 pause 返回 Promise（标准 HTML5），则等待它完成
-									if (pauseResult && typeof pauseResult.then === 'function') {
-										pausePromises.push(pauseResult.catch(() => {}));
-									}
-								} catch (e) {
-									// 忽略 pause 可能抛出的异常
-								}
-							}
-						});
-					}
-
-					// 等待所有其他视频暂停完成后，再播放当前视频
-					Promise.all(pausePromises)
-						.then(() => {
-							// 再次确认播放器仍然存在且未切换
-							const currentPlayer = this.$refs.domVideoPlayer[index];
-							if (!currentPlayer) return;
-
-							const playPromise = currentPlayer.play();
-							if (playPromise && typeof playPromise.then === 'function') {
-								playPromise
-									.then(() => {
-										// 播放成功
-										this._programmaticPlay = false;
-									})
-									.catch(error => {
-										// 如果是 AbortError 或其他用户中断，忽略
-										// 或者记录日志，但不必抛出
-										console.warn('Video play failed:', error.name || error.message);
-										this._programmaticPlay = false;
-									});
-							} else {
-								// 某些旧版浏览器 play 不返回 Promise，直接认为成功
-								this._programmaticPlay = false;
-							}
-						})
-						.catch(() => {
-							this._programmaticPlay = false;
-						});
-				};
-
-				// 如果已加载，直接播放
-				if (item.showVideo) {
-					playVideo();
+				// 如果点击的是当前正在播放的视频，不重复操作
+				if (this.currentPlayingIndex === index && item.showVideo) {
 					return;
 				}
 
-				// 首次加载：隐藏 loading
+				// 1. 立即暂停其他视频（并行执行，不阻塞）
+				this.pauseOtherVideos(index);
+
+				// 2. 更新当前播放索引
+				this.currentPlayingIndex = index;
+
+				// 3. 如果视频已加载，立即播放（同步执行）
+				if (item.showVideo) {
+					const player = this.$refs.domVideoPlayer[index];
+					if (player && typeof player.play === 'function') {
+						this._programmaticPlay = true;
+						try {
+							const playPromise = player.play();
+							if (playPromise && typeof playPromise.then === 'function') {
+								playPromise
+									.then(() => {
+										this._programmaticPlay = false;
+									})
+									.catch(err => {
+										this._programmaticPlay = false;
+										console.warn(`视频 ${index} 播放失败:`, err.message);
+									});
+							} else {
+								this._programmaticPlay = false;
+							}
+						} catch (e) {
+							this._programmaticPlay = false;
+							console.warn(`视频 ${index} 播放异常:`, e);
+						}
+					}
+					return;
+				}
+
+				// 4. 首次加载：设置视频源，显示播放器
 				item.thumbnailLoading = false;
-				// 显示视频组件，设置视频地址
 				const realUrl = `${this.baseImageUrl}img/${item.filepath}`;
 				this.$set(item, 'showVideo', true);
 				this.$set(item, 'videoSrc', realUrl);
 
-				// 等待 DOM 更新后，延迟 2 秒播放（给视频加载一些缓冲）
+				// 等待 DOM 更新后立即播放
 				this.$nextTick(() => {
-					setTimeout(playVideo, 2000);
+					const player = this.$refs.domVideoPlayer[index];
+					if (player && typeof player.play === 'function') {
+						this._programmaticPlay = true;
+						try {
+							const playPromise = player.play();
+							if (playPromise && typeof playPromise.then === 'function') {
+								playPromise
+									.then(() => {
+										this._programmaticPlay = false;
+									})
+									.catch(err => {
+										this._programmaticPlay = false;
+										console.warn(`视频 ${index} 首次播放失败:`, err.message);
+									});
+							} else {
+								this._programmaticPlay = false;
+							}
+						} catch (e) {
+							this._programmaticPlay = false;
+							console.warn(`视频 ${index} 播放异常:`, e);
+						}
+					} else {
+						console.warn(`视频播放器 ${index} 未就绪`);
+					}
 				});
 			},
 
-			// ---------- 简化互斥事件处理 ----------
+			// ---------- 视频播放事件（用户手动点击播放按钮） ----------
 			onVideoPlay(playingIndex) {
-				// 如果是程序触发的播放，忽略事件，避免重复暂停
 				if (this._programmaticPlay) {
 					return;
 				}
-				// 这里可以添加用户手动播放的埋点或逻辑
-				console.log(`Video ${playingIndex} started by user action.`);
-			}
+				// 用户手动操作，暂停其他视频（不阻塞）
+				if (this.currentPlayingIndex !== playingIndex) {
+					this.pauseOtherVideos(playingIndex);
+					this.currentPlayingIndex = playingIndex;
+				}
+			},
 		},
 
 		onLoad(options) {
 			this.initSystemInfo();
-			// 兜底加载存储中的选中状态（当网络请求失败时显示）
 			this.loadSelectedZoneIds();
 			this.fetchBannerList();
 			this.fetchTabBarList();
-			this.fetchZoneList(); // 会覆盖上述兜底值，保证最新
+			this.fetchZoneList();
 			this.fetchGuideVideoList();
 			this.subtitleText = options?.subtitle || '';
 			this.subtitleFontSize = options?.stfontSize || null;
@@ -870,7 +863,6 @@
 		flex-direction: column;
 	}
 
-	/* 视频容器 - 相对定位，固定宽高比 */
 	.video-wrapper {
 		position: relative;
 		width: 100%;
@@ -880,7 +872,6 @@
 		background: #000;
 	}
 
-	/* 缩略图样式 */
 	.video-thumbnail {
 		width: 100%;
 		height: 100%;
@@ -889,7 +880,6 @@
 		object-fit: cover;
 	}
 
-	/* 播放按钮 */
 	.play-icon-wrapper {
 		position: absolute;
 		top: 0;
@@ -909,7 +899,6 @@
 		opacity: 0.9;
 	}
 
-	/* 视频组件样式：确保填充容器 */
 	.guide-item video,
 	.guide-item .dom-video-player {
 		width: 100% !important;
@@ -919,7 +908,6 @@
 		display: block;
 	}
 
-	/* 缩略图加载中的 loading 遮罩 */
 	.thumbnail-loading {
 		position: absolute;
 		top: 0;
@@ -947,7 +935,6 @@
 		0% {
 			transform: rotate(0deg);
 		}
-
 		100% {
 			transform: rotate(360deg);
 		}
@@ -1016,7 +1003,6 @@
 		from {
 			opacity: 0;
 		}
-
 		to {
 			opacity: 1;
 		}
@@ -1038,7 +1024,6 @@
 		from {
 			transform: translateY(100%);
 		}
-
 		to {
 			transform: translateY(0);
 		}
