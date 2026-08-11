@@ -9,7 +9,7 @@
 						@tap="handleFunExe">
 						<view class="my-content-list-item__left">
 							<text class="my-content-list-item__text">
-								{{ item['text' + lang] || item.text }}
+								{{ item.multiText }}
 							</text>
 						</view>
 						<image src="/static/images/right_1.png" class="my-content-list-item__arrow" mode="widthFix" />
@@ -25,7 +25,7 @@
 					mode="widthFix" v-if="currentTab === index" />
 				<image :src="`https://k1sw.wiselink.net.cn/img/${item.iconPath}`" class="tab-icon" mode="widthFix"
 					v-else />
-				<text>{{ item['text' + lang] || item.text }}</text>
+				<text>{{ item.multiText }}</text>
 			</view>
 		</view>
 
@@ -264,6 +264,7 @@
 				})
 
 				const info = evt.currentTarget.dataset.info
+				console.log(info,'22223344')
 				if (!info?.pagePath) return
 
 				// ===== 语言切换：使用自定义弹窗 =====
@@ -273,11 +274,10 @@
 				}
 
 				if (info.pagePath === 'Exit') {
+					console.log(tips,2222,tips.Tip)
 					uni.showModal({
 						title: tips.Tip[this.lang],
 						content: tips.ExitClearCache[this.lang],
-						confirmText: tips.Confirm[this.lang],
-						cancelText: tips.Cancel[this.lang],
 						success: (res) => {
 							if (res.confirm) {
 								uni.clearStorageSync()
@@ -296,8 +296,8 @@
 						content: this.lang === 'zhCn' ?
 							'警告：注销后数据永久清除，无法恢复！确定要注销吗？' :
 							'Warning: All data will be permanently deleted. Are you sure?',
-						confirmText: this.lang === 'zhCn' ? '确认注销' : 'Confirm Delete',
-						cancelText: this.lang === 'zhCn' ? '取消' : 'Cancel',
+						// confirmText: this.lang === 'zhCn' ? '确认注销' : 'Confirm Delete',
+						// cancelText: this.lang === 'zhCn' ? '取消' : 'Cancel',
 						confirmColor: '#FF3B30',
 						success: async (res) => {
 							if (res.confirm) {
@@ -364,7 +364,7 @@
 		background-position: center;
 		align-items: center;
 		height: 100vh;
-		background-color: #F3F9FD;
+		background-color: linear-gradient(145deg, #e3f2fd 0%, #81d4fa 80%, #81d4fa)
 	}
 
 	.custom-header {
@@ -465,16 +465,16 @@
 	}
 
 	.tabbar {
-		width: 100%;
-		background-color: #fff;
-		display: flex;
-		justify-content: space-around;
-		align-items: center;
 		position: fixed;
 		bottom: 0;
 		left: 0;
-		box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.1);
-		z-index: 100;
+		width: 100%;
+		background-color: #e3f2fd;
+		box-shadow: -2rpx -2rpx 10rpx -10rpx #81d4fa;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		z-index: 99;
 		box-sizing: border-box;
 	}
 
@@ -482,23 +482,23 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
-		width: 25%;
+		gap: 4rpx;
+		padding: 12rpx 0;
 	}
 
 	.tab-icon {
 		width: 50rpx;
 		height: 50rpx;
-		margin-bottom: 10rpx;
 	}
 
 	.tab-item text {
-		font-size: 24rpx;
-		color: #999;
+		font-size: 26rpx;
+		color: #333;
 	}
 
 	.tab-item.active text {
 		color: #3498db;
+		font-weight: bold;
 	}
 
 	.float-button {

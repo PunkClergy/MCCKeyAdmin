@@ -151,7 +151,8 @@
 			"pages": [{
 					"path": "index",
 					"style": {
-						"navigationBarTitleText": "个人中心"
+						"navigationBarTitleText": "个人中心",
+						"navigationBarBackgroundColor": "#e3f2fd"
 					}
 				},
 

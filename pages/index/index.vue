@@ -76,7 +76,7 @@
 								@error="handleThumbnailError(index)" />
 							<!-- 播放按钮（缩略图上） -->
 							<view v-if="!item.showVideo" class="play-icon-wrapper" @tap.stop="loadAndPlayVideo(index)">
-								<image src="/static/images/play-icon.png" class="play-icon" mode="widthFix" />
+								<image src="/static/car_icon.png" class="play-icon" mode="widthFix" />
 							</view>
 							<!-- 视频组件（加载后显示） -->
 							<DomVideoPlayer v-else ref="domVideoPlayer" @play="onVideoPlay(index)" :src="item.videoSrc"
@@ -95,7 +95,7 @@
 				:key="index" @tap="switchTab" :data-index="index">
 				<image class="tab-icon" mode="widthFix"
 					:src="baseImageUrl + '/img/' + (currentTab === index ? item.selectedIconPath : item.iconPath)" />
-				<text>{{ item['text' + lang] }}</text>
+				<text>{{ item.multiText }}</text>
 			</view>
 		</view>
 
