@@ -67,7 +67,7 @@
 							<view class="footer-left" style="max-width: 70%;">
 								<view v-for="(g_item, index) in item.driverList" :key="index">
 									<view style="display: flex;gap: 15rpx;line-height: 50rpx;">
-										<text>{{ g_item.drivername }}12</text>
+										<text>{{ g_item.drivername }}</text>
 										<text>{{ g_item.drivermobile }}</text>
 										<text style="color:#1b64b1;" :data-item="g_item"
 											@tap="handleUnBindDriver">解绑</text>
@@ -96,11 +96,10 @@
 					<view class="card-info">
 						<view class="card-info-item">
 							<label>车牌号<text style="color:red">*</text></label>
-							<view class="card-info-item-input">
-								<input placeholder="请输入车牌号" v-model="params.platenumber" data-item="platenumber"
-									@input="handleBindinput" />
-							</view>
+							<input placeholder="请输入车牌号" v-model="params.platenumber" data-item="platenumber"
+								@input="handleBindinput" />
 						</view>
+
 						<view class="card-info-item">
 							<label>设备号<text style="color:red">*</text></label>
 							<view class="card-info-item-input">
@@ -579,7 +578,6 @@
 					}
 				]
 				for (const item of validations) {
-					console.log(1234567)
 					if (!item.field?.trim()) {
 						uni.showToast({
 							title: item.message,

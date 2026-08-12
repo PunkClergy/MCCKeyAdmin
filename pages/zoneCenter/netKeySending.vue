@@ -525,7 +525,7 @@
 				const response = await u_sendRentKey(requestParams);
 				if (response.code !== 1000) {
 					return uni.showToast({
-						title: response.data.msg,
+						title: response.msg,
 						icon: 'none'
 					});
 				}
@@ -535,9 +535,11 @@
 				this.y_page = 1;
 				this.getKeySendingList();
 				this.getOrderList();
+				console.log(response)
+				
 				uni.showModal({
 					title: '温馨提示',
-					content: response?.data?.msg,
+					content: response?.msg||'',
 					showCancel: false
 				});
 			},

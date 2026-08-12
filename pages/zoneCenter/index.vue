@@ -12,7 +12,7 @@
 			<view class="custom-header-outer-layer">
 				<image class="custom-header-outer-layer-image" src="/static/images/home.png" @tap="handleBackHome">
 				</image>
-				<view class="custom-header-outer-layer-title">{{title_name||tips.RentalEKey[lang]}}</view>
+				<view class="custom-header-outer-layer-title">{{title_name}}</view>
 				<view class="custom-header-outer-layer_user_name">
 					<text v-if="account">{{account}}</text>
 					<view v-else @tap="handleOnExistingAccountTap" class="login-wrapper">
@@ -51,9 +51,8 @@
 				<view class="special-zone" v-for="(item,index) in groupedZoneList" :key="index"
 					:style="{ '--item-count': item.list.length }">
 					<view class="zone-item" v-for="(zoneItem,idx) in item.list" :key="idx">
-						<view class="zone-out"
-							:style="{ backgroundColor: zoneItem.bgcolor}"
-							:data-info="zoneItem" @tap="handleGetMenuList">
+						<view class="zone-out" :style="{ backgroundColor: zoneItem.bgcolor}" :data-info="zoneItem"
+							@tap="handleGetMenuList">
 							<image class="zone-img" :src="'https://k1sw.wiselink.net.cn/img/' + zoneItem.icon" />
 							<view class="zone-text-area">
 								<view class="zone-name">
@@ -300,7 +299,7 @@
 			handleSwitchTabNavigation(e) {
 				const idx = e.currentTarget.dataset.index
 				const url = this.tabList[idx]?.pagePath
-				if (url) uni.redirectTo({
+				if (url) uni.navigateTo({
 					url: `/${url}`
 				})
 			},
@@ -342,8 +341,12 @@
 			this.initBottomDirectory()
 			this.initZoneInfo()
 			this.initBookList()
-
-			this.title_name = options?.name
+			if (options?.name) {
+				this.title_name = options.name
+				uni.setStorageSync('title_name', options?.name);
+			} else {
+				this.title_name = uni.getStorageSync('title_name');
+			}
 			this.bgcolor = options?.bgcolor || '#FAF6E9'
 			this.subtitle = options?.subtitle
 			this.stfontSize = options?.stfontSize

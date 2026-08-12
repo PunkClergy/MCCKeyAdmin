@@ -449,7 +449,7 @@
 			switchTab(e) {
 				const idx = e.currentTarget.dataset.index;
 				const url = this.tabBarList[idx]?.pagePath;
-				if (url) uni.redirectTo({
+				if (url) uni.navigateTo({
 					url: `/${url}`
 				});
 			},

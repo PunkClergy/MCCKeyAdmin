@@ -209,9 +209,10 @@
 		},
 		onLoad(options) {
 			this.initCarryParams(options)
-			this.initList()
+			
 		},
 		onShow() {
+			this.initList()
 			this.lang = uni.getStorageSync('language') || 'zhCn'
 			const pageRoute = 'zoneCenter/carKeyConfig'
 			uni.setNavigationBarTitle({
@@ -391,6 +392,7 @@
 							title: res.msg
 						})
 						this.switchToList()
+						this.initList()
 					} else {
 						uni.showToast({
 							title: res.msg,

@@ -272,11 +272,9 @@
 				const params = {
 					...this.formData,
 					id: this.g_uesr_details.id || '',
-					roleId: this.new_role.id
+					roleId: this.new_role.id || ''
 				}
-
-
-				if (!params.realname || !params.roleId || !params?.username || !params?.password) {
+				if (!params.realname || !params?.username || !params?.password) {
 					return
 				}
 

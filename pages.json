@@ -121,7 +121,7 @@
 						"navigationBarBackgroundColor": "#EFF1FC"
 					}
 				},
-				{
+				{ 
 					"path": "userRole",
 					"style": {
 						"navigationBarTitleText": "人员与角色",

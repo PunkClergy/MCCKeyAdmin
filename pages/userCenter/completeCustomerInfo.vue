@@ -38,58 +38,6 @@
 							@input="handleBindinput" data-item="bak" />
 					</view>
 				</view>
-
-				<view class="card-info-item">
-					<label style="font-weight:bold">{{ tips.BillingInfo[lang] }}</label>
-				</view>
-
-				<view class="card-info-item">
-					<label>{{ tips.BillingName[lang] }}</label>
-					<view class="card-info-item-input">
-						<input :placeholder="tips.PleaseEnterBillingName[lang]" v-model="params.invoiceHeader"
-							@input="handleBindinput" data-item="invoiceHeader" />
-					</view>
-				</view>
-
-				<view class="card-info-item">
-					<label>{{ tips.TaxpayerId[lang] }}</label>
-					<view class="card-info-item-input">
-						<input :placeholder="tips.PleaseEnterTaxpayerId[lang]" v-model="params.invoiceNum"
-							@input="handleBindinput" data-item="invoiceNum" />
-					</view>
-				</view>
-
-				<view class="card-info-item">
-					<label>{{ tips.Phone[lang] }}</label>
-					<view class="card-info-item-input">
-						<input :placeholder="tips.PleaseEnterPhone[lang]" v-model="params.invoiceMobile"
-							@input="handleBindinput" data-item="invoiceMobile" />
-					</view>
-				</view>
-
-				<view class="card-info-item">
-					<label>{{ tips.Address[lang] }}</label>
-					<view class="card-info-item-input">
-						<input :placeholder="tips.PleaseEnterAddress[lang]" v-model="params.invoiceAddress"
-							@input="handleBindinput" data-item="invoiceAddress" />
-					</view>
-				</view>
-
-				<view class="card-info-item">
-					<label>{{ tips.BankName[lang] }}</label>
-					<view class="card-info-item-input">
-						<input :placeholder="tips.PleaseEnterBankName[lang]" v-model="params.accountsBank"
-							@input="handleBindinput" data-item="accountsBank" />
-					</view>
-				</view>
-
-				<view class="card-info-item">
-					<label>{{ tips.BankAccount[lang] }}</label>
-					<view class="card-info-item-input">
-						<input :placeholder="tips.PleaseEnterBankAccount[lang]" v-model="params.bankCardNumber"
-							@input="handleBindinput" data-item="bankCardNumber" />
-					</view>
-				</view>
 			</view>
 
 			<view class="card-footer">
@@ -218,13 +166,18 @@
 
 					const res = await u_companyImprove(submitData)
 					if (res.code !== 1000) return
+					uni.showToast({
+						title: res.msg,
+						icon: 'none'
+					})
 
 					const userRes = await u_getUserlnfo({})
 					const userKey = userRes.content
 					uni.setStorageSync('userKey', userKey)
-					uni.redirectTo({
-						url: '/pages/userCenter/index'
-					})
+					setTimeout(() => {
+						uni.navigateBack()
+					}, 1500)
+
 				} catch (e) {}
 			}
 		}
