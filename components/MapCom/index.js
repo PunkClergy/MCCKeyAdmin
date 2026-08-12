@@ -165,28 +165,28 @@ Component({
     },
     // 获取当前硬件设备定位
     handleLocation() {
-      // const _this = this
-      // wx.getLocation({
-      //   type: 'gcj02', // 返回可以用于wx.openLocation的经纬度
-      //   success(res) {
-      //     const latitude = res.latitude
-      //     const longitude = res.longitude
-      //     const markerList = [{
-      //       id: 0,
-      //       longitude,
-      //       latitude,
-      //       iconPath: '/assets/images/startPoint1.png', // 用户位置图标
-      //       width: 25,
-      //       height: 37,
-      //       title: '我的位置',
-      //     }]
-      //     _this.setData({
-      //       latitude: latitude,
-      //       longitude: longitude,
-      //       markers: markerList
-      //     });
-      //   }
-      // })
+      const _this = this
+      wx.getLocation({
+        type: 'gcj02', // 返回可以用于wx.openLocation的经纬度
+        success(res) {
+          const latitude = res.latitude
+          const longitude = res.longitude
+          const markerList = [{
+            id: 0,
+            longitude,
+            latitude,
+            iconPath: '/assets/images/startPoint1.png', // 用户位置图标
+            width: 25,
+            height: 37,
+            title: '我的位置',
+          }]
+          _this.setData({
+            latitude: latitude,
+            longitude: longitude,
+            markers: markerList
+          });
+        }
+      })
     },
 
     // 点击 按钮 "当前位置" 执行方法
@@ -313,26 +313,26 @@ Component({
               }
             );
           } else {
-            // wx.getLocation({
-            //   type: 'gcj02',
-            //   success: (res) => {
-            //     const userMarker = {
-            //       ...markerStyle.user,
-            //       id: 0,
-            //       latitude: res.latitude,
-            //       longitude: res.longitude,
-            //       title: '我的位置'
-            //     };
-            //     _this.setData({
-            //       scale: 12,
-            //       latitude: res.latitude,
-            //       longitude: res.longitude,
-            //       markers: [userMarker, ...otherMarkers]
-            //     });
-            //     safeHideLoading();
-            //   },
-            //   fail: () => handleError('定位失败')
-            // });
+            wx.getLocation({
+              type: 'gcj02',
+              success: (res) => {
+                const userMarker = {
+                  ...markerStyle.user,
+                  id: 0,
+                  latitude: res.latitude,
+                  longitude: res.longitude,
+                  title: '我的位置'
+                };
+                _this.setData({
+                  scale: 12,
+                  latitude: res.latitude,
+                  longitude: res.longitude,
+                  markers: [userMarker, ...otherMarkers]
+                });
+                safeHideLoading();
+              },
+              fail: () => handleError('定位失败')
+            });
           }
         };
 
@@ -682,32 +682,32 @@ Component({
           }
         }];
         if (_this.data.source == 'desk') {
-          // wx.getLocation({
-          //   type: 'gcj02', // 返回可以用于wx.openLocation的经纬度
-          //   success(res) {
+          wx.getLocation({
+            type: 'gcj02', // 返回可以用于wx.openLocation的经纬度
+            success(res) {
 
-          //     const latitude = res.latitude
-          //     const longitude = res.longitude
-          //     markerList.push({
-          //       id: 0,
-          //       longitude,
-          //       latitude,
-          //       iconPath: '/assets/images/startPoint1.png', // 用户位置图标
-          //       width: 25,
-          //       height: 37,
-          //       title: '我的位置',
-          //     })
-          //     _this.setData({
-          //       a_deputy_latitude: latitude,
-          //       a_deputy_longitude: longitude,
-          //       latitude: content?.tlatitude || latitude,
-          //       longitude: content?.tlongitude || longitude,
-          //       markers: markerList
-          //     }, () => {
-          //       _this.handleGetWalkingRoute()
-          //     });
-          //   }
-          // })
+              const latitude = res.latitude
+              const longitude = res.longitude
+              markerList.push({
+                id: 0,
+                longitude,
+                latitude,
+                iconPath: '/assets/images/startPoint1.png', // 用户位置图标
+                width: 25,
+                height: 37,
+                title: '我的位置',
+              })
+              _this.setData({
+                a_deputy_latitude: latitude,
+                a_deputy_longitude: longitude,
+                latitude: content?.tlatitude || latitude,
+                longitude: content?.tlongitude || longitude,
+                markers: markerList
+              }, () => {
+                _this.handleGetWalkingRoute()
+              });
+            }
+          })
         } else {
           _this.setData({
             a_deputy_latitude: content?.tlatitude,
