@@ -2248,5 +2248,38 @@ export const tips = {
 		"thTh": "กรุณาเลือกโซนที่ต้องการแสดง",
 		"idId": "Silakan pilih zona yang ingin ditampilkan",
 		"miNz": "Kōwhirihia ngā rohe e hiahia ana koe kia whakaatuhia"
+	},
+	"BindDriver": {
+		"zhCn": "绑定用车人",
+		"enUs": "Bind User",
+		"msMy": "Ikat Pengguna",
+		"ptBr": "Vincular Usuário",
+		"taSg": "பயனரை இணைக்கவும்",
+		"thTh": "ผูกผู้ใช้งานรถ",
+		"idId": "Ikatan Pengguna",
+		"miNz": "Whakapiri Kaiwhakamahi",
+		"jaJp": "利用者を紐付ける"
+	},
+	"GoBindDriver": {
+	    "zhCn": "去绑定司机",
+	    "enUs": "Bind Driver",
+	    "msMy": "Ikat Pemandu",
+	    "ptBr": "Vincular Motorista",
+	    "taSg": "டிரைவரை இணைக்கவும்",
+	    "thTh": "ผูกมัดคนขับรถ",
+	    "idId": "Ikat Pengemudi",
+	    "miNz": "Whakapiri Kaitaraiwa",
+	    "jaJp": "ドライバーを紐付ける"
+	},
+	"BindDriver": {
+	    "zhCn": "绑定司机",
+	    "enUs": "Bind Driver",
+	    "msMy": "Ikat Pemandu",
+	    "ptBr": "Vincular Motorista",
+	    "taSg": "டிரைவரை இணைக்கவும்",
+	    "thTh": "ผูกผู้ขับขี่",
+	    "idId": "Ikat Pengemudi",
+	    "miNz": "Whakapiri Kaitaraiwa",
+	    "jaJp": "ドライバーを紐付ける"
 	}
 }

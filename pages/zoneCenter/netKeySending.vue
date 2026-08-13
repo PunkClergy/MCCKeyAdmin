@@ -1,18 +1,17 @@
 <template>
 	<view class="container" style="background-color:#F5F7FA;height: `${c_screen_height}px`">
-		<view class="record-container"
-			:style="{height: `${c_screen_height-(navBarHeight + statusBarHeight + 10)}px`}">
+		<view class="record-container" :style="{height: `${c_screen_height-(navBarHeight + statusBarHeight + 10)}px`}">
 			<!-- Tab切换 -->
 			<view class="record-tabs">
-				<view class="record-tabs-item" 
+				<view class="record-tabs-item"
 					:style="{backgroundColor:c_activeTab==1?'#1677ff':'#e8eef6',color:c_activeTab==1?'#ffffff':'#555555'}"
 					@tap="handleSwitchTab(1)">
-					发送钥匙
+					{{tips.SendKey[lang]}}
 				</view>
-				<view class="record-tabs-item" 
+				<view class="record-tabs-item"
 					:style="{backgroundColor:c_activeTab==2?'#1677ff':'#e8eef6',color:c_activeTab==2?'#ffffff':'#555555'}"
 					@tap="handleSwitchTab(2)">
-					使用记录
+					{{tips.UsageLogs[lang]}}
 				</view>
 			</view>
 
@@ -23,10 +22,11 @@
 				<view class="record-tabs-1">
 					<view class="search-box">
 						<icon type="search" size="16" class="search-icon" />
-						<input placeholder="车牌号/设备号" class="search-input" @blur="bindblurSeaGetList" />
+						<input :placeholder="tips.PlateDeviceUser[lang]" class="search-input"
+							@blur="bindblurSeaGetList" />
 					</view>
 				</view>
-				<view class="tabs-1-conut">共有{{g_total}}条记录</view>
+				<view class="tabs-1-conut">{{g_total}}{{tips.Items[lang]}}</view>
 				<scroll-view scroll-y
 					:style="{height:`${c_screen_height-(navBarHeight + statusBarHeight + 10 + 50)}px`}"
 					@scrolltolower="handleLower" refresher-enabled="true" :refresher-triggered="g_triggered"
@@ -46,11 +46,11 @@
 						</view>
 						<view class="content-item-info">
 							<view class="info-item" :class="[item.vin?.length > 15 ? 'long-info-item' : '']">
-								<label>车架号 ：</label>
+								<label>{{tips.VIN[lang]}} ：</label>
 								<text>{{item.vin||'-'}}</text>
 							</view>
 							<view class="info-item" :class="[item.sn?.length > 15 ? 'long-info-item' : '']">
-								<label>设备号 ：</label>
+								<label>{{tips.DeviceID[lang]}} ：</label>
 								<text>{{item.sn}}</text>
 							</view>
 						</view>
@@ -63,10 +63,10 @@
 										<text>{{g_item.drivername}}</text>
 										<text>{{g_item.drivermobile}}</text>
 										<text style="color:#1b64b1;" @tap="handleShowSendKeyModal" :data-item="item"
-											:data-gitem="g_item">发送钥匙</text>
+											:data-gitem="g_item">{{tips.SendKey[lang]}}</text>
 									</view>
 									<view>
-										<label>生效周期 ：</label>
+										<label>{{tips.EffectivePeriod[lang]}} ：</label>
 										<text style="font-size: 22rpx;font-weight: 500;">{{g_item.rentstartdate}} -
 											{{g_item.rentenddate}}</text>
 									</view>
@@ -75,7 +75,7 @@
 							<view class="footer-right" style="display: flex;gap: 10rpx;">
 								<view v-if="!item.driverList" class="footer-right-btn" :data-item="item"
 									@tap="handleShowSendNetKeyModal">
-									<text>去绑定司机</text>
+									<text>{{tips.GoBindDriver[lang]}}</text>
 								</view>
 							</view>
 						</view>
@@ -88,10 +88,10 @@
 				<view class="record-tabs-1">
 					<view class="search-box">
 						<icon type="search" size="16" class="search-icon" />
-						<input placeholder="车牌号/设备号/使用人" class="search-input" @blur="bindblurSea" />
+						<input :placeholder="tips.PlateDeviceUser[lang]" class="search-input" @blur="bindblurSea" />
 					</view>
 				</view>
-				<view class="tabs-1-conut">共有{{y_total}}条记录</view>
+				<view class="tabs-1-conut">{{y_total}}{{tips.Items[lang]}}</view>
 				<scroll-view class="content-container" scroll-y="true"
 					:style="{top:`${25 + 5 + 8 + 10 + 10 + searchBarHeight}px`}" @scrolltolower="handleKeyLower"
 					refresher-enabled="true" :refresher-triggered="y_triggered" @refresherrefresh="handleKeyRefresh">
@@ -104,8 +104,8 @@
 								<text class="phone-text">{{item.mobile}}</text>
 							</view>
 							<view class="card-head-right">
-								<text v-if="item.status" style="color: #7b7b7c;">已取消</text>
-								<text v-else>使用中</text>
+								<text v-if="item.status" style="color: #7b7b7c;">{{tips.Cancelled[lang]}}</text>
+								<text v-else>{{tips.InUse[lang]}}</text>
 							</view>
 						</view>
 						<view class="card-info">
@@ -118,8 +118,9 @@
 								<text @tap="handleEditKey" :data-item="item" style="float: left;">修改</text>
 							</view>
 							<view style="display: flex;flex-direction: row;">
-								<text @tap="handleCopy" :data-item="item">{{ copied ? '已复制' : '复制链接' }}</text>
-								<text @tap="handleCance" :data-item="item">取消用车</text>
+								<text @tap="handleCopy"
+									:data-item="item">{{ copied ? tips.Copied[lang] : tips.CopyLink[lang] }}</text>
+								<text @tap="handleCance" :data-item="item">{{tips.CancelCarUse[lang]}}</text>
 							</view>
 						</view>
 					</view>
@@ -135,20 +136,20 @@
 			<form @submit="handleFormSubmit">
 				<view class="modal-container">
 					<view class="modal-container-head">
-						<text>发送电子钥匙</text>
+						<text>{{tips.SendKey[lang]}}</text>
 						<image src="/static/images/right_1.png" @tap="handleHideSengKeyModal" />
 					</view>
 					<view class="modal-container-middle">
 						<view class="middle-form-item">
-							<label>车牌号</label>
+							<label>{{tips.PlateNo[lang]}}</label>
 							<view class="modal-form-region">{{cellData.platenumber}}</view>
 						</view>
 						<view class="middle-form-item">
-							<label>使用人</label>
+							<label>{{tips.User[lang]}}</label>
 							<view class="modal-form-region">{{cellData.personName}}</view>
 						</view>
 						<view class="middle-form-item">
-							<label>是否允许多人使用</label>
+							<label>{{tips.MultiUserAllowed[lang]}}</label>
 							<view class="modal-form-region">
 								<picker mode="selector" :range="pickerList" range-key="name"
 									@change="handleOnPickerChange" :value="pickerIndex">
@@ -158,7 +159,7 @@
 						</view>
 					</view>
 					<view class="modal-container-footer">
-						<button form-type="submit">确认</button>
+						<button form-type="submit">{{tips.Confirm[lang]}}</button>
 					</view>
 				</view>
 			</form>
@@ -172,24 +173,24 @@
 			<form @submit="handleFormEdit">
 				<view class="modal-container">
 					<view class="modal-container-head">
-						<text>修改</text>
+						<text>{{tips.Edit[lang]}}</text>
 						<image src="/static/images/right_1.png" @tap="handleHideEditKeyModal" />
 					</view>
 					<view class="modal-container-middle">
 						<view class="middle-form-item">
-							<label>车牌号</label>
+							<label>{{tips.PlateNo[lang]}}</label>
 							<view class="modal-form-region">{{g_edit_info.platenumber}}</view>
 						</view>
 						<view class="middle-form-item">
-							<label>使用人</label>
+							<label>{{tips.User[lang]}}</label>
 							<view class="modal-form-region"><text>{{g_edit_info.personname}}</text></view>
 						</view>
 						<view class="middle-form-item">
-							<label>手机号</label>
+							<label>{{tips.AccountPhone[lang]}}</label>
 							<view class="modal-form-region"><text>{{g_edit_info.mobile}}</text></view>
 						</view>
 						<view class="middle-form-item">
-							<label>开始时间</label>
+							<label>{{tips.StartTime[lang]}}</label>
 							<view class="modal-form-region">
 								<picker mode="date" data-index="startDate" @change="bindTimeChange">
 									<view class="form-item-text"><text>{{startDate}}</text></view>
@@ -200,7 +201,7 @@
 							</view>
 						</view>
 						<view class="middle-form-item">
-							<label>结束时间</label>
+							<label>tips.EndTime[lang]</label>
 							<view class="modal-form-region">
 								<picker mode="date" data-index="endDate" @change="bindTimeChange">
 									<view class="form-item-text"><text>{{endDate}}</text></view>
@@ -211,7 +212,7 @@
 							</view>
 						</view>
 						<view class="middle-form-item">
-							<label>是否允许多人使用</label>
+							<label>{{tips.MultiUserAllowed[lang]}}</label>
 							<view class="modal-form-region">
 								<picker mode="selector" :range="pickerList" range-key="name"
 									@change="handleOnPickerChange" :value="pickerIndex">
@@ -219,24 +220,9 @@
 								</picker>
 							</view>
 						</view>
-						<view class="middle-form-item">
-							<label>打开方式</label>
-							<view class="modal-form-region">
-								<radio-group class="radio-group" @change="handleOnRadioChange">
-									<label class="radio-item">
-										<radio value="1" :checked="radioValue ==1" />
-										<text class="radio-label">智车钥</text>
-									</label>
-									<label class="radio-item">
-										<radio value="0" :checked="radioValue ==0" />
-										<text class="radio-label">智信通</text>
-									</label>
-								</radio-group>
-							</view>
-						</view>
 					</view>
 					<view class="modal-container-footer">
-						<button form-type="submit">确认</button>
+						<button form-type="submit">{{tips.Confirm[lang]}}</button>
 					</view>
 				</view>
 			</form>
@@ -250,29 +236,30 @@
 			<form @submit="handleNetFormSubmit">
 				<view class="modal-container">
 					<view class="modal-container-head">
-						<text>绑定司机</text>
+						<text>{{tips.BindDriver[lang]}}</text>
 						<image src="/static/images/right_1.png" @tap="handleHideSengKeyModal" />
 					</view>
 					<view class="modal-container-middle">
 						<view class="middle-form-item">
-							<label>车牌号</label>
+							<label>{{tips.PlateNo[lang]}}</label>
 							<view class="modal-form-region">{{cellData.platenumber}}</view>
 						</view>
 						<view class="middle-form-item">
-							<label>绑定司机</label>
+							<label>{{tips.BindDriver[lang]}}</label>
 							<view class="modal-form-region">
-								<input placeholder="请输入使用人" name='personName'
+								<input :placeholder="tips.EnterUser[lang]" name='personName'
 									style="text-align: right;font-size: 28rpx;" />
 							</view>
 						</view>
 						<view class="middle-form-item">
-							<label>手机号</label>
+							<label>{{tips.AccountPhone[lang]}}</label>
 							<view class="modal-form-region">
-								<input placeholder="请输入手机号" name='mobile' style="text-align: right;font-size: 28rpx;" />
+								<input :placeholder="tips.EnterAccountOrPhone[lang]" name='mobile'
+									style="text-align: right;font-size: 28rpx;" />
 							</view>
 						</view>
 						<view class="middle-form-item">
-							<label>开始时间</label>
+							<label>{{tips.StartTime[lang]}}</label>
 							<view class="modal-form-region">
 								<picker mode="date" data-index="startDate" @change="bindTimeChange">
 									<view class="form-item-text"><text>{{startDate}}</text></view>
@@ -283,7 +270,7 @@
 							</view>
 						</view>
 						<view class="middle-form-item">
-							<label>结束时间</label>
+							<label>{{tips.EndTime[lang]}}</label>
 							<view class="modal-form-region">
 								<picker mode="date" data-index="endDate" @change="bindTimeChange">
 									<view class="form-item-text"><text>{{endDate}}</text></view>
@@ -295,7 +282,7 @@
 						</view>
 					</view>
 					<view class="modal-container-footer">
-						<button form-type="submit">确认</button>
+						<button form-type="submit">{{tips.Confirm[lang]}}</button>
 					</view>
 				</view>
 			</form>
@@ -313,10 +300,17 @@
 		u_cancelRentKey,
 		u_bindOrUpdateDriver
 	} from '@/api/index'
-
+	import {
+		tips
+	} from '@/utils/langtips.js'
+	import {
+		titles
+	} from '@/utils/langtitle.js'
 	export default {
 		data() {
 			return {
+				lang: 'zhCn',
+				tips: tips,
 				c_screen_height: 0,
 				c_screen_width: 0,
 				statusBarHeight: 0,
@@ -536,10 +530,10 @@
 				this.getKeySendingList();
 				this.getOrderList();
 				console.log(response)
-				
+
 				uni.showModal({
 					title: '温馨提示',
-					content: response?.msg||'',
+					content: response?.msg || '',
 					showCancel: false
 				});
 			},
@@ -621,6 +615,11 @@
 		},
 		onShow() {
 			this.handleCurrentDate()
+			this.lang = uni.getStorageSync('language') || 'zhCn'
+			const pageRoute = 'zoneCenter/carKeyConfig'
+			uni.setNavigationBarTitle({
+				title: titles[pageRoute][this.lang]
+			})
 		}
 	}
 </script>
