@@ -80,8 +80,8 @@
 							</view>
 							<!-- 视频组件（加载后显示） -->
 							<DomVideoPlayer v-else ref="domVideoPlayer" @play="onVideoPlay(index)" :src="item.videoSrc"
-								:poster="item.poster" :autoplay="false" :preload="auto" :loop="true" :controls="true" preload="none"
-								style="width:100%;height:100%;display:block;" />
+								:poster="item.poster" :autoplay="false" :preload="auto" :loop="true" :controls="true"
+								preload="none" style="width:100%;height:100%;display:block;" />
 						</view>
 						<view class="guide-desc">{{ item.title || item.desc }}</view>
 					</view>
@@ -276,14 +276,16 @@
 						terminalId: 0
 					});
 					if (res?.content) this.bannerList = res.content;
-				} catch (e) { /* ignore */ }
+				} catch (e) {
+					/* ignore */ }
 			},
 
 			async fetchTabBarList() {
 				try {
 					const res = await u_navlist20({});
 					if (res.code === 1000) this.tabBarList = res.content;
-				} catch (e) { /* ignore */ }
+				} catch (e) {
+					/* ignore */ }
 			},
 
 			async fetchZoneList() {
@@ -294,7 +296,8 @@
 						this.selectedZoneIds = this.zoneList.map(item => item.id);
 						uni.setStorageSync('selectedZoneIds', this.selectedZoneIds);
 					}
-				} catch (e) { /* ignore */ }
+				} catch (e) {
+					/* ignore */ }
 			},
 
 			async fetchGuideVideoList() {
@@ -309,21 +312,24 @@
 							thumbnailLoading: true,
 						}));
 					}
-				} catch (e) { /* ignore */ }
+				} catch (e) {
+					/* ignore */ }
 			},
 
 			async fetchQrCode() {
 				try {
 					const res = await u_getQrcodeImg({});
 					if (res.statusCode === 200) this.qrCodeImage = res.content.img;
-				} catch (e) { /* ignore */ }
+				} catch (e) {
+					/* ignore */ }
 			},
 
 			async fetchShowInfo() {
 				try {
 					const res = await u_isShowInfo({});
 					if (res.code === 1000) this.showInfoFlag = res.content;
-				} catch (e) { /* ignore */ }
+				} catch (e) {
+					/* ignore */ }
 			},
 
 			// ---------- 交互事件 ----------
@@ -407,7 +413,8 @@
 					this.zoneSelectList = res?.content || [];
 					this.tempSelectedZoneIds = [...this.selectedZoneIds];
 					this.showZonePopup = true;
-				} catch (e) { /* ignore */ }
+				} catch (e) {
+					/* ignore */ }
 			},
 
 			closeZoneSelector() {
@@ -621,7 +628,7 @@
 	.container {
 		width: 100vw;
 		min-height: 100vh;
-		background: linear-gradient(145deg, #e3f2fd 0%, #81d4fa 80%, #81d4fa 100%);
+		background: linear-gradient(145deg, #d6d6fb 0%, #FFF 80%, #FFF 100%);
 		box-sizing: border-box;
 		overflow: hidden;
 	}
@@ -935,6 +942,7 @@
 		0% {
 			transform: rotate(0deg);
 		}
+
 		100% {
 			transform: rotate(360deg);
 		}
@@ -953,7 +961,7 @@
 		bottom: 0;
 		left: 0;
 		width: 100%;
-		background: #81d4fa;
+		background: #FFF;
 		box-shadow: -2rpx -2rpx 10rpx -10rpx #81d4fa;
 		display: flex;
 		align-items: center;
@@ -1003,6 +1011,7 @@
 		from {
 			opacity: 0;
 		}
+
 		to {
 			opacity: 1;
 		}
@@ -1024,6 +1033,7 @@
 		from {
 			transform: translateY(100%);
 		}
+
 		to {
 			transform: translateY(0);
 		}

@@ -469,7 +469,7 @@
 		bottom: 0;
 		left: 0;
 		width: 100%;
-		background-color: #e3f2fd;
+		background-color: #FFF;
 		box-shadow: -2rpx -2rpx 10rpx -10rpx #81d4fa;
 		display: flex;
 		align-items: center;
