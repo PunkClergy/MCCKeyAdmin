@@ -2270,16 +2270,5 @@ export const tips = {
 	    "idId": "Ikat Pengemudi",
 	    "miNz": "Whakapiri Kaitaraiwa",
 	    "jaJp": "ドライバーを紐付ける"
-	},
-	"BindDriver": {
-	    "zhCn": "绑定司机",
-	    "enUs": "Bind Driver",
-	    "msMy": "Ikat Pemandu",
-	    "ptBr": "Vincular Motorista",
-	    "taSg": "டிரைவரை இணைக்கவும்",
-	    "thTh": "ผูกผู้ขับขี่",
-	    "idId": "Ikat Pengemudi",
-	    "miNz": "Whakapiri Kaitaraiwa",
-	    "jaJp": "ドライバーを紐付ける"
 	}
 }

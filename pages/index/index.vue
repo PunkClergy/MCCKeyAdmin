@@ -237,6 +237,7 @@
 					this.lang = cached;
 					return;
 				}
+
 				const {
 					platform,
 					language
@@ -277,7 +278,8 @@
 					});
 					if (res?.content) this.bannerList = res.content;
 				} catch (e) {
-					/* ignore */ }
+					/* ignore */
+				}
 			},
 
 			async fetchTabBarList() {
@@ -285,7 +287,8 @@
 					const res = await u_navlist20({});
 					if (res.code === 1000) this.tabBarList = res.content;
 				} catch (e) {
-					/* ignore */ }
+					/* ignore */
+				}
 			},
 
 			async fetchZoneList() {
@@ -297,7 +300,8 @@
 						uni.setStorageSync('selectedZoneIds', this.selectedZoneIds);
 					}
 				} catch (e) {
-					/* ignore */ }
+					/* ignore */
+				}
 			},
 
 			async fetchGuideVideoList() {
@@ -313,7 +317,8 @@
 						}));
 					}
 				} catch (e) {
-					/* ignore */ }
+					/* ignore */
+				}
 			},
 
 			async fetchQrCode() {
@@ -321,7 +326,8 @@
 					const res = await u_getQrcodeImg({});
 					if (res.statusCode === 200) this.qrCodeImage = res.content.img;
 				} catch (e) {
-					/* ignore */ }
+					/* ignore */
+				}
 			},
 
 			async fetchShowInfo() {
@@ -329,7 +335,8 @@
 					const res = await u_isShowInfo({});
 					if (res.code === 1000) this.showInfoFlag = res.content;
 				} catch (e) {
-					/* ignore */ }
+					/* ignore */
+				}
 			},
 
 			// ---------- 交互事件 ----------
@@ -414,7 +421,8 @@
 					this.tempSelectedZoneIds = [...this.selectedZoneIds];
 					this.showZonePopup = true;
 				} catch (e) {
-					/* ignore */ }
+					/* ignore */
+				}
 			},
 
 			closeZoneSelector() {
@@ -456,7 +464,7 @@
 			switchTab(e) {
 				const idx = e.currentTarget.dataset.index;
 				const url = this.tabBarList[idx]?.pagePath;
-				if (url) uni.navigateTo({
+				if (url) uni.redirectTo({
 					url: `/${url}`
 				});
 			},
@@ -597,19 +605,19 @@
 		},
 
 		onLoad(options) {
-			this.initSystemInfo();
-			this.loadSelectedZoneIds();
-			this.fetchBannerList();
-			this.fetchTabBarList();
-			this.fetchZoneList();
-			this.fetchGuideVideoList();
+			this.loadLanguage();
 			this.subtitleText = options?.subtitle || '';
 			this.subtitleFontSize = options?.stfontSize || null;
 		},
 
 		onShow() {
 			uni.removeStorageSync('funAreaId');
-			this.loadLanguage();
+			this.initSystemInfo();
+			this.loadSelectedZoneIds();
+			this.fetchBannerList();
+			this.fetchTabBarList();
+			this.fetchZoneList();
+			this.fetchGuideVideoList();
 			this.fetchShowInfo();
 		},
 

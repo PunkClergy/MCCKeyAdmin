@@ -299,7 +299,7 @@
 			handleSwitchTabNavigation(e) {
 				const idx = e.currentTarget.dataset.index
 				const url = this.tabList[idx]?.pagePath
-				if (url) uni.navigateTo({
+				if (url) uni.redirectTo({
 					url: `/${url}`
 				})
 			},
