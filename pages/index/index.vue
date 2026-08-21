@@ -232,23 +232,33 @@
 			},
 
 			loadLanguage() {
+				const allowLangList = ['zhCn', 'enUs', 'msMy', 'ptBr', 'taSg', 'thTh', 'idId', 'miNz'];
 				const cached = uni.getStorageSync('language');
+
+				// 校验缓存语言
 				if (cached) {
-					this.lang = cached;
+					this.lang = allowLangList.includes(cached) ? cached : 'enUs';
+					// 缓存非法则同步更新存储
+					if (!allowLangList.includes(cached)) uni.setStorageSync('language', this.lang);
 					return;
 				}
 
-				const {
-					platform,
-					language
-				} = uni.getSystemInfoSync();
-				if (platform === 'ios') {
-					this.lang = 'zhCn';
-				} else {
-					const [prefix, suffix] = language.split(/[-_]/);
-					const processedSuffix = suffix.charAt(0).toUpperCase() + suffix.slice(1).toLowerCase();
-					this.lang = prefix.toLowerCase() + processedSuffix;
-				}
+				let targetLang = 'enUs';
+				try {
+					const {
+						platform,
+						language
+					} = uni.getSystemInfoSync();
+					if (platform !== 'ios' && language) {
+						const [prefix, suffix] = language.split(/[-_]/);
+						if (prefix && suffix) {
+							const processedSuffix = suffix[0].toUpperCase() + suffix.slice(1).toLowerCase();
+							targetLang = prefix.toLowerCase() + processedSuffix;
+						}
+					}
+				} catch (e) {}
+
+				this.lang = allowLangList.includes(targetLang) ? targetLang : 'enUs';
 				uni.setStorageSync('language', this.lang);
 			},
 
