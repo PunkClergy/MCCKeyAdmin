@@ -61,26 +61,23 @@
 				<view class="car-life-card">
 					<view class="car-life-header">
 						<view class="car-life-header__left">
-							<text class="car-life-header__title">使用指南</text>
-							<text class="car-life-header__subtitle">精选用车知识与服务指南</text>
+							<text class="car-life-header__title">{{videoMultiName}}</text>
+							<text class="car-life-header__subtitle">{{videoMultiSubtitle}}</text>
 						</view>
 					</view>
 					<view class="car-life-tabs">
-						<text class="car-life-tab car-life-tab--active">全部</text>
-						<text class="car-life-tab">车辆养护</text>
-						<text class="car-life-tab">用车技巧</text>
-						<text class="car-life-tab">安全出行</text>
+						<text v-for="(item, index) in tabCarList" :key="index" class="car-life-tab"
+							:class="{'car-life-tab--active': activeTabIndex === index}"
+							@click="handleTabCarClick(item?.value,index)">
+							{{ item.name }}
+						</text>
 					</view>
 					<view class="car-life-grid">
 						<view class="car-life-item-wrap" v-for="(item, index) in guideVideoList" :key="index">
 							<view class="car-life-card-item__cover-wrap">
 								<view class="video-wrapper">
-									<view v-if="item.thumbnailLoading" class="thumbnail-loading">
-										<view class="loading-spinner"></view>
-									</view>
 									<image v-if="!item.showVideo" class="video-thumbnail" :src="item.poster"
-										mode="aspectFill" @tap="loadAndPlayVideo(index)"
-										@load="handleThumbnailLoad(index)" @error="handleThumbnailError(index)" />
+										mode="aspectFill" @tap="loadAndPlayVideo(index)" />
 									<view v-if="!item.showVideo" class="play-icon-wrapper"
 										@tap.stop="loadAndPlayVideo(index)">
 										<image src="/static/images/play.png" class="play-icon" mode="widthFix" />
@@ -116,14 +113,14 @@
 		</view>
 	</view>
 </template>
-
 <script>
 	import {
 		u_getHomeArea30,
 		u_bannerlist20,
 		u_dateReport,
 		u_navlist20,
-		u_videoList
+		u_videoList,
+		u_videoFeedOption
 	} from '@/api/index';
 	const IMG_BASE_URL = 'https://k1sw.wiselink.net.cn/';
 	export default {
@@ -158,8 +155,23 @@
 				allServiceList: [],
 				// 常用服务宫格8项
 				serviceList: [],
-
 				// ========== 视频播放器相关 ==========
+				videoMultiName: '',
+				videoMultiSubtitle: '',
+				activeTabIndex: 0, // 默认选中第一个：全部
+				tabCarList: [{
+						label: '全部'
+					},
+					{
+						label: '车辆养护'
+					},
+					{
+						label: '用车技巧'
+					},
+					{
+						label: '安全出行'
+					}
+				], //视频标签
 				guideVideoList: [], // 使用指南视频列表
 				currentPlayingIndex: -1, // 当前正在播放的视频下标，-1代表无播放
 				_programmaticPlay: false, // 标记是否代码自动触发播放，区分用户手动点击
@@ -196,6 +208,7 @@
 			this.fetchDateReport()
 			this.fetchNavlist()
 			this.fetchGuideVideoList()
+			this.fetchVideoFeedOption()
 		},
 		methods: {
 			getSystemHeight() {
@@ -219,6 +232,18 @@
 					if (res?.content) {
 						this.bannerList = res.content;
 						this.bannerHeight = 0;
+					}
+				} catch (e) {
+					/* ignore */
+				}
+			},
+			async fetchVideoFeedOption() {
+				try {
+					const res = await u_videoFeedOption({});
+					if (res?.content) {
+						this.videoMultiName = res?.content?.multiName
+						this.videoMultiSubtitle = res?.content?.multiSubtitle
+						this.tabCarList = res?.content?.paramList
 					}
 				} catch (e) {
 					/* ignore */
@@ -280,33 +305,27 @@
 			 * 获取使用指南视频列表
 			 * 对返回数据做预处理：初始化视频状态字段、拼接封面图完整url
 			 */
-			async fetchGuideVideoList() {
+			async fetchGuideVideoList(evt = '') {
 				try {
-					const res = await u_videoList({});
+					const res = await u_videoList({
+						type: evt
+					});
 					if (res.code === 1000) {
 						this.guideVideoList = res.content.map(item => ({
 							...item,
 							videoSrc: '', // 视频播放地址，点击后才赋值，懒加载
 							poster: item.preview ? `${this.baseImageUrl}img/${item.preview}` : '',
-							showVideo: false, // false展示缩略图，true渲染视频播放器
-							thumbnailLoading: true // 缩略图加载状态标记
+							showVideo: false // false展示缩略图，true渲染视频播放器
 						}));
 					}
 				} catch (e) {
 					/* ignore */
 				}
 			},
-			/**
-			 * 缩略图加载成功，关闭loading状态
-			 */
-			handleThumbnailLoad(index) {
-				this.guideVideoList[index].thumbnailLoading = false;
-			},
-			/**
-			 * 缩略图加载失败，关闭loading状态
-			 */
-			handleThumbnailError(index) {
-				this.guideVideoList[index].thumbnailLoading = false;
+			// 切换视频标签
+			handleTabCarClick(evt, index) {
+				this.activeTabIndex = index
+				this.fetchGuideVideoList(evt)
 			},
 			/**
 			 * 暂停除exceptIndex以外的所有视频播放器
@@ -389,7 +408,6 @@
 					return;
 				}
 				// 首次点击：懒加载，赋值视频源，开启播放器组件渲染
-				item.thumbnailLoading = false;
 				const realUrl = `${this.baseImageUrl}img/${item.filepath}`;
 				this.$set(item, 'showVideo', true);
 				this.$set(item, 'videoSrc', realUrl);
@@ -464,14 +482,10 @@
 			// 功能专区的展开和收起方法
 			handleAllService() {
 				this.expand = !this.expand
-			},
-			handleTabClick(index) {
-				console.log('tab click', index);
 			}
 		}
 	};
 </script>
-
 <style lang="scss" scoped>
 	@import './index.scss';
 </style>
