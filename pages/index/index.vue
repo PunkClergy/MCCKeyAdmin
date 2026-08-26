@@ -16,9 +16,7 @@
 				<view class="layout-header__phone">{{userInfo?.companyName ||userInfo?.username }}</view>
 			</view>
 		</view>
-		<!-- 页面主体内容 -->
 		<view class="layout-content" :style="contentStyle">
-			<!-- banner区域：左右边距和头部统一15rpx -->
 			<view class="banner-section" v-if="bannerList.length">
 				<swiper class="banner-swiper" :style="{height: bannerHeight + 'px'}" :indicator-dots="true"
 					:autoplay="true" :interval="3000" :duration="500">
@@ -29,7 +27,6 @@
 					</swiper-item>
 				</swiper>
 			</view>
-			<!-- 数据中心：单个圆角大卡片，内部横向4个数据 -->
 			<view class="data-center-section">
 				<view class="data-center-card">
 					<view class="data-center-card__item" v-for="(stat, idx) in dataCenter" :key="idx">
@@ -38,7 +35,6 @@
 					</view>
 				</view>
 			</view>
-			<!-- 常用服务板块：全部包裹在service-card卡片内 -->
 			<view class="service-section">
 				<view class="service-card">
 					<view class="service-header">
@@ -61,7 +57,6 @@
 					</view>
 				</view>
 			</view>
-			<!-- 车生活板块：全部包裹在 car-life-card 卡片内 -->
 			<view class="car-life-section">
 				<view class="car-life-card">
 					<view class="car-life-header">
@@ -77,21 +72,26 @@
 						<text class="car-life-tab">安全出行</text>
 					</view>
 					<view class="car-life-grid">
-						<!-- 每个item独立外层卡片 car‑life‑item‑wrap -->
-						<view class="car-life-item-wrap" v-for="(item, idx) in carLifeList" :key="idx"
-							@click="handleCarLifeClick(item)">
-							<!-- 竖版 宽9 : 高16  padding‑top:16/9*100% =177.78% -->
+						<view class="car-life-item-wrap" v-for="(item, index) in guideVideoList" :key="index">
 							<view class="car-life-card-item__cover-wrap">
-								<view class="car-life-card-item__cover">
-									<image :src="baseImageUrl + '/img/' + item?.preview"></image>
-									<view class="car-life-card-item__tag" v-if="item.typename">{{item.typename}}</view>
+								<view class="video-wrapper">
+									<view v-if="item.thumbnailLoading" class="thumbnail-loading">
+										<view class="loading-spinner"></view>
+									</view>
+									<image v-if="!item.showVideo" class="video-thumbnail" :src="item.poster"
+										mode="aspectFill" @tap="loadAndPlayVideo(index)"
+										@load="handleThumbnailLoad(index)" @error="handleThumbnailError(index)" />
+									<view v-if="!item.showVideo" class="play-icon-wrapper"
+										@tap.stop="loadAndPlayVideo(index)">
+										<image src="/static/images/play.png" class="play-icon" mode="widthFix" />
+									</view>
+									<DomVideoPlayer v-else ref="domVideoPlayer" @play="onVideoPlay(index)"
+										:src="item.videoSrc" :poster="item.poster" :autoplay="false" preload="none"
+										:loop="true" :controls="true" style="width:100%;height:100%;display:block;" />
 								</view>
 							</view>
 							<view class="car-life-card-item__info">
-								<text class="car-life-card-item__title">{{item.title}}</text>
-								<view class="car-life-card-item__meta">
-									<text class="car-life-card-item__time">{{item.lang}}</text>
-								</view>
+								<text class="car-life-card-item__title">{{ item.title || item.desc }}</text>
 							</view>
 						</view>
 					</view>
@@ -114,11 +114,9 @@
 				</text>
 			</view>
 		</view>
-
-
-
 	</view>
 </template>
+
 <script>
 	import {
 		u_getHomeArea30,
@@ -160,46 +158,11 @@
 				allServiceList: [],
 				// 常用服务宫格8项
 				serviceList: [],
-				// 底部两个大卡片
-				serviceBottomList: [],
-				// 车生活板块数据
-				carLifeList: [{
-						title: '雨季用车',
-						time: '02:16',
-						views: '1.2k',
-						coverText: '🌧️',
-						coverBgColor: '#e6f7ed',
-						tag: '养护课堂',
-						path: '/pages/car-life/detail'
-					},
-					{
-						title: '电子钥匙如何安全授权给家人？',
-						time: '03:25',
-						views: '',
-						coverText: '🔐',
-						coverBgColor: '#e6f0ff',
-						tag: '安全出行',
-						path: '/pages/car-life/detail'
-					},
-					{
-						title: '雨季用车，记得给爱车做这 3 项检查',
-						time: '33',
-						views: '44',
-						coverText: '▶️',
-						coverBgColor: '#fff4e6',
-						tag: '',
-						path: '/pages/car-life/detail'
-					},
-					{
-						title: '电子钥匙如何安全',
-						time: '11',
-						views: '22',
-						coverText: '🛡️',
-						coverBgColor: '#f7f0ff',
-						tag: '',
-						path: '/pages/car-life/detail'
-					}
-				]
+
+				// ========== 视频播放器相关 ==========
+				guideVideoList: [], // 使用指南视频列表
+				currentPlayingIndex: -1, // 当前正在播放的视频下标，-1代表无播放
+				_programmaticPlay: false, // 标记是否代码自动触发播放，区分用户手动点击
 			}
 		},
 		computed: {
@@ -232,7 +195,7 @@
 			this.fetchZoneList()
 			this.fetchDateReport()
 			this.fetchNavlist()
-			this.fetchVideoList()
+			this.fetchGuideVideoList()
 		},
 		methods: {
 			getSystemHeight() {
@@ -270,7 +233,6 @@
 					if (res?.code !== 1000) return;
 					const info = res?.content ?? [];
 					if (!Array.isArray(info)) return;
-					const BottomList = [];
 					for (const evt of info) {
 						if (!evt) continue;
 						this.zoneMultiName = evt.multiName ?? '';
@@ -300,16 +262,6 @@
 					/* ignore */
 				}
 			},
-			async fetchVideoList() {
-				try {
-					const res = await u_videoList({});
-					if (res?.content) {
-						this.carLifeList = res?.content
-					}
-				} catch (e) {
-					/* ignore */
-				}
-			},
 			/**
 			 * 底部导航数据
 			 */
@@ -322,6 +274,166 @@
 					}
 				} catch (e) {
 					/* ignore */
+				}
+			},
+			/**
+			 * 获取使用指南视频列表
+			 * 对返回数据做预处理：初始化视频状态字段、拼接封面图完整url
+			 */
+			async fetchGuideVideoList() {
+				try {
+					const res = await u_videoList({});
+					if (res.code === 1000) {
+						this.guideVideoList = res.content.map(item => ({
+							...item,
+							videoSrc: '', // 视频播放地址，点击后才赋值，懒加载
+							poster: item.preview ? `${this.baseImageUrl}img/${item.preview}` : '',
+							showVideo: false, // false展示缩略图，true渲染视频播放器
+							thumbnailLoading: true // 缩略图加载状态标记
+						}));
+					}
+				} catch (e) {
+					/* ignore */
+				}
+			},
+			/**
+			 * 缩略图加载成功，关闭loading状态
+			 */
+			handleThumbnailLoad(index) {
+				this.guideVideoList[index].thumbnailLoading = false;
+			},
+			/**
+			 * 缩略图加载失败，关闭loading状态
+			 */
+			handleThumbnailError(index) {
+				this.guideVideoList[index].thumbnailLoading = false;
+			},
+			/**
+			 * 暂停除exceptIndex以外的所有视频播放器
+			 * 关键逻辑：同一时间只允许一个视频播放，处理ref可能是数组/单个实例兼容
+			 * @param {Number} exceptIndex 不需要暂停的视频下标
+			 */
+			pauseOtherVideos(exceptIndex) {
+				const players = this.$refs.domVideoPlayer;
+				if (!players) return;
+				// 统一转为数组，兼容单条/多条ref返回值
+				const list = Array.isArray(players) ? players : [players];
+				list.forEach((player, idx) => {
+					if (idx === exceptIndex || !player) return;
+					let videoEl = null;
+					// 组件实例获取内部video dom节点
+					if (player.$el) {
+						videoEl = player.$el.querySelector?.('video') || player.$el;
+					} else if (player.tagName && player.tagName.toLowerCase() === 'video') {
+						// 如果拿到的直接是video原生dom
+						videoEl = player;
+					}
+					// 优先调用原生video pause方法
+					if (videoEl && typeof videoEl.pause === 'function') {
+						try {
+							videoEl.pause();
+						} catch (e) {
+							console.warn(`暂停视频 ${idx} 失败:`, e);
+						}
+					} else {
+						// 降级：调用自定义组件暴露pause方法
+						if (typeof player.pause === 'function') {
+							try {
+								player.pause();
+							} catch (e) {
+								console.warn(`组件 pause 方法调用失败 ${idx}:`, e);
+							}
+						}
+					}
+				});
+			},
+			/**
+			 * 加载并播放指定下标视频，懒加载视频源，点击才初始化播放器
+			 * @param {Number} index 当前点击视频下标
+			 */
+			loadAndPlayVideo(index) {
+				const item = this.guideVideoList[index];
+				if (!item) return;
+				// 当前视频已经在播放，直接返回，避免重复执行
+				if (this.currentPlayingIndex === index && item.showVideo) {
+					return;
+				}
+				// 第一步：暂停其他所有视频
+				this.pauseOtherVideos(index);
+				// 更新全局播放标记
+				this.currentPlayingIndex = index;
+				// 播放器已经初始化完成，直接调用play播放
+				if (item.showVideo) {
+					const player = this.$refs.domVideoPlayer[index];
+					if (player && typeof player.play === 'function') {
+						this._programmaticPlay = true;
+						try {
+							const playPromise = player.play();
+							if (playPromise && typeof playPromise.then === 'function') {
+								playPromise
+									.then(() => {
+										this._programmaticPlay = false;
+									})
+									.catch(err => {
+										this._programmaticPlay = false;
+										console.warn(`视频 ${index} 播放失败:`, err.message);
+									});
+							} else {
+								this._programmaticPlay = false;
+							}
+						} catch (e) {
+							this._programmaticPlay = false;
+							console.warn(`视频 ${index} 播放异常:`, e);
+						}
+					}
+					return;
+				}
+				// 首次点击：懒加载，赋值视频源，开启播放器组件渲染
+				item.thumbnailLoading = false;
+				const realUrl = `${this.baseImageUrl}img/${item.filepath}`;
+				this.$set(item, 'showVideo', true);
+				this.$set(item, 'videoSrc', realUrl);
+				// nextTick等待dom渲染完成之后调用play
+				this.$nextTick(() => {
+					const player = this.$refs.domVideoPlayer[index];
+					if (player && typeof player.play === 'function') {
+						this._programmaticPlay = true;
+						try {
+							const playPromise = player.play();
+							if (playPromise && typeof playPromise.then === 'function') {
+								playPromise
+									.then(() => {
+										this._programmaticPlay = false;
+									})
+									.catch(err => {
+										this._programmaticPlay = false;
+										console.warn(`视频 ${index} 首次播放失败:`, err.message);
+									});
+							} else {
+								this._programmaticPlay = false;
+							}
+						} catch (e) {
+							this._programmaticPlay = false;
+							console.warn(`视频 ${index} 播放异常:`, e);
+						}
+					} else {
+						console.warn(`视频播放器 ${index} 未就绪`);
+					}
+				});
+			},
+			/**
+			 * 视频组件play事件回调
+			 * _programmaticPlay=true代表代码自动播放，不做处理；用户手动点击播放按钮时，暂停其他视频
+			 * @param {Number} playingIndex 当前播放视频下标
+			 */
+			onVideoPlay(playingIndex) {
+				if (this._programmaticPlay) {
+					return;
+				}
+				// 用户手动触发播放，暂停其余视频
+				if (this.currentPlayingIndex !== playingIndex) {
+					this.pauseOtherVideos(playingIndex);
+					this.currentPlayingIndex = playingIndex;
 				}
 			},
 			/**
@@ -353,17 +465,11 @@
 			handleAllService() {
 				this.expand = !this.expand
 			},
-			// 车生活 - 点击卡片
-			handleCarLifeClick(item) {
-				console.log('点击车生活内容', item)
-				if (item.path) {
-					uni.navigateTo({
-						url: item.path
-					})
-				}
+			handleTabClick(index) {
+				console.log('tab click', index);
 			}
 		}
-	}
+	};
 </script>
 
 <style lang="scss" scoped>

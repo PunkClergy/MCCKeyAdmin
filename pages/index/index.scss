@@ -191,48 +191,6 @@
 	font-size: 24rpx;
 	color: #2c2c2c;
 }
-/* 底部两个服务卡片【K7、渠道客户：移除阴影】 */
-.service-bottom-list {
-	display: flex;
-	gap: 12rpx;
-}
-.service-bottom-item {
-	flex: 1;
-	background: #f7f8fa;
-	border-radius: 16rpx;
-	padding: 24rpx;
-	display: flex;
-	align-items: center;
-	gap: 12rpx;
-	box-sizing: border-box;
-}
-.service-bottom-item__icon {
-	width: 72rpx;
-	height: 72rpx;
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-shrink: 0;
-}
-.service-bottom-item__icon-text {
-	width: 50rpx;
-	height: 50rpx;
-}
-.service-bottom-item__info {
-	display: flex;
-	flex-direction: column;
-	gap: 4rpx;
-}
-.service-bottom-item__title {
-	font-size: 24rpx;
-	font-weight: bold;
-	color: #222;
-}
-.service-bottom-item__desc {
-	font-size: 22rpx;
-	color: #666;
-}
 /* ========== 车生活板块 ========== */
 .car-life-section {
 	width: 100%;
@@ -316,31 +274,7 @@
 	padding-top: 177.78%;
 	position: relative;
 }
-.car-life-card-item__cover {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-sizing: border-box;
-	border-radius: 12rpx;
-}
-.car-life-card-item__cover-text {
-	font-size: 48rpx;
-}
-.car-life-card-item__tag {
-	position: absolute;
-	left: 12rpx;
-	bottom: 12rpx;
-	background: rgba(255, 255, 255, 0.95);
-	color: #222;
-	font-size: 22rpx;
-	padding: 4rpx 10rpx;
-	border-radius: 8rpx;
-}
+
 .car-life-card-item__info {
 	padding: 16rpx 8rpx 8rpx 8rpx;
 	display: flex;
@@ -353,17 +287,89 @@
 	color: #222;
 	line-height: 1.4;
 }
-.car-life-card-item__meta {
+
+/* ========== 视频播放器相关样式 ========== */
+.video-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-radius: 12rpx;
+	overflow: hidden;
+	background: #000;
+	position:absolute;
+	top:0;
+	left:0;
+}
+.video-thumbnail {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 12rpx;
+	background: #000;
+	object-fit: cover;
+}
+.play-icon-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 	display: flex;
 	align-items: center;
-	gap: 16rpx;
-	margin-top: 8rpx;
+	justify-content: center;
+	pointer-events: auto;
+	z-index: 2;
 }
-.car-life-card-item__time,
-.car-life-card-item__views {
-	font-size: 22rpx;
-	color: #999;
+.play-icon {
+	width: 80rpx;
+	height: 80rpx;
+	opacity: 0.9;
 }
+.car-life-item-wrap video,
+.car-life-item-wrap .dom-video-player {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100% !important;
+	border-radius: 12rpx;
+	background: #000;
+	display: block;
+}
+/* 缩略图加载中遮罩 */
+.thumbnail-loading {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #f0f0f0;
+	z-index: 1;
+	border-radius: 12rpx;
+}
+/* loading旋转动画 */
+.loading-spinner {
+	width: 60rpx;
+	height: 60rpx;
+	border: 6rpx solid #e0e0e0;
+	border-top: 6rpx solid #4F7CFF;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+}
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
 /* ========== tabbar 修复版：图标文字下移，整体垂直居中 ========== */
 .layout-tabbar {
   position: fixed;
@@ -379,7 +385,6 @@
   box-sizing: border-box;
   // 安全区适配，兼容iphone底部横条
   padding-bottom: constant(safe-area-inset-bottom);
-
   &__item {
     flex: 1;
     display: flex;
@@ -392,7 +397,6 @@
     // 扩大点击热区，整个item可点击
     position: relative;
   }
-
   &__icon {
     width: 52rpx;
     height: 52rpx;
@@ -400,24 +404,19 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-
     image {
       width: 92rpx;
       height: 102rpx;
     }
   }
-
   &__text {
     font-size: 26rpx;
     color: #666666;
     transition: color 0.2s ease;
     flex-shrink: 0;
-
     &.active {
       color: #1677ff;
       font-weight: 500;
     }
   }
 }
-
-
