@@ -98,7 +98,7 @@
 		<!-- 自定义tabbar -->
 		<view class="layout-tabbar" :style="tabbarStyle">
 			<view class="layout-tabbar__item" v-for="(item, index) in tabList" :key="item.menuId || index"
-				@click="handleTabClick(index)">
+				@click="handleTabClick(item,index)">
 				<view class="layout-tabbar__icon">
 					<image class="tabbar-icon-img" :src="
 	          index === currentTab
@@ -482,7 +482,13 @@
 			// 功能专区的展开和收起方法
 			handleAllService() {
 				this.expand = !this.expand
-			}
+			},
+			handleTabClick(evt, index) {
+				const url = evt?.pagePath
+				if (url) uni.redirectTo({
+					url: `/${url}`
+				});
+			},
 		}
 	};
 </script>
