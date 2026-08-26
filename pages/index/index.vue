@@ -95,24 +95,13 @@
 				</view>
 			</view>
 		</view>
-		<!-- 自定义tabbar -->
-		<view class="layout-tabbar" :style="tabbarStyle">
-			<view class="layout-tabbar__item" v-for="(item, index) in tabList" :key="item.menuId || index"
-				@click="handleTabClick(item,index)">
-				<view class="layout-tabbar__icon">
-					<image class="tabbar-icon-img" :src="
-	          index === currentTab
-	            ? baseImageUrl + '/img/' + item.selectedIconPath
-	            : baseImageUrl + '/img/' + item.iconPath
-	        " mode="aspectFit" />
-				</view>
-				<text class="layout-tabbar__text" :class="{ active: index === currentTab }">
-					{{ item.multiText }}
-				</text>
-			</view>
-		</view>
+
+		<!-- 抽离的公共tabbar组件 -->
+		<CustomTabbar :tab-list="tabList" :current-tab="currentTab" :base-image-url="baseImageUrl"
+			:tabbar-height="tabbarBaseHeight" :safe-area-bottom="safeAreaBottom" @tab-click="onTabbarClick" />
 	</view>
 </template>
+
 <script>
 	import {
 		u_getHomeArea30,
@@ -122,8 +111,14 @@
 		u_videoList,
 		u_videoFeedOption
 	} from '@/api/index';
+	// 引入自定义tabbar组件
+	import CustomTabbar from '@/components/custom-tabbar/custom-tabbar.vue';
+
 	const IMG_BASE_URL = 'https://k1sw.wiselink.net.cn/';
 	export default {
+		components: {
+			CustomTabbar
+		},
 		data() {
 			return {
 				// 布局相关的值
@@ -192,11 +187,7 @@
 					paddingBottom: `${bottom}px`
 				}
 			},
-			tabbarStyle() {
-				return {
-					height: `${this.tabbarBaseHeight}px`
-				}
-			}
+			// tabbarStyle 移到组件内部，这里删掉
 		},
 		onLoad() {
 			this.getSystemHeight()
@@ -483,8 +474,12 @@
 			handleAllService() {
 				this.expand = !this.expand
 			},
-			handleTabClick(evt, index) {
-				const url = evt?.pagePath
+			// 接收子组件tabbar点击事件
+			onTabbarClick({
+				item,
+				index
+			}) {
+				const url = item?.pagePath
 				if (url) uni.redirectTo({
 					url: `/${url}`
 				});
@@ -492,6 +487,7 @@
 		}
 	};
 </script>
+
 <style lang="scss" scoped>
 	@import './index.scss';
 </style>

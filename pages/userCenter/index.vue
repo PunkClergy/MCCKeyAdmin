@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-		<scroll-view class="content" scroll-y>
+		<scroll-view class="content" scroll-y :style="{paddingBottom: contentPaddingBottom + 'px'}">
 			<view class="my-content-list-container">
 				<view class="my-content-list-inner">
 					<view v-for="(item, index) in contentList" :key="item.id" :data-info="item"
@@ -18,16 +18,9 @@
 			</view>
 		</scroll-view>
 
-		<view class="tabbar" :style="{ height: tabBarHeight + 'px' }">
-			<view class="tab-item" :class="currentTab === index ? 'active' : ''" v-for="(item, index) in tabList"
-				:key="index" @tap="handleSwitchTabNavigation" :data-index="index">
-				<image :src="`https://k1sw.wiselink.net.cn/img/${item.selectedIconPath}`" class="tab-icon"
-					mode="widthFix" v-if="currentTab === index" />
-				<image :src="`https://k1sw.wiselink.net.cn/img/${item.iconPath}`" class="tab-icon" mode="widthFix"
-					v-else />
-				<text>{{ item.multiText }}</text>
-			</view>
-		</view>
+		<!-- 复用公共tabbar组件 -->
+		<CustomTabbar :tab-list="tabList" :current-tab="currentTab" :base-image-url="c_link"
+			:tabbar-height="tabBarHeight" :safe-area-bottom="safeAreaBottom" @tab-click="onTabbarClick" />
 
 		<!-- ========== 自定义语言选择弹窗 ========== -->
 		<view class="lang-picker-mask" v-if="showLangPicker" @tap="closeLangPicker">
@@ -49,7 +42,6 @@
 		</view>
 	</view>
 </template>
-
 <script>
 	import {
 		u_navlist20,
@@ -62,11 +54,17 @@
 	import {
 		tips
 	} from '@/utils/langtips.js'
+	// 引入公共tabbar组件
+	import CustomTabbar from '@/components/custom-tabbar/custom-tabbar.vue';
 
 	export default {
+		components: {
+			CustomTabbar
+		},
 		data() {
 			return {
-				tabBarHeight: 80,
+				tabBarHeight: 90, // 和首页保持统一，和组件默认值对齐
+				safeAreaBottom: 0, // ios底部安全区
 				currentTab: 2,
 				c_link: 'https://k1sw.wiselink.net.cn/',
 				tabList: [],
@@ -77,7 +75,6 @@
 				capsule_distance_to_the_right: 0,
 				account: '',
 				lang: 'zhCn',
-
 				// 语言列表（提取为 data 属性，便于多处复用）
 				langList: [{
 						name: '中文', //中文【中国】
@@ -116,12 +113,17 @@
 				showLangPicker: false,
 			}
 		},
-
+		computed: {
+			// scroll‑view底部内边距，防止内容被tabbar遮挡
+			contentPaddingBottom() {
+				return this.tabBarHeight + this.safeAreaBottom
+			}
+		},
 		onLoad() {
+			this.getSystemSafeArea()
 			this.initBottomDirectory()
 			this.initDirectoryStructure()
 		},
-
 		onShow() {
 			this.lang = uni.getStorageSync('language') || 'zhCn'
 			const pageRoute = 'userCenter/index'
@@ -130,12 +132,15 @@
 			})
 			this.initSystemInfo()
 		},
-
 		onReady() {
 			this.initLoginStatus()
 		},
-
 		methods: {
+			// 获取系统安全区，给tabbar使用
+			getSystemSafeArea() {
+				const sys = uni.getSystemInfoSync()
+				this.safeAreaBottom = sys.safeAreaInsets?.bottom || 0
+			},
 			handleMakePhoneCallWithConfirm() {
 				uni.showModal({
 					title: tips.MakeACall[this.lang],
@@ -159,7 +164,6 @@
 					}
 				})
 			},
-
 			initSystemInfo() {
 				const {
 					statusBarHeight: s,
@@ -173,14 +177,12 @@
 				this.head_height = s + n
 				this.capsule_distance_to_the_right = c
 			},
-
 			initLoginStatus() {
 				try {
 					const res = uni.getStorageSync('user_info')
 					this.account = res?.companyName || res?.username || ''
 				} catch (e) {}
 			},
-
 			async initBottomDirectory() {
 				try {
 					const res = await u_navlist20({})
@@ -190,13 +192,11 @@
 					}
 				} catch (e) {}
 			},
-
 			handleOnExistingAccountTap() {
 				uni.navigateTo({
 					url: '/pages/system/managerLoginView/loginView'
 				})
 			},
-
 			async initDirectoryStructure() {
 				try {
 					const res = await u_mylist({})
@@ -206,23 +206,22 @@
 					}
 				} catch (e) {}
 			},
-
-			handleSwitchTabNavigation(evt) {
-				const idx = evt.currentTarget.dataset.index
-				const item = this.tabList[idx]
+			// 接收子组件tabbar点击事件，替代原 handleSwitchTabNavigation
+			onTabbarClick({
+				item,
+				index
+			}) {
 				if (!item?.pagePath) return
 				const targetUrl = item.pagePath
 				uni.redirectTo({
 					url: `/${targetUrl}`
 				})
 			},
-
 			handleBackHome() {
 				uni.redirectTo({
 					url: '/pages/index/index'
 				})
 			},
-
 			// ========== 自定义语言弹窗相关 ==========
 			// 显示弹窗
 			showLangPickerModal() {
@@ -239,42 +238,34 @@
 					this.closeLangPicker()
 					return
 				}
-
 				// 保存语言
 				uni.setStorageSync('language', value)
 				this.lang = value
-
 				// 更新导航栏标题
 				const pageRoute = 'userCenter/index'
 				uni.setNavigationBarTitle({
 					title: titles[pageRoute][value]
 				})
-
 				// 刷新列表数据（使列表文本按新语言显示）
 				await this.initDirectoryStructure()
 				await this.initBottomDirectory()
-
 				// 关闭弹窗
 				this.closeLangPicker()
 			},
-
 			handleFunExe(evt) {
 				if (!this.account) return uni.redirectTo({
 					url: '/pages/login/index'
 				})
-
 				const info = evt.currentTarget.dataset.info
-				console.log(info,'22223344')
+				console.log(info, '22223344')
 				if (!info?.pagePath) return
-
 				// ===== 语言切换：使用自定义弹窗 =====
 				if (info.pagePath === 'Language') {
 					this.showLangPickerModal()
 					return
 				}
-
 				if (info.pagePath === 'Exit') {
-					console.log(tips,2222,tips.Tip)
+					console.log(tips, 2222, tips.Tip)
 					uni.showModal({
 						title: tips.Tip[this.lang],
 						content: tips.ExitClearCache[this.lang],
@@ -289,22 +280,18 @@
 					})
 					return
 				}
-
 				if (info?.pagePath === 'Delete') {
 					uni.showModal({
 						title: this.lang === 'zhCn' ? '注销账号' : 'Delete Account',
 						content: this.lang === 'zhCn' ?
 							'警告：注销后数据永久清除，无法恢复！确定要注销吗？' :
 							'Warning: All data will be permanently deleted. Are you sure?',
-						// confirmText: this.lang === 'zhCn' ? '确认注销' : 'Confirm Delete',
-						// cancelText: this.lang === 'zhCn' ? '取消' : 'Cancel',
 						confirmColor: '#FF3B30',
 						success: async (res) => {
 							if (res.confirm) {
 								uni.showLoading({
 									title: this.lang === 'zhCn' ? '注销中...' : 'Deleting...'
 								})
-
 								try {
 									const res = await u_deleteAccount({})
 									if (res.code === 1000) {
@@ -347,7 +334,6 @@
 		}
 	}
 </script>
-
 <style scoped lang="scss">
 	::-webkit-scrollbar {
 		width: 0;
@@ -419,6 +405,9 @@
 		position: absolute;
 		overflow-y: auto;
 		box-sizing: border-box;
+		top: 0;
+		left: 0;
+		bottom: 0;
 	}
 
 	.my-content-list-container {
@@ -462,43 +451,6 @@
 	.my-content-list-item__arrow {
 		width: 25rpx;
 		height: 25rpx;
-	}
-
-	.tabbar {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		background-color: #FFF;
-		box-shadow: -2rpx -2rpx 10rpx -10rpx #81d4fa;
-		display: flex;
-		align-items: center;
-		justify-content: space-around;
-		z-index: 99;
-		box-sizing: border-box;
-	}
-
-	.tab-item {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 4rpx;
-		padding: 12rpx 0;
-	}
-
-	.tab-icon {
-		width: 50rpx;
-		height: 50rpx;
-	}
-
-	.tab-item text {
-		font-size: 26rpx;
-		color: #333;
-	}
-
-	.tab-item.active text {
-		color: #3498db;
-		font-weight: bold;
 	}
 
 	.float-button {
