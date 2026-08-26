@@ -66,6 +66,7 @@ export const u_sendInfo = (data) => http.postFormData('/renterApi/uploadControlR
 export const u_uploadLog = (data) => http.post('/loggerapi/uploadLog', data)
 export const u_bannerlist20 = (data) => http.get('/appHomeApi/bannerlist20', data)
 export const u_getHomeArea = (data) => http.get('/appHomeApi/homeArea', data)
+export const u_getHomeArea30 = (data) => http.get('/appHomeApi/homeArea30', data)
 export const u_booklist = (data) => http.get('/appHomeApi/booklist', data)
 export const u_mylist = (data) => http.get('/appHomeApi/mylist', data)
 export const u_paivatecarList = (data) => http.get('/carapi/getCarList', data)
@@ -86,3 +87,4 @@ export const u_updateRentKey = (data) => http.postFormData('/rentKeyApi/updateRe
 export const u_leveOneMenu = (data) => http.get('/appHomeApi/leveOneMenu', data) //获取所有专区
 export const u_setHomeMenu = (data) => http.postFormData('/appHomeApi/setHomeMenu', data) //修改显示专区
 export const u_videoList = (data) => http.get('/appHomeApi/videoFeed', data) //获取指南视频
+export const u_dateReport = (data)=>http.get('/appHomeApi/dateReport',data)//获取首页数据板块内容

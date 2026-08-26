@@ -1,0 +1,423 @@
+.layout-root {
+	width: 100%;
+	height: 100vh;
+	box-sizing: border-box;
+	background-color: #f6f8fb;
+}
+/* ========== 头部 ========== */
+.layout-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 999;
+	display: flex;
+	flex-direction: column;
+	background: #ffffff;
+}
+.layout-header__status-bar {
+	width: 100%;
+}
+.layout-header__title-wrap {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 6rpx 15rpx;
+	box-sizing: border-box;
+}
+.layout-header__brand {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 10rpx;
+}
+.brand-logo-box {
+	background-color: #f6f8fb;
+	border-radius: 10rpx;
+	width: 80rpx;
+	height: 80rpx;
+}
+.brand-logo-img {
+	width: 100%;
+	height: 100%;
+}
+.brand-info {
+	display: flex;
+	flex-direction: column;
+	gap: 4rpx;
+}
+.brand-info__title {
+	font-size: 34rpx;
+	font-weight: bold;
+	color: #2c2c2c;
+}
+.brand-info__sub {
+	font-size: 24rpx;
+	color: #64748b;
+}
+.layout-header__phone {}
+/* ========== 内容区 ========== */
+.layout-content {
+	width: 100%;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+/* ========== banner ========== */
+.banner-section {
+	width: 100%;
+	padding: 0rpx 15rpx;
+	box-sizing: border-box;
+	margin-top: 20rpx;
+}
+.banner-swiper {
+	width: 100%;
+	overflow: hidden;
+	border-radius: 16rpx;
+	box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+	box-sizing: border-box;
+}
+.banner-img {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+/* ========== 数据中心 ========== */
+.data-center-section {
+	width: 100%;
+	padding: 0 15rpx;
+	box-sizing: border-box;
+	margin-top: 20rpx;
+}
+.data-center-card {
+	width: 100%;
+	background: #ffffff;
+	border-radius: 16rpx;
+	display: flex;
+	padding: 32rpx 0;
+	box-sizing: border-box;
+	box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+.data-center-card__item {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.data-center-card__num {
+	font-size: 32rpx;
+	font-weight: bold;
+	line-height: 1;
+	margin-bottom: 12rpx;
+}
+.data-center-card__label {
+	font-size: 22rpx;
+	color: #64748b;
+}
+/* ========== 常用服务板块 ========== */
+.service-section {
+	width: 100%;
+	padding: 0 15rpx;
+	box-sizing: border-box;
+	margin-top: 20rpx;
+}
+.service-card {
+	width: 100%;
+	background: #ffffff;
+	border-radius: 16rpx;
+	padding: 32rpx 24rpx;
+	box-sizing: border-box;
+	box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+.service-header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	margin-bottom: 24rpx;
+}
+.service-header__left {
+	display: flex;
+	flex-direction: column;
+	gap: 6rpx;
+}
+.service-header__title {
+	font-size: 34rpx;
+	font-weight: bold;
+	color: #2c2c2c;
+}
+.service-header__subtitle {
+	font-size: 22rpx;
+	color: #64748b;
+}
+.service-header__more {
+	display: flex;
+	align-items: center;
+	gap: 4rpx;
+}
+.service-header__more-text {
+	font-size: 26rpx;
+	color: #168a82;
+}
+.service-header__more-arrow {
+	font-size: 28rpx;
+	color: #168a82;
+}
+/* 顶部8个服务宫格 */
+.service-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 24rpx 12rpx;
+	margin-bottom: 24rpx;
+}
+.service-grid__item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10rpx;
+}
+.service-grid__icon {
+	width: 96rpx;
+	height: 96rpx;
+	border-radius: 24rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.service-grid__icon-text {
+	width: 50rpx;
+	height: 50rpx;
+}
+.service-grid__name {
+	font-size: 24rpx;
+	color: #2c2c2c;
+}
+/* 底部两个服务卡片【K7、渠道客户：移除阴影】 */
+.service-bottom-list {
+	display: flex;
+	gap: 12rpx;
+}
+.service-bottom-item {
+	flex: 1;
+	background: #f7f8fa;
+	border-radius: 16rpx;
+	padding: 24rpx;
+	display: flex;
+	align-items: center;
+	gap: 12rpx;
+	box-sizing: border-box;
+}
+.service-bottom-item__icon {
+	width: 72rpx;
+	height: 72rpx;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+.service-bottom-item__icon-text {
+	width: 50rpx;
+	height: 50rpx;
+}
+.service-bottom-item__info {
+	display: flex;
+	flex-direction: column;
+	gap: 4rpx;
+}
+.service-bottom-item__title {
+	font-size: 24rpx;
+	font-weight: bold;
+	color: #222;
+}
+.service-bottom-item__desc {
+	font-size: 22rpx;
+	color: #666;
+}
+/* ========== 车生活板块 ========== */
+.car-life-section {
+	width: 100%;
+	padding: 0 15rpx;
+	box-sizing: border-box;
+	margin-top: 20rpx;
+}
+.car-life-card {
+	width: 100%;
+	background: #ffffff;
+	border-radius: 16rpx;
+	padding: 32rpx 24rpx;
+	box-sizing: border-box;
+	box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+.car-life-header {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	margin-bottom: 24rpx;
+}
+.car-life-header__left {
+	display: flex;
+	flex-direction: column;
+	gap: 6rpx;
+}
+.car-life-header__title {
+	font-size: 34rpx;
+	font-weight: bold;
+	color: #2c2c2c;
+}
+.car-life-header__subtitle {
+	font-size: 22rpx;
+	color: #64748b;
+}
+.car-life-header__more {
+	display: flex;
+	align-items: center;
+	gap: 4rpx;
+}
+.car-life-header__more-text {
+	font-size: 26rpx;
+	color: #289c87;
+}
+.car-life-tabs {
+	display: flex;
+	gap: 24rpx;
+	margin-bottom: 24rpx;
+}
+.car-life-tab {
+	font-size: 24rpx;
+	color: #2c2c2c;
+	padding: 8rpx 16rpx;
+	border-radius: 30rpx;
+	background: #f5f7fa;
+}
+.car-life-tab--active {
+	color: #fff;
+	font-weight: bold;
+	background-color: #289c87;
+}
+/* 两列瀑布流 */
+.car-life-grid {
+	column-count: 2;
+	column-gap: 16rpx;
+}
+/* 车生活item外层卡片：有卡片底色，无厚重阴影 */
+.car-life-item-wrap {
+	background: #f8f9fa;
+	border-radius: 16rpx;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	break-inside: avoid;
+	margin-bottom: 16rpx;
+	padding: 12rpx;
+}
+.car-life-card-item__cover-wrap {
+	width: 100%;
+	height: 0;
+	padding-top: 177.78%;
+	position: relative;
+}
+.car-life-card-item__cover {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	border-radius: 12rpx;
+}
+.car-life-card-item__cover-text {
+	font-size: 48rpx;
+}
+.car-life-card-item__tag {
+	position: absolute;
+	left: 12rpx;
+	bottom: 12rpx;
+	background: rgba(255, 255, 255, 0.95);
+	color: #222;
+	font-size: 22rpx;
+	padding: 4rpx 10rpx;
+	border-radius: 8rpx;
+}
+.car-life-card-item__info {
+	padding: 16rpx 8rpx 8rpx 8rpx;
+	display: flex;
+	flex-direction: column;
+	gap: 8rpx;
+}
+.car-life-card-item__title {
+	font-size: 26rpx;
+	font-weight: bold;
+	color: #222;
+	line-height: 1.4;
+}
+.car-life-card-item__meta {
+	display: flex;
+	align-items: center;
+	gap: 16rpx;
+	margin-top: 8rpx;
+}
+.car-life-card-item__time,
+.car-life-card-item__views {
+	font-size: 22rpx;
+	color: #999;
+}
+/* ========== tabbar 修复版：图标文字下移，整体垂直居中 ========== */
+.layout-tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  border-top: 1rpx solid #eeeeee;
+  z-index: 999;
+  box-sizing: border-box;
+  // 安全区适配，兼容iphone底部横条
+  padding-bottom: constant(safe-area-inset-bottom);
+
+  &__item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6rpx;
+    padding-top: 12rpx;
+    padding-bottom: 12rpx;
+    // 扩大点击热区，整个item可点击
+    position: relative;
+  }
+
+  &__icon {
+    width: 52rpx;
+    height: 52rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    image {
+      width: 92rpx;
+      height: 102rpx;
+    }
+  }
+
+  &__text {
+    font-size: 26rpx;
+    color: #666666;
+    transition: color 0.2s ease;
+    flex-shrink: 0;
+
+    &.active {
+      color: #1677ff;
+      font-weight: 500;
+    }
+  }
+}
+
+
