@@ -212,9 +212,14 @@
 				index
 			}) {
 				if (!item?.pagePath) return
-				const targetUrl = item.pagePath
-				uni.redirectTo({
-					url: `/${targetUrl}`
+				const {
+					pagePath,
+					text
+				} = item
+				const targetUrl = `/${pagePath}`
+				const navigateApi = text == 'K7' ? uni.navigateTo : uni.redirectTo
+				navigateApi({
+					url: targetUrl
 				})
 			},
 			handleBackHome() {

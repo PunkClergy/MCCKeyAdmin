@@ -2261,14 +2261,37 @@ export const tips = {
 		"jaJp": "利用者を紐付ける"
 	},
 	"GoBindDriver": {
-	    "zhCn": "去绑定司机",
-	    "enUs": "Bind Driver",
-	    "msMy": "Ikat Pemandu",
-	    "ptBr": "Vincular Motorista",
-	    "taSg": "டிரைவரை இணைக்கவும்",
-	    "thTh": "ผูกมัดคนขับรถ",
-	    "idId": "Ikat Pengemudi",
-	    "miNz": "Whakapiri Kaitaraiwa",
-	    "jaJp": "ドライバーを紐付ける"
+		"zhCn": "去绑定司机",
+		"enUs": "Bind Driver",
+		"msMy": "Ikat Pemandu",
+		"ptBr": "Vincular Motorista",
+		"taSg": "டிரைவரை இணைக்கவும்",
+		"thTh": "ผูกมัดคนขับรถ",
+		"idId": "Ikat Pengemudi",
+		"miNz": "Whakapiri Kaitaraiwa",
+		"jaJp": "ドライバーを紐付ける"
+	},
+	"Expand": {
+		"zhCn": "展开",
+		"enUs": "Expand",
+		"msMy": "Kembangkan",
+		"ptBr": "Expandir",
+		"taSg": "விரிவாக்கு",
+		"thTh": "ขยาย",
+		"idId": "Perluas",
+		"miNz": "Whakawhānui",
+		"jaJp": "展開"
+	},
+	"Collapse": {
+		"zhCn": "收起",
+		"enUs": "Collapse",
+		"msMy": "Lipat",
+		"ptBr": "Recolher",
+		"taSg": "மடி",
+		"thTh": "ย่อ",
+		"idId": "Lipat",
+		"miNz": "Whakakōpaki",
+		"jaJp": "折りたたむ"
 	}
+
 }

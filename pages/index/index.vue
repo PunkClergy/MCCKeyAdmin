@@ -43,7 +43,9 @@
 							<text class="service-header__subtitle">{{zoneMultiSubtitle}}</text>
 						</view>
 						<view class="service-header__more" @click="handleAllService">
-							<text class="service-header__more-text">{{expand?'收起':'展开'}}</text>
+							<text class="service-header__more-text">
+								{{expand?tips?.Collapse[lang]:tips?.Expand[lang]}}
+							</text>
 						</view>
 					</view>
 					<view class="service-grid">
@@ -113,6 +115,9 @@
 	} from '@/api/index';
 	// 引入自定义tabbar组件
 	import CustomTabbar from '@/components/custom-tabbar/custom-tabbar.vue';
+	import {
+		tips
+	} from '@/utils/langtips.js'
 
 	const IMG_BASE_URL = 'https://k1sw.wiselink.net.cn/';
 	export default {
@@ -121,6 +126,9 @@
 		},
 		data() {
 			return {
+				// 语言
+				lang: 'zhCn',
+				tips: tips,
 				// 布局相关的值
 				statusBarHeight: 0,
 				customTitleHeight: 44,
@@ -154,19 +162,7 @@
 				videoMultiName: '',
 				videoMultiSubtitle: '',
 				activeTabIndex: 0, // 默认选中第一个：全部
-				tabCarList: [{
-						label: '全部'
-					},
-					{
-						label: '车辆养护'
-					},
-					{
-						label: '用车技巧'
-					},
-					{
-						label: '安全出行'
-					}
-				], //视频标签
+				tabCarList: [], //视频标签
 				guideVideoList: [], // 使用指南视频列表
 				currentPlayingIndex: -1, // 当前正在播放的视频下标，-1代表无播放
 				_programmaticPlay: false, // 标记是否代码自动触发播放，区分用户手动点击
@@ -187,7 +183,6 @@
 					paddingBottom: `${bottom}px`
 				}
 			},
-			// tabbarStyle 移到组件内部，这里删掉
 		},
 		onLoad() {
 			this.getSystemHeight()
@@ -200,8 +195,12 @@
 			this.fetchNavlist()
 			this.fetchGuideVideoList()
 			this.fetchVideoFeedOption()
+			this.getLang()
 		},
 		methods: {
+			getLang() {
+				this.lang = uni.getStorageSync('language') || 'zhCn'
+			},
 			getSystemHeight() {
 				const sys = uni.getSystemInfoSync()
 				this.statusBarHeight = sys.statusBarHeight || 0
@@ -479,11 +478,18 @@
 				item,
 				index
 			}) {
-				const url = item?.pagePath
-				if (url) uni.redirectTo({
-					url: `/${url}`
-				});
+				if (!item?.pagePath) return
+				const {
+					pagePath,
+					text
+				} = item
+				const targetUrl = `/${pagePath}`
+				const navigateApi = text == 'K7' ? uni.navigateTo : uni.redirectTo
+				navigateApi({
+					url: targetUrl
+				})
 			},
+
 		}
 	};
 </script>
