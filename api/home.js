@@ -89,3 +89,4 @@ export const u_setHomeMenu = (data) => http.postFormData('/appHomeApi/setHomeMen
 export const u_videoList = (data) => http.get('/appHomeApi/videoFeed', data) //获取指南视频
 export const u_dateReport = (data)=>http.get('/appHomeApi/dateReport',data)//获取首页数据板块内容
 export const u_videoFeedOption = (data)=>http.get('/appHomeApi/videoFeedOption',data)// 首页使用指南部分
+export const u_homeAreaOption = (data)=>http.get('/appHomeApi/homeAreaOption',data)// 功能部分标签

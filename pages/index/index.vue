@@ -43,19 +43,26 @@
 							<text class="service-header__title">{{zoneMultiName}}</text>
 							<text class="service-header__subtitle">{{zoneMultiSubtitle}}</text>
 						</view>
-						<view class="service-header__more" @click="handleAllService">
+						<view class="service-header__more" @click="handleAllService" v-if="expandShow">
 							<text class="service-header__more-text">
 								{{expand?tips?.Collapse[lang]:tips?.Expand[lang]}}
 							</text>
 						</view>
 					</view>
+					<view class="service-tabs">
+						<text v-for="(item, index) in tabServiceList" :key="index" class="service-tab"
+							:class="{'service-tab--active': activeTabServiceIndex === index}"
+							@click="handleTabServiceClick(item?.value,index)">
+							{{ item.name }}
+						</text>
+					</view>
 					<view class="service-grid">
-						<view class="service-grid__item" v-for="(item, idx) in (expand?allServiceList:serviceList)"
-							:key="idx" @click="handleServiceClick(item)">
-							<view class="service-grid__icon" :style="{backgroundColor: item.bgcolor}">
-								<image class="service-grid__icon-text" :src="baseImageUrl + '/img/' + item.icon" />
+						<view class="service-grid__item" v-for="(item, idx) in serviceList" :key="idx"
+							@click="handleServiceClick(item)">
+							<view class="service-grid__icon" :style="{backgroundColor: item?.bgcolor}">
+								<image class="service-grid__icon-text" :src="baseImageUrl + '/img/' + item?.icon" />
 							</view>
-							<text class="service-grid__name">{{item.multiName}}</text>
+							<text class="service-grid__name">{{item?.multiName}}</text>
 						</view>
 					</view>
 				</view>
@@ -112,7 +119,8 @@
 		u_dateReport,
 		u_navlist20,
 		u_videoList,
-		u_videoFeedOption
+		u_videoFeedOption,
+		u_homeAreaOption
 	} from '@/api/index';
 	// 引入自定义tabbar组件
 	import CustomTabbar from '@/components/custom-tabbar/custom-tabbar.vue';
@@ -155,10 +163,16 @@
 				zoneMultiSubtitle: '功能专区副标题',
 				// 功能专区是否展开
 				expand: 0,
+				// 展开收起是否显示
+				expandShow: true,
 				// 常用服用全部数据
 				allServiceList: [],
-				// 常用服务宫格8项
+				// 常用服务宫格12项
 				serviceList: [],
+				// 功能分类标签
+				tabServiceList: [],
+				// 默认选择全部的功能
+				activeTabServiceIndex: 0,
 				// ========== 视频播放器相关 ==========
 				videoMultiName: '',
 				videoMultiSubtitle: '',
@@ -197,6 +211,7 @@
 			this.fetchGuideVideoList()
 			this.fetchVideoFeedOption()
 			this.getLang()
+			this.fetchServiceTabs()
 		},
 		methods: {
 			getLang() {
@@ -235,6 +250,16 @@
 						this.videoMultiName = res?.content?.multiName
 						this.videoMultiSubtitle = res?.content?.multiSubtitle
 						this.tabCarList = res?.content?.paramList
+					}
+				} catch (e) {
+					/* ignore */
+				}
+			},
+			async fetchServiceTabs() {
+				try {
+					const res = await u_homeAreaOption({}); //修改接口
+					if (res?.content) {
+						this.tabServiceList = res?.content
 					}
 				} catch (e) {
 					/* ignore */
@@ -285,7 +310,6 @@
 				try {
 					const res = await u_navlist20({});
 					if (res?.content) {
-						console.log(res, '111')
 						this.tabList = res?.content
 					}
 				} catch (e) {
@@ -318,6 +342,24 @@
 				this.activeTabIndex = index
 				this.fetchGuideVideoList(evt)
 			},
+			// 切换功能分类
+
+			/**
+			 * 功能专区tab切换
+			 */
+			handleTabServiceClick(evt, index) {
+				this.activeTabServiceIndex = index;
+				const sourceList = this.allServiceList ?? [];
+				if (!evt) {
+					this.serviceList = this.expand ? [...sourceList] : sourceList.slice(0, 12);
+					this.expandShow = sourceList.length > 11;
+					return;
+				}
+				const filterList = sourceList.filter(element => element?.serial_number === evt);
+				this.expandShow = filterList.length > 11;
+				this.serviceList = filterList
+			},
+
 			handleDataInfo(evt) {
 				if (!evt?.path) return;
 				uni.navigateTo({
@@ -477,10 +519,18 @@
 					})
 				}
 			},
-			// 功能专区的展开和收起方法
+			/**
+			 * 功能专区展开收起切换
+			 */
 			handleAllService() {
-				this.expand = !this.expand
+				this.expand = !this.expand;
+				const sourceList = this.allServiceList ?? [];
+				this.serviceList = this.expand ? [...sourceList] :
+					sourceList.slice(0, 12).map(item => ({
+						...item
+					}));
 			},
+
 			// 接收子组件tabbar点击事件
 			onTabbarClick({
 				item,
