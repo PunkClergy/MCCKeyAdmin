@@ -121,7 +121,7 @@
 						"navigationBarBackgroundColor": "#EFF1FC"
 					}
 				},
-				{ 
+				{
 					"path": "userRole",
 					"style": {
 						"navigationBarTitleText": "人员与角色",
@@ -184,6 +184,16 @@
 					}
 				}
 			]
+		},
+		{
+			"root": "pages/joinCenter",
+			"pages": [{
+				"path": "index",
+				"style": {
+					"navigationBarTitleText": "渠道合作",
+					"navigationStyle": "custom"
+				}
+			}]
 		}
 	],
 

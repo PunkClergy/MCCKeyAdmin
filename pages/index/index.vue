@@ -29,7 +29,8 @@
 			</view>
 			<view class="data-center-section">
 				<view class="data-center-card">
-					<view class="data-center-card__item" v-for="(stat, idx) in dataCenter" :key="idx">
+					<view class="data-center-card__item" v-for="(stat, idx) in dataCenter" :key="idx"
+						@click="handleDataInfo(stat)">
 						<text class="data-center-card__num" :style="{color: stat.fontColor}">{{stat.count}}</text>
 						<text class="data-center-card__label">{{stat.name}}</text>
 					</view>
@@ -317,6 +318,13 @@
 				this.activeTabIndex = index
 				this.fetchGuideVideoList(evt)
 			},
+			handleDataInfo(evt) {
+				if (!evt?.path) return;
+				uni.navigateTo({
+					url: evt.path
+				});
+			},
+
 			/**
 			 * 暂停除exceptIndex以外的所有视频播放器
 			 * 关键逻辑：同一时间只允许一个视频播放，处理ref可能是数组/单个实例兼容
