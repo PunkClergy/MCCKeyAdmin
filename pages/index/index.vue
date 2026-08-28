@@ -18,8 +18,8 @@
 		</view>
 		<view class="layout-content" :style="contentStyle">
 			<view class="banner-section" v-if="bannerList.length">
-				<swiper class="banner-swiper" :style="{height: (bannerHeight || uni.upx2px(240)) + 'px'}" :indicator-dots="true"
-					:autoplay="true" :interval="3000" :duration="500">
+				<swiper class="banner-swiper" :style="{height: (bannerHeight || uni.upx2px(240)) + 'px'}"
+					:indicator-dots="true" :autoplay="true" :interval="3000" :duration="500">
 					<swiper-item v-for="(item, index) in bannerList" :key="index">
 						<image :data-item="item"
 							:src="baseImageUrl + '/img/' + (item.fileType == 1 ? item.img : item.videoImg)"
@@ -53,7 +53,7 @@
 						<text v-for="(item, index) in tabServiceList" :key="index" class="service-tab"
 							:class="{'service-tab--active': activeTabServiceIndex === index}"
 							@click="handleTabServiceClick(item?.id,index)">
-							{{ item.name }}
+							{{ item.multiName }}
 						</text>
 					</view>
 					<view class="service-grid">
@@ -199,9 +199,10 @@
 		onLoad() {
 			this.getSystemHeight()
 			this.getStorageUser()
-			this.fetchBannerList() 
+			this.fetchBannerList()
 		},
 		onShow() {
+			this.activeTabServiceIndex = 0
 			this.fetchZoneList()
 			this.fetchDateReport()
 			this.fetchNavlist()
@@ -235,7 +236,7 @@
 					if (res?.content) {
 						const newList = res.content;
 						// 只有banner数据真正变更才更新，避免onShow重复重置高度
-						if(JSON.stringify(newList) !== JSON.stringify(this.bannerList)){
+						if (JSON.stringify(newList) !== JSON.stringify(this.bannerList)) {
 							this.bannerList = newList;
 							this.bannerHeight = uni.upx2px(240); // 设置默认占位高度，防止图片load不触发高度为0
 						}
