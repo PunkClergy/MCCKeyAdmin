@@ -2,9 +2,9 @@ import {
 	http
 } from '@/utils/request/http'
 
-export const u_uploadInstallImg = (data) => http.postFormData('/k7Api/uploadInstallImg', data)//上传图片
-export const u_getBluetoothKey = (data) => http.get('/rentKeyApi/getBluetoothKey', data)//获取蓝牙密码
-export const u_deleteAccount = (data) => http.postFormData('/accountapi/deleteAccount', data)//注销账号
+export const u_uploadInstallImg = (data) => http.postFormData('/k7Api/uploadInstallImg', data) //上传图片
+export const u_getBluetoothKey = (data) => http.get('/rentKeyApi/getBluetoothKey', data) //获取蓝牙密码
+export const u_deleteAccount = (data) => http.postFormData('/accountapi/deleteAccount', data) //注销账号
 export const u_getTrackPlayback = (data) => http.get('/carapi/getTrackPlayback', data)
 export const u_getAllCarPoisiton = (data) => http.get('/carapi/getAllCarPoisiton', data) //替换
 export const u_getUserlnfo = (data) => http.get('/deskapi/getUserInfo', data)
@@ -87,6 +87,9 @@ export const u_updateRentKey = (data) => http.postFormData('/rentKeyApi/updateRe
 export const u_leveOneMenu = (data) => http.get('/appHomeApi/leveOneMenu', data) //获取所有专区
 export const u_setHomeMenu = (data) => http.postFormData('/appHomeApi/setHomeMenu', data) //修改显示专区
 export const u_videoList = (data) => http.get('/appHomeApi/videoFeed', data) //获取指南视频
-export const u_dateReport = (data)=>http.get('/appHomeApi/dateReport',data)//获取首页数据板块内容
-export const u_videoFeedOption = (data)=>http.get('/appHomeApi/videoFeedOption',data)// 首页使用指南部分
-export const u_homeAreaOption = (data)=>http.get('/appHomeApi/homeAreaOption',data)// 功能部分标签
+export const u_dateReport = (data) => http.get('/appHomeApi/dateReport', data) //获取首页数据板块内容
+export const u_videoFeedOption = (data) => http.get('/appHomeApi/videoFeedOption', data) // 首页使用指南部分
+export const u_homeAreaOption = (data) => http.get('/appHomeApi/homeAreaOption', data) // 功能部分标签
+export const u_scheduledCarApiList = (data) => http.get('/scheduledCarApi/list', data) // 限时管控列表
+export const u_scheduledAddUpdate = (data) => http.postFormData('/scheduledCarApi/addOrUpdate', data) //新增编辑时效管控
+export const u_scheduledDel = (data) => http.postFormData('/scheduledCarApi/del', data)
