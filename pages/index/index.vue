@@ -18,7 +18,7 @@
 		</view>
 		<view class="layout-content" :style="contentStyle">
 			<view class="banner-section" v-if="bannerList.length">
-				<swiper class="banner-swiper" :style="{height: bannerHeight + 'px'}" :indicator-dots="true"
+				<swiper class="banner-swiper" :style="{height: (bannerHeight || uni.upx2px(240)) + 'px'}" :indicator-dots="true"
 					:autoplay="true" :interval="3000" :duration="500">
 					<swiper-item v-for="(item, index) in bannerList" :key="index">
 						<image :data-item="item"
@@ -105,13 +105,11 @@
 				</view>
 			</view>
 		</view>
-
 		<!-- 抽离的公共tabbar组件 -->
 		<CustomTabbar :tab-list="tabList" :current-tab="currentTab" :base-image-url="baseImageUrl"
 			:tabbar-height="tabbarBaseHeight" :safe-area-bottom="safeAreaBottom" @tab-click="onTabbarClick" />
 	</view>
 </template>
-
 <script>
 	import {
 		u_getHomeArea30,
@@ -127,7 +125,6 @@
 	import {
 		tips
 	} from '@/utils/langtips.js'
-
 	const IMG_BASE_URL = 'https://k1sw.wiselink.net.cn/';
 	export default {
 		components: {
@@ -202,9 +199,9 @@
 		onLoad() {
 			this.getSystemHeight()
 			this.getStorageUser()
+			this.fetchBannerList() 
 		},
 		onShow() {
-			this.fetchBannerList()
 			this.fetchZoneList()
 			this.fetchDateReport()
 			this.fetchNavlist()
@@ -236,8 +233,12 @@
 						terminalId: 0
 					});
 					if (res?.content) {
-						this.bannerList = res.content;
-						this.bannerHeight = 0;
+						const newList = res.content;
+						// 只有banner数据真正变更才更新，避免onShow重复重置高度
+						if(JSON.stringify(newList) !== JSON.stringify(this.bannerList)){
+							this.bannerList = newList;
+							this.bannerHeight = uni.upx2px(240); // 设置默认占位高度，防止图片load不触发高度为0
+						}
 					}
 				} catch (e) {
 					/* ignore */
@@ -343,7 +344,6 @@
 				this.fetchGuideVideoList(evt)
 			},
 			// 切换功能分类
-
 			/**
 			 * 功能专区tab切换
 			 */
@@ -359,14 +359,12 @@
 				this.expandShow = filterList.length > 11;
 				this.serviceList = filterList
 			},
-
 			handleDataInfo(evt) {
 				if (!evt?.path) return;
 				uni.navigateTo({
 					url: evt.path
 				});
 			},
-
 			/**
 			 * 暂停除exceptIndex以外的所有视频播放器
 			 * 关键逻辑：同一时间只允许一个视频播放，处理ref可能是数组/单个实例兼容
@@ -530,7 +528,6 @@
 						...item
 					}));
 			},
-
 			// 接收子组件tabbar点击事件
 			onTabbarClick({
 				item,
@@ -547,11 +544,9 @@
 					url: targetUrl
 				})
 			},
-
 		}
 	};
 </script>
-
 <style lang="scss" scoped>
 	@import './index.scss';
 </style>
