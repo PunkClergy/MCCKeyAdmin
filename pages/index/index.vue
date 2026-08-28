@@ -52,7 +52,7 @@
 					<view class="service-tabs">
 						<text v-for="(item, index) in tabServiceList" :key="index" class="service-tab"
 							:class="{'service-tab--active': activeTabServiceIndex === index}"
-							@click="handleTabServiceClick(item?.value,index)">
+							@click="handleTabServiceClick(item?.id,index)">
 							{{ item.name }}
 						</text>
 					</view>
