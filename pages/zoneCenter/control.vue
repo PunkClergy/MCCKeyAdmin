@@ -345,11 +345,11 @@
 			},
 
 			onStartTimeChange(e) {
-				this.formData.starttime = e.target.value;
+				this.formData.starttime = e.target.value || e?.detail?.value;
 			},
 
 			onEndTimeChange(e) {
-				this.formData.endtime = e.target.value;
+				this.formData.endtime = e.target.value || e?.detail?.value;
 			},
 
 			async handleSave() {
