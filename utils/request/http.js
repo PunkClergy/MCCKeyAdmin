@@ -201,7 +201,7 @@ http.delete = (url, params, config) => http.request({
 	params
 })
 
-// 设置拦截器示例
+// 设置拦截器示例 
 http.setInterceptor({
 	request: (config) => {
 		// 添加全局header（例如token）
@@ -211,7 +211,7 @@ http.setInterceptor({
 		const token = userKey?.token || ''
 		let header = config.header || {}
 		header['funAreaId'] = funAreaId //暂时写死参数
-		header['lang'] = language //所属语言
+		header['lang'] = language||'en_Us' //所属语言
 		header['programType'] = 'app' //所属语言
 
 		if (token) {

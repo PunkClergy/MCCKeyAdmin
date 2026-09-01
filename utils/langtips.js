@@ -559,6 +559,27 @@ export const tips = {
 		"idId": "Akun / Telepon",
 		"miNz": "Pūkete / Waea"
 	},
+	'AccountLogin': {
+		"zhCn": "账号登录",
+		"enUs": "Account Login",
+		"msMy": "Log Masuk Akaun",
+		"ptBr": "Login da Conta",
+		"taSg": "கணக்கு உள்நுழைவு",
+		"thTh": "เข้าสู่ระบบบัญชี",
+		"idId": "Masuk Akun",
+		"miNz": "Whakauru Pūkete"
+	},
+	'GuestLogin': {
+		"zhCn": "游客登录",
+		"enUs": "Guest Login",
+		"msMy": "Log Masuk Tetamu",
+		"ptBr": "Login Convidado",
+		"taSg": "விருந்தினர் உள்நுழைவு",
+		"thTh": "เข้าสู่ระบบผู้เยี่ยมชม",
+		"idId": "Masuk Tamu",
+		"miNz": "Whakauru Manuhiri"
+	},
+
 	"EnterAccountPhone": {
 		"zhCn": "请输入手机号/账号",
 		"enUs": "Enter Phone/Account",

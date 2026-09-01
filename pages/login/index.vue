@@ -13,25 +13,43 @@
 				</view>
 			</view>
 
-			<!-- 登录方式选择 -->
-			<view class="input-group">
-				<view class="input-item">
-					<view class="input-label">{{tips.Account[lang]}}</view>
-					<input class="input-field" :placeholder="tips.EnterAccountPhone[lang]" v-model="username" />
+			<!-- 切换标签：账号登录 / 游客登录 -->
+			<view class="tab-switch">
+				<view class="tab-item" :class="{active: loginType === 'account'}" @tap="loginType = 'account'">
+					{{tips.AccountLogin?.[lang] || 'Account Login'}}
 				</view>
-				<view class="input-item">
-					<view class="input-label">{{tips.Password[lang]}}</view>
-					<input class="input-field" :placeholder="tips.EnterPassword[lang]" v-model="password" :password="true" />
-				</view>
-				<view>
-					<button class="login-btn" @tap="handleLogin">{{tips.Login[lang]||'登录'}}</button>
-					<text class="register" @tap="handleRegister">{{tips.RegisterAccount[lang]}}</text>
+				<view class="tab-item" :class="{active: loginType === 'guest'}" @tap="loginType = 'guest'">
+					{{tips.GuestLogin?.[lang] || 'Guest Login'}}
 				</view>
 			</view>
 
+			<!-- 登录方式选择 -->
+			<view class="input-group">
+				<!-- 账号登录表单 -->
+				<view v-if="loginType === 'account'" class="account-form-wrap">
+					<view class="input-item">
+						<view class="input-label">{{tips.Account[lang]}}</view>
+						<input class="input-field" :placeholder="tips.EnterAccountPhone[lang]" v-model="username" />
+					</view>
+					<view class="input-item">
+						<view class="input-label">{{tips.Password[lang]}}</view>
+						<input class="input-field" :placeholder="tips.EnterPassword[lang]" v-model="password"
+							:password="true" />
+					</view>
+					<view class="btn-wrap">
+						<button class="login-btn" @tap="handleLogin">{{tips.Login[lang]||'Login'}}</button>
+						<text class="register" @tap="handleRegister">{{tips.RegisterAccount[lang]}}</text>
+					</view>
+				</view>
 
+				<!-- 游客登录视图 -->
+				<view v-if="loginType === 'guest'">
+					<button class="guest-login-btn" @tap="handleGuestLogin" :disabled="isSubmitting">
+						{{tips.GuestLogin?.[lang] || 'Guest Login'}}
+					</button>
+				</view>
+			</view>
 		</view>
-
 		<!-- 下部分：信息展示 -->
 		<view class="info-area">
 			<view class="info-card">
@@ -44,11 +62,11 @@
 		</view>
 	</view>
 </template>
-
 <script>
 	import {
 		login,
-		u_getQrcodeImg
+		u_getQrcodeImg,
+		u_visitorLogin
 	} from '@/api';
 	import {
 		titles
@@ -63,13 +81,13 @@
 				password: '',
 				isSubmitting: false,
 				init_qr_code: '',
-				tips:tips,
-				lang:'zhCn'
-		
+				tips: tips,
+				lang: 'zhCn',
+				loginType: 'account' // account账号登录 / guest游客登录
 			};
 		},
 		components: {
-			
+
 		},
 		mounted() {
 			this.infinityGetQrcodeImg()
@@ -96,16 +114,13 @@
 					}]
 				});
 			},
-
 			handlePreviewImage() {
 				if (this.init_qr_code) {
 					uni.previewImage({
 						urls: [this.init_qr_code],
 						longPressActions: {
 							itemList: ['保存图片到相册'],
-							success: (data) => {
-
-							}
+							success: (data) => {}
 						}
 					});
 				}
@@ -117,7 +132,6 @@
 					if (response?.code == 1000) {
 						this.init_qr_code = response?.content?.img
 					}
-
 				} catch (error) {
 					uni.showToast({
 						title: '查询失败',
@@ -133,19 +147,16 @@
 					});
 					return;
 				}
-
 				this.isSubmitting = true;
-
 				try {
 					const response = await login({
 						username: this.username,
 						password: this.password,
 						type: 2
 					});
-
 					uni.setStorageSync('token', response.content.token);
 					uni.setStorageSync('user_info', response.content);
-
+					uni.removeStorageSync('is_guest');
 					// 跳转到首页或其他页面
 					uni.reLaunch({
 						url: '/pages/index/index'
@@ -159,16 +170,32 @@
 					this.isSubmitting = false;
 				}
 			},
-			handleRegister(){
+			// 游客登录
+			async handleGuestLogin() {
+				this.isSubmitting = true;
+				try {
+					// ==========这里替换为你的游客登录接口==========
+					const res = await u_visitorLogin()
+					uni.setStorageSync('token', res.content.token)
+					uni.setStorageSync('user_info', res.content)
+					uni.reLaunch({
+						url: '/pages/index/index'
+					})
+				} catch (err) {
+
+				} finally {
+					this.isSubmitting = false
+				}
+			},
+			handleRegister() {
 				console.log(1111)
 				uni.navigateTo({
-					url:'/pages/userCenter/register'
+					url: '/pages/userCenter/register'
 				})
 			}
 		}
 	};
 </script>
-
 <style>
 	page {
 		background-color: #252c3b;
@@ -224,31 +251,27 @@
 		margin-top: 20rpx;
 	}
 
-	/* 单选按钮组 */
-	.radio-container {
-		width: 92%;
+	/* 切换标签样式 */
+	.tab-switch {
+		width: 90%;
 		display: flex;
-		justify-content: flex-start;
+		background: rgba(255, 255, 255, 0.12);
+		border-radius: 12rpx;
+		overflow: hidden;
 	}
 
-	.radio-group {
-		display: flex;
-		gap: 40rpx;
+	.tab-item {
+		flex: 1;
+		text-align: center;
+		font-size: 30rpx;
+		color: #cccccc;
+		padding: 20rpx 0;
 	}
 
-	.radio-label {
-		display: flex;
-		align-items: center;
-	}
-
-	.radio-item {
-		transform: scale(0.8);
-	}
-
-	.radio-text {
-		font-size: 28rpx;
-		margin-left: 10rpx;
-		color: #fff;
+	.tab-item.active {
+		background: #ffffff;
+		color: #252c3b;
+		font-weight: 500;
 	}
 
 	/* 表单样式 */
@@ -261,8 +284,14 @@
 	.input-group {
 		display: flex;
 		flex-direction: column;
-		gap: 40rpx;
+		gap: 60rpx;
 		width: 90%;
+	}
+
+	.account-form-wrap {
+		display: flex;
+		flex-direction: column;
+		gap: 32rpx;
 	}
 
 	.input-item {
@@ -290,10 +319,20 @@
 		font-size: 30rpx;
 	}
 
+	.btn-wrap {
+		margin-top: 20rpx;
+	}
+
 	.login-btn {
 		width: 100%;
 		background: #4cd964;
 		color: white;
+	}
+
+	.guest-login-btn {
+		width: 100%;
+		background: #406299;
+		color: #fff;
 	}
 
 	.login-tip {

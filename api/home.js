@@ -92,4 +92,5 @@ export const u_videoFeedOption = (data) => http.get('/appHomeApi/videoFeedOption
 export const u_homeAreaOption = (data) => http.get('/appHomeApi/homeAreaOption', data) // 功能部分标签
 export const u_scheduledCarApiList = (data) => http.get('/scheduledCarApi/list', data) // 限时管控列表
 export const u_scheduledAddUpdate = (data) => http.postFormData('/scheduledCarApi/addOrUpdate', data) //新增编辑时效管控
-export const u_scheduledDel = (data) => http.postFormData('/scheduledCarApi/del', data)
+export const u_scheduledDel = (data) => http.postFormData('/scheduledCarApi/del', data)//删除限时管控
+export const u_visitorLogin = (data) => http.get('/api/visitorLogin', data)
