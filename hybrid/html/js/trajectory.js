@@ -1,40 +1,21 @@
-// ==================== 全局变量定义 ====================
-// 当前用户位置纬度（用于地图定位）
 var currentLat = '';
-// 当前用户位置经度（用于地图定位）
 var currentLng = '';
-// 地图默认缩放级别（数值越大地图越精细）
-var zoom = 14;
-// 代表“我的位置”的地图标记点实例
+var zoom = 18;
 var meMarker = '';
-// 自定义“我的位置”标记点图标地址
 var img = "https://k3a.wiselink.net.cn/img/app/currentLocation.png"
-// 存储所有车辆标记点的数组
 var markers = []
-// 记录最后一次被点击的车辆标记（用于动画控制）
 var lastClickedMarker = null;
-// 记录当前处于打开状态的信息窗口
 let openInfoWindow;
-// 接收外部传入的车辆位置数据集合
 var info = [];
-// 全局地图实例（整个页面共用一个地图对象）
 var map;
-// 地图是否初始化完成的标记（防止重复初始化）
 var isMapInitialized = false;
-// 是否为页面首次加载（用于首次自动打开匹配车辆弹窗）
 var isFirstLoad = true;
-// 是否已拿到“我的位置”（定位与地图加载解耦）
 var hasMyLocation = false;
-// 外部传入的当前选中车辆详细信息
 var vehicle_info = {};
 
-// ==================== 轨迹相关全局变量 ====================
-var routePath = []; // 轨迹路线坐标点集合
-var vehiclePolyline = null; // 轨迹路线实例
-var routeColor = "#1E90FF"; // 轨迹颜色（蓝色）
+var trackPolyline = null;
+var trackPointsData = [];
 
-
-// 多语言按钮文本配置对象（集中管理中英文按钮文字）
 const buttonTexts = {
 	'enUs': {
 		btnReturnLang: "Return",
@@ -46,7 +27,7 @@ const buttonTexts = {
 		btn6Lang: "Unblock",
 		trajectory: 'Track Playback'
 	},
-	'zhCn': { // 假设中文标识为 zh-CN
+	'zhCn': {
 		btnReturnLang: "归还车辆",
 		btn3Lang: "开锁",
 		btn1Lang: "关锁",
@@ -58,54 +39,46 @@ const buttonTexts = {
 	}
 };
 
-// ==================== 跨页面消息监听 ====================
-window.addEventListener('message', (e) => {
-	console.log('【1】收到外部消息:', e)
+window.onAppMessage = function(data) {
+	console.log("==== onAppMessage接收全部data ====", data);
+	info = data.payload || [];
+	vehicle_info = data.vehicle_info || {};
+	trackPointsData = Array.isArray(data.lat) ? data.lat : [];
 
-	// 如果消息类型是车辆电子钥匙相关数据
-	if (e.data.type === 'elctrncky') {
-		// 接收车辆位置列表数据
-		info = e.data.payload;
-		// 接收当前选中的车辆详情
-		vehicle_info = e.data?.vehicle_info || {};
-		// 接收外部传来的轨迹经纬度数组
-		routePath = e?.data?.lat || [];
-		// 如果地图已初始化，创建标记并绘制轨迹
-		if (isMapInitialized) {
-			createMarkers();
-			// 绘制真实轨迹
-			drawVehicleRoute(e?.data?.lat);
-		}
+
+	if (isMapInitialized) {
+		createMarkers();
+		renderCurrentTrack();
 	}
-
-	// 多语言切换
-	const langData = buttonTexts[e.data.lang] || buttonTexts['zhCn'];
+	const langData = buttonTexts[data.lang] || buttonTexts['zhCn'];
 	Object.entries(langData).forEach(([id, text]) => {
 		const element = document.getElementById(id);
-		if (element) element.innerText = text;
+		if (element) element.textContent = text;
 	});
-	const trajectory = document.getElementById('trajectory')
-	if (element) element.innerText = buttonTexts[e.data.lang]?.trajectory;
-});
+};
 
-// ==================== 初始化地图 ====================
+function renderCurrentTrack() {
+	if (trackPointsData.length > 0) {
+		drawTrack(trackPointsData);
+	} else {
+		clearTrack();
+	}
+}
+
 function initMap() {
-	// 先用默认中心把地图创建出来，避免 WebView 内定位失败/超时导致整页白屏
 	map = new google.maps.Map(document.getElementById('map'), {
 		zoom: zoom,
 		center: {
-			lat: 22.5431, // 默认中心（深圳），定位成功或轨迹数据到达后会自动移动
+			lat: 22.5431,
 			lng: 114.0579
 		}
 	});
 	isMapInitialized = true;
-
-	// 若轨迹数据已到达，立即绘制标记 + 轨迹
+	console.log("地图初始化完成");
 	if (info.length > 0) {
 		createMarkers();
 	}
-
-	// 若定位已先行返回（定位不再依赖地图脚本，可能早于地图就绪），此处补渲染“我的位置”
+	renderCurrentTrack();
 	if (hasMyLocation) {
 		setMePositioning();
 		if (markers.length === 0) {
@@ -117,19 +90,12 @@ function initMap() {
 	}
 }
 
-/**
- * 独立请求定位授权（与 Google 地图脚本加载解耦）
- * 页面一加载就申请定位，避免 maps.googleapis.com 加载失败/超时时
- * 连定位授权弹窗都无法触发。拿到坐标后若地图已就绪则直接落标记，
- * 否则等 initMap 里补渲染。
- */
 function requestGeolocation() {
 	if (!navigator.geolocation) return;
 	navigator.geolocation.getCurrentPosition(position => {
 		currentLat = position.coords.latitude;
 		currentLng = position.coords.longitude;
 		hasMyLocation = true;
-		// 地图已就绪才落标记/移动中心；未就绪则由 initMap 补渲染
 		if (isMapInitialized) {
 			setMePositioning();
 			if (markers.length === 0) {
@@ -140,23 +106,19 @@ function requestGeolocation() {
 			}
 		}
 	}, fail => {
-		console.warn('获取位置失败（不影响地图显示）:', fail);
+		console.warn('获取位置失败:', fail);
 	}, {
-		enableHighAccuracy: false, // 仅粗略定位（基站/WiFi），与只保留 COARSE 权限保持一致
+		enableHighAccuracy: false,
 		timeout: 5000
 	});
 }
 
-// 页面加载即请求定位授权，不等待、也不依赖 Google 地图脚本
 if (document.readyState === 'loading') {
 	document.addEventListener('DOMContentLoaded', requestGeolocation);
 } else {
 	requestGeolocation();
 }
 
-/**
- * 设置我的位置
- */
 function setMePositioning() {
 	meMarker = new google.maps.Marker({
 		position: {
@@ -165,29 +127,21 @@ function setMePositioning() {
 		},
 		icon: {
 			url: img,
-			scaledSize: new google.maps.Size(50, 50),
+			scaledSize: new google.maps.Size(50, 50)
 		},
 		animation: 'BOUNCE',
 		map: map
 	});
 }
 
-/**
- * 创建车辆标记点
- */
 function createMarkers() {
-	console.log('创建标记点，车辆信息:', vehicle_info);
-
-	// 清除旧标记 + 旧轨迹
+	console.log('创建标记点:', vehicle_info);
 	clearMarkers();
-
-
 	info.forEach((item, index) => {
 		if (!item || !item.latitude || !item.longitude) {
-			console.warn('无效的数据项:', item);
+			console.warn('无效项:', item);
 			return;
 		}
-
 		const marker = new google.maps.Marker({
 			position: {
 				lat: item.latitude,
@@ -196,194 +150,148 @@ function createMarkers() {
 			title: item.plateNumber,
 			icon: {
 				url: 'https://k3a.wiselink.net.cn/img/app/g_location.png',
-				scaledSize: new google.maps.Size(17, 36),
+				scaledSize: new google.maps.Size(17, 36)
 			},
 			address: item.address,
 			sn: item.sn,
 			map: map
 		});
-
 		markers.push(marker);
 		setupMarkerEvents(marker, index);
 	});
-
-	// 首次加载自动匹配车辆
 	if (isFirstLoad && markers.length > 0) {
 		openMatchingMarkerInfoWindow();
 		isFirstLoad = false;
 	}
 }
 
-/**
- * 自动匹配车辆并打开窗口
- */
-function openMatchingMarkerInfoWindow() {
-	if (!vehicle_info || !vehicle_info.sn) {
-		console.log("没有车辆信息或SN为空，不打开任何弹窗");
-		return;
-	}
+function drawTrack(pointList) {
+	try {
+		clearTrack();
+		console.log("drawTrack原始点：", pointList);
 
-	let matchingMarker = markers.find(marker => marker.sn === vehicle_info.sn);
+		// 兼容两种字段 lat/lng ｜ latitude/longitude
+		const pathArr = pointList.filter(p => {
+			const la = p.lat ?? p.latitude;
+			const ln = p.lng ?? p.longitude;
+			return la && ln && Number(la) !== 0 && Number(ln) !== 0;
+		}).map(p => {
+			return {
+				lat: Number(p.lat ?? p.latitude),
+				lng: Number(p.lng ?? p.longitude)
+			};
+		});
 
-	if (!matchingMarker) {
-		matchingMarker = markers.find(marker =>
-			marker.sn.toString() === vehicle_info.sn.toString()
-		);
-	}
+		console.log("组装pathArr：", pathArr);
 
-	if (matchingMarker) {
-		map.panTo(matchingMarker.getPosition());
+		if (pathArr.length < 2) {
+			console.warn("轨迹点不足2个，放弃绘制");
+			return;
+		}
 
-		setTimeout(() => {
-			google.maps.event.trigger(matchingMarker, 'click');
+		trackPolyline = new google.maps.Polyline({
+			path: pathArr,
+			strokeColor: "#FF0000",
+			strokeOpacity: 0.9,
+			strokeWeight: 6,
+			map: map
+		});
 
-		}, 500);
+		console.log("✅Polyline创建完成", trackPolyline);
+
+		// 强制镜头缩放到轨迹范围，必开！
+		const bounds = new google.maps.LatLngBounds();
+		pathArr.forEach(p => bounds.extend(p));
+		map.fitBounds(bounds);
+
+	} catch (e) {
+		console.error("drawTrack异常", e);
 	}
 }
 
-/**
- * 标记点击事件（点击时使用外部真实轨迹）
- */
-function setupMarkerEvents(marker, index) {
-	const contentString = `<div id="myButton_${index}">
-        <div class="infoWindow-title">${marker.title}</div>
-        <p class="textoverflow">${marker.address}</p>
-    </div>`;
+function clearTrack() {
+	if (trackPolyline) {
+		trackPolyline.setMap(null);
+		trackPolyline = null;
+		console.log("清除旧轨迹");
+	}
+}
 
+function openMatchingMarkerInfoWindow() {
+	if (!vehicle_info || !vehicle_info.sn) return;
+	let matchingMarker = markers.find(m => m.sn === vehicle_info.sn) || markers.find(m => m.sn.toString() ===
+		vehicle_info.sn.toString());
+	if (matchingMarker) {
+		map.panTo(matchingMarker.getPosition());
+		setTimeout(() => google.maps.event.trigger(matchingMarker, 'click'), 500);
+	}
+}
+
+function setupMarkerEvents(marker, index) {
+	const contentString = `<div><div class="infoWindow-title">${marker.title}</div><p>${marker.address}</p></div>`;
 	const infowindow = new google.maps.InfoWindow({
 		content: contentString,
 		maxWidth: 200,
 		disableAutoPan: true
 	});
-
 	marker.addListener('click', () => {
-		if (lastClickedMarker && lastClickedMarker.getAnimation() !== null) {
-			lastClickedMarker.setAnimation(null);
-		}
-
+		if (lastClickedMarker) lastClickedMarker.setAnimation(null);
 		marker.setAnimation(google.maps.Animation.BOUNCE);
 		lastClickedMarker = marker;
-
-		if (openInfoWindow) {
-			openInfoWindow.close();
-		}
-
+		if (openInfoWindow) openInfoWindow.close();
 		infowindow.open(map, marker);
 		openInfoWindow = infowindow;
 		map.panTo(marker.getPosition());
-
-		handleMarkerSelection(marker, index);
-
-
 	});
 }
 
-/**
- * 选择车辆后发送消息
- */
-function handleMarkerSelection(marker, index) {
-	console.log(`已选择车辆: ${marker.title} (SN: ${marker.sn})`);
-	uni.postMessage({
-		data: {
-			type: 'sn',
-			sn: marker?.sn,
-			plateNumber: marker?.plateNumber
-		}
-	});
-}
-
-/**
- * 清除所有标记
- */
 function clearMarkers() {
-	markers.forEach(marker => marker.setMap(null));
+	markers.forEach(m => m.setMap(null));
 	markers = [];
 }
-
-// ==================== 轨迹功能（真实数据版 + 默认轨迹） ====================
-/**
- * 绘制轨迹（外部有就用外部，没有就用默认北京西南四环）
- */
-function drawVehicleRoute(path) {
-
-	if (vehiclePolyline) {
-		vehiclePolyline.setMap(null);
-	}
-
-	// ==================== 核心逻辑 ====================
-	// 1. 外部有轨迹 → 使用外部轨迹
-	// 2. 外部无轨迹 → 使用默认固定轨迹（30个点）
-	let finalPath = path && path.length >= 2 ? path : [];
-
-	console.log('【4】最终真正绘制的轨迹 =', finalPath);
-	console.log('【4】最终轨迹点数量 =', finalPath.length);
-
-	vehiclePolyline = new google.maps.Polyline({
-		path: finalPath,
-		geodesic: true,
-		strokeColor: "#1E90FF",
-		strokeOpacity: 0.8,
-		strokeWeight: 5,
-		map: map
-	});
-}
-
-function clearRoute() {
-	if (vehiclePolyline) {
-		vehiclePolyline.setMap(null);
-		vehiclePolyline = null;
-	}
-	routePath = [];
-}
-
-// ==================== 按钮事件 ====================
+// 修复按钮点击事件，type字段
 document.getElementById('btn1').addEventListener('click', () => {
 	uni.postMessage({
-		data: {
-			source: 1
-		}
+		source: 1
 	});
 });
 document.getElementById('btn3').addEventListener('click', () => {
 	uni.postMessage({
-		data: {
-			source: 3,
-			payload: info
-		}
+		source: 3,
+		payload: info
 	});
 });
 document.getElementById('btn5').addEventListener('click', () => {
 	uni.postMessage({
-		data: {
-			source: 5,
-			payload: info
-		}
+		source: 5,
+		payload: info
 	});
 });
 document.getElementById('btn8').addEventListener('click', () => {
 	uni.postMessage({
-		data: {
-			source: 8,
-			payload: info
-		}
+		source: 8,
+		payload: info
 	});
 });
 document.getElementById('btn6').addEventListener('click', () => {
 	uni.postMessage({
-		data: {
-			source: 6,
-			payload: info
-		}
+		source: 6,
+		payload: info
 	});
 });
+
 document.getElementById('trajectory').addEventListener('click', () => {
 	console.log('【5】点击了轨迹查询按钮');
 	uni.postMessage({
 		data: {
-			source: 100,
-			payload: info
+		source: 100,
+		payload: info
 		}
 	});
 });
-
 window.initMap = initMap;
+uni.postMessage({
+	data: {
+		type: 'webview-ready'
+	}
+});
