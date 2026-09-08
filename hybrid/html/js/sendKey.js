@@ -34,25 +34,20 @@ const buttonTexts = {
 	}
 };
 
-// 消息监听器
-window.addEventListener('message', (e) => {
-	if (e.data.type === 'elctrncky') {
-		info = e.data.payload;
-		// 确保正确接收 vehicle_info
-		vehicle_info = e.data?.vehicle_info || {};
 
-
-		// 如果地图已初始化，直接创建标记
-		if (isMapInitialized) {
-			createMarkers();
-		}
+window.onAppMessage = function(data) {
+	info = data.payload || [];
+	vehicle_info = data.vehicle_info || {};
+	if (isMapInitialized) {
+		createMarkers();
 	}
-	const langData = buttonTexts[e.data.lang] || buttonTexts['zhCn']; // 默认中文
+	const langData = buttonTexts[data.lang] || buttonTexts['zhCn']; // 默认中文
 	Object.entries(langData).forEach(([id, text]) => {
 		const element = document.getElementById(id);
-		if (element) element.innerText = text;
+		if (element) element.textContent = text;
 	});
-});
+
+};
 
 /**
  * 初始化地图
@@ -62,13 +57,13 @@ function initMap() {
 	map = new google.maps.Map(document.getElementById('map'), {
 		zoom: zoom,
 		center: {
-			lat: 22.5431, // 默认中心（深圳），定位成功或车辆数据到达后会自动移动
+			lat: 22.5431, // 默认中心（深圳），定位成功或数据到达后会自动移动
 			lng: 114.0579
 		}
 	});
 	isMapInitialized = true;
 
-	// 若车辆数据已到达，立即渲染车辆标记（createMarkers 会自动 panTo 到目标车辆）
+	// 若数据已到达，立即渲染标记
 	if (info.length > 0) {
 		createMarkers();
 	}
@@ -326,21 +321,32 @@ document.getElementById('btn5').addEventListener('click', () => {
 		}
 	});
 });
-document.getElementById('btn8').addEventListener('click', () => {
+// 还车
+document.getElementById('btnReturn').addEventListener('click', () => {
 	uni.postMessage({
 		data: {
-			source: 8,
-			payload: info
+			source: 'btnReturn',
+			payload: vehicleList
 		}
 	});
 });
-document.getElementById('btn6').addEventListener('click', () => {
+// 查看照片
+document.getElementById('btnSee').addEventListener('click', () => {
 	uni.postMessage({
 		data: {
-			source: 6,
-			payload: info
+			source: 'btnSee',
+			payload: vehicleList
 		}
 	});
 });
 
 window.initMap = initMap;
+
+// 通知 nvue：webview 脚本已就绪，可以下发数据了。
+// 不依赖 Google Maps 是否加载完成（地图标记由 isMapInitialized + initMap 兜底），
+// 确保按钮文案等不依赖地图的内容也能及时渲染。
+uni.postMessage({
+	data: {
+		type: 'webview-ready'
+	}
+});

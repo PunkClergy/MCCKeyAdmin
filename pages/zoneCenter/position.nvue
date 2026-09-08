@@ -85,7 +85,7 @@
 			},
 
 			webUrlWithTimestamp() {
-				return `/hybrid/html/risk.html?nowTime=${this.nowTimestamp}`;
+				return `/hybrid/html/position.html?nowTime=${this.nowTimestamp}`;
 			},
 
 			statusBarHeight() {
@@ -113,7 +113,7 @@
 		async onShow() {
 			// 多语言 + 导航栏标题
 			this.lang = uni.getStorageSync('language') || 'zhCn'
-			const pageRoute = 'zoneCenter/riskManagement'
+			const pageRoute = 'zoneCenter/position'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]
 			})

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0" />
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" type="text/css">
+		<title>车辆位置</title>
+		<link rel="stylesheet" type="text/css" href="./css/index.css" />
+	</head>
+	<body>
+		<!-- 地图 -->
+		<div id="map"></div>
+		<div class="floatingLayer">
+
+			<div class="button_style" id="btn3">
+				<img src="https://k3a.wiselink.net.cn/img/app/desk/ren_unlock.png" alt="">
+				<div id="btn3Lang"></div>
+			</div>
+			<div class="button_style" id="btn1">
+				<img src="https://k3a.wiselink.net.cn/img/app/desk/ren_lock.png" alt="">
+				<div id="btn1Lang"></div>
+			</div>
+			<div class="button_style" id="btn5">
+				<img src="https://k3a.wiselink.net.cn/img/app/desk/ren_lookFor.png" alt="">
+				<div id="btn5Lang"></div>
+			</div>
+			<div class="button_style" id="btn8">
+				<img src="https://k3a.wiselink.net.cn/img/app/desk/ren_intercept.png" alt="">
+				<div id="btn8Lang"></div>
+			</div>
+			<div class="button_style" id="btn6">
+				<img src="https://k3a.wiselink.net.cn/img/app/desk/ren_recovery.png" alt="">
+				<div id="btn6Lang"></div>
+			</div>
+		</div>
+
+
+	</body>
+	<script type="text/javascript" src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.1.5.2.js"></script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGzLnrbvfiqdmemX8yR4CTc6n2SzjOaBM&libraries=places&callback=initMap"
+		async defer></script>
+
+	<script src="./js/risk.js"></script>
+</html>

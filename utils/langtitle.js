@@ -158,5 +158,16 @@ export const titles = {
 		"thTh": "ลงทะเบียนบัญชี",
 		"idId": "Daftar Akun",
 		"miNz": "Rēhita pūkete"
+	},
+	"zoneCenter/position": {
+		"zhCn": "车辆位置",
+		"enUs": "Vehicle Position",
+		"msMy": "Kedudukan Kenderaan",
+		"ptBr": "Posição do Veículo",
+		"taSg": "வாகன நிலை",
+		"thTh": "ตำแหน่งยานพาหนะ",
+		"idId": "Posisi Kendaraan",
+		"miNz": "Tūnga Waka"
 	}
+
 }
