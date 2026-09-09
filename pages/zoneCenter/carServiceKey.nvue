@@ -215,14 +215,13 @@
 			// 页面跳转
 			handleJumpVehicle() {
 				uni.redirectTo({
-					url: `/pages/zoneCenter/carKeyConfig?source=/pages/zoneCenter/riskManagement`
+					url: `/pages/zoneCenter/carKeyConfig?source=/pages/zoneCenter/carServiceKey`
 				});
 			},
 
 			// 消息处理
 			handlePostMessage(evt) {
 				const messageData = evt?.detail?.data?.[0] || {};
-
 				// webview 脚本就绪信号：收到后置就绪标志并尝试下发数据
 				if (messageData.type === 'webview-ready') {
 					this.webviewReady = true;
@@ -244,7 +243,55 @@
 					6: () => this.handleVehicle(source),
 					'sn': () => {
 						this.vehicle_info = messageData
-					}
+					},
+					'btnReturn': () => {
+						const item = this.vehicle_info
+						const timestamp = `cw${Date.now()}`
+						console.log(item)
+						if (!item) {
+							uni.showToast({
+								title: '暂无车辆',
+								icon: 'none'
+							})
+							return
+						}
+						uni.navigateTo({
+							url: `/pages/zoneCenter/returnPhotos?code=${timestamp}&vehId=${item?.id}`
+						})
+					},
+					'btnSee': () => {
+						const item = this.vehicle_info
+						if (!item) {
+							uni.showToast({
+								title: '暂无车辆',
+								icon: 'none'
+							})
+							return
+						}
+						const baseImgUrl = 'https://k3a.wiselink.net.cn/img/'
+						// 拼接完整网络地址，过滤空值
+						const imgList = [
+								item.uploadImgUrl,
+								item.uploadImgUrlTwo,
+								item.uploadImgUrlThree,
+								item.uploadImgUrlFour,
+								item.uploadImgUrlFive
+							].filter(path => !!path)
+							.map(path => baseImgUrl + path) // 拼接域名
+
+						if (imgList.length === 0) {
+							uni.showToast({
+								title: '暂无照片',
+								icon: 'none'
+							})
+							return
+						}
+
+						uni.previewImage({
+							urls: imgList,
+							current: 0
+						})
+					},
 				};
 
 				const handler = ACTION_HANDLERS[source];

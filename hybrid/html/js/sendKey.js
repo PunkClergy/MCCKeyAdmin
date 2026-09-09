@@ -331,6 +331,7 @@ function setupMarkerEvents(marker, index) {
  */
 function handleMarkerSelection(marker, index) {
 	console.log(`已选择车辆: ${marker.title} (SN: ${marker.sn})`);
+	alert(marker?.id,'000')
 	uni.postMessage({
 		data: {
 			source: 'sn',

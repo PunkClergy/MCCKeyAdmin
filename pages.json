@@ -49,6 +49,14 @@
 					}
 				},
 				{
+					"path": "returnPhotos",
+					"style": {
+						"navigationBarTitleText": "归还车辆",
+						"navigationBarBackgroundColor": "#EFF1FC"
+					}
+				},
+				
+				{
 					"path": "position",
 					"style": {
 						"navigationBarTitleText": "车辆位置",
