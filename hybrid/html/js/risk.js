@@ -12,6 +12,10 @@ var isMapInitialized = false; // 标记地图是否初始化
 var isFirstLoad = true; // 标记是否是首次加载
 var hasMyLocation = false; // 标记是否已拿到“我的位置”（定位与地图加载解耦）
 var vehicle_info = {};
+const GOOGLE_API_KEY = 'AIzaSyDGzLnrbvfiqdmemX8yR4CTc6n2SzjOaBM';
+const DEFAULT_LANG = 'zhCn';
+let currentLang = DEFAULT_LANG;
+
 // 使用配置对象集中管理多语言文本
 const buttonTexts = {
 	'enUs': {
@@ -23,7 +27,7 @@ const buttonTexts = {
 		btn8Lang: "Block",
 		btn6Lang: "Unblock"
 	},
-	'zhCn': { // 假设中文标识为 zh-CN
+	'zhCn': {
 		btnReturnLang: "归还车辆",
 		btn3Lang: "开锁",
 		btn1Lang: "关锁",
@@ -34,19 +38,46 @@ const buttonTexts = {
 	}
 };
 
+/**
+ * 地址解析：根据经纬度+当前语言，调用谷歌Geocode获取对应语言地址
+ * @param {number} lat
+ * @param {number} lng
+ * @returns {Promise<string>}
+ */
+async function resolveAddress(lat, lng) {
+	try {
+		// zhCn -> zh-cn，enUs -> en-us，适配google geocode language参数
+		const mapLang = currentLang.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+		const url =
+			`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${GOOGLE_API_KEY}&language=${mapLang}`;
+		const res = await fetch(url);
+		const data = await res.json();
+		if (data.status === 'OK' && data.results.length) {
+			return data.results[0].formatted_address;
+		}
+	} catch (err) {
+		console.error('地址解析失败:', err);
+	}
+	return '地址获取失败';
+}
 
-window.onAppMessage = function(data) {
+window.onAppMessage = async function(data) {
 	info = data.payload || [];
 	vehicle_info = data.vehicle_info || {};
-	if (isMapInitialized) {
-		createMarkers();
-	}
-	const langData = buttonTexts[data.lang] || buttonTexts['zhCn']; // 默认中文
+	// 更新全局语言
+	currentLang = data.lang || DEFAULT_LANG;
+
+	// 更新页面按钮UI多语言
+	const langData = buttonTexts[currentLang] || buttonTexts[DEFAULT_LANG];
 	Object.entries(langData).forEach(([id, text]) => {
 		const element = document.getElementById(id);
 		if (element) element.textContent = text;
 	});
 
+	if (isMapInitialized) {
+		// 语言变更，重新创建marker，重新拉取多语言地址
+		await createMarkers();
+	}
 };
 
 /**
@@ -62,12 +93,10 @@ function initMap() {
 		}
 	});
 	isMapInitialized = true;
-
 	// 若数据已到达，立即渲染标记
 	if (info.length > 0) {
 		createMarkers();
 	}
-
 	// 若定位已先行返回（定位不再依赖地图脚本，可能早于地图就绪），此处补渲染“我的位置”
 	if (hasMyLocation) {
 		setMePositioning();
@@ -109,7 +138,6 @@ function requestGeolocation() {
 		timeout: 5000
 	});
 }
-
 // 页面加载即请求定位授权，不等待、也不依赖 Google 地图脚本
 if (document.readyState === 'loading') {
 	document.addEventListener('DOMContentLoaded', requestGeolocation);
@@ -138,18 +166,17 @@ function setMePositioning() {
 /**
  * 创建标记点
  */
-function createMarkers() {
+async function createMarkers() {
 	console.log('创建标记点，车辆信息:', vehicle_info);
-
 	// 清除现有标记
 	clearMarkers();
-
-	info.forEach((item, index) => {
+	for (const item of info) {
 		if (!item || !item.latitude || !item.longitude) {
 			console.warn('无效的数据项:', item);
-			return;
+			continue;
 		}
-
+		// 根据当前语言异步解析地址
+		const address = await resolveAddress(item.latitude, item.longitude);
 		const marker = new google.maps.Marker({
 			position: {
 				lat: item.latitude,
@@ -160,15 +187,14 @@ function createMarkers() {
 				url: 'https://k3a.wiselink.net.cn/img/app/g_location.png',
 				scaledSize: new google.maps.Size(17, 36),
 			},
-			address: item.address,
+			address: address, // 使用接口返回的多语言地址，不再读取item.address
 			sn: item.sn,
+			plateNumber: item.plateNumber,
 			map: map
 		});
-
 		markers.push(marker);
-		setupMarkerEvents(marker, index);
-	});
-
+		setupMarkerEvents(marker);
+	}
 	// 首次加载时尝试打开匹配的标记信息窗口
 	if (isFirstLoad && markers.length > 0) {
 		console.log('首次加载，尝试打开匹配标记');
@@ -186,22 +212,17 @@ function openMatchingMarkerInfoWindow() {
 	console.log('vehicle_info:', vehicle_info);
 	console.log('vehicle_info.sn:', vehicle_info?.sn);
 	console.log('vehicle_info.sn 类型:', typeof vehicle_info?.sn);
-
 	// 如果没有车辆信息或SN号，则不打开任何弹窗
 	if (!vehicle_info || !vehicle_info.sn) {
 		console.log("没有车辆信息或SN为空，不打开任何弹窗");
 		return;
 	}
-
 	console.log("尝试匹配车辆SN:", vehicle_info.sn);
 	console.log("当前所有标记的SN:", markers.map(m => m.sn));
-
 	// 查找匹配的标记
 	let matchingMarker = null;
-
 	// 首先尝试精确匹配
 	matchingMarker = markers.find(marker => marker.sn === vehicle_info.sn);
-
 	// 如果没有找到，尝试字符串匹配
 	if (!matchingMarker) {
 		console.log("尝试字符串匹配");
@@ -209,14 +230,11 @@ function openMatchingMarkerInfoWindow() {
 			marker.sn.toString() === vehicle_info.sn.toString()
 		);
 	}
-
 	if (matchingMarker) {
 		console.log("找到匹配标记:", matchingMarker);
-
 		// 将地图中心点移动到标记位置
 		map.panTo(matchingMarker.getPosition());
 		console.log("地图中心已移动到标记位置");
-
 		// 直接模拟点击匹配的标记
 		setTimeout(() => {
 			console.log("触发标记点击事件");
@@ -231,57 +249,50 @@ function openMatchingMarkerInfoWindow() {
 /**
  * 设置标记点事件
  */
-function setupMarkerEvents(marker, index) {
+function setupMarkerEvents(marker) {
 	// 创建信息窗口内容
-	const contentString = `<div id="myButton_${index}">
+	const contentString = `<div>
         <div class="infoWindow-title">${marker.title}</div>
         <p class="textoverflow">${marker.address}</p>
     </div>`;
-
 	const infowindow = new google.maps.InfoWindow({
 		content: contentString,
 		maxWidth: 200,
 		disableAutoPan: true
 	});
-
 	// 添加点击事件监听
 	marker.addListener('click', () => {
 		console.log(`点击标记: ${marker.title} (SN: ${marker.sn})`);
-
 		// 停止上一个标记的动画
 		if (lastClickedMarker && lastClickedMarker.getAnimation() !== null) {
 			lastClickedMarker.setAnimation(null);
 		}
-
 		// 设置当前标记动画
 		marker.setAnimation(google.maps.Animation.BOUNCE);
 		lastClickedMarker = marker;
-
 		// 关闭之前的信息窗口并打开新的
 		if (openInfoWindow) {
 			openInfoWindow.close();
 		}
-
 		// 打开信息窗口
 		infowindow.open(map, marker);
 		openInfoWindow = infowindow;
 		// 将地图中心点移动到标记位置
 		map.panTo(marker.getPosition());
 		console.log("地图中心已移动到标记位置");
-
 		// 触发选择事件
-		handleMarkerSelection(marker, index);
+		handleMarkerSelection(marker);
 	});
 }
 
 /**
  * 处理标记选择
  */
-function handleMarkerSelection(marker, index) {
+function handleMarkerSelection(marker) {
 	console.log(`已选择车辆: ${marker.title} (SN: ${marker.sn})`);
 	uni.postMessage({
 		data: {
-			type: 'sn',
+			source: 'sn',
 			sn: marker?.sn,
 			plateNumber: marker?.plateNumber
 		}
@@ -304,7 +315,6 @@ document.getElementById('btn1').addEventListener('click', () => {
 		}
 	});
 });
-
 document.getElementById('btn3').addEventListener('click', () => {
 	uni.postMessage({
 		data: {
@@ -339,7 +349,6 @@ document.getElementById('btn6').addEventListener('click', () => {
 });
 
 window.initMap = initMap;
-
 // 通知 nvue：webview 脚本已就绪，可以下发数据了。
 // 不依赖 Google Maps 是否加载完成（地图标记由 isMapInitialized + initMap 兜底），
 // 确保按钮文案等不依赖地图的内容也能及时渲染。

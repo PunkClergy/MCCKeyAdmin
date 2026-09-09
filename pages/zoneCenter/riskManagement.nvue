@@ -242,6 +242,9 @@
 					5: () => this.handleVehicle(source),
 					8: () => this.handleVehicle(source),
 					6: () => this.handleVehicle(source),
+					'sn': () => {
+						this.vehicle_info = messageData
+					}
 				};
 
 				const handler = ACTION_HANDLERS[source];

@@ -74,7 +74,7 @@
 				head_height: 0,
 				capsule_distance_to_the_right: 0,
 				account: '',
-				lang: 'zhCn',
+				lang: 'enUs',
 				// 语言列表（提取为 data 属性，便于多处复用）
 				langList: [{
 						name: '中文', //中文【中国】
@@ -125,7 +125,7 @@
 			this.initDirectoryStructure()
 		},
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			const pageRoute = 'userCenter/index'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]
