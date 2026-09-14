@@ -52,7 +52,7 @@
 					<view class="service-tabs">
 						<text v-for="(item, index) in tabServiceList" :key="index" class="service-tab"
 							:class="{'service-tab--active': activeTabServiceIndex === index}"
-							@click="handleTabServiceClick(item?.id,index)">
+							@click="handleTabServiceClick(item?.id,index)" :style="{background:item?.bgcolor}">
 							{{ item.multiName }}
 						</text>
 					</view>
@@ -202,7 +202,7 @@
 			this.fetchBannerList()
 		},
 		onShow() {
-			this.activeTabServiceIndex = 0
+			this.activeTabServiceIndex = 1
 			this.fetchZoneList()
 			this.fetchDateReport()
 			this.fetchNavlist()
@@ -262,6 +262,12 @@
 					const res = await u_homeAreaOption({}); //修改接口
 					if (res?.content) {
 						this.tabServiceList = res?.content
+						this.activeTabServiceIndex = 1
+						// 拿到tab对应id，执行过滤
+						const targetTab = res?.content[1]
+						if (targetTab?.id) {
+							this.handleTabServiceClick(targetTab.id, 1)
+						}
 					}
 				} catch (e) {
 					/* ignore */
