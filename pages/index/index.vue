@@ -52,7 +52,7 @@
 					<view class="service-tabs">
 						<text v-for="(item, index) in tabServiceList" :key="index" class="service-tab"
 							:class="{'service-tab--active': activeTabServiceIndex === index}"
-							@click="handleTabServiceClick(item?.id,index)" :style="{background:item?.bgcolor}">
+							@click="handleTabServiceClick(item?.id,index)" :style="{background:item?.backgroundcolor}">
 							{{ item.multiName }}
 						</text>
 					</view>
@@ -60,7 +60,7 @@
 						<view class="service-grid__item" v-for="(item, idx) in serviceList" :key="idx"
 							@click="handleServiceClick(item)">
 							<view class="service-grid__icon" :style="{backgroundColor: item?.bgcolor}">
-								<image class="service-grid__icon-text" :src="baseImageUrl + '/img/' + item?.icon" />
+								<image class="service-grid__icon-text" :src="baseImageUr l + '/img/' + item?.icon" />
 							</view>
 							<text class="service-grid__name">{{item?.multiName}}</text>
 						</view>
