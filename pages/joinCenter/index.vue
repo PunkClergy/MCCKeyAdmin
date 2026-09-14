@@ -28,19 +28,20 @@
 
 				<view class="question-block">
 					<view class="q-text">Do you have existing connections with car-rental companies?</view>
-					<input class="input-box" v-model="formData.q1" placeholder="Enter your answer." />
+					<input class="input-box" v-model="formData.bak" placeholder="Enter your answer." />
 				</view>
 
 				<view class="contact-title">Contact information</view>
 				<view class="contact-desc">We'll contact you about your fleet management inquiry. Your information is
 					secure and never shared.</view>
 
-				<input class="input-box" v-model="formData.fullName" placeholder="Full name" />
-				<input class="input-box" v-model="formData.whatsapp" placeholder="WhatsApp number" />
-				<input class="input-box" v-model="formData.company" placeholder="Company name (Optional)" />
-				<input class="input-box" v-model="formData.email" placeholder="Email" />
-				<input class="input-box" v-model="formData.workEmail" placeholder="Work email (Optional)" />
-				<input class="input-box" v-model="formData.phone" placeholder="Phone number" />
+				<input class="input-box" v-model="formData.name" placeholder="Full name" />
+				<input class="input-box" v-model="formData.whatappnum" placeholder="WhatsApp number" />
+				<input class="input-box" v-model="formData.standardcustomername"
+					placeholder="Company name (Optional)" />
+				<input class="input-box" v-model="formData.extend2" placeholder="Email" />
+				<input class="input-box" v-model="formData.workemail" placeholder="Work email (Optional)" />
+				<input class="input-box" v-model="formData.mobile" placeholder="Phone number" />
 
 
 				<button class="submit-btn" @click="handleSubmit">Submit</button>
@@ -65,7 +66,8 @@
 
 <script>
 	import {
-		u_navlist20
+		u_navlist20,
+		u_channelJoin
 	} from '@/api/index';
 	import CustomTabbar from '@/components/custom-tabbar/custom-tabbar.vue';
 	const IMG_BASE_URL = 'https://k1sw.wiselink.net.cn/';
@@ -89,13 +91,13 @@
 				isSuccess: false,
 				checked: true,
 				formData: {
-					q1: '',
-					fullName: '',
-					whatsapp: '',
-					company: '',
-					email: '',
-					workEmail: '',
-					phone: ''
+					bak: '',
+					name: '',
+					whatappnum: '',
+					standardcustomername: '',
+					extend2: '',
+					workemail: '',
+					mobile: '',
 				}
 			}
 		},
@@ -136,16 +138,16 @@
 					/* ignore */
 				}
 			},
-			handleSubmit() {
+			async handleSubmit() {
 				const {
-					q1,
-					fullName,
-					whatsapp,
-					email
+					bak,
+					name,
+					whatappnum,
+					extend2,
 				} = this.formData;
 
 				// 1. 强制必填项校验
-				if (!fullName?.trim()) {
+				if (!name?.trim()) {
 					uni.showToast({
 						title: 'Please enter your full name',
 						icon: 'none'
@@ -154,8 +156,8 @@
 				}
 
 				// 2. WhatsApp / Email 至少填写一个
-				const waVal = whatsapp?.trim();
-				const emailVal = email?.trim();
+				const waVal = whatappnum?.trim();
+				const emailVal = extend2?.trim();
 				if (!waVal && !emailVal) {
 					uni.showToast({
 						title: 'Please fill in WhatsApp number or Email',
@@ -177,8 +179,13 @@
 				}
 
 				console.log('提交表单数据：', this.formData)
-				// 接口请求成功后切换成功页
-				this.isSuccess = true
+				const res = await u_channelJoin(this.formData);
+				if (res?.code == 1000) {
+					// 接口请求成功后切换成功页
+					this.isSuccess = true
+				}
+
+
 			},
 
 			goWeb() {

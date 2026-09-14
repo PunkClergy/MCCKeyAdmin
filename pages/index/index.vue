@@ -60,7 +60,7 @@
 						<view class="service-grid__item" v-for="(item, idx) in serviceList" :key="idx"
 							@click="handleServiceClick(item)">
 							<view class="service-grid__icon" :style="{backgroundColor: item?.bgcolor}">
-								<image class="service-grid__icon-text" :src="baseImageUr l + '/img/' + item?.icon" />
+								<image class="service-grid__icon-text" :src="baseImageUrl + '/img/' + item?.icon" />
 							</view>
 							<text class="service-grid__name">{{item?.multiName}}</text>
 						</view>
