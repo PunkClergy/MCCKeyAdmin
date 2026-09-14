@@ -2,7 +2,7 @@
 	<view class="page-wrap">
 		<!-- 空状态：管控规则列表为空时展示 -->
 		<view v-if="showAgreementList.length === 0" class="empty-wrap">
-			<text class="empty-txt">暂无管控规则，请点击底部新增</text>
+			<text class="empty-txt">{{ tips.EmptyControlRule[lang] }}</text>
 		</view>
 		<!-- 管控规则列表容器 -->
 		<view v-else class="agreement-list">
@@ -12,82 +12,83 @@
 				<view class="item-top">
 					<text class="item-title">{{ item.title }}</text>
 					<view class="item-operate">
-						<view class="edit-btn" @click.stop="openEditPopup(item)">编辑</view>
-						<view class="del-btn" @click.stop="handleDelete(item)">删除</view>
+						<view class="edit-btn" @click.stop="openEditPopup(item)">{{ tips.Edit[lang] }}</view>
+						<view class="del-btn" @click.stop="handleDelete(item)">{{ tips.Delete[lang] }}</view>
 					</view>
 				</view>
 				<view class="item-row">
-					<text class="label">时间段</text>
+					<text class="label">{{ tips.TimeRange[lang] }}</text>
 					<text class="value">{{ item.starttime || '-' }} ~ {{ item.endtime || '-' }}</text>
 				</view>
 				<view class="item-row">
-					<text class="label">生效星期</text>
+					<text class="label">{{ tips.EffectiveWeek[lang] }}</text>
 					<text class="value">{{ formatWeekDay(item.dayofweek) }}</text>
 				</view>
 				<view class="item-row">
-					<text class="label">使用权限</text>
+					<text class="label">{{ tips.UsePermission[lang] }}</text>
 					<text class="value allowuse-tag" :class="{ enable: item.allowuse === 1 }">
-						{{ item.allowuse === 1 ? '允许' : '不允许' }}
+						{{ item.allowuse === 1 ? tips.Allow[lang] : tips.Disallow[lang] }}
 					</text>
 				</view>
 				<view class="item-row" v-if="item.bak">
-					<text class="label">备注</text>
+					<text class="label">{{ tips.Remark[lang] }}</text>
 					<text class="value">{{ item.bak }}</text>
 				</view>
 				<view class="item-row car-row-wrap" v-if="item.vehids">
-					<text class="label">已绑定车辆</text>
-					<text class="view-car-mini-btn" @click.stop="openViewCarPopup(item)">已绑车辆</text>
+					<text class="label">{{ tips.BoundVehicle[lang] }}</text>
+					<text class="view-car-mini-btn"
+						@click.stop="openViewCarPopup(item)">{{ tips.ViewBoundCar[lang] }}</text>
 				</view>
 				<view class="item-btn-wrap">
-					<button class="bind-car-btn" @click.stop="openCarPopup(item)">绑定车辆</button>
+					<button class="bind-car-btn" @click.stop="openCarPopup(item)">{{ tips.BindCar[lang] }}</button>
 				</view>
 			</view>
 		</view>
 		<!-- 底部固定新增管控规则按钮 -->
 		<view class="btn-bottom-wrap">
-			<button class="add-btn" @click="openAddPopup">新增管控</button>
+			<button class="add-btn" @click="openAddPopup">{{ tips.AddRule[lang] }}</button>
 		</view>
 		<!-- 新增/编辑规则弹窗组件 -->
 		<view class="popup-mask" v-if="popupShow" @click="closePopup">
 			<view class="popup-box" @click.stop>
 				<view class="popup-header">
-					<text class="popup-title">{{ isEdit ? '修改规则' : '新增规则' }}</text>
+					<text class="popup-title">{{ isEdit ? tips.ModifyRule[lang] : tips.AddNewRule[lang] }}</text>
 					<view class="close-icon" @click="closePopup">×</view>
 				</view>
 				<scroll-view scroll-y class="popup-body">
 					<view class="form-item">
-						<text class="form-label">标题</text>
-						<input class="form-input" v-model="formData.title" placeholder="请输入规则标题"
+						<text class="form-label">{{ tips.Title[lang] }}</text>
+						<input class="form-input" v-model="formData.title" :placeholder="tips.InputRuleTitle[lang]"
 							placeholder-class="input-placeholder" />
 					</view>
 					<view class="form-item">
-						<text class="form-label">是否允许使用</text>
+						<text class="form-label">{{ tips.IsAllowUse[lang] }}</text>
 						<picker :value="allowusePickerIndex" :range="allowuseRange" @change="onAllowuseChange">
 							<view class="picker-view">
-								<text>{{ formData.allowuse === 1 ? '允许' : '不允许' }}</text>
+								<text>{{ formData.allowuse === 1 ? tips.Allow[lang] : tips.Disallow[lang] }}</text>
 							</view>
 						</picker>
 					</view>
 					<view class="form-row-two">
 						<view class="form-item flex-item">
-							<text class="form-label">开始时间</text>
+							<text class="form-label">{{ tips.StartTime[lang] }}</text>
 							<picker mode="time" :value="formData.starttime" @change="onStartTimeChange">
 								<view class="picker-view">
-									<text>{{ formData.starttime || '选择时间' }}</text>
+									<text>{{ formData.starttime || tips.SelectTime[lang] }}</text>
 								</view>
 							</picker>
 						</view>
 						<view class="form-item flex-item">
-							<text class="form-label">结束时间</text>
+							<text class="form-label">{{ tips.EndTime[lang] }}</text>
 							<picker mode="time" :value="formData.endtime" @change="onEndTimeChange">
 								<view class="picker-view">
-									<text>{{ formData.endtime || '选择时间' }}</text>
+									<text>{{ formData.endtime || tips.SelectTime[lang] }}</text>
 								</view>
 							</picker>
 						</view>
 					</view>
 					<view class="form-item">
-						<text class="form-label">生效星期</text>
+						<text class="form-label">{{ tips.EffectiveWeek[lang] }}</text>
 						<view class="week-select-wrap">
 							<view class="week-item" v-for="(w,idx) in weekList" :key="idx"
 								:class="{active:selectedWeekIndexList.includes(idx)}" @click="toggleWeek(idx)">
@@ -96,14 +97,14 @@
 						</view>
 					</view>
 					<view class="form-item">
-						<text class="form-label">备注</text>
-						<textarea class="form-textarea" v-model="formData.bak" placeholder="请填写备注信息"
+						<text class="form-label">{{ tips.Remark[lang] }}</text>
+						<textarea class="form-textarea" v-model="formData.bak" :placeholder="tips.FillRemark[lang]"
 							placeholder-class="input-placeholder" auto-height></textarea>
 					</view>
 				</scroll-view>
 				<view class="popup-btns">
-					<button class="btn-cancel" @click="closePopup">取消</button>
-					<button class="btn-save" @click="handleSave">保存</button>
+					<button class="btn-cancel" @click="closePopup">{{ tips.Cancel[lang] }}</button>
+					<button class="btn-save" @click="handleSave">{{ tips.Save[lang] }}</button>
 				</view>
 			</view>
 		</view>
@@ -111,7 +112,7 @@
 		<view class="popup-mask" v-if="carPopupShow" @click="closeCarPopup">
 			<view class="popup-box car-popup" @click.stop>
 				<view class="popup-header">
-					<text class="popup-title">绑定车辆</text>
+					<text class="popup-title">{{ tips.BindCar[lang] }}</text>
 					<view class="close-icon" @click="closeCarPopup">×</view>
 				</view>
 				<scroll-view scroll-y class="popup-body car-scroll">
@@ -121,8 +122,8 @@
 					</view>
 				</scroll-view>
 				<view class="popup-btns">
-					<button class="btn-cancel" @click="closeCarPopup">取消</button>
-					<button class="btn-save" @click="confirmBindCar">确定</button>
+					<button class="btn-cancel" @click="closeCarPopup">{{ tips.Cancel[lang] }}</button>
+					<button class="btn-save" @click="confirmBindCar">{{ tips.ConfirmBtn[lang] }}</button>
 				</view>
 			</view>
 		</view>
@@ -130,23 +131,25 @@
 		<view class="popup-mask" v-if="viewCarPopupShow" @click="closeViewCarPopup">
 			<view class="popup-box car-popup" @click.stop>
 				<view class="popup-header">
-					<text class="popup-title">已绑定车辆</text>
+					<text class="popup-title">{{ tips.BoundVehicle[lang] }}</text>
 					<view class="close-icon" @click="closeViewCarPopup">×</view>
 				</view>
 				<scroll-view scroll-y class="popup-body car-scroll">
 					<view v-if="viewCarArr.length === 0" class="empty-car">
-						<text>暂未绑定任何车辆</text>
+						<text>{{ tips.NoBoundCar[lang] }}</text>
 					</view>
 					<!-- 每辆车增加解除绑定按钮 -->
 					<view class="view-car-item" v-for="car in viewCarArr" :key="car.id">
 						<text class="plate-text">{{car.platenumber}}</text>
-						<text class="unbind-single-btn" @click.stop="handleUnbindSingleCar(car)">解除绑定</text>
+						<text class="unbind-single-btn"
+							@click.stop="handleUnbindSingleCar(car)">{{ tips.Unbind[lang] }}</text>
 					</view>
 				</scroll-view>
 				<view class="popup-btns">
 					<!-- 全部解绑按钮，有车辆才显示 -->
-					<button v-if="viewCarArr.length > 0" class="btn-cancel" @click="handleUnbindAllCar">全部解绑</button>
-					<button class="btn-single" @click="closeViewCarPopup">关闭</button>
+					<button v-if="viewCarArr.length > 0" class="btn-cancel"
+						@click="handleUnbindAllCar">{{ tips.UnbindAll[lang] }}</button>
+					<button class="btn-single" @click="closeViewCarPopup">{{ tips.Close[lang] }}</button>
 				</view>
 			</view>
 		</view>
@@ -159,19 +162,25 @@
 		u_scheduledDel,
 		u_carList
 	} from '@/api/index';
+	import {
+		tips
+	} from '@/utils/langtips.js'
+	import {
+		titles
+	} from '@/utils/langtitle.js'
 	// 常量
 	const API_SUCCESS_CODE = 1000;
-	const WEEK_LIST = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
-	const ALLOWUSE_RANGE = ['不允许', '允许'];
 	export default {
 		data() {
 			return {
+				lang: 'zhCn',
+				tips: tips,
 				agreementList: [],
 				popupShow: false,
 				isEdit: false,
 				allowusePickerIndex: 0,
-				weekList: WEEK_LIST,
-				allowuseRange: ALLOWUSE_RANGE,
+				weekList: [],
+				allowuseRange: [],
 				selectedWeekIndexList: [],
 				formData: {},
 				carPopupShow: false,
@@ -185,13 +194,25 @@
 			};
 		},
 		onLoad() {
+			// 页面标题，需要你在tips增加对应key自行替换
 			uni.setNavigationBarTitle({
 				title: '管控规则列表'
 			});
+			this.initI18nConst();
 		},
 		onShow() {
 			this.fetchAgreementData();
 			this.fetchCarList();
+			this.lang = uni.getStorageSync('language') || 'zhCn'
+			const pageRoute = 'zoneCenter/control'
+			uni.setNavigationBarTitle({
+				title: titles[pageRoute][this.lang]
+			})
+		},
+		watch: {
+			lang() {
+				this.initI18nConst();
+			}
 		},
 		computed: {
 			showAgreementList() {
@@ -199,6 +220,22 @@
 			}
 		},
 		methods: {
+			// 初始化国际化常量：星期、下拉选项
+			initI18nConst() {
+				this.weekList = [
+					this.tips.WeekSun[this.lang],
+					this.tips.WeekMon[this.lang],
+					this.tips.WeekTue[this.lang],
+					this.tips.WeekWed[this.lang],
+					this.tips.WeekThu[this.lang],
+					this.tips.WeekFri[this.lang],
+					this.tips.WeekSat[this.lang]
+				];
+				this.allowuseRange = [
+					this.tips.Disallow[this.lang],
+					this.tips.Allow[this.lang]
+				];
+			},
 			/**
 			 * 格式化星期字符串
 			 * @param {String} str "0,1,2"
@@ -207,7 +244,7 @@
 			formatWeekDay(str) {
 				if (!str) return '-';
 				const arr = str.split(',');
-				return arr.map(n => WEEK_LIST[Number(n)] ?? '').filter(Boolean).join(' · ');
+				return arr.map(n => this.weekList[Number(n)] ?? '').filter(Boolean).join(' · ');
 			},
 			/**
 			 * 解析dayofweek字符串到选中数组
@@ -253,7 +290,7 @@
 				const submit = this.getSubmitForm();
 				if (!submit.title) {
 					uni.showToast({
-						title: '请输入规则标题',
+						title: this.tips.InputRuleTitle[this.lang],
 						icon: 'none'
 					});
 					return false;
@@ -269,7 +306,7 @@
 					}
 				} catch (err) {
 					uni.showToast({
-						title: '获取管控列表失败',
+						title: this.tips.FetchRuleListFail[this.lang],
 						icon: 'none'
 					});
 				}
@@ -282,7 +319,7 @@
 					}
 				} catch (err) {
 					uni.showToast({
-						title: '获取车辆列表失败',
+						title: this.tips.FetchCarListFail[this.lang],
 						icon: 'none'
 					});
 				}
@@ -331,26 +368,26 @@
 						this.closePopup();
 						this.fetchAgreementData();
 						uni.showToast({
-							title: res?.msg || '保存成功',
+							title: res?.msg || this.tips.SaveSuccess[this.lang],
 							icon: 'none'
 						});
 					} else {
 						uni.showToast({
-							title: res?.msg || '保存失败',
+							title: res?.msg || this.tips.SaveFail[this.lang],
 							icon: 'none'
 						});
 					}
 				} catch (err) {
 					uni.showToast({
-						title: '网络异常，保存失败',
+						title: this.tips.NetSaveError[this.lang],
 						icon: 'none'
 					});
 				}
 			},
 			handleDelete(item) {
 				uni.showModal({
-					title: '提示',
-					content: '确定要删除该管控规则吗？删除后不可恢复',
+					title: this.tips.Tip[lang],
+					content: this.tips.DeleteConfirmTip[this.lang],
 					success: async (res) => {
 						if (res.confirm) {
 							try {
@@ -359,19 +396,19 @@
 								});
 								if (delRes.code === API_SUCCESS_CODE) {
 									uni.showToast({
-										title: delRes?.msg || '删除成功',
+										title: delRes?.msg || this.tips.DeleteSuccess[this.lang],
 										icon: 'none'
 									});
 									this.fetchAgreementData();
 								} else {
 									uni.showToast({
-										title: delRes?.msg || '删除失败',
+										title: delRes?.msg || this.tips.DeleteFail[this.lang],
 										icon: 'none'
 									});
 								}
 							} catch (err) {
 								uni.showToast({
-									title: '网络异常，删除失败',
+									title: this.tips.NetDeleteError[this.lang],
 									icon: 'none'
 								});
 							}
@@ -416,19 +453,19 @@
 					});
 					if (res?.code === API_SUCCESS_CODE) {
 						uni.showToast({
-							title: res?.msg || '绑定成功',
+							title: res?.msg || this.tips.BindCarSuccess[this.lang],
 							icon: 'none'
 						});
 						this.fetchAgreementData();
 					} else {
 						uni.showToast({
-							title: res?.msg || '绑定失败',
+							title: res?.msg || this.tips.BindCarFail[this.lang],
 							icon: 'none'
 						});
 					}
 				} catch (err) {
 					uni.showToast({
-						title: '网络异常，绑定失败',
+						title: this.tips.NetBindError[this.lang],
 						icon: 'none'
 					});
 				}
@@ -455,33 +492,48 @@
 			async handleUnbindSingleCar(car) {
 				if (!this.currentViewRule) return;
 				uni.showModal({
-					title: '确认解除',
-					content: `确定解除【${car.platenumber}】绑定吗？`,
+					title: this.tips.UnbindConfirm[this.lang],
+					content: `${this.tips.UnbindCarTip[this.lang]}【${car.platenumber}】?`,
 					success: async (modalRes) => {
 						if (!modalRes.confirm) return;
 						// 原有id数组，剔除当前车辆id
-						const oldIdArr = this.currentViewRule.vehids.split(',').map(s=>Number(s)).filter(n=>!isNaN(n));
+						const oldIdArr = this.currentViewRule.vehids.split(',').map(s => Number(s)).filter(
+							n => !isNaN(n));
 						const newIdArr = oldIdArr.filter(id => id !== car.id);
 						const newVehids = newIdArr.join(',');
-						this.formData = { ...this.currentViewRule };
+						this.formData = {
+							...this.currentViewRule
+						};
 						this.formData.vehids = newVehids;
 						const submitParam = this.getSubmitForm();
 						try {
-							const res = await u_scheduledAddUpdate({ ...submitParam });
-							if(res.code === API_SUCCESS_CODE){
-								uni.showToast({ title:'解除绑定成功', icon:'none' });
+							const res = await u_scheduledAddUpdate({
+								...submitParam
+							});
+							if (res.code === API_SUCCESS_CODE) {
+								uni.showToast({
+									title: this.tips.UnbindSuccess[this.lang],
+									icon: 'none'
+								});
 								// 刷新外层管控规则列表数据
 								await this.fetchAgreementData();
 								// 从最新agreementList获取更新后的规则对象，不能用旧缓存currentViewRule
-								const freshRule = this.agreementList.find(r => r.id === this.currentViewRule.id);
-								if(freshRule){
+								const freshRule = this.agreementList.find(r => r.id === this
+									.currentViewRule.id);
+								if (freshRule) {
 									this.openViewCarPopup(freshRule);
 								}
-							}else{
-								uni.showToast({ title:res?.msg||'解除绑定失败', icon:'none' });
+							} else {
+								uni.showToast({
+									title: res?.msg || this.tips.UnbindFail[this.lang],
+									icon: 'none'
+								});
 							}
-						} catch(e){
-							uni.showToast({ title:'网络异常', icon:'none' });
+						} catch (e) {
+							uni.showToast({
+								title: this.tips.NetError[this.lang],
+								icon: 'none'
+							});
 						}
 					}
 				})
@@ -492,24 +544,37 @@
 			async handleUnbindAllCar() {
 				if (!this.currentViewRule) return;
 				uni.showModal({
-					title:'全部解绑',
-					content:'确定解除该规则下所有已绑定车辆？',
-					success: async (modalRes)=>{
-						if(!modalRes.confirm) return;
-						this.formData = { ...this.currentViewRule };
+					title: this.tips.UnbindAll[this.lang],
+					content: this.tips.UnbindAllTip[this.lang],
+					success: async (modalRes) => {
+						if (!modalRes.confirm) return;
+						this.formData = {
+							...this.currentViewRule
+						};
 						this.formData.vehids = '';
 						const submitParam = this.getSubmitForm();
 						try {
-							const res = await u_scheduledAddUpdate({ ...submitParam });
-							if(res.code === API_SUCCESS_CODE){
-								uni.showToast({ title:'全部解绑成功', icon:'none' });
+							const res = await u_scheduledAddUpdate({
+								...submitParam
+							});
+							if (res.code === API_SUCCESS_CODE) {
+								uni.showToast({
+									title: this.tips.UnbindAllSuccess[this.lang],
+									icon: 'none'
+								});
 								await this.fetchAgreementData();
 								this.closeViewCarPopup();
-							}else{
-								uni.showToast({ title:res?.msg||'全部解绑失败', icon:'none' });
+							} else {
+								uni.showToast({
+									title: res?.msg || this.tips.UnbindAllFail[this.lang],
+									icon: 'none'
+								});
 							}
-						}catch(e){
-							uni.showToast({ title:'网络异常', icon:'none' });
+						} catch (e) {
+							uni.showToast({
+								title: this.tips.NetError[this.lang],
+								icon: 'none'
+							});
 						}
 					}
 				})
@@ -521,6 +586,7 @@
 	page {
 		background-color: #f4f6f9;
 	}
+
 	.page-wrap {
 		min-height: 100vh;
 		background-color: #f4f6f9;
@@ -528,14 +594,17 @@
 		padding-bottom: calc(32rpx + 160rpx);
 		box-sizing: border-box;
 	}
+
 	.empty-wrap {
 		padding: 160rpx 0;
 		text-align: center;
+
 		.empty-txt {
 			font-size: 28rpx;
 			color: #86909c;
 		}
 	}
+
 	.agreement-list {
 		.agreement-item {
 			position: relative;
@@ -544,62 +613,75 @@
 			padding: 20rpx 30rpx;
 			margin-bottom: 28rpx;
 			box-shadow: 0 4rpx 22rpx rgba(0, 0, 0, 0.05);
+
 			.item-top {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
 				margin-bottom: 24rpx;
+
 				.item-title {
 					font-size: 34rpx;
 					color: #1d2129;
 					font-weight: 600;
 					flex: 1;
 				}
+
 				.item-operate {
 					display: flex;
 					gap: 25rpx;
+
 					.edit-btn {
 						font-size: 26rpx;
 						color: #1677ff;
 					}
+
 					.del-btn {
 						font-size: 26rpx;
 						color: #f53f3f;
 					}
 				}
 			}
+
 			.item-row {
 				display: flex;
 				font-size: 28rpx;
 				color: #4e5969;
 				line-height: 52rpx;
 				margin-bottom: 10rpx;
+
 				.label {
 					flex-shrink: 0;
 					color: #86909c;
 					margin-right: 20rpx;
 				}
+
 				.value {
 					flex: 1;
 					color: #272e3b;
+
 					&.allowuse-tag {
 						&.enable {
 							color: #00b42a;
 						}
+
 						color: #f53f3f;
 					}
 				}
 			}
+
 			.car-row-wrap {
 				.view-car-mini-btn {
 					font-size: 26rpx;
 					color: #1677ff;
 				}
 			}
+
 			.item-btn-wrap {
 				margin-top: 24rpx;
 				display: flex;
 				gap: 20rpx;
+
 				.bind-car-btn {
 					width: 220rpx;
 					height: 72rpx;
@@ -610,6 +692,7 @@
 					border-radius: 14rpx;
 					border: none;
 					margin: 0;
+
 					&::after {
 						border: none;
 					}
@@ -617,12 +700,14 @@
 			}
 		}
 	}
+
 	.btn-bottom-wrap {
 		position: fixed;
 		left: 32rpx;
 		right: 32rpx;
 		bottom: env(safe-area-inset-bottom, 30rpx);
 		z-index: 100;
+
 		.add-btn {
 			width: 100%;
 			height: 100rpx;
@@ -636,15 +721,18 @@
 			margin: 0;
 			box-shadow: 0 8rpx 24rpx rgba(22, 119, 255, 0.32);
 			transition: all 0.2s ease;
+
 			&::after {
 				border: none;
 			}
+
 			&:active {
 				transform: scale(0.97);
 				box-shadow: 0 4rpx 14rpx rgba(22, 119, 255, 0.24);
 			}
 		}
 	}
+
 	.popup-mask {
 		position: fixed;
 		top: 0;
@@ -658,6 +746,7 @@
 		justify-content: center;
 		padding: 40rpx 32rpx;
 		box-sizing: border-box;
+
 		.popup-box {
 			width: 100%;
 			background: #fff;
@@ -667,11 +756,13 @@
 			display: flex;
 			flex-direction: column;
 			box-sizing: border-box;
+
 			&.car-popup {
 				max-height: 70vh;
 			}
 		}
 	}
+
 	.popup-header {
 		display: flex;
 		align-items: center;
@@ -679,11 +770,13 @@
 		position: relative;
 		padding: 40rpx 32rpx 24rpx;
 		box-sizing: border-box;
+
 		.popup-title {
 			font-size: 36rpx;
 			font-weight: 600;
 			color: #1d2129;
 		}
+
 		.close-icon {
 			position: absolute;
 			right: 32rpx;
@@ -698,16 +791,20 @@
 			justify-content: center;
 		}
 	}
+
 	.popup-body {
 		padding: 0 32rpx;
 		box-sizing: border-box;
+
 		&.car-scroll {
 			padding: 0;
 		}
 	}
+
 	.form-item {
 		margin-bottom: 32rpx;
 		box-sizing: border-box;
+
 		.form-label {
 			display: block;
 			font-size: 28rpx;
@@ -715,6 +812,7 @@
 			margin-bottom: 14rpx;
 			font-weight: 500;
 		}
+
 		.form-input,
 		.picker-view {
 			width: 100%;
@@ -730,11 +828,13 @@
 			align-items: center;
 			justify-content: space-between;
 			transition: border-color 0.2s;
+
 			&:focus {
 				border-color: #1677ff;
 				background: #ffffff;
 			}
 		}
+
 		.form-textarea {
 			width: 100%;
 			min-height: 120rpx;
@@ -745,32 +845,39 @@
 			box-sizing: border-box;
 			background: #f7f8fa;
 			transition: border-color 0.2s;
+
 			&:focus {
 				border-color: #1677ff;
 				background: #ffffff;
 			}
 		}
+
 		.picker-arrow {
 			font-size: 30rpx;
 			color: #86909c;
 		}
 	}
+
 	.input-placeholder {
 		color: #b4b9c3;
 	}
+
 	.form-row-two {
 		display: flex;
 		gap: 24rpx;
 		box-sizing: border-box;
+
 		.flex-item {
 			flex: 1;
 		}
 	}
+
 	.week-select-wrap {
 		display: flex;
 		justify-content: space-between;
 		gap: 14rpx;
 		box-sizing: border-box;
+
 		.week-item {
 			flex: 1;
 			height: 72rpx;
@@ -783,9 +890,11 @@
 			border: 1rpx solid transparent;
 			box-sizing: border-box;
 			transition: all 0.2s ease;
+
 			&:active {
 				transform: scale(0.94);
 			}
+
 			&.active {
 				background: #e8f3ff;
 				color: #1677ff;
@@ -794,10 +903,12 @@
 			}
 		}
 	}
+
 	.popup-btns {
 		display: flex;
 		box-sizing: border-box;
 		margin-top: 16rpx;
+
 		.btn-cancel,
 		.btn-save {
 			flex: 1;
@@ -809,21 +920,26 @@
 			font-size: 32rpx;
 			font-weight: 500;
 			transition: all 0.2s;
+
 			&::after {
 				border: none;
 			}
+
 			&:active {
 				opacity: 0.82;
 			}
 		}
+
 		.btn-cancel {
 			background: #f2f3f5;
 			color: #4e5969;
 		}
+
 		.btn-save {
 			background: linear-gradient(90deg, #1677ff, #4096ff);
 			color: #fff;
 		}
+
 		.btn-single {
 			flex: 1;
 			height: 96rpx;
@@ -834,16 +950,19 @@
 			font-size: 32rpx;
 			border: none;
 			margin: 0;
+
 			&::after {
 				border: none;
 			}
 		}
 	}
+
 	.car-item {
 		display: flex;
 		align-items: center;
 		padding: 32rpx;
 		border-bottom: 1rpx solid #f0f2f5;
+
 		.car-checkbox {
 			width: 36rpx;
 			height: 36rpx;
@@ -851,9 +970,11 @@
 			border: 1rpx solid #c9cdd4;
 			margin-right: 24rpx;
 			position: relative;
+
 			&.checked {
 				background: #1677ff;
 				border-color: #1677ff;
+
 				&::after {
 					content: "✓";
 					position: absolute;
@@ -865,26 +986,31 @@
 				}
 			}
 		}
+
 		.car-name {
 			font-size: 30rpx;
 			color: #1d2129;
 		}
 	}
+
 	.view-car-item {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		padding: 32rpx;
 		border-bottom: 1rpx solid #f0f2f5;
+
 		.plate-text {
 			font-size: 30rpx;
 			color: #1d2129;
 		}
+
 		.unbind-single-btn {
 			font-size: 26rpx;
 			color: #f53f3f;
 		}
 	}
+
 	.empty-car {
 		padding: 80rpx 0;
 		text-align: center;

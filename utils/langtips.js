@@ -2313,6 +2313,439 @@ export const tips = {
 		"idId": "Lipat",
 		"miNz": "Whakakōpaki",
 		"jaJp": "折りたたむ"
+	},
+	// ===== 管控规则页面 (scheduleRule) 新增字段 =====
+	"EmptyControlRule": {
+		"zhCn": "暂无管控规则，请点击底部新增",
+		"enUs": "No control rules, click add at bottom",
+		"msMy": "Tiada peraturan kawalan, klik tambah di bawah",
+		"ptBr": "Sem regras de controle, clique em adicionar abaixo",
+		"taSg": "கட்டுப்பாடு விதிகள் இல்லை, கீழே சேர் என்பதைக் கிளிக் செய்யவும்",
+		"thTh": "ไม่มีกฎควบคุม กรุณาคลิกเพิ่มที่ด้านล่าง",
+		"idId": "Tidak ada aturan kontrol, klik tambah di bawah",
+		"miNz": "Kāore he ture whakahaere, pāwhiritia te tāpiri i raro"
+	},
+	"TimeRange": {
+		"zhCn": "时间段",
+		"enUs": "Time Range",
+		"msMy": "Julat Masa",
+		"ptBr": "Período",
+		"taSg": "நேர இடைவெளி",
+		"thTh": "ช่วงเวลา",
+		"idId": "Rentang Waktu",
+		"miNz": "Awhe wā"
+	},
+	"EffectiveWeek": {
+		"zhCn": "生效星期",
+		"enUs": "Effective Week",
+		"msMy": "Hari Berkuatkuasa",
+		"ptBr": "Semana Efetiva",
+		"taSg": "செயல்படும் நாள்",
+		"thTh": "วันที่มีผล",
+		"idId": "Hari Berlaku",
+		"miNz": "Rā whai hua"
+	},
+	"UsePermission": {
+		"zhCn": "使用权限",
+		"enUs": "Use Permission",
+		"msMy": "Kebenaran Penggunaan",
+		"ptBr": "Permissão de Uso",
+		"taSg": "பயன்பாட்டு அனுமதி",
+		"thTh": "สิทธิ์การใช้งาน",
+		"idId": "Izin Penggunaan",
+		"miNz": "Whakaaetanga whakamahi"
+	},
+	"AddRule": {
+		"zhCn": "新增管控",
+		"enUs": "Add Control",
+		"msMy": "Tambah Kawalan",
+		"ptBr": "Adicionar Controle",
+		"taSg": "கட்டுப்பாடு சேர்",
+		"thTh": "เพิ่มการควบคุม",
+		"idId": "Tambah Kontrol",
+		"miNz": "Tāpiri whakahaere"
+	},
+	"ModifyRule": {
+		"zhCn": "修改规则",
+		"enUs": "Modify Rule",
+		"msMy": "Ubah Peraturan",
+		"ptBr": "Alterar Regra",
+		"taSg": "விதியை மாற்று",
+		"thTh": "แก้ไขกฎ",
+		"idId": "Ubah Aturan",
+		"miNz": "Whakarerekē ture"
+	},
+	"AddNewRule": {
+		"zhCn": "新增规则",
+		"enUs": "Add Rule",
+		"msMy": "Tambah Peraturan",
+		"ptBr": "Adicionar Regra",
+		"taSg": "புதிய விதி சேர்",
+		"thTh": "เพิ่มกฎ",
+		"idId": "Tambah Aturan",
+		"miNz": "Tāpiri ture"
+	},
+	"Title": {
+		"zhCn": "标题",
+		"enUs": "Title",
+		"msMy": "Tajuk",
+		"ptBr": "Título",
+		"taSg": "தலைப்பு",
+		"thTh": "หัวข้อ",
+		"idId": "Judul",
+		"miNz": "Taitara"
+	},
+	"InputRuleTitle": {
+		"zhCn": "请输入规则标题",
+		"enUs": "Please input rule title",
+		"msMy": "Sila masukkan tajuk peraturan",
+		"ptBr": "Digite o título da regra",
+		"taSg": "விதி தலைப்பை உள்ளிடவும்",
+		"thTh": "กรุณากรอกชื่อกฎ",
+		"idId": "Masukkan judul aturan",
+		"miNz": "Whakauruhia te taitara ture"
+	},
+	"IsAllowUse": {
+		"zhCn": "是否允许使用",
+		"enUs": "Allow Usage",
+		"msMy": "Benarkan Penggunaan",
+		"ptBr": "Permitir Uso",
+		"taSg": "பயன்பாட்டை அனுமதியா",
+		"thTh": "อนุญาตให้ใช้งานหรือไม่",
+		"idId": "Izinkan Penggunaan",
+		"miNz": "Whakaae whakamahinga"
+	},
+	"SelectTime": {
+		"zhCn": "选择时间",
+		"enUs": "Select Time",
+		"msMy": "Pilih Masa",
+		"ptBr": "Selecionar Horário",
+		"taSg": "நேரத்தைத் தேர்ந்தெடு",
+		"thTh": "เลือกเวลา",
+		"idId": "Pilih Waktu",
+		"miNz": "Tīpako wā"
+	},
+	"FillRemark": {
+		"zhCn": "请填写备注信息",
+		"enUs": "Fill remark info",
+		"msMy": "Isi maklumat catatan",
+		"ptBr": "Preencha a observação",
+		"taSg": "குறிப்பு தகவலை நிரப்பவும்",
+		"thTh": "กรุณากรอกข้อมูลหมายเหตุ",
+		"idId": "Isi info catatan",
+		"miNz": "Whakakiia ngā kōrero tuku iho"
+	},
+	"Save": {
+		"zhCn": "保存",
+		"enUs": "Save",
+		"msMy": "Simpan",
+		"ptBr": "Salvar",
+		"taSg": "சேமி",
+		"thTh": "บันทึก",
+		"idId": "Simpan",
+		"miNz": "Tiaki"
+	},
+	"SaveSuccess": {
+		"zhCn": "保存成功",
+		"enUs": "Saved successfully",
+		"msMy": "Berjaya disimpan",
+		"ptBr": "Salvo com sucesso",
+		"taSg": "சேமிப்பு வெற்றி",
+		"thTh": "บันทึกสำเร็จ",
+		"idId": "Berhasil Disimpan",
+		"miNz": "I angitu te tiaki"
+	},
+	"SaveFail": {
+		"zhCn": "保存失败",
+		"enUs": "Save failed",
+		"msMy": "Gagal simpan",
+		"ptBr": "Falha ao salvar",
+		"taSg": "சேமிப்பு தோல்வி",
+		"thTh": "บันทึกล้มเหลว",
+		"idId": "Gagal Simpan",
+		"miNz": "I rahua te tiaki"
+	},
+	"NetSaveError": {
+		"zhCn": "网络异常，保存失败",
+		"enUs": "Network error, save failed",
+		"msMy": "Ralat rangkaian, simpan gagal",
+		"ptBr": "Erro de rede, falha ao salvar",
+		"taSg": "பிணையப் பிழை, சேமிப்பு தோல்வி",
+		"thTh": "เครือข่ายผิดปกติ บันทึกล้มเหลว",
+		"idId": "Kesalahan jaringan, gagal simpan",
+		"miNz": "Hapa whatunga, i rahua te tiaki"
+	},
+	"DeleteConfirmTip": {
+		"zhCn": "确定要删除该管控规则吗？删除后不可恢复",
+		"enUs": "Delete this rule? Cannot be recovered",
+		"msMy": "Padam peraturan ini? Tidak boleh dipulihkan",
+		"ptBr": "Excluir esta regra? Ação irreversível",
+		"taSg": "இந்த விதியை நீக்கவா? மீட்க முடியாது",
+		"thTh": "ลบกฎนี้ใช่หรือไม่? ไม่สามารถกู้คืนได้",
+		"idId": "Hapus aturan ini? Tidak dapat dipulihkan",
+		"miNz": "Muku tēnei ture? Kāore e taea te whakaora"
+	},
+	"DeleteSuccess": {
+		"zhCn": "删除成功",
+		"enUs": "Deleted successfully",
+		"msMy": "Berjaya dipadam",
+		"ptBr": "Excluído com sucesso",
+		"taSg": "நீக்கம் வெற்றி",
+		"thTh": "ลบสำเร็จ",
+		"idId": "Berhasil Dihapus",
+		"miNz": "I angitu te muku"
+	},
+	"DeleteFail": {
+		"zhCn": "删除失败",
+		"enUs": "Delete failed",
+		"msMy": "Gagal padam",
+		"ptBr": "Falha ao excluir",
+		"taSg": "நீக்கம் தோல்வி",
+		"thTh": "ลบล้มเหลว",
+		"idId": "Gagal Hapus",
+		"miNz": "I rahua te muku"
+	},
+	"NetDeleteError": {
+		"zhCn": "网络异常，删除失败",
+		"enUs": "Network error, delete failed",
+		"msMy": "Ralat rangkaian, padam gagal",
+		"ptBr": "Erro de rede, falha ao excluir",
+		"taSg": "பிணையப் பிழை, நீக்கம் தோல்வி",
+		"thTh": "เครือข่ายผิดปกติ ลบล้มเหลว",
+		"idId": "Kesalahan jaringan, gagal hapus",
+		"miNz": "Hapa whatunga, i rahua te muku"
+	},
+	"BindCarSuccess": {
+		"zhCn": "绑定成功",
+		"enUs": "Bind successful",
+		"msMy": "Berjaya diikat",
+		"ptBr": "Vinculado com sucesso",
+		"taSg": "பிணைப்பு வெற்றி",
+		"thTh": "ผูกสำเร็จ",
+		"idId": "Berhasil Diikat",
+		"miNz": "I angitu te here"
+	},
+	"BindCarFail": {
+		"zhCn": "绑定失败",
+		"enUs": "Bind failed",
+		"msMy": "Gagal ikat",
+		"ptBr": "Falha ao vincular",
+		"taSg": "பிணைப்பு தோல்வி",
+		"thTh": "ผูกไม่สำเร็จ",
+		"idId": "Gagal Ikat",
+		"miNz": "I rahua te here"
+	},
+	"NetBindError": {
+		"zhCn": "网络异常，绑定失败",
+		"enUs": "Network error, bind failed",
+		"msMy": "Ralat rangkaian, ikat gagal",
+		"ptBr": "Erro de rede, falha ao vincular",
+		"taSg": "பிணையப் பிழை, பிணைப்பு தோல்வி",
+		"thTh": "เครือข่ายผิดปกติ ผูกไม่สำเร็จ",
+		"idId": "Kesalahan jaringan, gagal ikat",
+		"miNz": "Hapa whatunga, i rahua te here"
+	},
+	"UnbindConfirm": {
+		"zhCn": "确认解除",
+		"enUs": "Confirm Unbind",
+		"msMy": "Sahkan Nyahikat",
+		"ptBr": "Confirmar Desvinculação",
+		"taSg": "பிரிவதை உறுதிப்படுத்து",
+		"thTh": "ยืนยันการยกเลิก",
+		"idId": "Konfirmasi Lepas",
+		"miNz": "Whakaū wetewete"
+	},
+	"UnbindCarTip": {
+		"zhCn": "确定解除",
+		"enUs": "Confirm unbind",
+		"msMy": "Sahkan nyahikat",
+		"ptBr": "Confirmar desvinculação",
+		"taSg": "பிரிப்பதை உறுதி",
+		"thTh": "ยืนยันการยกเลิก",
+		"idId": "Konfirmasi lepas",
+		"miNz": "Whakaū te wetewete"
+	},
+	"UnbindSuccess": {
+		"zhCn": "解除绑定成功",
+		"enUs": "Unbind successful",
+		"msMy": "Berjaya nyahikat",
+		"ptBr": "Desvinculado com sucesso",
+		"taSg": "பிரிப்பு வெற்றி",
+		"thTh": "ยกเลิกการผูกสำเร็จ",
+		"idId": "Berhasil Lepas",
+		"miNz": "I angitu te wetewete"
+	},
+	"UnbindFail": {
+		"zhCn": "解除绑定失败",
+		"enUs": "Unbind failed",
+		"msMy": "Gagal nyahikat",
+		"ptBr": "Falha ao desvincular",
+		"taSg": "பிரிப்பு தோல்வி",
+		"thTh": "ยกเลิกการผูกไม่สำเร็จ",
+		"idId": "Gagal Lepas",
+		"miNz": "I rahua te wetewete"
+	},
+	"NetError": {
+		"zhCn": "网络异常",
+		"enUs": "Network error",
+		"msMy": "Ralat rangkaian",
+		"ptBr": "Erro de rede",
+		"taSg": "பிணையப் பிழை",
+		"thTh": "เครือข่ายผิดปกติ",
+		"idId": "Kesalahan jaringan",
+		"miNz": "Hapa whatunga"
+	},
+	"UnbindAllTip": {
+		"zhCn": "确定解除该规则下所有已绑定车辆？",
+		"enUs": "Unbind all vehicles under this rule?",
+		"msMy": "Nyahikat semua kenderaan di bawah peraturan ini?",
+		"ptBr": "Desvincular todos os veículos desta regra?",
+		"taSg": "இந்த விதியின் கீழ் உள்ள அனைத்து வாகனங்களையும் பிரிக்கவா?",
+		"thTh": "ยกเลิกการผูกยานพาหนะทั้งหมดภายใต้กฎนี้หรือไม่?",
+		"idId": "Lepas semua kendaraan di bawah aturan ini?",
+		"miNz": "Wetewete ngā waka katoa i raro i tēnei ture?"
+	},
+	"UnbindAllSuccess": {
+		"zhCn": "全部解绑成功",
+		"enUs": "All unbound successfully",
+		"msMy": "Semua berjaya dinyahikat",
+		"ptBr": "Todos desvinculados",
+		"taSg": "அனைத்தும் பிரிக்கப்பட்டது",
+		"thTh": "ยกเลิกทั้งหมดสำเร็จ",
+		"idId": "Semua Berhasil Dilepas",
+		"miNz": "Kua angitu te wetewete katoa"
+	},
+	"UnbindAllFail": {
+		"zhCn": "全部解绑失败",
+		"enUs": "Unbind all failed",
+		"msMy": "Gagal nyahikat semua",
+		"ptBr": "Falha ao desvincular todos",
+		"taSg": "அனைத்தும் பிரிக்கத் தோல்வி",
+		"thTh": "ยกเลิกทั้งหมดไม่สำเร็จ",
+		"idId": "Gagal Lepas Semua",
+		"miNz": "I rahua te wetewete katoa"
+	},
+	"FetchRuleListFail": {
+		"zhCn": "获取管控列表失败",
+		"enUs": "Failed to get rule list",
+		"msMy": "Gagal dapat senarai peraturan",
+		"ptBr": "Falha ao carregar regras",
+		"taSg": "விதி பட்டியல் பெறத் தோல்வி",
+		"thTh": "โหลดรายการกฎล้มเหลว",
+		"idId": "Gagal memuat daftar aturan",
+		"miNz": "I rahua te tiki rārangi ture"
+	},
+	"FetchCarListFail": {
+		"zhCn": "获取车辆列表失败",
+		"enUs": "Failed to get car list",
+		"msMy": "Gagal dapat senarai kereta",
+		"ptBr": "Falha ao carregar veículos",
+		"taSg": "வாகன பட்டியல் பெறத் தோல்வி",
+		"thTh": "โหลดรายการรถล้มเหลว",
+		"idId": "Gagal memuat daftar kendaraan",
+		"miNz": "I rahua te tiki rārangi waka"
+	},
+	"NoBoundCar": {
+		"zhCn": "暂未绑定任何车辆",
+		"enUs": "No vehicles bound",
+		"msMy": "Tiada kenderaan terikat",
+		"ptBr": "Nenhum veículo vinculado",
+		"taSg": "வாகனங்கள் எதுவும் பிணைக்கப்படவில்லை",
+		"thTh": "ยังไม่มีการผูกยานพาหนะ",
+		"idId": "Belum ada kendaraan terikat",
+		"miNz": "Kāore he waka kua herea"
+	},
+	"ViewBoundCar": {
+		"zhCn": "已绑车辆",
+		"enUs": "Bound Cars",
+		"msMy": "Kereta Terikat",
+		"ptBr": "Carros Vinculados",
+		"taSg": "பிணைக்கப்பட்ட வாகனங்கள்",
+		"thTh": "รถที่ผูกไว้",
+		"idId": "Kendaraan Terikat",
+		"miNz": "Ngā waka here"
+	},
+	"BoundVehicle": {
+		"zhCn": "已绑定车辆",
+		"enUs": "Bound Vehicles",
+		"msMy": "Kenderaan Terikat",
+		"ptBr": "Veículos Vinculados",
+		"taSg": "பிணைக்கப்பட்ட வாகனங்கள்",
+		"thTh": "ยานพาหนะที่ผูกไว้",
+		"idId": "Kendaraan Terikat",
+		"miNz": "Ngā waka herea"
+	},
+	"WeekSun": {
+		"zhCn": "周日",
+		"enUs": "Sun",
+		"msMy": "Ahad",
+		"ptBr": "Dom",
+		"taSg": "ஞாயிறு",
+		"thTh": "อาทิตย์",
+		"idId": "Minggu",
+		"miNz": "Rātapu"
+	},
+	"WeekMon": {
+		"zhCn": "周一",
+		"enUs": "Mon",
+		"msMy": "Isnin",
+		"ptBr": "Seg",
+		"taSg": "திங்கள்",
+		"thTh": "จันทร์",
+		"idId": "Senin",
+		"miNz": "Rāhina"
+	},
+	"WeekTue": {
+		"zhCn": "周二",
+		"enUs": "Tue",
+		"msMy": "Selasa",
+		"ptBr": "Ter",
+		"taSg": "செவ்வாய்",
+		"thTh": "อังคาร",
+		"idId": "Selasa",
+		"miNz": "Rātū"
+	},
+	"WeekWed": {
+		"zhCn": "周三",
+		"enUs": "Wed",
+		"msMy": "Rabu",
+		"ptBr": "Qua",
+		"taSg": "புதன்",
+		"thTh": "พุธ",
+		"idId": "Rabu",
+		"miNz": "Rāapa"
+	},
+	"WeekThu": {
+		"zhCn": "周四",
+		"enUs": "Thu",
+		"msMy": "Khamis",
+		"ptBr": "Qui",
+		"taSg": "வியாழன்",
+		"thTh": "พฤหัส",
+		"idId": "Kamis",
+		"miNz": "Rāpare"
+	},
+	"WeekFri": {
+		"zhCn": "周五",
+		"enUs": "Fri",
+		"msMy": "Jumaat",
+		"ptBr": "Sex",
+		"taSg": "வெள்ளி",
+		"thTh": "ศุกร์",
+		"idId": "Jumat",
+		"miNz": "Rāmere"
+	},
+	"WeekSat": {
+		"zhCn": "周六",
+		"enUs": "Sat",
+		"msMy": "Sabtu",
+		"ptBr": "Sáb",
+		"taSg": "சனி",
+		"thTh": "เสาร์",
+		"idId": "Sabtu",
+		"miNz": "Rāhoroi"
 	}
+
+
 
 }

@@ -168,6 +168,16 @@ export const titles = {
 		"thTh": "ตำแหน่งยานพาหนะ",
 		"idId": "Posisi Kendaraan",
 		"miNz": "Tūnga Waka"
-	}
+	},
+	"zoneCenter/control": {
+		"zhCn": "管控规则列表",
+		"enUs": "Control Rule List",
+		"msMy": "Senarai Peraturan Kawalan",
+		"ptBr": "Lista de Regras de Controle",
+		"taSg": "கட்டுப்பாடு விதிகள் பட்டியல்",
+		"thTh": "รายการกฎควบคุม",
+		"idId": "Daftar Aturan Kontrol",
+		"miNz": "Rārangi ture whakahaere"
+	},
 
 }
