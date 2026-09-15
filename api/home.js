@@ -94,4 +94,4 @@ export const u_scheduledCarApiList = (data) => http.get('/scheduledCarApi/list',
 export const u_scheduledAddUpdate = (data) => http.postFormData('/scheduledCarApi/addOrUpdate', data) //新增编辑时效管控
 export const u_scheduledDel = (data) => http.postFormData('/scheduledCarApi/del', data)//删除限时管控
 export const u_visitorLogin = (data) => http.get('/api/visitorLogin', data)
-export const u_channelJoin = (data) => http.postFormData('/appdeskapi/channelJoin', data)
+export const u_channelJoin = (data) => http.postFormData('/appHomeApi/channelJoin', data)

@@ -52,7 +52,8 @@
 					<view class="service-tabs">
 						<text v-for="(item, index) in tabServiceList" :key="index" class="service-tab"
 							:class="{'service-tab--active': activeTabServiceIndex === index}"
-							@click="handleTabServiceClick(item?.id,index)" :style="{background:item?.backgroundcolor}">
+							@click="handleTabServiceClick(item?.id,index)"
+							:style="{background:activeTabServiceIndex !== index?item?.backgroundcolor:''}">
 							{{ item.multiName }}
 						</text>
 					</view>
