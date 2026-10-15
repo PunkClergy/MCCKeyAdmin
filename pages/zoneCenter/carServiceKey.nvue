@@ -305,24 +305,34 @@
 			},
 
 			async handleVehicle(evt) {
-				try {
-					const res = await u_operation({
-						sn: this.vehicle_info?.sn,
-						operationType: evt,
-						_timestamp: Date.now()
-					});
-					uni.showToast({
-						title: res.msg,
-						icon: 'none',
-						duration: 2000
-					});
-				} catch (error) {
-					uni.showToast({
-						title: '网络错误',
-						icon: 'none'
-					})
-				}
+			  uni.showLoading({
+			    title: '处理中...',
+			    mask: true // 遮罩，阻止点击，防止重复提交
+			  })
+			  try {
+			    const res = await u_operation({
+			      sn: this.vehicle_info?.sn,
+			      operationType: evt,
+			      _timestamp: Date.now()
+			    });
+			    console.log(res,'resres')
+			    uni.showToast({ 
+			      title: res.msg, 
+			      icon: 'none', 
+			      duration: 2000 
+			    });
+			  } catch (error) {
+			    console.error('handleVehicle异常：', error)
+			    uni.showToast({ 
+			      title: '网络错误', 
+			      icon: 'none' 
+			    })
+			  } finally {
+			    // ✅ 不管try成功还是catch报错，都会关闭loading
+			    uni.hideLoading()
+			  }
 			},
+
 
 			handleTouchMove() {}
 		}

@@ -4,7 +4,7 @@
 const defaultConfig = {
 	url: '',
 	method: 'GET',
-	timeout: 10000,
+	timeout: 30000,
 	loading: true
 }
 
@@ -217,6 +217,7 @@ http.setInterceptor({
 		if (token) {
 			header['token'] = token
 		}
+		console.log(header,'00000--==')
 
 		// 设置 Content-Type
 		if (config.isFormData) {
