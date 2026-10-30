@@ -262,7 +262,7 @@
 	export default {
 		data() {
 			return {
-				lang: 'zhCn',
+				lang: 'enUs',
 				tips: tips,
 				c_screen_height: 0,
 				statusBarHeight: 0,
@@ -317,7 +317,7 @@
 		},
 		onShow() {
 			this.initialiImageBaseConversion()
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			this.btnState = this.tips.Add[this.lang]
 			const pageRoute = 'zoneCenter/onlineCarHailing'
 			uni.setNavigationBarTitle({

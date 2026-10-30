@@ -323,7 +323,7 @@
 				vehId: '',
 				recordTotal: 0,
 				searchParam: '',
-				lang: 'zhCn',
+				lang: 'enUs',
 				tips: tips
 			}
 		},
@@ -559,7 +559,7 @@
 			this.initDateTime()
 		},
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'zhCn';
+			this.lang = uni.getStorageSync('language') || 'enUs';
 			const pageRoute = 'zoneCenter/sendKeyToRenter';
 			uni.setNavigationBarTitle({ title: titles[pageRoute][this.lang] });
 			this.multiOptions = [

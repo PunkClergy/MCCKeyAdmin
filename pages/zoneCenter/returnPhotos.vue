@@ -61,7 +61,7 @@
 		data() {
 			return {
 				tips: tips,
-				lang: 'zhCn',
+				lang: 'enUs',
 				showHeight: 0,
 				cardWidth: 0,
 				showPhoneHeight: 0,
@@ -109,7 +109,7 @@
 			this.vehId = options.vehId
 		},
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			const pageRoute = 'zoneCenter/returnPhotos'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

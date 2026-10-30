@@ -135,7 +135,7 @@
 		data() {
 			return {
 				// 语言
-				lang: 'zhCn',
+				lang: 'enUs',
 				tips: tips,
 				// 布局相关的值
 				statusBarHeight: 0,
@@ -215,7 +215,7 @@
 		},
 		methods: {
 			getLang() {
-				this.lang = uni.getStorageSync('language') || 'zhCn'
+				this.lang = uni.getStorageSync('language') || 'enUs'
 			},
 			getSystemHeight() {
 				const sys = uni.getSystemInfoSync()

@@ -95,7 +95,7 @@ export default {
   data() {
     return {
       tips: tips,
-      lang: 'zhCn',
+      lang: 'enUs',
       isSubscribed: false,
       totalCount: 0,
       todayCount: 0,
@@ -115,7 +115,7 @@ export default {
     this.handleCarList('', '')
   },
   onShow() {
-    this.lang = uni.getStorageSync('language') || 'zhCn'
+    this.lang = uni.getStorageSync('language') || 'enUs'
     const pageRoute = 'zoneCenter/alarmOutOfFence'
     uni.setNavigationBarTitle({
       title: titles[pageRoute][this.lang]

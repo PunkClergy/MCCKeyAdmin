@@ -309,7 +309,7 @@
 	export default {
 		data() {
 			return {
-				lang: 'zhCn',
+				lang: 'enUs',
 				tips: tips,
 				c_screen_height: 0,
 				c_screen_width: 0,
@@ -615,7 +615,7 @@
 		},
 		onShow() {
 			this.handleCurrentDate()
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			this.pickerList = [{
 				name: this.tips.Allow[this.lang],
 				value: 1

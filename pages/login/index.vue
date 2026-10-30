@@ -82,7 +82,7 @@
 				isSubmitting: false,
 				init_qr_code: '',
 				tips: tips,
-				lang: 'zhCn',
+				lang: 'enUs',
 				loginType: 'account' // account账号登录 / guest游客登录
 			};
 		},
@@ -94,7 +94,7 @@
 		},
 		onShow() {
 			this.handleGetCurrentLanguage()
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			const pageRoute = 'login/index'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]
@@ -102,7 +102,7 @@
 		},
 		methods: {
 			handleGetCurrentLanguage() {
-				let currentLang = uni.getStorageSync('language') || 'zhCn';
+				let currentLang = uni.getStorageSync('language') || 'enUs';
 			},
 			// 预览图片
 			handlePreviewImage(evt) {

@@ -57,7 +57,7 @@
 
 		// UniApp 生命周期：应用初始化（替代原 onLaunch）
 		onLaunch(options) {
-			const L = uni.getStorageSync('language') || 'zhCn'
+			const L = uni.getStorageSync('language') || 'enUs'
 			// 1. 检查更新（仅微信小程序端生效，其他端自动忽略）
 
 			if (uni.canIUse('getUpdateManager')) {

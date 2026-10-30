@@ -221,7 +221,7 @@
 				btnState: '',
 				id: '',
 				tree: [],
-				lang: 'zhCn',
+				lang: 'enUs',
 				tips: tips
 			}
 		},
@@ -236,7 +236,7 @@
 
 		onShow() {
 			this.inittMenuTree()
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			const pageRoute = 'zoneCenter/rolePermission'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

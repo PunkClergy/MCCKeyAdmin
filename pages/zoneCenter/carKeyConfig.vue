@@ -182,7 +182,7 @@
 	export default {
 		data() {
 			return {
-				lang: 'zhCn',
+				lang: 'enUs',
 				tips: tips,
 				c_activeTab: 1,
 				g_page: 1,
@@ -213,7 +213,7 @@
 		},
 		onShow() {
 			this.initList()
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			const pageRoute = 'zoneCenter/carKeyConfig'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

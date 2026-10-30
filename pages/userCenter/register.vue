@@ -65,6 +65,7 @@
 		data() {
 			return {
 				tips: tips,
+				lang: 'enUs',
 				username: '',
 				password: '',
 				confirmPassword: '',
@@ -78,7 +79,7 @@
 		},
 		components: {},
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			const pageRoute = 'userCenter/register'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

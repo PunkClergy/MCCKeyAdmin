@@ -135,7 +135,7 @@
 				s_use_height: '',
 				// 语言设置
 				tips: tips,
-				lang: 'zhCn',
+				lang: 'enUs',
 			}
 		},
 		methods: {
@@ -353,7 +353,7 @@
 		},
 		onShow() {
 			this.inIsShowInfo()
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 		},
 		onReady() {
 			this.initLoginStatus()

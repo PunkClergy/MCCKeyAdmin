@@ -35,7 +35,7 @@
 		data() {
 			return {
 				tips: tips,
-				lang: 'zhCn',
+				lang: 'enUs',
 				screenInfo: {}, // 屏幕信息对象
 				baseLink: 'https://k1sw.wiselink.net.cn', // 基础域名
 
@@ -101,7 +101,7 @@
 
 		},
 		mounted() { // 使用mounted替代onShow
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			this.initialScreenInfo();
 		}
 	};

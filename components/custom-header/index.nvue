@@ -29,7 +29,7 @@
 		data() {
 			return {
 				tips: tips,
-				lang: 'zhCn',
+				lang: 'enUs',
 				screenInfo: {}, // 屏幕信息对象
 			}
 		},
@@ -81,7 +81,7 @@
 			}
 		},
 		mounted() {
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			this.initialScreenInfo();
 		}
 	}

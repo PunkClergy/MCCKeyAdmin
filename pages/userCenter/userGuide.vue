@@ -121,7 +121,7 @@
 		data() {
 			return {
 				tips: tips,
-				lang: 'zhCn',
+				lang: 'enUs',
 				filterSortList: [],
 				filterTypeList: [],
 				c_screen_height: 0,
@@ -168,7 +168,7 @@
 			this.initList(this.pageType)
 		},
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			this.buildFilters()
 			this.initialQuickEntry()
 		},

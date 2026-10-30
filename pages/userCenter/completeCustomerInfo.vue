@@ -66,7 +66,7 @@
 		data() {
 			return {
 				tips: tips,
-				lang: 'zhCn',
+				lang: 'enUs',
 				c_screen_height: 0,
 				c_statusBarHeight: 0,
 				c_navBarHeight: 20,
@@ -83,7 +83,7 @@
 			}
 		},
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			const pageRoute = 'userCenter/completeCustomerInfo'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

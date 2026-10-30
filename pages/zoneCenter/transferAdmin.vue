@@ -71,7 +71,7 @@
 		data() {
 			return {
 				tips: tips,
-				lang: 'zhCn',
+				lang: 'enUs',
 				c_screen_height: 0,
 				c_statusBarHeight: 0,
 				c_navBarHeight: 44,
@@ -103,7 +103,7 @@
 
 		onShow() {
 			this.user = getApp()?.globalData?.userInfo?.username || ''
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			const pageRoute = 'zoneCenter/transferAdmin'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

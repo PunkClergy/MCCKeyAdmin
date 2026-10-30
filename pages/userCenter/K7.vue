@@ -279,7 +279,7 @@
 		data() {
 			return {
 				tips: tips,
-				lang: 'zhCn',
+				lang: 'enUs',
 				checkForm: {
 					idc: '',
 					code: ''
@@ -317,7 +317,7 @@
 			}
 		},
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 		},
 		methods: {
 			toggleDemo() {

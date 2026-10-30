@@ -118,7 +118,7 @@
 		data() {
 			return {
 				tips: tips,
-				lang: 'zhCn',
+				lang: 'enUs',
 				c_screen_height: 0,
 				c_screen_width: 0,
 				statusBarHeight: 0,
@@ -154,7 +154,7 @@
 		onShow() {
 			this.initialiImageBaseConversion()
 			this.handleRole()
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			const pageRoute = 'zoneCenter/userRole'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

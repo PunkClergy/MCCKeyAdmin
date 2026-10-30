@@ -68,7 +68,7 @@
 	export default {
 		data() {
 			return {
-				lang: 'zhCn',
+				lang: 'enUs',
 				tips: tips,
 
 				c_screen_height: 0,
@@ -94,7 +94,7 @@
 		},
 
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			const pageRoute = 'zoneCenter/bizKeyConfig'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

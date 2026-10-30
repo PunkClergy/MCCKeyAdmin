@@ -173,7 +173,7 @@
 	export default {
 		data() {
 			return {
-				lang: 'zhCn',
+				lang: 'enUs',
 				tips: tips,
 				agreementList: [],
 				popupShow: false,
@@ -199,7 +199,7 @@
 		onShow() {
 			this.fetchAgreementData();
 			this.fetchCarList();
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			const pageRoute = 'zoneCenter/control'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

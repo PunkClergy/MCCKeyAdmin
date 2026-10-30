@@ -91,7 +91,7 @@
 		components: {},
 
 		data: () => ({
-			lang: 'zhCn',
+			lang: 'enUs',
 			tips: tips,
 
 			screenInfo: {},
@@ -142,7 +142,7 @@
 
 		async onShow() {
 			// 多语言 + 导航栏标题
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			uni.setNavigationBarTitle({
 				title: titles['zoneCenter/trajectory'][this.lang]
 			})

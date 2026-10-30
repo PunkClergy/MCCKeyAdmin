@@ -54,7 +54,7 @@
 	export default {
 		data() {
 			return {
-				lang: 'zhCn',
+				lang: 'enUs',
 				tips: tips,
 
 				y_items: [],
@@ -69,7 +69,7 @@
 		},
 		onShow() {
 			// 多语言 + 导航栏标题
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			const pageRoute = 'zoneCenter/rentRecordList'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

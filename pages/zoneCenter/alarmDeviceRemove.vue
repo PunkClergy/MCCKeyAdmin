@@ -119,7 +119,7 @@
 				currentAddress: '',
 				currentRecord: null,
 				tips: tips,
-				lang: 'zhCn',
+				lang: 'enUs',
 			}
 		},
 
@@ -128,7 +128,7 @@
 		},
 		
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			const pageRoute = 'zoneCenter/alarmDeviceRemove'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

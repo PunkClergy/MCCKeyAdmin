@@ -114,7 +114,7 @@
 	export default {
 		data() {
 			return {
-				lang: 'zhCn',
+				lang: 'enUs',
 				tips: tips,
 
 				totalCount: 0,
@@ -149,11 +149,11 @@
 			}
 		},
 		onLoad() {
-			this.lang = uni.getStorageSync('language') || 'zhCn';
+			this.lang = uni.getStorageSync('language') || 'enUs';
 			this.loadCarMaintenanceList();
 		},
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.lang = uni.getStorageSync('language') || 'enUs'
 			const pageRoute = 'zoneCenter/maintainRemind'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]
