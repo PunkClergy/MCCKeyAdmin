@@ -8,6 +8,7 @@ export const titles = {
 		"thTh": "บทบาทและสิทธิ์",
 		"idId": "Peran & Izin",
 		"miNz": "Ngā tūranga me ngā whakaaetanga",
+		"esEs": "Roles y permisos",
 	},
 	"zoneCenter/alarmDeviceRemove": {
 		"zhCn": "设备拆除提醒",
@@ -18,6 +19,7 @@ export const titles = {
 		"thTh": "แจ้งเตือนอุปกรณ์ถูกถอดออก",
 		"idId": "Peringatan Perangkat Dilepas",
 		"miNz": "Matohu whakakōpeka taputapu",
+		"esEs": "Alarma de manipulación",
 	},
 	"zoneCenter/transferAdmin": {
 		"zhCn": "移交管理员",
@@ -28,6 +30,7 @@ export const titles = {
 		"thTh": "โอนสิทธิ์ผู้ดูแลระบบ",
 		"idId": "Serahkan Administrator",
 		"miNz": "Whakawhiti kaiwhakahaere",
+		"esEs": "Transferir administrador",
 	},
 	"zoneCenter/userRole": {
 		"zhCn": "人员与角色",
@@ -38,6 +41,7 @@ export const titles = {
 		"thTh": "บุคลากรและบทบาท",
 		"idId": "Staf & Peran",
 		"miNz": "Ngā kaimahi me ngā tūranga",
+		"esEs": "Personal y roles",
 	},
 	"zoneCenter/trajectory": {
 		"zhCn": "轨迹查询",
@@ -48,6 +52,7 @@ export const titles = {
 		"thTh": "เล่นย้อนรอยเส้นทาง",
 		"idId": "Pemutaran Jejak Perjalanan",
 		"miNz": "Takahanga ara",
+		"esEs": "Reproducción de trayectoria",
 	},
 	"zoneCenter/riskManagement": {
 		"zhCn": "远程控车风控",
@@ -58,6 +63,7 @@ export const titles = {
 		"thTh": "จัดการความเสี่ยงควบคุมรถระยะไกล",
 		"idId": "Manajemen Risiko Kontrol Jarak Jauh Kendaraan",
 		"miNz": "Whakahaere mō ngā mōrearea waka mamao",
+		"esEs": "Gestión de riesgos",
 	},
 	"zoneCenter/carServiceKey": {
 		"zhCn": "车务使用电子钥匙",
@@ -68,6 +74,7 @@ export const titles = {
 		"thTh": "กุญแจอิเล็กทรอนิกส์สำหรับพนักงานรถ",
 		"idId": "Kunci Elektronik Petugas Layanan Mobil",
 		"miNz": "Kī hiko mō te kaimahi waka",
+		"esEs": "Llave de valet",
 	},
 	"zoneCenter/rentRecordList": {
 		"zhCn": "还车记录",
@@ -78,6 +85,7 @@ export const titles = {
 		"thTh": "ประวัติการคืนรถ",
 		"idId": "Catatan Pengembalian Kendaraan",
 		"miNz": "Ngā rārangi whakahoki waka",
+		"esEs": "Registros de devolución",
 	},
 	"zoneCenter/maintainRemind": {
 		"zhCn": "保养提醒",
@@ -88,6 +96,7 @@ export const titles = {
 		"thTh": "การแจ้งเตือนบำรุงรักษา",
 		"idId": "Pengingat Perawatan",
 		"miNz": "Whakamahara tiaki waka",
+		"esEs": "Recordatorio de mantenimiento",
 	},
 	"zoneCenter/bizKeyConfig": {
 		"zhCn": "车务配置电子钥匙",
@@ -98,6 +107,7 @@ export const titles = {
 		"thTh": "ตั้งค่ากุญแจอิเล็กทรอนิกส์พนักงานรถ",
 		"idId": "Konfigurasi Kunci Elektronik Petugas Layanan",
 		"miNz": "Whirihora kī hiko kaimahi waka",
+		"esEs": "Llave electrónica de valet",
 	},
 	"zoneCenter/carKeyConfig": {
 		"zhCn": "车辆配置电子钥匙",
@@ -108,6 +118,7 @@ export const titles = {
 		"thTh": "ตั้งค่ากุญแจอิเล็กทรอนิกส์ของรถ",
 		"idId": "Pengaturan Kunci Elektronik Kendaraan",
 		"miNz": "Whirihora kī hiko o te waka",
+		"esEs": "Configuración de llave electrónica",
 	},
 	"zoneCenter/sendKeyToRenter": {
 		"zhCn": "发送钥匙",
@@ -118,6 +129,7 @@ export const titles = {
 		"thTh": "ส่งกุญแจ",
 		"idId": "Kirim Kunci",
 		"miNz": "Tukua te kī",
+		"esEs": "Enviar llave",
 	},
 	"zoneCenter/completeCustomerInfo": {
 		"zhCn": "完善客户资料",
@@ -128,6 +140,7 @@ export const titles = {
 		"thTh": "กรอกข้อมูลลูกค้าให้สมบูรณ์",
 		"idId": "Lengkapi Data Pelanggan",
 		"miNz": "Whakaoti kōrero mō te kiritaki",
+		"esEs": "Completar perfil del cliente",
 	},
 	"userCenter/index": {
 		"zhCn": "个人中心",
@@ -138,6 +151,7 @@ export const titles = {
 		"thTh": "ศูนย์ผู้ใช้งาน",
 		"idId": "Pusat Pengguna",
 		"miNz": "Pokapū kaiwhakamahi",
+		"esEs": "Centro de usuario",
 	},
 	"login/index": {
 		"zhCn": "智信通",
@@ -148,6 +162,7 @@ export const titles = {
 		"thTh": "WiseLink Auto Global",
 		"idId": "WiseLink Auto Global",
 		"miNz": "WiseLink Auto Global",
+		"esEs": "WiseLink Auto Global",
 	},
 	"userCenter/register": {
 		"zhCn": "注册账号",
@@ -158,6 +173,7 @@ export const titles = {
 		"thTh": "ลงทะเบียนบัญชี",
 		"idId": "Daftar Akun",
 		"miNz": "Rēhita pūkete",
+		"esEs": "Registrar cuenta",
 	},
 	"zoneCenter/position": {
 		"zhCn": "车辆位置",
@@ -168,6 +184,7 @@ export const titles = {
 		"thTh": "ตำแหน่งยานพาหนะ",
 		"idId": "Posisi Kendaraan",
 		"miNz": "Tūnga Waka",
+		"esEs": "Ubicación del vehículo",
 	},
 	"zoneCenter/control": {
 		"zhCn": "管控规则列表",
@@ -178,6 +195,7 @@ export const titles = {
 		"thTh": "รายการกฎควบคุม",
 		"idId": "Daftar Aturan Kontrol",
 		"miNz": "Rārangi ture whakahaere",
+		"esEs": "Lista de reglas de control",
 	},
 
 
@@ -190,6 +208,7 @@ export const titles = {
 		"thTh": "บันทึกแจ้งเตือนรั้ว",
 		"idId": "Catatan Alarm Pagar",
 		"miNz": "Ngā rekoata whakatūpato taiepa",
+		"esEs": "Registros de alarma de geovalla",
 	},
 	"zoneCenter/returnPhotos": {
 		"zhCn": "归还车辆",
@@ -200,6 +219,7 @@ export const titles = {
 		"thTh": "คืนรถ",
 		"idId": "Kembalikan Kendaraan",
 		"miNz": "Whakahoki waka",
+		"esEs": "Devolver vehículo",
 	},
 	"zoneCenter/netKeySending": {
 		"zhCn": "发送电子钥匙",
@@ -210,6 +230,7 @@ export const titles = {
 		"thTh": "ส่งกุญแจอิเล็กทรอนิกส์",
 		"idId": "Kirim Kunci Elektronik",
 		"miNz": "Tukua kī hiko",
+		"esEs": "Enviar llave electrónica",
 	},
 	"zoneCenter/onlineCarHailing": {
 		"zhCn": "网约车列表",
@@ -220,6 +241,7 @@ export const titles = {
 		"thTh": "รายการเรียกรถออนไลน์",
 		"idId": "Daftar Transportasi Online",
 		"miNz": "Rārangi waka-hoko-hāere",
+		"esEs": "Lista de transporte bajo demanda",
 	},
 	"zoneCenter/returnRecord": {
 		"zhCn": "还车记录",
@@ -230,6 +252,7 @@ export const titles = {
 		"thTh": "ประวัติการคืนรถ",
 		"idId": "Catatan Pengembalian Kendaraan",
 		"miNz": "Ngā rārangi whakahoki waka",
+		"esEs": "Registros de devolución",
 	},
 	"userCenter/completeCustomerInfo": {
 		"zhCn": "完善客户资料",
@@ -240,5 +263,6 @@ export const titles = {
 		"thTh": "กรอกข้อมูลลูกค้าให้สมบูรณ์",
 		"idId": "Lengkapi Data Pelanggan",
 		"miNz": "Whakaoti kōrero mō te kiritaki",
+		"esEs": "Completar perfil del cliente",
 	},
 }

@@ -8,6 +8,7 @@ export const tips = {
 		"thTh": "โทรออก",
 		"idId": "Lakukan Panggilan",
 		"miNz": "Waea atu",
+		"esEs": "Realizar llamada",
 	},
 	"DoYouWantToCallCustomerService": {
 		"zhCn": "是否拨打客服电话",
@@ -18,6 +19,7 @@ export const tips = {
 		"thTh": "ต้องการโทรหาฝ่ายบริการลูกค้าหรือไม่",
 		"idId": "Apakah anda ingin menghubungi layanan pelanggan",
 		"miNz": "Kei te hiahia koe ki te waea ki te ratonga kiritaki",
+		"esEs": "¿Desea llamar al servicio de atención al cliente?",
 	},
 	"Call": {
 		"zhCn": "拨打",
@@ -28,6 +30,7 @@ export const tips = {
 		"thTh": "โทร",
 		"idId": "Panggil",
 		"miNz": "Waea",
+		"esEs": "Llamar",
 	},
 	"Confirm": {
 		"zhCn": "确认",
@@ -38,6 +41,7 @@ export const tips = {
 		"thTh": "ยืนยัน",
 		"idId": "Konfirmasi",
 		"miNz": "Whakaū",
+		"esEs": "Confirmar",
 	},
 	"Cancel": {
 		"zhCn": "取消",
@@ -48,6 +52,7 @@ export const tips = {
 		"thTh": "ยกเลิก",
 		"idId": "Batal",
 		"miNz": "Whakakore",
+		"esEs": "Cancelar",
 	},
 	"DialFailed": {
 		"zhCn": "拨号失败",
@@ -58,6 +63,7 @@ export const tips = {
 		"thTh": "การโทรล้มเหลว",
 		"idId": "Panggilan gagal",
 		"miNz": "I rahua te waea",
+		"esEs": "Error de marcación",
 	},
 	"Tip": {
 		"zhCn": "提示",
@@ -68,6 +74,7 @@ export const tips = {
 		"thTh": "คำแนะนำ",
 		"idId": "Tips",
 		"miNz": "Tohu",
+		"esEs": "Aviso",
 	},
 	"ExitClearCache": {
 		"zhCn": "确定要退出并清除所有缓存吗?",
@@ -78,6 +85,7 @@ export const tips = {
 		"thTh": "แน่ใจหรือไม่ที่จะออกและลบแคชทั้งหมด",
 		"idId": "Apakah anda yakin ingin keluar dan menghapus semua cache?",
 		"miNz": "Kei te tino hiahia koe ki te puta me te ūkui katoa te keteroki?",
+		"esEs": "¿Seguro que desea salir y borrar toda la caché?",
 	},
 	"MyProfile": {
 		"zhCn": "我的资料",
@@ -88,6 +96,7 @@ export const tips = {
 		"thTh": "ข้อมูลส่วนตัวของฉัน",
 		"idId": "Profil Saya",
 		"miNz": "Taku kōrero whaiaro",
+		"esEs": "Mi perfil",
 	},
 	"CompanyName": {
 		"zhCn": "企业名称",
@@ -98,6 +107,7 @@ export const tips = {
 		"thTh": "ชื่อบริษัท",
 		"idId": "Nama Perusahaan",
 		"miNz": "Ingoa kamupene",
+		"esEs": "Nombre de la empresa",
 	},
 	"PleaseEnterCompanyName": {
 		"zhCn": "请输入企业名称",
@@ -108,6 +118,7 @@ export const tips = {
 		"thTh": "กรุณากรอกชื่อบริษัท",
 		"idId": "Silakan masukkan nama perusahaan",
 		"miNz": "Tena koa whakauru mai te ingoa kamupene",
+		"esEs": "Introduzca el nombre de la empresa",
 	},
 	"ContactPerson": {
 		"zhCn": "联系人",
@@ -118,6 +129,7 @@ export const tips = {
 		"thTh": "ผู้ติดต่อ",
 		"idId": "Orang Kontak",
 		"miNz": "Tangata whakapā",
+		"esEs": "Persona de contacto",
 	},
 	"PleaseEnterContactPerson": {
 		"zhCn": "请输入联系人",
@@ -128,6 +140,7 @@ export const tips = {
 		"thTh": "กรุณากรอกชื่อผู้ติดต่อ",
 		"idId": "Silakan masukkan orang kontak",
 		"miNz": "Tena koa whakauru mai te tangata whakapā",
+		"esEs": "Introduzca el contacto",
 	},
 	"ContactPhone": {
 		"zhCn": "联系电话",
@@ -138,6 +151,7 @@ export const tips = {
 		"thTh": "หมายเลขโทรศัพท์ติดต่อ",
 		"idId": "Telepon Kontak",
 		"miNz": "Waea whakapā",
+		"esEs": "Teléfono de contacto",
 	},
 	"PleaseEnterContactPhone": {
 		"zhCn": "请输入联系电话",
@@ -148,6 +162,7 @@ export const tips = {
 		"thTh": "กรุณากรอกหมายเลขโทรศัพท์ติดต่อ",
 		"idId": "Silakan masukkan nomor telepon kontak",
 		"miNz": "Tena koa whakauru mai te nama waea whakapā",
+		"esEs": "Introduzca el teléfono de contacto",
 	},
 	"Remarks": {
 		"zhCn": "备注",
@@ -158,6 +173,7 @@ export const tips = {
 		"thTh": "หมายเหตุ",
 		"idId": "Catatan",
 		"miNz": "Ngā kōrero tuku iho",
+		"esEs": "Observaciones",
 	},
 	"PleaseEnterRemarks": {
 		"zhCn": "请输入备注",
@@ -168,6 +184,7 @@ export const tips = {
 		"thTh": "กรุณากรอกหมายเหตุ",
 		"idId": "Silakan masukkan catatan",
 		"miNz": "Tena koa whakauru mai ngā kōrero tuku iho",
+		"esEs": "Introduzca las observaciones",
 	},
 	"BillingInfo": {
 		"zhCn": "开票信息",
@@ -178,6 +195,7 @@ export const tips = {
 		"thTh": "ข้อมูลใบแจ้งหนี้",
 		"idId": "Informasi Penagihan",
 		"miNz": "Ngā kōrero nama",
+		"esEs": "Datos de facturación",
 	},
 	"BillingName": {
 		"zhCn": "开票名称",
@@ -188,6 +206,7 @@ export const tips = {
 		"thTh": "ชื่อสำหรับใบแจ้งหนี้",
 		"idId": "Nama Penagihan",
 		"miNz": "Ingoa nama",
+		"esEs": "Nombre de facturación",
 	},
 	"PleaseEnterBillingName": {
 		"zhCn": "请输入开票名称",
@@ -198,6 +217,7 @@ export const tips = {
 		"thTh": "กรุณากรอกชื่อสำหรับใบแจ้งหนี้",
 		"idId": "Silakan masukkan nama penagihan",
 		"miNz": "Tena koa whakauru mai te ingoa nama",
+		"esEs": "Introduzca el nombre de facturación",
 	},
 	"TaxpayerId": {
 		"zhCn": "纳税人识别号",
@@ -208,6 +228,7 @@ export const tips = {
 		"thTh": "หมายเลขประจำตัวผู้เสียภาษี",
 		"idId": "ID Wajib Pajak",
 		"miNz": "Tau kaitākete",
+		"esEs": "NIF / CIF",
 	},
 	"PleaseEnterTaxpayerId": {
 		"zhCn": "请输入纳税人识别号",
@@ -218,6 +239,7 @@ export const tips = {
 		"thTh": "กรุณากรอกหมายเลขประจำตัวผู้เสียภาษี",
 		"idId": "Silakan masukkan ID wajib pajak",
 		"miNz": "Tena koa whakauru mai te tau kaitākete",
+		"esEs": "Introduzca el NIF",
 	},
 	"PleaseEnterPhone": {
 		"zhCn": "请输入电话",
@@ -228,6 +250,7 @@ export const tips = {
 		"thTh": "กรุณากรอกหมายเลขโทรศัพท์",
 		"idId": "Silakan masukkan nomor telepon",
 		"miNz": "Tena koa whakauru mai te nama waea",
+		"esEs": "Introduzca el teléfono",
 	},
 	"Address": {
 		"zhCn": "地址",
@@ -238,6 +261,7 @@ export const tips = {
 		"thTh": "ที่อยู่",
 		"idId": "Alamat",
 		"miNz": "Wāhi noho",
+		"esEs": "Dirección",
 	},
 	"PleaseEnterAddress": {
 		"zhCn": "请输入地址",
@@ -248,6 +272,7 @@ export const tips = {
 		"thTh": "กรุณากรอกที่อยู่",
 		"idId": "Silakan masukkan alamat",
 		"miNz": "Tena koa whakauru mai te wāhi noho",
+		"esEs": "Introduzca la dirección",
 	},
 	"BankName": {
 		"zhCn": "开户行",
@@ -258,6 +283,7 @@ export const tips = {
 		"thTh": "ชื่อธนาคาร",
 		"idId": "Nama Bank",
 		"miNz": "Ingoa peeke",
+		"esEs": "Nombre del banco",
 	},
 	"PleaseEnterBankName": {
 		"zhCn": "请输入开户行",
@@ -268,6 +294,7 @@ export const tips = {
 		"thTh": "กรุณากรอกชื่อธนาคาร",
 		"idId": "Silakan masukkan nama bank",
 		"miNz": "Tena koa whakauru mai te ingoa peeke",
+		"esEs": "Introduzca el nombre del banco",
 	},
 	"BankAccount": {
 		"zhCn": "开户账号",
@@ -278,6 +305,7 @@ export const tips = {
 		"thTh": "บัญชีธนาคาร",
 		"idId": "Rekening Bank",
 		"miNz": "Pūkete peeke",
+		"esEs": "Número de cuenta",
 	},
 	"PleaseEnterBankAccount": {
 		"zhCn": "请输入开户账号",
@@ -288,6 +316,7 @@ export const tips = {
 		"thTh": "กรุณากรอกหมายเลขบัญชีธนาคาร",
 		"idId": "Silakan masukkan nomor rekening bank",
 		"miNz": "Tena koa whakauru mai te nama pūkete peeke",
+		"esEs": "Introduzca el número de cuenta",
 	},
 	"PleaseLogin": {
 		"zhCn": "请登录",
@@ -298,6 +327,7 @@ export const tips = {
 		"thTh": "กรุณาเข้าสู่ระบบ",
 		"idId": "Silakan masuk",
 		"miNz": "Tena koa takiuru mai",
+		"esEs": "Inicie sesión",
 	},
 	"WelcomeUse": {
 		"zhCn": "欢迎使用",
@@ -308,6 +338,7 @@ export const tips = {
 		"thTh": "ยินดีที่ได้รู้จัก",
 		"idId": "Selamat Datang",
 		"miNz": "Nau mai ki te whakamahi",
+		"esEs": "Bienvenido",
 	},
 	"PreparingService": {
 		"zhCn": "正在为您准备优质服务",
@@ -318,6 +349,7 @@ export const tips = {
 		"thTh": "กำลังเตรียมบริการคุณภาพสูงสำหรับคุณ",
 		"idId": "Sedang menyiapkan layanan berkualitas untuk anda",
 		"miNz": "Kei te whakarite ratonga kounga mōu",
+		"esEs": "Preparando un servicio de calidad para usted",
 	},
 	"ZhiXinTong": {
 		"zhCn": "智信通",
@@ -328,6 +360,7 @@ export const tips = {
 		"thTh": "WiseLink Auto",
 		"idId": "WiseLink Auto",
 		"miNz": "WiseLink Auto",
+		"esEs": "WiseLink Auto",
 	},
 	"RentalEKey": {
 		"zhCn": "电子钥匙",
@@ -338,6 +371,7 @@ export const tips = {
 		"thTh": "กุญแจอิเล็กทรอนิกส์รถเช่า",
 		"idId": "Kunci Elektronik Sewa",
 		"miNz": "Kī hiko rēti",
+		"esEs": "Llave electrónica de alquiler",
 	},
 	"UserGuide": {
 		"zhCn": "使用指南",
@@ -348,6 +382,7 @@ export const tips = {
 		"thTh": "คู่มือผู้ใช้",
 		"idId": "Panduan Pengguna",
 		"miNz": "Aratohu kaiwhakamahi",
+		"esEs": "Guía de uso",
 	},
 	"SendKey": {
 		"zhCn": "发送钥匙",
@@ -358,6 +393,7 @@ export const tips = {
 		"thTh": "ส่งกุญแจ",
 		"idId": "Kirim Kunci",
 		"miNz": "Tukua te kī",
+		"esEs": "Enviar llave",
 	},
 	"UsageLogs": {
 		"zhCn": "使用记录",
@@ -368,6 +404,7 @@ export const tips = {
 		"thTh": "ประวัติการใช้งาน",
 		"idId": "Catatan Penggunaan",
 		"miNz": "Ngā rārangi whakamahi",
+		"esEs": "Registros de uso",
 	},
 	"VIN": {
 		"zhCn": "车架号",
@@ -378,6 +415,7 @@ export const tips = {
 		"thTh": "หมายเลขตัวถัง (VIN)",
 		"idId": "VIN",
 		"miNz": "VIN",
+		"esEs": "VIN",
 	},
 	"FuelCapacity": {
 		"zhCn": "油箱容积",
@@ -388,6 +426,7 @@ export const tips = {
 		"thTh": "ความจุถังน้ำมัน",
 		"idId": "Kapasitas Tangki Bahan Bakar",
 		"miNz": "Rōrahi pūkoro hinu",
+		"esEs": "Capacidad del depósito",
 	},
 	"DevicePlatform": {
 		"zhCn": "设备平台",
@@ -398,6 +437,7 @@ export const tips = {
 		"thTh": "แพลตฟอร์มอุปกรณ์",
 		"idId": "Platform Perangkat",
 		"miNz": "Papa taputapu",
+		"esEs": "Plataforma del dispositivo",
 	},
 	"DeviceID": {
 		"zhCn": "设备号",
@@ -408,6 +448,7 @@ export const tips = {
 		"thTh": "รหัสอุปกรณ์",
 		"idId": "ID Perangkat",
 		"miNz": "ID taputapu",
+		"esEs": "ID del dispositivo",
 	},
 	"NoData": {
 		"zhCn": "暂无数据",
@@ -418,6 +459,7 @@ export const tips = {
 		"thTh": "ไม่มีข้อมูล",
 		"idId": "Tidak Ada Data",
 		"miNz": "Kāore he raraunga",
+		"esEs": "Sin datos",
 	},
 	"PlateDeviceUser": {
 		"zhCn": "车牌号/设备号/使用人",
@@ -428,6 +470,7 @@ export const tips = {
 		"thTh": "ทะเบียนรถ / รหัสอุปกรณ์ / ผู้ใช้",
 		"idId": "Plat / ID Perangkat / Pengguna",
 		"miNz": "Tau pereti / ID taputapu / kaiwhakamahi",
+		"esEs": "Matrícula / ID dispositivo / Usuario",
 	},
 	"InUse": {
 		"zhCn": "使用中",
@@ -438,6 +481,7 @@ export const tips = {
 		"thTh": "กำลังใช้งาน",
 		"idId": "Sedang Digunakan",
 		"miNz": "Kei te whakamahia",
+		"esEs": "En uso",
 	},
 	"Expired": {
 		"zhCn": "已过期",
@@ -448,6 +492,7 @@ export const tips = {
 		"thTh": "หมดอายุ",
 		"idId": "Kedaluwarsa",
 		"miNz": "Kua pau",
+		"esEs": "Caducado",
 	},
 	"Cancelled": {
 		"zhCn": "已取消",
@@ -458,6 +503,7 @@ export const tips = {
 		"thTh": "ยกเลิกแล้ว",
 		"idId": "Dibatalkan",
 		"miNz": "Kua whakakorehia",
+		"esEs": "Cancelado",
 	},
 	"Edit": {
 		"zhCn": "修改",
@@ -468,6 +514,7 @@ export const tips = {
 		"thTh": "แก้ไข",
 		"idId": "Edit",
 		"miNz": "Whakatika",
+		"esEs": "Editar",
 	},
 	"Copied": {
 		"zhCn": "已复制",
@@ -478,6 +525,7 @@ export const tips = {
 		"thTh": "คัดลอกแล้ว",
 		"idId": "Tersalin",
 		"miNz": "Kua tāruatia",
+		"esEs": "Copiado",
 	},
 	"CopyLink": {
 		"zhCn": "复制链接",
@@ -488,6 +536,7 @@ export const tips = {
 		"thTh": "คัดลอกลิงก์",
 		"idId": "Salin Tautan",
 		"miNz": "Tārua te hononga",
+		"esEs": "Copiar enlace",
 	},
 	"CancelCarUse": {
 		"zhCn": "取消用车",
@@ -498,6 +547,7 @@ export const tips = {
 		"thTh": "ยกเลิกการใช้รถ",
 		"idId": "Batal Penggunaan Kendaraan",
 		"miNz": "Whakakore te whakamahi waka",
+		"esEs": "Cancelar uso del vehículo",
 	},
 	"ViewPhotos": {
 		"zhCn": "查看照片",
@@ -508,6 +558,7 @@ export const tips = {
 		"thTh": "ดูรูปภาพ",
 		"idId": "Lihat Foto",
 		"miNz": "Tirohia ngā whakaahua",
+		"esEs": "Ver fotos",
 	},
 	"PlateNo": {
 		"zhCn": "车牌号",
@@ -518,6 +569,7 @@ export const tips = {
 		"thTh": "หมายเลขทะเบียนรถ",
 		"idId": "Nomor Plat",
 		"miNz": "Tau pereti",
+		"esEs": "Matrícula",
 	},
 	"EnterPlateNo": {
 		"zhCn": "请输入车牌号",
@@ -528,6 +580,7 @@ export const tips = {
 		"thTh": "กรุณากรอกหมายเลขทะเบียนรถ",
 		"idId": "Masukkan nomor plat",
 		"miNz": "Whakauru mai te tau pereti",
+		"esEs": "Introduzca la matrícula",
 	},
 	"User": {
 		"zhCn": "使用人",
@@ -538,6 +591,7 @@ export const tips = {
 		"thTh": "ผู้ใช้",
 		"idId": "Pengguna",
 		"miNz": "Kaiwhakamahi",
+		"esEs": "Usuario",
 	},
 	"EnterUser": {
 		"zhCn": "请输入使用人",
@@ -548,6 +602,7 @@ export const tips = {
 		"thTh": "กรุณากรอกชื่อผู้ใช้",
 		"idId": "Masukkan nama pengguna",
 		"miNz": "Whakauru mai te ingoa kaiwhakamahi",
+		"esEs": "Introduzca el usuario",
 	},
 	"AccountPhone": {
 		"zhCn": "账号/手机号",
@@ -558,6 +613,7 @@ export const tips = {
 		"thTh": "บัญชี / หมายเลขโทรศัพท์",
 		"idId": "Akun / Telepon",
 		"miNz": "Pūkete / Waea",
+		"esEs": "Cuenta / Teléfono",
 	},
 	'AccountLogin': {
 		"zhCn": "账号登录",
@@ -568,6 +624,7 @@ export const tips = {
 		"thTh": "เข้าสู่ระบบบัญชี",
 		"idId": "Masuk Akun",
 		"miNz": "Whakauru Pūkete",
+		"esEs": "Cuenta / Teléfono",
 	},
 	'GuestLogin': {
 		"zhCn": "游客登录",
@@ -578,6 +635,7 @@ export const tips = {
 		"thTh": "เข้าสู่ระบบผู้เยี่ยมชม",
 		"idId": "Masuk Tamu",
 		"miNz": "Whakauru Manuhiri",
+		"esEs": "Cuenta / Teléfono",
 	},
 
 	"EnterAccountPhone": {
@@ -589,6 +647,7 @@ export const tips = {
 		"thTh": "กรุณากรอกหมายเลขโทรศัพท์หรือบัญชี",
 		"idId": "Masukkan telepon / akun",
 		"miNz": "Whakauru mai te waea, pūkete rānei",
+		"esEs": "Introduzca teléfono o cuenta",
 	},
 	"StartTime": {
 		"zhCn": "开始时间",
@@ -599,6 +658,7 @@ export const tips = {
 		"thTh": "เวลาเริ่มต้น",
 		"idId": "Waktu Mulai",
 		"miNz": "Wā tīmata",
+		"esEs": "Hora de inicio",
 	},
 	"EndTime": {
 		"zhCn": "结束时间",
@@ -609,6 +669,7 @@ export const tips = {
 		"thTh": "เวลาสิ้นสุด",
 		"idId": "Waktu Selesai",
 		"miNz": "Wā mutu",
+		"esEs": "Hora de finalización",
 	},
 	"MultiUserAllowed": {
 		"zhCn": "是否允许多人使用",
@@ -619,6 +680,7 @@ export const tips = {
 		"thTh": "อนุญาตให้หลายคนใช้งานหรือไม่",
 		"idId": "Izinkan Banyak Pengguna",
 		"miNz": "Whakaaetia ngā kaiwhakamahi maha",
+		"esEs": "¿Permitir varios usuarios?",
 	},
 	"Remark": {
 		"zhCn": "备注",
@@ -629,6 +691,7 @@ export const tips = {
 		"thTh": "หมายเหตุ",
 		"idId": "Catatan",
 		"miNz": "Kōrero tuku iho",
+		"esEs": "Observación",
 	},
 	"EnterParkingPos": {
 		"zhCn": "请输入车位号或车辆位置",
@@ -639,6 +702,7 @@ export const tips = {
 		"thTh": "กรุณากรอกหมายเลขที่จอดรถหรือตำแหน่งรถ",
 		"idId": "Masukkan nomor parkir atau lokasi kendaraan",
 		"miNz": "Whakauru mai te tau wāhi tū waka, te wāhi rānei o te waka",
+		"esEs": "Introduzca el número de plaza o la ubicación",
 	},
 	"Total": {
 		"zhCn": "共",
@@ -649,6 +713,7 @@ export const tips = {
 		"thTh": "ทั้งหมด",
 		"idId": "Total",
 		"miNz": "Katoa",
+		"esEs": "Total",
 	},
 	"Records": {
 		"zhCn": "记录",
@@ -659,6 +724,7 @@ export const tips = {
 		"thTh": "รายการ",
 		"idId": "catatan",
 		"miNz": "ngā rārangi",
+		"esEs": "registros",
 	},
 	"Allow": {
 		"zhCn": "允许",
@@ -669,6 +735,7 @@ export const tips = {
 		"thTh": "อนุญาต",
 		"idId": "Izinkan",
 		"miNz": "Whakaae",
+		"esEs": "Permitir",
 	},
 	"Disallow": {
 		"zhCn": "不允许",
@@ -679,6 +746,7 @@ export const tips = {
 		"thTh": "ไม่อนุญาต",
 		"idId": "Tidak Izinkan",
 		"miNz": "Whakakahore",
+		"esEs": "No permitir",
 	},
 	"SendSuccess": {
 		"zhCn": "发送成功",
@@ -689,6 +757,7 @@ export const tips = {
 		"thTh": "ส่งสำเร็จ",
 		"idId": "Berhasil Dikirim",
 		"miNz": "I angitu te tuku",
+		"esEs": "Enviado correctamente",
 	},
 	"SendFailed": {
 		"zhCn": "发送失败",
@@ -699,6 +768,7 @@ export const tips = {
 		"thTh": "ส่งล้มเหลว",
 		"idId": "Gagal Dikirim",
 		"miNz": "I rahua te tuku",
+		"esEs": "Error al enviar",
 	},
 	"CopySuccess": {
 		"zhCn": "复制成功",
@@ -709,6 +779,7 @@ export const tips = {
 		"thTh": "คัดลอกสำเร็จ",
 		"idId": "Berhasil Disalin",
 		"miNz": "I angitu te tārua",
+		"esEs": "Copiado correctamente",
 	},
 	"CarList": {
 		"zhCn": "车辆列表",
@@ -719,6 +790,7 @@ export const tips = {
 		"thTh": "รายการรถยนต์",
 		"idId": "Daftar Kendaraan",
 		"miNz": "Rārangi waka",
+		"esEs": "Lista de vehículos",
 		"jaJp": "車両一覧"
 	},
 	"Car": {
@@ -730,6 +802,7 @@ export const tips = {
 		"thTh": "รถยนต์",
 		"idId": "Kendaraan",
 		"miNz": "Waka",
+		"esEs": "Vehículo",
 		"jaJp": "車両"
 	},
 	"Add": {
@@ -741,6 +814,7 @@ export const tips = {
 		"thTh": "เพิ่ม",
 		"idId": "Tambah",
 		"miNz": "Tāpiri",
+		"esEs": "Añadir",
 		"jaJp": "追加"
 	},
 	"Delete": {
@@ -752,6 +826,7 @@ export const tips = {
 		"thTh": "ลบ",
 		"idId": "Hapus",
 		"miNz": "Muku",
+		"esEs": "Eliminar",
 		"jaJp": "削除"
 	},
 	"SearchPlaceholder": {
@@ -763,6 +838,7 @@ export const tips = {
 		"thTh": "ทะเบียนรถ / SN / รุ่นรถ / ซีรีส์",
 		"idId": "Plat / SN / Model / Seri",
 		"miNz": "Tau pereti / SN / tauira / raupapa",
+		"esEs": "Matrícula / SN / Modelo / Serie",
 		"jaJp": "ナンバー／ID／モデル／シリーズ"
 	},
 	"TotalRecords": {
@@ -774,6 +850,7 @@ export const tips = {
 		"thTh": "ทั้งหมด ",
 		"idId": "Total ",
 		"miNz": "Katoa ",
+		"esEs": "En total",
 		"jaJp": "合計"
 	},
 	"Items": {
@@ -785,6 +862,7 @@ export const tips = {
 		"thTh": " รายการ",
 		"idId": " item",
 		"miNz": " ngā rārangi",
+		"esEs": " registros",
 		"jaJp": "件"
 	},
 	"SelectAll": {
@@ -796,6 +874,7 @@ export const tips = {
 		"thTh": "เลือกทั้งหมด",
 		"idId": "Pilih Semua",
 		"miNz": "Kōwhiri katoa",
+		"esEs": "Seleccionar todo",
 		"jaJp": "すべて選択"
 	},
 	"DeviceSN": {
@@ -807,6 +886,7 @@ export const tips = {
 		"thTh": "SN อุปกรณ์",
 		"idId": "SN Perangkat",
 		"miNz": "SN taputapu",
+		"esEs": "SN del dispositivo",
 		"jaJp": "デバイスID"
 	},
 	"EffectivePeriod": {
@@ -818,6 +898,7 @@ export const tips = {
 		"thTh": "ระยะเวลาที่มีผล",
 		"idId": "Masa Berlaku",
 		"miNz": "Wā whai hua",
+		"esEs": "Periodo de vigencia",
 		"jaJp": "有効期間"
 	},
 	"SelectThisCar": {
@@ -829,6 +910,7 @@ export const tips = {
 		"thTh": "เลือกรถคันนี้",
 		"idId": "Pilih Kendaraan Ini",
 		"miNz": "Kōwhiri tēnei waka",
+		"esEs": "Seleccionar este vehículo",
 		"jaJp": "この車を選択"
 	},
 	"PlateNumber": {
@@ -840,6 +922,7 @@ export const tips = {
 		"thTh": "หมายเลขทะเบียนรถ",
 		"idId": "Nomor Plat",
 		"miNz": "Tau pereti",
+		"esEs": "Matrícula",
 		"jaJp": "ナンバープレート"
 	},
 	"VehicleSeries": {
@@ -851,6 +934,7 @@ export const tips = {
 		"thTh": "ซีรีส์รถยนต์",
 		"idId": "Seri Kendaraan",
 		"miNz": "Raupapa waka",
+		"esEs": "Serie del vehículo",
 		"jaJp": "車種シリーズ"
 	},
 	"VehicleModel": {
@@ -862,6 +946,7 @@ export const tips = {
 		"thTh": "รุ่นรถยนต์",
 		"idId": "Model Kendaraan",
 		"miNz": "Tauira waka",
+		"esEs": "Modelo del vehículo",
 		"jaJp": "車種"
 	},
 	"ModelYear": {
@@ -873,6 +958,7 @@ export const tips = {
 		"thTh": "ปีรุ่นรถ",
 		"idId": "Tahun Model",
 		"miNz": "Tau tauira",
+		"esEs": "Año del modelo",
 		"jaJp": "年式"
 	},
 	"TotalMileage": {
@@ -884,6 +970,7 @@ export const tips = {
 		"thTh": "ระยะทางรวม",
 		"idId": "Total Jarak Tempuh",
 		"miNz": "Te katoa o te tawhiti haere",
+		"esEs": "Kilometraje total actual",
 		"jaJp": "総走行距離"
 	},
 	"MaintainMileage": {
@@ -895,6 +982,7 @@ export const tips = {
 		"thTh": "ระยะทางเมื่อทำการบำรุงรักษา",
 		"idId": "Jarak Tempuh Perawatan",
 		"miNz": "Tawhiti tiaki",
+		"esEs": "Kilómetros mantenidos",
 		"jaJp": "最終整備時走行距離"
 	},
 	"MaintainInterval": {
@@ -906,6 +994,7 @@ export const tips = {
 		"thTh": "ช่วงการบำรุงรักษา",
 		"idId": "Interval Perawatan",
 		"miNz": "Wāhi tiaki",
+		"esEs": "Intervalo de mantenimiento",
 		"jaJp": "整備間隔"
 	},
 	"Tips": {
@@ -917,6 +1006,7 @@ export const tips = {
 		"thTh": "คำแนะนำ",
 		"idId": "Tips",
 		"miNz": "Ngā tohutohu",
+		"esEs": "Consejos",
 		"jaJp": "ヒント"
 	},
 	"ConfirmDelete": {
@@ -928,6 +1018,7 @@ export const tips = {
 		"thTh": "ยืนยันการลบ?",
 		"idId": "Konfirmasi Hapus?",
 		"miNz": "Whakaū te muku?",
+		"esEs": "¿Confirmar eliminación?",
 		"jaJp": "削除してよろしいですか？"
 	},
 	"Empty": {
@@ -939,6 +1030,7 @@ export const tips = {
 		"thTh": "ว่างเปล่า",
 		"idId": "Kosong",
 		"miNz": "Kore kau",
+		"esEs": "Vacío",
 		"jaJp": "空"
 	},
 	"PleaseEnterPlate": {
@@ -950,6 +1042,7 @@ export const tips = {
 		"thTh": "กรุณากรอกหมายเลขทะเบียนรถ",
 		"idId": "Silakan masukkan nomor plat",
 		"miNz": "Tena koa whakauru mai te tau pereti",
+		"esEs": "Introduzca la matrícula",
 		"jaJp": "ナンバーを入力してください"
 	},
 	"PleaseEnterSN": {
@@ -961,6 +1054,7 @@ export const tips = {
 		"thTh": "กรุณากรอก SN อุปกรณ์",
 		"idId": "Silakan masukkan SN perangkat",
 		"miNz": "Tena koa whakauru mai te SN taputapu",
+		"esEs": "Introduzca el SN del dispositivo",
 		"jaJp": "デバイスIDを入力してください"
 	},
 	"PleaseEnterCode": {
@@ -972,6 +1066,7 @@ export const tips = {
 		"thTh": "กรุณากรอกโค้ด",
 		"idId": "Silakan masukkan kode",
 		"miNz": "Tena koa whakauru mai te waehere",
+		"esEs": "Introduzca el código",
 		"jaJp": "コードを入力してください"
 	},
 	"PleaseEnterSeries": {
@@ -983,6 +1078,7 @@ export const tips = {
 		"thTh": "กรุณากรอกซีรีส์รถยนต์",
 		"idId": "Silakan masukkan seri kendaraan",
 		"miNz": "Tena koa whakauru mai te raupapa waka",
+		"esEs": "Introduzca la serie",
 		"jaJp": "シリーズを入力してください"
 	},
 	"PleaseEnterModel": {
@@ -994,6 +1090,7 @@ export const tips = {
 		"thTh": "กรุณากรอกรุ่นรถยนต์",
 		"idId": "Silakan masukkan model kendaraan",
 		"miNz": "Tena koa whakauru mai te tauira waka",
+		"esEs": "Introduzca el modelo",
 		"jaJp": "モデルを入力してください"
 	},
 	"PleaseEnterYear": {
@@ -1005,6 +1102,7 @@ export const tips = {
 		"thTh": "กรุณากรอกปีรุ่นรถ",
 		"idId": "Silakan masukkan tahun model",
 		"miNz": "Tena koa whakauru mai te tau tauira",
+		"esEs": "Introduzca el año",
 		"jaJp": "年式を入力してください"
 	},
 	"PleaseEnterTotalMileage": {
@@ -1016,6 +1114,7 @@ export const tips = {
 		"thTh": "กรุณากรอกระยะทางรวมปัจจุบัน",
 		"idId": "Silakan masukkan total jarak tempuh saat ini",
 		"miNz": "Tena koa whakauru mai te katoa o te tawhiti haere",
+		"esEs": "Introduzca el kilometraje actual",
 		"jaJp": "現在の走行距離を入力してください"
 	},
 	"PleaseEnterMaintainMileage": {
@@ -1027,6 +1126,7 @@ export const tips = {
 		"thTh": "กรุณากรอกระยะทางเมื่อทำการบำรุงรักษา",
 		"idId": "Silakan masukkan jarak tempuh perawatan",
 		"miNz": "Tena koa whakauru mai te tawhiti tiaki",
+		"esEs": "Introduzca los kilómetros mantenidos",
 		"jaJp": "最終整備時走行距離を入力してください"
 	},
 	"PleaseEnterMaintainInterval": {
@@ -1038,6 +1138,7 @@ export const tips = {
 		"thTh": "กรุณากรอกช่วงการบำรุงรักษา",
 		"idId": "Silakan masukkan interval perawatan",
 		"miNz": "Tena koa whakauru mai te wāhi tiaki",
+		"esEs": "Introduzca el intervalo de mantenimiento",
 		"jaJp": "整備間隔を入力してください"
 	},
 	"Account": {
@@ -1049,6 +1150,7 @@ export const tips = {
 		"thTh": "บัญชี",
 		"idId": "Akun",
 		"miNz": "Pūkete",
+		"esEs": "Cuenta",
 		"jaJp": "アカウント"
 	},
 	"Phone": {
@@ -1060,6 +1162,7 @@ export const tips = {
 		"thTh": "หมายเลขโทรศัพท์",
 		"idId": "Telepon",
 		"miNz": "Waea",
+		"esEs": "Teléfono",
 		"jaJp": "電話番号"
 	},
 	"BoundCars": {
@@ -1071,6 +1174,7 @@ export const tips = {
 		"thTh": "รถที่ผูกไว้",
 		"idId": "Kendaraan Terikat",
 		"miNz": "Ngā waka herehia",
+		"esEs": "Vehículos vinculados",
 		"jaJp": "紐付け車両"
 	},
 	"UnbindAll": {
@@ -1082,6 +1186,7 @@ export const tips = {
 		"thTh": "ยกเลิกการผูกทั้งหมด",
 		"idId": "Lepas Semua",
 		"miNz": "Wetewete katoa",
+		"esEs": "Desvincular todos",
 		"jaJp": "すべて解除"
 	},
 	"Unbind": {
@@ -1093,6 +1198,7 @@ export const tips = {
 		"thTh": "ยกเลิกการผูก",
 		"idId": "Lepas",
 		"miNz": "Wetewete",
+		"esEs": "Desvincular",
 		"jaJp": "解除"
 	},
 	"BindCar": {
@@ -1104,6 +1210,7 @@ export const tips = {
 		"thTh": "ผูกรถยนต์",
 		"idId": "Ikat Kendaraan",
 		"miNz": "Here waka",
+		"esEs": "Vincular vehículo",
 		"jaJp": "車両を紐付け"
 	},
 	"ImportantTip": {
@@ -1115,6 +1222,7 @@ export const tips = {
 		"thTh": "ข้อควรระวังสำคัญ",
 		"idId": "Peringatan Penting",
 		"miNz": "Tohutohu nui",
+		"esEs": "Aviso importante",
 		"jaJp": "重要"
 	},
 	"ConfirmUnbind": {
@@ -1126,6 +1234,7 @@ export const tips = {
 		"thTh": "ยืนยันการยกเลิกการผูก?",
 		"idId": "Konfirmasi Lepas?",
 		"miNz": "Whakaū te wetewete?",
+		"esEs": "¿Confirmar desvinculación?",
 		"jaJp": "解除しますか？"
 	},
 	"TotalCars": {
@@ -1137,6 +1246,7 @@ export const tips = {
 		"thTh": "จำนวนรถทั้งหมด",
 		"idId": "Total Kendaraan",
 		"miNz": "Katoa ngā waka",
+		"esEs": "Total de vehículos",
 		"jaJp": "車両総数"
 	},
 	"NeedMaintenance": {
@@ -1148,6 +1258,7 @@ export const tips = {
 		"thTh": "รถที่ต้องการบำรุงรักษา",
 		"idId": "Kendaraan Butuh Perawatan",
 		"miNz": "Ngā waka e hiahia ana ki te tiaki",
+		"esEs": "vehículos necesitan mantenimiento",
 		"jaJp": "台整備必要"
 	},
 	"CarMaintenanceReminder": {
@@ -1159,6 +1270,7 @@ export const tips = {
 		"thTh": "การแจ้งเตือนบำรุงรักษารถยนต์",
 		"idId": "Pengingat Perawatan Kendaraan",
 		"miNz": "Whakamahara tiaki waka",
+		"esEs": "Recordatorio de mantenimiento del vehículo",
 		"jaJp": "車両整備リマインダー"
 	},
 	"RemainingMaintenance": {
@@ -1170,6 +1282,7 @@ export const tips = {
 		"thTh": "ระยะทางที่เหลือก่อนบำรุงรักษา",
 		"idId": "Sisa Jarak Perawatan",
 		"miNz": "Tawhiti e toe ana ki te tiaki",
+		"esEs": "Kilómetros para el mantenimiento",
 		"jaJp": "整備まで残り"
 	},
 	"KM": {
@@ -1181,6 +1294,7 @@ export const tips = {
 		"thTh": "กม.",
 		"idId": "KM",
 		"miNz": "km",
+		"esEs": "km",
 		"jaJp": "km"
 	},
 	"Calibrate": {
@@ -1192,6 +1306,7 @@ export const tips = {
 		"thTh": "ปรับเทียบ",
 		"idId": "Kalibrasi",
 		"miNz": "Whakatika ine",
+		"esEs": "Calibrar",
 		"jaJp": "キャリブレーション"
 	},
 	"MaintenanceCycle": {
@@ -1203,6 +1318,7 @@ export const tips = {
 		"thTh": "รอบการบำรุงรักษา",
 		"idId": "Siklus Perawatan",
 		"miNz": "Huringa tiaki",
+		"esEs": "Ciclo de mantenimiento",
 		"jaJp": "整備サイクル"
 	},
 	"RecordTime": {
@@ -1214,6 +1330,7 @@ export const tips = {
 		"thTh": "เวลาบันทึก",
 		"idId": "Waktu Catatan",
 		"miNz": "Wā rārangi",
+		"esEs": "Hora del registro",
 		"jaJp": "記録時間"
 	},
 	"MaintenanceConfirm": {
@@ -1225,6 +1342,7 @@ export const tips = {
 		"thTh": "ยืนยันการบำรุงรักษา",
 		"idId": "Konfirmasi Perawatan",
 		"miNz": "Whakaū tiaki",
+		"esEs": "Confirmar mantenimiento",
 		"jaJp": "整備確認"
 	},
 	"NoMaintenanceRecords": {
@@ -1236,6 +1354,7 @@ export const tips = {
 		"thTh": "ไม่มีรายการบำรุงรักษาที่ตรงเงื่อนไข",
 		"idId": "Tidak ada catatan perawatan yang sesuai",
 		"miNz": "Kāore he rārangi tiaki e taurite ana",
+		"esEs": "No hay registros de mantenimiento que coincidan",
 		"jaJp": "該当する整備記録なし"
 	},
 	"FilterConditions": {
@@ -1247,6 +1366,7 @@ export const tips = {
 		"thTh": "เงื่อนไขการกรอง",
 		"idId": "Kondisi Filter",
 		"miNz": "Ngā tikanga tātari",
+		"esEs": "Filtros",
 		"jaJp": "絞り込み条件"
 	},
 	"MaintenanceStatus": {
@@ -1258,6 +1378,7 @@ export const tips = {
 		"thTh": "สถานะการบำรุงรักษา",
 		"idId": "Status Perawatan",
 		"miNz": "Tūnga tiaki",
+		"esEs": "Estado del mantenimiento",
 		"jaJp": "整備ステータス"
 	},
 	"PleaseSelectStatus": {
@@ -1269,6 +1390,7 @@ export const tips = {
 		"thTh": "กรุณาเลือกสถานะ",
 		"idId": "Silakan pilih status",
 		"miNz": "Tena koa kōwhiria te tūnga",
+		"esEs": "Seleccione el estado",
 		"jaJp": "ステータスを選択してください"
 	},
 	"MileageCalibration": {
@@ -1280,6 +1402,7 @@ export const tips = {
 		"thTh": "การปรับเทียบระยะทาง",
 		"idId": "Kalibrasi Jarak Tempuh",
 		"miNz": "Whakatika ine tawhiti haere",
+		"esEs": "Calibración de kilometraje",
 		"jaJp": "走行距離校正"
 	},
 	"PleaseEnterCalibrateMileage": {
@@ -1291,6 +1414,7 @@ export const tips = {
 		"thTh": "กรุณากรอกระยะทางสำหรับปรับเทียบ",
 		"idId": "Silakan masukkan jarak tempuh kalibrasi",
 		"miNz": "Tena koa whakauru mai te tawhiti ine",
+		"esEs": "Introduzca el kilometraje a calibrar",
 		"jaJp": "校正距離を入力してください"
 	},
 	"WarmTip": {
@@ -1302,6 +1426,7 @@ export const tips = {
 		"thTh": "ข้อความแจ้งเตือน",
 		"idId": "Peringatan Hangat",
 		"miNz": "Tohutohu atawhai",
+		"esEs": "Consejo",
 		"jaJp": "お知らせ"
 	},
 	"ConfirmMaintenanceCompleted": {
@@ -1313,6 +1438,7 @@ export const tips = {
 		"thTh": "ยืนยันว่าบำรุงรักษาเสร็จสิ้นแล้ว?",
 		"idId": "Konfirmasi perawatan selesai?",
 		"miNz": "Whakaū kua oti te tiaki?",
+		"esEs": "¿Confirmar mantenimiento completado?",
 		"jaJp": "整備を完了しましたか？"
 	},
 	"Submitting": {
@@ -1324,6 +1450,7 @@ export const tips = {
 		"thTh": "กำลังส่งข้อมูล...",
 		"idId": "Sedang mengirim...",
 		"miNz": "Kei te tuku...",
+		"esEs": "Enviando...",
 		"jaJp": "送信中..."
 	},
 	"MaintenanceSuccess": {
@@ -1335,6 +1462,7 @@ export const tips = {
 		"thTh": "บำรุงรักษาสำเร็จ",
 		"idId": "Perawatan Berhasil",
 		"miNz": "I angitu te tiaki",
+		"esEs": "Mantenimiento realizado",
 		"jaJp": "整備完了"
 	},
 	"OperationFailed": {
@@ -1346,6 +1474,7 @@ export const tips = {
 		"thTh": "การดำเนินการล้มเหลว",
 		"idId": "Operasi Gagal",
 		"miNz": "I rahua te mahi",
+		"esEs": "Operación fallida",
 		"jaJp": "操作失敗"
 	},
 	"PleaseEnterValidMileage": {
@@ -1357,6 +1486,7 @@ export const tips = {
 		"thTh": "กรุณากรอกระยะทางที่ถูกต้อง",
 		"idId": "Silakan masukkan jarak tempuh yang valid",
 		"miNz": "Tena koa whakauru mai te tawhiti whaimana",
+		"esEs": "Introduzca un kilometraje válido",
 		"jaJp": "有効な距離を入力してください"
 	},
 	"Calibrating": {
@@ -1368,6 +1498,7 @@ export const tips = {
 		"thTh": "กำลังปรับเทียบ...",
 		"idId": "Sedang mengkalibrasi...",
 		"miNz": "Kei te whakatika ine...",
+		"esEs": "Calibrando...",
 		"jaJp": "校正中..."
 	},
 	"CalibrateSuccess": {
@@ -1379,6 +1510,7 @@ export const tips = {
 		"thTh": "การสอบเทียบสำเร็จ",
 		"idId": "Kalibrasi Berhasil",
 		"miNz": "Kua angitu te whakatika",
+		"esEs": "Calibración correcta",
 	},
 	"CalibrateFailed": {
 		"zhCn": "校准失败",
@@ -1389,6 +1521,7 @@ export const tips = {
 		"thTh": "การสอบเทียบล้มเหลว",
 		"idId": "Kalibrasi Gagal",
 		"miNz": "I rahua te whakatika",
+		"esEs": "Error de calibración",
 	},
 	"FilteredOut": {
 		"zhCn": "筛选出",
@@ -1399,6 +1532,7 @@ export const tips = {
 		"thTh": "กรองออก",
 		"idId": "Difilter Keluar",
 		"miNz": "Kua tātarihia",
+		"esEs": "Filtrados",
 	},
 	"All": {
 		"zhCn": "全部",
@@ -1409,6 +1543,7 @@ export const tips = {
 		"thTh": "ทั้งหมด",
 		"idId": "Semua",
 		"miNz": "Katoa",
+		"esEs": "Todo",
 	},
 	"PendingMaintenance": {
 		"zhCn": "待保养",
@@ -1419,6 +1554,7 @@ export const tips = {
 		"thTh": "รอการบำรุงรักษา",
 		"idId": "Menunggu Perawatan",
 		"miNz": "Tatari te tiaki",
+		"esEs": "Pendiente de mantenimiento",
 	},
 	"Maintained": {
 		"zhCn": "已保养",
@@ -1429,6 +1565,7 @@ export const tips = {
 		"thTh": "บำรุงรักษาแล้ว",
 		"idId": "Sudah Dirawat",
 		"miNz": "Kua tiakina",
+		"esEs": "Mantenido",
 	},
 	"LoadedAll": {
 		"zhCn": "已加载全部",
@@ -1439,6 +1576,7 @@ export const tips = {
 		"thTh": "โหลดข้อมูลทั้งหมดแล้ว",
 		"idId": "Semua Telah Dimuat",
 		"miNz": "Katoa kua utaina",
+		"esEs": "Todo cargado",
 	},
 	"NoPhotos": {
 		"zhCn": "暂无照片",
@@ -1449,6 +1587,7 @@ export const tips = {
 		"thTh": "ไม่มีรูปภาพ",
 		"idId": "Tidak Ada Foto",
 		"miNz": "Kāore he whakaahua",
+		"esEs": "Sin fotos",
 	},
 	"PleaseSelectCar": {
 		"zhCn": "请选择车辆",
@@ -1459,6 +1598,7 @@ export const tips = {
 		"thTh": "กรุณาเลือกยานพาหนะ",
 		"idId": "Silakan Pilih Kendaraan",
 		"miNz": "Tīpakohia te waka",
+		"esEs": "Seleccione un vehículo",
 	},
 	"ReSelect": {
 		"zhCn": "重新选择",
@@ -1469,6 +1609,7 @@ export const tips = {
 		"thTh": "เลือกใหม่",
 		"idId": "Pilih Ulang",
 		"miNz": "Tīpako anō",
+		"esEs": "Volver a seleccionar",
 	},
 	"DataLoadFailed": {
 		"zhCn": "数据加载失败",
@@ -1479,6 +1620,7 @@ export const tips = {
 		"thTh": "โหลดข้อมูลล้มเหลว",
 		"idId": "Gagal Memuat Data",
 		"miNz": "I rahua te uta raraunga",
+		"esEs": "Error al cargar los datos",
 	},
 	"DeviceInfoFailed": {
 		"zhCn": "设备信息获取失败",
@@ -1489,6 +1631,7 @@ export const tips = {
 		"thTh": "รับข้อมูลอุปกรณ์ล้มเหลว",
 		"idId": "Gagal Mendapatkan Info Perangkat",
 		"miNz": "I rahua te tiki korero taputapu",
+		"esEs": "Error al obtener la información del dispositivo",
 	},
 	"PleaseSelectCarFirst": {
 		"zhCn": "请先选择车辆",
@@ -1499,6 +1642,7 @@ export const tips = {
 		"thTh": "กรุณาเลือกยานพาหนะก่อน",
 		"idId": "Silakan Pilih Kendaraan Terlebih Dahulu",
 		"miNz": "Tīpakohia te waka i te tuatahi",
+		"esEs": "Seleccione primero un vehículo",
 	},
 	"TrackPlayback": {
 		"zhCn": "轨迹查询",
@@ -1509,6 +1653,7 @@ export const tips = {
 		"thTh": "เล่นย้อนรอยเส้นทาง",
 		"idId": "Pemutaran Jejak",
 		"miNz": "Whakaara ano te ara",
+		"esEs": "Reproducción de trayectoria",
 	},
 	"PleaseSelectDateRange": {
 		"zhCn": "请选择开始和结束日期",
@@ -1519,6 +1664,7 @@ export const tips = {
 		"thTh": "กรุณาเลือกวันที่เริ่มต้นและสิ้นสุด",
 		"idId": "Silakan Pilih Tanggal Mulai dan Selesai",
 		"miNz": "Tīpakohia te rā tīmata me te rā mutunga",
+		"esEs": "Seleccione las fechas de inicio y fin",
 	},
 	"PleaseSelect": {
 		"zhCn": "请选择",
@@ -1529,6 +1675,7 @@ export const tips = {
 		"thTh": "กรุณาเลือก",
 		"idId": "Silakan Pilih",
 		"miNz": "Tīpakohia koa",
+		"esEs": "Seleccionar",
 	},
 	"PleaseSelectFullDate": {
 		"zhCn": "请选择完整的日期区间",
@@ -1539,6 +1686,7 @@ export const tips = {
 		"thTh": "กรุณาเลือกช่วงวันที่สมบูรณ์",
 		"idId": "Silakan Pilih Rentang Tanggal Lengkap",
 		"miNz": "Tīpakohia te awhe rā katoa",
+		"esEs": "Seleccione un intervalo de fechas completo",
 	},
 	"TrackLoadSuccess": {
 		"zhCn": "轨迹加载成功",
@@ -1549,6 +1697,7 @@ export const tips = {
 		"thTh": "โหลดเส้นทางสำเร็จ",
 		"idId": "Jejak Berhasil Dimuat",
 		"miNz": "Kua angitu te uta ara",
+		"esEs": "Trayectoria cargada correctamente",
 	},
 	"NoTrackData": {
 		"zhCn": "暂无轨迹数据",
@@ -1559,6 +1708,7 @@ export const tips = {
 		"thTh": "ไม่มีข้อมูลเส้นทาง",
 		"idId": "Tidak Ada Data Jejak",
 		"miNz": "Kāore he raraunga ara",
+		"esEs": "Sin datos de trayectoria",
 	},
 	"TrackRequestFailed": {
 		"zhCn": "轨迹请求异常，请重试",
@@ -1569,6 +1719,7 @@ export const tips = {
 		"thTh": "ขอข้อมูลเส้นทางล้มเหลว กรุณาลองอีกครั้ง",
 		"idId": "Permintaan jejak gagal, silakan coba lagi",
 		"miNz": "I rahua te tono ara, ngana anō",
+		"esEs": "Error en la solicitud de trayectoria, inténtelo de nuevo",
 	},
 	"StartDate": {
 		"zhCn": "开始日期",
@@ -1579,6 +1730,7 @@ export const tips = {
 		"thTh": "วันที่เริ่มต้น",
 		"idId": "Tanggal Mulai",
 		"miNz": "Rā tīmata",
+		"esEs": "Fecha de inicio",
 	},
 	"EndDate": {
 		"zhCn": "结束日期",
@@ -1589,6 +1741,7 @@ export const tips = {
 		"thTh": "วันที่สิ้นสุด",
 		"idId": "Tanggal Selesai",
 		"miNz": "Rā mutunga",
+		"esEs": "Fecha de finalización",
 	},
 	"SuperAdmin": {
 		"zhCn": "超级管理员",
@@ -1599,6 +1752,7 @@ export const tips = {
 		"thTh": "ผู้ดูแลระบบระดับสูง",
 		"idId": "Super Admin",
 		"miNz": "Kaiwhakahaere nui",
+		"esEs": "Superadministrador",
 	},
 	"Role": {
 		"zhCn": "角色",
@@ -1609,6 +1763,7 @@ export const tips = {
 		"thTh": "บทบาท",
 		"idId": "Peran",
 		"miNz": "Tūranga",
+		"esEs": "Rol",
 	},
 	"Name": {
 		"zhCn": "姓名",
@@ -1619,6 +1774,7 @@ export const tips = {
 		"thTh": "ชื่อ",
 		"idId": "Nama",
 		"miNz": "Ingoa",
+		"esEs": "Nombre",
 	},
 	"EnterName": {
 		"zhCn": "请输入姓名",
@@ -1629,6 +1785,7 @@ export const tips = {
 		"thTh": "กรุณากรอกชื่อ",
 		"idId": "Silakan Masukkan Nama",
 		"miNz": "Whakauruhia te ingoa",
+		"esEs": "Introduzca el nombre",
 	},
 	"EnterPhone": {
 		"zhCn": "请输入手机号",
@@ -1639,6 +1796,7 @@ export const tips = {
 		"thTh": "กรุณากรอกหมายเลขโทรศัพท์",
 		"idId": "Silakan Masukkan Nomor Telepon",
 		"miNz": "Whakauruhia te nama waea",
+		"esEs": "Introduzca el teléfono",
 	},
 	"SelectRole": {
 		"zhCn": "请选择角色",
@@ -1649,6 +1807,7 @@ export const tips = {
 		"thTh": "กรุณาเลือกบทบาท",
 		"idId": "Silakan Pilih Peran",
 		"miNz": "Tīpakohia te tūranga",
+		"esEs": "Seleccione el rol",
 	},
 	"ConfirmDeleteUser": {
 		"zhCn": "确认删除当前人员吗",
@@ -1659,6 +1818,7 @@ export const tips = {
 		"thTh": "ยืนยันการลบผู้ใช้นี้หรือไม่",
 		"idId": "Konfirmasi hapus pengguna ini?",
 		"miNz": "Whakaaetia te muku i tenei kaiwhakamahi?",
+		"esEs": "¿Confirmar la eliminación de este usuario?",
 	},
 	"TransferAdmin": {
 		"zhCn": "移交管理员",
@@ -1669,6 +1829,7 @@ export const tips = {
 		"thTh": "โอนสิทธิ์ผู้ดูแลระบบ",
 		"idId": "Transfer Admin",
 		"miNz": "Whakawhiti kaiwhakahaere",
+		"esEs": "Transferir administrador",
 	},
 	"ConfirmTransferAdmin": {
 		"zhCn": "确认移交管理员",
@@ -1679,6 +1840,7 @@ export const tips = {
 		"thTh": "ยืนยันการโอนสิทธิ์ผู้ดูแลระบบ",
 		"idId": "Konfirmasi Transfer Admin",
 		"miNz": "Whakaaetia te whakawhiti kaiwhakahaere",
+		"esEs": "Confirmar transferencia de administrador",
 	},
 	"AbnormalRecordTotal": {
 		"zhCn": "异常记录总数",
@@ -1689,6 +1851,7 @@ export const tips = {
 		"thTh": "จำนวนบันทึกผิดปกติทั้งหมด",
 		"idId": "Total Catatan Tidak Normal",
 		"miNz": "Te tapeke o ngā rekoata kōhē",
+		"esEs": "Total de registros anómalos",
 	},
 	"TodayNewAbnormal": {
 		"zhCn": "今日新增异常",
@@ -1699,6 +1862,7 @@ export const tips = {
 		"thTh": "บันทึกผิดปกติใหม่วันนี้",
 		"idId": "Abnormal Baru Hari Ini",
 		"miNz": "Ngā kōhē hou o tēnei rā",
+		"esEs": "Anomalías nuevas hoy",
 	},
 	"SuspectedRemovalAbnormal": {
 		"zhCn": "疑似拆除异常记录",
@@ -1709,6 +1873,7 @@ export const tips = {
 		"thTh": "บันทึกสงสัยว่าถูกถอดออก",
 		"idId": "Catatan Dugaan Pencabutan",
 		"miNz": "Ngā rekoata whakapae tangohanga",
+		"esEs": "Registros de sospecha de retirada",
 	},
 	"Filter": {
 		"zhCn": "筛选",
@@ -1719,6 +1884,7 @@ export const tips = {
 		"thTh": "กรอง",
 		"idId": "Filter",
 		"miNz": "Tātari",
+		"esEs": "Filtrar",
 	},
 	"SuspectedRemoval": {
 		"zhCn": "疑似拆除",
@@ -1729,6 +1895,7 @@ export const tips = {
 		"thTh": "สงสัยว่าถูกถอดออก",
 		"idId": "Dugaan Pencabutan",
 		"miNz": "Whakapae tangohanga",
+		"esEs": "Sospecha de retirada",
 	},
 	"RelatedVehicle": {
 		"zhCn": "涉及车辆",
@@ -1739,6 +1906,7 @@ export const tips = {
 		"thTh": "ยานพาหนะที่เกี่ยวข้อง",
 		"idId": "Kendaraan Terkait",
 		"miNz": "Waka e whai wāhi ana",
+		"esEs": "Vehículos relacionados",
 	},
 	"ViewLocation": {
 		"zhCn": "查看位置",
@@ -1749,6 +1917,7 @@ export const tips = {
 		"thTh": "ดูตำแหน่ง",
 		"idId": "Lihat Lokasi",
 		"miNz": "Tirohia te tauwāhi",
+		"esEs": "Ver ubicación",
 	},
 	"NoSuspectedRemovalRecords": {
 		"zhCn": "暂无符合条件的疑似拆除异常记录",
@@ -1759,6 +1928,7 @@ export const tips = {
 		"thTh": "ไม่มีบันทึกสงสัยถอดออกที่ตรงเงื่อนไข",
 		"idId": "Tidak ada catatan dugaan pencabutan yang cocok",
 		"miNz": "Kāore he rekoata whakapae tangohanga e taurite ana",
+		"esEs": "No hay registros de retirada sospechosa que coincidan",
 	},
 	"LocationInfo": {
 		"zhCn": "位置信息",
@@ -1769,6 +1939,7 @@ export const tips = {
 		"thTh": "ข้อมูลตำแหน่ง",
 		"idId": "Info Lokasi",
 		"miNz": "Korero tauwāhi",
+		"esEs": "Información de ubicación",
 	},
 	"DetailedAddress": {
 		"zhCn": "详细地址",
@@ -1779,6 +1950,7 @@ export const tips = {
 		"thTh": "ที่อยู่รายละเอียด",
 		"idId": "Alamat Lengkap",
 		"miNz": "Wāhi noho taipitopito",
+		"esEs": "Dirección detallada",
 	},
 	"NoAddressInfo": {
 		"zhCn": "暂无地址信息",
@@ -1789,6 +1961,7 @@ export const tips = {
 		"thTh": "ไม่มีข้อมูลที่อยู่",
 		"idId": "Tidak Ada Info Alamat",
 		"miNz": "Kāore he korero wāhi noho",
+		"esEs": "Sin información de dirección",
 	},
 	"Close": {
 		"zhCn": "关闭",
@@ -1799,6 +1972,7 @@ export const tips = {
 		"thTh": "ปิด",
 		"idId": "Tutup",
 		"miNz": "Katia",
+		"esEs": "Cerrar",
 	},
 	"SelectDate": {
 		"zhCn": "选择日期",
@@ -1809,6 +1983,7 @@ export const tips = {
 		"thTh": "เลือกวันที่",
 		"idId": "Pilih Tanggal",
 		"miNz": "Tīpakohia te rā",
+		"esEs": "Seleccionar fecha",
 	},
 	"LicensePlate": {
 		"zhCn": "车牌号",
@@ -1819,6 +1994,7 @@ export const tips = {
 		"thTh": "ป้ายทะเบียนรถ",
 		"idId": "Plat Nomor",
 		"miNz": "Papa raihana waka",
+		"esEs": "Matrícula",
 	},
 	"EnterLicensePlate": {
 		"zhCn": "请输入车牌号",
@@ -1829,6 +2005,7 @@ export const tips = {
 		"thTh": "กรุณากรอกหมายเลขทะเบียนรถ",
 		"idId": "Silakan Masukkan Plat Nomor",
 		"miNz": "Whakauruhia te papa raihana waka",
+		"esEs": "Introduzca la matrícula",
 	},
 	"Reset": {
 		"zhCn": "重置",
@@ -1839,6 +2016,7 @@ export const tips = {
 		"thTh": "รีเซ็ต",
 		"idId": "Reset",
 		"miNz": "Tautuhi anō",
+		"esEs": "Restablecer",
 	},
 	"ConfirmFilter": {
 		"zhCn": "确认筛选",
@@ -1849,6 +2027,7 @@ export const tips = {
 		"thTh": "ยืนยันการกรอง",
 		"idId": "Konfirmasi Filter",
 		"miNz": "Whakaaetia te tātari",
+		"esEs": "Confirmar filtro",
 	},
 	"NavigationFailed": {
 		"zhCn": "导航失败",
@@ -1859,6 +2038,7 @@ export const tips = {
 		"thTh": "นำทางล้มเหลว",
 		"idId": "Navigasi Gagal",
 		"miNz": "I rahua te whakatere",
+		"esEs": "Error de navegación",
 	},
 	"CannotOpenMap": {
 		"zhCn": "无法打开地图",
@@ -1869,6 +2049,7 @@ export const tips = {
 		"thTh": "ไม่สามารถเปิดแผนที่ได้",
 		"idId": "Tidak Dapat Membuka Peta",
 		"miNz": "Kāore e taea te whakatuwhera mapi",
+		"esEs": "No se puede abrir el mapa",
 	},
 	"RoleList": {
 		"zhCn": "角色列表",
@@ -1879,6 +2060,7 @@ export const tips = {
 		"thTh": "รายการบทบาท",
 		"idId": "Daftar Peran",
 		"miNz": "Rārangi tūranga",
+		"esEs": "Lista de roles",
 	},
 	"BasicInfo": {
 		"zhCn": "基础信息",
@@ -1889,6 +2071,7 @@ export const tips = {
 		"thTh": "ข้อมูลพื้นฐาน",
 		"idId": "Info Dasar",
 		"miNz": "Korero taketake",
+		"esEs": "Información básica",
 	},
 	"RoleName": {
 		"zhCn": "角色名称",
@@ -1899,6 +2082,7 @@ export const tips = {
 		"thTh": "ชื่อบทบาท",
 		"idId": "Nama Peran",
 		"miNz": "Ingoa tūranga",
+		"esEs": "Nombre del rol",
 	},
 	"EnterRoleName": {
 		"zhCn": "请输入角色名称",
@@ -1909,6 +2093,7 @@ export const tips = {
 		"thTh": "กรุณากรอกชื่อบทบาท",
 		"idId": "Silakan Masukkan Nama Peran",
 		"miNz": "Whakauruhia te ingoa tūranga",
+		"esEs": "Introduzca el nombre del rol",
 	},
 	"PermissionSettings": {
 		"zhCn": "权限设置",
@@ -1919,6 +2104,7 @@ export const tips = {
 		"thTh": "การตั้งค่าสิทธิ์",
 		"idId": "Pengaturan Izin",
 		"miNz": "Ngā tautuhinga whakaaetanga",
+		"esEs": "Configuración de permisos",
 	},
 	"WiseLinkAutoRide": {
 		"zhCn": "智车钥",
@@ -1929,6 +2115,7 @@ export const tips = {
 		"thTh": "WiseLink Auto Ride",
 		"idId": "WiseLink Auto Ride",
 		"miNz": "WiseLink Auto Ride",
+		"esEs": "WiseLink Auto Ride",
 	},
 	"PersonalCenter": {
 		"zhCn": "个人中心",
@@ -1939,6 +2126,7 @@ export const tips = {
 		"thTh": "ศูนย์ส่วนตัว",
 		"idId": "Pusat Pribadi",
 		"miNz": "Pokapū whaiaro",
+		"esEs": "Centro",
 	},
 	"Loading": {
 		"zhCn": "加载中",
@@ -1949,6 +2137,7 @@ export const tips = {
 		"thTh": "กำลังโหลด",
 		"idId": "Sedang Memuat",
 		"miNz": "Kei te uta",
+		"esEs": "Cargando",
 	},
 	"OperateSuccess": {
 		"zhCn": "操作成功",
@@ -1959,6 +2148,7 @@ export const tips = {
 		"thTh": "ดำเนินการสำเร็จ",
 		"idId": "Operasi Berhasil",
 		"miNz": "I angitu te mahi",
+		"esEs": "Operación correcta",
 	},
 	"ContactZhitongxin": {
 		"zhCn": "联系智信通",
@@ -1969,6 +2159,7 @@ export const tips = {
 		"thTh": "ติดต่อเรา",
 		"idId": "Hubungi Kami",
 		"miNz": "Whakapā mai",
+		"esEs": "Contáctenos",
 	},
 	"LanguageSettings": {
 		"zhCn": "语言设置",
@@ -1979,6 +2170,7 @@ export const tips = {
 		"thTh": "การตั้งค่าภาษา",
 		"idId": "Pengaturan Bahasa",
 		"miNz": "Tautuhinga reo",
+		"esEs": "Idioma",
 	},
 	"Logout": {
 		"zhCn": "退出登录",
@@ -1989,6 +2181,7 @@ export const tips = {
 		"thTh": "ออกจากระบบ",
 		"idId": "Keluar",
 		"miNz": "Whakawhiti atu",
+		"esEs": "Cerrar sesión",
 	},
 	"CallPhone": {
 		"zhCn": "拨打电话",
@@ -1999,6 +2192,7 @@ export const tips = {
 		"thTh": "โทรออก",
 		"idId": "Lakukan Panggilan Telepon",
 		"miNz": "Waea atu",
+		"esEs": "Llamar",
 	},
 	"IsCallServicePhone": {
 		"zhCn": "是否拨打客服电话",
@@ -2009,6 +2203,7 @@ export const tips = {
 		"thTh": "ต้องการโทรหาฝ่ายบริการลูกค้าหรือไม่",
 		"idId": "Apakah ingin menelepon layanan pelanggan?",
 		"miNz": "Me waea atu ki te ratonga kiritaki?",
+		"esEs": "¿Llamar al servicio de atención al cliente?",
 	},
 	"ConfirmLogout": {
 		"zhCn": "确定退出登录吗",
@@ -2019,6 +2214,7 @@ export const tips = {
 		"thTh": "ยืนยันออกจากระบบใช่หรือไม่",
 		"idId": "Apakah anda yakin ingin keluar?",
 		"miNz": "Kei te tino hiahia koe ki te whakawhiti atu?",
+		"esEs": "¿Seguro que desea cerrar sesión?",
 	},
 	"ServiceIntro": {
 		"zhCn": "WiseLink Auto Ride 面向全球个人车主、租车用户、出行人群的 C 端服务入口，聚焦便捷租车、智能出行、车辆服务，主打轻松出行、随行随心的用户体验。",
@@ -2029,6 +2225,7 @@ export const tips = {
 		"thTh": "WiseLink Auto Ride พอร์ทัลบริการผู้ใช้ปลายทาง C สำหรับเจ้าของรถส่วนบุคคล ผู้เช่ารถและผู้เดินทางทั่วโลก มุ่งเน้นไปที่การเช่ารถที่สะดวก การเดินทางอัจฉริยะ และบริการยานพาหนะ มอบประสบการณ์การเดินทางที่ผ่อนคลายและอิสระ",
 		"idId": "WiseLink Auto Ride portal layanan pengguna akhir C bagi pemilik kendaraan pribadi, pengguna sewa mobil dan wisatawan global, berfokus pada penyewaan mobil praktis, mobilitas cerdas dan layanan kendaraan, menghadirkan pengalaman perjalanan yang santai dan fleksibel.",
 		"miNz": "WiseLink Auto Ride he tomokanga ratonga kaiwhakamahi mutunga‑C mō ngā rangatira waka takitahi, ngā kaiwhakamahi rīta waka me ngā hunga haere huri noa te ao, e arotahi ana ki te rīta waka māmā, te nekeneke atamai me ngā ratonga waka, e tuku ana i te wheako haere māmā me te watea.",
+		"esEs": "WiseLink Auto Ride es el portal de servicio C para propietarios particulares, usuarios de alquiler de vehículos y viajeros de todo el mundo, centrado en el alquiler, la movilidad inteligente y los servicios al vehículo, para una experiencia de viaje fácil y libre.",
 	},
 	"BPlatformIntro": {
 		"zhCn": "WiseLink Auto Global 面向全球车企、租赁公司、服务商、商户的 B 端管理平台，聚合全球车源、业务管控、渠道运维、国际业务一体化运营，主打全球化、专业化、企业级商务服务",
@@ -2039,6 +2236,7 @@ export const tips = {
 		"thTh": "WiseLink Auto Global แพลตฟอร์มจัดการฝั่ง B สำหรับผู้ผลิตรถยนต์ บริษัทเช่ารถ ผู้ให้บริการ และผู้ค้าทั่วโลก รวมทรัพยากรยานพาหนะทั่วโลก การควบคุมธุรกิจ การดำเนินงานและบำรุงรักษาช่องทาง และการดำเนินธุรกิจระหว่างประเทศแบบบูรณาการ มุ่งเน้นบริการธุรกิจระดับองค์กรที่เป็นสากลและมืออาชีพ",
 		"idId": "WiseLink Auto Global platform manajemen sisi‑B untuk produsen kendaraan, perusahaan sewa, penyedia layanan dan pedagang sedunia, menggabungkan sumber daya kendaraan global, kendali bisnis, operasi & pemeliharaan saluran serta operasi bisnis internasional terpadu, menyajikan layanan bisnis tingkat perusahaan yang global dan profesional.",
 		"miNz": "WiseLink Auto Global he tūāpapa whakahaere taha‑B mō ngā kaihanga waka, ngā kamupene rīta, ngā kaiwhakarato ratonga me ngā kaihokohoko huri noa te ao, e whakakao ana i ngā rauemi waka o te ao, te whakahaere pakihi, te whakahaere me te tiaki hongere, me ngā mahi pakihi o te ao, e whakaatu ana i ngā ratonga pakihi o te ao, ngaio, taumata‑pakihi.",
+		"esEs": "WiseLink Auto Global es la plataforma de gestión B para fabricantes, empresas de alquiler, proveedores de servicios y comercios de todo el mundo; integra flota global, control de negocio, operación y mantenimiento de canales y operaciones internacionales, con servicios empresariales globales y profesionales.",
 	},
 	"footInfo": {
 		"zhCn": "智信通",
@@ -2049,6 +2247,7 @@ export const tips = {
 		"thTh": "WiseLink Auto",
 		"idId": "WiseLink Auto",
 		"miNz": "WiseLink Auto",
+		"esEs": "WiseLink Auto",
 	},
 	"EnterAccountOrPhone": {
 		"zhCn": "请输入账号或手机号",
@@ -2059,6 +2258,7 @@ export const tips = {
 		"thTh": "กรุณากรอกบัญชีหรือหมายเลขโทรศัพท์",
 		"idId": "Masukkan akun atau nomor telepon",
 		"miNz": "Whakauruhia te pūkete, te nama waea rānei",
+		"esEs": "Introduzca la cuenta o el teléfono",
 	},
 	"Password": {
 		"zhCn": "密码",
@@ -2069,6 +2269,7 @@ export const tips = {
 		"thTh": "รหัสผ่าน",
 		"idId": "Kata sandi",
 		"miNz": "Kupuhipa",
+		"esEs": "Contraseña",
 	},
 	"EnterPassword": {
 		"zhCn": "请输入密码",
@@ -2079,6 +2280,7 @@ export const tips = {
 		"thTh": "กรุณากรอกรหัสผ่าน",
 		"idId": "Masukkan kata sandi",
 		"miNz": "Whakauruhia te kupuhipa",
+		"esEs": "Introduzca la contraseña",
 	},
 	"EnterUsernameAndPwd": {
 		"zhCn": "请输入用户名和密码",
@@ -2089,6 +2291,7 @@ export const tips = {
 		"thTh": "กรุณากรอกชื่อผู้ใช้และรหัสผ่าน",
 		"idId": "Silakan masukkan nama pengguna dan kata sandi",
 		"miNz": "Whakauruhia te ingoa kaiwhakamahi me te kupuhipa",
+		"esEs": "Introduzca el usuario y la contraseña",
 	},
 	"EnterUsername": {
 		"zhCn": "请输入用户名",
@@ -2099,6 +2302,7 @@ export const tips = {
 		"thTh": "กรุณากรอกชื่อผู้ใช้",
 		"idId": "Silakan masukkan nama pengguna",
 		"miNz": "Whakauruhia te ingoa kaiwhakamahi",
+		"esEs": "Introduzca el nombre de usuario",
 	},
 	"Username": {
 		"zhCn": "用户名",
@@ -2109,6 +2313,7 @@ export const tips = {
 		"thTh": "ชื่อผู้ใช้",
 		"idId": "nama pengguna",
 		"miNz": "ingoa kaiwhakamahi",
+		"esEs": "Usuario",
 	},
 	"LoginFailCheckInfo": {
 		"zhCn": "登录失败，请检查用户名和密码",
@@ -2119,6 +2324,7 @@ export const tips = {
 		"thTh": "เข้าสู่ระบบล้มเหลว โปรดตรวจสอบชื่อผู้ใช้และรหัสผ่าน",
 		"idId": "Gagal masuk, silakan periksa nama pengguna dan kata sandi Anda",
 		"miNz": "I rahua te takiuru, tirohia tō ingoa kaiwhakamahi me tō kupuhipa",
+		"esEs": "Error de inicio de sesión, compruebe usuario y contraseña",
 	},
 	"RegisterAccount": {
 		"zhCn": "注册账号",
@@ -2129,6 +2335,7 @@ export const tips = {
 		"thTh": "ลงทะเบียนบัญชี",
 		"idId": "Daftar Akun",
 		"miNz": "Rēhita Pūkete",
+		"esEs": "Registrar cuenta",
 	},
 	"zhixintong": {
 		"zhCn": "智信通",
@@ -2139,6 +2346,7 @@ export const tips = {
 		"thTh": "WiseLink Auto Global",
 		"idId": "WiseLink Auto Global",
 		"miNz": "WiseLink Auto Global",
+		"esEs": "WiseLink Auto Global",
 	},
 	"ZhitongxinProvider": {
 		"zhCn": "智信通汽车出行技术服务运营提供商",
@@ -2149,6 +2357,7 @@ export const tips = {
 		"thTh": "Zhitongxin ผู้ให้บริการดำเนินงานเทคโนโลยีด้านการเดินทางยานยนต์",
 		"idId": "Zhitongxin Penyedia layanan & operasi teknologi mobilitas otomotif",
 		"miNz": "Zhitongxin Kaiwhakarato ratonga hangarau nekeneke waka me ngā mahi whakahaere.",
+		"esEs": "Proveedor de servicios y operaciones de tecnología de movilidad automotriz WiseLink",
 	},
 	"ConfirmPassword": {
 		"zhCn": "确认密码",
@@ -2159,6 +2368,7 @@ export const tips = {
 		"thTh": "ยืนยันรหัสผ่าน",
 		"idId": "Konfirmasi Kata Sandi",
 		"miNz": "Whakaū te Kupuhipa",
+		"esEs": "Confirmar contraseña",
 	},
 	"ReEnterPassword": {
 		"zhCn": "请再次输入密码",
@@ -2169,6 +2379,7 @@ export const tips = {
 		"thTh": "กรุณากรอกรหัสผ่านอีกครั้ง",
 		"idId": "Silakan masukkan kata sandi kembali",
 		"miNz": "Whakauruhia ano te kupuhipa",
+		"esEs": "Repita la contraseña",
 	},
 	"Login": {
 		"zhCn": "登录",
@@ -2179,6 +2390,7 @@ export const tips = {
 		"thTh": "เข้าสู่ระบบ",
 		"idId": "Masuk",
 		"miNz": "Takiuru",
+		"esEs": "Iniciar sesión",
 	},
 	"Register": {
 		"zhCn": "注册",
@@ -2189,6 +2401,7 @@ export const tips = {
 		"thTh": "ลงทะเบียน",
 		"idId": "Daftar",
 		"miNz": "Rēhita",
+		"esEs": "Registrarse",
 	},
 	"GoToLogin": {
 		"zhCn": "去登录",
@@ -2199,6 +2412,7 @@ export const tips = {
 		"thTh": "ไปหน้าเข้าสู่ระบบ",
 		"idId": "Pergi ke Halaman Masuk",
 		"miNz": "Haere ki te whārangi takiuru",
+		"esEs": "Iniciar sesión",
 	},
 	"PwdNotMatch": {
 		"zhCn": "两次输入的密码不一致",
@@ -2209,6 +2423,7 @@ export const tips = {
 		"thTh": "รหัสผ่านที่กรอกสองครั้งไม่ตรงกัน",
 		"idId": "Dua kata sandi yang dimasukkan tidak cocok",
 		"miNz": "Kāore ngā kupuhipa e rua i tāuru koe e ōrite",
+		"esEs": "Las dos contraseñas no coinciden",
 	},
 	"RegisterSuccess": {
 		"zhCn": "注册成功",
@@ -2219,6 +2434,7 @@ export const tips = {
 		"thTh": "ลงทะเบียนสำเร็จ",
 		"idId": "Pendaftaran berhasil",
 		"miNz": "I angitu te rēhita",
+		"esEs": "Registro correcto",
 	},
 	"RegisterFail": {
 		"zhCn": "注册失败",
@@ -2229,6 +2445,7 @@ export const tips = {
 		"thTh": "ลงทะเบียนล้มเหลว",
 		"idId": "Pendaftaran gagal",
 		"miNz": "I rahua te rēhita",
+		"esEs": "Error en el registro",
 	},
 	"RequestFailRetry": {
 		"zhCn": "请求失败，请稍后重试",
@@ -2239,6 +2456,7 @@ export const tips = {
 		"thTh": "คำขอล้มเหลว โปรดลองอีกครั้งภายหลัง",
 		"idId": "Permintaan gagal, silakan coba lagi nanti",
 		"miNz": "I rahua te tono, ngana anō ā muri ake",
+		"esEs": "Solicitud fallida, inténtelo más tarde",
 	},
 	"FunctionZone": {
 		"zhCn": "功能专区",
@@ -2249,6 +2467,7 @@ export const tips = {
 		"thTh": "โซนฟังก์ชัน",
 		"idId": "Zona Fungsi",
 		"miNz": "Rohe Mahi",
+		"esEs": "Zona de funciones",
 	},
 	"MoreZones": {
 		"zhCn": "更多专区",
@@ -2259,6 +2478,7 @@ export const tips = {
 		"thTh": "โซนเพิ่มเติม",
 		"idId": "Zona Lainnya",
 		"miNz": "Ētahi atu Rohe",
+		"esEs": "Más zonas",
 	},
 	"Pleaseselectthezoneyouwishtodisplay": {
 		"zhCn": "请选择您想要显示的专区",
@@ -2269,6 +2489,7 @@ export const tips = {
 		"thTh": "กรุณาเลือกโซนที่ต้องการแสดง",
 		"idId": "Silakan pilih zona yang ingin ditampilkan",
 		"miNz": "Kōwhirihia ngā rohe e hiahia ana koe kia whakaatuhia",
+		"esEs": "Seleccione las zonas que desea mostrar",
 	},
 	"BindDriver": {
 		"zhCn": "绑定用车人",
@@ -2279,6 +2500,7 @@ export const tips = {
 		"thTh": "ผูกผู้ใช้งานรถ",
 		"idId": "Ikatan Pengguna",
 		"miNz": "Whakapiri Kaiwhakamahi",
+		"esEs": "Vincular conductor",
 		"jaJp": "利用者を紐付ける"
 	},
 	"GoBindDriver": {
@@ -2290,6 +2512,7 @@ export const tips = {
 		"thTh": "ผูกมัดคนขับรถ",
 		"idId": "Ikat Pengemudi",
 		"miNz": "Whakapiri Kaitaraiwa",
+		"esEs": "Vincular conductor",
 		"jaJp": "ドライバーを紐付ける"
 	},
 	"Expand": {
@@ -2301,6 +2524,7 @@ export const tips = {
 		"thTh": "ขยาย",
 		"idId": "Perluas",
 		"miNz": "Whakawhānui",
+		"esEs": "Expandir",
 		"jaJp": "展開"
 	},
 	"Collapse": {
@@ -2312,6 +2536,7 @@ export const tips = {
 		"thTh": "ย่อ",
 		"idId": "Lipat",
 		"miNz": "Whakakōpaki",
+		"esEs": "Contraer",
 		"jaJp": "折りたたむ"
 	},
 	// ===== 管控规则页面 (scheduleRule) 新增字段 =====
@@ -2324,6 +2549,7 @@ export const tips = {
 		"thTh": "ไม่มีกฎควบคุม กรุณาคลิกเพิ่มที่ด้านล่าง",
 		"idId": "Tidak ada aturan kontrol, klik tambah di bawah",
 		"miNz": "Kāore he ture whakahaere, pāwhiritia te tāpiri i raro",
+		"esEs": "Sin reglas de control; pulse Añadir abajo",
 	},
 	"TimeRange": {
 		"zhCn": "时间段",
@@ -2334,6 +2560,7 @@ export const tips = {
 		"thTh": "ช่วงเวลา",
 		"idId": "Rentang Waktu",
 		"miNz": "Awhe wā",
+		"esEs": "Intervalo de tiempo",
 	},
 	"EffectiveWeek": {
 		"zhCn": "生效星期",
@@ -2344,6 +2571,7 @@ export const tips = {
 		"thTh": "วันที่มีผล",
 		"idId": "Hari Berlaku",
 		"miNz": "Rā whai hua",
+		"esEs": "Día de la semana vigente",
 	},
 	"UsePermission": {
 		"zhCn": "使用权限",
@@ -2354,6 +2582,7 @@ export const tips = {
 		"thTh": "สิทธิ์การใช้งาน",
 		"idId": "Izin Penggunaan",
 		"miNz": "Whakaaetanga whakamahi",
+		"esEs": "Permiso de uso",
 	},
 	"AddRule": {
 		"zhCn": "新增管控",
@@ -2364,6 +2593,7 @@ export const tips = {
 		"thTh": "เพิ่มการควบคุม",
 		"idId": "Tambah Kontrol",
 		"miNz": "Tāpiri whakahaere",
+		"esEs": "Añadir control",
 	},
 	"ModifyRule": {
 		"zhCn": "修改规则",
@@ -2374,6 +2604,7 @@ export const tips = {
 		"thTh": "แก้ไขกฎ",
 		"idId": "Ubah Aturan",
 		"miNz": "Whakarerekē ture",
+		"esEs": "Modificar regla",
 	},
 	"AddNewRule": {
 		"zhCn": "新增规则",
@@ -2384,6 +2615,7 @@ export const tips = {
 		"thTh": "เพิ่มกฎ",
 		"idId": "Tambah Aturan",
 		"miNz": "Tāpiri ture",
+		"esEs": "Añadir regla",
 	},
 	"Title": {
 		"zhCn": "标题",
@@ -2394,6 +2626,7 @@ export const tips = {
 		"thTh": "หัวข้อ",
 		"idId": "Judul",
 		"miNz": "Taitara",
+		"esEs": "Título",
 	},
 	"InputRuleTitle": {
 		"zhCn": "请输入规则标题",
@@ -2404,6 +2637,7 @@ export const tips = {
 		"thTh": "กรุณากรอกชื่อกฎ",
 		"idId": "Masukkan judul aturan",
 		"miNz": "Whakauruhia te taitara ture",
+		"esEs": "Introduzca el título de la regla",
 	},
 	"IsAllowUse": {
 		"zhCn": "是否允许使用",
@@ -2414,6 +2648,7 @@ export const tips = {
 		"thTh": "อนุญาตให้ใช้งานหรือไม่",
 		"idId": "Izinkan Penggunaan",
 		"miNz": "Whakaae whakamahinga",
+		"esEs": "¿Permitir el uso?",
 	},
 	"SelectTime": {
 		"zhCn": "选择时间",
@@ -2424,6 +2659,7 @@ export const tips = {
 		"thTh": "เลือกเวลา",
 		"idId": "Pilih Waktu",
 		"miNz": "Tīpako wā",
+		"esEs": "Seleccionar hora",
 	},
 	"FillRemark": {
 		"zhCn": "请填写备注信息",
@@ -2434,6 +2670,7 @@ export const tips = {
 		"thTh": "กรุณากรอกข้อมูลหมายเหตุ",
 		"idId": "Isi info catatan",
 		"miNz": "Whakakiia ngā kōrero tuku iho",
+		"esEs": "Introduzca las observaciones",
 	},
 	"Save": {
 		"zhCn": "保存",
@@ -2444,6 +2681,7 @@ export const tips = {
 		"thTh": "บันทึก",
 		"idId": "Simpan",
 		"miNz": "Tiaki",
+		"esEs": "Guardar",
 	},
 	"SaveSuccess": {
 		"zhCn": "保存成功",
@@ -2454,6 +2692,7 @@ export const tips = {
 		"thTh": "บันทึกสำเร็จ",
 		"idId": "Berhasil Disimpan",
 		"miNz": "I angitu te tiaki",
+		"esEs": "Guardado correctamente",
 	},
 	"SaveFail": {
 		"zhCn": "保存失败",
@@ -2464,6 +2703,7 @@ export const tips = {
 		"thTh": "บันทึกล้มเหลว",
 		"idId": "Gagal Simpan",
 		"miNz": "I rahua te tiaki",
+		"esEs": "Error al guardar",
 	},
 	"NetSaveError": {
 		"zhCn": "网络异常，保存失败",
@@ -2474,6 +2714,7 @@ export const tips = {
 		"thTh": "เครือข่ายผิดปกติ บันทึกล้มเหลว",
 		"idId": "Kesalahan jaringan, gagal simpan",
 		"miNz": "Hapa whatunga, i rahua te tiaki",
+		"esEs": "Error de red; no se pudo guardar",
 	},
 	"DeleteConfirmTip": {
 		"zhCn": "确定要删除该管控规则吗？删除后不可恢复",
@@ -2484,6 +2725,7 @@ export const tips = {
 		"thTh": "ลบกฎนี้ใช่หรือไม่? ไม่สามารถกู้คืนได้",
 		"idId": "Hapus aturan ini? Tidak dapat dipulihkan",
 		"miNz": "Muku tēnei ture? Kāore e taea te whakaora",
+		"esEs": "¿Eliminar esta regla de control? No se podrá recuperar",
 	},
 	"DeleteSuccess": {
 		"zhCn": "删除成功",
@@ -2494,6 +2736,7 @@ export const tips = {
 		"thTh": "ลบสำเร็จ",
 		"idId": "Berhasil Dihapus",
 		"miNz": "I angitu te muku",
+		"esEs": "Eliminado correctamente",
 	},
 	"DeleteFail": {
 		"zhCn": "删除失败",
@@ -2504,6 +2747,7 @@ export const tips = {
 		"thTh": "ลบล้มเหลว",
 		"idId": "Gagal Hapus",
 		"miNz": "I rahua te muku",
+		"esEs": "Error al eliminar",
 	},
 	"NetDeleteError": {
 		"zhCn": "网络异常，删除失败",
@@ -2514,6 +2758,7 @@ export const tips = {
 		"thTh": "เครือข่ายผิดปกติ ลบล้มเหลว",
 		"idId": "Kesalahan jaringan, gagal hapus",
 		"miNz": "Hapa whatunga, i rahua te muku",
+		"esEs": "Error de red; no se pudo eliminar",
 	},
 	"BindCarSuccess": {
 		"zhCn": "绑定成功",
@@ -2524,6 +2769,7 @@ export const tips = {
 		"thTh": "ผูกสำเร็จ",
 		"idId": "Berhasil Diikat",
 		"miNz": "I angitu te here",
+		"esEs": "Vinculación correcta",
 	},
 	"BindCarFail": {
 		"zhCn": "绑定失败",
@@ -2534,6 +2780,7 @@ export const tips = {
 		"thTh": "ผูกไม่สำเร็จ",
 		"idId": "Gagal Ikat",
 		"miNz": "I rahua te here",
+		"esEs": "Error de vinculación",
 	},
 	"NetBindError": {
 		"zhCn": "网络异常，绑定失败",
@@ -2544,6 +2791,7 @@ export const tips = {
 		"thTh": "เครือข่ายผิดปกติ ผูกไม่สำเร็จ",
 		"idId": "Kesalahan jaringan, gagal ikat",
 		"miNz": "Hapa whatunga, i rahua te here",
+		"esEs": "Error de red; no se pudo vincular",
 	},
 	"UnbindConfirm": {
 		"zhCn": "确认解除",
@@ -2554,6 +2802,7 @@ export const tips = {
 		"thTh": "ยืนยันการยกเลิก",
 		"idId": "Konfirmasi Lepas",
 		"miNz": "Whakaū wetewete",
+		"esEs": "Confirmar desvinculación",
 	},
 	"UnbindCarTip": {
 		"zhCn": "确定解除",
@@ -2564,6 +2813,7 @@ export const tips = {
 		"thTh": "ยืนยันการยกเลิก",
 		"idId": "Konfirmasi lepas",
 		"miNz": "Whakaū te wetewete",
+		"esEs": "Confirmar desvinculación",
 	},
 	"UnbindSuccess": {
 		"zhCn": "解除绑定成功",
@@ -2574,6 +2824,7 @@ export const tips = {
 		"thTh": "ยกเลิกการผูกสำเร็จ",
 		"idId": "Berhasil Lepas",
 		"miNz": "I angitu te wetewete",
+		"esEs": "Desvinculación correcta",
 	},
 	"UnbindFail": {
 		"zhCn": "解除绑定失败",
@@ -2584,6 +2835,7 @@ export const tips = {
 		"thTh": "ยกเลิกการผูกไม่สำเร็จ",
 		"idId": "Gagal Lepas",
 		"miNz": "I rahua te wetewete",
+		"esEs": "Error al desvincular",
 	},
 	"NetError": {
 		"zhCn": "网络异常",
@@ -2594,6 +2846,7 @@ export const tips = {
 		"thTh": "เครือข่ายผิดปกติ",
 		"idId": "Kesalahan jaringan",
 		"miNz": "Hapa whatunga",
+		"esEs": "Error de red",
 	},
 	"UnbindAllTip": {
 		"zhCn": "确定解除该规则下所有已绑定车辆？",
@@ -2604,6 +2857,7 @@ export const tips = {
 		"thTh": "ยกเลิกการผูกยานพาหนะทั้งหมดภายใต้กฎนี้หรือไม่?",
 		"idId": "Lepas semua kendaraan di bawah aturan ini?",
 		"miNz": "Wetewete ngā waka katoa i raro i tēnei ture?",
+		"esEs": "¿Desvincular todos los vehículos de esta regla?",
 	},
 	"UnbindAllSuccess": {
 		"zhCn": "全部解绑成功",
@@ -2614,6 +2868,7 @@ export const tips = {
 		"thTh": "ยกเลิกทั้งหมดสำเร็จ",
 		"idId": "Semua Berhasil Dilepas",
 		"miNz": "Kua angitu te wetewete katoa",
+		"esEs": "Todos desvinculados correctamente",
 	},
 	"UnbindAllFail": {
 		"zhCn": "全部解绑失败",
@@ -2624,6 +2879,7 @@ export const tips = {
 		"thTh": "ยกเลิกทั้งหมดไม่สำเร็จ",
 		"idId": "Gagal Lepas Semua",
 		"miNz": "I rahua te wetewete katoa",
+		"esEs": "Error al desvincular todos",
 	},
 	"FetchRuleListFail": {
 		"zhCn": "获取管控列表失败",
@@ -2634,6 +2890,7 @@ export const tips = {
 		"thTh": "โหลดรายการกฎล้มเหลว",
 		"idId": "Gagal memuat daftar aturan",
 		"miNz": "I rahua te tiki rārangi ture",
+		"esEs": "Error al obtener la lista de reglas",
 	},
 	"FetchCarListFail": {
 		"zhCn": "获取车辆列表失败",
@@ -2644,6 +2901,7 @@ export const tips = {
 		"thTh": "โหลดรายการรถล้มเหลว",
 		"idId": "Gagal memuat daftar kendaraan",
 		"miNz": "I rahua te tiki rārangi waka",
+		"esEs": "Error al obtener la lista de vehículos",
 	},
 	"NoBoundCar": {
 		"zhCn": "暂未绑定任何车辆",
@@ -2654,6 +2912,7 @@ export const tips = {
 		"thTh": "ยังไม่มีการผูกยานพาหนะ",
 		"idId": "Belum ada kendaraan terikat",
 		"miNz": "Kāore he waka kua herea",
+		"esEs": "Ningún vehículo vinculado",
 	},
 	"ViewBoundCar": {
 		"zhCn": "已绑车辆",
@@ -2664,6 +2923,7 @@ export const tips = {
 		"thTh": "รถที่ผูกไว้",
 		"idId": "Kendaraan Terikat",
 		"miNz": "Ngā waka here",
+		"esEs": "Vehículos vinculados",
 	},
 	"BoundVehicle": {
 		"zhCn": "已绑定车辆",
@@ -2674,6 +2934,7 @@ export const tips = {
 		"thTh": "ยานพาหนะที่ผูกไว้",
 		"idId": "Kendaraan Terikat",
 		"miNz": "Ngā waka herea",
+		"esEs": "Vehículos vinculados",
 	},
 	"WeekSun": {
 		"zhCn": "周日",
@@ -2684,6 +2945,7 @@ export const tips = {
 		"thTh": "อาทิตย์",
 		"idId": "Minggu",
 		"miNz": "Rātapu",
+		"esEs": "Dom",
 	},
 	"WeekMon": {
 		"zhCn": "周一",
@@ -2694,6 +2956,7 @@ export const tips = {
 		"thTh": "จันทร์",
 		"idId": "Senin",
 		"miNz": "Rāhina",
+		"esEs": "Lun",
 	},
 	"WeekTue": {
 		"zhCn": "周二",
@@ -2704,6 +2967,7 @@ export const tips = {
 		"thTh": "อังคาร",
 		"idId": "Selasa",
 		"miNz": "Rātū",
+		"esEs": "Mar",
 	},
 	"WeekWed": {
 		"zhCn": "周三",
@@ -2714,6 +2978,7 @@ export const tips = {
 		"thTh": "พุธ",
 		"idId": "Rabu",
 		"miNz": "Rāapa",
+		"esEs": "Mié",
 	},
 	"WeekThu": {
 		"zhCn": "周四",
@@ -2724,6 +2989,7 @@ export const tips = {
 		"thTh": "พฤหัส",
 		"idId": "Kamis",
 		"miNz": "Rāpare",
+		"esEs": "Jue",
 	},
 	"WeekFri": {
 		"zhCn": "周五",
@@ -2734,6 +3000,7 @@ export const tips = {
 		"thTh": "ศุกร์",
 		"idId": "Jumat",
 		"miNz": "Rāmere",
+		"esEs": "Vie",
 	},
 	"WeekSat": {
 		"zhCn": "周六",
@@ -2744,6 +3011,7 @@ export const tips = {
 		"thTh": "เสาร์",
 		"idId": "Sabtu",
 		"miNz": "Rāhoroi",
+		"esEs": "Sáb",
 	},
 
 
@@ -2757,6 +3025,7 @@ export const tips = {
 		"thTh": "รีเฟรชล้มเหลว",
 		"idId": "Gagal memuat ulang",
 		"miNz": "I rahua te whakahou",
+		"esEs": "Error al actualizar",
 	},
 	"Processing": {
 		"zhCn": "处理中...",
@@ -2767,6 +3036,7 @@ export const tips = {
 		"thTh": "กำลังประมวลผล...",
 		"idId": "Memproses...",
 		"miNz": "Kei te tukatuka...",
+		"esEs": "Procesando...",
 	},
 	"ImageSelectSuccess": {
 		"zhCn": "图片选择成功！",
@@ -2777,6 +3047,7 @@ export const tips = {
 		"thTh": "เลือกรูปภาพสำเร็จ!",
 		"idId": "Gambar berhasil dipilih!",
 		"miNz": "Kua kōwhiria te whakaahua!",
+		"esEs": "¡Imagen seleccionada!",
 	},
 	"CameraAlbumPermissionRequired": {
 		"zhCn": "请授权相机/相册权限后重试",
@@ -2787,6 +3058,7 @@ export const tips = {
 		"thTh": "โปรดอนุญาตสิทธิ์กล้อง/อัลบั้มแล้วลองอีกครั้ง",
 		"idId": "Berikan izin kamera/galeri lalu coba lagi",
 		"miNz": "Tukua te whakaaetanga kāmera/aratau ka ngana anō",
+		"esEs": "Conceda permiso de cámara/álbum e inténtelo de nuevo",
 	},
 	"ImageSelectFailedRetry": {
 		"zhCn": "图片选择失败，请重试",
@@ -2797,6 +3069,7 @@ export const tips = {
 		"thTh": "เลือกรูปภาพไม่สำเร็จ โปรดลองอีกครั้ง",
 		"idId": "Gagal memilih gambar, coba lagi",
 		"miNz": "I rahua te kōwhiri whakaahua, ngana anō",
+		"esEs": "Error al seleccionar la imagen, inténtelo de nuevo",
 	},
 	"ImagePathEmpty": {
 		"zhCn": "图片路径为空",
@@ -2807,6 +3080,7 @@ export const tips = {
 		"thTh": "เส้นทางรูปภาพว่าง",
 		"idId": "Jalur gambar kosong",
 		"miNz": "Ko te ara whakaahua he kau",
+		"esEs": "La ruta de la imagen está vacía",
 	},
 	"Uploading": {
 		"zhCn": "上传中...",
@@ -2817,6 +3091,7 @@ export const tips = {
 		"thTh": "กำลังอัปโหลด...",
 		"idId": "Mengunggah...",
 		"miNz": "Kei te tuku ake...",
+		"esEs": "Subiendo...",
 	},
 	"UploadSuccess": {
 		"zhCn": "上传成功！",
@@ -2827,6 +3102,7 @@ export const tips = {
 		"thTh": "อัปโหลดสำเร็จ!",
 		"idId": "Unggah berhasil!",
 		"miNz": "Kua angitu te tuku ake!",
+		"esEs": "¡Subida correcta!",
 	},
 	"UploadFailedRetry": {
 		"zhCn": "上传失败，请重试",
@@ -2837,6 +3113,7 @@ export const tips = {
 		"thTh": "อัปโหลดไม่สำเร็จ โปรดลองอีกครั้ง",
 		"idId": "Unggah gagal, coba lagi",
 		"miNz": "I rahua te tuku ake, ngana anō",
+		"esEs": "Error en la subida, inténtelo de nuevo",
 	},
 	"DataParseFailedRetry": {
 		"zhCn": "数据解析失败，请重试",
@@ -2847,6 +3124,7 @@ export const tips = {
 		"thTh": "แยกข้อมูลไม่สำเร็จ โปรดลองอีกครั้ง",
 		"idId": "Gagal memparsing data, coba lagi",
 		"miNz": "I rahua te wetewete raraunga, ngana anō",
+		"esEs": "Error al analizar los datos, inténtelo de nuevo",
 	},
 	"NetworkImageUploadFailed": {
 		"zhCn": "网络异常，图片上传失败！",
@@ -2857,6 +3135,7 @@ export const tips = {
 		"thTh": "เครือข่ายผิดปกติ อัปโหลดรูปภาพไม่สำเร็จ!",
 		"idId": "Kesalahan jaringan, unggah gambar gagal!",
 		"miNz": "Hapa whatunga, i rahua te tuku whakaahua!",
+		"esEs": "Error de red; error al subir la imagen",
 	},
 	"UploadFailedCheckNetwork": {
 		"zhCn": "上传失败，请检查网络后重试",
@@ -2867,6 +3146,7 @@ export const tips = {
 		"thTh": "อัปโหลดไม่สำเร็จ ตรวจสอบเครือข่ายแล้วลองอีกครั้ง",
 		"idId": "Unggah gagal, periksa jaringan lalu coba lagi",
 		"miNz": "I rahua te tuku ake, tirohia te whatunga ka ngana anō",
+		"esEs": "Error en la subida; compruebe la red e inténtelo de nuevo",
 	},
 	"SubmitSuccessMsg": {
 		"zhCn": "提交成功！",
@@ -2877,6 +3157,7 @@ export const tips = {
 		"thTh": "ส่งสำเร็จ!",
 		"idId": "Pengiriman berhasil!",
 		"miNz": "Kua angitu te tuku!",
+		"esEs": "¡Enviado correctamente!",
 	},
 	"SubmitFailedRetry": {
 		"zhCn": "提交失败，请重试",
@@ -2887,6 +3168,7 @@ export const tips = {
 		"thTh": "ส่งไม่สำเร็จ โปรดลองอีกครั้ง",
 		"idId": "Pengiriman gagal, coba lagi",
 		"miNz": "I rahua te tuku, ngana anō",
+		"esEs": "Error en el envío, inténtelo de nuevo",
 	},
 	"NetworkException": {
 		"zhCn": "网络异常！",
@@ -2897,6 +3179,7 @@ export const tips = {
 		"thTh": "เครือข่ายผิดปกติ!",
 		"idId": "Kesalahan jaringan!",
 		"miNz": "Hapa whatunga!",
+		"esEs": "¡Error de red!",
 	},
 	"SubmitFailedCheckNetwork": {
 		"zhCn": "提交失败，请检查网络",
@@ -2907,6 +3190,7 @@ export const tips = {
 		"thTh": "ส่งไม่สำเร็จ กรุณาตรวจสอบเครือข่าย",
 		"idId": "Pengiriman gagal, periksa jaringan",
 		"miNz": "I rahua te tuku, tirohia te whatunga",
+		"esEs": "Error en el envío; compruebe la red",
 	},
 	"QueryFailed": {
 		"zhCn": "查询失败",
@@ -2917,6 +3201,7 @@ export const tips = {
 		"thTh": "ค้นหาล้มเหลว",
 		"idId": "Query gagal",
 		"miNz": "I rahua te tīrai",
+		"esEs": "Error en la consulta",
 	},
 	"ClickUploadPhoto": {
 		"zhCn": "点击上传照片",
@@ -2927,6 +3212,7 @@ export const tips = {
 		"thTh": "แตะเพื่ออัปโหลดรูปภาพ",
 		"idId": "Ketuk untuk unggah foto",
 		"miNz": "Pāwhiri ki te tuku whakaahua",
+		"esEs": "Toque para subir una foto",
 	},
 	"FrontPhoto": {
 		"zhCn": "车头照片",
@@ -2937,6 +3223,7 @@ export const tips = {
 		"thTh": "รูปด้านหน้ารถ",
 		"idId": "Foto depan",
 		"miNz": "Whakaahua mua",
+		"esEs": "Foto frontal",
 	},
 	"RearPhoto": {
 		"zhCn": "车尾照片",
@@ -2947,6 +3234,7 @@ export const tips = {
 		"thTh": "รูปด้านท้ายรถ",
 		"idId": "Foto belakang",
 		"miNz": "Whakaahua muri",
+		"esEs": "Foto trasera",
 	},
 	"LeftSidePhoto": {
 		"zhCn": "车身左侧照片",
@@ -2957,6 +3245,7 @@ export const tips = {
 		"thTh": "รูปด้านซ้ายตัวรถ",
 		"idId": "Foto sisi kiri",
 		"miNz": "Whakaahua taha maui",
+		"esEs": "Foto lateral izquierda",
 	},
 	"RightSidePhoto": {
 		"zhCn": "车身右侧照片",
@@ -2967,6 +3256,7 @@ export const tips = {
 		"thTh": "รูปด้านขวาตัวรถ",
 		"idId": "Foto sisi kanan",
 		"miNz": "Whakaahua taha katau",
+		"esEs": "Foto lateral derecha",
 	},
 	"KeyPositionPhoto": {
 		"zhCn": "车钥匙位置照片",
@@ -2977,6 +3267,7 @@ export const tips = {
 		"thTh": "รูปตำแหน่งกุญแจรถ",
 		"idId": "Foto posisi kunci",
 		"miNz": "Whakaahua tūwāhi kī",
+		"esEs": "Foto de la posición de la llave",
 	},
 	"SubmitAndFinish": {
 		"zhCn": "提交并完成",
@@ -2987,6 +3278,7 @@ export const tips = {
 		"thTh": "ส่งและเสร็จสิ้น",
 		"idId": "Kirim dan selesaikan",
 		"miNz": "Tuku ka mutu",
+		"esEs": "Enviar y finalizar",
 	},
 	"NeedFrontPhoto": {
 		"zhCn": "请上传车头照片！",
@@ -2997,6 +3289,7 @@ export const tips = {
 		"thTh": "กรุณาอัปโหลดรูปด้านหน้ารถ!",
 		"idId": "Unggah foto depan!",
 		"miNz": "Tukua te whakaahua mua!",
+		"esEs": "¡Suba la foto frontal!",
 	},
 	"NeedRearPhoto": {
 		"zhCn": "请上传车尾照片！",
@@ -3007,6 +3300,7 @@ export const tips = {
 		"thTh": "กรุณาอัปโหลดรูปด้านท้ายรถ!",
 		"idId": "Unggah foto belakang!",
 		"miNz": "Tukua te whakaahua muri!",
+		"esEs": "¡Suba la foto trasera!",
 	},
 	"NeedLeftPhoto": {
 		"zhCn": "请上传车身左侧照片！",
@@ -3017,6 +3311,7 @@ export const tips = {
 		"thTh": "กรุณาอัปโหลดรูปด้านซ้าย!",
 		"idId": "Unggah foto sisi kiri!",
 		"miNz": "Tukua te whakaahua taha maui!",
+		"esEs": "¡Suba la foto lateral izquierda!",
 	},
 	"NeedRightPhoto": {
 		"zhCn": "请上传车身右侧照片！",
@@ -3027,6 +3322,7 @@ export const tips = {
 		"thTh": "กรุณาอัปโหลดรูปด้านขวา!",
 		"idId": "Unggah foto sisi kanan!",
 		"miNz": "Tukua te whakaahua taha katau!",
+		"esEs": "¡Suba la foto lateral derecha!",
 	},
 	"NeedKeyPhoto": {
 		"zhCn": "请上传车钥匙位置照片！",
@@ -3037,6 +3333,7 @@ export const tips = {
 		"thTh": "กรุณาอัปโหลดรูปตำแหน่งกุญแจ!",
 		"idId": "Unggah foto posisi kunci!",
 		"miNz": "Tukua te whakaahua tūwāhi kī!",
+		"esEs": "¡Suba la foto de la posición de la llave!",
 	},
 
 	"CodeLabel": {
@@ -3048,6 +3345,7 @@ export const tips = {
 		"thTh": "CODE",
 		"idId": "CODE",
 		"miNz": "CODE",
+		"esEs": "CÓDIGO",
 	},
 	"StartCheck": {
 		"zhCn": "开始检测",
@@ -3058,6 +3356,7 @@ export const tips = {
 		"thTh": "เริ่มการตรวจสอบ",
 		"idId": "Mulai Periksa",
 		"miNz": "Tīmata te Tirohanga",
+		"esEs": "Iniciar comprobación",
 	},
 	"UploadScenePhotos": {
 		"zhCn": "现场图片上传",
@@ -3068,6 +3367,7 @@ export const tips = {
 		"thTh": "อัปโหลดรูปภาพสนาม",
 		"idId": "Unggah Foto Lokasi",
 		"miNz": "Tuku Whakaahua Tauhi",
+		"esEs": "Subida de fotos del lugar",
 	},
 	"UploadTipK7": {
 		"zhCn": "7类图片全部必填：车辆铭牌、钥匙焊接图、风控线束图、回避器图、ACC接线图、常火接线图、应急感应区域图，每组至少上传1张，每组可上传多张",
@@ -3078,6 +3378,7 @@ export const tips = {
 		"thTh": "รูปทั้ง 7 ประเภทจำเป็น: แผ่นป้ายรถ, แผนผังการเชื่อมกุญแจ, แผนผังสายควบคุมความเสี่ยง, แผนผังตัวหลีกเลี่ยง, แผนผังสาย ACC, แผนผังสายไฟประจำ, แผนผังพื้นที่เซนเซอร์ฉุกเฉิน; แต่ละกลุ่มอย่างน้อย 1 รูป อัปโหลดได้หลายรูป",
 		"idId": "Ketujuh jenis foto wajib: papan nama, diagram pengelasan kunci, diagram kabel kendali risiko, diagram penghindar, diagram kabel ACC, diagram kabel daya tetap, diagram area sensor darurat; minimal 1 foto per kelompok, boleh lebih dari satu.",
 		"miNz": "Ko ngā momo whakaahua 7 katoa e hiahiatia ana: papa ingoa, hoahoa whakapiri kī, hoahoa waea mana-ā-raro, hoahoa karo, hoahoa waea ACC, hoahoa waea hiko-mau, hoahoa rohe pūoko ohotata; kia kotahi neke atu i te rōpū, he maha e whakaaetia ana.",
+		"esEs": "Las 7 categorías de fotos son obligatorias: placa de datos, diagrama de soldadura de la llave, diagrama del cableado de control de riesgo, diagrama del evitador, diagrama de cableado ACC, diagrama de alimentación constante, diagrama de zona de detección de emergencia; al menos 1 foto por grupo, se permiten varias.",
 	},
 	"RequiredSuffix": {
 		"zhCn": "（必填）",
@@ -3088,6 +3389,7 @@ export const tips = {
 		"thTh": "(จำเป็น)",
 		"idId": "(Wajib)",
 		"miNz": "(Me herea)",
+		"esEs": "(Obligatorio)",
 	},
 	"SampleBadge": {
 		"zhCn": "示例",
@@ -3098,6 +3400,7 @@ export const tips = {
 		"thTh": "ตัวอย่าง",
 		"idId": "Contoh",
 		"miNz": "Tauira",
+		"esEs": "Ejemplo",
 	},
 	"VehicleNamePlateReq": {
 		"zhCn": "车辆铭牌（必填）",
@@ -3108,6 +3411,7 @@ export const tips = {
 		"thTh": "แผ่นป้ายรถ (จำเป็น)",
 		"idId": "Papan Nama (Wajib)",
 		"miNz": "Papa ingoa waka (Me herea)",
+		"esEs": "Placa de datos del vehículo (obligatorio)",
 	},
 	"KeyWeldingReq": {
 		"zhCn": "钥匙焊接图（必填）",
@@ -3118,6 +3422,7 @@ export const tips = {
 		"thTh": "แผนผังการเชื่อมกุญแจ (จำเป็น)",
 		"idId": "Diagram Pengelasan Kunci (Wajib)",
 		"miNz": "Hoahoa whakapiri kī (Me herea)",
+		"esEs": "Diagrama de soldadura de la llave (obligatorio)",
 	},
 	"RiskWiringReq": {
 		"zhCn": "风控线束图（必填）",
@@ -3128,6 +3433,7 @@ export const tips = {
 		"thTh": "แผนผังสายควบคุมความเสี่ยง (จำเป็น)",
 		"idId": "Diagram Kabel Kontrol Risiko (Wajib)",
 		"miNz": "Hoahoa waea mana-ā-raro (Me herea)",
+		"esEs": "Diagrama del cableado de control de riesgo (obligatorio)",
 	},
 	"AvoiderReq": {
 		"zhCn": "回避器图（必填）",
@@ -3138,6 +3444,7 @@ export const tips = {
 		"thTh": "แผนผังตัวหลีกเลี่ยง (จำเป็น)",
 		"idId": "Diagram Penghindar (Wajib)",
 		"miNz": "Hoahoa karo (Me herea)",
+		"esEs": "Diagrama del evitador (obligatorio)",
 	},
 	"AccWiringReq": {
 		"zhCn": "ACC接线图（必填）",
@@ -3148,6 +3455,7 @@ export const tips = {
 		"thTh": "แผนผังสาย ACC (จำเป็น)",
 		"idId": "Diagram Kabel ACC (Wajib)",
 		"miNz": "Hoahoa waea ACC (Me herea)",
+		"esEs": "Diagrama de cableado ACC (obligatorio)",
 	},
 	"ConstantPowerReq": {
 		"zhCn": "常火接线图（必填）",
@@ -3158,6 +3466,7 @@ export const tips = {
 		"thTh": "แผนผังสายไฟประจำ (จำเป็น)",
 		"idId": "Diagram Kabel Daya Tetap (Wajib)",
 		"miNz": "Hoahoa waea hiko-mau (Me herea)",
+		"esEs": "Diagrama de alimentación constante (obligatorio)",
 	},
 	"EmergencyReq": {
 		"zhCn": "应急感应区域图（必填）",
@@ -3168,6 +3477,7 @@ export const tips = {
 		"thTh": "แผนผังพื้นที่เซนเซอร์ฉุกเฉิน (จำเป็น)",
 		"idId": "Diagram Area Sensor Darurat (Wajib)",
 		"miNz": "Hoahoa rohe pūoko ohotata (Me herea)",
+		"esEs": "Diagrama de zona de detección de emergencia (obligatorio)",
 	},
 	"ConfirmUploadPhotos": {
 		"zhCn": "确认上传图片",
@@ -3178,6 +3488,7 @@ export const tips = {
 		"thTh": "ยืนยันอัปโหลดรูปภาพ",
 		"idId": "Konfirmasi Unggah Foto",
 		"miNz": "Whakaū te tuku whakaahua",
+		"esEs": "Confirmar subida de fotos",
 	},
 	"NetworkModeCheck": {
 		"zhCn": "网络模式检测",
@@ -3188,6 +3499,7 @@ export const tips = {
 		"thTh": "ตรวจสอบโหมดเครือข่าย",
 		"idId": "Pemeriksaan Mode Jaringan",
 		"miNz": "Tirohanga aratau whatunga",
+		"esEs": "Comprobación del modo de red",
 	},
 	"NetworkModeActions": {
 		"zhCn": "网络模式操作",
@@ -3198,6 +3510,7 @@ export const tips = {
 		"thTh": "การทำงานผ่านเครือข่าย",
 		"idId": "Operasi Jaringan",
 		"miNz": "Ngā mahi whatunga",
+		"esEs": "Operaciones del modo de red",
 	},
 	"CompletedBadge": {
 		"zhCn": "已完成",
@@ -3208,6 +3521,7 @@ export const tips = {
 		"thTh": "เสร็จสิ้น",
 		"idId": "Selesai",
 		"miNz": "Kua oti",
+		"esEs": "Completado",
 	},
 	"UnlockCmd": {
 		"zhCn": "开锁",
@@ -3218,6 +3532,7 @@ export const tips = {
 		"thTh": "ปลดล็อก",
 		"idId": "Buka Kunci",
 		"miNz": "Wewete",
+		"esEs": "Desbloquear",
 	},
 	"LockCmd": {
 		"zhCn": "关锁",
@@ -3228,6 +3543,7 @@ export const tips = {
 		"thTh": "ล็อก",
 		"idId": "Kunci",
 		"miNz": "Muku",
+		"esEs": "Bloquear",
 	},
 	"FindCarCmd": {
 		"zhCn": "寻车",
@@ -3238,6 +3554,7 @@ export const tips = {
 		"thTh": "ค้นหารถ",
 		"idId": "Cari Kendaraan",
 		"miNz": "Kimihia te waka",
+		"esEs": "Localizar",
 	},
 	"RiskBlockCmd": {
 		"zhCn": "风控拦截",
@@ -3248,6 +3565,7 @@ export const tips = {
 		"thTh": "สกัดกั้น",
 		"idId": "Blokir",
 		"miNz": "Aukati",
+		"esEs": "Bloquear",
 	},
 	"CancelBlockCmd": {
 		"zhCn": "取消拦截",
@@ -3258,6 +3576,7 @@ export const tips = {
 		"thTh": "ยกเลิกการสกัดกั้น",
 		"idId": "Buka Blokir",
 		"miNz": "Wewete aukati",
+		"esEs": "Desbloquear",
 	},
 	"TestSuccess": {
 		"zhCn": "成功",
@@ -3268,6 +3587,7 @@ export const tips = {
 		"thTh": "สำเร็จ",
 		"idId": "Berhasil",
 		"miNz": "Angitu",
+		"esEs": "Correcto",
 	},
 	"Testing": {
 		"zhCn": "测试中",
@@ -3278,6 +3598,7 @@ export const tips = {
 		"thTh": "กำลังทดสอบ",
 		"idId": "Sedang diuji",
 		"miNz": "Kei te whakamātau",
+		"esEs": "Probando",
 	},
 	"TestFailed": {
 		"zhCn": "失败",
@@ -3288,6 +3609,7 @@ export const tips = {
 		"thTh": "ล้มเหลว",
 		"idId": "Gagal",
 		"miNz": "I rahua",
+		"esEs": "Fallido",
 	},
 	"TestLog": {
 		"zhCn": "测试日志",
@@ -3298,6 +3620,7 @@ export const tips = {
 		"thTh": "บันทึกการทดสอบ",
 		"idId": "Log Uji",
 		"miNz": "Rārangi whakamātau",
+		"esEs": "Registro de prueba",
 	},
 	"SubmitCheck": {
 		"zhCn": "提交检测",
@@ -3308,6 +3631,7 @@ export const tips = {
 		"thTh": "ส่งการตรวจสอบ",
 		"idId": "Kirim Periksa",
 		"miNz": "Tuku te tirohanga",
+		"esEs": "Enviar comprobación",
 	},
 	"ResultTitle": {
 		"zhCn": "结果",
@@ -3318,6 +3642,7 @@ export const tips = {
 		"thTh": "ผลลัพธ์",
 		"idId": "Hasil",
 		"miNz": "Hua",
+		"esEs": "Resultado",
 	},
 	"BindDeviceProcessing": {
 		"zhCn": "设备绑定中...",
@@ -3328,6 +3653,7 @@ export const tips = {
 		"thTh": "กำลังผูกอุปกรณ์...",
 		"idId": "Mengikat perangkat...",
 		"miNz": "Kei te herea te taputapu...",
+		"esEs": "Vinculando dispositivo...",
 	},
 	"BindDeviceFailed": {
 		"zhCn": "设备绑定失败",
@@ -3338,6 +3664,7 @@ export const tips = {
 		"thTh": "ผูกอุปกรณ์ไม่สำเร็จ",
 		"idId": "Pengikatan perangkat gagal",
 		"miNz": "I rahua te here taputapu",
+		"esEs": "Error al vincular el dispositivo",
 	},
 	"BindRequestError": {
 		"zhCn": "绑定请求异常，请检查网络后重试",
@@ -3348,6 +3675,7 @@ export const tips = {
 		"thTh": "คำขอผูกผิดปกติ ตรวจสอบเครือข่ายแล้วลองอีกครั้ง",
 		"idId": "Kesalahan permintaan pengikatan, periksa jaringan lalu coba lagi",
 		"miNz": "Hapa tono here, tirohia te whatunga ka ngana anō",
+		"esEs": "Error en la solicitud de vinculación; compruebe la red e inténtelo de nuevo",
 	},
 	"PleaseInputIdcAndCode": {
 		"zhCn": "请先输入设备号和检验码",
@@ -3358,6 +3686,7 @@ export const tips = {
 		"thTh": "กรุณากรอก SN อุปกรณ์และรหัสก่อน",
 		"idId": "Masukkan SN dan kode perangkat dulu",
 		"miNz": "Whakaurua te SN taputapu me te waehere i te tuatahi",
+		"esEs": "Introduzca primero el SN del dispositivo y el código de verificación",
 	},
 	"PleaseBindDeviceFirst": {
 		"zhCn": "请先绑定设备",
@@ -3368,6 +3697,7 @@ export const tips = {
 		"thTh": "กรุณาผูกอุปกรณ์ก่อน",
 		"idId": "Ikat perangkat dulu",
 		"miNz": "Herea te taputapu i te tuatahi",
+		"esEs": "Vincule primero el dispositivo",
 	},
 	"PleaseUploadScenePhotos": {
 		"zhCn": "请先上传现场图片",
@@ -3378,6 +3708,7 @@ export const tips = {
 		"thTh": "กรุณาอัปโหลดรูปภาพสนามก่อน",
 		"idId": "Unggah foto lokasi dulu",
 		"miNz": "Tukua ngā whakaahua tauhi i te tuatahi",
+		"esEs": "Suba primero las fotos del lugar",
 	},
 	"MaxImagesPerCategory": {
 		"zhCn": "该分类最多上传{n}张",
@@ -3388,6 +3719,7 @@ export const tips = {
 		"thTh": "แต่ละหมวดอัปโหลดได้สูงสุด {n} รูป",
 		"idId": "Maksimal {n} foto per kategori",
 		"miNz": "Kia {n} whakaahua mo ia rōpū",
+		"esEs": "Hasta {n} fotos por categoría",
 	},
 	"SevenPhotosEachRequired": {
 		"zhCn": "7类图片每类至少上传一张",
@@ -3398,6 +3730,7 @@ export const tips = {
 		"thTh": "อัปโหลดอย่างน้อยหนึ่งรูปในแต่ละ 7 ประเภท",
 		"idId": "Unggah minimal satu foto untuk tiap 7 jenis",
 		"miNz": "Tukua kotahi whakaahua mo ia momo o te 7",
+		"esEs": "Suba al menos una foto de cada una de las 7 categorías",
 	},
 	"DeviceInfoAbnormalRebind": {
 		"zhCn": "设备信息异常，请重新绑定",
@@ -3408,6 +3741,7 @@ export const tips = {
 		"thTh": "ข้อมูลอุปกรณ์ผิดปกติ โปรดผูกใหม่",
 		"idId": "Info perangkat tidak normal, ikat ulang",
 		"miNz": "He kino te korero taputapu, herea anō",
+		"esEs": "Información del dispositivo anómala; vuelva a vincular",
 	},
 	"StartingUploadImages": {
 		"zhCn": "开始上传图片...",
@@ -3418,6 +3752,7 @@ export const tips = {
 		"thTh": "เริ่มอัปโหลดรูปภาพ...",
 		"idId": "Mulai mengunggah foto...",
 		"miNz": "Kei te tuku whakaahua...",
+		"esEs": "Iniciando subida de fotos...",
 	},
 	"UploadingImages": {
 		"zhCn": "正在上传...",
@@ -3428,6 +3763,7 @@ export const tips = {
 		"thTh": "กำลังอัปโหลด...",
 		"idId": "Mengunggah...",
 		"miNz": "Kei te tuku ake...",
+		"esEs": "Subiendo...",
 	},
 	"AllImagesUploaded": {
 		"zhCn": "图片全部上传成功！可开始功能检测",
@@ -3438,6 +3774,7 @@ export const tips = {
 		"thTh": "อัปโหลดรูปทั้งหมดสำเร็จ! เริ่มการทดสอบฟังก์ชันได้",
 		"idId": "Semua foto terunggah! Mulai uji fungsi",
 		"miNz": "Kua tukuna ngā whakaahua katoa! Ka tīmata te tirohanga mahi",
+		"esEs": "¡Todas las fotos subidas! Puede iniciar la comprobación de funciones",
 	},
 	"ImageUploadFailedPrefix": {
 		"zhCn": "图片上传失败：",
@@ -3448,6 +3785,7 @@ export const tips = {
 		"thTh": "อัปโหลดรูปภาพไม่สำเร็จ: ",
 		"idId": "Unggah foto gagal: ",
 		"miNz": "I rahua te tuku whakaahua: ",
+		"esEs": "Error al subir la foto: ",
 	},
 	"GroupAbnormal": {
 		"zhCn": "分组异常",
@@ -3458,6 +3796,7 @@ export const tips = {
 		"thTh": "กลุ่มไม่ถูกต้อง",
 		"idId": "Grup tidak valid",
 		"miNz": "Rōpū hē",
+		"esEs": "Grupo no válido",
 	},
 	"ParseException": {
 		"zhCn": "数据解析异常",
@@ -3468,6 +3807,7 @@ export const tips = {
 		"thTh": "แยกข้อมูลผิดพลาด",
 		"idId": "Kesalahan parsel data",
 		"miNz": "Hapa wetewete raraunga",
+		"esEs": "Error de análisis de datos",
 	},
 	"AllTestsComplete": {
 		"zhCn": "网络模式全部检测完成！可提交检测",
@@ -3478,6 +3818,7 @@ export const tips = {
 		"thTh": "ตรวจสอบโหมดเครือข่ายครบถ้วน! พร้อมส่ง",
 		"idId": "Semua pemeriksaan mode jaringan selesai! Siap kirim",
 		"miNz": "Kua oti ngā tirohanga whatunga katoa! Ka tuku",
+		"esEs": "¡Todas las comprobaciones del modo de red completadas! Listo para enviar",
 	},
 	"DeviceMissing": {
 		"zhCn": "设备信息缺失",
@@ -3488,6 +3829,7 @@ export const tips = {
 		"thTh": "ขาดข้อมูลอุปกรณ์",
 		"idId": "Info perangkat tidak tersedia",
 		"miNz": "Kua ngaro te korero taputapu",
+		"esEs": "Falta información del dispositivo",
 	},
 	"StartActionLog": {
 		"zhCn": "开始{action} → 设备号：{idc}",
@@ -3498,6 +3840,7 @@ export const tips = {
 		"thTh": "เริ่ม{action} → SN อุปกรณ์: {idc}",
 		"idId": "Mulai {action} → SN perangkat: {idc}",
 		"miNz": "Tīmata {action} → SN taputapu: {idc}",
+		"esEs": "Inicio {action} → SN del dispositivo: {idc}",
 	},
 	"ActionSuccessLog": {
 		"zhCn": "{action} 成功",
@@ -3508,6 +3851,7 @@ export const tips = {
 		"thTh": "{action} สำเร็จ",
 		"idId": "{action} berhasil",
 		"miNz": "{action} angitu",
+		"esEs": "{action} correcto",
 	},
 	"ActionFailLog": {
 		"zhCn": "{action} 失败：{reason}",
@@ -3518,6 +3862,7 @@ export const tips = {
 		"thTh": "{action} ล้มเหลว: {reason}",
 		"idId": "{action} gagal: {reason}",
 		"miNz": "{action} i rahua: {reason}",
+		"esEs": "{action} fallido: {reason}",
 	},
 	"ExecutingCommand": {
 		"zhCn": "指令执行中...",
@@ -3528,6 +3873,7 @@ export const tips = {
 		"thTh": "กำลังดำเนินการคำสั่ง...",
 		"idId": "Menjalankan perintah...",
 		"miNz": "Kei te whakahaere tono...",
+		"esEs": "Ejecutando orden...",
 	},
 	"SubmittingCheckResult": {
 		"zhCn": "提交检测结果中...",
@@ -3538,6 +3884,7 @@ export const tips = {
 		"thTh": "กำลังส่งผลการตรวจสอบ...",
 		"idId": "Mengirim hasil periksa...",
 		"miNz": "Kei te tuku hua tirohanga...",
+		"esEs": "Enviando resultado de la comprobación...",
 	},
 	"SubmitSuccessTitle": {
 		"zhCn": "提交成功",
@@ -3548,6 +3895,7 @@ export const tips = {
 		"thTh": "ส่งสำเร็จ",
 		"idId": "Pengiriman Berhasil",
 		"miNz": "Tuku angitu",
+		"esEs": "Envío correcto",
 	},
 	"CheckCompletedContent": {
 		"zhCn": "设备全流程检测已完成！",
@@ -3558,6 +3906,7 @@ export const tips = {
 		"thTh": "การตรวจสอบอุปกรณ์ทั้งหมดเสร็จสิ้น!",
 		"idId": "Pemeriksaan lengkap perangkat selesai!",
 		"miNz": "Kua oti te tirohanga katoa o te taputapu!",
+		"esEs": "¡Se ha completado la comprobación completa del dispositivo!",
 	},
 	"SubmitFailedToast": {
 		"zhCn": "提交失败",
@@ -3568,6 +3917,7 @@ export const tips = {
 		"thTh": "ส่งไม่สำเร็จ",
 		"idId": "Pengiriman gagal",
 		"miNz": "I rahua te tuku",
+		"esEs": "Error en el envío",
 	},
 	"RequestExceptionRetry": {
 		"zhCn": "请求异常，请重试",
@@ -3578,6 +3928,7 @@ export const tips = {
 		"thTh": "คำขอผิดพลาด โปรดลองอีกครั้ง",
 		"idId": "Kesalahan permintaan, coba lagi",
 		"miNz": "Hapa tono, ngana anō",
+		"esEs": "Error en la solicitud, inténtelo de nuevo",
 	},
 	"SubmitResultFailedLog": {
 		"zhCn": "检测结果提交失败：网络或接口异常",
@@ -3588,6 +3939,7 @@ export const tips = {
 		"thTh": "ส่งผลตรวจสอบไม่สำเร็จ: เครือข่ายหรือ API ผิดพลาด",
 		"idId": "Gagal mengirim hasil: kesalahan jaringan atau antarmuka",
 		"miNz": "I rahua te tuku hua: hapa whatunga, atanga rānei",
+		"esEs": "Error al enviar el resultado: error de red o de interfaz",
 	},
 	"VideoMaterial": {
 		"zhCn": "视频物料",
@@ -3598,6 +3950,7 @@ export const tips = {
 		"thTh": "สื่อวิดีโอ",
 		"idId": "Materi Video",
 		"miNz": "Rauemi Ataata",
+		"esEs": "Material de vídeo",
 	},
 	"SortDefault": {
 		"zhCn": "默认排序",
@@ -3608,6 +3961,7 @@ export const tips = {
 		"thTh": "เรียงลำดับเริ่มต้น",
 		"idId": "Urutkan Default",
 		"miNz": "Kōtaha Māori",
+		"esEs": "Orden por defecto",
 	},
 	"SortAsc": {
 		"zhCn": "升序",
@@ -3618,6 +3972,7 @@ export const tips = {
 		"thTh": "จากน้อยไปมาก",
 		"idId": "Naik",
 		"miNz": "Piki",
+		"esEs": "Ascendente",
 	},
 	"SortDesc": {
 		"zhCn": "降序",
@@ -3628,6 +3983,7 @@ export const tips = {
 		"thTh": "จากมากไปน้อย",
 		"idId": "Turun",
 		"miNz": "Heiheke",
+		"esEs": "Descendente",
 	},
 	"AllTypes": {
 		"zhCn": "所有类型",
@@ -3638,6 +3994,7 @@ export const tips = {
 		"thTh": "ทุกประเภท",
 		"idId": "Semua Jenis",
 		"miNz": "Ngā momo katoa",
+		"esEs": "Todos los tipos",
 	},
 	"TypeImage": {
 		"zhCn": "图片",
@@ -3648,6 +4005,7 @@ export const tips = {
 		"thTh": "รูปภาพ",
 		"idId": "Gambar",
 		"miNz": "Whakaahua",
+		"esEs": "Imagen",
 	},
 	"TypeVideo": {
 		"zhCn": "视频",
@@ -3658,6 +4016,7 @@ export const tips = {
 		"thTh": "วิดีโอ",
 		"idId": "Video",
 		"miNz": "Ataata",
+		"esEs": "Vídeo",
 	},
 	"TypeDocument": {
 		"zhCn": "文档",
@@ -3668,6 +4027,7 @@ export const tips = {
 		"thTh": "เอกสาร",
 		"idId": "Dokumen",
 		"miNz": "Tuhinga",
+		"esEs": "Documento",
 	},
 	"TypeOther": {
 		"zhCn": "其他",
@@ -3678,6 +4038,7 @@ export const tips = {
 		"thTh": "อื่นๆ",
 		"idId": "Lainnya",
 		"miNz": "Ētahi",
+		"esEs": "Otros",
 	},
 	"AllIndustries": {
 		"zhCn": "所有行业",
@@ -3688,6 +4049,7 @@ export const tips = {
 		"thTh": "ทุกอุตสาหกรรม",
 		"idId": "Semua Industri",
 		"miNz": "Ngā rāngai katoa",
+		"esEs": "Todos los sectores",
 	},
 	"ItemNo": {
 		"zhCn": "序号",
@@ -3698,6 +4060,7 @@ export const tips = {
 		"thTh": "ลำดับ",
 		"idId": "No.",
 		"miNz": "Tau",
+		"esEs": "N.º",
 	},
 	"SubItemNo": {
 		"zhCn": "子序号",
@@ -3708,6 +4071,7 @@ export const tips = {
 		"thTh": "ลำดับย่อย",
 		"idId": "Sub No.",
 		"miNz": "Tau-roto",
+		"esEs": "Sub-n.º",
 	},
 	"CreatedBy": {
 		"zhCn": "创建人",
@@ -3718,6 +4082,7 @@ export const tips = {
 		"thTh": "ผู้สร้าง",
 		"idId": "Dibuat Oleh",
 		"miNz": "Na te Wai I Hanga",
+		"esEs": "Creado por",
 	},
 	"CategoryType": {
 		"zhCn": "类型",
@@ -3728,6 +4093,7 @@ export const tips = {
 		"thTh": "ประเภท",
 		"idId": "Jenis",
 		"miNz": "Momo",
+		"esEs": "Tipo",
 	},
 	"Industry": {
 		"zhCn": "行业",
@@ -3738,6 +4104,7 @@ export const tips = {
 		"thTh": "อุตสาหกรรม",
 		"idId": "Industri",
 		"miNz": "Rangai",
+		"esEs": "Sector",
 	},
 	"CreatedTime": {
 		"zhCn": "创建时间",
@@ -3748,6 +4115,7 @@ export const tips = {
 		"thTh": "เวลาที่สร้าง",
 		"idId": "Waktu Dibuat",
 		"miNz": "Wā Hanga",
+		"esEs": "Fecha de creación",
 	},
 	"View": {
 		"zhCn": "查看",
@@ -3758,6 +4126,7 @@ export const tips = {
 		"thTh": "ดู",
 		"idId": "Lihat",
 		"miNz": "Tirohia",
+		"esEs": "Ver",
 	},
 	"ShareToFriend": {
 		"zhCn": "分享给好友",
@@ -3768,6 +4137,7 @@ export const tips = {
 		"thTh": "แชร์ให้เพื่อน",
 		"idId": "Bagikan ke Teman",
 		"miNz": "Tuku ki te Hoa",
+		"esEs": "Compartir con amigos",
 	},
 	"CopyFailed": {
 		"zhCn": "复制失败",
@@ -3778,6 +4148,7 @@ export const tips = {
 		"thTh": "คัดลอกไม่สำเร็จ",
 		"idId": "Gagal menyalin",
 		"miNz": "I rahua te tārua",
+		"esEs": "Error al copiar",
 	},
 	"AlarmTotal": {
 		"zhCn": "总数",
@@ -3788,6 +4159,7 @@ export const tips = {
 		"thTh": "ทั้งหมด",
 		"idId": "Total",
 		"miNz": "Katoa",
+		"esEs": "Total",
 	},
 	"AlarmTodayNew": {
 		"zhCn": "今日新增",
@@ -3798,6 +4170,7 @@ export const tips = {
 		"thTh": "วันนี้เพิ่มใหม่",
 		"idId": "Baru Hari Ini",
 		"miNz": "Hou o tēnei rā",
+		"esEs": "Nuevos hoy",
 	},
 	"HomeTitle": {
 		"zhCn": "首页",
@@ -3808,6 +4181,7 @@ export const tips = {
 		"thTh": "หน้าแรก",
 		"idId": "Beranda",
 		"miNz": "Kāinga",
+		"esEs": "Inicio",
 	},
 	"UnbindDriverQuestion": {
 		"zhCn": "确认解绑？！",
@@ -3818,6 +4192,7 @@ export const tips = {
 		"thTh": "ยืนยันยกเลิก?!",
 		"idId": "Konfirmasi lepas?!",
 		"miNz": "Whakaū te wetewete?!",
+		"esEs": "¿Confirmar desvinculación?",
 	},
 	"DisclaimerTitle": {
 		"zhCn": "免责条款",
@@ -3828,6 +4203,7 @@ export const tips = {
 		"thTh": "ข้อจำกัดความรับผิดชอบ",
 		"idId": "Penyangkalan",
 		"miNz": "Whakakīkīhere",
+		"esEs": "Aviso legal",
 	},
 	"DisclaimerP1": {
 		"zhCn": "设备安装完成后，建议您使用 K7 模块做基础预检，检测记录会留存存档，后续设备出现问题时，能帮助我们更快排查维修，给您更完善的售后保障～",
@@ -3838,6 +4214,7 @@ export const tips = {
 		"thTh": "หลังติดตั้ง ขอแนะนำให้ตรวจเบื้องต้นด้วยโมดูล K7 บันทึกจะถูกเก็บไว้ ช่วยให้เราวินิจฉัยและซ่อมปัญหาอุปกรณ์ได้เร็วขึ้นและให้บริการหลังการขายที่ดีขึ้น",
 		"idId": "Setelah pemasangan, kami menyarankan melakukan pemeriksaan awal dengan modul K7. Catatan diarsipkan dan membantu kami mendiagnosis dan memperbaiki masalah perangkat lebih cepat, dengan layanan purna jual yang lebih baik.",
 		"miNz": "Whai muri i te whakauru, ka tūtohu mātou kia whai i te tirohanga tīmatanga me te kōwae K7. Ka puritia ngā rārangi hei āwhina ki te tātaritanga me te whakatika tere, me te tautoko muri-hoko pai ake.",
+		"esEs": "Tras la instalación, le recomendamos realizar una precomprobación básica con el módulo K7. Los registros se archivan y ayudarán a diagnosticar y reparar problemas del dispositivo con mayor rapidez, ofreciendo un mejor soporte posventa.",
 	},
 	"DisclaimerP2": {
 		"zhCn": "若您选择【免检注册】，将会跳过本次 K7 预检流程。",
@@ -3848,6 +4225,7 @@ export const tips = {
 		"thTh": "หากเลือกลงทะเบียนโดยไม่ตรวจสอบ ขั้นตอนตรวจเบื้องต้น K7 จะถูกข้ามไป",
 		"idId": "Jika Anda memilih Daftar tanpa inspeksi, pemeriksaan awal K7 ini akan dilewati.",
 		"miNz": "Ki te kōwhiria te Rēhanga kore-tirohanga, ka pekehia tēnei tirohanga K7.",
+		"esEs": "Si elige Registrarse sin inspección, se omitirá esta precomprobación K7.",
 	},
 	"DisclaimerP3": {
 		"zhCn": "温馨小提示：如果未完成预检就注册设备，后续设备产生故障，我们将无法提供售后排查与维修服务，相关损失需要您自行承担，还请您仔细考虑后再确认哦。",
@@ -3858,6 +4236,7 @@ export const tips = {
 		"thTh": "ข้อควรระวัง: หากลงทะเบียนอุปกรณ์โดยยังไม่ตรวจเบื้องต้น เราจะไม่สามารถให้บริการวินิจฉัยและซ่อมหลังการขายสำหรับความเสียหายที่เกิดขึ้นในภายหลัง คุณต้องรับผิดชอบความเสียหายที่เกี่ยวข้อง โปรดพิจารณาก่อนยืนยัน",
 		"idId": "Catatan penting: jika Anda mendaftar perangkat tanpa menyelesaikan pemeriksaan awal, kami tidak dapat menyediakan diagnosis dan perbaikan purna jual atas kegagalan berikutnya; kerugian terkait menjadi tanggung jawab Anda. Pertimbangkan baik-baik sebelum mengonfirmasi.",
 		"miNz": "He tuhipaki nui: ki te rēhita koe i te taputapu me te kore e oti te tirohanga tīmatanga, e kore mātou e taea te tuku tātaritanga me te whakatika muri-hoko mō ngā ngoikoretanga o muri; ko ngā ngaronga e hāngai ana kei raro i a koe. Whakaaropai i mua i te whakaū.",
+		"esEs": "Nota importante: si registra el dispositivo sin completar la precomprobación, no podremos ofrecer diagnóstico ni reparación posventa ante fallos posteriores; los daños correrán por su cuenta. Revíselo detenidamente antes de confirmar.",
 	},
 	"GoCheck": {
 		"zhCn": "去检测",
@@ -3868,6 +4247,7 @@ export const tips = {
 		"thTh": "ไปตรวจสอบ",
 		"idId": "Ke Periksa",
 		"miNz": "Haere ki te Tiro",
+		"esEs": "Ir a comprobar",
 	},
 	"SkipCheckRegister": {
 		"zhCn": "免检注册",
@@ -3878,6 +4258,7 @@ export const tips = {
 		"thTh": "ลงทะเบียนไม่ตรวจสอบ",
 		"idId": "Daftar Tanpa Inspeksi",
 		"miNz": "Rēhanga Kore-Tirohanga",
+		"esEs": "Registrarse sin inspección",
 	},
 	"InvalidJumpPath": {
 		"zhCn": "跳转路径无效",
@@ -3888,6 +4269,7 @@ export const tips = {
 		"thTh": "เส้นทางเปลี่ยนหน้าไม่ถูกต้อง",
 		"idId": "Jalur navigasi tidak valid",
 		"miNz": "Arahi hē",
+		"esEs": "Ruta de salto no válida",
 	},
 	"UpdateTitle": {
 		"zhCn": "更新提示",
@@ -3898,6 +4280,7 @@ export const tips = {
 		"thTh": "แจ้งเตือนการอัปเดต",
 		"idId": "Pemberitahuan Pembaruan",
 		"miNz": "Pānui Whakahou",
+		"esEs": "Aviso de actualización",
 	},
 	"UpdateContent": {
 		"zhCn": "发现新版本，建议立即更新！",
@@ -3908,6 +4291,7 @@ export const tips = {
 		"thTh": "พบเวอร์ชันใหม่ แนะนำให้อัปเดตทันที!",
 		"idId": "Ada versi baru, silakan perbarui sekarang!",
 		"miNz": "He putanga hou, whakahou ināianei!",
+		"esEs": "Hay una nueva versión disponible; ¡actualice ahora!",
 	},
 	"Later": {
 		"zhCn": "稍后",
@@ -3918,6 +4302,7 @@ export const tips = {
 		"thTh": "ภายหลัง",
 		"idId": "Nanti",
 		"miNz": "Mō muri",
+		"esEs": "Más tarde",
 	},
 	"UpdateNow": {
 		"zhCn": "立即更新",
@@ -3928,6 +4313,7 @@ export const tips = {
 		"thTh": "อัปเดตทันที",
 		"idId": "Perbarui Sekarang",
 		"miNz": "Whakahou Ināianei",
+		"esEs": "Actualizar ahora",
 	},
 	"HaveAnAccountGoLogin": {
 		"zhCn": "已有账号？",
@@ -3938,6 +4324,7 @@ export const tips = {
 		"thTh": "มีบัญชีแล้ว?",
 		"idId": "Sudah punya akun?",
 		"miNz": "He pūkete kē?",
+		"esEs": "¿Ya tiene una cuenta?",
 	},
 	"FunctionZoneSubtitle": {
 		"zhCn": "功能专区副标题",
@@ -3948,6 +4335,7 @@ export const tips = {
 		"thTh": "คำบรรยายใต้หัวข้อฟังก์ชัน",
 		"idId": "Subjudul zona fungsi",
 		"miNz": "Taitararangi rohe mahi",
+		"esEs": "Subtítulo de la zona de funciones",
 	},
 
 	"FenceAlarmTotal": {
@@ -3959,6 +4347,7 @@ export const tips = {
 		"thTh": "บันทึกแจ้งเตือนทั้งหมด",
 		"idId": "Total Rekaman Alarm",
 		"miNz": "Katoa ngā rekoata whakatūpato",
+		"esEs": "Total de registros de alarma",
 	},
 	"FenceAlarmToday": {
 		"zhCn": "今日新增异常",
@@ -3969,6 +4358,7 @@ export const tips = {
 		"thTh": "วันนี้แจ้งเตือนใหม่",
 		"idId": "Alarm Baru Hari Ini",
 		"miNz": "Ngā whakatūpato hou o tēnei rā",
+		"esEs": "Anomalías nuevas hoy",
 	},
 	"FenceAlarmListTitle": {
 		"zhCn": "出/入围栏异常记录",
@@ -3979,6 +4369,7 @@ export const tips = {
 		"thTh": "บันทึกแจ้งเตือนเข้า/ออกรั้ว",
 		"idId": "Rekaman Alarm Keluar/Masuk Pagar",
 		"miNz": "Ngā rekoata whakatūpato taiepa",
+		"esEs": "Registros de alarma de geovalla",
 	},
 	"NoMatchingAlarmRecord": {
 		"zhCn": "暂无符合条件的异常记录",
@@ -3989,6 +4380,7 @@ export const tips = {
 		"thTh": "ไม่มีบันทึกแจ้งเตือนที่ตรงเงื่อนไข",
 		"idId": "Tidak ada rekaman alarm yang cocok",
 		"miNz": "Kāore he rekoata whakatūpato e taurite ana",
+		"esEs": "No hay registros de alarma que coincidan",
 	},
 	"PleaseSelectDate": {
 		"zhCn": "请选择日期",
@@ -3999,6 +4391,7 @@ export const tips = {
 		"thTh": "โปรดเลือกวันที่",
 		"idId": "Pilih tanggal",
 		"miNz": "Tīpaki he rā",
+		"esEs": "Seleccione una fecha",
 	},
 
 	"PleaseEnterName": {
@@ -4010,6 +4403,7 @@ export const tips = {
 		"thTh": "โปรดใส่ชื่อ",
 		"idId": "Masukkan nama",
 		"miNz": "Whakaurua he ingoa",
+		"esEs": "Introduzca el nombre",
 	},
 	"ParentChildNo": {
 		"zhCn": "主/子序号",
@@ -4020,6 +4414,7 @@ export const tips = {
 		"thTh": "ลำดับหลัก/รอง",
 		"idId": "No. Induk/Sub",
 		"miNz": "Tau Matua/Iti",
+		"esEs": "N.º principal / secundario",
 	},
 
 	"CheckAbortMsg": {
@@ -4031,6 +4426,7 @@ export const tips = {
 		"thTh": "การตรวจผ่าน ยุติขั้นตอน",
 		"idId": "Validasi lulus, proses dihentikan",
 		"miNz": "Whakamana i tika, whakatara te kaupapa",
+		"esEs": "Validación superada; proceso detenido",
 	},
 	"DeviceBoundSuccessLog": {
 		"zhCn": "设备绑定成功，可进行图片上传",
@@ -4041,6 +4437,7 @@ export const tips = {
 		"thTh": "ผูกอุปกรณ์สำเร็จ อัปโหลดรูปได้",
 		"idId": "Perangkat terikat, foto dapat diunggah",
 		"miNz": "Kua herea te taputapu, ka tuku whakaahua",
+		"esEs": "Dispositivo vinculado correctamente; ya puede subir fotos",
 	},
 	"UnknownReason": {
 		"zhCn": "未知原因",
@@ -4051,6 +4448,7 @@ export const tips = {
 		"thTh": "สาเหตุไม่ทราบ",
 		"idId": "Alasan tidak diketahui",
 		"miNz": "He take kāore e mōhiotia",
+		"esEs": "Motivo desconocido",
 	},
 	"UnknownError": {
 		"zhCn": "未知错误",
@@ -4061,6 +4459,7 @@ export const tips = {
 		"thTh": "ข้อผิดพลาดไม่ทราบ",
 		"idId": "Kesalahan tidak diketahui",
 		"miNz": "He hapa kāore e mōhiotia",
+		"esEs": "Error desconocido",
 	},
 
 	"SelectLanguage": {
@@ -4072,6 +4471,7 @@ export const tips = {
 		"thTh": "เลือกภาษา",
 		"idId": "Pilih Bahasa",
 		"miNz": "Kōwhiri reo",
+		"esEs": "Seleccionar idioma",
 	},
 	"DeleteAccountTitle": {
 		"zhCn": "注销账号",
@@ -4082,6 +4482,7 @@ export const tips = {
 		"thTh": "ลบบัญชี",
 		"idId": "Hapus Akun",
 		"miNz": "Mukuia te Kaute",
+		"esEs": "Eliminar cuenta",
 	},
 	"DeleteAccountWarn": {
 		"zhCn": "警告：注销后数据永久清除，无法恢复！确定要注销吗？",
@@ -4092,6 +4493,7 @@ export const tips = {
 		"thTh": "คำเตือน: ข้อมูลทั้งหมดจะถูกลบถาวร ไม่สามารถกู้คืนได้ แน่ใจหรือไม่",
 		"idId": "Peringatan: Semua data akan dihapus permanen dan tidak dapat dipulihkan. Yakin?",
 		"miNz": "Whakatūpato: Ka mukua katoa ngā raraunga, kāore e taea te whakaora. Kei te tino pono?",
+		"esEs": "Advertencia: al eliminar la cuenta, los datos se borrarán de forma permanente e irreversible. ¿Está seguro?",
 	},
 	"Deleting": {
 		"zhCn": "注销中...",
@@ -4102,6 +4504,7 @@ export const tips = {
 		"thTh": "กำลังลบ...",
 		"idId": "Menghapus...",
 		"miNz": "E muku ana...",
+		"esEs": "Eliminando...",
 	},
 	"DeleteAccountSuccess": {
 		"zhCn": "注销成功",
@@ -4112,6 +4515,7 @@ export const tips = {
 		"thTh": "ลบสำเร็จ",
 		"idId": "Berhasil dihapus",
 		"miNz": "Kua mukua",
+		"esEs": "Cuenta eliminada correctamente",
 	},
 	"DeleteAccountFailed": {
 		"zhCn": "注销失败",
@@ -4122,6 +4526,7 @@ export const tips = {
 		"thTh": "ลบไม่สำเร็จ",
 		"idId": "Gagal menghapus",
 		"miNz": "Kāore i muku",
+		"esEs": "Error al eliminar la cuenta",
 	},
 
 	"DateRangeTo": {
@@ -4133,6 +4538,7 @@ export const tips = {
 		"thTh": "ถึง",
 		"idId": "sampai",
 		"miNz": "ki",
+		"esEs": "a",
 	},
 
 	"SaveToAlbum": {
@@ -4144,6 +4550,7 @@ export const tips = {
 		"thTh": "บันทึกลับอัลบั้ม",
 		"idId": "Simpan ke album",
 		"miNz": "Tiaki ki te puka whakaahua",
+		"esEs": "Guardar imagen en el álbum",
 	},
 
 	"UpdateReadyRestart": {
@@ -4155,6 +4562,7 @@ export const tips = {
 		"thTh": "เวอร์ชันใหม่พร้อมแล้ว เริ่มแอปใหม่ไหม",
 		"idId": "Versi baru siap. Mulai ulang aplikasi sekarang?",
 		"miNz": "Kua rite te putanga hou. Tīmata anō i te taupānga?",
+		"esEs": "Una nueva versión está lista. ¿Reiniciar la aplicación ahora?",
 	},
 	"UpdateDownloadFailed": {
 		"zhCn": "新版本下载失败，请删除当前小程序，重新搜索打开",
@@ -4165,6 +4573,7 @@ export const tips = {
 		"thTh": "ดาวน์โหลดเวอร์ชันใหม่ล้มเหลว ลบมินิโปรแกรมนี้แล้วค้นหาใหม่",
 		"idId": "Gagal mengunduh versi baru. Hapus aplikasi mini ini dan cari lagi.",
 		"miNz": "I rahua te tiki i te putanga hou. Mukua tēnei taupānga iti ka rapu anō.",
+		"esEs": "Error al descargar la nueva versión. Elimine este miniprograma y búsquelo de nuevo.",
 	},
 
 	"LogNetworkTag": {
@@ -4176,5 +4585,6 @@ export const tips = {
 		"thTh": "[เครือข่าย]",
 		"idId": "[Jaringan]",
 		"miNz": "[Whatunga]",
+		"esEs": "[Red]",
 	},
 }

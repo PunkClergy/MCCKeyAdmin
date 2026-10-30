@@ -12,7 +12,7 @@
 
 ---
 
-## 1. 支持语种（8 种）
+## 1. 支持语种（9 种）
 
 前端 storage 内部码与后端 `lang` 请求头标准码的映射见 `utils/request/http.js` 的 `langCodeMap`。
 
@@ -26,6 +26,7 @@
 | `thTh` | `th_TH` | ภาษาไทย |
 | `idId` | `id_ID` | Bahasa Indonesia |
 | `miNz` | `mi_NZ` | Te Reo Māori |
+| `esEs` | `es_ES` | Español |
 
 > 词库中少量历史键保留了 `jaJp`（日语）字段，前端默认逻辑不启用，仅为历史兼容保留，无需维护翻译。
 
@@ -37,7 +38,7 @@
 | --- | --- | --- | --- |
 | A 前端词库 | `utils/langtips.js`、`utils/langtitle.js` | 前端静态 UI 文案、导航标题 | 页面通过 `tips.Key[lang]` / `titles[route][lang]` 取值 |
 | B 后端多语 | 接口响应 `multiName` / `multiText` / `msg`，请求头 `lang` | 字典化业务数据（菜单、权限树、区域等）与服务端提示 | 前端直出，缺失时用前端兜底词条 |
-| C Hybrid 地图页 | `hybrid/html/js/position.js`、`risk.js`、`trajectory.js`、`sendKey.js` | 地图页按钮与兜底提示文案 | 内置 `buttonTexts` 8 语对象，`DEFAULT_LANG = 'enUs'` |
+| C Hybrid 地图页 | `hybrid/html/js/position.js`、`risk.js`、`trajectory.js`、`sendKey.js` | 地图页按钮与兜底提示文案 | 内置 `buttonTexts` 9 语对象，`DEFAULT_LANG = 'enUs'` |
 
 ### 数据流
 1. 页面 `onShow` 读取 `uni.getStorageSync('language')`，无缓存时默认 `enUs`。
@@ -50,10 +51,10 @@
 
 | 文件 | 内容 | 规模 |
 | --- | --- | --- |
-| `utils/langtips.js` | 全部功能文案键 `export const tips = { ... }` | 410 键，8 语齐全 |
-| `utils/langtitle.js` | 页面导航标题键 `export const titles = { ... }`，键为页面路由 | 24 键，8 语齐全 |
+| `utils/langtips.js` | 全部功能文案键 `export const tips = { ... }` | 410 键，9 语齐全 |
+| `utils/langtitle.js` | 页面导航标题键 `export const titles = { ... }`，键为页面路由 | 24 键，9 语齐全 |
 
-词条块固定 8 语顺序：`zhCn → enUs → msMy → ptBr → taSg → thTh → idId → miNz`，每个语种值不得留空。
+词条块固定 9 语顺序：`zhCn → enUs → msMy → ptBr → taSg → thTh → idId → miNz → esEs`，每个语种值不得留空。
 
 ### 新增词条示例
 
@@ -68,7 +69,8 @@
     "taSg": "புகைப்படங்களைப் பதிவேற்ற உறுதிசெய்",
     "thTh": "ยืนยันอัปโหลดรูปภาพ",
     "idId": "Konfirmasi Unggah Foto",
-    "miNz": "Whakaū te tuku whakaahua"
+    "miNz": "Whakaū te tuku whakaahua",
+    "esEs": "Confirmar subida de fotos"
 },
 ```
 
@@ -111,7 +113,7 @@ export default {
 
 ### 4.3 语言切换
 - 存储键：`uni.setStorageSync('language', value)`，选项值即内部码（见第 1 节表）。
-- 语言选择列表（个人中心）按 8 语本名展示，切换后刷新当前页数据与标题。
+- 语言选择列表（个人中心）按 9 语本名展示，切换后刷新当前页数据与标题。
 
 ### 4.4 默认语言策略
 - **新用户（本地无 `language` 记录）：默认英文 `enUs`**，与后端 `http.js` 默认 `en_US` 保持一致。
@@ -122,7 +124,7 @@ export default {
 ## 5. 本次改造范围
 
 ### 5.1 网络层
-- `utils/request/http.js`：`lang` 头由原先错误的正则写法改为显式 `langCodeMap` 8 语标准码映射，默认 `en_US`；`token` 注入与 `9000` 跳登录逻辑保持不变。
+- `utils/request/http.js`：`lang` 头由原先错误的正则写法改为显式 `langCodeMap` 9 语标准码映射，默认 `en_US`；`token` 注入与 `9000` 跳登录逻辑保持不变。
 
 ### 5.2 词库扩展
 - `utils/langtips.js`：268 → **410 键**，补齐预检、还车、围栏、用车、风控、空态/加载/报错等文案。
@@ -167,7 +169,7 @@ export default {
 | 校验项 | 方式 | 结果 |
 | --- | --- | --- |
 | 词库 JS 语法 | `node --check`（ESM） | `langtips.js`、`langtitle.js` 均通过 |
-| 8 语完整性 | 逐键比对 8 语种缺失 / 空值 | tips 410、titles 24，缺失 0、空值 0 |
+| 9 语完整性 | 逐键比对 9 语种缺失 / 空值 | tips 410、titles 24，缺失 0、空值 0 |
 | 词条引用存在性 | 全量提取 `tips.Key[lang]`、`titles[route][lang]` 与词库求差 | 悬空引用 0 |
 | 方法区引用规范 | 扫描裸 `tips[lang]`、缺 `this.lang` | 0 处 |
 | 模板插值 / 标签配平 | `{{ }}`、`<template>` 配平检查 | 0 异常 |
@@ -200,7 +202,7 @@ pages/
   zoneCenter/            # 功能中心各业务页（含 nvue 控车 / 轨迹 / 风控）
 components/
   custom-header/         # 自定义头部（.vue + .nvue）
-hybrid/html/js/          # 地图页内置 8 语文案
+hybrid/html/js/          # 地图页内置 9 语文案
 ```
 
 > 备份：词库改动前原始版本已在开发工作区备份，需要回滚时以备份覆盖 `langtips.js` / `langtitle.js` 即可。
@@ -210,6 +212,20 @@ hybrid/html/js/          # 地图页内置 8 语文案
 ## 10. 更新记录（Changelog）
 
 > 格式：版本号（`versionName` / `versionCode`）· 日期 · 分组（新增 / 优化 / 修复 / 变更）。新记录追加在表格顶部。未升级 `versionCode` 的迭代按"批次"标注在对应版本下。
+
+### v1.3.3（260916）— 2026-10-30 · 新增西班牙语（esEs）批次
+
+**新增**
+- 新增第 9 语种西班牙语：内部码 `esEs`，后端标准码 `es_ES`；个人中心语言列表新增 `Español` 选项。
+- `utils/langtips.js`（410 键）、`utils/langtitle.js`（24 键）全部补齐 `esEs` 词条，覆盖导航标题、按钮、toast、K7 预检说明、免责条款、更新提示等。
+- 4 个 Hybrid 地图脚本 `buttonTexts`、`addressFail`、`mapSdkNotReady` 补齐西语；`sendKey.js` 谷歌 geocode `langMap` 增加 `esEs: 'es-ES'`（其余脚本由内部码自动推导为 `es-es`）。
+- `utils/request/http.js` 的 `langCodeMap` 增加 `esEs: 'es_ES'`。
+
+**变更**
+- 默认语言仍为 `enUs`；西班牙语仅作为可选语言，不改变新用户默认值与老用户本地选择。
+
+**校验**
+- 9 语缺失 0、空值 0；tips / titles 悬空引用 0；模板配平 0；两个词库与 4 个 Hybrid 脚本 `node --check` 通过；词库文件保持 CRLF、零裸 LF。
 
 ### v1.3.3（260916）— 2026-10-30 · 多语言补齐批次
 

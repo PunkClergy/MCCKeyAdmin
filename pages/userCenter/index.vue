@@ -108,6 +108,10 @@
 					{
 						name: 'Te Reo Māori', //毛利语【新西兰】
 						value: 'miNz'
+					},
+					{
+						name: 'Español', //西班牙语【西班牙】
+						value: 'esEs'
 					}
 				],
 				// 控制弹窗显示

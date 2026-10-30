@@ -100,6 +100,16 @@ const buttonTexts = {
 		btn6Lang: "Wewete aukati",
 		trajectory: "Takahanga ara",
 	},
+	'esEs': {
+		btnReturnLang: "Devolver",
+		btn3Lang: "Desbloquear",
+		btn1Lang: "Bloquear",
+		btn5Lang: "Localizar",
+		btnSeeLang: "Fotos",
+		btn8Lang: "Bloquear",
+		btn6Lang: "Desbloquear",
+	},
+
 };
 const addressFail = {
 	'zhCn': "地址获取失败",
@@ -110,6 +120,8 @@ const addressFail = {
 	'thTh': "ไม่พบที่อยู่",
 	'idId': "Alamat tidak tersedia",
 	'miNz': "Kāore te wāhi wātea",
+	'esEs': "Dirección no disponible",
+
 };
 const mapSdkNotReady = {
 	'zhCn': "地图SDK未就绪",
@@ -120,6 +132,8 @@ const mapSdkNotReady = {
 	'thTh': "SDK แผนที่ยังไม่พร้อม",
 	'idId': "SDK peta belum siap",
 	'miNz': "Kāore te SDK mahere i te rite",
+	'esEs': "SDK del mapa no disponible",
+
 };
 
 // ============ 新增：逆地理解析函数 resolveAddress ============

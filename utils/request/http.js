@@ -216,7 +216,8 @@ http.setInterceptor({
 			taSg: 'ta_SG',
 			thTh: 'th_TH',
 			idId: 'id_ID',
-			miNz: 'mi_NZ'
+			miNz: 'mi_NZ',
+			esEs: 'es_ES'
 		}
 		const language = langCodeMap[uni.getStorageSync('language')] || 'en_US'
 		const token = userKey?.token || ''
