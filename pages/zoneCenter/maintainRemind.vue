@@ -120,21 +120,21 @@
 				totalCount: 0,
 				todayCount: 0,
 				maintenanceStatusOptions: [{
-						name: '全部',
+						name: '',
 						value: 'all'
 					},
 					{
-						name: '待保养',
+						name: '',
 						value: 'pending'
 					},
 					{
-						name: '已保养',
+						name: '',
 						value: 'done'
 					}
 				],
 				selectedStatusIndex: 0,
 				selectedStatus: {
-					name: '全部',
+					name: '',
 					value: 'all'
 				},
 				showFilterModal: false,
@@ -263,7 +263,7 @@
 				this.showFilterModal = false
 				this.carCandidateList = []
 				uni.showToast({
-					title: `${tips.FilteredOut[lang]}${result.length}${tips.Records[lang]}`,
+					title: `${this.tips.FilteredOut[this.lang]}${result.length}${this.tips.Records[this.lang]}`,
 					icon: 'none'
 				})
 			},

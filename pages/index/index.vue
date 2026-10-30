@@ -40,12 +40,12 @@
 				<view class="service-card">
 					<view class="service-header">
 						<view class="service-header__left">
-							<text class="service-header__title">{{zoneMultiName}}</text>
-							<text class="service-header__subtitle">{{zoneMultiSubtitle}}</text>
+							<text class="service-header__title">{{zoneMultiName || tips.FunctionZone[lang]}}</text>
+							<text class="service-header__subtitle">{{zoneMultiSubtitle || tips.FunctionZoneSubtitle[lang]}}</text>
 						</view>
 						<view class="service-header__more" @click="handleAllService" v-if="expandShow">
 							<text class="service-header__more-text">
-								{{expand?tips?.Collapse[lang]:tips?.Expand[lang]}}
+								{{expand ? tips.Collapse[lang] : tips.Expand[lang]}}
 							</text>
 						</view>
 					</view>
@@ -106,6 +106,7 @@
 				</view>
 			</view>
 		</view>
+		
 		<!-- 抽离的公共tabbar组件 -->
 		<CustomTabbar :tab-list="tabList" :current-tab="currentTab" :base-image-url="baseImageUrl"
 			:tabbar-height="tabbarBaseHeight" :safe-area-bottom="safeAreaBottom" @tab-click="onTabbarClick" />
@@ -156,9 +157,9 @@
 				// 数据中心统计
 				dataCenter: [],
 				// 功能专区标题
-				zoneMultiName: '功能专区',
+				zoneMultiName: '',
 				// 功能专区副标题
-				zoneMultiSubtitle: '功能专区副标题',
+				zoneMultiSubtitle: '',
 				// 功能专区是否展开
 				expand: 0,
 				// 展开收起是否显示

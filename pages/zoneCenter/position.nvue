@@ -259,7 +259,7 @@
 
 			async handleVehicle(evt) {
 			  uni.showLoading({
-			    title: '处理中...',
+			    title: this.tips.Processing[this.lang],
 			    mask: true // 遮罩，阻止点击，防止重复提交
 			  })
 			  try {
@@ -277,7 +277,7 @@
 			  } catch (error) {
 			    console.error('handleVehicle异常：', error)
 			    uni.showToast({ 
-			      title: '网络错误', 
+			      title: this.tips.NetError[this.lang], 
 			      icon: 'none' 
 			    })
 			  } finally {

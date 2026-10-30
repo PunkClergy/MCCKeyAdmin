@@ -12,21 +12,13 @@ var isMapInitialized = false; // 标记地图是否初始化
 var isFirstLoad = true; // 标记是否是首次加载
 var hasMyLocation = false; // 标记是否已拿到“我的位置”（定位与地图加载解耦）
 var vehicle_info = {};
-let currentLang = 'zhCn'; // 全局保存当前语言
+const DEFAULT_LANG = 'enUs'; // 默认语言
+let currentLang = DEFAULT_LANG; // 全局保存当前语言
 // 坐标解析缓存，避免同一经纬度重复调用Geocoder，节约配额
 const geoCache = new Map();
 
 // 使用配置对象集中管理多语言文本
 const buttonTexts = {
-	'enUs': {
-		btnReturnLang: "Return",
-		btn3Lang: "Unlock",
-		btn1Lang: "Lock",
-		btn5Lang: "Locate",
-		btnSeeLang: "Photos",
-		btn8Lang: "Block",
-		btn6Lang: "Unblock"
-	},
 	'zhCn': {
 		btnReturnLang: "归还车辆",
 		btn3Lang: "开锁",
@@ -34,8 +26,91 @@ const buttonTexts = {
 		btn5Lang: "寻车",
 		btnSeeLang: "送车拍照",
 		btn8Lang: "风控拦截",
-		btn6Lang: "取消拦截"
-	}
+		btn6Lang: "取消拦截",
+	},
+	'enUs': {
+		btnReturnLang: "Return",
+		btn3Lang: "Unlock",
+		btn1Lang: "Lock",
+		btn5Lang: "Locate",
+		btnSeeLang: "Photos",
+		btn8Lang: "Block",
+		btn6Lang: "Unblock",
+	},
+	'msMy': {
+		btnReturnLang: "Pulang Kenderaan",
+		btn3Lang: "Buka Kunci",
+		btn1Lang: "Tutup Kunci",
+		btn5Lang: "Cari Kereta",
+		btnSeeLang: "Gambar",
+		btn8Lang: "Sekat Risiko",
+		btn6Lang: "Batal Sekatan",
+	},
+	'ptBr': {
+		btnReturnLang: "Devolver Veículo",
+		btn3Lang: "Destravar",
+		btn1Lang: "Travar",
+		btn5Lang: "Localizar",
+		btnSeeLang: "Fotos",
+		btn8Lang: "Bloquear",
+		btn6Lang: "Desbloquear",
+	},
+	'taSg': {
+		btnReturnLang: "வாகனத்தைத் திருப்பி",
+		btn3Lang: "திற",
+		btn1Lang: "பூட்டு",
+		btn5Lang: "கண்டுபிடி",
+		btnSeeLang: "புகைப்படங்கள்",
+		btn8Lang: "தடு",
+		btn6Lang: "தடுப்பை நீக்கு",
+	},
+	'thTh': {
+		btnReturnLang: "คืนรถ",
+		btn3Lang: "ปลดล็อก",
+		btn1Lang: "ล็อก",
+		btn5Lang: "ค้นหารถ",
+		btnSeeLang: "รูปถ่าย",
+		btn8Lang: "สกัดกั้น",
+		btn6Lang: "ยกเลิกสกัดกั้น",
+	},
+	'idId': {
+		btnReturnLang: "Kembalikan Kendaraan",
+		btn3Lang: "Buka Kunci",
+		btn1Lang: "Kunci",
+		btn5Lang: "Cari Kendaraan",
+		btnSeeLang: "Foto",
+		btn8Lang: "Blokir",
+		btn6Lang: "Buka Blokir",
+	},
+	'miNz': {
+		btnReturnLang: "Whakahoki waka",
+		btn3Lang: "Wewete",
+		btn1Lang: "Muku",
+		btn5Lang: "Kimihia",
+		btnSeeLang: "Whakaahua",
+		btn8Lang: "Aukati",
+		btn6Lang: "Wewete aukati",
+	},
+};
+const addressFail = {
+	'zhCn': "地址获取失败",
+	'enUs': "Address unavailable",
+	'msMy': "Alamat tidak tersedia",
+	'ptBr': "Endereço indisponível",
+	'taSg': "முகவரி கிடைக்கவில்லை",
+	'thTh': "ไม่พบที่อยู่",
+	'idId': "Alamat tidak tersedia",
+	'miNz': "Kāore te wāhi wātea",
+};
+const mapSdkNotReady = {
+	'zhCn': "地图SDK未就绪",
+	'enUs': "Map SDK not ready",
+	'msMy': "SDK peta belum sedia",
+	'ptBr': "SDK do mapa não pronto",
+	'taSg': "வரைபடம் SDK தயாராகவில்லை",
+	'thTh': "SDK แผนที่ยังไม่พร้อม",
+	'idId': "SDK peta belum siap",
+	'miNz': "Kāore te SDK mahere i te rite",
 };
 
 /**
@@ -46,7 +121,7 @@ const buttonTexts = {
  */
 async function resolveAddress(lat, lng) {
 	if (!map || !window.google || !google.maps.Geocoder) {
-		return '地图SDK未就绪';
+		return mapSdkNotReady[currentLang] || mapSdkNotReady.enUs;
 	}
 	// 保留6位小数作为缓存key，减少浮点精度问题
 	const cacheKey = `${Number(lat).toFixed(6)},${Number(lng).toFixed(6)}`;
@@ -55,10 +130,16 @@ async function resolveAddress(lat, lng) {
 	}
 	// 语言映射，匹配谷歌标准language参数
 	const langMap = {
-		zhCn: 'zh-CN',
-		enUs: 'en-US'
-	};
-	const targetLang = langMap[currentLang] || 'zh-CN';
+	zhCn: 'zh-CN',
+	enUs: 'en-US',
+	msMy: 'ms-MY',
+	ptBr: 'pt-BR',
+	taSg: 'ta-SG',
+	thTh: 'th-TH',
+	idId: 'id-ID',
+	miNz: 'mi-NZ',
+};
+	const targetLang = langMap[currentLang] || 'en-US';
 	const geocoder = new google.maps.Geocoder();
 
 	return new Promise((resolve) => {
@@ -75,7 +156,7 @@ async function resolveAddress(lat, lng) {
 				resolve(addr);
 			} else {
 				console.warn('Geocoder地址解析失败，status：', status);
-				resolve('地址获取失败');
+				resolve(addressFail[currentLang] || addressFail.enUs);
 			}
 		});
 	});
@@ -91,7 +172,7 @@ window.onAppMessage = async function(data) {
 		geoCache.clear();
 	}
 	// 更新按钮UI多语言
-	const langData = buttonTexts[currentLang] || buttonTexts['zhCn'];
+	const langData = buttonTexts[currentLang] || buttonTexts[DEFAULT_LANG];
 	Object.entries(langData).forEach(([id, text]) => {
 		const element = document.getElementById(id);
 		if (element) element.textContent = text;

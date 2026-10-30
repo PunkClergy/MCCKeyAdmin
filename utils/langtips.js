@@ -7,7 +7,7 @@ export const tips = {
 		"taSg": "அழைப்பை மேற்கொள்ளுங்கள்",
 		"thTh": "โทรออก",
 		"idId": "Lakukan Panggilan",
-		"miNz": "Waea atu"
+		"miNz": "Waea atu",
 	},
 	"DoYouWantToCallCustomerService": {
 		"zhCn": "是否拨打客服电话",
@@ -17,7 +17,7 @@ export const tips = {
 		"taSg": "வாடிக்கையாளர் சேவைக்கு அழைக்க விரும்புகிறீர்களா",
 		"thTh": "ต้องการโทรหาฝ่ายบริการลูกค้าหรือไม่",
 		"idId": "Apakah anda ingin menghubungi layanan pelanggan",
-		"miNz": "Kei te hiahia koe ki te waea ki te ratonga kiritaki"
+		"miNz": "Kei te hiahia koe ki te waea ki te ratonga kiritaki",
 	},
 	"Call": {
 		"zhCn": "拨打",
@@ -27,7 +27,7 @@ export const tips = {
 		"taSg": "அழைப்பு",
 		"thTh": "โทร",
 		"idId": "Panggil",
-		"miNz": "Waea"
+		"miNz": "Waea",
 	},
 	"Confirm": {
 		"zhCn": "确认",
@@ -37,7 +37,7 @@ export const tips = {
 		"taSg": "உறுதிப்படுத்து",
 		"thTh": "ยืนยัน",
 		"idId": "Konfirmasi",
-		"miNz": "Whakaū"
+		"miNz": "Whakaū",
 	},
 	"Cancel": {
 		"zhCn": "取消",
@@ -47,7 +47,7 @@ export const tips = {
 		"taSg": "ரத்து செய்",
 		"thTh": "ยกเลิก",
 		"idId": "Batal",
-		"miNz": "Whakakore"
+		"miNz": "Whakakore",
 	},
 	"DialFailed": {
 		"zhCn": "拨号失败",
@@ -57,7 +57,7 @@ export const tips = {
 		"taSg": "அழைப்பு தோல்வி",
 		"thTh": "การโทรล้มเหลว",
 		"idId": "Panggilan gagal",
-		"miNz": "I rahua te waea"
+		"miNz": "I rahua te waea",
 	},
 	"Tip": {
 		"zhCn": "提示",
@@ -67,7 +67,7 @@ export const tips = {
 		"taSg": "குறிப்பு",
 		"thTh": "คำแนะนำ",
 		"idId": "Tips",
-		"miNz": "Tohu"
+		"miNz": "Tohu",
 	},
 	"ExitClearCache": {
 		"zhCn": "确定要退出并清除所有缓存吗?",
@@ -77,7 +77,7 @@ export const tips = {
 		"taSg": "வெளியேறி அனைத்து தற்காலிக சேமிப்புகளையும் அழிக்க உறுதியா?",
 		"thTh": "แน่ใจหรือไม่ที่จะออกและลบแคชทั้งหมด",
 		"idId": "Apakah anda yakin ingin keluar dan menghapus semua cache?",
-		"miNz": "Kei te tino hiahia koe ki te puta me te ūkui katoa te keteroki?"
+		"miNz": "Kei te tino hiahia koe ki te puta me te ūkui katoa te keteroki?",
 	},
 	"MyProfile": {
 		"zhCn": "我的资料",
@@ -87,7 +87,7 @@ export const tips = {
 		"taSg": "எனது சுயவிவரம்",
 		"thTh": "ข้อมูลส่วนตัวของฉัน",
 		"idId": "Profil Saya",
-		"miNz": "Taku kōrero whaiaro"
+		"miNz": "Taku kōrero whaiaro",
 	},
 	"CompanyName": {
 		"zhCn": "企业名称",
@@ -97,7 +97,7 @@ export const tips = {
 		"taSg": "நிறுவன பெயர்",
 		"thTh": "ชื่อบริษัท",
 		"idId": "Nama Perusahaan",
-		"miNz": "Ingoa kamupene"
+		"miNz": "Ingoa kamupene",
 	},
 	"PleaseEnterCompanyName": {
 		"zhCn": "请输入企业名称",
@@ -107,7 +107,7 @@ export const tips = {
 		"taSg": "நிறுவன பெயரை உள்ளிடவும்",
 		"thTh": "กรุณากรอกชื่อบริษัท",
 		"idId": "Silakan masukkan nama perusahaan",
-		"miNz": "Tena koa whakauru mai te ingoa kamupene"
+		"miNz": "Tena koa whakauru mai te ingoa kamupene",
 	},
 	"ContactPerson": {
 		"zhCn": "联系人",
@@ -117,7 +117,7 @@ export const tips = {
 		"taSg": "தொடர்பு நபர்",
 		"thTh": "ผู้ติดต่อ",
 		"idId": "Orang Kontak",
-		"miNz": "Tangata whakapā"
+		"miNz": "Tangata whakapā",
 	},
 	"PleaseEnterContactPerson": {
 		"zhCn": "请输入联系人",
@@ -127,7 +127,7 @@ export const tips = {
 		"taSg": "தொடர்பு நபரின் பெயரை உள்ளிடவும்",
 		"thTh": "กรุณากรอกชื่อผู้ติดต่อ",
 		"idId": "Silakan masukkan orang kontak",
-		"miNz": "Tena koa whakauru mai te tangata whakapā"
+		"miNz": "Tena koa whakauru mai te tangata whakapā",
 	},
 	"ContactPhone": {
 		"zhCn": "联系电话",
@@ -137,7 +137,7 @@ export const tips = {
 		"taSg": "தொடர்பு தொலைபேசி",
 		"thTh": "หมายเลขโทรศัพท์ติดต่อ",
 		"idId": "Telepon Kontak",
-		"miNz": "Waea whakapā"
+		"miNz": "Waea whakapā",
 	},
 	"PleaseEnterContactPhone": {
 		"zhCn": "请输入联系电话",
@@ -147,7 +147,7 @@ export const tips = {
 		"taSg": "தொடர்பு தொலைபேசி எண்ணை உள்ளிடவும்",
 		"thTh": "กรุณากรอกหมายเลขโทรศัพท์ติดต่อ",
 		"idId": "Silakan masukkan nomor telepon kontak",
-		"miNz": "Tena koa whakauru mai te nama waea whakapā"
+		"miNz": "Tena koa whakauru mai te nama waea whakapā",
 	},
 	"Remarks": {
 		"zhCn": "备注",
@@ -157,7 +157,7 @@ export const tips = {
 		"taSg": "குறிப்புகள்",
 		"thTh": "หมายเหตุ",
 		"idId": "Catatan",
-		"miNz": "Ngā kōrero tuku iho"
+		"miNz": "Ngā kōrero tuku iho",
 	},
 	"PleaseEnterRemarks": {
 		"zhCn": "请输入备注",
@@ -167,7 +167,7 @@ export const tips = {
 		"taSg": "குறிப்புகளை உள்ளிடவும்",
 		"thTh": "กรุณากรอกหมายเหตุ",
 		"idId": "Silakan masukkan catatan",
-		"miNz": "Tena koa whakauru mai ngā kōrero tuku iho"
+		"miNz": "Tena koa whakauru mai ngā kōrero tuku iho",
 	},
 	"BillingInfo": {
 		"zhCn": "开票信息",
@@ -177,7 +177,7 @@ export const tips = {
 		"taSg": "பில் தகவல்",
 		"thTh": "ข้อมูลใบแจ้งหนี้",
 		"idId": "Informasi Penagihan",
-		"miNz": "Ngā kōrero nama"
+		"miNz": "Ngā kōrero nama",
 	},
 	"BillingName": {
 		"zhCn": "开票名称",
@@ -187,7 +187,7 @@ export const tips = {
 		"taSg": "பில் பெயர்",
 		"thTh": "ชื่อสำหรับใบแจ้งหนี้",
 		"idId": "Nama Penagihan",
-		"miNz": "Ingoa nama"
+		"miNz": "Ingoa nama",
 	},
 	"PleaseEnterBillingName": {
 		"zhCn": "请输入开票名称",
@@ -197,7 +197,7 @@ export const tips = {
 		"taSg": "பில் பெயரை உள்ளிடவும்",
 		"thTh": "กรุณากรอกชื่อสำหรับใบแจ้งหนี้",
 		"idId": "Silakan masukkan nama penagihan",
-		"miNz": "Tena koa whakauru mai te ingoa nama"
+		"miNz": "Tena koa whakauru mai te ingoa nama",
 	},
 	"TaxpayerId": {
 		"zhCn": "纳税人识别号",
@@ -207,7 +207,7 @@ export const tips = {
 		"taSg": "வரி செலுத்துபவர் அடையாள எண்",
 		"thTh": "หมายเลขประจำตัวผู้เสียภาษี",
 		"idId": "ID Wajib Pajak",
-		"miNz": "Tau kaitākete"
+		"miNz": "Tau kaitākete",
 	},
 	"PleaseEnterTaxpayerId": {
 		"zhCn": "请输入纳税人识别号",
@@ -217,7 +217,7 @@ export const tips = {
 		"taSg": "வரி செலுத்துபவர் அடையாள எண்ணை உள்ளிடவும்",
 		"thTh": "กรุณากรอกหมายเลขประจำตัวผู้เสียภาษี",
 		"idId": "Silakan masukkan ID wajib pajak",
-		"miNz": "Tena koa whakauru mai te tau kaitākete"
+		"miNz": "Tena koa whakauru mai te tau kaitākete",
 	},
 	"PleaseEnterPhone": {
 		"zhCn": "请输入电话",
@@ -227,7 +227,7 @@ export const tips = {
 		"taSg": "தொலைபேசி எண்ணை உள்ளிடவும்",
 		"thTh": "กรุณากรอกหมายเลขโทรศัพท์",
 		"idId": "Silakan masukkan nomor telepon",
-		"miNz": "Tena koa whakauru mai te nama waea"
+		"miNz": "Tena koa whakauru mai te nama waea",
 	},
 	"Address": {
 		"zhCn": "地址",
@@ -237,7 +237,7 @@ export const tips = {
 		"taSg": "முகவரி",
 		"thTh": "ที่อยู่",
 		"idId": "Alamat",
-		"miNz": "Wāhi noho"
+		"miNz": "Wāhi noho",
 	},
 	"PleaseEnterAddress": {
 		"zhCn": "请输入地址",
@@ -247,7 +247,7 @@ export const tips = {
 		"taSg": "முகவரியை உள்ளிடவும்",
 		"thTh": "กรุณากรอกที่อยู่",
 		"idId": "Silakan masukkan alamat",
-		"miNz": "Tena koa whakauru mai te wāhi noho"
+		"miNz": "Tena koa whakauru mai te wāhi noho",
 	},
 	"BankName": {
 		"zhCn": "开户行",
@@ -257,7 +257,7 @@ export const tips = {
 		"taSg": "வங்கி பெயர்",
 		"thTh": "ชื่อธนาคาร",
 		"idId": "Nama Bank",
-		"miNz": "Ingoa peeke"
+		"miNz": "Ingoa peeke",
 	},
 	"PleaseEnterBankName": {
 		"zhCn": "请输入开户行",
@@ -267,7 +267,7 @@ export const tips = {
 		"taSg": "வங்கி பெயரை உள்ளிடவும்",
 		"thTh": "กรุณากรอกชื่อธนาคาร",
 		"idId": "Silakan masukkan nama bank",
-		"miNz": "Tena koa whakauru mai te ingoa peeke"
+		"miNz": "Tena koa whakauru mai te ingoa peeke",
 	},
 	"BankAccount": {
 		"zhCn": "开户账号",
@@ -277,7 +277,7 @@ export const tips = {
 		"taSg": "வங்கி கணக்கு",
 		"thTh": "บัญชีธนาคาร",
 		"idId": "Rekening Bank",
-		"miNz": "Pūkete peeke"
+		"miNz": "Pūkete peeke",
 	},
 	"PleaseEnterBankAccount": {
 		"zhCn": "请输入开户账号",
@@ -287,7 +287,7 @@ export const tips = {
 		"taSg": "வங்கி கணக்கு எண்ணை உள்ளிடவும்",
 		"thTh": "กรุณากรอกหมายเลขบัญชีธนาคาร",
 		"idId": "Silakan masukkan nomor rekening bank",
-		"miNz": "Tena koa whakauru mai te nama pūkete peeke"
+		"miNz": "Tena koa whakauru mai te nama pūkete peeke",
 	},
 	"PleaseLogin": {
 		"zhCn": "请登录",
@@ -297,7 +297,7 @@ export const tips = {
 		"taSg": "உள்நுழையவும்",
 		"thTh": "กรุณาเข้าสู่ระบบ",
 		"idId": "Silakan masuk",
-		"miNz": "Tena koa takiuru mai"
+		"miNz": "Tena koa takiuru mai",
 	},
 	"WelcomeUse": {
 		"zhCn": "欢迎使用",
@@ -307,7 +307,7 @@ export const tips = {
 		"taSg": "பயன்படுத்த வரவேற்கிறோம்",
 		"thTh": "ยินดีที่ได้รู้จัก",
 		"idId": "Selamat Datang",
-		"miNz": "Nau mai ki te whakamahi"
+		"miNz": "Nau mai ki te whakamahi",
 	},
 	"PreparingService": {
 		"zhCn": "正在为您准备优质服务",
@@ -317,7 +317,7 @@ export const tips = {
 		"taSg": "உங்களுக்கு உயர்தர சேவைகளை தயார் செய்கிறது",
 		"thTh": "กำลังเตรียมบริการคุณภาพสูงสำหรับคุณ",
 		"idId": "Sedang menyiapkan layanan berkualitas untuk anda",
-		"miNz": "Kei te whakarite ratonga kounga mōu"
+		"miNz": "Kei te whakarite ratonga kounga mōu",
 	},
 	"ZhiXinTong": {
 		"zhCn": "智信通",
@@ -327,7 +327,7 @@ export const tips = {
 		"taSg": "WiseLink Auto",
 		"thTh": "WiseLink Auto",
 		"idId": "WiseLink Auto",
-		"miNz": "WiseLink Auto"
+		"miNz": "WiseLink Auto",
 	},
 	"RentalEKey": {
 		"zhCn": "电子钥匙",
@@ -337,7 +337,7 @@ export const tips = {
 		"taSg": "வாடகை மின்னணு சாவி",
 		"thTh": "กุญแจอิเล็กทรอนิกส์รถเช่า",
 		"idId": "Kunci Elektronik Sewa",
-		"miNz": "Kī hiko rēti"
+		"miNz": "Kī hiko rēti",
 	},
 	"UserGuide": {
 		"zhCn": "使用指南",
@@ -347,7 +347,7 @@ export const tips = {
 		"taSg": "பயனர் வழிகாட்டி",
 		"thTh": "คู่มือผู้ใช้",
 		"idId": "Panduan Pengguna",
-		"miNz": "Aratohu kaiwhakamahi"
+		"miNz": "Aratohu kaiwhakamahi",
 	},
 	"SendKey": {
 		"zhCn": "发送钥匙",
@@ -357,7 +357,7 @@ export const tips = {
 		"taSg": "சாவி அனுப்பு",
 		"thTh": "ส่งกุญแจ",
 		"idId": "Kirim Kunci",
-		"miNz": "Tukua te kī"
+		"miNz": "Tukua te kī",
 	},
 	"UsageLogs": {
 		"zhCn": "使用记录",
@@ -367,7 +367,7 @@ export const tips = {
 		"taSg": "பயன்பாட்டு பதிவுகள்",
 		"thTh": "ประวัติการใช้งาน",
 		"idId": "Catatan Penggunaan",
-		"miNz": "Ngā rārangi whakamahi"
+		"miNz": "Ngā rārangi whakamahi",
 	},
 	"VIN": {
 		"zhCn": "车架号",
@@ -377,7 +377,7 @@ export const tips = {
 		"taSg": "வாகன அடையாள எண் (VIN)",
 		"thTh": "หมายเลขตัวถัง (VIN)",
 		"idId": "VIN",
-		"miNz": "VIN"
+		"miNz": "VIN",
 	},
 	"FuelCapacity": {
 		"zhCn": "油箱容积",
@@ -387,7 +387,7 @@ export const tips = {
 		"taSg": "எரிபொருள் தொட்டி திறன்",
 		"thTh": "ความจุถังน้ำมัน",
 		"idId": "Kapasitas Tangki Bahan Bakar",
-		"miNz": "Rōrahi pūkoro hinu"
+		"miNz": "Rōrahi pūkoro hinu",
 	},
 	"DevicePlatform": {
 		"zhCn": "设备平台",
@@ -397,7 +397,7 @@ export const tips = {
 		"taSg": "சாதன தளம்",
 		"thTh": "แพลตฟอร์มอุปกรณ์",
 		"idId": "Platform Perangkat",
-		"miNz": "Papa taputapu"
+		"miNz": "Papa taputapu",
 	},
 	"DeviceID": {
 		"zhCn": "设备号",
@@ -407,7 +407,7 @@ export const tips = {
 		"taSg": "சாதன அடையாள எண்",
 		"thTh": "รหัสอุปกรณ์",
 		"idId": "ID Perangkat",
-		"miNz": "ID taputapu"
+		"miNz": "ID taputapu",
 	},
 	"NoData": {
 		"zhCn": "暂无数据",
@@ -417,7 +417,7 @@ export const tips = {
 		"taSg": "தரவு இல்லை",
 		"thTh": "ไม่มีข้อมูล",
 		"idId": "Tidak Ada Data",
-		"miNz": "Kāore he raraunga"
+		"miNz": "Kāore he raraunga",
 	},
 	"PlateDeviceUser": {
 		"zhCn": "车牌号/设备号/使用人",
@@ -427,7 +427,7 @@ export const tips = {
 		"taSg": "தகடு எண் / சாதன் ஐடி / பயனர்",
 		"thTh": "ทะเบียนรถ / รหัสอุปกรณ์ / ผู้ใช้",
 		"idId": "Plat / ID Perangkat / Pengguna",
-		"miNz": "Tau pereti / ID taputapu / kaiwhakamahi"
+		"miNz": "Tau pereti / ID taputapu / kaiwhakamahi",
 	},
 	"InUse": {
 		"zhCn": "使用中",
@@ -437,7 +437,7 @@ export const tips = {
 		"taSg": "பயன்பாட்டில் உள்ளது",
 		"thTh": "กำลังใช้งาน",
 		"idId": "Sedang Digunakan",
-		"miNz": "Kei te whakamahia"
+		"miNz": "Kei te whakamahia",
 	},
 	"Expired": {
 		"zhCn": "已过期",
@@ -447,7 +447,7 @@ export const tips = {
 		"taSg": "காலாவதியானது",
 		"thTh": "หมดอายุ",
 		"idId": "Kedaluwarsa",
-		"miNz": "Kua pau"
+		"miNz": "Kua pau",
 	},
 	"Cancelled": {
 		"zhCn": "已取消",
@@ -457,7 +457,7 @@ export const tips = {
 		"taSg": "ரத்து செய்யப்பட்டது",
 		"thTh": "ยกเลิกแล้ว",
 		"idId": "Dibatalkan",
-		"miNz": "Kua whakakorehia"
+		"miNz": "Kua whakakorehia",
 	},
 	"Edit": {
 		"zhCn": "修改",
@@ -467,7 +467,7 @@ export const tips = {
 		"taSg": "திருத்து",
 		"thTh": "แก้ไข",
 		"idId": "Edit",
-		"miNz": "Whakatika"
+		"miNz": "Whakatika",
 	},
 	"Copied": {
 		"zhCn": "已复制",
@@ -477,7 +477,7 @@ export const tips = {
 		"taSg": "நகலெடுக்கப்பட்டது",
 		"thTh": "คัดลอกแล้ว",
 		"idId": "Tersalin",
-		"miNz": "Kua tāruatia"
+		"miNz": "Kua tāruatia",
 	},
 	"CopyLink": {
 		"zhCn": "复制链接",
@@ -487,7 +487,7 @@ export const tips = {
 		"taSg": "இணைப்பை நகலெடு",
 		"thTh": "คัดลอกลิงก์",
 		"idId": "Salin Tautan",
-		"miNz": "Tārua te hononga"
+		"miNz": "Tārua te hononga",
 	},
 	"CancelCarUse": {
 		"zhCn": "取消用车",
@@ -497,7 +497,7 @@ export const tips = {
 		"taSg": "வாகன பயன்பாட்டை ரத்து செய்",
 		"thTh": "ยกเลิกการใช้รถ",
 		"idId": "Batal Penggunaan Kendaraan",
-		"miNz": "Whakakore te whakamahi waka"
+		"miNz": "Whakakore te whakamahi waka",
 	},
 	"ViewPhotos": {
 		"zhCn": "查看照片",
@@ -507,7 +507,7 @@ export const tips = {
 		"taSg": "புகைப்படங்களைப் பார்",
 		"thTh": "ดูรูปภาพ",
 		"idId": "Lihat Foto",
-		"miNz": "Tirohia ngā whakaahua"
+		"miNz": "Tirohia ngā whakaahua",
 	},
 	"PlateNo": {
 		"zhCn": "车牌号",
@@ -517,7 +517,7 @@ export const tips = {
 		"taSg": "தகடு எண்",
 		"thTh": "หมายเลขทะเบียนรถ",
 		"idId": "Nomor Plat",
-		"miNz": "Tau pereti"
+		"miNz": "Tau pereti",
 	},
 	"EnterPlateNo": {
 		"zhCn": "请输入车牌号",
@@ -527,7 +527,7 @@ export const tips = {
 		"taSg": "தகடு எண்ணை உள்ளிடவும்",
 		"thTh": "กรุณากรอกหมายเลขทะเบียนรถ",
 		"idId": "Masukkan nomor plat",
-		"miNz": "Whakauru mai te tau pereti"
+		"miNz": "Whakauru mai te tau pereti",
 	},
 	"User": {
 		"zhCn": "使用人",
@@ -537,7 +537,7 @@ export const tips = {
 		"taSg": "பயனர்",
 		"thTh": "ผู้ใช้",
 		"idId": "Pengguna",
-		"miNz": "Kaiwhakamahi"
+		"miNz": "Kaiwhakamahi",
 	},
 	"EnterUser": {
 		"zhCn": "请输入使用人",
@@ -547,7 +547,7 @@ export const tips = {
 		"taSg": "பயனர் பெயரை உள்ளிடவும்",
 		"thTh": "กรุณากรอกชื่อผู้ใช้",
 		"idId": "Masukkan nama pengguna",
-		"miNz": "Whakauru mai te ingoa kaiwhakamahi"
+		"miNz": "Whakauru mai te ingoa kaiwhakamahi",
 	},
 	"AccountPhone": {
 		"zhCn": "账号/手机号",
@@ -557,7 +557,7 @@ export const tips = {
 		"taSg": "கணக்கு / தொலைபேசி",
 		"thTh": "บัญชี / หมายเลขโทรศัพท์",
 		"idId": "Akun / Telepon",
-		"miNz": "Pūkete / Waea"
+		"miNz": "Pūkete / Waea",
 	},
 	'AccountLogin': {
 		"zhCn": "账号登录",
@@ -567,7 +567,7 @@ export const tips = {
 		"taSg": "கணக்கு உள்நுழைவு",
 		"thTh": "เข้าสู่ระบบบัญชี",
 		"idId": "Masuk Akun",
-		"miNz": "Whakauru Pūkete"
+		"miNz": "Whakauru Pūkete",
 	},
 	'GuestLogin': {
 		"zhCn": "游客登录",
@@ -577,7 +577,7 @@ export const tips = {
 		"taSg": "விருந்தினர் உள்நுழைவு",
 		"thTh": "เข้าสู่ระบบผู้เยี่ยมชม",
 		"idId": "Masuk Tamu",
-		"miNz": "Whakauru Manuhiri"
+		"miNz": "Whakauru Manuhiri",
 	},
 
 	"EnterAccountPhone": {
@@ -588,7 +588,7 @@ export const tips = {
 		"taSg": "தொலைபேசி அல்லது கணக்கை உள்ளிடவும்",
 		"thTh": "กรุณากรอกหมายเลขโทรศัพท์หรือบัญชี",
 		"idId": "Masukkan telepon / akun",
-		"miNz": "Whakauru mai te waea, pūkete rānei"
+		"miNz": "Whakauru mai te waea, pūkete rānei",
 	},
 	"StartTime": {
 		"zhCn": "开始时间",
@@ -598,7 +598,7 @@ export const tips = {
 		"taSg": "தொடக்க நேரம்",
 		"thTh": "เวลาเริ่มต้น",
 		"idId": "Waktu Mulai",
-		"miNz": "Wā tīmata"
+		"miNz": "Wā tīmata",
 	},
 	"EndTime": {
 		"zhCn": "结束时间",
@@ -608,7 +608,7 @@ export const tips = {
 		"taSg": "முடிவு நேரம்",
 		"thTh": "เวลาสิ้นสุด",
 		"idId": "Waktu Selesai",
-		"miNz": "Wā mutu"
+		"miNz": "Wā mutu",
 	},
 	"MultiUserAllowed": {
 		"zhCn": "是否允许多人使用",
@@ -618,7 +618,7 @@ export const tips = {
 		"taSg": "பல பயனர்களை அனுமதிக்கலாமா",
 		"thTh": "อนุญาตให้หลายคนใช้งานหรือไม่",
 		"idId": "Izinkan Banyak Pengguna",
-		"miNz": "Whakaaetia ngā kaiwhakamahi maha"
+		"miNz": "Whakaaetia ngā kaiwhakamahi maha",
 	},
 	"Remark": {
 		"zhCn": "备注",
@@ -628,7 +628,7 @@ export const tips = {
 		"taSg": "குறிப்பு",
 		"thTh": "หมายเหตุ",
 		"idId": "Catatan",
-		"miNz": "Kōrero tuku iho"
+		"miNz": "Kōrero tuku iho",
 	},
 	"EnterParkingPos": {
 		"zhCn": "请输入车位号或车辆位置",
@@ -638,7 +638,7 @@ export const tips = {
 		"taSg": "பார்க்கிங் எண் அல்லது வாகன இருப்பிடத்தை உள்ளிடவும்",
 		"thTh": "กรุณากรอกหมายเลขที่จอดรถหรือตำแหน่งรถ",
 		"idId": "Masukkan nomor parkir atau lokasi kendaraan",
-		"miNz": "Whakauru mai te tau wāhi tū waka, te wāhi rānei o te waka"
+		"miNz": "Whakauru mai te tau wāhi tū waka, te wāhi rānei o te waka",
 	},
 	"Total": {
 		"zhCn": "共",
@@ -648,7 +648,7 @@ export const tips = {
 		"taSg": "மொத்தம்",
 		"thTh": "ทั้งหมด",
 		"idId": "Total",
-		"miNz": "Katoa"
+		"miNz": "Katoa",
 	},
 	"Records": {
 		"zhCn": "记录",
@@ -658,7 +658,7 @@ export const tips = {
 		"taSg": "பதிவுகள்",
 		"thTh": "รายการ",
 		"idId": "catatan",
-		"miNz": "ngā rārangi"
+		"miNz": "ngā rārangi",
 	},
 	"Allow": {
 		"zhCn": "允许",
@@ -668,7 +668,7 @@ export const tips = {
 		"taSg": "அனுமதி",
 		"thTh": "อนุญาต",
 		"idId": "Izinkan",
-		"miNz": "Whakaae"
+		"miNz": "Whakaae",
 	},
 	"Disallow": {
 		"zhCn": "不允许",
@@ -678,7 +678,7 @@ export const tips = {
 		"taSg": "அனுமதிக்காதே",
 		"thTh": "ไม่อนุญาต",
 		"idId": "Tidak Izinkan",
-		"miNz": "Whakakahore"
+		"miNz": "Whakakahore",
 	},
 	"SendSuccess": {
 		"zhCn": "发送成功",
@@ -688,7 +688,7 @@ export const tips = {
 		"taSg": "அனுப்புதல் வெற்றி",
 		"thTh": "ส่งสำเร็จ",
 		"idId": "Berhasil Dikirim",
-		"miNz": "I angitu te tuku"
+		"miNz": "I angitu te tuku",
 	},
 	"SendFailed": {
 		"zhCn": "发送失败",
@@ -698,7 +698,7 @@ export const tips = {
 		"taSg": "அனுப்புதல் தோல்வி",
 		"thTh": "ส่งล้มเหลว",
 		"idId": "Gagal Dikirim",
-		"miNz": "I rahua te tuku"
+		"miNz": "I rahua te tuku",
 	},
 	"CopySuccess": {
 		"zhCn": "复制成功",
@@ -708,7 +708,7 @@ export const tips = {
 		"taSg": "நகலெடுப்பு வெற்றி",
 		"thTh": "คัดลอกสำเร็จ",
 		"idId": "Berhasil Disalin",
-		"miNz": "I angitu te tārua"
+		"miNz": "I angitu te tārua",
 	},
 	"CarList": {
 		"zhCn": "车辆列表",
@@ -1378,7 +1378,7 @@ export const tips = {
 		"taSg": "கலிபரேசன் வெற்றி",
 		"thTh": "การสอบเทียบสำเร็จ",
 		"idId": "Kalibrasi Berhasil",
-		"miNz": "Kua angitu te whakatika"
+		"miNz": "Kua angitu te whakatika",
 	},
 	"CalibrateFailed": {
 		"zhCn": "校准失败",
@@ -1388,7 +1388,7 @@ export const tips = {
 		"taSg": "கலிபரேசன் தோல்வி",
 		"thTh": "การสอบเทียบล้มเหลว",
 		"idId": "Kalibrasi Gagal",
-		"miNz": "I rahua te whakatika"
+		"miNz": "I rahua te whakatika",
 	},
 	"FilteredOut": {
 		"zhCn": "筛选出",
@@ -1398,7 +1398,7 @@ export const tips = {
 		"taSg": "வடிகட்டப்பட்டது",
 		"thTh": "กรองออก",
 		"idId": "Difilter Keluar",
-		"miNz": "Kua tātarihia"
+		"miNz": "Kua tātarihia",
 	},
 	"All": {
 		"zhCn": "全部",
@@ -1408,7 +1408,7 @@ export const tips = {
 		"taSg": "அனைத்தும்",
 		"thTh": "ทั้งหมด",
 		"idId": "Semua",
-		"miNz": "Katoa"
+		"miNz": "Katoa",
 	},
 	"PendingMaintenance": {
 		"zhCn": "待保养",
@@ -1418,7 +1418,7 @@ export const tips = {
 		"taSg": "பராமரிப்பு நிலுவையில்",
 		"thTh": "รอการบำรุงรักษา",
 		"idId": "Menunggu Perawatan",
-		"miNz": "Tatari te tiaki"
+		"miNz": "Tatari te tiaki",
 	},
 	"Maintained": {
 		"zhCn": "已保养",
@@ -1428,7 +1428,7 @@ export const tips = {
 		"taSg": "பராமரிக்கப்பட்டது",
 		"thTh": "บำรุงรักษาแล้ว",
 		"idId": "Sudah Dirawat",
-		"miNz": "Kua tiakina"
+		"miNz": "Kua tiakina",
 	},
 	"LoadedAll": {
 		"zhCn": "已加载全部",
@@ -1438,7 +1438,7 @@ export const tips = {
 		"taSg": "அனைத்தும் ஏற்றப்பட்டது",
 		"thTh": "โหลดข้อมูลทั้งหมดแล้ว",
 		"idId": "Semua Telah Dimuat",
-		"miNz": "Katoa kua utaina"
+		"miNz": "Katoa kua utaina",
 	},
 	"NoPhotos": {
 		"zhCn": "暂无照片",
@@ -1448,7 +1448,7 @@ export const tips = {
 		"taSg": "புகைப்படங்கள் இல்லை",
 		"thTh": "ไม่มีรูปภาพ",
 		"idId": "Tidak Ada Foto",
-		"miNz": "Kāore he whakaahua"
+		"miNz": "Kāore he whakaahua",
 	},
 	"PleaseSelectCar": {
 		"zhCn": "请选择车辆",
@@ -1458,7 +1458,7 @@ export const tips = {
 		"taSg": "வாகனத்தைத் தேர்ந்தெடுக்கவும்",
 		"thTh": "กรุณาเลือกยานพาหนะ",
 		"idId": "Silakan Pilih Kendaraan",
-		"miNz": "Tīpakohia te waka"
+		"miNz": "Tīpakohia te waka",
 	},
 	"ReSelect": {
 		"zhCn": "重新选择",
@@ -1468,7 +1468,7 @@ export const tips = {
 		"taSg": "மீண்டும் தேர்ந்தெடுக்கவும்",
 		"thTh": "เลือกใหม่",
 		"idId": "Pilih Ulang",
-		"miNz": "Tīpako anō"
+		"miNz": "Tīpako anō",
 	},
 	"DataLoadFailed": {
 		"zhCn": "数据加载失败",
@@ -1478,7 +1478,7 @@ export const tips = {
 		"taSg": "தரவு ஏற்றுதல் தோல்வி",
 		"thTh": "โหลดข้อมูลล้มเหลว",
 		"idId": "Gagal Memuat Data",
-		"miNz": "I rahua te uta raraunga"
+		"miNz": "I rahua te uta raraunga",
 	},
 	"DeviceInfoFailed": {
 		"zhCn": "设备信息获取失败",
@@ -1488,7 +1488,7 @@ export const tips = {
 		"taSg": "சாதனத் தகவல் பெறுதல் தோல்வி",
 		"thTh": "รับข้อมูลอุปกรณ์ล้มเหลว",
 		"idId": "Gagal Mendapatkan Info Perangkat",
-		"miNz": "I rahua te tiki korero taputapu"
+		"miNz": "I rahua te tiki korero taputapu",
 	},
 	"PleaseSelectCarFirst": {
 		"zhCn": "请先选择车辆",
@@ -1498,7 +1498,7 @@ export const tips = {
 		"taSg": "முதலில் வாகனத்தைத் தேர்ந்தெடுக்கவும்",
 		"thTh": "กรุณาเลือกยานพาหนะก่อน",
 		"idId": "Silakan Pilih Kendaraan Terlebih Dahulu",
-		"miNz": "Tīpakohia te waka i te tuatahi"
+		"miNz": "Tīpakohia te waka i te tuatahi",
 	},
 	"TrackPlayback": {
 		"zhCn": "轨迹查询",
@@ -1508,7 +1508,7 @@ export const tips = {
 		"taSg": "பாதை மீண்டும் இயக்கம்",
 		"thTh": "เล่นย้อนรอยเส้นทาง",
 		"idId": "Pemutaran Jejak",
-		"miNz": "Whakaara ano te ara"
+		"miNz": "Whakaara ano te ara",
 	},
 	"PleaseSelectDateRange": {
 		"zhCn": "请选择开始和结束日期",
@@ -1518,7 +1518,7 @@ export const tips = {
 		"taSg": "தொடக்க மற்றும் முடிவு தேதியைத் தேர்ந்தெடுக்கவும்",
 		"thTh": "กรุณาเลือกวันที่เริ่มต้นและสิ้นสุด",
 		"idId": "Silakan Pilih Tanggal Mulai dan Selesai",
-		"miNz": "Tīpakohia te rā tīmata me te rā mutunga"
+		"miNz": "Tīpakohia te rā tīmata me te rā mutunga",
 	},
 	"PleaseSelect": {
 		"zhCn": "请选择",
@@ -1528,7 +1528,7 @@ export const tips = {
 		"taSg": "தேர்ந்தெடுக்கவும்",
 		"thTh": "กรุณาเลือก",
 		"idId": "Silakan Pilih",
-		"miNz": "Tīpakohia koa"
+		"miNz": "Tīpakohia koa",
 	},
 	"PleaseSelectFullDate": {
 		"zhCn": "请选择完整的日期区间",
@@ -1538,7 +1538,7 @@ export const tips = {
 		"taSg": "முழு தேதி வரம்பைத் தேர்ந்தெடுக்கவும்",
 		"thTh": "กรุณาเลือกช่วงวันที่สมบูรณ์",
 		"idId": "Silakan Pilih Rentang Tanggal Lengkap",
-		"miNz": "Tīpakohia te awhe rā katoa"
+		"miNz": "Tīpakohia te awhe rā katoa",
 	},
 	"TrackLoadSuccess": {
 		"zhCn": "轨迹加载成功",
@@ -1548,7 +1548,7 @@ export const tips = {
 		"taSg": "பாதை ஏற்றுதல் வெற்றி",
 		"thTh": "โหลดเส้นทางสำเร็จ",
 		"idId": "Jejak Berhasil Dimuat",
-		"miNz": "Kua angitu te uta ara"
+		"miNz": "Kua angitu te uta ara",
 	},
 	"NoTrackData": {
 		"zhCn": "暂无轨迹数据",
@@ -1558,7 +1558,7 @@ export const tips = {
 		"taSg": "பாதை தரவு இல்லை",
 		"thTh": "ไม่มีข้อมูลเส้นทาง",
 		"idId": "Tidak Ada Data Jejak",
-		"miNz": "Kāore he raraunga ara"
+		"miNz": "Kāore he raraunga ara",
 	},
 	"TrackRequestFailed": {
 		"zhCn": "轨迹请求异常，请重试",
@@ -1568,7 +1568,7 @@ export const tips = {
 		"taSg": "பாதை கோரிக்கை தோல்வி, மீண்டும் முயற்சிக்கவும்",
 		"thTh": "ขอข้อมูลเส้นทางล้มเหลว กรุณาลองอีกครั้ง",
 		"idId": "Permintaan jejak gagal, silakan coba lagi",
-		"miNz": "I rahua te tono ara, ngana anō"
+		"miNz": "I rahua te tono ara, ngana anō",
 	},
 	"StartDate": {
 		"zhCn": "开始日期",
@@ -1578,7 +1578,7 @@ export const tips = {
 		"taSg": "தொடக்க தேதி",
 		"thTh": "วันที่เริ่มต้น",
 		"idId": "Tanggal Mulai",
-		"miNz": "Rā tīmata"
+		"miNz": "Rā tīmata",
 	},
 	"EndDate": {
 		"zhCn": "结束日期",
@@ -1588,7 +1588,7 @@ export const tips = {
 		"taSg": "முடிவு தேதி",
 		"thTh": "วันที่สิ้นสุด",
 		"idId": "Tanggal Selesai",
-		"miNz": "Rā mutunga"
+		"miNz": "Rā mutunga",
 	},
 	"SuperAdmin": {
 		"zhCn": "超级管理员",
@@ -1598,7 +1598,7 @@ export const tips = {
 		"taSg": "மேலும் நிர்வாகி",
 		"thTh": "ผู้ดูแลระบบระดับสูง",
 		"idId": "Super Admin",
-		"miNz": "Kaiwhakahaere nui"
+		"miNz": "Kaiwhakahaere nui",
 	},
 	"Role": {
 		"zhCn": "角色",
@@ -1608,7 +1608,7 @@ export const tips = {
 		"taSg": "பங்கு",
 		"thTh": "บทบาท",
 		"idId": "Peran",
-		"miNz": "Tūranga"
+		"miNz": "Tūranga",
 	},
 	"Name": {
 		"zhCn": "姓名",
@@ -1618,7 +1618,7 @@ export const tips = {
 		"taSg": "பெயர்",
 		"thTh": "ชื่อ",
 		"idId": "Nama",
-		"miNz": "Ingoa"
+		"miNz": "Ingoa",
 	},
 	"EnterName": {
 		"zhCn": "请输入姓名",
@@ -1628,7 +1628,7 @@ export const tips = {
 		"taSg": "பெயரை உள்ளிடவும்",
 		"thTh": "กรุณากรอกชื่อ",
 		"idId": "Silakan Masukkan Nama",
-		"miNz": "Whakauruhia te ingoa"
+		"miNz": "Whakauruhia te ingoa",
 	},
 	"EnterPhone": {
 		"zhCn": "请输入手机号",
@@ -1638,7 +1638,7 @@ export const tips = {
 		"taSg": "தொலைபேசி எண்ணை உள்ளிடவும்",
 		"thTh": "กรุณากรอกหมายเลขโทรศัพท์",
 		"idId": "Silakan Masukkan Nomor Telepon",
-		"miNz": "Whakauruhia te nama waea"
+		"miNz": "Whakauruhia te nama waea",
 	},
 	"SelectRole": {
 		"zhCn": "请选择角色",
@@ -1648,7 +1648,7 @@ export const tips = {
 		"taSg": "பங்கைத் தேர்ந்தெடுக்கவும்",
 		"thTh": "กรุณาเลือกบทบาท",
 		"idId": "Silakan Pilih Peran",
-		"miNz": "Tīpakohia te tūranga"
+		"miNz": "Tīpakohia te tūranga",
 	},
 	"ConfirmDeleteUser": {
 		"zhCn": "确认删除当前人员吗",
@@ -1658,7 +1658,7 @@ export const tips = {
 		"taSg": "இந்த பயனரை நீக்க உறுதி செய்கிறீர்களா?",
 		"thTh": "ยืนยันการลบผู้ใช้นี้หรือไม่",
 		"idId": "Konfirmasi hapus pengguna ini?",
-		"miNz": "Whakaaetia te muku i tenei kaiwhakamahi?"
+		"miNz": "Whakaaetia te muku i tenei kaiwhakamahi?",
 	},
 	"TransferAdmin": {
 		"zhCn": "移交管理员",
@@ -1668,7 +1668,7 @@ export const tips = {
 		"taSg": "நிர்வாகியை மாற்றவும்",
 		"thTh": "โอนสิทธิ์ผู้ดูแลระบบ",
 		"idId": "Transfer Admin",
-		"miNz": "Whakawhiti kaiwhakahaere"
+		"miNz": "Whakawhiti kaiwhakahaere",
 	},
 	"ConfirmTransferAdmin": {
 		"zhCn": "确认移交管理员",
@@ -1678,7 +1678,7 @@ export const tips = {
 		"taSg": "நிர்வாகி மாற்றத்தை உறுதி செய்க",
 		"thTh": "ยืนยันการโอนสิทธิ์ผู้ดูแลระบบ",
 		"idId": "Konfirmasi Transfer Admin",
-		"miNz": "Whakaaetia te whakawhiti kaiwhakahaere"
+		"miNz": "Whakaaetia te whakawhiti kaiwhakahaere",
 	},
 	"AbnormalRecordTotal": {
 		"zhCn": "异常记录总数",
@@ -1688,7 +1688,7 @@ export const tips = {
 		"taSg": "மொத்த அசாதாரண பதிவுகள்",
 		"thTh": "จำนวนบันทึกผิดปกติทั้งหมด",
 		"idId": "Total Catatan Tidak Normal",
-		"miNz": "Te tapeke o ngā rekoata kōhē"
+		"miNz": "Te tapeke o ngā rekoata kōhē",
 	},
 	"TodayNewAbnormal": {
 		"zhCn": "今日新增异常",
@@ -1698,7 +1698,7 @@ export const tips = {
 		"taSg": "இன்றைய புதிய அசாதாரண நிகழ்வு",
 		"thTh": "บันทึกผิดปกติใหม่วันนี้",
 		"idId": "Abnormal Baru Hari Ini",
-		"miNz": "Ngā kōhē hou o tēnei rā"
+		"miNz": "Ngā kōhē hou o tēnei rā",
 	},
 	"SuspectedRemovalAbnormal": {
 		"zhCn": "疑似拆除异常记录",
@@ -1708,7 +1708,7 @@ export const tips = {
 		"taSg": "அகற்றல் சந்தேகப் பதிவுகள்",
 		"thTh": "บันทึกสงสัยว่าถูกถอดออก",
 		"idId": "Catatan Dugaan Pencabutan",
-		"miNz": "Ngā rekoata whakapae tangohanga"
+		"miNz": "Ngā rekoata whakapae tangohanga",
 	},
 	"Filter": {
 		"zhCn": "筛选",
@@ -1718,7 +1718,7 @@ export const tips = {
 		"taSg": "வடிகட்டி",
 		"thTh": "กรอง",
 		"idId": "Filter",
-		"miNz": "Tātari"
+		"miNz": "Tātari",
 	},
 	"SuspectedRemoval": {
 		"zhCn": "疑似拆除",
@@ -1728,7 +1728,7 @@ export const tips = {
 		"taSg": "அகற்றல் சந்தேகம்",
 		"thTh": "สงสัยว่าถูกถอดออก",
 		"idId": "Dugaan Pencabutan",
-		"miNz": "Whakapae tangohanga"
+		"miNz": "Whakapae tangohanga",
 	},
 	"RelatedVehicle": {
 		"zhCn": "涉及车辆",
@@ -1738,7 +1738,7 @@ export const tips = {
 		"taSg": "தொடர்புடைய வாகனம்",
 		"thTh": "ยานพาหนะที่เกี่ยวข้อง",
 		"idId": "Kendaraan Terkait",
-		"miNz": "Waka e whai wāhi ana"
+		"miNz": "Waka e whai wāhi ana",
 	},
 	"ViewLocation": {
 		"zhCn": "查看位置",
@@ -1748,7 +1748,7 @@ export const tips = {
 		"taSg": "இடத்தைப் பார்க்கவும்",
 		"thTh": "ดูตำแหน่ง",
 		"idId": "Lihat Lokasi",
-		"miNz": "Tirohia te tauwāhi"
+		"miNz": "Tirohia te tauwāhi",
 	},
 	"NoSuspectedRemovalRecords": {
 		"zhCn": "暂无符合条件的疑似拆除异常记录",
@@ -1758,7 +1758,7 @@ export const tips = {
 		"taSg": "பொருத்தமான அகற்றல் சந்தேகப் பதிவுகள் இல்லை",
 		"thTh": "ไม่มีบันทึกสงสัยถอดออกที่ตรงเงื่อนไข",
 		"idId": "Tidak ada catatan dugaan pencabutan yang cocok",
-		"miNz": "Kāore he rekoata whakapae tangohanga e taurite ana"
+		"miNz": "Kāore he rekoata whakapae tangohanga e taurite ana",
 	},
 	"LocationInfo": {
 		"zhCn": "位置信息",
@@ -1768,7 +1768,7 @@ export const tips = {
 		"taSg": "இடத் தகவல்",
 		"thTh": "ข้อมูลตำแหน่ง",
 		"idId": "Info Lokasi",
-		"miNz": "Korero tauwāhi"
+		"miNz": "Korero tauwāhi",
 	},
 	"DetailedAddress": {
 		"zhCn": "详细地址",
@@ -1778,7 +1778,7 @@ export const tips = {
 		"taSg": "விரிவான முகவரி",
 		"thTh": "ที่อยู่รายละเอียด",
 		"idId": "Alamat Lengkap",
-		"miNz": "Wāhi noho taipitopito"
+		"miNz": "Wāhi noho taipitopito",
 	},
 	"NoAddressInfo": {
 		"zhCn": "暂无地址信息",
@@ -1788,7 +1788,7 @@ export const tips = {
 		"taSg": "முகவரித் தகவல் இல்லை",
 		"thTh": "ไม่มีข้อมูลที่อยู่",
 		"idId": "Tidak Ada Info Alamat",
-		"miNz": "Kāore he korero wāhi noho"
+		"miNz": "Kāore he korero wāhi noho",
 	},
 	"Close": {
 		"zhCn": "关闭",
@@ -1798,7 +1798,7 @@ export const tips = {
 		"taSg": "மூடு",
 		"thTh": "ปิด",
 		"idId": "Tutup",
-		"miNz": "Katia"
+		"miNz": "Katia",
 	},
 	"SelectDate": {
 		"zhCn": "选择日期",
@@ -1808,7 +1808,7 @@ export const tips = {
 		"taSg": "தேதியைத் தேர்ந்தெடுக்கவும்",
 		"thTh": "เลือกวันที่",
 		"idId": "Pilih Tanggal",
-		"miNz": "Tīpakohia te rā"
+		"miNz": "Tīpakohia te rā",
 	},
 	"LicensePlate": {
 		"zhCn": "车牌号",
@@ -1818,7 +1818,7 @@ export const tips = {
 		"taSg": "வாகன உரிமத் தட்டு",
 		"thTh": "ป้ายทะเบียนรถ",
 		"idId": "Plat Nomor",
-		"miNz": "Papa raihana waka"
+		"miNz": "Papa raihana waka",
 	},
 	"EnterLicensePlate": {
 		"zhCn": "请输入车牌号",
@@ -1828,7 +1828,7 @@ export const tips = {
 		"taSg": "வாகன உரிமத் தட்டு எண்ணை உள்ளிடவும்",
 		"thTh": "กรุณากรอกหมายเลขทะเบียนรถ",
 		"idId": "Silakan Masukkan Plat Nomor",
-		"miNz": "Whakauruhia te papa raihana waka"
+		"miNz": "Whakauruhia te papa raihana waka",
 	},
 	"Reset": {
 		"zhCn": "重置",
@@ -1838,7 +1838,7 @@ export const tips = {
 		"taSg": "மீட்டமை",
 		"thTh": "รีเซ็ต",
 		"idId": "Reset",
-		"miNz": "Tautuhi anō"
+		"miNz": "Tautuhi anō",
 	},
 	"ConfirmFilter": {
 		"zhCn": "确认筛选",
@@ -1848,7 +1848,7 @@ export const tips = {
 		"taSg": "வடிகட்டலை உறுதி செய்க",
 		"thTh": "ยืนยันการกรอง",
 		"idId": "Konfirmasi Filter",
-		"miNz": "Whakaaetia te tātari"
+		"miNz": "Whakaaetia te tātari",
 	},
 	"NavigationFailed": {
 		"zhCn": "导航失败",
@@ -1858,7 +1858,7 @@ export const tips = {
 		"taSg": "வழிசெலுத்தல் தோல்வி",
 		"thTh": "นำทางล้มเหลว",
 		"idId": "Navigasi Gagal",
-		"miNz": "I rahua te whakatere"
+		"miNz": "I rahua te whakatere",
 	},
 	"CannotOpenMap": {
 		"zhCn": "无法打开地图",
@@ -1868,7 +1868,7 @@ export const tips = {
 		"taSg": "வரைபடத்தைத் திறக்க முடியாது",
 		"thTh": "ไม่สามารถเปิดแผนที่ได้",
 		"idId": "Tidak Dapat Membuka Peta",
-		"miNz": "Kāore e taea te whakatuwhera mapi"
+		"miNz": "Kāore e taea te whakatuwhera mapi",
 	},
 	"RoleList": {
 		"zhCn": "角色列表",
@@ -1878,7 +1878,7 @@ export const tips = {
 		"taSg": "பங்கு பட்டியல்",
 		"thTh": "รายการบทบาท",
 		"idId": "Daftar Peran",
-		"miNz": "Rārangi tūranga"
+		"miNz": "Rārangi tūranga",
 	},
 	"BasicInfo": {
 		"zhCn": "基础信息",
@@ -1888,7 +1888,7 @@ export const tips = {
 		"taSg": "அடிப்படைத் தகவல்",
 		"thTh": "ข้อมูลพื้นฐาน",
 		"idId": "Info Dasar",
-		"miNz": "Korero taketake"
+		"miNz": "Korero taketake",
 	},
 	"RoleName": {
 		"zhCn": "角色名称",
@@ -1898,7 +1898,7 @@ export const tips = {
 		"taSg": "பங்கு பெயர்",
 		"thTh": "ชื่อบทบาท",
 		"idId": "Nama Peran",
-		"miNz": "Ingoa tūranga"
+		"miNz": "Ingoa tūranga",
 	},
 	"EnterRoleName": {
 		"zhCn": "请输入角色名称",
@@ -1908,7 +1908,7 @@ export const tips = {
 		"taSg": "பங்கு பெயரை உள்ளிடவும்",
 		"thTh": "กรุณากรอกชื่อบทบาท",
 		"idId": "Silakan Masukkan Nama Peran",
-		"miNz": "Whakauruhia te ingoa tūranga"
+		"miNz": "Whakauruhia te ingoa tūranga",
 	},
 	"PermissionSettings": {
 		"zhCn": "权限设置",
@@ -1918,7 +1918,7 @@ export const tips = {
 		"taSg": "அனுமதி அமைப்புகள்",
 		"thTh": "การตั้งค่าสิทธิ์",
 		"idId": "Pengaturan Izin",
-		"miNz": "Ngā tautuhinga whakaaetanga"
+		"miNz": "Ngā tautuhinga whakaaetanga",
 	},
 	"WiseLinkAutoRide": {
 		"zhCn": "智车钥",
@@ -1928,7 +1928,7 @@ export const tips = {
 		"taSg": "WiseLink Auto Ride",
 		"thTh": "WiseLink Auto Ride",
 		"idId": "WiseLink Auto Ride",
-		"miNz": "WiseLink Auto Ride"
+		"miNz": "WiseLink Auto Ride",
 	},
 	"PersonalCenter": {
 		"zhCn": "个人中心",
@@ -1938,7 +1938,7 @@ export const tips = {
 		"taSg": "தனிப்பட்ட மையம்",
 		"thTh": "ศูนย์ส่วนตัว",
 		"idId": "Pusat Pribadi",
-		"miNz": "Pokapū whaiaro"
+		"miNz": "Pokapū whaiaro",
 	},
 	"Loading": {
 		"zhCn": "加载中",
@@ -1948,7 +1948,7 @@ export const tips = {
 		"taSg": "ஏற்றுகிறது",
 		"thTh": "กำลังโหลด",
 		"idId": "Sedang Memuat",
-		"miNz": "Kei te uta"
+		"miNz": "Kei te uta",
 	},
 	"OperateSuccess": {
 		"zhCn": "操作成功",
@@ -1958,7 +1958,7 @@ export const tips = {
 		"taSg": "செயல்பாடு வெற்றி",
 		"thTh": "ดำเนินการสำเร็จ",
 		"idId": "Operasi Berhasil",
-		"miNz": "I angitu te mahi"
+		"miNz": "I angitu te mahi",
 	},
 	"ContactZhitongxin": {
 		"zhCn": "联系智信通",
@@ -1968,7 +1968,7 @@ export const tips = {
 		"taSg": "எங்களைத் தொடர்பு கொள்ளவும்",
 		"thTh": "ติดต่อเรา",
 		"idId": "Hubungi Kami",
-		"miNz": "Whakapā mai"
+		"miNz": "Whakapā mai",
 	},
 	"LanguageSettings": {
 		"zhCn": "语言设置",
@@ -1978,7 +1978,7 @@ export const tips = {
 		"taSg": "மொழி அமைப்பு",
 		"thTh": "การตั้งค่าภาษา",
 		"idId": "Pengaturan Bahasa",
-		"miNz": "Tautuhinga reo"
+		"miNz": "Tautuhinga reo",
 	},
 	"Logout": {
 		"zhCn": "退出登录",
@@ -1988,7 +1988,7 @@ export const tips = {
 		"taSg": "வெளியேறு",
 		"thTh": "ออกจากระบบ",
 		"idId": "Keluar",
-		"miNz": "Whakawhiti atu"
+		"miNz": "Whakawhiti atu",
 	},
 	"CallPhone": {
 		"zhCn": "拨打电话",
@@ -1998,7 +1998,7 @@ export const tips = {
 		"taSg": "தொலைபேசி அழைப்பு",
 		"thTh": "โทรออก",
 		"idId": "Lakukan Panggilan Telepon",
-		"miNz": "Waea atu"
+		"miNz": "Waea atu",
 	},
 	"IsCallServicePhone": {
 		"zhCn": "是否拨打客服电话",
@@ -2008,7 +2008,7 @@ export const tips = {
 		"taSg": "வாடிக்கையாளர் சேவைக்கு அழைக்க வேண்டுமா?",
 		"thTh": "ต้องการโทรหาฝ่ายบริการลูกค้าหรือไม่",
 		"idId": "Apakah ingin menelepon layanan pelanggan?",
-		"miNz": "Me waea atu ki te ratonga kiritaki?"
+		"miNz": "Me waea atu ki te ratonga kiritaki?",
 	},
 	"ConfirmLogout": {
 		"zhCn": "确定退出登录吗",
@@ -2018,7 +2018,7 @@ export const tips = {
 		"taSg": "வெளியேற விரும்புகிறீர்களா?",
 		"thTh": "ยืนยันออกจากระบบใช่หรือไม่",
 		"idId": "Apakah anda yakin ingin keluar?",
-		"miNz": "Kei te tino hiahia koe ki te whakawhiti atu?"
+		"miNz": "Kei te tino hiahia koe ki te whakawhiti atu?",
 	},
 	"ServiceIntro": {
 		"zhCn": "WiseLink Auto Ride 面向全球个人车主、租车用户、出行人群的 C 端服务入口，聚焦便捷租车、智能出行、车辆服务，主打轻松出行、随行随心的用户体验。",
@@ -2028,7 +2028,7 @@ export const tips = {
 		"taSg": "WiseLink Auto Ride உலகளாவிய தனிநபர் கார் உரிமையாளர்கள், கார் வாடகை பயனர்கள் மற்றும் பயணிகளுக்கான C-இறுதி சேவை நுழைவாயில், வசதியான கார் வாடகை, ஸ்மார்ட் பயணம் மற்றும் வாகன சேவைகளில் கவனம் செலுத்தி, இலகுவான மற்றும் சுதந்திரமான பயண அனுபவத்தை வழங்குகிறது.",
 		"thTh": "WiseLink Auto Ride พอร์ทัลบริการผู้ใช้ปลายทาง C สำหรับเจ้าของรถส่วนบุคคล ผู้เช่ารถและผู้เดินทางทั่วโลก มุ่งเน้นไปที่การเช่ารถที่สะดวก การเดินทางอัจฉริยะ และบริการยานพาหนะ มอบประสบการณ์การเดินทางที่ผ่อนคลายและอิสระ",
 		"idId": "WiseLink Auto Ride portal layanan pengguna akhir C bagi pemilik kendaraan pribadi, pengguna sewa mobil dan wisatawan global, berfokus pada penyewaan mobil praktis, mobilitas cerdas dan layanan kendaraan, menghadirkan pengalaman perjalanan yang santai dan fleksibel.",
-		"miNz": "WiseLink Auto Ride he tomokanga ratonga kaiwhakamahi mutunga‑C mō ngā rangatira waka takitahi, ngā kaiwhakamahi rīta waka me ngā hunga haere huri noa te ao, e arotahi ana ki te rīta waka māmā, te nekeneke atamai me ngā ratonga waka, e tuku ana i te wheako haere māmā me te watea."
+		"miNz": "WiseLink Auto Ride he tomokanga ratonga kaiwhakamahi mutunga‑C mō ngā rangatira waka takitahi, ngā kaiwhakamahi rīta waka me ngā hunga haere huri noa te ao, e arotahi ana ki te rīta waka māmā, te nekeneke atamai me ngā ratonga waka, e tuku ana i te wheako haere māmā me te watea.",
 	},
 	"BPlatformIntro": {
 		"zhCn": "WiseLink Auto Global 面向全球车企、租赁公司、服务商、商户的 B 端管理平台，聚合全球车源、业务管控、渠道运维、国际业务一体化运营，主打全球化、专业化、企业级商务服务",
@@ -2038,7 +2038,7 @@ export const tips = {
 		"taSg": "WiseLink Auto Global உலகளாவிய வாகன உற்பத்தியாளர்கள், வாடகை நிறுவனங்கள், சேவை வழங்குநர்கள் மற்றும் வணிகர்களுக்கான B‑பக்க மேலாண்மை தளம், உலகளாவிய வாகன வளங்கள், வணிகக் கட்டுப்பாடு, சேனல் செயல்பாடு மற்றும் பராமரிப்பு மற்றும் ஒருங்கிணைந்த சர்வதேச வணிக செயல்பாடுகளை ஒருங்கிணைக்கிறது, உலகளாவிய, தொழில்முறை மற்றும் நிறுவன அளவிலான வணிக சேவைகளைக் கொண்டுள்ளது.",
 		"thTh": "WiseLink Auto Global แพลตฟอร์มจัดการฝั่ง B สำหรับผู้ผลิตรถยนต์ บริษัทเช่ารถ ผู้ให้บริการ และผู้ค้าทั่วโลก รวมทรัพยากรยานพาหนะทั่วโลก การควบคุมธุรกิจ การดำเนินงานและบำรุงรักษาช่องทาง และการดำเนินธุรกิจระหว่างประเทศแบบบูรณาการ มุ่งเน้นบริการธุรกิจระดับองค์กรที่เป็นสากลและมืออาชีพ",
 		"idId": "WiseLink Auto Global platform manajemen sisi‑B untuk produsen kendaraan, perusahaan sewa, penyedia layanan dan pedagang sedunia, menggabungkan sumber daya kendaraan global, kendali bisnis, operasi & pemeliharaan saluran serta operasi bisnis internasional terpadu, menyajikan layanan bisnis tingkat perusahaan yang global dan profesional.",
-		"miNz": "WiseLink Auto Global he tūāpapa whakahaere taha‑B mō ngā kaihanga waka, ngā kamupene rīta, ngā kaiwhakarato ratonga me ngā kaihokohoko huri noa te ao, e whakakao ana i ngā rauemi waka o te ao, te whakahaere pakihi, te whakahaere me te tiaki hongere, me ngā mahi pakihi o te ao, e whakaatu ana i ngā ratonga pakihi o te ao, ngaio, taumata‑pakihi."
+		"miNz": "WiseLink Auto Global he tūāpapa whakahaere taha‑B mō ngā kaihanga waka, ngā kamupene rīta, ngā kaiwhakarato ratonga me ngā kaihokohoko huri noa te ao, e whakakao ana i ngā rauemi waka o te ao, te whakahaere pakihi, te whakahaere me te tiaki hongere, me ngā mahi pakihi o te ao, e whakaatu ana i ngā ratonga pakihi o te ao, ngaio, taumata‑pakihi.",
 	},
 	"footInfo": {
 		"zhCn": "智信通",
@@ -2048,7 +2048,7 @@ export const tips = {
 		"taSg": "WiseLink Auto",
 		"thTh": "WiseLink Auto",
 		"idId": "WiseLink Auto",
-		"miNz": "WiseLink Auto"
+		"miNz": "WiseLink Auto",
 	},
 	"EnterAccountOrPhone": {
 		"zhCn": "请输入账号或手机号",
@@ -2058,7 +2058,7 @@ export const tips = {
 		"taSg": "கணக்கு அல்லது தொலைபேசி எண்ணை உள்ளிடவும்",
 		"thTh": "กรุณากรอกบัญชีหรือหมายเลขโทรศัพท์",
 		"idId": "Masukkan akun atau nomor telepon",
-		"miNz": "Whakauruhia te pūkete, te nama waea rānei"
+		"miNz": "Whakauruhia te pūkete, te nama waea rānei",
 	},
 	"Password": {
 		"zhCn": "密码",
@@ -2068,7 +2068,7 @@ export const tips = {
 		"taSg": "கடவுச்சொல்",
 		"thTh": "รหัสผ่าน",
 		"idId": "Kata sandi",
-		"miNz": "Kupuhipa"
+		"miNz": "Kupuhipa",
 	},
 	"EnterPassword": {
 		"zhCn": "请输入密码",
@@ -2078,7 +2078,7 @@ export const tips = {
 		"taSg": "கடவுச்சொல்லை உள்ளிடவும்",
 		"thTh": "กรุณากรอกรหัสผ่าน",
 		"idId": "Masukkan kata sandi",
-		"miNz": "Whakauruhia te kupuhipa"
+		"miNz": "Whakauruhia te kupuhipa",
 	},
 	"EnterUsernameAndPwd": {
 		"zhCn": "请输入用户名和密码",
@@ -2088,7 +2088,7 @@ export const tips = {
 		"taSg": "பயனர் பெயர் மற்றும் கடவுச்சொல்லை உள்ளிடவும்",
 		"thTh": "กรุณากรอกชื่อผู้ใช้และรหัสผ่าน",
 		"idId": "Silakan masukkan nama pengguna dan kata sandi",
-		"miNz": "Whakauruhia te ingoa kaiwhakamahi me te kupuhipa"
+		"miNz": "Whakauruhia te ingoa kaiwhakamahi me te kupuhipa",
 	},
 	"EnterUsername": {
 		"zhCn": "请输入用户名",
@@ -2098,7 +2098,7 @@ export const tips = {
 		"taSg": "பயனர் பெயரை உள்ளிடவும்",
 		"thTh": "กรุณากรอกชื่อผู้ใช้",
 		"idId": "Silakan masukkan nama pengguna",
-		"miNz": "Whakauruhia te ingoa kaiwhakamahi"
+		"miNz": "Whakauruhia te ingoa kaiwhakamahi",
 	},
 	"Username": {
 		"zhCn": "用户名",
@@ -2108,7 +2108,7 @@ export const tips = {
 		"taSg": "பயனர் பெயர்",
 		"thTh": "ชื่อผู้ใช้",
 		"idId": "nama pengguna",
-		"miNz": "ingoa kaiwhakamahi"
+		"miNz": "ingoa kaiwhakamahi",
 	},
 	"LoginFailCheckInfo": {
 		"zhCn": "登录失败，请检查用户名和密码",
@@ -2118,7 +2118,7 @@ export const tips = {
 		"taSg": "உள்நுழைவு தோல்வியுற்றது, பயனர் பெயரையும் கடவுச்சொல்லையும் சரிபார்க்கவும்",
 		"thTh": "เข้าสู่ระบบล้มเหลว โปรดตรวจสอบชื่อผู้ใช้และรหัสผ่าน",
 		"idId": "Gagal masuk, silakan periksa nama pengguna dan kata sandi Anda",
-		"miNz": "I rahua te takiuru, tirohia tō ingoa kaiwhakamahi me tō kupuhipa"
+		"miNz": "I rahua te takiuru, tirohia tō ingoa kaiwhakamahi me tō kupuhipa",
 	},
 	"RegisterAccount": {
 		"zhCn": "注册账号",
@@ -2128,7 +2128,7 @@ export const tips = {
 		"taSg": "கணக்கைப் பதிவுசெய்க",
 		"thTh": "ลงทะเบียนบัญชี",
 		"idId": "Daftar Akun",
-		"miNz": "Rēhita Pūkete"
+		"miNz": "Rēhita Pūkete",
 	},
 	"zhixintong": {
 		"zhCn": "智信通",
@@ -2138,7 +2138,7 @@ export const tips = {
 		"taSg": "WiseLink Auto Global",
 		"thTh": "WiseLink Auto Global",
 		"idId": "WiseLink Auto Global",
-		"miNz": "WiseLink Auto Global"
+		"miNz": "WiseLink Auto Global",
 	},
 	"ZhitongxinProvider": {
 		"zhCn": "智信通汽车出行技术服务运营提供商",
@@ -2148,7 +2148,7 @@ export const tips = {
 		"taSg": "Zhitongxin வாகன இயக்க தொழில்நுட்ப சேவைகள் மற்றும் செயல்பாடுகளின் வழங்குநர்",
 		"thTh": "Zhitongxin ผู้ให้บริการดำเนินงานเทคโนโลยีด้านการเดินทางยานยนต์",
 		"idId": "Zhitongxin Penyedia layanan & operasi teknologi mobilitas otomotif",
-		"miNz": "Zhitongxin Kaiwhakarato ratonga hangarau nekeneke waka me ngā mahi whakahaere."
+		"miNz": "Zhitongxin Kaiwhakarato ratonga hangarau nekeneke waka me ngā mahi whakahaere.",
 	},
 	"ConfirmPassword": {
 		"zhCn": "确认密码",
@@ -2158,7 +2158,7 @@ export const tips = {
 		"taSg": "கடவுச்சொல்லை உறுதிப்படுத்தவும்",
 		"thTh": "ยืนยันรหัสผ่าน",
 		"idId": "Konfirmasi Kata Sandi",
-		"miNz": "Whakaū te Kupuhipa"
+		"miNz": "Whakaū te Kupuhipa",
 	},
 	"ReEnterPassword": {
 		"zhCn": "请再次输入密码",
@@ -2168,7 +2168,7 @@ export const tips = {
 		"taSg": "கடவுச்சொல்லை மீண்டும் உள்ளிடவும்",
 		"thTh": "กรุณากรอกรหัสผ่านอีกครั้ง",
 		"idId": "Silakan masukkan kata sandi kembali",
-		"miNz": "Whakauruhia ano te kupuhipa"
+		"miNz": "Whakauruhia ano te kupuhipa",
 	},
 	"Login": {
 		"zhCn": "登录",
@@ -2178,7 +2178,7 @@ export const tips = {
 		"taSg": "உள்நுழை",
 		"thTh": "เข้าสู่ระบบ",
 		"idId": "Masuk",
-		"miNz": "Takiuru"
+		"miNz": "Takiuru",
 	},
 	"Register": {
 		"zhCn": "注册",
@@ -2188,7 +2188,7 @@ export const tips = {
 		"taSg": "பதிவு செய்க",
 		"thTh": "ลงทะเบียน",
 		"idId": "Daftar",
-		"miNz": "Rēhita"
+		"miNz": "Rēhita",
 	},
 	"GoToLogin": {
 		"zhCn": "去登录",
@@ -2198,7 +2198,7 @@ export const tips = {
 		"taSg": "உள்நுழைவு பக்கத்திற்குச் செல்லவும்",
 		"thTh": "ไปหน้าเข้าสู่ระบบ",
 		"idId": "Pergi ke Halaman Masuk",
-		"miNz": "Haere ki te whārangi takiuru"
+		"miNz": "Haere ki te whārangi takiuru",
 	},
 	"PwdNotMatch": {
 		"zhCn": "两次输入的密码不一致",
@@ -2208,7 +2208,7 @@ export const tips = {
 		"taSg": "நீங்கள் உள்ளிட்ட இரண்டு கடவுச்சொற்கள் பொருந்தவில்லை",
 		"thTh": "รหัสผ่านที่กรอกสองครั้งไม่ตรงกัน",
 		"idId": "Dua kata sandi yang dimasukkan tidak cocok",
-		"miNz": "Kāore ngā kupuhipa e rua i tāuru koe e ōrite"
+		"miNz": "Kāore ngā kupuhipa e rua i tāuru koe e ōrite",
 	},
 	"RegisterSuccess": {
 		"zhCn": "注册成功",
@@ -2218,7 +2218,7 @@ export const tips = {
 		"taSg": "பதிவு வெற்றிகரமாக முடிந்தது",
 		"thTh": "ลงทะเบียนสำเร็จ",
 		"idId": "Pendaftaran berhasil",
-		"miNz": "I angitu te rēhita"
+		"miNz": "I angitu te rēhita",
 	},
 	"RegisterFail": {
 		"zhCn": "注册失败",
@@ -2228,7 +2228,7 @@ export const tips = {
 		"taSg": "பதிவு தோல்வியுற்றது",
 		"thTh": "ลงทะเบียนล้มเหลว",
 		"idId": "Pendaftaran gagal",
-		"miNz": "I rahua te rēhita"
+		"miNz": "I rahua te rēhita",
 	},
 	"RequestFailRetry": {
 		"zhCn": "请求失败，请稍后重试",
@@ -2238,7 +2238,7 @@ export const tips = {
 		"taSg": "கோரிக்கை தோல்வியுற்றது, பிறகு முயற்சிக்கவும்",
 		"thTh": "คำขอล้มเหลว โปรดลองอีกครั้งภายหลัง",
 		"idId": "Permintaan gagal, silakan coba lagi nanti",
-		"miNz": "I rahua te tono, ngana anō ā muri ake"
+		"miNz": "I rahua te tono, ngana anō ā muri ake",
 	},
 	"FunctionZone": {
 		"zhCn": "功能专区",
@@ -2248,7 +2248,7 @@ export const tips = {
 		"taSg": "செயல்பாட்டு மண்டலம்",
 		"thTh": "โซนฟังก์ชัน",
 		"idId": "Zona Fungsi",
-		"miNz": "Rohe Mahi"
+		"miNz": "Rohe Mahi",
 	},
 	"MoreZones": {
 		"zhCn": "更多专区",
@@ -2258,7 +2258,7 @@ export const tips = {
 		"taSg": "மேலும் மண்டலங்கள்",
 		"thTh": "โซนเพิ่มเติม",
 		"idId": "Zona Lainnya",
-		"miNz": "Ētahi atu Rohe"
+		"miNz": "Ētahi atu Rohe",
 	},
 	"Pleaseselectthezoneyouwishtodisplay": {
 		"zhCn": "请选择您想要显示的专区",
@@ -2268,7 +2268,7 @@ export const tips = {
 		"taSg": "நீங்கள் காட்ட விரும்பும் மண்டலத்தைத் தேர்ந்தெடுக்கவும்",
 		"thTh": "กรุณาเลือกโซนที่ต้องการแสดง",
 		"idId": "Silakan pilih zona yang ingin ditampilkan",
-		"miNz": "Kōwhirihia ngā rohe e hiahia ana koe kia whakaatuhia"
+		"miNz": "Kōwhirihia ngā rohe e hiahia ana koe kia whakaatuhia",
 	},
 	"BindDriver": {
 		"zhCn": "绑定用车人",
@@ -2323,7 +2323,7 @@ export const tips = {
 		"taSg": "கட்டுப்பாடு விதிகள் இல்லை, கீழே சேர் என்பதைக் கிளிக் செய்யவும்",
 		"thTh": "ไม่มีกฎควบคุม กรุณาคลิกเพิ่มที่ด้านล่าง",
 		"idId": "Tidak ada aturan kontrol, klik tambah di bawah",
-		"miNz": "Kāore he ture whakahaere, pāwhiritia te tāpiri i raro"
+		"miNz": "Kāore he ture whakahaere, pāwhiritia te tāpiri i raro",
 	},
 	"TimeRange": {
 		"zhCn": "时间段",
@@ -2333,7 +2333,7 @@ export const tips = {
 		"taSg": "நேர இடைவெளி",
 		"thTh": "ช่วงเวลา",
 		"idId": "Rentang Waktu",
-		"miNz": "Awhe wā"
+		"miNz": "Awhe wā",
 	},
 	"EffectiveWeek": {
 		"zhCn": "生效星期",
@@ -2343,7 +2343,7 @@ export const tips = {
 		"taSg": "செயல்படும் நாள்",
 		"thTh": "วันที่มีผล",
 		"idId": "Hari Berlaku",
-		"miNz": "Rā whai hua"
+		"miNz": "Rā whai hua",
 	},
 	"UsePermission": {
 		"zhCn": "使用权限",
@@ -2353,7 +2353,7 @@ export const tips = {
 		"taSg": "பயன்பாட்டு அனுமதி",
 		"thTh": "สิทธิ์การใช้งาน",
 		"idId": "Izin Penggunaan",
-		"miNz": "Whakaaetanga whakamahi"
+		"miNz": "Whakaaetanga whakamahi",
 	},
 	"AddRule": {
 		"zhCn": "新增管控",
@@ -2363,7 +2363,7 @@ export const tips = {
 		"taSg": "கட்டுப்பாடு சேர்",
 		"thTh": "เพิ่มการควบคุม",
 		"idId": "Tambah Kontrol",
-		"miNz": "Tāpiri whakahaere"
+		"miNz": "Tāpiri whakahaere",
 	},
 	"ModifyRule": {
 		"zhCn": "修改规则",
@@ -2373,7 +2373,7 @@ export const tips = {
 		"taSg": "விதியை மாற்று",
 		"thTh": "แก้ไขกฎ",
 		"idId": "Ubah Aturan",
-		"miNz": "Whakarerekē ture"
+		"miNz": "Whakarerekē ture",
 	},
 	"AddNewRule": {
 		"zhCn": "新增规则",
@@ -2383,7 +2383,7 @@ export const tips = {
 		"taSg": "புதிய விதி சேர்",
 		"thTh": "เพิ่มกฎ",
 		"idId": "Tambah Aturan",
-		"miNz": "Tāpiri ture"
+		"miNz": "Tāpiri ture",
 	},
 	"Title": {
 		"zhCn": "标题",
@@ -2393,7 +2393,7 @@ export const tips = {
 		"taSg": "தலைப்பு",
 		"thTh": "หัวข้อ",
 		"idId": "Judul",
-		"miNz": "Taitara"
+		"miNz": "Taitara",
 	},
 	"InputRuleTitle": {
 		"zhCn": "请输入规则标题",
@@ -2403,7 +2403,7 @@ export const tips = {
 		"taSg": "விதி தலைப்பை உள்ளிடவும்",
 		"thTh": "กรุณากรอกชื่อกฎ",
 		"idId": "Masukkan judul aturan",
-		"miNz": "Whakauruhia te taitara ture"
+		"miNz": "Whakauruhia te taitara ture",
 	},
 	"IsAllowUse": {
 		"zhCn": "是否允许使用",
@@ -2413,7 +2413,7 @@ export const tips = {
 		"taSg": "பயன்பாட்டை அனுமதியா",
 		"thTh": "อนุญาตให้ใช้งานหรือไม่",
 		"idId": "Izinkan Penggunaan",
-		"miNz": "Whakaae whakamahinga"
+		"miNz": "Whakaae whakamahinga",
 	},
 	"SelectTime": {
 		"zhCn": "选择时间",
@@ -2423,7 +2423,7 @@ export const tips = {
 		"taSg": "நேரத்தைத் தேர்ந்தெடு",
 		"thTh": "เลือกเวลา",
 		"idId": "Pilih Waktu",
-		"miNz": "Tīpako wā"
+		"miNz": "Tīpako wā",
 	},
 	"FillRemark": {
 		"zhCn": "请填写备注信息",
@@ -2433,7 +2433,7 @@ export const tips = {
 		"taSg": "குறிப்பு தகவலை நிரப்பவும்",
 		"thTh": "กรุณากรอกข้อมูลหมายเหตุ",
 		"idId": "Isi info catatan",
-		"miNz": "Whakakiia ngā kōrero tuku iho"
+		"miNz": "Whakakiia ngā kōrero tuku iho",
 	},
 	"Save": {
 		"zhCn": "保存",
@@ -2443,7 +2443,7 @@ export const tips = {
 		"taSg": "சேமி",
 		"thTh": "บันทึก",
 		"idId": "Simpan",
-		"miNz": "Tiaki"
+		"miNz": "Tiaki",
 	},
 	"SaveSuccess": {
 		"zhCn": "保存成功",
@@ -2453,7 +2453,7 @@ export const tips = {
 		"taSg": "சேமிப்பு வெற்றி",
 		"thTh": "บันทึกสำเร็จ",
 		"idId": "Berhasil Disimpan",
-		"miNz": "I angitu te tiaki"
+		"miNz": "I angitu te tiaki",
 	},
 	"SaveFail": {
 		"zhCn": "保存失败",
@@ -2463,7 +2463,7 @@ export const tips = {
 		"taSg": "சேமிப்பு தோல்வி",
 		"thTh": "บันทึกล้มเหลว",
 		"idId": "Gagal Simpan",
-		"miNz": "I rahua te tiaki"
+		"miNz": "I rahua te tiaki",
 	},
 	"NetSaveError": {
 		"zhCn": "网络异常，保存失败",
@@ -2473,7 +2473,7 @@ export const tips = {
 		"taSg": "பிணையப் பிழை, சேமிப்பு தோல்வி",
 		"thTh": "เครือข่ายผิดปกติ บันทึกล้มเหลว",
 		"idId": "Kesalahan jaringan, gagal simpan",
-		"miNz": "Hapa whatunga, i rahua te tiaki"
+		"miNz": "Hapa whatunga, i rahua te tiaki",
 	},
 	"DeleteConfirmTip": {
 		"zhCn": "确定要删除该管控规则吗？删除后不可恢复",
@@ -2483,7 +2483,7 @@ export const tips = {
 		"taSg": "இந்த விதியை நீக்கவா? மீட்க முடியாது",
 		"thTh": "ลบกฎนี้ใช่หรือไม่? ไม่สามารถกู้คืนได้",
 		"idId": "Hapus aturan ini? Tidak dapat dipulihkan",
-		"miNz": "Muku tēnei ture? Kāore e taea te whakaora"
+		"miNz": "Muku tēnei ture? Kāore e taea te whakaora",
 	},
 	"DeleteSuccess": {
 		"zhCn": "删除成功",
@@ -2493,7 +2493,7 @@ export const tips = {
 		"taSg": "நீக்கம் வெற்றி",
 		"thTh": "ลบสำเร็จ",
 		"idId": "Berhasil Dihapus",
-		"miNz": "I angitu te muku"
+		"miNz": "I angitu te muku",
 	},
 	"DeleteFail": {
 		"zhCn": "删除失败",
@@ -2503,7 +2503,7 @@ export const tips = {
 		"taSg": "நீக்கம் தோல்வி",
 		"thTh": "ลบล้มเหลว",
 		"idId": "Gagal Hapus",
-		"miNz": "I rahua te muku"
+		"miNz": "I rahua te muku",
 	},
 	"NetDeleteError": {
 		"zhCn": "网络异常，删除失败",
@@ -2513,7 +2513,7 @@ export const tips = {
 		"taSg": "பிணையப் பிழை, நீக்கம் தோல்வி",
 		"thTh": "เครือข่ายผิดปกติ ลบล้มเหลว",
 		"idId": "Kesalahan jaringan, gagal hapus",
-		"miNz": "Hapa whatunga, i rahua te muku"
+		"miNz": "Hapa whatunga, i rahua te muku",
 	},
 	"BindCarSuccess": {
 		"zhCn": "绑定成功",
@@ -2523,7 +2523,7 @@ export const tips = {
 		"taSg": "பிணைப்பு வெற்றி",
 		"thTh": "ผูกสำเร็จ",
 		"idId": "Berhasil Diikat",
-		"miNz": "I angitu te here"
+		"miNz": "I angitu te here",
 	},
 	"BindCarFail": {
 		"zhCn": "绑定失败",
@@ -2533,7 +2533,7 @@ export const tips = {
 		"taSg": "பிணைப்பு தோல்வி",
 		"thTh": "ผูกไม่สำเร็จ",
 		"idId": "Gagal Ikat",
-		"miNz": "I rahua te here"
+		"miNz": "I rahua te here",
 	},
 	"NetBindError": {
 		"zhCn": "网络异常，绑定失败",
@@ -2543,7 +2543,7 @@ export const tips = {
 		"taSg": "பிணையப் பிழை, பிணைப்பு தோல்வி",
 		"thTh": "เครือข่ายผิดปกติ ผูกไม่สำเร็จ",
 		"idId": "Kesalahan jaringan, gagal ikat",
-		"miNz": "Hapa whatunga, i rahua te here"
+		"miNz": "Hapa whatunga, i rahua te here",
 	},
 	"UnbindConfirm": {
 		"zhCn": "确认解除",
@@ -2553,7 +2553,7 @@ export const tips = {
 		"taSg": "பிரிவதை உறுதிப்படுத்து",
 		"thTh": "ยืนยันการยกเลิก",
 		"idId": "Konfirmasi Lepas",
-		"miNz": "Whakaū wetewete"
+		"miNz": "Whakaū wetewete",
 	},
 	"UnbindCarTip": {
 		"zhCn": "确定解除",
@@ -2563,7 +2563,7 @@ export const tips = {
 		"taSg": "பிரிப்பதை உறுதி",
 		"thTh": "ยืนยันการยกเลิก",
 		"idId": "Konfirmasi lepas",
-		"miNz": "Whakaū te wetewete"
+		"miNz": "Whakaū te wetewete",
 	},
 	"UnbindSuccess": {
 		"zhCn": "解除绑定成功",
@@ -2573,7 +2573,7 @@ export const tips = {
 		"taSg": "பிரிப்பு வெற்றி",
 		"thTh": "ยกเลิกการผูกสำเร็จ",
 		"idId": "Berhasil Lepas",
-		"miNz": "I angitu te wetewete"
+		"miNz": "I angitu te wetewete",
 	},
 	"UnbindFail": {
 		"zhCn": "解除绑定失败",
@@ -2583,7 +2583,7 @@ export const tips = {
 		"taSg": "பிரிப்பு தோல்வி",
 		"thTh": "ยกเลิกการผูกไม่สำเร็จ",
 		"idId": "Gagal Lepas",
-		"miNz": "I rahua te wetewete"
+		"miNz": "I rahua te wetewete",
 	},
 	"NetError": {
 		"zhCn": "网络异常",
@@ -2593,7 +2593,7 @@ export const tips = {
 		"taSg": "பிணையப் பிழை",
 		"thTh": "เครือข่ายผิดปกติ",
 		"idId": "Kesalahan jaringan",
-		"miNz": "Hapa whatunga"
+		"miNz": "Hapa whatunga",
 	},
 	"UnbindAllTip": {
 		"zhCn": "确定解除该规则下所有已绑定车辆？",
@@ -2603,7 +2603,7 @@ export const tips = {
 		"taSg": "இந்த விதியின் கீழ் உள்ள அனைத்து வாகனங்களையும் பிரிக்கவா?",
 		"thTh": "ยกเลิกการผูกยานพาหนะทั้งหมดภายใต้กฎนี้หรือไม่?",
 		"idId": "Lepas semua kendaraan di bawah aturan ini?",
-		"miNz": "Wetewete ngā waka katoa i raro i tēnei ture?"
+		"miNz": "Wetewete ngā waka katoa i raro i tēnei ture?",
 	},
 	"UnbindAllSuccess": {
 		"zhCn": "全部解绑成功",
@@ -2613,7 +2613,7 @@ export const tips = {
 		"taSg": "அனைத்தும் பிரிக்கப்பட்டது",
 		"thTh": "ยกเลิกทั้งหมดสำเร็จ",
 		"idId": "Semua Berhasil Dilepas",
-		"miNz": "Kua angitu te wetewete katoa"
+		"miNz": "Kua angitu te wetewete katoa",
 	},
 	"UnbindAllFail": {
 		"zhCn": "全部解绑失败",
@@ -2623,7 +2623,7 @@ export const tips = {
 		"taSg": "அனைத்தும் பிரிக்கத் தோல்வி",
 		"thTh": "ยกเลิกทั้งหมดไม่สำเร็จ",
 		"idId": "Gagal Lepas Semua",
-		"miNz": "I rahua te wetewete katoa"
+		"miNz": "I rahua te wetewete katoa",
 	},
 	"FetchRuleListFail": {
 		"zhCn": "获取管控列表失败",
@@ -2633,7 +2633,7 @@ export const tips = {
 		"taSg": "விதி பட்டியல் பெறத் தோல்வி",
 		"thTh": "โหลดรายการกฎล้มเหลว",
 		"idId": "Gagal memuat daftar aturan",
-		"miNz": "I rahua te tiki rārangi ture"
+		"miNz": "I rahua te tiki rārangi ture",
 	},
 	"FetchCarListFail": {
 		"zhCn": "获取车辆列表失败",
@@ -2643,7 +2643,7 @@ export const tips = {
 		"taSg": "வாகன பட்டியல் பெறத் தோல்வி",
 		"thTh": "โหลดรายการรถล้มเหลว",
 		"idId": "Gagal memuat daftar kendaraan",
-		"miNz": "I rahua te tiki rārangi waka"
+		"miNz": "I rahua te tiki rārangi waka",
 	},
 	"NoBoundCar": {
 		"zhCn": "暂未绑定任何车辆",
@@ -2653,7 +2653,7 @@ export const tips = {
 		"taSg": "வாகனங்கள் எதுவும் பிணைக்கப்படவில்லை",
 		"thTh": "ยังไม่มีการผูกยานพาหนะ",
 		"idId": "Belum ada kendaraan terikat",
-		"miNz": "Kāore he waka kua herea"
+		"miNz": "Kāore he waka kua herea",
 	},
 	"ViewBoundCar": {
 		"zhCn": "已绑车辆",
@@ -2663,7 +2663,7 @@ export const tips = {
 		"taSg": "பிணைக்கப்பட்ட வாகனங்கள்",
 		"thTh": "รถที่ผูกไว้",
 		"idId": "Kendaraan Terikat",
-		"miNz": "Ngā waka here"
+		"miNz": "Ngā waka here",
 	},
 	"BoundVehicle": {
 		"zhCn": "已绑定车辆",
@@ -2673,7 +2673,7 @@ export const tips = {
 		"taSg": "பிணைக்கப்பட்ட வாகனங்கள்",
 		"thTh": "ยานพาหนะที่ผูกไว้",
 		"idId": "Kendaraan Terikat",
-		"miNz": "Ngā waka herea"
+		"miNz": "Ngā waka herea",
 	},
 	"WeekSun": {
 		"zhCn": "周日",
@@ -2683,7 +2683,7 @@ export const tips = {
 		"taSg": "ஞாயிறு",
 		"thTh": "อาทิตย์",
 		"idId": "Minggu",
-		"miNz": "Rātapu"
+		"miNz": "Rātapu",
 	},
 	"WeekMon": {
 		"zhCn": "周一",
@@ -2693,7 +2693,7 @@ export const tips = {
 		"taSg": "திங்கள்",
 		"thTh": "จันทร์",
 		"idId": "Senin",
-		"miNz": "Rāhina"
+		"miNz": "Rāhina",
 	},
 	"WeekTue": {
 		"zhCn": "周二",
@@ -2703,7 +2703,7 @@ export const tips = {
 		"taSg": "செவ்வாய்",
 		"thTh": "อังคาร",
 		"idId": "Selasa",
-		"miNz": "Rātū"
+		"miNz": "Rātū",
 	},
 	"WeekWed": {
 		"zhCn": "周三",
@@ -2713,7 +2713,7 @@ export const tips = {
 		"taSg": "புதன்",
 		"thTh": "พุธ",
 		"idId": "Rabu",
-		"miNz": "Rāapa"
+		"miNz": "Rāapa",
 	},
 	"WeekThu": {
 		"zhCn": "周四",
@@ -2723,7 +2723,7 @@ export const tips = {
 		"taSg": "வியாழன்",
 		"thTh": "พฤหัส",
 		"idId": "Kamis",
-		"miNz": "Rāpare"
+		"miNz": "Rāpare",
 	},
 	"WeekFri": {
 		"zhCn": "周五",
@@ -2733,7 +2733,7 @@ export const tips = {
 		"taSg": "வெள்ளி",
 		"thTh": "ศุกร์",
 		"idId": "Jumat",
-		"miNz": "Rāmere"
+		"miNz": "Rāmere",
 	},
 	"WeekSat": {
 		"zhCn": "周六",
@@ -2743,9 +2743,1438 @@ export const tips = {
 		"taSg": "சனி",
 		"thTh": "เสาร์",
 		"idId": "Sabtu",
-		"miNz": "Rāhoroi"
-	}
+		"miNz": "Rāhoroi",
+	},
 
 
 
+	"RefreshFailed": {
+		"zhCn": "刷新失败",
+		"enUs": "Refresh failed",
+		"msMy": "Gagal menyegarkan",
+		"ptBr": "Falha ao atualizar",
+		"taSg": "புதுப்பித்தல் தோல்வி",
+		"thTh": "รีเฟรชล้มเหลว",
+		"idId": "Gagal memuat ulang",
+		"miNz": "I rahua te whakahou",
+	},
+	"Processing": {
+		"zhCn": "处理中...",
+		"enUs": "Processing...",
+		"msMy": "Memproses...",
+		"ptBr": "Processando...",
+		"taSg": "செயலாக்குகிறது...",
+		"thTh": "กำลังประมวลผล...",
+		"idId": "Memproses...",
+		"miNz": "Kei te tukatuka...",
+	},
+	"ImageSelectSuccess": {
+		"zhCn": "图片选择成功！",
+		"enUs": "Image selected successfully!",
+		"msMy": "Gambar berjaya dipilih!",
+		"ptBr": "Imagem selecionada com sucesso!",
+		"taSg": "படம் வெற்றிகரமாக தேர்ந்தெடுக்கப்பட்டது!",
+		"thTh": "เลือกรูปภาพสำเร็จ!",
+		"idId": "Gambar berhasil dipilih!",
+		"miNz": "Kua kōwhiria te whakaahua!",
+	},
+	"CameraAlbumPermissionRequired": {
+		"zhCn": "请授权相机/相册权限后重试",
+		"enUs": "Please grant camera/album permission and retry",
+		"msMy": "Sila benarkan kebenaran kamera/album dan cuba semula",
+		"ptBr": "Conceda permissão da câmera/álbum e tente novamente",
+		"taSg": "கேமரா/ஆல்பம் அனுமதியை வழங்கி மீண்டும் முயற்சிக்கவும்",
+		"thTh": "โปรดอนุญาตสิทธิ์กล้อง/อัลบั้มแล้วลองอีกครั้ง",
+		"idId": "Berikan izin kamera/galeri lalu coba lagi",
+		"miNz": "Tukua te whakaaetanga kāmera/aratau ka ngana anō",
+	},
+	"ImageSelectFailedRetry": {
+		"zhCn": "图片选择失败，请重试",
+		"enUs": "Image selection failed, please retry",
+		"msMy": "Pemilihan gambar gagal, sila cuba semula",
+		"ptBr": "Falha ao selecionar imagem, tente novamente",
+		"taSg": "படம் தேர்வு தோல்வி, மீண்டும் முயற்சிக்கவும்",
+		"thTh": "เลือกรูปภาพไม่สำเร็จ โปรดลองอีกครั้ง",
+		"idId": "Gagal memilih gambar, coba lagi",
+		"miNz": "I rahua te kōwhiri whakaahua, ngana anō",
+	},
+	"ImagePathEmpty": {
+		"zhCn": "图片路径为空",
+		"enUs": "Image path is empty",
+		"msMy": "Laluan gambar kosong",
+		"ptBr": "Caminho da imagem vazio",
+		"taSg": "படப் பாதை காலியாக உள்ளது",
+		"thTh": "เส้นทางรูปภาพว่าง",
+		"idId": "Jalur gambar kosong",
+		"miNz": "Ko te ara whakaahua he kau",
+	},
+	"Uploading": {
+		"zhCn": "上传中...",
+		"enUs": "Uploading...",
+		"msMy": "Memuat naik...",
+		"ptBr": "Enviando...",
+		"taSg": "பதிவேற்றுகிறது...",
+		"thTh": "กำลังอัปโหลด...",
+		"idId": "Mengunggah...",
+		"miNz": "Kei te tuku ake...",
+	},
+	"UploadSuccess": {
+		"zhCn": "上传成功！",
+		"enUs": "Upload successful!",
+		"msMy": "Muat naik berjaya!",
+		"ptBr": "Enviado com sucesso!",
+		"taSg": "பதிவேற்றம் வெற்றி!",
+		"thTh": "อัปโหลดสำเร็จ!",
+		"idId": "Unggah berhasil!",
+		"miNz": "Kua angitu te tuku ake!",
+	},
+	"UploadFailedRetry": {
+		"zhCn": "上传失败，请重试",
+		"enUs": "Upload failed, please retry",
+		"msMy": "Muat naik gagal, sila cuba semula",
+		"ptBr": "Falha ao enviar, tente novamente",
+		"taSg": "பதிவேற்றம் தோல்வி, மீண்டும் முயற்சிக்கவும்",
+		"thTh": "อัปโหลดไม่สำเร็จ โปรดลองอีกครั้ง",
+		"idId": "Unggah gagal, coba lagi",
+		"miNz": "I rahua te tuku ake, ngana anō",
+	},
+	"DataParseFailedRetry": {
+		"zhCn": "数据解析失败，请重试",
+		"enUs": "Data parsing failed, please retry",
+		"msMy": "Penghuraian data gagal, sila cuba semula",
+		"ptBr": "Falha ao analisar dados, tente novamente",
+		"taSg": "தரவு பகுப்பாய்வு தோல்வி, மீண்டும் முயற்சிக்கவும்",
+		"thTh": "แยกข้อมูลไม่สำเร็จ โปรดลองอีกครั้ง",
+		"idId": "Gagal memparsing data, coba lagi",
+		"miNz": "I rahua te wetewete raraunga, ngana anō",
+	},
+	"NetworkImageUploadFailed": {
+		"zhCn": "网络异常，图片上传失败！",
+		"enUs": "Network error, image upload failed!",
+		"msMy": "Ralat rangkaian, muat naik gambar gagal!",
+		"ptBr": "Erro de rede, falha ao enviar imagem!",
+		"taSg": "பிணையப் பிழை, படம் பதிவேற்றம் தோல்வி!",
+		"thTh": "เครือข่ายผิดปกติ อัปโหลดรูปภาพไม่สำเร็จ!",
+		"idId": "Kesalahan jaringan, unggah gambar gagal!",
+		"miNz": "Hapa whatunga, i rahua te tuku whakaahua!",
+	},
+	"UploadFailedCheckNetwork": {
+		"zhCn": "上传失败，请检查网络后重试",
+		"enUs": "Upload failed, check network and retry",
+		"msMy": "Muat naik gagal, periksa rangkaian dan cuba semula",
+		"ptBr": "Falha ao enviar, verifique a rede e tente novamente",
+		"taSg": "பதிவேற்றம் தோல்வி, பிணையத்தைச் சரிபார்த்து மீண்டும் முயற்சிக்கவும்",
+		"thTh": "อัปโหลดไม่สำเร็จ ตรวจสอบเครือข่ายแล้วลองอีกครั้ง",
+		"idId": "Unggah gagal, periksa jaringan lalu coba lagi",
+		"miNz": "I rahua te tuku ake, tirohia te whatunga ka ngana anō",
+	},
+	"SubmitSuccessMsg": {
+		"zhCn": "提交成功！",
+		"enUs": "Submitted successfully!",
+		"msMy": "Penghantaran berjaya!",
+		"ptBr": "Enviado com sucesso!",
+		"taSg": "சமர்ப்பிப்பு வெற்றி!",
+		"thTh": "ส่งสำเร็จ!",
+		"idId": "Pengiriman berhasil!",
+		"miNz": "Kua angitu te tuku!",
+	},
+	"SubmitFailedRetry": {
+		"zhCn": "提交失败，请重试",
+		"enUs": "Submission failed, please retry",
+		"msMy": "Penghantaran gagal, sila cuba semula",
+		"ptBr": "Falha no envio, tente novamente",
+		"taSg": "சமர்ப்பிப்பு தோல்வி, மீண்டும் முயற்சிக்கவும்",
+		"thTh": "ส่งไม่สำเร็จ โปรดลองอีกครั้ง",
+		"idId": "Pengiriman gagal, coba lagi",
+		"miNz": "I rahua te tuku, ngana anō",
+	},
+	"NetworkException": {
+		"zhCn": "网络异常！",
+		"enUs": "Network error!",
+		"msMy": "Ralat rangkaian!",
+		"ptBr": "Erro de rede!",
+		"taSg": "பிணையப் பிழை!",
+		"thTh": "เครือข่ายผิดปกติ!",
+		"idId": "Kesalahan jaringan!",
+		"miNz": "Hapa whatunga!",
+	},
+	"SubmitFailedCheckNetwork": {
+		"zhCn": "提交失败，请检查网络",
+		"enUs": "Submission failed, please check network",
+		"msMy": "Penghantaran gagal, sila periksa rangkaian",
+		"ptBr": "Falha no envio, verifique a rede",
+		"taSg": "சமர்ப்பிப்பு தோல்வி, பிணையத்தைச் சரிபார்க்கவும்",
+		"thTh": "ส่งไม่สำเร็จ กรุณาตรวจสอบเครือข่าย",
+		"idId": "Pengiriman gagal, periksa jaringan",
+		"miNz": "I rahua te tuku, tirohia te whatunga",
+	},
+	"QueryFailed": {
+		"zhCn": "查询失败",
+		"enUs": "Query failed",
+		"msMy": "Pertanyaan gagal",
+		"ptBr": "Consulta falhou",
+		"taSg": "வினவல் தோல்வி",
+		"thTh": "ค้นหาล้มเหลว",
+		"idId": "Query gagal",
+		"miNz": "I rahua te tīrai",
+	},
+	"ClickUploadPhoto": {
+		"zhCn": "点击上传照片",
+		"enUs": "Tap to upload photo",
+		"msMy": "Ketik untuk muat naik gambar",
+		"ptBr": "Toque para enviar foto",
+		"taSg": "புகைப்படத்தைப் பதிவேற்ற தட்டவும்",
+		"thTh": "แตะเพื่ออัปโหลดรูปภาพ",
+		"idId": "Ketuk untuk unggah foto",
+		"miNz": "Pāwhiri ki te tuku whakaahua",
+	},
+	"FrontPhoto": {
+		"zhCn": "车头照片",
+		"enUs": "Front photo",
+		"msMy": "Gambar hadapan",
+		"ptBr": "Foto dianteira",
+		"taSg": "முன்பக்க புகைப்படம்",
+		"thTh": "รูปด้านหน้ารถ",
+		"idId": "Foto depan",
+		"miNz": "Whakaahua mua",
+	},
+	"RearPhoto": {
+		"zhCn": "车尾照片",
+		"enUs": "Rear photo",
+		"msMy": "Gambar belakang",
+		"ptBr": "Foto traseira",
+		"taSg": "பின்பக்க புகைப்படம்",
+		"thTh": "รูปด้านท้ายรถ",
+		"idId": "Foto belakang",
+		"miNz": "Whakaahua muri",
+	},
+	"LeftSidePhoto": {
+		"zhCn": "车身左侧照片",
+		"enUs": "Left side photo",
+		"msMy": "Gambar kiri kereta",
+		"ptBr": "Foto lateral esquerda",
+		"taSg": "வாகன இடதுபக்க புகைப்படம்",
+		"thTh": "รูปด้านซ้ายตัวรถ",
+		"idId": "Foto sisi kiri",
+		"miNz": "Whakaahua taha maui",
+	},
+	"RightSidePhoto": {
+		"zhCn": "车身右侧照片",
+		"enUs": "Right side photo",
+		"msMy": "Gambar kanan kereta",
+		"ptBr": "Foto lateral direita",
+		"taSg": "வாகன வலப்பக்க புகைப்படம்",
+		"thTh": "รูปด้านขวาตัวรถ",
+		"idId": "Foto sisi kanan",
+		"miNz": "Whakaahua taha katau",
+	},
+	"KeyPositionPhoto": {
+		"zhCn": "车钥匙位置照片",
+		"enUs": "Key position photo",
+		"msMy": "Gambar kedudukan kunci",
+		"ptBr": "Foto da posição da chave",
+		"taSg": "சாவி இருப்பிடம் புகைப்படம்",
+		"thTh": "รูปตำแหน่งกุญแจรถ",
+		"idId": "Foto posisi kunci",
+		"miNz": "Whakaahua tūwāhi kī",
+	},
+	"SubmitAndFinish": {
+		"zhCn": "提交并完成",
+		"enUs": "Submit and finish",
+		"msMy": "Hantar dan selesaikan",
+		"ptBr": "Enviar e concluir",
+		"taSg": "சமர்ப்பித்து முடி",
+		"thTh": "ส่งและเสร็จสิ้น",
+		"idId": "Kirim dan selesaikan",
+		"miNz": "Tuku ka mutu",
+	},
+	"NeedFrontPhoto": {
+		"zhCn": "请上传车头照片！",
+		"enUs": "Please upload the front photo!",
+		"msMy": "Sila muat naik gambar hadapan!",
+		"ptBr": "Envie a foto dianteira!",
+		"taSg": "முன்பக்க புகைப்படத்தைப் பதிவேற்றவும்!",
+		"thTh": "กรุณาอัปโหลดรูปด้านหน้ารถ!",
+		"idId": "Unggah foto depan!",
+		"miNz": "Tukua te whakaahua mua!",
+	},
+	"NeedRearPhoto": {
+		"zhCn": "请上传车尾照片！",
+		"enUs": "Please upload the rear photo!",
+		"msMy": "Sila muat naik gambar belakang!",
+		"ptBr": "Envie a foto traseira!",
+		"taSg": "பின்பக்க புகைப்படத்தைப் பதிவேற்றவும்!",
+		"thTh": "กรุณาอัปโหลดรูปด้านท้ายรถ!",
+		"idId": "Unggah foto belakang!",
+		"miNz": "Tukua te whakaahua muri!",
+	},
+	"NeedLeftPhoto": {
+		"zhCn": "请上传车身左侧照片！",
+		"enUs": "Please upload the left side photo!",
+		"msMy": "Sila muat naik gambar kiri!",
+		"ptBr": "Envie a foto lateral esquerda!",
+		"taSg": "இடதுபக்க புகைப்படத்தைப் பதிவேற்றவும்!",
+		"thTh": "กรุณาอัปโหลดรูปด้านซ้าย!",
+		"idId": "Unggah foto sisi kiri!",
+		"miNz": "Tukua te whakaahua taha maui!",
+	},
+	"NeedRightPhoto": {
+		"zhCn": "请上传车身右侧照片！",
+		"enUs": "Please upload the right side photo!",
+		"msMy": "Sila muat naik gambar kanan!",
+		"ptBr": "Envie a foto lateral direita!",
+		"taSg": "வலப்பக்க புகைப்படத்தைப் பதிவேற்றவும்!",
+		"thTh": "กรุณาอัปโหลดรูปด้านขวา!",
+		"idId": "Unggah foto sisi kanan!",
+		"miNz": "Tukua te whakaahua taha katau!",
+	},
+	"NeedKeyPhoto": {
+		"zhCn": "请上传车钥匙位置照片！",
+		"enUs": "Please upload the key position photo!",
+		"msMy": "Sila muat naik gambar kedudukan kunci!",
+		"ptBr": "Envie a foto da posição da chave!",
+		"taSg": "சாவி இருப்பிடம் புகைப்படத்தைப் பதிவேற்றவும்!",
+		"thTh": "กรุณาอัปโหลดรูปตำแหน่งกุญแจ!",
+		"idId": "Unggah foto posisi kunci!",
+		"miNz": "Tukua te whakaahua tūwāhi kī!",
+	},
+
+	"CodeLabel": {
+		"zhCn": "CODE",
+		"enUs": "CODE",
+		"msMy": "CODE",
+		"ptBr": "CODE",
+		"taSg": "CODE",
+		"thTh": "CODE",
+		"idId": "CODE",
+		"miNz": "CODE",
+	},
+	"StartCheck": {
+		"zhCn": "开始检测",
+		"enUs": "Start Check",
+		"msMy": "Mula Semakan",
+		"ptBr": "Iniciar Verificação",
+		"taSg": "சோதனையைத் தொடங்கு",
+		"thTh": "เริ่มการตรวจสอบ",
+		"idId": "Mulai Periksa",
+		"miNz": "Tīmata te Tirohanga",
+	},
+	"UploadScenePhotos": {
+		"zhCn": "现场图片上传",
+		"enUs": "Site Photo Upload",
+		"msMy": "Muat Naik Gambar Tapak",
+		"ptBr": "Enviar Fotos do Local",
+		"taSg": "இடப் புகைப்படங்கள் பதிவேற்றம்",
+		"thTh": "อัปโหลดรูปภาพสนาม",
+		"idId": "Unggah Foto Lokasi",
+		"miNz": "Tuku Whakaahua Tauhi",
+	},
+	"UploadTipK7": {
+		"zhCn": "7类图片全部必填：车辆铭牌、钥匙焊接图、风控线束图、回避器图、ACC接线图、常火接线图、应急感应区域图，每组至少上传1张，每组可上传多张",
+		"enUs": "All 7 photo types are required: nameplate, key welding diagram, risk-control wiring diagram, avoider diagram, ACC wiring diagram, constant-power wiring diagram, emergency sensing area diagram; at least 1 photo per group, multiple allowed.",
+		"msMy": "Kesemua 7 jenis gambar wajib: plat nama, rajah kimpalan kunci, rajah pendawaian kawalan risiko, rajah pengelak, rajah pendawaian ACC, rajah pendawaian kuasa tetap, rajah kawasan pengesan kecemasan; sekurang-kurangnya 1 gambar setiap kumpulan, banyak dibenarkan.",
+		"ptBr": "Todos os 7 tipos de fotos são obrigatórios: plaqueta, diagrama de solda da chave, diagrama de fiação de controle de risco, diagrama do evitador, diagrama de fiação ACC, diagrama de fiação de alimentação constante, diagrama da área de detecção de emergência; pelo menos 1 foto por grupo, várias permitidas.",
+		"taSg": "7 வகை படங்களும் கட்டாயம்: வாகன மாதிரி அட்டவணை, சாவி பற்றவைப்பு வரைபடம், இடர் கட்டுப்பாடு வயரிங் வரைபடம், தவிர்ப்பு வரைபடம், ACC வயரிங் வரைபடம், நிலை மின் வயரிங் வரைபடம், அவசர உணர் பகுதி வரைபடம்; ஒவ்வொரு குழுவிலும் குறைந்தது 1 படம், பல அனுமதி.",
+		"thTh": "รูปทั้ง 7 ประเภทจำเป็น: แผ่นป้ายรถ, แผนผังการเชื่อมกุญแจ, แผนผังสายควบคุมความเสี่ยง, แผนผังตัวหลีกเลี่ยง, แผนผังสาย ACC, แผนผังสายไฟประจำ, แผนผังพื้นที่เซนเซอร์ฉุกเฉิน; แต่ละกลุ่มอย่างน้อย 1 รูป อัปโหลดได้หลายรูป",
+		"idId": "Ketujuh jenis foto wajib: papan nama, diagram pengelasan kunci, diagram kabel kendali risiko, diagram penghindar, diagram kabel ACC, diagram kabel daya tetap, diagram area sensor darurat; minimal 1 foto per kelompok, boleh lebih dari satu.",
+		"miNz": "Ko ngā momo whakaahua 7 katoa e hiahiatia ana: papa ingoa, hoahoa whakapiri kī, hoahoa waea mana-ā-raro, hoahoa karo, hoahoa waea ACC, hoahoa waea hiko-mau, hoahoa rohe pūoko ohotata; kia kotahi neke atu i te rōpū, he maha e whakaaetia ana.",
+	},
+	"RequiredSuffix": {
+		"zhCn": "（必填）",
+		"enUs": "(Required)",
+		"msMy": "(Wajib)",
+		"ptBr": "(Obrigatório)",
+		"taSg": "(கட்டாயம்)",
+		"thTh": "(จำเป็น)",
+		"idId": "(Wajib)",
+		"miNz": "(Me herea)",
+	},
+	"SampleBadge": {
+		"zhCn": "示例",
+		"enUs": "Sample",
+		"msMy": "Contoh",
+		"ptBr": "Exemplo",
+		"taSg": "மாதிரி",
+		"thTh": "ตัวอย่าง",
+		"idId": "Contoh",
+		"miNz": "Tauira",
+	},
+	"VehicleNamePlateReq": {
+		"zhCn": "车辆铭牌（必填）",
+		"enUs": "Nameplate (Required)",
+		"msMy": "Plat Nama Kenderaan (Wajib)",
+		"ptBr": "Plaqueta (Obrigatório)",
+		"taSg": "வாகன மாதிரி அட்டவணை (கட்டாயம்)",
+		"thTh": "แผ่นป้ายรถ (จำเป็น)",
+		"idId": "Papan Nama (Wajib)",
+		"miNz": "Papa ingoa waka (Me herea)",
+	},
+	"KeyWeldingReq": {
+		"zhCn": "钥匙焊接图（必填）",
+		"enUs": "Key Welding Diagram (Required)",
+		"msMy": "Rajah Kimpalan Kunci (Wajib)",
+		"ptBr": "Diagrama de Solda da Chave (Obrigatório)",
+		"taSg": "சாவி பற்றவைப்பு வரைபடம் (கட்டாயம்)",
+		"thTh": "แผนผังการเชื่อมกุญแจ (จำเป็น)",
+		"idId": "Diagram Pengelasan Kunci (Wajib)",
+		"miNz": "Hoahoa whakapiri kī (Me herea)",
+	},
+	"RiskWiringReq": {
+		"zhCn": "风控线束图（必填）",
+		"enUs": "Risk-Control Wiring Diagram (Required)",
+		"msMy": "Rajah Pendawaian Kawalan Risiko (Wajib)",
+		"ptBr": "Diagrama de Fiação de Controle de Risco (Obrigatório)",
+		"taSg": "இடர் கட்டுப்பாடு வயரிங் வரைபடம் (கட்டாயம்)",
+		"thTh": "แผนผังสายควบคุมความเสี่ยง (จำเป็น)",
+		"idId": "Diagram Kabel Kontrol Risiko (Wajib)",
+		"miNz": "Hoahoa waea mana-ā-raro (Me herea)",
+	},
+	"AvoiderReq": {
+		"zhCn": "回避器图（必填）",
+		"enUs": "Avoider Diagram (Required)",
+		"msMy": "Rajah Pengelak (Wajib)",
+		"ptBr": "Diagrama do Evitador (Obrigatório)",
+		"taSg": "தவிர்ப்பு வரைபடம் (கட்டாயம்)",
+		"thTh": "แผนผังตัวหลีกเลี่ยง (จำเป็น)",
+		"idId": "Diagram Penghindar (Wajib)",
+		"miNz": "Hoahoa karo (Me herea)",
+	},
+	"AccWiringReq": {
+		"zhCn": "ACC接线图（必填）",
+		"enUs": "ACC Wiring Diagram (Required)",
+		"msMy": "Rajah Pendawaian ACC (Wajib)",
+		"ptBr": "Diagrama de Fiação ACC (Obrigatório)",
+		"taSg": "ACC வயரிங் வரைபடம் (கட்டாயம்)",
+		"thTh": "แผนผังสาย ACC (จำเป็น)",
+		"idId": "Diagram Kabel ACC (Wajib)",
+		"miNz": "Hoahoa waea ACC (Me herea)",
+	},
+	"ConstantPowerReq": {
+		"zhCn": "常火接线图（必填）",
+		"enUs": "Constant-Power Wiring Diagram (Required)",
+		"msMy": "Rajah Pendawaian Kuasa Tetap (Wajib)",
+		"ptBr": "Diagrama de Fiação de Alimentação Constante (Obrigatório)",
+		"taSg": "நிலை மின் வயரிங் வரைபடம் (கட்டாயம்)",
+		"thTh": "แผนผังสายไฟประจำ (จำเป็น)",
+		"idId": "Diagram Kabel Daya Tetap (Wajib)",
+		"miNz": "Hoahoa waea hiko-mau (Me herea)",
+	},
+	"EmergencyReq": {
+		"zhCn": "应急感应区域图（必填）",
+		"enUs": "Emergency Sensing Area Diagram (Required)",
+		"msMy": "Rajah Kawasan Pengesan Kecemasan (Wajib)",
+		"ptBr": "Diagrama da Área de Detecção de Emergência (Obrigatório)",
+		"taSg": "அவசர உணர் பகுதி வரைபடம் (கட்டாயம்)",
+		"thTh": "แผนผังพื้นที่เซนเซอร์ฉุกเฉิน (จำเป็น)",
+		"idId": "Diagram Area Sensor Darurat (Wajib)",
+		"miNz": "Hoahoa rohe pūoko ohotata (Me herea)",
+	},
+	"ConfirmUploadPhotos": {
+		"zhCn": "确认上传图片",
+		"enUs": "Confirm Photo Upload",
+		"msMy": "Sahkan Muat Naik Gambar",
+		"ptBr": "Confirmar Envio de Fotos",
+		"taSg": "படங்களைப் பதிவேற்ற உறுதி",
+		"thTh": "ยืนยันอัปโหลดรูปภาพ",
+		"idId": "Konfirmasi Unggah Foto",
+		"miNz": "Whakaū te tuku whakaahua",
+	},
+	"NetworkModeCheck": {
+		"zhCn": "网络模式检测",
+		"enUs": "Network Mode Check",
+		"msMy": "Semakan Mod Rangkaian",
+		"ptBr": "Verificação do Modo de Rede",
+		"taSg": "பிணைய முறை சோதனை",
+		"thTh": "ตรวจสอบโหมดเครือข่าย",
+		"idId": "Pemeriksaan Mode Jaringan",
+		"miNz": "Tirohanga aratau whatunga",
+	},
+	"NetworkModeActions": {
+		"zhCn": "网络模式操作",
+		"enUs": "Network Operations",
+		"msMy": "Operasi Mod Rangkaian",
+		"ptBr": "Operações de Rede",
+		"taSg": "பிணைய செயல்பாடுகள்",
+		"thTh": "การทำงานผ่านเครือข่าย",
+		"idId": "Operasi Jaringan",
+		"miNz": "Ngā mahi whatunga",
+	},
+	"CompletedBadge": {
+		"zhCn": "已完成",
+		"enUs": "Completed",
+		"msMy": "Selesai",
+		"ptBr": "Concluído",
+		"taSg": "முடிந்தது",
+		"thTh": "เสร็จสิ้น",
+		"idId": "Selesai",
+		"miNz": "Kua oti",
+	},
+	"UnlockCmd": {
+		"zhCn": "开锁",
+		"enUs": "Unlock",
+		"msMy": "Buka Kunci",
+		"ptBr": "Destravar",
+		"taSg": "திற",
+		"thTh": "ปลดล็อก",
+		"idId": "Buka Kunci",
+		"miNz": "Wewete",
+	},
+	"LockCmd": {
+		"zhCn": "关锁",
+		"enUs": "Lock",
+		"msMy": "Tutup Kunci",
+		"ptBr": "Travar",
+		"taSg": "பூட்டு",
+		"thTh": "ล็อก",
+		"idId": "Kunci",
+		"miNz": "Muku",
+	},
+	"FindCarCmd": {
+		"zhCn": "寻车",
+		"enUs": "Locate",
+		"msMy": "Cari Kenderaan",
+		"ptBr": "Localizar",
+		"taSg": "வாகனத்தைக் கண்டுபிடி",
+		"thTh": "ค้นหารถ",
+		"idId": "Cari Kendaraan",
+		"miNz": "Kimihia te waka",
+	},
+	"RiskBlockCmd": {
+		"zhCn": "风控拦截",
+		"enUs": "Block",
+		"msMy": "Sekat Risiko",
+		"ptBr": "Bloquear",
+		"taSg": "தடு",
+		"thTh": "สกัดกั้น",
+		"idId": "Blokir",
+		"miNz": "Aukati",
+	},
+	"CancelBlockCmd": {
+		"zhCn": "取消拦截",
+		"enUs": "Unblock",
+		"msMy": "Batal Sekatan",
+		"ptBr": "Desbloquear",
+		"taSg": "தடுப்பை நீக்கு",
+		"thTh": "ยกเลิกการสกัดกั้น",
+		"idId": "Buka Blokir",
+		"miNz": "Wewete aukati",
+	},
+	"TestSuccess": {
+		"zhCn": "成功",
+		"enUs": "Success",
+		"msMy": "Berjaya",
+		"ptBr": "Sucesso",
+		"taSg": "வெற்றி",
+		"thTh": "สำเร็จ",
+		"idId": "Berhasil",
+		"miNz": "Angitu",
+	},
+	"Testing": {
+		"zhCn": "测试中",
+		"enUs": "Testing",
+		"msMy": "Sedang diuji",
+		"ptBr": "Testando",
+		"taSg": "சோதிக்கப்படுகிறது",
+		"thTh": "กำลังทดสอบ",
+		"idId": "Sedang diuji",
+		"miNz": "Kei te whakamātau",
+	},
+	"TestFailed": {
+		"zhCn": "失败",
+		"enUs": "Failed",
+		"msMy": "Gagal",
+		"ptBr": "Falhou",
+		"taSg": "தோல்வி",
+		"thTh": "ล้มเหลว",
+		"idId": "Gagal",
+		"miNz": "I rahua",
+	},
+	"TestLog": {
+		"zhCn": "测试日志",
+		"enUs": "Test Log",
+		"msMy": "Log Ujian",
+		"ptBr": "Registro de Teste",
+		"taSg": "சோதனைப் பதிவு",
+		"thTh": "บันทึกการทดสอบ",
+		"idId": "Log Uji",
+		"miNz": "Rārangi whakamātau",
+	},
+	"SubmitCheck": {
+		"zhCn": "提交检测",
+		"enUs": "Submit Check",
+		"msMy": "Hantar Semakan",
+		"ptBr": "Enviar Verificação",
+		"taSg": "சோதனையைச் சமர்ப்பி",
+		"thTh": "ส่งการตรวจสอบ",
+		"idId": "Kirim Periksa",
+		"miNz": "Tuku te tirohanga",
+	},
+	"ResultTitle": {
+		"zhCn": "结果",
+		"enUs": "Result",
+		"msMy": "Keputusan",
+		"ptBr": "Resultado",
+		"taSg": "முடிவு",
+		"thTh": "ผลลัพธ์",
+		"idId": "Hasil",
+		"miNz": "Hua",
+	},
+	"BindDeviceProcessing": {
+		"zhCn": "设备绑定中...",
+		"enUs": "Binding device...",
+		"msMy": "Sedang mengikat peranti...",
+		"ptBr": "Vinculando dispositivo...",
+		"taSg": "சாதனம் இணைக்கப்படுகிறது...",
+		"thTh": "กำลังผูกอุปกรณ์...",
+		"idId": "Mengikat perangkat...",
+		"miNz": "Kei te herea te taputapu...",
+	},
+	"BindDeviceFailed": {
+		"zhCn": "设备绑定失败",
+		"enUs": "Device binding failed",
+		"msMy": "Pengikatan peranti gagal",
+		"ptBr": "Falha ao vincular dispositivo",
+		"taSg": "சாதன இணைப்பு தோல்வி",
+		"thTh": "ผูกอุปกรณ์ไม่สำเร็จ",
+		"idId": "Pengikatan perangkat gagal",
+		"miNz": "I rahua te here taputapu",
+	},
+	"BindRequestError": {
+		"zhCn": "绑定请求异常，请检查网络后重试",
+		"enUs": "Binding request error, please check network and retry",
+		"msMy": "Ralat permintaan pengikatan, periksa rangkaian dan cuba semula",
+		"ptBr": "Erro na solicitação de vínculo, verifique a rede e tente novamente",
+		"taSg": "இணைப்பு கோரிக்கை பிழை, பிணையத்தைச் சரிபார்த்து மீண்டும் முயற்சிக்கவும்",
+		"thTh": "คำขอผูกผิดปกติ ตรวจสอบเครือข่ายแล้วลองอีกครั้ง",
+		"idId": "Kesalahan permintaan pengikatan, periksa jaringan lalu coba lagi",
+		"miNz": "Hapa tono here, tirohia te whatunga ka ngana anō",
+	},
+	"PleaseInputIdcAndCode": {
+		"zhCn": "请先输入设备号和检验码",
+		"enUs": "Please enter the device SN and code first",
+		"msMy": "Sila masukkan SN peranti dan kod dahulu",
+		"ptBr": "Insira o SN e o código do dispositivo primeiro",
+		"taSg": "முதலில் சாதன வரிசை எண் மற்றும் குறியீட்டை உள்ளிடவும்",
+		"thTh": "กรุณากรอก SN อุปกรณ์และรหัสก่อน",
+		"idId": "Masukkan SN dan kode perangkat dulu",
+		"miNz": "Whakaurua te SN taputapu me te waehere i te tuatahi",
+	},
+	"PleaseBindDeviceFirst": {
+		"zhCn": "请先绑定设备",
+		"enUs": "Please bind the device first",
+		"msMy": "Sila ikat peranti dahulu",
+		"ptBr": "Vincule o dispositivo primeiro",
+		"taSg": "முதலில் சாதனத்தை இணைக்கவும்",
+		"thTh": "กรุณาผูกอุปกรณ์ก่อน",
+		"idId": "Ikat perangkat dulu",
+		"miNz": "Herea te taputapu i te tuatahi",
+	},
+	"PleaseUploadScenePhotos": {
+		"zhCn": "请先上传现场图片",
+		"enUs": "Please upload the site photos first",
+		"msMy": "Sila muat naik gambar tapak dahulu",
+		"ptBr": "Envie as fotos do local primeiro",
+		"taSg": "முதலில் இடப் புகைப்படங்களைப் பதிவேற்றவும்",
+		"thTh": "กรุณาอัปโหลดรูปภาพสนามก่อน",
+		"idId": "Unggah foto lokasi dulu",
+		"miNz": "Tukua ngā whakaahua tauhi i te tuatahi",
+	},
+	"MaxImagesPerCategory": {
+		"zhCn": "该分类最多上传{n}张",
+		"enUs": "Up to {n} photos per category",
+		"msMy": "Maksimum {n} gambar setiap kategori",
+		"ptBr": "Até {n} fotos por categoria",
+		"taSg": "ஒவ்வொரு பிரிவிலும் அதிகபட்சம் {n} படங்கள்",
+		"thTh": "แต่ละหมวดอัปโหลดได้สูงสุด {n} รูป",
+		"idId": "Maksimal {n} foto per kategori",
+		"miNz": "Kia {n} whakaahua mo ia rōpū",
+	},
+	"SevenPhotosEachRequired": {
+		"zhCn": "7类图片每类至少上传一张",
+		"enUs": "Upload at least one photo for each of the 7 types",
+		"msMy": "Muat naik sekurang-kurangnya satu gambar bagi setiap 7 jenis",
+		"ptBr": "Envie pelo menos uma foto de cada um dos 7 tipos",
+		"taSg": "7 வகையிலும் குறைந்தது ஒரு படம் பதிவேற்றவும்",
+		"thTh": "อัปโหลดอย่างน้อยหนึ่งรูปในแต่ละ 7 ประเภท",
+		"idId": "Unggah minimal satu foto untuk tiap 7 jenis",
+		"miNz": "Tukua kotahi whakaahua mo ia momo o te 7",
+	},
+	"DeviceInfoAbnormalRebind": {
+		"zhCn": "设备信息异常，请重新绑定",
+		"enUs": "Device info abnormal, please rebind",
+		"msMy": "Maklumat peranti tidak normal, sila ikat semula",
+		"ptBr": "Informações do dispositivo anormais, vincule novamente",
+		"taSg": "சாதனத் தகவல் இயல்பில்லை, மீண்டும் இணைக்கவும்",
+		"thTh": "ข้อมูลอุปกรณ์ผิดปกติ โปรดผูกใหม่",
+		"idId": "Info perangkat tidak normal, ikat ulang",
+		"miNz": "He kino te korero taputapu, herea anō",
+	},
+	"StartingUploadImages": {
+		"zhCn": "开始上传图片...",
+		"enUs": "Starting photo upload...",
+		"msMy": "Mula memuat naik gambar...",
+		"ptBr": "Iniciando envio de fotos...",
+		"taSg": "படங்கள் பதிவேற்றம் தொடங்குகிறது...",
+		"thTh": "เริ่มอัปโหลดรูปภาพ...",
+		"idId": "Mulai mengunggah foto...",
+		"miNz": "Kei te tuku whakaahua...",
+	},
+	"UploadingImages": {
+		"zhCn": "正在上传...",
+		"enUs": "Uploading...",
+		"msMy": "Sedang memuat naik...",
+		"ptBr": "Enviando...",
+		"taSg": "பதிவேற்றுகிறது...",
+		"thTh": "กำลังอัปโหลด...",
+		"idId": "Mengunggah...",
+		"miNz": "Kei te tuku ake...",
+	},
+	"AllImagesUploaded": {
+		"zhCn": "图片全部上传成功！可开始功能检测",
+		"enUs": "All photos uploaded! You can start the functional check",
+		"msMy": "Semua gambar dimuat naik! Boleh mula semakan fungsi",
+		"ptBr": "Todas as fotos enviadas! Inicie a verificação funcional",
+		"taSg": "அனைத்து படங்களும் பதிவேற்றப்பட்டன! செயல்பாட்டு சோதனையைத் தொடங்கலாம்",
+		"thTh": "อัปโหลดรูปทั้งหมดสำเร็จ! เริ่มการทดสอบฟังก์ชันได้",
+		"idId": "Semua foto terunggah! Mulai uji fungsi",
+		"miNz": "Kua tukuna ngā whakaahua katoa! Ka tīmata te tirohanga mahi",
+	},
+	"ImageUploadFailedPrefix": {
+		"zhCn": "图片上传失败：",
+		"enUs": "Photo upload failed: ",
+		"msMy": "Muat naik gambar gagal: ",
+		"ptBr": "Falha no envio de fotos: ",
+		"taSg": "படம் பதிவேற்றம் தோல்வி: ",
+		"thTh": "อัปโหลดรูปภาพไม่สำเร็จ: ",
+		"idId": "Unggah foto gagal: ",
+		"miNz": "I rahua te tuku whakaahua: ",
+	},
+	"GroupAbnormal": {
+		"zhCn": "分组异常",
+		"enUs": "Invalid group",
+		"msMy": "Kumpulan tidak sah",
+		"ptBr": "Grupo inválido",
+		"taSg": "குழு தவறு",
+		"thTh": "กลุ่มไม่ถูกต้อง",
+		"idId": "Grup tidak valid",
+		"miNz": "Rōpū hē",
+	},
+	"ParseException": {
+		"zhCn": "数据解析异常",
+		"enUs": "Data parsing error",
+		"msMy": "Ralat penghuraian data",
+		"ptBr": "Erro ao analisar dados",
+		"taSg": "தரவு பகுப்பாய்வு பிழை",
+		"thTh": "แยกข้อมูลผิดพลาด",
+		"idId": "Kesalahan parsel data",
+		"miNz": "Hapa wetewete raraunga",
+	},
+	"AllTestsComplete": {
+		"zhCn": "网络模式全部检测完成！可提交检测",
+		"enUs": "All network-mode checks completed! Ready to submit",
+		"msMy": "Semua semakan mod rangkaian selesai! Sedia untuk dihantar",
+		"ptBr": "Todas as verificações de rede concluídas! Pronto para enviar",
+		"taSg": "அனைத்து பிணைய சோதனைகளும் முடிந்தன! சமர்ப்பிக்கலாம்",
+		"thTh": "ตรวจสอบโหมดเครือข่ายครบถ้วน! พร้อมส่ง",
+		"idId": "Semua pemeriksaan mode jaringan selesai! Siap kirim",
+		"miNz": "Kua oti ngā tirohanga whatunga katoa! Ka tuku",
+	},
+	"DeviceMissing": {
+		"zhCn": "设备信息缺失",
+		"enUs": "Device info missing",
+		"msMy": "Maklumat peranti hilang",
+		"ptBr": "Faltam informações do dispositivo",
+		"taSg": "சாதனத் தகவல் இல்லை",
+		"thTh": "ขาดข้อมูลอุปกรณ์",
+		"idId": "Info perangkat tidak tersedia",
+		"miNz": "Kua ngaro te korero taputapu",
+	},
+	"StartActionLog": {
+		"zhCn": "开始{action} → 设备号：{idc}",
+		"enUs": "Start {action} → Device SN: {idc}",
+		"msMy": "Mula {action} → SN peranti: {idc}",
+		"ptBr": "Iniciar {action} → SN do dispositivo: {idc}",
+		"taSg": "தொடங்கு {action} → சாதன எண்: {idc}",
+		"thTh": "เริ่ม{action} → SN อุปกรณ์: {idc}",
+		"idId": "Mulai {action} → SN perangkat: {idc}",
+		"miNz": "Tīmata {action} → SN taputapu: {idc}",
+	},
+	"ActionSuccessLog": {
+		"zhCn": "{action} 成功",
+		"enUs": "{action} succeeded",
+		"msMy": "{action} berjaya",
+		"ptBr": "{action} com sucesso",
+		"taSg": "{action} வெற்றி",
+		"thTh": "{action} สำเร็จ",
+		"idId": "{action} berhasil",
+		"miNz": "{action} angitu",
+	},
+	"ActionFailLog": {
+		"zhCn": "{action} 失败：{reason}",
+		"enUs": "{action} failed: {reason}",
+		"msMy": "{action} gagal: {reason}",
+		"ptBr": "{action} falhou: {reason}",
+		"taSg": "{action} தோல்வி: {reason}",
+		"thTh": "{action} ล้มเหลว: {reason}",
+		"idId": "{action} gagal: {reason}",
+		"miNz": "{action} i rahua: {reason}",
+	},
+	"ExecutingCommand": {
+		"zhCn": "指令执行中...",
+		"enUs": "Executing command...",
+		"msMy": "Sedang melaksanakan arahan...",
+		"ptBr": "Executando comando...",
+		"taSg": "கட்டளை இயக்கப்படுகிறது...",
+		"thTh": "กำลังดำเนินการคำสั่ง...",
+		"idId": "Menjalankan perintah...",
+		"miNz": "Kei te whakahaere tono...",
+	},
+	"SubmittingCheckResult": {
+		"zhCn": "提交检测结果中...",
+		"enUs": "Submitting check result...",
+		"msMy": "Sedang menghantar hasil semakan...",
+		"ptBr": "Enviando resultado...",
+		"taSg": "சோதனை முடிவு சமர்ப்பிக்கப்படுகிறது...",
+		"thTh": "กำลังส่งผลการตรวจสอบ...",
+		"idId": "Mengirim hasil periksa...",
+		"miNz": "Kei te tuku hua tirohanga...",
+	},
+	"SubmitSuccessTitle": {
+		"zhCn": "提交成功",
+		"enUs": "Submit Success",
+		"msMy": "Penghantaran Berjaya",
+		"ptBr": "Envio Concluído",
+		"taSg": "சமர்ப்பிப்பு வெற்றி",
+		"thTh": "ส่งสำเร็จ",
+		"idId": "Pengiriman Berhasil",
+		"miNz": "Tuku angitu",
+	},
+	"CheckCompletedContent": {
+		"zhCn": "设备全流程检测已完成！",
+		"enUs": "The full device check has been completed!",
+		"msMy": "Semakan penuh peranti selesai!",
+		"ptBr": "A verificação completa do dispositivo foi concluída!",
+		"taSg": "சாதனத்தின் முழுச் சோதனை முடிந்தது!",
+		"thTh": "การตรวจสอบอุปกรณ์ทั้งหมดเสร็จสิ้น!",
+		"idId": "Pemeriksaan lengkap perangkat selesai!",
+		"miNz": "Kua oti te tirohanga katoa o te taputapu!",
+	},
+	"SubmitFailedToast": {
+		"zhCn": "提交失败",
+		"enUs": "Submission failed",
+		"msMy": "Penghantaran gagal",
+		"ptBr": "Envio falhou",
+		"taSg": "சமர்ப்பிப்பு தோல்வி",
+		"thTh": "ส่งไม่สำเร็จ",
+		"idId": "Pengiriman gagal",
+		"miNz": "I rahua te tuku",
+	},
+	"RequestExceptionRetry": {
+		"zhCn": "请求异常，请重试",
+		"enUs": "Request error, please retry",
+		"msMy": "Ralat permintaan, sila cuba semula",
+		"ptBr": "Erro na solicitação, tente novamente",
+		"taSg": "கோரிக்கை பிழை, மீண்டும் முயற்சிக்கவும்",
+		"thTh": "คำขอผิดพลาด โปรดลองอีกครั้ง",
+		"idId": "Kesalahan permintaan, coba lagi",
+		"miNz": "Hapa tono, ngana anō",
+	},
+	"SubmitResultFailedLog": {
+		"zhCn": "检测结果提交失败：网络或接口异常",
+		"enUs": "Failed to submit check result: network or interface error",
+		"msMy": "Gagal menghantar hasil: ralat rangkaian atau antara muka",
+		"ptBr": "Falha ao enviar resultado: erro de rede ou interface",
+		"taSg": "முடிவு சமர்ப்பிப்பு தோல்வி: பிணைய அல்லது இடைமுகப் பிழை",
+		"thTh": "ส่งผลตรวจสอบไม่สำเร็จ: เครือข่ายหรือ API ผิดพลาด",
+		"idId": "Gagal mengirim hasil: kesalahan jaringan atau antarmuka",
+		"miNz": "I rahua te tuku hua: hapa whatunga, atanga rānei",
+	},
+	"VideoMaterial": {
+		"zhCn": "视频物料",
+		"enUs": "Video Materials",
+		"msMy": "Bahan Video",
+		"ptBr": "Materiais de Vídeo",
+		"taSg": "வீடியோ பொருட்கள்",
+		"thTh": "สื่อวิดีโอ",
+		"idId": "Materi Video",
+		"miNz": "Rauemi Ataata",
+	},
+	"SortDefault": {
+		"zhCn": "默认排序",
+		"enUs": "Default Sort",
+		"msMy": "Susunan Lalai",
+		"ptBr": "Ordem Padrão",
+		"taSg": "இயல்பு வரிசை",
+		"thTh": "เรียงลำดับเริ่มต้น",
+		"idId": "Urutkan Default",
+		"miNz": "Kōtaha Māori",
+	},
+	"SortAsc": {
+		"zhCn": "升序",
+		"enUs": "Ascending",
+		"msMy": "Menaik",
+		"ptBr": "Crescente",
+		"taSg": "ஏறுவரிசை",
+		"thTh": "จากน้อยไปมาก",
+		"idId": "Naik",
+		"miNz": "Piki",
+	},
+	"SortDesc": {
+		"zhCn": "降序",
+		"enUs": "Descending",
+		"msMy": "Menurun",
+		"ptBr": "Decrescente",
+		"taSg": "இறங்குவரிசை",
+		"thTh": "จากมากไปน้อย",
+		"idId": "Turun",
+		"miNz": "Heiheke",
+	},
+	"AllTypes": {
+		"zhCn": "所有类型",
+		"enUs": "All Types",
+		"msMy": "Semua Jenis",
+		"ptBr": "Todos os Tipos",
+		"taSg": "அனைத்து வகைகள்",
+		"thTh": "ทุกประเภท",
+		"idId": "Semua Jenis",
+		"miNz": "Ngā momo katoa",
+	},
+	"TypeImage": {
+		"zhCn": "图片",
+		"enUs": "Image",
+		"msMy": "Gambar",
+		"ptBr": "Imagem",
+		"taSg": "படம்",
+		"thTh": "รูปภาพ",
+		"idId": "Gambar",
+		"miNz": "Whakaahua",
+	},
+	"TypeVideo": {
+		"zhCn": "视频",
+		"enUs": "Video",
+		"msMy": "Video",
+		"ptBr": "Vídeo",
+		"taSg": "வீடியோ",
+		"thTh": "วิดีโอ",
+		"idId": "Video",
+		"miNz": "Ataata",
+	},
+	"TypeDocument": {
+		"zhCn": "文档",
+		"enUs": "Document",
+		"msMy": "Dokumen",
+		"ptBr": "Documento",
+		"taSg": "ஆவணம்",
+		"thTh": "เอกสาร",
+		"idId": "Dokumen",
+		"miNz": "Tuhinga",
+	},
+	"TypeOther": {
+		"zhCn": "其他",
+		"enUs": "Other",
+		"msMy": "Lain-lain",
+		"ptBr": "Outro",
+		"taSg": "மற்றவை",
+		"thTh": "อื่นๆ",
+		"idId": "Lainnya",
+		"miNz": "Ētahi",
+	},
+	"AllIndustries": {
+		"zhCn": "所有行业",
+		"enUs": "All Industries",
+		"msMy": "Semua Sektor",
+		"ptBr": "Todos os Setores",
+		"taSg": "அனைத்து துறைகள்",
+		"thTh": "ทุกอุตสาหกรรม",
+		"idId": "Semua Industri",
+		"miNz": "Ngā rāngai katoa",
+	},
+	"ItemNo": {
+		"zhCn": "序号",
+		"enUs": "No.",
+		"msMy": "No.",
+		"ptBr": "Nº",
+		"taSg": "எண்",
+		"thTh": "ลำดับ",
+		"idId": "No.",
+		"miNz": "Tau",
+	},
+	"SubItemNo": {
+		"zhCn": "子序号",
+		"enUs": "Sub No.",
+		"msMy": "No. Sub",
+		"ptBr": "Sub Nº",
+		"taSg": "துணை எண்",
+		"thTh": "ลำดับย่อย",
+		"idId": "Sub No.",
+		"miNz": "Tau-roto",
+	},
+	"CreatedBy": {
+		"zhCn": "创建人",
+		"enUs": "Created By",
+		"msMy": "Dicipta Oleh",
+		"ptBr": "Criado Por",
+		"taSg": "உருவாக்கியவர்",
+		"thTh": "ผู้สร้าง",
+		"idId": "Dibuat Oleh",
+		"miNz": "Na te Wai I Hanga",
+	},
+	"CategoryType": {
+		"zhCn": "类型",
+		"enUs": "Type",
+		"msMy": "Jenis",
+		"ptBr": "Tipo",
+		"taSg": "வகை",
+		"thTh": "ประเภท",
+		"idId": "Jenis",
+		"miNz": "Momo",
+	},
+	"Industry": {
+		"zhCn": "行业",
+		"enUs": "Industry",
+		"msMy": "Sektor",
+		"ptBr": "Setor",
+		"taSg": "துறை",
+		"thTh": "อุตสาหกรรม",
+		"idId": "Industri",
+		"miNz": "Rangai",
+	},
+	"CreatedTime": {
+		"zhCn": "创建时间",
+		"enUs": "Created Time",
+		"msMy": "Masa Ciptaan",
+		"ptBr": "Data de Criação",
+		"taSg": "உருவாக்கிய நேரம்",
+		"thTh": "เวลาที่สร้าง",
+		"idId": "Waktu Dibuat",
+		"miNz": "Wā Hanga",
+	},
+	"View": {
+		"zhCn": "查看",
+		"enUs": "View",
+		"msMy": "Lihat",
+		"ptBr": "Visualizar",
+		"taSg": "காண்க",
+		"thTh": "ดู",
+		"idId": "Lihat",
+		"miNz": "Tirohia",
+	},
+	"ShareToFriend": {
+		"zhCn": "分享给好友",
+		"enUs": "Share to Friend",
+		"msMy": "Kongsi ke Rakan",
+		"ptBr": "Compartilhar com Amigo",
+		"taSg": "நண்பருடன் பகிர்",
+		"thTh": "แชร์ให้เพื่อน",
+		"idId": "Bagikan ke Teman",
+		"miNz": "Tuku ki te Hoa",
+	},
+	"CopyFailed": {
+		"zhCn": "复制失败",
+		"enUs": "Copy failed",
+		"msMy": "Salinan gagal",
+		"ptBr": "Falha ao copiar",
+		"taSg": "நகலெடுத்தல் தோல்வி",
+		"thTh": "คัดลอกไม่สำเร็จ",
+		"idId": "Gagal menyalin",
+		"miNz": "I rahua te tārua",
+	},
+	"AlarmTotal": {
+		"zhCn": "总数",
+		"enUs": "Total",
+		"msMy": "Jumlah",
+		"ptBr": "Total",
+		"taSg": "மொத்தம்",
+		"thTh": "ทั้งหมด",
+		"idId": "Total",
+		"miNz": "Katoa",
+	},
+	"AlarmTodayNew": {
+		"zhCn": "今日新增",
+		"enUs": "Today New",
+		"msMy": "Baharu Hari Ini",
+		"ptBr": "Novos Hoje",
+		"taSg": "இன்றைய புதிய",
+		"thTh": "วันนี้เพิ่มใหม่",
+		"idId": "Baru Hari Ini",
+		"miNz": "Hou o tēnei rā",
+	},
+	"HomeTitle": {
+		"zhCn": "首页",
+		"enUs": "Home",
+		"msMy": "Laman Utama",
+		"ptBr": "Início",
+		"taSg": "முகப்பு",
+		"thTh": "หน้าแรก",
+		"idId": "Beranda",
+		"miNz": "Kāinga",
+	},
+	"UnbindDriverQuestion": {
+		"zhCn": "确认解绑？！",
+		"enUs": "Confirm unbind?",
+		"msMy": "Sahkan nyahikat?!",
+		"ptBr": "Confirmar desvinculação?",
+		"taSg": "பிரிப்பதை உறுதி செய்கிறீர்களா?",
+		"thTh": "ยืนยันยกเลิก?!",
+		"idId": "Konfirmasi lepas?!",
+		"miNz": "Whakaū te wetewete?!",
+	},
+	"DisclaimerTitle": {
+		"zhCn": "免责条款",
+		"enUs": "Disclaimer",
+		"msMy": "Terma Penafian",
+		"ptBr": "Termo de Isenção",
+		"taSg": "பொறுப்புவிலக்கு",
+		"thTh": "ข้อจำกัดความรับผิดชอบ",
+		"idId": "Penyangkalan",
+		"miNz": "Whakakīkīhere",
+	},
+	"DisclaimerP1": {
+		"zhCn": "设备安装完成后，建议您使用 K7 模块做基础预检，检测记录会留存存档，后续设备出现问题时，能帮助我们更快排查维修，给您更完善的售后保障～",
+		"enUs": "After installation, we recommend running a basic pre-check with the K7 module. Records are archived and will help us diagnose and repair device issues faster and provide better after-sales support.",
+		"msMy": "Selepas pemasangan, kami cadangkan menjalankan semakan asas dengan modul K7. Rekod disimpan arkib dan membantu kami mengenal pasti dan membaiki masalah peranti dengan lebih pantas, serta memberikan sokongan selepas jualan yang lebih baik.",
+		"ptBr": "Após a instalação, recomendamos fazer uma pré-verificação básica com o módulo K7. Os registros são arquivados e nos ajudam a diagnosticar e reparar problemas mais rápido, oferecendo melhor suporte pós-venda.",
+		"taSg": "நிறுவலுக்குப் பிறகு, K7 தொகுதியுடன் அடிப்படை முன்சோதனை செய்ய பரிந்துரைக்கிறோம். பதிவுகள் சேமிக்கப்பட்டு, சாதனப் பிரச்சனைகளை விரைவாகக் கண்டறிந்து சரிசெய்யவும், சிறந்த விற்பனைப் பின் ஆதரவு அளிக்கவும் உதவும்.",
+		"thTh": "หลังติดตั้ง ขอแนะนำให้ตรวจเบื้องต้นด้วยโมดูล K7 บันทึกจะถูกเก็บไว้ ช่วยให้เราวินิจฉัยและซ่อมปัญหาอุปกรณ์ได้เร็วขึ้นและให้บริการหลังการขายที่ดีขึ้น",
+		"idId": "Setelah pemasangan, kami menyarankan melakukan pemeriksaan awal dengan modul K7. Catatan diarsipkan dan membantu kami mendiagnosis dan memperbaiki masalah perangkat lebih cepat, dengan layanan purna jual yang lebih baik.",
+		"miNz": "Whai muri i te whakauru, ka tūtohu mātou kia whai i te tirohanga tīmatanga me te kōwae K7. Ka puritia ngā rārangi hei āwhina ki te tātaritanga me te whakatika tere, me te tautoko muri-hoko pai ake.",
+	},
+	"DisclaimerP2": {
+		"zhCn": "若您选择【免检注册】，将会跳过本次 K7 预检流程。",
+		"enUs": "If you choose Register without inspection, this K7 pre-check will be skipped.",
+		"msMy": "Jika anda pilih Daftar tanpa pemeriksaan, proses semakan awal K7 ini akan dilangkau.",
+		"ptBr": "Se você escolher Registrar sem inspeção, esta pré-verificação do K7 será pulada.",
+		"taSg": "சோதனையில்லாமல் பதிவு செய்ய தேர்வு செய்தால், இந்த K7 முன்சோதனை தவிர்க்கப்படும்.",
+		"thTh": "หากเลือกลงทะเบียนโดยไม่ตรวจสอบ ขั้นตอนตรวจเบื้องต้น K7 จะถูกข้ามไป",
+		"idId": "Jika Anda memilih Daftar tanpa inspeksi, pemeriksaan awal K7 ini akan dilewati.",
+		"miNz": "Ki te kōwhiria te Rēhanga kore-tirohanga, ka pekehia tēnei tirohanga K7.",
+	},
+	"DisclaimerP3": {
+		"zhCn": "温馨小提示：如果未完成预检就注册设备，后续设备产生故障，我们将无法提供售后排查与维修服务，相关损失需要您自行承担，还请您仔细考虑后再确认哦。",
+		"enUs": "Important note: if you register the device without completing the pre-check, we will not be able to provide after-sales diagnosis and repair for any subsequent failure; related losses will be borne by you. Please consider carefully before confirming.",
+		"msMy": "Nota penting: jika anda mendaftar peranti tanpa menyelesaikan semakan awal, kami tidak dapat menyediakan diagnosis dan pembaikan selepas jualan bagi sebarang kegagalan seterusnya; kerugian berkaitan adalah tanggungjawab anda. Sila pertimbang dengan teliti sebelum mengesahkan.",
+		"ptBr": "Aviso importante: se você registrar o dispositivo sem concluir a pré-verificação, não poderemos fornecer diagnóstico e reparo pós-venda para falhas posteriores; as perdas relacionadas serão de sua responsabilidade. Considere com atenção antes de confirmar.",
+		"taSg": "முக்கியமான குறிப்பு: முன்சோதனை முடிக்காமல் சாதனத்தைப் பதிவு செய்தால், பிறகு ஏற்படும் பிழைகளுக்கு விற்பனைப் பின் கண்டறிதல் மற்றும் பழுதுபார்ப்பை எங்களால் அளிக்க முடியாது; தொடர்புடைய இழப்புகள் உங்கள் பொறுப்பு. உறுதி செய்வதற்கு முன் கவனமாகத் தீர்மானியுங்கள்.",
+		"thTh": "ข้อควรระวัง: หากลงทะเบียนอุปกรณ์โดยยังไม่ตรวจเบื้องต้น เราจะไม่สามารถให้บริการวินิจฉัยและซ่อมหลังการขายสำหรับความเสียหายที่เกิดขึ้นในภายหลัง คุณต้องรับผิดชอบความเสียหายที่เกี่ยวข้อง โปรดพิจารณาก่อนยืนยัน",
+		"idId": "Catatan penting: jika Anda mendaftar perangkat tanpa menyelesaikan pemeriksaan awal, kami tidak dapat menyediakan diagnosis dan perbaikan purna jual atas kegagalan berikutnya; kerugian terkait menjadi tanggung jawab Anda. Pertimbangkan baik-baik sebelum mengonfirmasi.",
+		"miNz": "He tuhipaki nui: ki te rēhita koe i te taputapu me te kore e oti te tirohanga tīmatanga, e kore mātou e taea te tuku tātaritanga me te whakatika muri-hoko mō ngā ngoikoretanga o muri; ko ngā ngaronga e hāngai ana kei raro i a koe. Whakaaropai i mua i te whakaū.",
+	},
+	"GoCheck": {
+		"zhCn": "去检测",
+		"enUs": "Go Check",
+		"msMy": "Pergi Semak",
+		"ptBr": "Fazer Verificação",
+		"taSg": "சோதனைக்குச் செல்",
+		"thTh": "ไปตรวจสอบ",
+		"idId": "Ke Periksa",
+		"miNz": "Haere ki te Tiro",
+	},
+	"SkipCheckRegister": {
+		"zhCn": "免检注册",
+		"enUs": "Register Without Inspection",
+		"msMy": "Daftar Tanpa Pemeriksaan",
+		"ptBr": "Registrar Sem Inspeção",
+		"taSg": "சோதனையில்லா பதிவு",
+		"thTh": "ลงทะเบียนไม่ตรวจสอบ",
+		"idId": "Daftar Tanpa Inspeksi",
+		"miNz": "Rēhanga Kore-Tirohanga",
+	},
+	"InvalidJumpPath": {
+		"zhCn": "跳转路径无效",
+		"enUs": "Invalid jump path",
+		"msMy": "Laluan lompat tidak sah",
+		"ptBr": "Caminho inválido",
+		"taSg": "பாய்ச்சல் பாதை தவறு",
+		"thTh": "เส้นทางเปลี่ยนหน้าไม่ถูกต้อง",
+		"idId": "Jalur navigasi tidak valid",
+		"miNz": "Arahi hē",
+	},
+	"UpdateTitle": {
+		"zhCn": "更新提示",
+		"enUs": "Update Notice",
+		"msMy": "Notis Kemas Kini",
+		"ptBr": "Aviso de Atualização",
+		"taSg": "புதுப்பிப்பு அறிவிப்பு",
+		"thTh": "แจ้งเตือนการอัปเดต",
+		"idId": "Pemberitahuan Pembaruan",
+		"miNz": "Pānui Whakahou",
+	},
+	"UpdateContent": {
+		"zhCn": "发现新版本，建议立即更新！",
+		"enUs": "A new version is available, please update now!",
+		"msMy": "Versi baharu tersedia, sila kemas kini sekarang!",
+		"ptBr": "Nova versão disponível, atualize agora!",
+		"taSg": "புதிய பதிப்பு உள்ளது, உடனே புதுப்பிக்கவும்!",
+		"thTh": "พบเวอร์ชันใหม่ แนะนำให้อัปเดตทันที!",
+		"idId": "Ada versi baru, silakan perbarui sekarang!",
+		"miNz": "He putanga hou, whakahou ināianei!",
+	},
+	"Later": {
+		"zhCn": "稍后",
+		"enUs": "Later",
+		"msMy": "Kemudian",
+		"ptBr": "Depois",
+		"taSg": "பின்னர்",
+		"thTh": "ภายหลัง",
+		"idId": "Nanti",
+		"miNz": "Mō muri",
+	},
+	"UpdateNow": {
+		"zhCn": "立即更新",
+		"enUs": "Update Now",
+		"msMy": "Kemas Kini Sekarang",
+		"ptBr": "Atualizar Agora",
+		"taSg": "உடனே புதுப்பி",
+		"thTh": "อัปเดตทันที",
+		"idId": "Perbarui Sekarang",
+		"miNz": "Whakahou Ināianei",
+	},
+	"HaveAnAccountGoLogin": {
+		"zhCn": "已有账号？",
+		"enUs": "Already have an account?",
+		"msMy": "Sudah ada akaun?",
+		"ptBr": "Já tem conta?",
+		"taSg": "கணக்கு இருக்கிறதா?",
+		"thTh": "มีบัญชีแล้ว?",
+		"idId": "Sudah punya akun?",
+		"miNz": "He pūkete kē?",
+	},
+	"FunctionZoneSubtitle": {
+		"zhCn": "功能专区副标题",
+		"enUs": "Function zone subtitle",
+		"msMy": "Sari kata zon fungsi",
+		"ptBr": "Subtítulo da zona funcional",
+		"taSg": "செயல்பாட்டு மண்டல துணைத்தலைப்பு",
+		"thTh": "คำบรรยายใต้หัวข้อฟังก์ชัน",
+		"idId": "Subjudul zona fungsi",
+		"miNz": "Taitararangi rohe mahi",
+	},
+
+	"FenceAlarmTotal": {
+		"zhCn": "异常记录总数",
+		"enUs": "Total Alarm Records",
+		"msMy": "Jumlah Rekod Penggera",
+		"ptBr": "Total de Registros de Alarme",
+		"taSg": "மொத்த எச்சரிக்கைப் பதிவுகள்",
+		"thTh": "บันทึกแจ้งเตือนทั้งหมด",
+		"idId": "Total Rekaman Alarm",
+		"miNz": "Katoa ngā rekoata whakatūpato",
+	},
+	"FenceAlarmToday": {
+		"zhCn": "今日新增异常",
+		"enUs": "New Alarms Today",
+		"msMy": "Penggera Baharu Hari Ini",
+		"ptBr": "Novos Alarmes Hoje",
+		"taSg": "இன்றைய புதிய எச்சரிக்கைகள்",
+		"thTh": "วันนี้แจ้งเตือนใหม่",
+		"idId": "Alarm Baru Hari Ini",
+		"miNz": "Ngā whakatūpato hou o tēnei rā",
+	},
+	"FenceAlarmListTitle": {
+		"zhCn": "出/入围栏异常记录",
+		"enUs": "Geofence Alarm Records",
+		"msMy": "Rekod Penggera Keluar/Masuk Kawasan",
+		"ptBr": "Registros de Alarme de Cerca",
+		"taSg": "வேலி உள்/வெளி எச்சரிக்கை பதிவுகள்",
+		"thTh": "บันทึกแจ้งเตือนเข้า/ออกรั้ว",
+		"idId": "Rekaman Alarm Keluar/Masuk Pagar",
+		"miNz": "Ngā rekoata whakatūpato taiepa",
+	},
+	"NoMatchingAlarmRecord": {
+		"zhCn": "暂无符合条件的异常记录",
+		"enUs": "No matching alarm records",
+		"msMy": "Tiada rekod penggera sepadan",
+		"ptBr": "Nenhum registro de alarme correspondente",
+		"taSg": "பொருந்திய எச்சரிக்கை பதிவுகள் இல்லை",
+		"thTh": "ไม่มีบันทึกแจ้งเตือนที่ตรงเงื่อนไข",
+		"idId": "Tidak ada rekaman alarm yang cocok",
+		"miNz": "Kāore he rekoata whakatūpato e taurite ana",
+	},
+	"PleaseSelectDate": {
+		"zhCn": "请选择日期",
+		"enUs": "Please select a date",
+		"msMy": "Sila pilih tarikh",
+		"ptBr": "Selecione uma data",
+		"taSg": "தேதியைத் தேர்ந்தெடுக்கவும்",
+		"thTh": "โปรดเลือกวันที่",
+		"idId": "Pilih tanggal",
+		"miNz": "Tīpaki he rā",
+	},
+
+	"PleaseEnterName": {
+		"zhCn": "请输入名称",
+		"enUs": "Please enter a name",
+		"msMy": "Sila masukkan nama",
+		"ptBr": "Insira um nome",
+		"taSg": "பெயரை உள்ளிடவும்",
+		"thTh": "โปรดใส่ชื่อ",
+		"idId": "Masukkan nama",
+		"miNz": "Whakaurua he ingoa",
+	},
+	"ParentChildNo": {
+		"zhCn": "主/子序号",
+		"enUs": "Main/Sub No.",
+		"msMy": "No. Induk/Sub",
+		"ptBr": "Nº Principal/Sub",
+		"taSg": "முதன்மை/துணை எண்",
+		"thTh": "ลำดับหลัก/รอง",
+		"idId": "No. Induk/Sub",
+		"miNz": "Tau Matua/Iti",
+	},
+
+	"CheckAbortMsg": {
+		"zhCn": "校验通过，流程终止",
+		"enUs": "Validation passed, flow aborted",
+		"msMy": "Pengesahan lulus, proses dihentikan",
+		"ptBr": "Validação aprovada, fluxo encerrado",
+		"taSg": "சரிபார்ப்பு வெற்றி, செயல்முறை நிறுத்தப்பட்டது",
+		"thTh": "การตรวจผ่าน ยุติขั้นตอน",
+		"idId": "Validasi lulus, proses dihentikan",
+		"miNz": "Whakamana i tika, whakatara te kaupapa",
+	},
+	"DeviceBoundSuccessLog": {
+		"zhCn": "设备绑定成功，可进行图片上传",
+		"enUs": "Device bound successfully; photos can be uploaded",
+		"msMy": "Peranti berjaya diikat, boleh muat naik gambar",
+		"ptBr": "Dispositivo vinculado; envie as fotos",
+		"taSg": "சாதனம் இணைக்கப்பட்டது, படங்கள் பதிவேற்றலாம்",
+		"thTh": "ผูกอุปกรณ์สำเร็จ อัปโหลดรูปได้",
+		"idId": "Perangkat terikat, foto dapat diunggah",
+		"miNz": "Kua herea te taputapu, ka tuku whakaahua",
+	},
+	"UnknownReason": {
+		"zhCn": "未知原因",
+		"enUs": "Unknown reason",
+		"msMy": "Sebab tidak diketahui",
+		"ptBr": "Motivo desconhecido",
+		"taSg": "தெரியாத காரணம்",
+		"thTh": "สาเหตุไม่ทราบ",
+		"idId": "Alasan tidak diketahui",
+		"miNz": "He take kāore e mōhiotia",
+	},
+	"UnknownError": {
+		"zhCn": "未知错误",
+		"enUs": "Unknown error",
+		"msMy": "Ralat tidak diketahui",
+		"ptBr": "Erro desconhecido",
+		"taSg": "தெரியாத பிழை",
+		"thTh": "ข้อผิดพลาดไม่ทราบ",
+		"idId": "Kesalahan tidak diketahui",
+		"miNz": "He hapa kāore e mōhiotia",
+	},
+
+	"SelectLanguage": {
+		"zhCn": "选择语言",
+		"enUs": "Select Language",
+		"msMy": "Pilih Bahasa",
+		"ptBr": "Selecionar idioma",
+		"taSg": "மொழியைத் தேர்ந்தெடுக்கவும்",
+		"thTh": "เลือกภาษา",
+		"idId": "Pilih Bahasa",
+		"miNz": "Kōwhiri reo",
+	},
+	"DeleteAccountTitle": {
+		"zhCn": "注销账号",
+		"enUs": "Delete Account",
+		"msMy": "Padam Akaun",
+		"ptBr": "Excluir Conta",
+		"taSg": "கணக்கை நீக்கு",
+		"thTh": "ลบบัญชี",
+		"idId": "Hapus Akun",
+		"miNz": "Mukuia te Kaute",
+	},
+	"DeleteAccountWarn": {
+		"zhCn": "警告：注销后数据永久清除，无法恢复！确定要注销吗？",
+		"enUs": "Warning: All data will be permanently deleted and cannot be recovered. Are you sure?",
+		"msMy": "Amaran: Semua data akan dipadam kekal dan tidak boleh dipulihkan. Adakah anda pasti?",
+		"ptBr": "Atenção: Todos os dados serão excluídos permanentemente e não poderão ser recuperados. Tem certeza?",
+		"taSg": "எச்சரிக்கை: அனைத்து தரவும் நிரந்தரமாக நீக்கப்படும். உறுதியா?",
+		"thTh": "คำเตือน: ข้อมูลทั้งหมดจะถูกลบถาวร ไม่สามารถกู้คืนได้ แน่ใจหรือไม่",
+		"idId": "Peringatan: Semua data akan dihapus permanen dan tidak dapat dipulihkan. Yakin?",
+		"miNz": "Whakatūpato: Ka mukua katoa ngā raraunga, kāore e taea te whakaora. Kei te tino pono?",
+	},
+	"Deleting": {
+		"zhCn": "注销中...",
+		"enUs": "Deleting...",
+		"msMy": "Memadam...",
+		"ptBr": "Excluindo...",
+		"taSg": "நீக்குகிறது...",
+		"thTh": "กำลังลบ...",
+		"idId": "Menghapus...",
+		"miNz": "E muku ana...",
+	},
+	"DeleteAccountSuccess": {
+		"zhCn": "注销成功",
+		"enUs": "Deleted successfully",
+		"msMy": "Berjaya dipadam",
+		"ptBr": "Excluído com sucesso",
+		"taSg": "நீக்கப்பட்டது",
+		"thTh": "ลบสำเร็จ",
+		"idId": "Berhasil dihapus",
+		"miNz": "Kua mukua",
+	},
+	"DeleteAccountFailed": {
+		"zhCn": "注销失败",
+		"enUs": "Delete failed",
+		"msMy": "Gagal memadam",
+		"ptBr": "Falha ao excluir",
+		"taSg": "நீக்கத் தோல்வி",
+		"thTh": "ลบไม่สำเร็จ",
+		"idId": "Gagal menghapus",
+		"miNz": "Kāore i muku",
+	},
+
+	"DateRangeTo": {
+		"zhCn": "至",
+		"enUs": "to",
+		"msMy": "hingga",
+		"ptBr": "a",
+		"taSg": "முதல்",
+		"thTh": "ถึง",
+		"idId": "sampai",
+		"miNz": "ki",
+	},
+
+	"SaveToAlbum": {
+		"zhCn": "保存图片到相册",
+		"enUs": "Save to album",
+		"msMy": "Simpan ke album",
+		"ptBr": "Salvar no álbum",
+		"taSg": "ஆல்பத்தில் சேமி",
+		"thTh": "บันทึกลับอัลบั้ม",
+		"idId": "Simpan ke album",
+		"miNz": "Tiaki ki te puka whakaahua",
+	},
+
+	"UpdateReadyRestart": {
+		"zhCn": "新版本已经准备好，是否重启应用？",
+		"enUs": "A new version is ready. Restart the app now?",
+		"msMy": "Versi baharu sedia ada. Mulakan semula aplikasi sekarang?",
+		"ptBr": "Nova versão pronta. Reiniciar o aplicativo agora?",
+		"taSg": "புதிய பதிப்பு தயாராக உள்ளது. செயலியை மறுதொடக்கம் செய்யவா?",
+		"thTh": "เวอร์ชันใหม่พร้อมแล้ว เริ่มแอปใหม่ไหม",
+		"idId": "Versi baru siap. Mulai ulang aplikasi sekarang?",
+		"miNz": "Kua rite te putanga hou. Tīmata anō i te taupānga?",
+	},
+	"UpdateDownloadFailed": {
+		"zhCn": "新版本下载失败，请删除当前小程序，重新搜索打开",
+		"enUs": "Failed to download the new version. Please delete this mini program and search again.",
+		"msMy": "Muat turun versi baharu gagal. Padam aplikasi mini ini dan cari semula.",
+		"ptBr": "Falha ao baixar a nova versão. Exclua este miniaplicativo e procure novamente.",
+		"taSg": "புதிய பதிப்பு பதிவிறக்கம் தோல்வி. இந்த சிறுசெயலியை நீக்கிவிட்டு மீண்டும் தேடவும்",
+		"thTh": "ดาวน์โหลดเวอร์ชันใหม่ล้มเหลว ลบมินิโปรแกรมนี้แล้วค้นหาใหม่",
+		"idId": "Gagal mengunduh versi baru. Hapus aplikasi mini ini dan cari lagi.",
+		"miNz": "I rahua te tiki i te putanga hou. Mukua tēnei taupānga iti ka rapu anō.",
+	},
+
+	"LogNetworkTag": {
+		"zhCn": "【网络】",
+		"enUs": "[Network]",
+		"msMy": "[Rangkaian]",
+		"ptBr": "[Rede]",
+		"taSg": "[வலையம்]",
+		"thTh": "[เครือข่าย]",
+		"idId": "[Jaringan]",
+		"miNz": "[Whatunga]",
+	},
 }

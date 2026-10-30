@@ -313,7 +313,7 @@
 				isManualInput: false,
 				recordStatus: '0',
 				searchKeyword: '',
-				multiOptions: [{ name: '允许', value: 1 }, { name: '不允许', value: 0 }],
+				multiOptions: [{ name: '', value: 1 }, { name: '', value: 0 }],
 				multiIndex: 0,
 				openType: 1,
 				searchList: [],

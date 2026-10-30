@@ -174,7 +174,7 @@
 					`/pages/agreementWebView/agreementWebView?url=${encodeURIComponent(targetPath)}`;
 				if (!navigateUrl) {
 					uni.showToast({
-						title: '跳转路径无效',
+						title: this.tips.InvalidJumpPath[this.lang],
 						icon: 'none'
 					});
 					return;
@@ -185,8 +185,8 @@
 			},
 			handleMakePhoneCallWithConfirm() {
 				uni.showModal({
-					title: '拨打电话',
-					content: `是否拨打客服电话：${this.servicePhone}`,
+					title: this.tips.CallPhone[this.lang],
+					content: `${this.tips.DoYouWantToCallCustomerService[this.lang]}：${this.servicePhone}`,
 					success: (res) => {
 						if (res.confirm) uni.makePhoneCall({
 							phoneNumber: this.servicePhone
@@ -276,7 +276,7 @@
 					title
 				} = e.currentTarget.dataset
 				if (url) uni.navigateTo({
-					url: `/pages/watchVideos/index?url=${encodeURI(url)}&title=${title || '使用指南'}`
+					url: `/pages/watchVideos/index?url=${encodeURI(url)}&title=${title || this.tips.UserGuide[this.lang]}`
 				})
 			},
 			async inIsShowInfo() {

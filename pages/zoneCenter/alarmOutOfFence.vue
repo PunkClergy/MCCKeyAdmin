@@ -4,11 +4,11 @@
     <view class="stats-card">
       <view class="stats-item">
         <text class="stats-num risky">{{ totalCount }}</text>
-        <text class="stats-label">异常记录总数</text>
+        <text class="stats-label">{{tips.FenceAlarmTotal[lang]}}</text>
       </view>
       <view class="stats-item">
         <text class="stats-num risky">{{ todayCount }}</text>
-        <text class="stats-label">今日新增异常</text>
+        <text class="stats-label">{{tips.FenceAlarmToday[lang]}}</text>
       </view>
     </view>
 
@@ -16,8 +16,8 @@
     <view class="record-list-container">
       <view class="record-list">
         <view class="list-title">
-          <text>出/入围栏异常记录</text>
-          <view class="filter-btn" @tap="openFilterModal">筛选 📋</view>
+          <text>{{tips.FenceAlarmListTitle[lang]}}</text>
+          <view class="filter-btn" @tap="openFilterModal">{{tips.Filter[lang]}} 📋</view>
         </view>
 
         <view class="record-item" v-for="item in filteredRecords" :key="item.recordId" @tap="goRecordDetail" :data-record="item">
@@ -25,17 +25,17 @@
             <text>{{ item.efencename }}</text>
             <text class="record-time">{{ item.alarmtime }}</text>
             <text class="record-desc">⚠️ {{ item.efencestateName }}</text>
-            <text class="record-vehicle">涉及车辆：{{ item.vehicleSerialName }}{{ item.vehicleModeName }}（{{ item.platenumber }}）</text>
+            <text class="record-vehicle">{{tips.RelatedVehicle[lang]}}：{{ item.vehicleSerialName }}{{ item.vehicleModeName }}（{{ item.platenumber }}）</text>
           </view>
           <view class="record-right">
             <button class="nav-btn" size="mini" @tap="showAddressModal" :data-record="item" catchtap>
-              查看位置
+              {{tips.ViewLocation[lang]}}
             </button>
           </view>
         </view>
 
         <view class="empty" v-if="filteredRecords.length === 0">
-          暂无符合条件的异常记录
+          {{tips.NoMatchingAlarmRecord[lang]}}
         </view>
       </view>
     </view>
@@ -44,11 +44,11 @@
     <view class="address-modal" v-if="showAddressPop">
       <view class="modal-mask" @tap="closeAddressModal"></view>
       <view class="modal-content">
-        <view class="modal-title">位置信息</view>
+        <view class="modal-title">{{tips.LocationInfo[lang]}}</view>
         <view class="address-box">
-          <text class="address-text">{{ currentAddress || '暂无地址信息' }}</text>
+          <text class="address-text">{{ currentAddress || tips.NoAddressInfo[lang] }}</text>
         </view>
-        <button class="close-btn" @tap="closeAddressModal">关闭</button>
+        <button class="close-btn" @tap="closeAddressModal">{{tips.Close[lang]}}</button>
       </view>
     </view>
 
@@ -56,18 +56,18 @@
     <view class="filter-modal" v-if="showFilterModal">
       <view class="modal-mask" @tap="closeFilterModal"></view>
       <view class="modal-content">
-        <view class="modal-title">筛选条件</view>
+        <view class="modal-title">{{tips.FilterConditions[lang]}}</view>
 
         <view class="filter-item">
-          <text class="filter-label">选择日期：</text>
+          <text class="filter-label">{{tips.SelectDate[lang]}}：</text>
           <picker mode="date" :value="selectedDate" @change="onDateChange">
-            <view class="picker-input">{{ selectedDate || '请选择日期' }}</view>
+            <view class="picker-input">{{ selectedDate || tips.PleaseSelectDate[lang] }}</view>
           </picker>
         </view>
 
         <view class="filter-item">
-          <text class="filter-label">车牌号：</text>
-          <input class="input-box" placeholder="请输入车牌号" v-model="inputCarNumber" @input="onCarNumberInput" :focus="focusCarInput" />
+          <text class="filter-label">{{tips.LicensePlate[lang]}}：</text>
+          <input class="input-box" :placeholder="tips.PleaseEnterPlate[lang]" v-model="inputCarNumber" @input="onCarNumberInput" :focus="focusCarInput" />
 
           <view class="car-list" v-if="carCandidateList.length > 0">
             <view class="car-item" v-for="item in carCandidateList" :key="item.platenumber" @tap="selectCarNumber" :data-carnumber="item.platenumber">
@@ -78,8 +78,8 @@
 
         <!-- 修复：按钮组布局 -->
         <view class="btn-group">
-          <button class="reset-btn" @tap="resetFilter">重置</button>
-          <button class="confirm-btn" @tap="confirmFilter">确认筛选</button>
+          <button class="reset-btn" @tap="resetFilter">{{tips.Reset[lang]}}</button>
+          <button class="confirm-btn" @tap="confirmFilter">{{tips.ConfirmFilter[lang]}}</button>
         </view>
       </view>
     </view>
@@ -88,10 +88,14 @@
 
 <script>
 import { u_efenceAlarmList } from '@/api/index'
+import { tips } from '@/utils/langtips.js'
+import { titles } from '@/utils/langtitle.js'
 
 export default {
   data() {
     return {
+      tips: tips,
+      lang: 'zhCn',
       isSubscribed: false,
       totalCount: 0,
       todayCount: 0,
@@ -109,6 +113,13 @@ export default {
   },
   onLoad() {
     this.handleCarList('', '')
+  },
+  onShow() {
+    this.lang = uni.getStorageSync('language') || 'zhCn'
+    const pageRoute = 'zoneCenter/alarmOutOfFence'
+    uni.setNavigationBarTitle({
+      title: titles[pageRoute][this.lang]
+    })
   },
   methods: {
     async handleCarList(inputCarNumber = '', selectedDate = '') {
@@ -198,7 +209,7 @@ export default {
     // 打开地址弹窗
     showAddressModal(e) {
       const record = e.currentTarget.dataset.record
-      this.currentAddress = record.address || '暂无地址信息'
+      this.currentAddress = record.address || this.tips.NoAddressInfo[this.lang]
       this.showAddressPop = true
     },
     // 关闭地址弹窗

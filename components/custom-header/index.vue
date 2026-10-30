@@ -11,7 +11,7 @@
 				<image src="/static/public/home.png" class="action-icon home-icon"
 					@tap="handleHome"></image>
 			</view>
-			<view style="font-size: 34rpx;font-weight: 600;">{{title}}</view>
+			<view style="font-size: 34rpx;font-weight: 600;">{{title || tips.HomeTitle[lang]}}</view>
 		</view>
 	</view>
 </template>
@@ -20,17 +20,22 @@
 	import {
 		info_screen
 	} from '@/utils/scheme/screen.js'
+	import {
+		tips
+	} from '@/utils/langtips.js'
 	export default {
 		name: 'CustomHeader',
 		props: {
 			title: { // 更明确的属性名
 				type: String,
-				default: '首页'
+				default: ''
 			}
 
 		},
 		data() {
 			return {
+				tips: tips,
+				lang: 'zhCn',
 				screenInfo: {}, // 屏幕信息对象
 				baseLink: 'https://k1sw.wiselink.net.cn', // 基础域名
 
@@ -44,7 +49,7 @@
 				} catch (error) {
 					console.error('[ScreenInfo] 获取屏幕信息失败:', error);
 					uni.showToast({
-						title: '设备信息获取失败',
+						title: this.tips.DeviceInfoFailed[this.lang],
 						icon: 'none'
 					});
 				}
@@ -96,6 +101,7 @@
 
 		},
 		mounted() { // 使用mounted替代onShow
+			this.lang = uni.getStorageSync('language') || 'zhCn'
 			this.initialScreenInfo();
 		}
 	};

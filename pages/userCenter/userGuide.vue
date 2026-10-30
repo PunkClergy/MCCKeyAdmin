@@ -1,6 +1,6 @@
 <template>
 	<view class="container" :style="{ backgroundImage: `url(${s_background_picture_of_the_front_page})` }">
-		<custom-header :title="pageType ? '使用指南' : '视频物料'" />
+		<custom-header :title="pageType ? tips.UserGuide[lang] : tips.VideoMaterial[lang]" />
 
 		<view
 			:style="{  width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }">
@@ -14,7 +14,7 @@
 
 			<view class="search-box" style="margin-top: 10rpx;">
 				<icon type="search" size="16" class="search-icon" />
-				<input placeholder="请输入名称" @blur="handleBlur" class="search-input" />
+				<input :placeholder="tips.PleaseEnterName[lang]" @blur="handleBlur" class="search-input" />
 			</view>
 		</view>
 
@@ -34,28 +34,28 @@
 
 					<view class="content-item-info">
 						<view class="info-item" v-if="!pageType">
-							<label>主/子序号：</label>
+							<label>{{tips.ParentChildNo[lang]}}：</label>
 							<text>{{ item.dsx || '-' }}/{{ item.xsx }}</text>
 						</view>
 						<view class="info-item" :class="item.createusername?.length > 15 ? 'long-info-item' : ''"
 							v-if="!pageType">
-							<label>创建人：</label>
+							<label>{{tips.CreatedBy[lang]}}：</label>
 							<text>{{ item.createusername || '-' }}</text>
 						</view>
 						<view class="info-item" :class="item.fileTypeName?.length > 15 ? 'long-info-item' : ''">
-							<label>类型：</label>
+							<label>{{tips.CategoryType[lang]}}：</label>
 							<text>{{ item.fileTypeName || '-' }}</text>
 						</view>
 						<view class="info-item" :class="item.industryName?.length > 15 ? 'long-info-item' : ''">
-							<label>行业：</label>
+							<label>{{tips.Industry[lang]}}：</label>
 							<text>{{ item.industryName || '-' }}</text>
 						</view>
 						<view class="info-item long-info-item">
-							<label>创建时间：</label>
+							<label>{{tips.CreatedTime[lang]}}：</label>
 							<text>{{ item.createdate || '-' }}</text>
 						</view>
 						<view class="info-item long-info-item">
-							<label>备注：</label>
+							<label>{{tips.Remark[lang]}}：</label>
 							<text>{{ item.bak || '-' }}</text>
 						</view>
 					</view>
@@ -64,10 +64,10 @@
 						<view class="footer-left"></view>
 						<view class="footer-right" style="display: flex;gap: 10rpx;">
 							<view class="footer-right-btn" :data-item="item" @click="hadleView">
-								<text>查看</text>
+								<text>{{tips.View[lang]}}</text>
 							</view>
 							<button class="footer-right-btn" open-type="share" :data-item="item"
-								style="height: 42rpx;">分享给好友</button>
+								style="height: 42rpx;">{{tips.ShareToFriend[lang]}}</button>
 						</view>
 					</view>
 				</view>
@@ -82,43 +82,48 @@
 		u_promotionalApiWxBooklist,
 		u_industryList
 	} from '@/api/index.js'
-
-
+	import {
+		tips
+	} from '@/utils/langtips.js'
 
 	const filter_sort = [{
 			value: 'asc',
-			name: '升序'
+			name: 'asc'
 		},
 		{
 			value: 'desc',
-			name: '降序'
+			name: 'desc'
 		},
 	]
 	const filter_type = [{
 			value: '',
-			name: '全部'
+			name: 'all'
 		},
 		{
 			value: 1,
-			name: '图片'
+			name: 'image'
 		},
 		{
 			value: 2,
-			name: '视频'
+			name: 'video'
 		},
 		{
 			value: 3,
-			name: '文档'
+			name: 'document'
 		},
 		{
 			value: 4,
-			name: '其他'
+			name: 'other'
 		},
 	]
 
 	export default {
 		data() {
 			return {
+				tips: tips,
+				lang: 'zhCn',
+				filterSortList: [],
+				filterTypeList: [],
 				c_screen_height: 0,
 				c_screen_width: 0,
 				statusBarHeight: 0,
@@ -136,21 +141,21 @@
 
 				filter_aggregate: [{
 						id: 1,
-						name: '默认排序',
+						name: '',
 						btnRender: false,
 						params: 'a',
 						filter_work_status: filter_sort
 					},
 					{
 						id: 2,
-						name: '所有类型',
+						name: '',
 						btnRender: false,
 						params: 'a',
 						filter_work_status: filter_type
 					},
 					{
 						id: 3,
-						name: '所有行业',
+						name: '',
 						btnRender: false,
 						params: 'a',
 						filter_work_status: []
@@ -163,9 +168,27 @@
 			this.initList(this.pageType)
 		},
 		onShow() {
+			this.lang = uni.getStorageSync('language') || 'zhCn'
+			this.buildFilters()
 			this.initialQuickEntry()
 		},
 		methods: {
+			buildFilters() {
+				this.filterSortList = [
+					{ value: 'asc', name: this.tips.SortAsc[this.lang] },
+					{ value: 'desc', name: this.tips.SortDesc[this.lang] }
+				]
+				this.filterTypeList = [
+					{ value: '', name: this.tips.All[this.lang] },
+					{ value: 1, name: this.tips.TypeImage[this.lang] },
+					{ value: 2, name: this.tips.TypeVideo[this.lang] },
+					{ value: 3, name: this.tips.TypeDocument[this.lang] },
+					{ value: 4, name: this.tips.TypeOther[this.lang] }
+				]
+				this.filter_aggregate[0].name = this.tips.SortDefault[this.lang]
+				this.filter_aggregate[1].name = this.tips.AllTypes[this.lang]
+				this.filter_aggregate[2].name = this.tips.AllIndustries[this.lang]
+			},
 			async initialQuickEntry() {
 				try {
 					const res = await u_industryList({
@@ -181,7 +204,7 @@
 					}))
 					const infoWithAll = [{
 						value: '',
-						name: '全部'
+						name: this.tips.All[this.lang]
 					}, ...info]
 
 					this.filter_aggregate[2].filter_work_status = infoWithAll
@@ -195,11 +218,11 @@
 				const config = {
 					'1': {
 						targetKey: 'sort',
-						sourceList: filter_sort
+						sourceList: this.filterSortList
 					},
 					'2': {
 						targetKey: 'fileType',
-						sourceList: filter_type
+						sourceList: this.filterTypeList
 					},
 					'3': {
 						targetKey: 'industry',
@@ -273,11 +296,11 @@
 				uni.setClipboardData({
 					data: link,
 					success: () => uni.showToast({
-						title: '已复制',
+						title: this.tips.Copied[this.lang],
 						icon: 'none'
 					}),
 					fail: () => uni.showToast({
-						title: '复制失败',
+						title: this.tips.CopyFailed[this.lang],
 						icon: 'none'
 					})
 				})

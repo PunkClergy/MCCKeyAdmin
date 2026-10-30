@@ -229,16 +229,16 @@
 		<!-- 免责弹窗 -->
 		<view v-if="showDisclaimerModal" class="modal-mask" @tap="closeDisclaimerModal">
 			<view class="modal-wrap" @tap.stop>
-				<view class="modal-title">免责条款</view>
+				<view class="modal-title">{{tips.DisclaimerTitle[lang]}}</view>
 				<view class="modal-content">
-					设备安装完成后，建议您使用 K7 模块做基础预检，检测记录会留存存档，后续设备出现问题时，能帮助我们更快排查维修，给您更完善的售后保障～
-					<text>若您选择【免检注册】，将会跳过本次 K7 预检流程。</text>
+					{{tips.DisclaimerP1[lang]}}
+					<text>{{tips.DisclaimerP2[lang]}}</text>
 					<text
-						class="warn-text">温馨小提示：如果未完成预检就注册设备，后续设备产生故障，我们将无法提供售后排查与维修服务，相关损失需要您自行承担，还请您仔细考虑后再确认哦。</text>
+						class="warn-text">{{tips.DisclaimerP3[lang]}}</text>
 				</view>
 				<view class="modal-buttons">
-					<view class="btn-cancel" @tap="modalGoCheck">去检测</view>
-					<view class="btn-confirm" @tap="modalSkipCheck">免检注册</view>
+					<view class="btn-cancel" @tap="modalGoCheck">{{tips.GoCheck[lang]}}</view>
+					<view class="btn-confirm" @tap="modalSkipCheck">{{tips.SkipCheckRegister[lang]}}</view>
 				</view>
 			</view>
 		</view>
@@ -319,7 +319,7 @@
 			this.initialiImageBaseConversion()
 			this.lang = uni.getStorageSync('language') || 'zhCn'
 			this.btnState = this.tips.Add[this.lang]
-			const pageRoute = 'zoneCenter/sendKeyToRenter'
+			const pageRoute = 'zoneCenter/onlineCarHailing'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]
 			})
@@ -339,8 +339,8 @@
 			},
 			handleDelete(evt) {
 				uni.showModal({
-					title: '提示',
-					content: '确认删除？',
+					title: this.tips.Tip[this.lang],
+					content: this.tips.ConfirmDelete[this.lang],
 					complete: async (res) => {
 						if (res.confirm) {
 
@@ -418,11 +418,11 @@
 				const formData = evt.detail.value
 				const validations = [{
 						field: formData.personName,
-						message: '请输入使用人'
+						message: this.tips.EnterUser[this.lang]
 					},
 					{
 						field: formData.mobile,
-						message: '请输入手机号'
+						message: this.tips.EnterPhone[this.lang]
 					}
 				]
 				const validationError = validations.find(item => !item.field)
@@ -455,10 +455,10 @@
 			async handleUnBindDriver(evt) {
 
 				uni.showModal({
-					title: '提示',
-					content: '确认解绑？！',
-					confirmText: '确认解绑',
-					cancelText: '取消',
+					title: this.tips.Tip[this.lang],
+					content: this.tips.UnbindDriverQuestion[this.lang],
+					confirmText: this.tips.UnbindConfirm[this.lang],
+					cancelText: this.tips.Cancel[this.lang],
 					success: async (res) => {
 						if (!res.confirm) return
 						const driverId = evt?.currentTarget?.dataset?.item?.id || ''
@@ -528,14 +528,14 @@
 					} else {
 						console.error('车辆列表接口返回错误', response)
 						uni.showToast({
-							title: response.msg || '数据加载失败',
+							title: response.msg || this.tips.DataLoadFailed[this.lang],
 							icon: 'none'
 						})
 					}
 				} catch (error) {
 					console.error('车辆列表接口请求失败', error)
 					uni.showToast({
-						title: '网络请求异常',
+						title: this.tips.NetError[this.lang],
 						icon: 'none'
 					})
 				}
@@ -555,7 +555,7 @@
 				} catch (err) {
 					console.error('下拉刷新异常', err)
 					uni.showToast({
-						title: '刷新失败',
+						title: this.tips.RefreshFailed[this.lang],
 						icon: 'none'
 					})
 				} finally {
@@ -582,15 +582,15 @@
 				console.log(param, '0000000')
 				const validations = [{
 						field: param.platenumber,
-						message: '请填写车牌号'
+						message: this.tips.EnterLicensePlate[this.lang]
 					},
 					{
 						field: param.sn,
-						message: '请填写设备号'
+						message: this.tips.PleaseEnterSN[this.lang]
 					},
 					{
 						field: param.code,
-						message: '请填写code'
+						message: this.tips.PleaseEnterCode[this.lang]
 					}
 				]
 				for (const item of validations) {
@@ -628,7 +628,7 @@
 			handleEdit(evt) {
 				const info = evt.currentTarget.dataset.item
 				this.c_activeTab = 2
-				this.btnState = this.tips?.Edit[lang]
+				this.btnState = this.tips.Edit[this.lang]
 				this.id = info?.id
 				this.params = {
 					maintainMileage: info?.maintainMileage || '',

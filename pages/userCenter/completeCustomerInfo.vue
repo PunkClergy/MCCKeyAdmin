@@ -83,8 +83,8 @@
 			}
 		},
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'zh-Cn'
-			const pageRoute = 'zoneCenter/completeCustomerInfo'
+			this.lang = uni.getStorageSync('language') || 'zhCn'
+			const pageRoute = 'userCenter/completeCustomerInfo'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]
 			})

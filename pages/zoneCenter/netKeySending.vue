@@ -110,12 +110,12 @@
 						</view>
 						<view class="card-info">
 							<time-line
-								:events="[ {createdate: (item.startdate || '-') + ' 至 ' + (item.enddate || '-')}]" />
+								:events="[ {createdate: (item.startdate || '-') + ' ' + tips.DateRangeTo[lang] + ' ' + (item.enddate || '-')}]" />
 						</view>
 						<view class="card-footer1" v-if="!item.status"
 							style="display: flex;justify-content: space-between;">
 							<view>
-								<text @tap="handleEditKey" :data-item="item" style="float: left;">修改</text>
+								<text @tap="handleEditKey" :data-item="item" style="float: left;">{{tips.Edit[lang]}}</text>
 							</view>
 							<view style="display: flex;flex-direction: row;">
 								<text @tap="handleCopy"
@@ -201,7 +201,7 @@
 							</view>
 						</view>
 						<view class="middle-form-item">
-							<label>tips.EndTime[lang]</label>
+							<label>{{tips.EndTime[lang]}}</label>
 							<view class="modal-form-region">
 								<picker mode="date" data-index="endDate" @change="bindTimeChange">
 									<view class="form-item-text"><text>{{endDate}}</text></view>
@@ -340,10 +340,10 @@
 				net_send_key_show_momal: false,
 				comParam: '',
 				pickerList: [{
-					name: "允许",
+					name: "",
 					value: 1
 				}, {
-					name: "不允许",
+					name: "",
 					value: 0
 				}],
 				pickerIndex: 0,
@@ -478,11 +478,11 @@
 			async handleNetFormSubmit(evt) {
 				const formData = evt.target.value;
 				if (!formData.personName) return uni.showToast({
-					title: '请输入使用人',
+					title: this.tips.EnterUser[this.lang],
 					icon: 'none'
 				});
 				if (!formData.mobile) return uni.showToast({
-					title: '请输入手机号',
+					title: this.tips.EnterPhone[this.lang],
 					icon: 'none'
 				});
 
@@ -532,7 +532,7 @@
 				console.log(response)
 
 				uni.showModal({
-					title: '温馨提示',
+					title: this.tips.WarmTip[this.lang],
 					content: response?.msg || '',
 					showCancel: false
 				});
@@ -593,7 +593,7 @@
 					this.y_items = [];
 					this.getKeySendingList();
 					uni.showModal({
-						title: '温馨提示',
+						title: this.tips.WarmTip[this.lang],
 						content: res?.data?.msg,
 						showCancel: false
 					});
@@ -601,7 +601,7 @@
 			},
 			onShareAppMessage() {
 				return {
-					title: '发送电子钥匙',
+					title: this.tips.SendKey[this.lang],
 					path: '/pages/index/index?scene=' + this.controlcode
 				};
 			}
@@ -616,7 +616,14 @@
 		onShow() {
 			this.handleCurrentDate()
 			this.lang = uni.getStorageSync('language') || 'zhCn'
-			const pageRoute = 'zoneCenter/carKeyConfig'
+			this.pickerList = [{
+				name: this.tips.Allow[this.lang],
+				value: 1
+			}, {
+				name: this.tips.Disallow[this.lang],
+				value: 0
+			}]
+			const pageRoute = 'zoneCenter/netKeySending'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]
 			})

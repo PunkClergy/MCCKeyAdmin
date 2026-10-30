@@ -15,20 +15,11 @@ var vehicle_info = {};
 
 // ========== 多语言全局配置 ==========
 const GOOGLE_API_KEY = 'AIzaSyDGzLnrbvfiqdmemX8yR4CTc6n2SzjOaBM';
-const DEFAULT_LANG = 'zhCn';
+const DEFAULT_LANG = 'enUs';
 let currentLang = DEFAULT_LANG;
 
 // 使用配置对象集中管理页面按钮多语言文本
 const buttonTexts = {
-	'enUs': {
-		btnReturnLang: "Return",
-		btn3Lang: "Unlock",
-		btn1Lang: "Lock",
-		btn5Lang: "Locate",
-		btnSeeLang: "Photos",
-		btn8Lang: "Block",
-		btn6Lang: "Unblock"
-	},
 	'zhCn': {
 		btnReturnLang: "归还车辆",
 		btn3Lang: "开锁",
@@ -36,8 +27,91 @@ const buttonTexts = {
 		btn5Lang: "寻车",
 		btnSeeLang: "送车拍照",
 		btn8Lang: "风控拦截",
-		btn6Lang: "取消拦截"
-	}
+		btn6Lang: "取消拦截",
+	},
+	'enUs': {
+		btnReturnLang: "Return",
+		btn3Lang: "Unlock",
+		btn1Lang: "Lock",
+		btn5Lang: "Locate",
+		btnSeeLang: "Photos",
+		btn8Lang: "Block",
+		btn6Lang: "Unblock",
+	},
+	'msMy': {
+		btnReturnLang: "Pulang Kenderaan",
+		btn3Lang: "Buka Kunci",
+		btn1Lang: "Tutup Kunci",
+		btn5Lang: "Cari Kereta",
+		btnSeeLang: "Gambar",
+		btn8Lang: "Sekat Risiko",
+		btn6Lang: "Batal Sekatan",
+	},
+	'ptBr': {
+		btnReturnLang: "Devolver Veículo",
+		btn3Lang: "Destravar",
+		btn1Lang: "Travar",
+		btn5Lang: "Localizar",
+		btnSeeLang: "Fotos",
+		btn8Lang: "Bloquear",
+		btn6Lang: "Desbloquear",
+	},
+	'taSg': {
+		btnReturnLang: "வாகனத்தைத் திருப்பி",
+		btn3Lang: "திற",
+		btn1Lang: "பூட்டு",
+		btn5Lang: "கண்டுபிடி",
+		btnSeeLang: "புகைப்படங்கள்",
+		btn8Lang: "தடு",
+		btn6Lang: "தடுப்பை நீக்கு",
+	},
+	'thTh': {
+		btnReturnLang: "คืนรถ",
+		btn3Lang: "ปลดล็อก",
+		btn1Lang: "ล็อก",
+		btn5Lang: "ค้นหารถ",
+		btnSeeLang: "รูปถ่าย",
+		btn8Lang: "สกัดกั้น",
+		btn6Lang: "ยกเลิกสกัดกั้น",
+	},
+	'idId': {
+		btnReturnLang: "Kembalikan Kendaraan",
+		btn3Lang: "Buka Kunci",
+		btn1Lang: "Kunci",
+		btn5Lang: "Cari Kendaraan",
+		btnSeeLang: "Foto",
+		btn8Lang: "Blokir",
+		btn6Lang: "Buka Blokir",
+	},
+	'miNz': {
+		btnReturnLang: "Whakahoki waka",
+		btn3Lang: "Wewete",
+		btn1Lang: "Muku",
+		btn5Lang: "Kimihia",
+		btnSeeLang: "Whakaahua",
+		btn8Lang: "Aukati",
+		btn6Lang: "Wewete aukati",
+	},
+};
+const addressFail = {
+	'zhCn': "地址获取失败",
+	'enUs': "Address unavailable",
+	'msMy': "Alamat tidak tersedia",
+	'ptBr': "Endereço indisponível",
+	'taSg': "முகவரி கிடைக்கவில்லை",
+	'thTh': "ไม่พบที่อยู่",
+	'idId': "Alamat tidak tersedia",
+	'miNz': "Kāore te wāhi wātea",
+};
+const mapSdkNotReady = {
+	'zhCn': "地图SDK未就绪",
+	'enUs': "Map SDK not ready",
+	'msMy': "SDK peta belum sedia",
+	'ptBr': "SDK do mapa não pronto",
+	'taSg': "வரைபடம் SDK தயாராகவில்லை",
+	'thTh': "SDK แผนที่ยังไม่พร้อม",
+	'idId': "SDK peta belum siap",
+	'miNz': "Kāore te SDK mahere i te rite",
 };
 
 /**
@@ -59,7 +133,7 @@ async function resolveAddress(lat, lng) {
 	} catch (err) {
 		console.error('地址解析失败:', err);
 	}
-	return '地址获取失败';
+	return addressFail[currentLang] || addressFail.enUs;
 }
 
 window.onAppMessage = async function(data) {

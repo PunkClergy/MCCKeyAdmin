@@ -250,7 +250,7 @@
 						console.log(item)
 						if (!item) {
 							uni.showToast({
-								title: '暂无车辆',
+								title: this.tips.NoBoundCar[this.lang],
 								icon: 'none'
 							})
 							return
@@ -263,7 +263,7 @@
 						const item = this.vehicle_info
 						if (!item) {
 							uni.showToast({
-								title: '暂无车辆',
+								title: this.tips.NoBoundCar[this.lang],
 								icon: 'none'
 							})
 							return
@@ -281,7 +281,7 @@
 
 						if (imgList.length === 0) {
 							uni.showToast({
-								title: '暂无照片',
+								title: this.tips.NoPhotos[this.lang],
 								icon: 'none'
 							})
 							return
@@ -306,7 +306,7 @@
 
 			async handleVehicle(evt) {
 			  uni.showLoading({
-			    title: '处理中...',
+			    title: this.tips.Processing[this.lang],
 			    mask: true // 遮罩，阻止点击，防止重复提交
 			  })
 			  try {
@@ -324,7 +324,7 @@
 			  } catch (error) {
 			    console.error('handleVehicle异常：', error)
 			    uni.showToast({ 
-			      title: '网络错误', 
+			      title: this.tips.NetError[this.lang], 
 			      icon: 'none' 
 			    })
 			  } finally {

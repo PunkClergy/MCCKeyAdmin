@@ -3,7 +3,7 @@
 		<image class="bg-img" src="/static/images/background.jpg"></image>
 		<!-- <view class="status-safe-bar" :style="{ height: statusBarHeight + 'px' }"></view> -->
 		<view class="container">
-			<view class="page_title">点击上传照片</view>
+			<view class="page_title">{{tips.ClickUploadPhoto[lang]}}</view>
 			<scroll-view scroll-y :style="{ height: showHeight + 'px', marginTop: '20rpx' }" :scroll-y="canScroll">
 				<button id="1" :style="{ 
             height: (750 - 2 * leftGap) / 1.6 + 'rpx', 
@@ -11,14 +11,14 @@
             lineHeight: (750 - 2 * leftGap) / 1.6 + 'rpx' 
           }" class="info-btn1" hover-class="btn_tapcolor" @tap="inputCardBtnTap">
 					<image class="arrow" mode="aspectFill" :src="firstTempFilePaths[0] || ''"></image>
-					<text>车头照片</text>
+					<text>{{tips.FrontPhoto[lang]}}</text>
 				</button>
 				<button id="2" :style="{ 
             height: (750 - 2 * leftGap) / 1.6 + 'rpx', 
             width: 750 - 2 * leftGap + 'rpx', 
             lineHeight: (750 - 2 * leftGap) / 1.6 + 'rpx' 
           }" class="info-btn" hover-class="btn_tapcolor" @tap="inputCardBtnTap">
-					<text>车尾照片</text>
+					<text>{{tips.RearPhoto[lang]}}</text>
 					<image class="arrow" mode="aspectFill" :src="secondTempFilePaths[0] || ''"></image>
 				</button>
 				<button id="3" :style="{ 
@@ -26,7 +26,7 @@
             width: 750 - 2 * leftGap + 'rpx', 
             lineHeight: (750 - 2 * leftGap) / 1.6 + 'rpx' 
           }" class="info-btn" hover-class="btn_tapcolor" @tap="inputCardBtnTap">
-					<text>车身左侧照片</text>
+					<text>{{tips.LeftSidePhoto[lang]}}</text>
 					<image class="arrow" mode="aspectFill" :src="thirdTempFilePaths[0] || ''"></image>
 				</button>
 				<button id="4" :style="{ 
@@ -34,7 +34,7 @@
             width: 750 - 2 * leftGap + 'rpx', 
             lineHeight: (750 - 2 * leftGap) / 1.6 + 'rpx' 
           }" class="info-btn" hover-class="btn_tapcolor" @tap="inputCardBtnTap">
-					<text>车身右侧照片</text>
+					<text>{{tips.RightSidePhoto[lang]}}</text>
 					<image class="arrow" mode="aspectFill" :src="fourthTempFilePaths[0] || ''"></image>
 				</button>
 				<button id="5" :style="{ 
@@ -42,22 +42,26 @@
             width: 750 - 2 * leftGap + 'rpx', 
             lineHeight: (750 - 2 * leftGap) / 1.6 + 'rpx' 
           }" class="info-btn" hover-class="btn_tapcolor" @tap="inputCardBtnTap">
-					<text>车钥匙位置照片</text>
+					<text>{{tips.KeyPositionPhoto[lang]}}</text>
 					<image class="arrow" mode="aspectFill" :src="fifthTempFilePaths[0] || ''"></image>
 				</button>
 			</scroll-view>
 			<button class="submit_btn" :style="{ bottom: (safeBottom + 10) + 'px' }" hover-class="btn_tapcolor"
 				@tap="submitBtnTap">
-				提交并完成
+				{{tips.SubmitAndFinish[lang]}}
 			</button>
 		</view>
 	</view>
 </template>
 <script>
+	import { tips } from '@/utils/langtips.js'
+	import { titles } from '@/utils/langtitle.js'
 	export default {
 		name: 'UploadPhoto',
 		data() {
 			return {
+				tips: tips,
+				lang: 'zhCn',
 				showHeight: 0,
 				cardWidth: 0,
 				showPhoneHeight: 0,
@@ -105,6 +109,11 @@
 			this.vehId = options.vehId
 		},
 		onShow() {
+			this.lang = uni.getStorageSync('language') || 'zhCn'
+			const pageRoute = 'zoneCenter/returnPhotos'
+			uni.setNavigationBarTitle({
+				title: titles[pageRoute][this.lang]
+			})
 			this.currentViewType = 0;
 			this.currentCardType = 0;
 		},
@@ -139,7 +148,7 @@
 			 */
 			showModal(msg, showCancel, callback) {
 				uni.showModal({
-					title: '提示',
+					title: this.tips.Tip[this.lang],
 					content: msg,
 					showCancel: showCancel || false,
 					success: (res) => {
@@ -186,17 +195,17 @@
 								this.fifthTempFilePaths = [tempFilePath];
 								break;
 						}
-						this.showToast('图片选择成功！');
+						this.showToast(this.tips.ImageSelectSuccess[this.lang]);
 					},
 					fail: (err) => {
 						if (err.errMsg.includes('auth')) {
-							this.showModal('请授权相机/相册权限后重试', true, (confirm) => {
+							this.showModal(this.tips.CameraAlbumPermissionRequired[this.lang], true, (confirm) => {
 								if (confirm) {
 									uni.openSetting();
 								}
 							});
 						} else {
-							this.showToast('图片选择失败，请重试');
+							this.showToast(this.tips.ImageSelectFailedRetry[this.lang]);
 						}
 					}
 				});
@@ -206,10 +215,10 @@
 			 */
 			uploadImg2(url, code, fileName, filePath) {
 				if (this.isEmpty(filePath)) {
-					this.showToast('图片路径为空');
+					this.showToast(this.tips.ImagePathEmpty[this.lang]);
 					return;
 				}
-				this.showLoading('上传中...');
+				this.showLoading(this.tips.Uploading[this.lang]);
 				// 构造请求头
 				const header = {
 					'content-type': 'multipart/form-data'
@@ -237,20 +246,20 @@
 							try {
 								const data = JSON.parse(res.data);
 								if (data.code === 1000) {
-									this.showToast('上传成功！');
+									this.showToast(this.tips.UploadSuccess[this.lang]);
 								} else {
-									this.showModal(data.msg || '上传失败，请重试');
+									this.showModal(data.msg || this.tips.UploadFailedRetry[this.lang]);
 								}
 							} catch (e) {
-								this.showModal('数据解析失败，请重试');
+								this.showModal(this.tips.DataParseFailedRetry[this.lang]);
 							}
 						} else {
-							this.showModal('网络异常，图片上传失败！');
+							this.showModal(this.tips.NetworkImageUploadFailed[this.lang]);
 						}
 					},
 					fail: () => {
 						this.hideLoading();
-						this.showModal('上传失败，请检查网络后重试');
+						this.showModal(this.tips.UploadFailedCheckNetwork[this.lang]);
 					}
 				});
 			},
@@ -260,19 +269,19 @@
 			submitBtnTap() {
 				// 校验所有图片是否上传
 				if (!this.firstTempFilePaths[0]) {
-					this.showToast('请上传车头照片！');
+					this.showToast(this.tips.NeedFrontPhoto[this.lang]);
 					return;
 				} else if (!this.secondTempFilePaths[0]) {
-					this.showToast('请上传车尾照片！');
+					this.showToast(this.tips.NeedRearPhoto[this.lang]);
 					return;
 				} else if (!this.thirdTempFilePaths[0]) {
-					this.showToast('请上传车身左侧照片！');
+					this.showToast(this.tips.NeedLeftPhoto[this.lang]);
 					return;
 				} else if (!this.fourthTempFilePaths[0]) {
-					this.showToast('请上传车身右侧照片！');
+					this.showToast(this.tips.NeedRightPhoto[this.lang]);
 					return;
 				} else if (!this.fifthTempFilePaths[0]) {
-					this.showToast('请上传车钥匙位置照片！');
+					this.showToast(this.tips.NeedKeyPhoto[this.lang]);
 					return;
 				}
 				const uploadUrl = 'http://192.168.10.100:8689/renterApi/saveImg';
@@ -290,7 +299,7 @@
 			 * 车辆管理提交完成
 			 */
 			carManagerFinish() {
-				this.showLoading('提交中...');
+				this.showLoading(this.tips.Submitting[this.lang]);
 				const param = {
 					code: this.code
 				};
@@ -333,17 +342,17 @@
 									fail(err) {
 									}
 								});
-								this.showModal(data.msg || '提交成功！');
+								this.showModal(data.msg || this.tips.SubmitSuccessMsg[this.lang]);
 							} else {
-								this.showModal(data.msg || '提交失败，请重试');
+								this.showModal(data.msg || this.tips.SubmitFailedRetry[this.lang]);
 							}
 						} else {
-							this.showToast('网络异常！');
+							this.showToast(this.tips.NetworkException[this.lang]);
 						}
 					},
 					fail: () => {
 						this.hideLoading();
-						this.showToast('提交失败，请检查网络');
+						this.showToast(this.tips.SubmitFailedCheckNetwork[this.lang]);
 					}
 				});
 			}

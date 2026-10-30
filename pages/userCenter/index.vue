@@ -25,7 +25,7 @@
 		<!-- ========== 自定义语言选择弹窗 ========== -->
 		<view class="lang-picker-mask" v-if="showLangPicker" @tap="closeLangPicker">
 			<view class="lang-picker-container" @tap.stop>
-				<view class="lang-picker-title">{{ lang === 'zhCn' ? '选择语言' : 'Select Language' }}</view>
+				<view class="lang-picker-title">{{ tips.SelectLanguage[lang] }}</view>
 				<scroll-view class="lang-picker-list" scroll-y>
 					<view v-for="(item, idx) in langList" :key="idx" class="lang-picker-item"
 						@tap="selectLanguage(item.value)">
@@ -35,7 +35,7 @@
 				</scroll-view>
 				<view class="lang-picker-footer">
 					<view class="lang-picker-btn lang-picker-btn-cancel" @tap="closeLangPicker">
-						{{ lang === 'zhCn' ? '取消' : 'Cancel' }}
+						{{ tips.Cancel[lang] }}
 					</view>
 				</view>
 			</view>
@@ -75,6 +75,7 @@
 				capsule_distance_to_the_right: 0,
 				account: '',
 				lang: 'enUs',
+				tips: tips,
 				// 语言列表（提取为 data 属性，便于多处复用）
 				langList: [{
 						name: '中文', //中文【中国】
@@ -287,23 +288,20 @@
 				}
 				if (info?.pagePath === 'Delete') {
 					uni.showModal({
-						title: this.lang === 'zhCn' ? '注销账号' : 'Delete Account',
-						content: this.lang === 'zhCn' ?
-							'警告：注销后数据永久清除，无法恢复！确定要注销吗？' :
-							'Warning: All data will be permanently deleted. Are you sure?',
+						title: tips.DeleteAccountTitle[this.lang],
+						content: tips.DeleteAccountWarn[this.lang],
 						confirmColor: '#FF3B30',
 						success: async (res) => {
 							if (res.confirm) {
 								uni.showLoading({
-									title: this.lang === 'zhCn' ? '注销中...' : 'Deleting...'
+									title: tips.Deleting[this.lang]
 								})
 								try {
 									const res = await u_deleteAccount({})
 									if (res.code === 1000) {
 										uni.hideLoading()
 										uni.showToast({
-											title: this.lang === 'zhCn' ? '注销成功' :
-												'Deleted successfully',
+											title: tips.DeleteAccountSuccess[this.lang],
 											icon: 'success'
 										})
 										uni.clearStorageSync()
@@ -315,15 +313,14 @@
 									} else {
 										uni.hideLoading()
 										uni.showToast({
-											title: res.msg || (this.lang === 'zhCn' ? '注销失败' :
-												'Delete failed'),
+											title: res.msg || tips.DeleteAccountFailed[this.lang],
 											icon: 'none'
 										})
 									}
 								} catch (err) {
 									uni.hideLoading()
 									uni.showToast({
-										title: this.lang === 'zhCn' ? '网络异常' : 'Network error',
+										title: tips.NetError[this.lang],
 										icon: 'none'
 									})
 								}

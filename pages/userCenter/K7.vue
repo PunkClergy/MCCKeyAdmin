@@ -7,35 +7,35 @@
 				<!-- ===== 设备绑定 ===== -->
 				<view class="device-bind-section">
 					<view class="form-item">
-						<text class="form-label">设备号：</text>
-						<input v-model="checkForm.idc" class="form-input" placeholder="请输入设备号(SN)" />
+						<text class="form-label">{{tips.DeviceSN[lang]}}：</text>
+						<input v-model="checkForm.idc" class="form-input" :placeholder="tips.PleaseEnterSN[lang]" />
 					</view>
 					<view class="form-item">
-						<text class="form-label">CODE：</text>
-						<input v-model="checkForm.code" class="form-input" placeholder="请输入CODE码(CODE)" />
+						<text class="form-label">{{tips.CodeLabel[lang]}}：</text>
+						<input v-model="checkForm.code" class="form-input" :placeholder="tips.PleaseEnterCode[lang]" />
 					</view>
 					<button class="bind-device-btn" :disabled="!checkForm.idc || !checkForm.code || isDeviceBound"
-						@tap="handleDeviceBind">开始检测</button>
+						@tap="handleDeviceBind">{{tips.StartCheck[lang]}}</button>
 				</view>
 
 				<view class="section-divider"></view>
 
 				<!-- ===== 图片上传 ===== -->
 				<view class="image-upload-section">
-					<view class="upload-title">现场图片上传</view>
-					<view class="upload-tip">7类图片全部必填：车辆铭牌、钥匙焊接图、风控线束图、回避器图、ACC接线图、常火接线图、应急感应区域图，每组至少上传1张，每组可上传多张</view>
+					<view class="upload-title">{{tips.UploadScenePhotos[lang]}}</view>
+					<view class="upload-tip">{{tips.UploadTipK7[lang]}}</view>
 
 					<!-- 分类上传区（7个独立分组，一一对应后端7个字段） -->
 					<view class="category-upload-wrapper">
 						<!-- 1. 车辆名牌 -->
 						<view class="upload-item">
-							<view class="upload-label">车辆名牌（必填）</view>
+							<view class="upload-label">{{tips.VehicleNamePlateReq[lang]}}</view>
 							<view class="image-list">
 								<view class="image-item demo-image-item" @tap="previewDemoImg"
 									data-src="https://k1sw.wiselink.net.cn/img/app2.0/k7/vehicle_nameplate.png">
 									<image src="https://k1sw.wiselink.net.cn/img/app2.0/k7/vehicle_nameplate.png"
 										class="preview-image"></image>
-									<view class="demo-badge">示例</view>
+									<view class="demo-badge">{{tips.SampleBadge[lang]}}</view>
 								</view>
 								<view class="image-item" v-for="(item, index) in imageGroups.namePlate" :key="index">
 									<image :src="item" class="preview-image" @tap="previewUploadImg" :data-url="item">
@@ -51,13 +51,13 @@
 
 						<!-- 2. 钥匙焊接图 -->
 						<view class="upload-item">
-							<view class="upload-label">钥匙焊接图（必填）</view>
+							<view class="upload-label">{{tips.KeyWeldingReq[lang]}}</view>
 							<view class="image-list">
 								<view class="image-item demo-image-item" @tap="previewDemoImg"
 									data-src="https://k1sw.wiselink.net.cn/img/app2.0/k7/key_welding_diagram.png">
 									<image src="https://k1sw.wiselink.net.cn/img/app2.0/k7/key_welding_diagram.png"
 										class="preview-image"></image>
-									<view class="demo-badge">示例</view>
+									<view class="demo-badge">{{tips.SampleBadge[lang]}}</view>
 								</view>
 								<view class="image-item" v-for="(item, index) in imageGroups.acc" :key="index">
 									<image :src="item" class="preview-image" @tap="previewUploadImg" :data-url="item">
@@ -73,13 +73,13 @@
 
 						<!-- 3. 风控线束图 -->
 						<view class="upload-item">
-							<view class="upload-label">风控线束图（必填）</view>
+							<view class="upload-label">{{tips.RiskWiringReq[lang]}}</view>
 							<view class="image-list">
 								<view class="image-item demo-image-item" @tap="previewDemoImg"
 									data-src="https://k1sw.wiselink.net.cn/img/app2.0/k7/risk_control_wiring.png">
 									<image src="https://k1sw.wiselink.net.cn/img/app2.0/k7/risk_control_wiring.png"
 										class="preview-image"></image>
-									<view class="demo-badge">示例</view>
+									<view class="demo-badge">{{tips.SampleBadge[lang]}}</view>
 								</view>
 								<view class="image-item" v-for="(item, index) in imageGroups.constant" :key="index">
 									<image :src="item" class="preview-image" @tap="previewUploadImg" :data-url="item">
@@ -95,13 +95,13 @@
 
 						<!-- 4. 回避器图 -->
 						<view class="upload-item">
-							<view class="upload-label">回避器图（必填）</view>
+							<view class="upload-label">{{tips.AvoiderReq[lang]}}</view>
 							<view class="image-list">
 								<view class="image-item demo-image-item" @tap="previewDemoImg"
 									data-src="https://k1sw.wiselink.net.cn/img/app2.0/k7/avoider_diagram.png">
 									<image src="https://k1sw.wiselink.net.cn/img/app2.0/k7/avoider_diagram.png"
 										class="preview-image"></image>
-									<view class="demo-badge">示例</view>
+									<view class="demo-badge">{{tips.SampleBadge[lang]}}</view>
 								</view>
 								<view class="image-item" v-for="(item, index) in imageGroups.ground" :key="index">
 									<image :src="item" class="preview-image" @tap="previewUploadImg" :data-url="item">
@@ -117,13 +117,13 @@
 
 						<!-- 5. ACC接线图 独立分组 accWiring -->
 						<view class="upload-item">
-							<view class="upload-label">ACC接线图（必填）</view>
+							<view class="upload-label">{{tips.AccWiringReq[lang]}}</view>
 							<view class="image-list">
 								<view class="image-item demo-image-item" @tap="previewDemoImg"
 									data-src="https://k1sw.wiselink.net.cn/img/app2.0/k7/acc_wiring_diagram.png">
 									<image src="https://k1sw.wiselink.net.cn/img/app2.0/k7/acc_wiring_diagram.png"
 										class="preview-image"></image>
-									<view class="demo-badge">示例</view>
+									<view class="demo-badge">{{tips.SampleBadge[lang]}}</view>
 								</view>
 								<view class="image-item" v-for="(item, index) in imageGroups.accWiring" :key="index">
 									<image :src="item" class="preview-image" @tap="previewUploadImg" :data-url="item">
@@ -139,13 +139,13 @@
 
 						<!-- 6. 常火接线图 独立分组 constantPower -->
 						<view class="upload-item">
-							<view class="upload-label">常火接线图（必填）</view>
+							<view class="upload-label">{{tips.ConstantPowerReq[lang]}}</view>
 							<view class="image-list">
 								<view class="image-item demo-image-item" @tap="previewDemoImg"
 									data-src="https://k1sw.wiselink.net.cn/img/app2.0/k7/constant_power_wiring.png">
 									<image src="https://k1sw.wiselink.net.cn/img/app2.0/k7/constant_power_wiring.png"
 										class="preview-image"></image>
-									<view class="demo-badge">示例</view>
+									<view class="demo-badge">{{tips.SampleBadge[lang]}}</view>
 								</view>
 								<view class="image-item" v-for="(item, index) in imageGroups.constantPower"
 									:key="index">
@@ -163,13 +163,13 @@
 
 						<!-- 7. 应急感应区域图 独立分组 emergencyArea -->
 						<view class="upload-item">
-							<view class="upload-label">应急感应区域图（必填）</view>
+							<view class="upload-label">{{tips.EmergencyReq[lang]}}</view>
 							<view class="image-list">
 								<view class="image-item demo-image-item" @tap="previewDemoImg"
 									data-src="https://k1sw.wiselink.net.cn/img/app2.0/k7/emergency_sensing_area.png">
 									<image src="https://k1sw.wiselink.net.cn/img/app2.0/k7/emergency_sensing_area.png"
 										class="preview-image"></image>
-									<view class="demo-badge">示例</view>
+									<view class="demo-badge">{{tips.SampleBadge[lang]}}</view>
 								</view>
 								<view class="image-item" v-for="(item, index) in imageGroups.emergencyArea"
 									:key="index">
@@ -188,7 +188,7 @@
 
 					<button class="confirm-upload-btn"
 						:disabled="!isDeviceBound || !allRequiredImgReady || isImageUploaded || isUploading"
-						@tap="handleBatchUploadImages">确认上传图片</button>
+						@tap="handleBatchUploadImages">{{tips.ConfirmUploadPhotos[lang]}}</button>
 				</view>
 
 				<view class="section-divider"></view>
@@ -196,50 +196,50 @@
 				<!-- ===== 网络检测 ===== -->
 				<view class="network-check-section">
 					<view class="section-title"><text
-							:class="['title-text', isNetworkTestFinished ? 'finished' : '']">网络模式检测</text></view>
+							:class="['title-text', isNetworkTestFinished ? 'finished' : '']">{{tips.NetworkModeCheck[lang]}}</text></view>
 					<view class="network-test-container"
 						:style="{pointerEvents: isNetworkTestFinished ? 'none' : 'auto'}">
-						<view class="test-header"><text>网络模式操作</text><text class="finish-tip"
-								v-if="isNetworkTestFinished">✅ 已完成</text></view>
+						<view class="test-header"><text>{{tips.NetworkModeActions[lang]}}</text><text class="finish-tip"
+								v-if="isNetworkTestFinished">✅ {{tips.CompletedBadge[lang]}}</text></view>
 						<view class="test-btn-group">
 							<view class="test-btn-item click-effect" @tap="handleNetworkTest" data-type="lock">
-								<text>开锁</text>
+								<text>{{tips.UnlockCmd[lang]}}</text>
 								<text :class="['test-status', networkTestStatus.lockStatus]">
-									<text v-if="networkTestStatus.lockStatus ==='success'">成功</text>
-									<text v-if="networkTestStatus.lockStatus ==='testing'">测试中</text>
-									<text v-if="networkTestStatus.lockStatus ==='fail'">失败</text>
+									<text v-if="networkTestStatus.lockStatus ==='success'">{{tips.TestSuccess[lang]}}</text>
+									<text v-if="networkTestStatus.lockStatus ==='testing'">{{tips.Testing[lang]}}</text>
+									<text v-if="networkTestStatus.lockStatus ==='fail'">{{tips.TestFailed[lang]}}</text>
 								</text>
 							</view>
 							<view class="test-btn-item click-effect" @tap="handleNetworkTest" data-type="unlock">
-								<text>关锁</text>
+								<text>{{tips.LockCmd[lang]}}</text>
 								<text :class="['test-status', networkTestStatus.unlockStatus]">
-									<text v-if="networkTestStatus.unlockStatus ==='success'">成功</text>
-									<text v-if="networkTestStatus.unlockStatus ==='testing'">测试中</text>
-									<text v-if="networkTestStatus.unlockStatus ==='fail'">失败</text>
+									<text v-if="networkTestStatus.unlockStatus ==='success'">{{tips.TestSuccess[lang]}}</text>
+									<text v-if="networkTestStatus.unlockStatus ==='testing'">{{tips.Testing[lang]}}</text>
+									<text v-if="networkTestStatus.unlockStatus ==='fail'">{{tips.TestFailed[lang]}}</text>
 								</text>
 							</view>
 							<view class="test-btn-item click-effect" @tap="handleNetworkTest" data-type="findCar">
-								<text>寻车</text>
+								<text>{{tips.FindCarCmd[lang]}}</text>
 								<text :class="['test-status', networkTestStatus.findCarStatus]">
-									<text v-if="networkTestStatus.findCarStatus ==='success'">成功</text>
-									<text v-if="networkTestStatus.findCarStatus ==='testing'">测试中</text>
-									<text v-if="networkTestStatus.findCarStatus ==='fail'">失败</text>
+									<text v-if="networkTestStatus.findCarStatus ==='success'">{{tips.TestSuccess[lang]}}</text>
+									<text v-if="networkTestStatus.findCarStatus ==='testing'">{{tips.Testing[lang]}}</text>
+									<text v-if="networkTestStatus.findCarStatus ==='fail'">{{tips.TestFailed[lang]}}</text>
 								</text>
 							</view>
 							<view class="test-btn-item click-effect" @tap="handleNetworkTest" data-type="risk">
-								<text>风控拦截</text>
+								<text>{{tips.RiskBlockCmd[lang]}}</text>
 								<text :class="['test-status', networkTestStatus.riskStatus]">
-									<text v-if="networkTestStatus.riskStatus ==='success'">成功</text>
-									<text v-if="networkTestStatus.riskStatus ==='testing'">测试中</text>
-									<text v-if="networkTestStatus.riskStatus ==='fail'">失败</text>
+									<text v-if="networkTestStatus.riskStatus ==='success'">{{tips.TestSuccess[lang]}}</text>
+									<text v-if="networkTestStatus.riskStatus ==='testing'">{{tips.Testing[lang]}}</text>
+									<text v-if="networkTestStatus.riskStatus ==='fail'">{{tips.TestFailed[lang]}}</text>
 								</text>
 							</view>
 							<view class="test-btn-item click-effect" @tap="handleNetworkTest" data-type="cancelRisk">
-								<text>取消拦截</text>
+								<text>{{tips.CancelBlockCmd[lang]}}</text>
 								<text :class="['test-status', networkTestStatus.cancelRiskStatus]">
-									<text v-if="networkTestStatus.cancelRiskStatus ==='success'">成功</text>
-									<text v-if="networkTestStatus.cancelRiskStatus ==='testing'">测试中</text>
-									<text v-if="networkTestStatus.cancelRiskStatus ==='fail'">失败</text>
+									<text v-if="networkTestStatus.cancelRiskStatus ==='success'">{{tips.TestSuccess[lang]}}</text>
+									<text v-if="networkTestStatus.cancelRiskStatus ==='testing'">{{tips.Testing[lang]}}</text>
+									<text v-if="networkTestStatus.cancelRiskStatus ==='fail'">{{tips.TestFailed[lang]}}</text>
 								</text>
 							</view>
 						</view>
@@ -250,7 +250,7 @@
 
 		<!-- ===== 日志 ===== -->
 		<view class="test-log-section">
-			<view class="log-title">测试日志</view>
+			<view class="log-title">{{tips.TestLog[lang]}}</view>
 			<scroll-view scroll-y class="log-content-container" id="logScroll">
 				<view class="log-item" v-for="(item, index) in testLogList" :key="index">{{item}}</view>
 			</scroll-view>
@@ -259,7 +259,7 @@
 		<!-- ===== 底部提交 ===== -->
 		<view class="fixed-submit-bar">
 			<button class="submit-check-btn" :disabled="!canSubmitFinalCheck"
-				@tap="handleSubmitFinalCheck">提交检测</button>
+				@tap="handleSubmitFinalCheck">{{tips.SubmitCheck[lang]}}</button>
 		</view>
 	</view>
 </template>
@@ -268,6 +268,9 @@
 	import {
 		u_operation
 	} from '@/api/index'
+	import {
+		tips
+	} from '@/utils/langtips.js'
 	// const { byGet, byPost } = require('../../../utils/request/http')
 
 	const MAX_LOG_COUNT = 50;
@@ -275,6 +278,8 @@
 	export default {
 		data() {
 			return {
+				tips: tips,
+				lang: 'zhCn',
 				checkForm: {
 					idc: '',
 					code: ''
@@ -310,6 +315,9 @@
 				isShowDemo: false,
 				isSubmitting: false
 			}
+		},
+		onShow() {
+			this.lang = uni.getStorageSync('language') || 'zhCn'
 		},
 		methods: {
 			toggleDemo() {
@@ -366,7 +374,7 @@
 				const remain = max - current.length;
 				if (remain <= 0) {
 					uni.showToast({
-						title: `该分类最多上传${max}张`,
+						title: this.tips.MaxImagesPerCategory[this.lang].replace('{n}', max),
 						icon: 'none'
 					})
 					return;
@@ -394,14 +402,14 @@
 				} = this;
 				if (!this.checkAllRequiredImages()) {
 					uni.showToast({
-						title: '7类图片每类至少上传一张',
+						title: this.tips.SevenPhotosEachRequired[this.lang],
 						icon: 'none'
 					});
 					return;
 				}
 				if (!deviceInfo?.sn) {
 					uni.showToast({
-						title: '设备信息异常，请重新绑定',
+						title: this.tips.DeviceInfoAbnormalRebind[this.lang],
 						icon: 'none'
 					});
 					return;
@@ -409,7 +417,7 @@
 
 				this.isUploading = true;
 				uni.showLoading({
-					title: '开始上传图片...'
+					title: this.tips.StartingUploadImages[this.lang]
 				});
 
 				try {
@@ -428,7 +436,7 @@
 						if (!imgList || imgList.length === 0) continue;
 						for (const filePath of imgList) {
 							uni.showLoading({
-								title: `正在上传...`
+								title: this.tips.UploadingImages[this.lang]
 							});
 							await this.uploadSingleImage(filePath, groupKey);
 						}
@@ -439,15 +447,15 @@
 						this.updateImgReadyState();
 						this.checkCanSubmit();
 					})
-					this.appendTestLog('✅ 图片全部上传成功！可开始功能检测');
+					this.appendTestLog('✅ ' + this.tips.AllImagesUploaded[this.lang]);
 					uni.showToast({
-						title: '上传成功',
+						title: this.tips.UploadSuccess[this.lang],
 						icon: 'none'
 					});
 				} catch (error) {
-					this.appendTestLog(`❌ 图片上传失败：${error}`);
+					this.appendTestLog('❌ ' + this.tips.ImageUploadFailedPrefix[this.lang] + error);
 					uni.showToast({
-						title: '上传失败，请重试',
+						title: this.tips.UploadFailedRetry[this.lang],
 						icon: 'none'
 					});
 				} finally {
@@ -472,7 +480,7 @@
 
 					const fieldName = groupNameMap[groupKey];
 					if (!fieldName) {
-						reject('分组异常');
+						reject(this.tips.GroupAbnormal[this.lang]);
 						return;
 					}
 
@@ -490,12 +498,12 @@
 							try {
 								const data = JSON.parse(uploadRes.data);
 								if (data.code === 1000) resolve();
-								else reject(data.msg || '上传失败');
+								else reject(data.msg || this.tips.UploadFailedRetry[this.lang]);
 							} catch (e) {
-								reject('数据解析异常');
+								reject(this.tips.ParseException[this.lang]);
 							}
 						},
-						fail: () => reject('网络异常')
+						fail: () => reject(this.tips.NetworkException[this.lang])
 					});
 				});
 			},
@@ -522,7 +530,7 @@
 				const canSubmit = isDeviceBound && isImageUploaded && allTestFinish;
 				this.canSubmitFinalCheck = canSubmit
 				if (allTestFinish) {
-					this.appendTestLog('🎉 网络模式全部检测完成！可提交检测');
+					this.appendTestLog('🎉 ' + this.tips.AllTestsComplete[this.lang]);
 				}
 			},
 			validateBeforeOperate() {
@@ -533,21 +541,21 @@
 				} = this;
 				if (!checkForm.idc || !checkForm.code) {
 					uni.showToast({
-						title: '请先输入设备号和检验码',
+						title: this.tips.PleaseInputIdcAndCode[this.lang],
 						icon: 'none'
 					});
 					return false;
 				}
 				if (!isDeviceBound) {
 					uni.showToast({
-						title: '请先绑定设备',
+						title: this.tips.PleaseBindDeviceFirst[this.lang],
 						icon: 'none'
 					});
 					return false;
 				}
 				if (!isImageUploaded) {
 					uni.showToast({
-						title: '请先上传现场图片',
+						title: this.tips.PleaseUploadScenePhotos[this.lang],
 						icon: 'none'
 					});
 					return false;
@@ -575,7 +583,7 @@
 
 					if (!idc || !code) {
 						uni.showToast({
-							title: '请输入完整的设备号和检验码',
+							title: this.tips.PleaseInputIdcAndCode[this.lang],
 							icon: 'none'
 						});
 						return;
@@ -598,15 +606,15 @@
 
 					if (checkRes?.data?.code === 1000) {
 						uni.showModal({
-							title: '结果',
-							content: checkRes?.data?.msg || '校验返回1000，终止绑定流程',
+							title: this.tips.ResultTitle[this.lang],
+							content: checkRes?.data?.msg || this.tips.CheckAbortMsg[this.lang],
 							showCancel: false
 						});
 						return;
 					}
 
 					uni.showLoading({
-						title: '设备绑定中...',
+						title: this.tips.BindDeviceProcessing[this.lang],
 						mask: true
 					});
 
@@ -633,24 +641,24 @@
 							this.updateImgReadyState();
 							this.checkCanSubmit();
 						})
-						this.appendTestLog('✅ 设备绑定成功，可进行图片上传');
+						this.appendTestLog('✅ ' + this.tips.DeviceBoundSuccessLog[this.lang]);
 						uni.showModal({
-							title: '结果',
+							title: this.tips.ResultTitle[this.lang],
 							content: bindResult?.msg,
 							showCancel: false
 						});
 					} else {
 						uni.showModal({
-							title: '结果',
-							content: bindResult.msg || '设备绑定失败',
+							title: this.tips.ResultTitle[this.lang],
+							content: bindResult.msg || this.tips.BindDeviceFailed[this.lang],
 							showCancel: false
 						});
 					}
 				} catch (error) {
 					console.error('设备绑定全流程异常：', error);
 					uni.showModal({
-						title: '结果',
-						content: '绑定请求异常，请检查网络后重试',
+						title: this.tips.ResultTitle[this.lang],
+						content: this.tips.BindRequestError[this.lang],
 						showCancel: false
 					});
 				} finally {
@@ -680,13 +688,13 @@
 				} = this;
 				const actionName = this.getTestActionText(command);
 				if (!deviceInfo?.sn) {
-					this.appendTestLog(`❌【网络】${actionName} 失败：设备信息缺失`);
+					this.appendTestLog(`❌ ${this.tips.LogNetworkTag[this.lang]} ${actionName} ${this.tips.DeviceMissing[this.lang]}`);
 					return;
 				}
 				this.setTestStatus(command, 'testing');
-				this.appendTestLog(`🚗【网络】开始${actionName} → 设备号：${checkForm.idc}`);
+				this.appendTestLog('🚗 ' + this.tips.LogNetworkTag[this.lang] + ' ' + this.tips.StartActionLog[this.lang].replace('{action}', actionName).replace('{idc}', checkForm.idc));
 				uni.showLoading({
-					title: '指令执行中...'
+					title: this.tips.ExecutingCommand[this.lang]
 				});
 
 				const reqUrl = `${c_k1sw_link}${u_operation.URL}`;
@@ -700,10 +708,10 @@
 				const resData = response.data || {};
 				if (resData.code === 1000) {
 					this.setTestStatus(command, 'success');
-					this.appendTestLog(`✅【网络】${actionName} 成功`);
+					this.appendTestLog('✅ ' + this.tips.LogNetworkTag[this.lang] + ' ' + this.tips.ActionSuccessLog[this.lang].replace('{action}', actionName));
 				} else {
 					this.setTestStatus(command, 'fail');
-					this.appendTestLog(`❌【网络】${actionName} 失败：${resData.msg || '未知原因'}`);
+					this.appendTestLog('❌ ' + this.tips.LogNetworkTag[this.lang] + ' ' + this.tips.ActionFailLog[this.lang].replace('{action}', actionName).replace('{reason}', resData.msg || this.tips.UnknownReason[this.lang]));
 				}
 
 				setTimeout(() => {
@@ -735,7 +743,7 @@
 				const token = userInfo.token || '';
 
 				uni.showLoading({
-					title: '提交检测结果中...'
+					title: this.tips.SubmittingCheckResult[this.lang]
 				});
 				try {
 					const res = await new Promise((resolve, reject) => {
@@ -758,8 +766,8 @@
 					const resData = res?.data || {};
 					if (resData.code === 1000) {
 						uni.showModal({
-							title: '提交成功',
-							content: '设备全流程检测已完成！',
+							title: this.tips.SubmitSuccessTitle[this.lang],
+							content: this.tips.CheckCompletedContent[this.lang],
 							showCancel: false,
 							success: () => {
 								uni.redirectTo({
@@ -769,37 +777,37 @@
 						});
 					} else {
 						uni.showToast({
-							title: resData.msg || '提交失败',
+							title: resData.msg || this.tips.SubmitFailedToast[this.lang],
 							icon: 'none'
 						});
-						this.appendTestLog(`❌ 提交失败：${resData.msg || '未知错误'}`);
+						this.appendTestLog('❌ ' + this.tips.SubmitFailedToast[this.lang] + '：' + (resData.msg || this.tips.UnknownError[this.lang]));
 					}
 				} catch (err) {
 					console.error('提交检测结果失败：', err);
 					uni.showToast({
-						title: '请求异常，请重试',
+						title: this.tips.RequestExceptionRetry[this.lang],
 						icon: 'none'
 					});
-					this.appendTestLog('❌ 检测结果提交失败：网络或接口异常');
+					this.appendTestLog('❌ ' + this.tips.SubmitResultFailedLog[this.lang]);
 				} finally {
 					uni.hideLoading();
 				}
 			},
 			getTestStatusText(status) {
 				const map = {
-					testing: '测试中',
-					success: '成功',
-					fail: '失败'
+					testing: this.tips.Testing[this.lang],
+					success: this.tips.TestSuccess[this.lang],
+					fail: this.tips.TestFailed[this.lang]
 				};
 				return map[status] || '';
 			},
 			getTestActionText(command) {
 				const map = {
-					3: '开锁',
-					1: '关锁',
-					5: '寻车',
-					8: '风控拦截',
-					6: '取消拦截'
+					3: this.tips.UnlockCmd[this.lang],
+					1: this.tips.LockCmd[this.lang],
+					5: this.tips.FindCarCmd[this.lang],
+					8: this.tips.RiskBlockCmd[this.lang],
+					6: this.tips.CancelBlockCmd[this.lang]
 				};
 				return map[command] || command;
 			},

@@ -1,4 +1,5 @@
 <script>
+	import { tips } from '@/utils/langtips.js'
 	export default {
 
 		// 全局数据（替代原 data，UniApp 推荐用 globalData）
@@ -56,8 +57,9 @@
 
 		// UniApp 生命周期：应用初始化（替代原 onLaunch）
 		onLaunch(options) {
+			const L = uni.getStorageSync('language') || 'zhCn'
 			// 1. 检查更新（仅微信小程序端生效，其他端自动忽略）
-			
+
 			if (uni.canIUse('getUpdateManager')) {
 				const updateManager = uni.getUpdateManager()
 				updateManager.onCheckForUpdate((res) => {
@@ -65,8 +67,8 @@
 					if (res.hasUpdate) {
 						updateManager.onUpdateReady(() => {
 							uni.showModal({
-								title: '更新提示',
-								content: '新版本已经准备好，是否重启应用？',
+								title: tips.UpdateTitle[L],
+								content: tips.UpdateReadyRestart[L],
 								success: (res) => {
 									if (res.confirm) {
 										// 强制更新
@@ -78,8 +80,8 @@
 						updateManager.onUpdateFailed(() => {
 							// 新版本下载失败
 							uni.showModal({
-								title: '更新提示',
-								content: '新版本下载失败，请删除当前小程序，重新搜索打开',
+								title: tips.UpdateTitle[L],
+								content: tips.UpdateDownloadFailed[L],
 							})
 						})
 					}

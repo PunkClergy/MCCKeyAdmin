@@ -102,7 +102,7 @@
 		},
 		methods: {
 			handleGetCurrentLanguage() {
-				let currentLang = uni.getStorageSync('lang') || 'zh-CN';
+				let currentLang = uni.getStorageSync('language') || 'zhCn';
 			},
 			// 预览图片
 			handlePreviewImage(evt) {
@@ -119,7 +119,7 @@
 					uni.previewImage({
 						urls: [this.init_qr_code],
 						longPressActions: {
-							itemList: ['保存图片到相册'],
+							itemList: [this.tips.SaveToAlbum[this.lang]],
 							success: (data) => {}
 						}
 					});
@@ -134,7 +134,7 @@
 					}
 				} catch (error) {
 					uni.showToast({
-						title: '查询失败',
+						title: this.tips.QueryFailed[this.lang],
 						icon: 'none'
 					});
 				}

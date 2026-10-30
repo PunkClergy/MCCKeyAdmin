@@ -207,11 +207,22 @@ http.setInterceptor({
 		// 添加全局header（例如token）
 		const userKey = uni.getStorageSync('user_info')
 		const funAreaId = uni.getStorageSync('funAreaId')
-		const language = uni.getStorageSync('language')?.replace(/([a-z])([A-Z])/g, '$1_$2')
+		// 内部语言码 → 后端标准语言码（BCP-47 风格：语言_地区大写）
+		const langCodeMap = {
+			zhCn: 'zh_CN',
+			enUs: 'en_US',
+			msMy: 'ms_MY',
+			ptBr: 'pt_BR',
+			taSg: 'ta_SG',
+			thTh: 'th_TH',
+			idId: 'id_ID',
+			miNz: 'mi_NZ'
+		}
+		const language = langCodeMap[uni.getStorageSync('language')] || 'en_US'
 		const token = userKey?.token || ''
 		let header = config.header || {}
 		header['funAreaId'] = funAreaId //暂时写死参数
-		header['lang'] = language||'en_Us' //所属语言
+		header['lang'] = language //所属语言
 		header['programType'] = 'app' //所属语言
 
 		if (token) {

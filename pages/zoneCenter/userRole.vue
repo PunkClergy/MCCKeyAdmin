@@ -135,7 +135,7 @@
 
 				c_send_key_show_momal: false,
 				g_uesr_details: {},
-				user_text: '新增',
+				user_text: '',
 				new_role: {},
 				roleArray: [],
 

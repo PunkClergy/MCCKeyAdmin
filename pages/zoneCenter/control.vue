@@ -123,7 +123,7 @@
 				</scroll-view>
 				<view class="popup-btns">
 					<button class="btn-cancel" @click="closeCarPopup">{{ tips.Cancel[lang] }}</button>
-					<button class="btn-save" @click="confirmBindCar">{{ tips.ConfirmBtn[lang] }}</button>
+					<button class="btn-save" @click="confirmBindCar">{{ tips.Confirm[lang] }}</button>
 				</view>
 			</view>
 		</view>
@@ -194,10 +194,6 @@
 			};
 		},
 		onLoad() {
-			// 页面标题，需要你在tips增加对应key自行替换
-			uni.setNavigationBarTitle({
-				title: '管控规则列表'
-			});
 			this.initI18nConst();
 		},
 		onShow() {
@@ -386,7 +382,7 @@
 			},
 			handleDelete(item) {
 				uni.showModal({
-					title: this.tips.Tip[lang],
+					title: this.tips.Tip[this.lang],
 					content: this.tips.DeleteConfirmTip[this.lang],
 					success: async (res) => {
 						if (res.confirm) {
@@ -493,7 +489,7 @@
 				if (!this.currentViewRule) return;
 				uni.showModal({
 					title: this.tips.UnbindConfirm[this.lang],
-					content: `${this.tips.UnbindCarTip[this.lang]}【${car.platenumber}】?`,
+					content: `${this.tips.UnbindCarTip[this.lang]} [${car.platenumber}]?`,
 					success: async (modalRes) => {
 						if (!modalRes.confirm) return;
 						// 原有id数组，剔除当前车辆id

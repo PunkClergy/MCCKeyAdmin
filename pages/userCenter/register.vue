@@ -33,7 +33,7 @@
 					@tap="handleRegister">{{tips.Register[lang]}}</button>
 
 				<view class="login-link">
-					<text>{{langs.haveanaccount}}</text>
+					<text>{{tips.HaveAnAccountGoLogin[lang]}}</text>
 					<text class="link-text" @tap="goToLogin">{{tips.GoToLogin[lang]}}</text>
 				</view>
 				<!-- 下部分：信息展示 -->
@@ -74,7 +74,6 @@
 				smsDisabled: false,
 				smsBtnText: '',
 				countdown: 60,
-				langs: {},
 			};
 		},
 		components: {},

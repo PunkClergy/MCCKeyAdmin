@@ -218,7 +218,7 @@
 				}],
 				c_activeTab: 1,
 				params: {},
-				btnState: '新增',
+				btnState: '',
 				id: '',
 				tree: [],
 				lang: 'zhCn',
