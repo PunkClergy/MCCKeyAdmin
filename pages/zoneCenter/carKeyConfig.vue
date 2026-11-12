@@ -1,168 +1,152 @@
 <template>
-	<view class="container">
-		<view class="record-container">
-			<!-- ===== 顶部标签页：固定 ===== -->
-			<view class="record-tabs">
-				<view class="record-tabs-item" :class="{ active: c_activeTab == 1 }" @tap="switchToList">
+	<view class="ck-page">
+		<view class="ck-shell">
+			<!-- ===== 顶部切换（固定） ===== -->
+			<view class="ck-seg">
+				<view class="ck-seg__item" :class="{ 'ck-seg__item--active': c_activeTab == 1 }" @tap="switchToList">
 					{{ tips.CarList[lang] }}
 				</view>
-				<view class="record-tabs-item" :class="{ active: c_activeTab == 2 }" @tap="switchToForm">
+				<view class="ck-seg__item" :class="{ 'ck-seg__item--active': c_activeTab == 2 }" @tap="switchToForm">
 					{{ btnState }}{{ tips.Car[lang] }}
 				</view>
 			</view>
 
 			<!-- ===== 列表视图 ===== -->
-			<block v-if="c_activeTab == 1">
-				<!-- 固定头部：搜索 + 统计 -->
-				<view class="list-header">
-					<view class="search-box">
-						<icon type="search" size="16" class="search-icon" color="#4facfe" />
-						<input :placeholder="tips.SearchPlaceholder[lang]" class="search-input" @blur="bindblurSea" />
+			<view class="ck-pane" v-if="c_activeTab == 1">
+				<view class="ck-toolbar">
+					<view class="ck-search">
+						<icon type="search" size="14" color="#4facfe" class="ck-search__icon" />
+						<input class="ck-search__input" :placeholder="tips.SearchPlaceholder[lang]" placeholder-style="color:#a9bccf" @blur="bindblurSea" />
 					</view>
-					<view class="tabs-1-conut">
-						<view class="total-records">{{ tips.TotalRecords[lang] }}<text class="highlight-number">{{ g_total }}</text>{{ tips.Items[lang] }}</view>
-						<view class="select-all" v-if="g_flagMulti">
+					<view class="ck-meta">
+						<text class="ck-meta__text">{{ tips.TotalRecords[lang] }}</text>
+						<text class="ck-meta__count">{{ g_total }}</text>
+						<text class="ck-meta__text">{{ tips.Items[lang] }}</text>
+						<view class="ck-meta__spacer"></view>
+						<view class="ck-selectall" v-if="g_flagMulti">
 							<text>{{ tips.SelectAll[lang] }}</text>
-							<checkbox style="transform: scale(0.9);" @tap="handleAllC" :checked="all_c" color="#4facfe" />
+							<checkbox class="ck-checkbox" @tap="handleAllC" :checked="all_c" color="#4facfe" />
 						</view>
 					</view>
 				</view>
 
-				<!-- 滚动列表 -->
-				<view class="scroll-wrapper">
-					<scroll-view scroll-y class="scroll-view" show-scrollbar="false">
-						<view class="content-item" v-for="(item, index) in g_items" :key="index">
-							<view class="content-item-head">
-								<view class="head-left">
-									<view class="left-category">
-										<text>{{ item.platenumber }}</text>
-									</view>
-									<view class="left-split_line"></view>
-									<view class="left-model">
-										{{ item.vehicleSerialName || '-' }}{{ item.vehicleModeName || '' }}
-									</view>
-								</view>
-								<view class="head-right" v-if="!g_flagMulti">
-									<view class="btn-icon" :data-item="item" @tap="handleEdit">{{ tips.Edit[lang] }}</view>
-									<view class="btn-icon delete" :data-item="item" @tap="handleDelete">{{ tips.Delete[lang] }}</view>
-								</view>
-								<view v-else>
-									<checkbox-group :data-item="item" @change="handleChangeBlack">
-										<checkbox style="transform: scale(1);" :checked="item.checked" color="#4facfe" />
-									</checkbox-group>
-								</view>
+				<scroll-view class="ck-scroll" scroll-y show-scrollbar="false">
+					<view class="ck-card" v-for="(item, index) in g_items" :key="index">
+						<view class="ck-card__head">
+							<view class="ck-plate">{{ item.platenumber }}</view>
+							<view class="ck-model">{{ item.vehicleSerialName || '-' }}{{ item.vehicleModeName || '' }}</view>
+							<view class="ck-actions" v-if="!g_flagMulti">
+								<view class="ck-action" :data-item="item" @tap="handleEdit">{{ tips.Edit[lang] }}</view>
+								<view class="ck-action ck-action--danger" :data-item="item" @tap="handleDelete">{{ tips.Delete[lang] }}</view>
 							</view>
-							<view class="content-item-info">
-								<view class="info-item" :class="item.sn && item.sn.length > 15 ? 'long-info-item' : ''">
-									<label>{{ tips.DeviceSN[lang] }}：</label>
-									<text>{{ item.sn || '-' }}</text>
-								</view>
-								<view class="info-item long-info-item">
-									<label>{{ tips.EffectivePeriod[lang] }}：</label>
-									<text>{{ item.startDate || '' }}-{{ item.endDate || '' }}</text>
-								</view>
-							</view>
-							<view class="content-item-footer" v-if="g_source && !g_flagMulti">
-								<view class="select-car-btn" :data-item="item" @tap="handleSelectJump">
-									{{ tips.SelectThisCar[lang] }}
-								</view>
+							<view class="ck-check" v-else>
+								<checkbox-group :data-item="item" @change="handleChangeBlack">
+									<checkbox class="ck-checkbox" :checked="item.checked" color="#4facfe" />
+								</checkbox-group>
 							</view>
 						</view>
-						<view class="empty" v-if="g_items.length === 0">
-							<text>{{ tips.NoData[lang] }}</text>
+						<view class="ck-card__body">
+							<view class="ck-row">
+								<text class="ck-row__k">{{ tips.DeviceSN[lang] }}</text>
+								<text class="ck-row__v">{{ item.sn || '-' }}</text>
+							</view>
+							<view class="ck-row">
+								<text class="ck-row__k">{{ tips.EffectivePeriod[lang] }}</text>
+								<text class="ck-row__v">{{ item.startDate || '' }}-{{ item.endDate || '' }}</text>
+							</view>
 						</view>
-					</scroll-view>
-				</view>
-			</block>
+						<view class="ck-card__foot" v-if="g_source && !g_flagMulti">
+							<view class="ck-ghost" :data-item="item" @tap="handleSelectJump">{{ tips.SelectThisCar[lang] }}</view>
+						</view>
+					</view>
+					<view class="ck-empty" v-if="g_items.length === 0">
+						<text class="ck-empty__text">{{ tips.NoData[lang] }}</text>
+					</view>
+				</scroll-view>
+			</view>
 
-			<!-- ===== 表单视图（新增/编辑） ===== -->
-			<block v-else>
-				<!-- 滚动表单内容（不包含底部按钮） -->
-				<view class="scroll-wrapper form-scroll">
-					<scroll-view scroll-y class="scroll-view" show-scrollbar="false">
-						<view class="card-info">
-							<view class="card-info-item">
-								<label>{{ tips.PlateNumber[lang] }}<text>*</text></label>
-								<view class="card-info-item-input">
-									<input :placeholder="tips.PleaseEnterPlate[lang]" v-model="params.platenumber"
-										data-item="platenumber" @input="handleBindinput" />
-								</view>
-							</view>
-							<view class="card-info-item">
-								<label>{{ tips.DeviceSN[lang] }}<text>*</text></label>
-								<view class="card-info-item-input">
-									<text v-if="id !== ''">{{ params.sn || tips.Empty[lang] }}</text>
-									<input v-else :placeholder="tips.PleaseEnterSN[lang]" v-model="params.paramsn"
-										data-item="sn" @input="handleBindinput" />
-								</view>
-							</view>
-							<view class="card-info-item">
-								<label>code<text>*</text></label>
-								<view class="card-info-item-input">
-									<text v-if="id !== ''">{{ params.code || tips.Empty[lang] }}</text>
-									<input v-else :placeholder="tips.PleaseEnterCode[lang]" v-model="params.code"
-										data-item="code" @input="handleBindinput" />
-								</view>
-							</view>
-							<view class="card-info-item">
-								<label>{{ tips.VehicleSeries[lang] }}</label>
-								<view class="card-info-item-input">
-									<input :placeholder="tips.PleaseEnterSeries[lang]" v-model="params.vehicleSerialName"
-										data-item="vehicleSerialName" @input="handleBindinput" />
-								</view>
-							</view>
-							<view class="card-info-item">
-								<label>{{ tips.VehicleModel[lang] }}</label>
-								<view class="card-info-item-input">
-									<input :placeholder="tips.PleaseEnterModel[lang]" v-model="params.vehicleModeName"
-										data-item="vehicleModeName" @input="handleBindinput" />
-								</view>
-							</view>
-							<view class="card-info-item">
-								<label>{{ tips.ModelYear[lang] }}</label>
-								<view class="card-info-item-input">
-									<input :placeholder="tips.PleaseEnterYear[lang]" v-model="params.ccdate"
-										data-item="ccdate" @input="handleBindinput" />
-								</view>
-							</view>
-							<view class="card-info-item">
-								<label>{{ tips.TotalMileage[lang] }}</label>
-								<view class="card-info-item-input">
-									<input :placeholder="tips.PleaseEnterTotalMileage[lang]" v-model="params.totalMileage"
-										data-item="totalMileage" @input="handleBindinput" />
-								</view>
-							</view>
-							<view class="card-info-item">
-								<label>{{ tips.MaintainMileage[lang] }}</label>
-								<view class="card-info-item-input">
-									<input :placeholder="tips.PleaseEnterMaintainMileage[lang]" v-model="params.maintainMileage"
-										data-item="maintainMileage" @input="handleBindinput" />
-								</view>
-							</view>
-							<view class="card-info-item">
-								<label>{{ tips.MaintainInterval[lang] }}</label>
-								<view class="card-info-item-input">
-									<input :placeholder="tips.PleaseEnterMaintainInterval[lang]" v-model="params.maintainMileageInterval"
-										data-item="maintainMileageInterval" @input="handleBindinput" />
-								</view>
+			<!-- ===== 表单视图（新增 / 编辑） ===== -->
+			<view class="ck-pane" v-else>
+				<scroll-view class="ck-scroll" scroll-y show-scrollbar="false">
+					<view class="ck-form-card">
+						<view class="ck-field">
+							<text class="ck-field__label">{{ tips.PlateNumber[lang] }}<text class="ck-req">*</text></text>
+							<view class="ck-field__ctl">
+								<input class="ck-input" :placeholder="tips.PleaseEnterPlate[lang]" placeholder-style="color:#a9bccf"
+									v-model="params.platenumber" data-item="platenumber" @input="handleBindinput" />
 							</view>
 						</view>
-						<!-- 底部占位，避免内容被按钮遮挡 -->
-						<view style="height: 20rpx;"></view>
-					</scroll-view>
+						<view class="ck-field">
+							<text class="ck-field__label">{{ tips.DeviceSN[lang] }}<text class="ck-req">*</text></text>
+							<view class="ck-field__ctl">
+								<text v-if="id !== ''" class="ck-static">{{ params.sn || tips.Empty[lang] }}</text>
+								<input v-else class="ck-input" :placeholder="tips.PleaseEnterSN[lang]" placeholder-style="color:#a9bccf"
+									v-model="params.paramsn" data-item="sn" @input="handleBindinput" />
+							</view>
+						</view>
+						<view class="ck-field">
+							<text class="ck-field__label">{{ tips.CodeLabel[lang] }}<text class="ck-req">*</text></text>
+							<view class="ck-field__ctl">
+								<text v-if="id !== ''" class="ck-static">{{ params.code || tips.Empty[lang] }}</text>
+								<input v-else class="ck-input" :placeholder="tips.PleaseEnterCode[lang]" placeholder-style="color:#a9bccf"
+									v-model="params.code" data-item="code" @input="handleBindinput" />
+							</view>
+						</view>
+					</view>
+					<view class="ck-form-card">
+						<view class="ck-field">
+							<text class="ck-field__label">{{ tips.VehicleSeries[lang] }}</text>
+							<view class="ck-field__ctl">
+								<input class="ck-input" :placeholder="tips.PleaseEnterSeries[lang]" placeholder-style="color:#a9bccf"
+									v-model="params.vehicleSerialName" data-item="vehicleSerialName" @input="handleBindinput" />
+							</view>
+						</view>
+						<view class="ck-field">
+							<text class="ck-field__label">{{ tips.VehicleModel[lang] }}</text>
+							<view class="ck-field__ctl">
+								<input class="ck-input" :placeholder="tips.PleaseEnterModel[lang]" placeholder-style="color:#a9bccf"
+									v-model="params.vehicleModeName" data-item="vehicleModeName" @input="handleBindinput" />
+							</view>
+						</view>
+						<view class="ck-field">
+							<text class="ck-field__label">{{ tips.ModelYear[lang] }}</text>
+							<view class="ck-field__ctl">
+								<input class="ck-input" :placeholder="tips.PleaseEnterYear[lang]" placeholder-style="color:#a9bccf"
+									v-model="params.ccdate" data-item="ccdate" @input="handleBindinput" />
+							</view>
+						</view>
+						<view class="ck-field">
+							<text class="ck-field__label">{{ tips.TotalMileage[lang] }}</text>
+							<view class="ck-field__ctl">
+								<input class="ck-input" :placeholder="tips.PleaseEnterTotalMileage[lang]" placeholder-style="color:#a9bccf"
+									v-model="params.totalMileage" data-item="totalMileage" @input="handleBindinput" />
+							</view>
+						</view>
+						<view class="ck-field">
+							<text class="ck-field__label">{{ tips.MaintainMileage[lang] }}</text>
+							<view class="ck-field__ctl">
+								<input class="ck-input" :placeholder="tips.PleaseEnterMaintainMileage[lang]" placeholder-style="color:#a9bccf"
+									v-model="params.maintainMileage" data-item="maintainMileage" @input="handleBindinput" />
+							</view>
+						</view>
+						<view class="ck-field">
+							<text class="ck-field__label">{{ tips.MaintainInterval[lang] }}</text>
+							<view class="ck-field__ctl">
+								<input class="ck-input" :placeholder="tips.PleaseEnterMaintainInterval[lang]" placeholder-style="color:#a9bccf"
+									v-model="params.maintainMileageInterval" data-item="maintainMileageInterval" @input="handleBindinput" />
+							</view>
+						</view>
+					</view>
+				</scroll-view>
+				<view class="ck-footer">
+					<view class="ck-primary" @tap="handleSubmit">{{ tips.Confirm[lang] }}{{ btnState }}</view>
 				</view>
-
-				<!-- 固定底部确认按钮 -->
-				<view class="card-footer" >
-					<view @tap="handleSubmit" class="primary-btn">{{ tips.Confirm[lang] }}{{ btnState }}</view>
-				</view>
-			</block>
+			</view>
 		</view>
 
-		<!-- 悬浮多选确认按钮（仅列表） -->
-		<view class="levitation-button" v-if="c_activeTab == 1 && g_flagMulti && g_black.length > 0"
-			@tap="handleJumpBlackInfo">
-			<text class="primary-btn">{{ tips.Confirm[lang] }}</text>
+		<!-- 悬浮多选确认（仅列表多选态） -->
+		<view class="ck-float" v-if="c_activeTab == 1 && g_flagMulti && g_black.length > 0">
+			<view class="ck-primary ck-primary--float" @tap="handleJumpBlackInfo">{{ tips.Confirm[lang] }}</view>
 		</view>
 	</view>
 </template>
@@ -313,13 +297,6 @@
 					url: `${this.g_source}?black=${this.g_black}&type=${this.type}&name=${this.name}&platenumbers=${this.g_platenumbers}&info=${JSON.stringify(this.info)}`
 				})
 			},
-			scanCode() {
-				uni.scanCode({
-					success: (res) => {
-						this.params.sn = res.result
-					}
-				})
-			},
 			initCarryParams(evt) {
 				const { source, flagMulti, info, allParams, type, name, desc } = evt
 				this.g_source = source
@@ -425,361 +402,360 @@
 </script>
 
 <style>
-	/* 全局背景：渐变天蓝色 */
+	/* ===== 页面底色：沿用天蓝渐变主题 ===== */
 	page {
 		height: 100vh;
 		display: flex;
 		flex-direction: column;
-		background: linear-gradient(145deg, #e3f2fd 0%, #e3f2fd 20%, #81d4fa 100%);
+		background: linear-gradient(160deg, #eaf5fe 0%, #e3f2fd 34%, #b7e3fb 72%, #81d4fa 100%);
 		box-sizing: border-box;
 	}
 
-	/* 滚动条美化 */
-	.scroll-view::-webkit-scrollbar {
-		width: 4px;
-	}
-	.scroll-view::-webkit-scrollbar-track {
-		background: transparent;
-	}
-	.scroll-view::-webkit-scrollbar-thumb {
-		background: rgba(79, 172, 254, 0.5);
-		border-radius: 10px;
-	}
-
-	.container {
+	.ck-page {
 		flex: 1;
+		min-height: 0;
 		display: flex;
 		flex-direction: column;
-		padding: 20rpx;
+		padding: 24rpx 24rpx 0;
 		box-sizing: border-box;
-		min-height: 0; /* 防止内容撑开 */
 	}
 
-	/* 主卡片：毛玻璃，固定高度由 flex 分配，内容不溢出 */
-	.record-container {
+	.ck-shell {
 		flex: 1;
+		min-height: 0;
 		display: flex;
 		flex-direction: column;
-		background: rgba(255, 255, 255, 0.45);
-		backdrop-filter: blur(20px);
-		-webkit-backdrop-filter: blur(20px);
-		border-radius: 48rpx;
-		border: 1px solid rgba(255, 255, 255, 0.6);
-		box-shadow: 0 20px 60px rgba(0, 150, 200, 0.15);
+		padding: 18rpx 18rpx 12rpx;
+		background: rgba(255, 255, 255, 0.58);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border: 1rpx solid rgba(255, 255, 255, 0.85);
+		border-radius: 32rpx;
+		box-shadow: 0 24rpx 60rpx rgba(19, 96, 160, 0.14);
 		overflow: hidden;
-		min-height: 0; /* flex 收缩 */
+		box-sizing: border-box;
 	}
 
-	/* ===== 标签页：固定 ===== */
-	.record-tabs {
-		display: flex;
-		background: rgba(255, 255, 255, 0.3);
-		padding: 12rpx;
-		margin: 20rpx 20rpx 10rpx 20rpx;
-		border-radius: 60rpx;
-		backdrop-filter: blur(5px);
-		-webkit-backdrop-filter: blur(5px);
+	/* ===== 顶部分段切换 ===== */
+	.ck-seg {
 		flex-shrink: 0;
-		position: relative;
-		z-index: 5;
+		display: flex;
+		padding: 6rpx;
+		margin-bottom: 16rpx;
+		background: rgba(255, 255, 255, 0.72);
+		border: 1rpx solid rgba(255, 255, 255, 0.95);
+		border-radius: 20rpx;
+		box-shadow: 0 6rpx 18rpx rgba(19, 96, 160, 0.06);
 	}
-
-	.record-tabs-item {
+	.ck-seg__item {
 		flex: 1;
 		padding: 20rpx 0;
 		text-align: center;
-		font-size: 28rpx;
+		font-size: 27rpx;
 		font-weight: 600;
-		color: #5a7a8a;
-		border-radius: 40rpx;
-		transition: all 0.3s ease;
-		letter-spacing: 0.5px;
+		color: #5f7892;
+		border-radius: 16rpx;
+		transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+	}
+	.ck-seg__item--active {
+		color: #ffffff;
+		background: linear-gradient(135deg, #4facfe 0%, #1a8cf2 100%);
+		box-shadow: 0 10rpx 22rpx rgba(26, 140, 242, 0.26);
 	}
 
-	.record-tabs-item.active {
-		background: linear-gradient(135deg, #4facfe 0%, #00c6fb 100%);
-		color: #fff;
-		box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
-	}
-
-	/* ===== 列表固定头部 ===== */
-	.list-header {
-		flex-shrink: 0;
-	}
-
-	.search-box {
-		display: flex;
-		align-items: center;
-		background: rgba(255, 255, 255, 0.7);
-		backdrop-filter: blur(5px);
-		-webkit-backdrop-filter: blur(5px);
-		border: 1px solid rgba(255, 255, 255, 0.9);
-		border-radius: 60rpx;
-		padding: 12rpx 24rpx;
-		margin: 20rpx 20rpx 10rpx 20rpx;
-		box-shadow: 0 4px 15px rgba(0, 150, 255, 0.05);
-		transition: all 0.3s ease;
-	}
-	.search-box:focus-within {
-		box-shadow: 0 4px 20px rgba(79, 172, 254, 0.15);
-		border-color: #4facfe;
-	}
-	.search-input {
-		flex: 1;
-		font-size: 28rpx;
-		margin-left: 10rpx;
-		color: #2c3e50;
-	}
-
-	.tabs-1-conut {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 0 30rpx 20rpx 30rpx;
-		color: #5a7a8a;
-		font-size: 26rpx;
-	}
-	.total-records .highlight-number {
-		color: #4facfe;
-		font-weight: 700;
-		margin: 0 6rpx;
-		font-size: 30rpx;
-	}
-	.select-all {
-		display: flex;
-		align-items: center;
-		gap: 10rpx;
-	}
-
-	/* ===== 滚动容器（列表 & 表单共用） ===== */
-	.scroll-wrapper {
+	/* ===== 视图容器 ===== */
+	.ck-pane {
 		flex: 1;
 		min-height: 0;
-		overflow: hidden;
 		display: flex;
 		flex-direction: column;
 	}
-	.scroll-view {
+	.ck-toolbar {
+		flex-shrink: 0;
+	}
+
+	.ck-search {
+		display: flex;
+		align-items: center;
+		height: 76rpx;
+		padding: 0 22rpx;
+		background: #ffffff;
+		border: 1rpx solid #e7f1fa;
+		border-radius: 16rpx;
+		box-shadow: 0 4rpx 14rpx rgba(19, 96, 160, 0.04);
+	}
+	.ck-search__icon {
+		flex-shrink: 0;
+	}
+	.ck-search__input {
 		flex: 1;
-		/* 不使用 height:100%，改用 flex 自动填充 */
+		height: 100%;
+		margin-left: 12rpx;
+		font-size: 26rpx;
+		color: #12283d;
+	}
+
+	.ck-meta {
+		display: flex;
+		align-items: center;
+		padding: 18rpx 6rpx 14rpx;
+	}
+	.ck-meta__text {
+		font-size: 24rpx;
+		color: #71869b;
+	}
+	.ck-meta__count {
+		margin: 0 6rpx;
+		font-size: 30rpx;
+		font-weight: 700;
+		color: #1a8cf2;
+	}
+	.ck-meta__spacer {
+		flex: 1;
+	}
+	.ck-selectall {
+		display: flex;
+		align-items: center;
+		font-size: 24rpx;
+		color: #3d5570;
+	}
+	.ck-checkbox {
+		margin-left: 10rpx;
+		transform: scale(0.88);
+	}
+
+	.ck-scroll {
+		flex: 1;
+		min-height: 0;
 		width: 100%;
-		padding-bottom: 10rpx;
-		box-sizing: border-box;
 	}
 
 	/* ===== 列表卡片 ===== */
-	.content-item {
-		margin: 20rpx;
-		background: rgba(255, 255, 255, 0.7);
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
-		border-radius: 28rpx;
-		border: 1px solid rgba(255, 255, 255, 0.8);
-		box-shadow: 0 8px 30px rgba(0, 100, 200, 0.06);
-		transition: all 0.3s ease;
-		overflow: hidden;
+	.ck-card {
+		margin: 0 2rpx 24rpx;
+		padding: 0 28rpx;
+		background: #ffffff;
+		border: 1rpx solid #eef4fb;
+		border-radius: 24rpx;
+		box-shadow: 0 6rpx 20rpx rgba(19, 96, 160, 0.05);
 	}
-	.content-item:active {
-		transform: scale(0.98);
-		box-shadow: 0 4px 15px rgba(0, 100, 200, 0.12);
-	}
-	.content-item-head {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 24rpx 30rpx;
-		border-bottom: 1px solid rgba(0, 0, 0, 0.02);
-	}
-	.head-left {
+	.ck-card__head {
 		display: flex;
 		align-items: center;
-		gap: 20rpx;
+		padding: 24rpx 0 20rpx;
 	}
-	.left-category {
-		font-size: 30rpx;
+	.ck-plate {
+		flex-shrink: 0;
+		max-width: 60%;
+		padding: 8rpx 18rpx;
+		font-size: 28rpx;
 		font-weight: 700;
-		color: #1a2a3a;
+		letter-spacing: 1rpx;
+		color: #0f2b46;
+		background: rgba(79, 172, 254, 0.10);
+		border: 1rpx solid rgba(79, 172, 254, 0.24);
+		border-radius: 12rpx;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
-	.left-split_line {
-		width: 2rpx;
-		height: 28rpx;
-		background: rgba(0, 0, 0, 0.08);
+	.ck-model {
+		flex: 1;
+		min-width: 0;
+		margin-left: 16rpx;
+		font-size: 24rpx;
+		color: #8095aa;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
-	.left-model {
-		font-size: 26rpx;
-		color: #5a7a8a;
-		font-weight: 500;
-	}
-	.head-right {
+	.ck-actions {
+		flex-shrink: 0;
 		display: flex;
-		gap: 16rpx;
+		align-items: center;
+		margin-left: 12rpx;
 	}
-	.btn-icon {
-		padding: 6rpx 20rpx;
-		border-radius: 30rpx;
+	.ck-action {
+		padding: 8rpx 14rpx;
 		font-size: 24rpx;
 		font-weight: 600;
-		color: #4facfe;
-		background: rgba(79, 172, 254, 0.1);
-		transition: all 0.2s ease;
+		color: #1a8cf2;
+		border-radius: 10rpx;
 	}
-	.btn-icon:active {
-		transform: scale(0.92);
-		background: rgba(79, 172, 254, 0.2);
+	.ck-action:active {
+		background: rgba(79, 172, 254, 0.12);
 	}
-	.btn-icon.delete {
-		color: #ff6b6b;
-		background: rgba(255, 107, 107, 0.1);
+	.ck-action--danger {
+		color: #e2606a;
 	}
-	.btn-icon.delete:active {
-		background: rgba(255, 107, 107, 0.2);
+	.ck-action--danger:active {
+		background: rgba(226, 96, 106, 0.10);
 	}
-	.content-item-info {
-		padding: 20rpx 30rpx;
-		font-size: 26rpx;
-		color: #2c3e50;
-	}
-	.info-item {
-		display: flex;
-		margin-bottom: 10rpx;
-	}
-	.info-item label {
-		color: #5a7a8a;
-		width: 140rpx;
+	.ck-check {
 		flex-shrink: 0;
 	}
-	.info-item text {
-		color: #1a2a3a;
-		font-weight: 500;
+
+	.ck-card__body {
+		padding: 14rpx 0 18rpx;
+		border-top: 1rpx solid #f4f8fc;
 	}
-	.content-item-footer {
-		padding: 16rpx 30rpx 24rpx 30rpx;
+	.ck-row {
+		display: flex;
+		align-items: flex-start;
+		padding-top: 10rpx;
+	}
+	.ck-row__k {
+		flex-shrink: 0;
+		width: 210rpx;
+		font-size: 24rpx;
+		line-height: 38rpx;
+		color: #71869b;
+	}
+	.ck-row__v {
+		flex: 1;
+		min-width: 0;
+		font-size: 25rpx;
+		line-height: 38rpx;
+		color: #20364c;
+		text-align: right;
+		word-break: break-all;
+	}
+
+	.ck-card__foot {
 		display: flex;
 		justify-content: flex-end;
-		border-top: 1px solid rgba(0, 0, 0, 0.02);
+		padding: 16rpx 0 22rpx;
+		border-top: 1rpx solid #f4f8fc;
 	}
-
-	/* ===== 通用按钮 ===== */
-	.primary-btn,
-	.select-car-btn,
-	.card-footer view,
-	.levitation-button text {
-		background: linear-gradient(135deg, #4facfe 0%, #00c6fb 100%);
-		box-shadow: 0 8px 25px rgba(79, 172, 254, 0.35);
-		color: #fff;
+	.ck-ghost {
+		padding: 10rpx 26rpx;
+		font-size: 24rpx;
 		font-weight: 600;
-		border: none;
-		border-radius: 60rpx;
-		padding: 16rpx 40rpx;
-		font-size: 28rpx;
-		transition: all 0.3s ease;
-		letter-spacing: 0.5px;
-		text-align: center;
-		display: inline-block;
+		color: #1279d0;
+		background: rgba(79, 172, 254, 0.07);
+		border: 1rpx solid rgba(79, 172, 254, 0.40);
+		border-radius: 999rpx;
 	}
-	.primary-btn:active,
-	.select-car-btn:active,
-	.card-footer view:active,
-	.levitation-button text:active {
-		transform: scale(0.94);
-		box-shadow: 0 4px 15px rgba(79, 172, 254, 0.5);
+	.ck-ghost:active {
+		background: rgba(79, 172, 254, 0.16);
 	}
 
-	/* ===== 空状态 ===== */
-	.empty {
+	.ck-empty {
+		padding: 160rpx 0 200rpx;
 		text-align: center;
-		padding: 80rpx 0;
-		color: #5a7a8a;
-		font-size: 28rpx;
+	}
+	.ck-empty__text {
+		font-size: 26rpx;
+		letter-spacing: 1rpx;
+		color: #8399ad;
 	}
 
 	/* ===== 表单卡片 ===== */
-	.card-info {
-		padding: 10rpx 30rpx;
+	.ck-form-card {
+		margin: 0 2rpx 24rpx;
+		padding: 4rpx 28rpx;
+		background: #ffffff;
+		border: 1rpx solid #eef4fb;
+		border-radius: 24rpx;
+		box-shadow: 0 6rpx 20rpx rgba(19, 96, 160, 0.05);
 	}
-	.card-info-item {
+	.ck-field {
 		display: flex;
-		justify-content: space-between;
 		align-items: center;
-		padding: 28rpx 0;
-		border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+		min-height: 100rpx;
+		border-bottom: 1rpx solid #f3f8fc;
 	}
-	.card-info-item label {
-		color: #1a2a3a;
-		font-weight: 600;
-		font-size: 28rpx;
-		width: 160rpx;
-		flex-shrink: 0;
+	.ck-field:last-child {
+		border-bottom: none;
 	}
-	.card-info-item label text {
-		color: #ff6b6b;
+	.ck-field__label {
+		flex: 0 0 44%;
+		font-size: 26rpx;
+		line-height: 34rpx;
+		color: #3d5570;
+	}
+	.ck-req {
 		margin-left: 4rpx;
+		font-size: 22rpx;
+		color: #f06a72;
 	}
-	.card-info-item-input {
+	.ck-field__ctl {
 		flex: 1;
+		min-width: 0;
 		display: flex;
 		justify-content: flex-end;
 	}
-	.card-info-item-input input,
-	.card-info-item-input text {
-		background: rgba(255, 255, 255, 0.6);
-		backdrop-filter: blur(5px);
-		-webkit-backdrop-filter: blur(5px);
-		border: 1px solid rgba(255, 255, 255, 0.8);
-		border-radius: 40rpx;
-		padding: 16rpx 24rpx;
-		font-size: 28rpx;
-		color: #1a2a3a;
-		width: 100%;
-		max-width: 400rpx;
+	.ck-input {
+		flex: 1;
+		min-width: 0;
+		height: 68rpx;
+		line-height: 68rpx;
+		padding: 0 18rpx;
+		box-sizing: border-box;
+		font-size: 26rpx;
+		color: #12283d;
 		text-align: right;
-		transition: all 0.3s ease;
-		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+		background: #f7fafd;
+		border: 1rpx solid #edf3f9;
+		border-radius: 12rpx;
 	}
-	.card-info-item-input input:focus {
-		border-color: #4facfe;
-		box-shadow: 0 0 0 4px rgba(79, 172, 254, 0.1), 0 4px 15px rgba(79, 172, 254, 0.05);
-		background: rgba(255, 255, 255, 0.9);
+	.ck-input:focus {
+		background: #ffffff;
+		border-color: #8ecdfc;
 	}
-	.card-info-item-input text {
-		background: transparent;
-		border: none;
-		padding: 16rpx 0;
-		color: #5a7a8a;
+	.ck-static {
+		flex: 1;
+		min-width: 0;
+		font-size: 26rpx;
+		line-height: 68rpx;
+		text-align: right;
+		color: #5d748a;
+		word-break: break-all;
 	}
 
-	/* ===== 表单底部固定按钮 ===== */
-	.card-footer {
+	/* ===== 主按钮 ===== */
+	.ck-footer {
 		flex-shrink: 0;
+		padding: 18rpx 2rpx 26rpx;
+	}
+	.ck-primary {
+		height: 88rpx;
+		line-height: 88rpx;
 		text-align: center;
-		padding: 20rpx 0 30rpx 0;
-		/* background: rgba(255, 255, 255, 0.7); */
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
-		border-top: 1px solid rgba(255, 255, 255, 0.5);
-		
-		
+		font-size: 30rpx;
+		font-weight: 600;
+		letter-spacing: 1rpx;
+		color: #ffffff;
+		background: linear-gradient(135deg, #4facfe 0%, #1a8cf2 100%);
+		border-radius: 44rpx;
+		box-shadow: 0 14rpx 30rpx rgba(26, 140, 242, 0.28);
+		transition: opacity 0.2s ease, transform 0.2s ease;
+	}
+	.ck-primary:active {
+		opacity: 0.9;
+		transform: scale(0.985);
 	}
 
-	/* ===== 悬浮多选按钮（仅列表） ===== */
-	.levitation-button {
+	/* ===== 悬浮多选确认 ===== */
+	.ck-float {
 		position: fixed;
-		bottom: 40rpx;
 		left: 0;
 		right: 0;
+		bottom: 48rpx;
+		z-index: 99;
 		display: flex;
 		justify-content: center;
-		z-index: 999;
+		padding: 0 48rpx;
 		pointer-events: none;
 	}
-	.levitation-button text {
+	.ck-primary--float {
+		min-width: 360rpx;
+		padding: 0 70rpx;
 		pointer-events: auto;
-		padding: 20rpx 80rpx;
-		font-size: 32rpx;
-		box-shadow: 0 12px 35px rgba(79, 172, 254, 0.45);
+		box-shadow: 0 18rpx 36rpx rgba(26, 140, 242, 0.38);
 	}
 
-	/* ===== 复选框样式 ===== */
+	/* ===== 复选框主题色 ===== */
 	checkbox .wx-checkbox-input,
 	checkbox .uni-checkbox-input {
 		border-radius: 8rpx !important;
