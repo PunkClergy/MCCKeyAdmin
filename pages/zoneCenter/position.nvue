@@ -1,39 +1,51 @@
 <template>
 	<view class="container" :style="containerStyle" @touchmove.prevent="handleTouchMove">
-		<view class="select-region">
-			<view class="select-vehicle" @tap="handleJumpVehicle" v-if="!vehicle_info?.sn">
-				<text>{{ tips.PleaseSelectCar[lang] }}</text>
-				<image src="/static/images/right_1.png" class="select-vehicle-image"></image>
+		<!-- 车辆选择卡 -->
+		<view class="key-card">
+			<view class="key-card__empty" @tap="handleJumpVehicle" v-if="!vehicle_info?.sn">
+				<view class="key-empty__left">
+					<image src="/static/images/01.png" class="key-empty__icon" mode="aspectFit"></image>
+					<text class="key-empty__text">{{ tips.PleaseSelectCar[lang] }}</text>
+				</view>
+				<image src="/static/images/right_1.png" class="key-empty__arrow" mode="aspectFit"></image>
 			</view>
-			<view v-else>
-				<view class="vehicle-info-main">
-					<view class="vehicle-info-left">
-						<view class="vehicle-plate-wrapper">
-							<image src="/static/images/01.png" class="vehicle-icon"></image>
-							<text class="vehicle-plate-text">{{vehicle_info?.platenumber}}</text>
+
+			<view class="key-car" v-else>
+				<view class="key-car__head">
+					<view class="key-car__left">
+						<view class="key-plate">
+							<image src="/static/images/01.png" class="key-plate__icon" mode="aspectFit"></image>
+							<text class="key-plate__text" lines="1">{{ vehicle_info?.platenumber || vehicle_info?.plateNumber }}</text>
 						</view>
-						<view class="vehicle-type-tag">
-							<text class="vehicle-type-text">
-								{{vehicle_info.vehicleSerialName||tips.NoData[lang]}}{{vehicle_info.vehicleModeName||''}}
-							</text>
+						<view class="key-tag">
+							<text class="key-tag__text" lines="1">{{vehicle_info.vehicleSerialName||tips.NoData[lang]}}{{vehicle_info.vehicleModeName||''}}</text>
 						</view>
 					</view>
-					<view class="vehicle-edit-btn" @tap="handleJumpVehicle">
-						<text class="vehicle-edit-text">{{ tips.ReSelect[lang] }}</text>
-						<image src="/static/images/right_1.png" class="right-arrow-icon"></image>
+					<view class="key-switch" @tap="handleJumpVehicle">
+						<text class="key-switch__text">{{ tips.ReSelect[lang] }}</text>
+						<image src="/static/images/right_1.png" class="key-switch__arrow" mode="aspectFit"></image>
 					</view>
 				</view>
-				<view class="vehicle-vin-device">
-					<view>{{ tips.VIN[lang] }}：{{vehicle_info?.vin||tips.NoData[lang]}}</view>
-					<view>{{ tips.DeviceID[lang] }}：{{vehicle_info?.sn||tips.NoData[lang]}}</view>
+
+				<view class="key-line"></view>
+
+				<view class="key-meta">
+					<view class="key-meta__item">
+						<text class="key-meta__label">{{ tips.VIN[lang] }}</text>
+						<text class="key-meta__value" lines="1">{{vehicle_info?.vin||tips.NoData[lang]}}</text>
+					</view>
+					<view class="key-meta__item key-meta__item--gap">
+						<text class="key-meta__label">{{ tips.DeviceID[lang] }}</text>
+						<text class="key-meta__value" lines="1">{{vehicle_info?.sn||tips.NoData[lang]}}</text>
+					</view>
 				</view>
 			</view>
 		</view>
 
-		<view class="web-view-container">
+		<!-- 车控 WebView -->
+		<view class="key-web">
 			<web-view ref="webview" @onPostMessage="handlePostMessage" :src="webUrlWithTimestamp"
-				:style="{ height: contentHeight + 'px' }">
-			</web-view>
+				:style="{ height: contentHeight + 'px' }"></web-view>
 		</view>
 	</view>
 </template>
@@ -100,13 +112,17 @@
 				const {
 					screenHeight
 				} = this.screenInfo;
-				return screenHeight - (this.statusBarHeight + this.navBarHeight + (!this.vehicle_info?.platenumber ? 60 :
-					100));
+				const hasPlate = this.vehicle_info?.platenumber || this.vehicle_info?.plateNumber;
+				return screenHeight - (this.statusBarHeight + this.navBarHeight + (hasPlate ? 100 : 60));
 			}
 		},
 
 		onLoad(options) {
-			this.vehicle_info = JSON.parse(options?.datails || '{}');
+			const parsed = JSON.parse(options?.datails || '{}') || {};
+			// 列表口径 platenumber 与点位口径 plateNumber 统一，避免任一口径缺失时车牌空白
+			if (!parsed.platenumber && parsed.plateNumber) parsed.platenumber = parsed.plateNumber;
+			if (!parsed.plateNumber && parsed.platenumber) parsed.plateNumber = parsed.platenumber;
+			this.vehicle_info = parsed;
 			this.initialScreenInfo();
 		},
 
@@ -157,6 +173,7 @@
 				try {
 					const res = await u_getAllCarPoisiton();
 					this.info = res.content || [];
+					this.syncPlateFromInfo();
 					this.dataLoaded = true;
 					this.trySendData();
 				} catch (error) {
@@ -215,7 +232,7 @@
 			// 页面跳转
 			handleJumpVehicle() {
 				uni.redirectTo({
-					url: `/pages/zoneCenter/carKeyConfig?source=/pages/zoneCenter/riskManagement`
+					url: `/pages/zoneCenter/carKeyConfig?source=/pages/zoneCenter/position`
 				});
 			},
 
@@ -236,6 +253,9 @@
 
 				if (!source) return;
 
+				// 换车判定快照：sn 分支会改车牌，必须在处理前先记下原车牌
+				const plateBefore = this.vehicle_info?.platenumber || this.vehicle_info?.plateNumber || '';
+
 				const ACTION_HANDLERS = {
 					3: () => this.handleVehicle(source),
 					1: () => this.handleVehicle(source),
@@ -243,18 +263,77 @@
 					8: () => this.handleVehicle(source),
 					6: () => this.handleVehicle(source),
 					'sn': () => {
-						this.vehicle_info = messageData
+						// webview 只回传 { source, sn, plateNumber }，整体覆盖会把已选车辆的车牌/VIN 冲掉
+						const plate = messageData.plateNumber || ''
+						this.applyVehiclePatch({
+							sn: messageData.sn,
+							plateNumber: plate || this.vehicle_info?.plateNumber,
+							platenumber: plate || this.vehicle_info?.platenumber
+						})
 					}
 				};
 
 				const handler = ACTION_HANDLERS[source];
 				if (handler) handler();
 
-				const targetSn = evt.detail.data[0]?.plateNumber;
-				if (!targetSn) return;
+				const targetPlate = evt.detail.data[0]?.plateNumber;
+				if (!targetPlate) return;
 
-				const matchedItem = this.info.find(item => item.plateNumber === targetSn);
-				if (matchedItem) this.vehicle_info = matchedItem;
+				const matchedItem = this.info.find(item => item.plateNumber === targetPlate || item.platenumber === targetPlate);
+				if (!matchedItem) return;
+
+				// 地图点位接口只返回 plateNumber/sn/经纬度，不能整体替换车辆信息
+				const currentPlate = plateBefore
+				const patch = {
+					sn: matchedItem.sn || this.vehicle_info?.sn,
+					plateNumber: targetPlate,
+					platenumber: targetPlate
+				}
+				if (currentPlate && currentPlate !== targetPlate) {
+					// 切换到另一台车：清掉旧车专属字段，避免显示错车的 VIN / 打开错车的照片
+					patch.vin = matchedItem.vin || ''
+					patch.id = matchedItem.id || ''
+					patch.vehicleSerialName = matchedItem.vehicleSerialName || ''
+					patch.vehicleModeName = matchedItem.vehicleModeName || ''
+					patch.uploadImgUrl = ''
+					patch.uploadImgUrlTwo = ''
+					patch.uploadImgUrlThree = ''
+					patch.uploadImgUrlFour = ''
+					patch.uploadImgUrlFive = ''
+				}
+				this.applyVehiclePatch(patch)
+			},
+
+			// 兜底：路线参数没带车牌（或只带另一种字段名）时，用点位列表按 sn 补回来
+			syncPlateFromInfo() {
+				const cur = this.vehicle_info || {};
+				if (cur.platenumber || cur.plateNumber) return;
+				if (!cur.sn) return;
+				const found = this.info.find(item => String(item.sn) === String(cur.sn));
+				if (!found || !found.plateNumber) return;
+				this.applyVehiclePatch({ plateNumber: found.plateNumber });
+			},
+
+			// 合并车辆信息：只覆盖传入的字段，避免少字段消息把已选车辆冲成空对象
+			applyVehiclePatch(patch) {
+				const base = this.vehicle_info || {}
+				const next = {}
+				for (const key in base) {
+					if (Object.prototype.hasOwnProperty.call(base, key)) next[key] = base[key]
+				}
+				// 车牌只做别名归一，不允许被空值覆盖（这是车牌回显消失的根因之一）
+				const plate = patch.platenumber || patch.plateNumber || ''
+				if (plate) {
+					patch.platenumber = plate
+					patch.plateNumber = plate
+				} else {
+					delete patch.platenumber
+					delete patch.plateNumber
+				}
+				for (const key in patch) {
+					if (patch[key] !== undefined) next[key] = patch[key]
+				}
+				this.vehicle_info = next
 			},
 
 			async handleVehicle(evt) {
@@ -298,112 +377,152 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		background-color: #ffffff;
 	}
 
-	.select-region {
-		width: 740rpx;
+	/* ===== 车辆卡片外壳 ===== */
+	.key-card {
+		width: 718rpx;
 		display: flex;
-		align-items: center;
-		justify-content: center;
+		flex-direction: column;
+		margin: 12rpx 0 8rpx;
 		padding: 10rpx;
-		border-radius: 6rpx;
-		box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
-		background-color: #fff;
-		margin-bottom: 5rpx;
+		border-radius: 18rpx;
+		background-color: #ffffff;
+		border: 1rpx solid #e8f1fa;
+		box-shadow: 0 6rpx 18rpx rgba(19, 96, 160, 0.06);
 	}
 
-	.select-vehicle-image {
-		width: 28rpx;
-		height: 28rpx;
-	}
-
-	.web-view-container {
-		width: 740rpx;
-	}
-
-	.select-vehicle {
-		width: 720rpx;
+	/* ===== 未选车：入口条 ===== */
+	.key-card__empty {
 		display: flex;
 		flex-direction: row;
-		justify-content: center;
 		align-items: center;
-		border-radius: 8px;
-		height: 50px;
-		background-color: aliceblue;
-		color: #333;
+		justify-content: space-between;
+		height: 80rpx;
+		padding: 0 20rpx;
+		border-radius: 12rpx;
+		background-color: #f6fbff;
+		border: 1rpx solid #dfeaf5;
 	}
-
-	/* 车辆信息样式 */
-	.vehicle-info-main {
+	.key-empty__left {
 		display: flex;
 		flex-direction: row;
-		justify-content: space-between;
-		width: 730rpx;
-		border-bottom: 1px solid #f0f0f0;
-		padding: 20rpx;
+		align-items: center;
+	}
+	.key-empty__icon {
+		width: 34rpx;
+		height: 34rpx;
+		margin-right: 12rpx;
+	}
+	.key-empty__text {
 		font-size: 26rpx;
-		align-items: center;
+		color: #3d6f9e;
+	}
+	.key-empty__arrow {
+		width: 22rpx;
+		height: 22rpx;
 	}
 
-	.vehicle-info-left {
+	/* ===== 已选车：车辆信息 ===== */
+	.key-car {
+		display: flex;
+		flex-direction: column;
+		padding: 6rpx 4rpx 2rpx;
+	}
+	.key-car__head {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-	}
-
-	.vehicle-plate-wrapper {
-		display: flex;
-		flex-direction: row;
-		margin-right: 20rpx;
-		align-items: center;
-	}
-
-	.vehicle-icon {
-		width: 40rpx;
-		height: 40rpx;
-	}
-
-	.vehicle-plate-text {
-		font-weight: bold;
-	}
-
-	.vehicle-type-tag {
-		background-color: aliceblue;
-		border-radius: 5rpx;
-		padding-left: 8rpx;
-		padding-right: 8rpx;
-		padding-top: 2rpx;
-		padding-bottom: 2rpx;
-		margin-right: 4rpx;
-		display: flex;
-		align-items: center;
-	}
-
-	.vehicle-type-text {
-		color: #2440b3;
-	}
-
-	.vehicle-edit-btn {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-	}
-
-	.vehicle-edit-text {
-		font-size: 28rpx;
-		color: #2440b3;
-	}
-
-	.right-arrow-icon {
-		width: 28rpx;
-		height: 28rpx;
-	}
-
-	.vehicle-vin-device {
-		display: flex;
-		width: 730rpx;
-		flex-direction: row;
 		justify-content: space-between;
-		padding: 20rpx;
+	}
+	.key-car__left {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		flex: 1;
+	}
+	.key-plate {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		flex-shrink: 0;
+		padding: 6rpx 12rpx;
+		border-radius: 10rpx;
+		background-color: #f2f8ff;
+		border: 1rpx solid #dbe9f8;
+	}
+	.key-plate__icon {
+		width: 32rpx;
+		height: 32rpx;
+		margin-right: 8rpx;
+	}
+	.key-plate__text {
+		flex-shrink: 0;
+		font-size: 28rpx;
+		font-weight: bold;
+		color: #14324e;
+	}
+	.key-tag {
+		margin-left: 12rpx;
+		padding: 4rpx 12rpx;
+		border-radius: 8rpx;
+		background-color: #f4f8fc;
+		flex-shrink: 1;
+		max-width: 220rpx;
+	}
+	.key-tag__text {
+		font-size: 22rpx;
+		color: #6d8aa4;
+	}
+	.key-switch {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		padding-left: 16rpx;
+		flex-shrink: 0;
+	}
+	.key-switch__text {
+		font-size: 24rpx;
+		color: #2b7fd4;
+	}
+	.key-switch__arrow {
+		width: 20rpx;
+		height: 20rpx;
+		margin-left: 4rpx;
+	}
+
+	.key-line {
+		height: 1rpx;
+		margin: 16rpx 0 14rpx;
+		background-color: #f0f5fa;
+	}
+
+	.key-meta {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+	}
+	.key-meta__item {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+	.key-meta__item--gap {
+		margin-left: 24rpx;
+	}
+	.key-meta__label {
+		font-size: 22rpx;
+		color: #8ba3b8;
+	}
+	.key-meta__value {
+		margin-top: 6rpx;
+		font-size: 24rpx;
+		color: #14324e;
+	}
+
+	/* ===== 车控 WebView ===== */
+	.key-web {
+		width: 718rpx;
 	}
 </style>
