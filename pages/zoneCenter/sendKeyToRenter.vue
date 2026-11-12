@@ -1,129 +1,119 @@
 <template>
-	<view class="page-wrap" :style="{ height: screenHeight + 'px' }">
-		<!-- 装饰性背景光效（适配天蓝背景） -->
-		<view class="glow-bg glow-1"></view>
-		<view class="glow-bg glow-2"></view>
-		<view class="glow-bg glow-3"></view>
+	<view class="sk-page" :style="{ height: screenHeight + 'px' }">
+		<!-- 装饰性背景光效（保持原有天蓝主题） -->
+		<view class="sk-glow sk-glow--1"></view>
+		<view class="sk-glow sk-glow--2"></view>
+		<view class="sk-glow sk-glow--3"></view>
 
-		<!-- ========== 主卡片：flex列，占据全部空间 ========== -->
-		<view class="main-card">
-			<!-- 顶部Tab切换（固定高度） -->
-			<view class="tab-header">
-				<view class="tab-item" :class="activeTab === 1 && 'tab-active'" @tap.stop="switchTab(1)">
-					<text class="tab-label">{{tips.SendKey[lang]}}</text>
-					<view class="tab-line"></view>
+		<!-- ===== 主卡片 ===== -->
+		<view class="sk-shell">
+			<!-- 顶部分段切换 -->
+			<view class="sk-seg">
+				<view class="sk-seg__item" :class="{ 'sk-seg__item--on': activeTab === 1 }" @tap.stop="switchTab(1)">
+					{{ tips.SendKey[lang] }}
 				</view>
-				<view class="tab-item" :class="activeTab === 2 && 'tab-active'" @tap.stop="switchTab(2)">
-					<text class="tab-label">{{tips.UsageLogs[lang]}}</text>
-					<view class="tab-line"></view>
+				<view class="sk-seg__item" :class="{ 'sk-seg__item--on': activeTab === 2 }" @tap.stop="switchTab(2)">
+					{{ tips.UsageLogs[lang] }}
 				</view>
 			</view>
 
-			<!-- ====== 内容区域：flex:1，撑满剩余空间 ====== -->
-			<view class="tab-content">
-				<!-- Tab1：车辆列表 -->
-				<view v-if="activeTab === 1" class="tab-panel tab-panel-1">
-					<scroll-view scroll-y class="scroll-container" @scrolltolower="loadCarList" :show-scrollbar="false">
-						<view class="car-item" v-for="(item, idx) in carList" :key="idx">
-							<!-- 卡片头部 -->
-							<view class="item-head">
-								<view class="head-left">
-									<view class="plate-wrap">
-										<image src="/static/car_icon.png" class="car-icon" mode="aspectFit" />
-										<text class="plate-text">{{ item.platenumber }}</text>
-									</view>
-									<text class="model-text" v-if="!item.bluetoothKey">
-										{{ item.vehicleSerialName || '-' }} {{ item.vehicleModeName || '' }}
-									</text>
+			<view class="sk-body">
+				<!-- ===== Tab1：车辆列表 ===== -->
+				<view v-if="activeTab === 1" class="sk-pane">
+					<scroll-view scroll-y class="sk-scroll" @scrolltolower="loadCarList" :show-scrollbar="false">
+						<view class="sk-car" v-for="(item, idx) in carList" :key="idx">
+							<view class="sk-car__head">
+								<view class="sk-plate">
+									<image src="/static/car_icon.png" class="sk-plate__icon" mode="aspectFit" />
+									<text class="sk-plate__text">{{ item.platenumber }}</text>
+								</view>
+								<text class="sk-car__model" v-if="!item.bluetoothKey">{{ item.vehicleSerialName || '-' }} {{ item.vehicleModeName || '' }}</text>
+							</view>
+							<view class="sk-specs">
+								<view class="sk-spec" v-if="!item.bluetoothKey">
+									<text class="sk-spec__k">{{ tips.VIN[lang] }}</text>
+									<text class="sk-spec__v">{{ item.vin || '-' }}</text>
+								</view>
+								<view class="sk-spec" v-if="!item.bluetoothKey">
+									<text class="sk-spec__k">{{ tips.FuelCapacity[lang] }}</text>
+									<text class="sk-spec__v">{{ item.xsgw ? item.xsgw + 'L' : '-' }}</text>
+								</view>
+								<view class="sk-spec">
+									<text class="sk-spec__k">{{ tips.DeviceID[lang] }}</text>
+									<text class="sk-spec__v">{{ item.sn || '-' }}</text>
 								</view>
 							</view>
-							<!-- 车辆信息 -->
-							<view class="info-wrap">
-								<view class="info-row" :class="item.vin.length > 15 && 'info-row-full'" v-if="!item.bluetoothKey">
-									<label class="info-label">{{tips.VIN[lang]}}</label>
-									<text class="info-value">{{ item.vin || '-' }}</text>
-								</view>
-								<view class="info-row" :class="item.xsgw.length > 15 && 'info-row-full'" v-if="!item.bluetoothKey">
-									<label class="info-label">{{tips.FuelCapacity[lang]}}</label>
-									<text class="info-value">{{ item.xsgw ? item.xsgw + 'L' : '-' }}</text>
-								</view>
-								<view class="info-row" :class="item.carOwnerName.length > 15 && 'info-row-full'" v-if="!item.bluetoothKey">
-									<label class="info-label">{{tips.DevicePlatform[lang]}}</label>
-									<text class="info-value">{{ item.carOwnerName || '-' }}</text>
-								</view>
-								<view class="info-row" :class="item.sn.length > 15 && 'info-row-full'">
-									<label class="info-label">{{tips.DeviceID[lang]}}</label>
-									<text class="info-value">{{ item.sn || '-' }}</text>
-								</view>
-							</view>
-							<!-- 操作按钮 -->
-							<view class="item-footer">
-								<view></view>
-								<view class="btn-primary" :data-item="item" @tap="openSendKeyModal">
-									<text>{{tips.SendKey[lang]}}</text>
-									<view class="btn-shimmer"></view>
-								</view>
+							<view class="sk-car__foot">
+								<view class="sk-btn-sm" :data-item="item" @tap="openSendKeyModal">{{ tips.SendKey[lang] }}</view>
 							</view>
 						</view>
-						<!-- 空状态 -->
-						<view class="empty-tip" v-if="carList.length < 1">
-							<view class="empty-icon">🚗</view>
-							<text class="empty-text">{{tips.NoData[lang]}}</text>
+						<view class="sk-empty" v-if="carList.length < 1">
+							<view class="sk-empty__ring">
+								<image src="/static/car_icon.png" class="sk-empty__icon" mode="aspectFit" />
+							</view>
+							<text class="sk-empty__text">{{ tips.NoData[lang] }}</text>
 						</view>
 					</scroll-view>
 				</view>
 
-				<!-- Tab2：使用记录 -->
-				<view v-if="activeTab === 2" class="tab-panel tab-panel-2">
-					<view class="filter-area">
-						<!-- 搜索框 -->
-						<view class="search-input-wrap">
-							<input class="search-input" :placeholder="tips.PlateDeviceUser[lang]" @blur="onSearchBlur" />
+				<!-- ===== Tab2：使用记录 ===== -->
+				<view v-if="activeTab === 2" class="sk-pane">
+					<view class="sk-filter">
+						<view class="sk-search">
+							<icon type="search" size="14" color="#4facfe" class="sk-search__icon" />
+							<input class="sk-search__input" :placeholder="tips.PlateDeviceUser[lang]" placeholder-style="color:#a9bccf" @blur="onSearchBlur" />
 						</view>
-						<!-- 状态筛选 -->
-						<view class="status-tabs">
-							<view class="status-tab" :class="recordStatus == 0 && 'status-active'" @tap="changeRecordStatus" data-id="0">
-								{{tips.InUse[lang]}}
+						<view class="sk-filter__row">
+							<view class="sk-chips">
+								<view class="sk-chip" :class="{ 'sk-chip--on': recordStatus == 0 }" @tap="changeRecordStatus" data-id="0">
+									{{ tips.InUse[lang] }}
+								</view>
+								<view class="sk-chip" :class="{ 'sk-chip--on': recordStatus == 1 }" @tap="changeRecordStatus" data-id="1">
+									{{ tips.Expired[lang] }}
+								</view>
 							</view>
-							<view class="status-tab" :class="recordStatus == 1 && 'status-active'" @tap="changeRecordStatus" data-id="1">
-								{{tips.Expired[lang]}}
+							<view class="sk-total">
+								<text>{{ tips.Total[lang] }}</text>
+								<text class="sk-total__num">{{ recordTotal }}</text>
+								<text>{{ tips.Records[lang] }}</text>
 							</view>
 						</view>
-						<view class="total-count">{{tips.Total[lang]}} <text class="count-num">{{recordTotal}}</text> {{tips.Records[lang]}}</view>
 					</view>
-					<scroll-view scroll-y class="scroll-container" @scrolltolower="loadRecordList" :show-scrollbar="false">
-						<view class="record-card" v-for="(item, idx) in recordList" :key="idx">
-							<view class="card-header">
-								<view class="header-left">
-									<text class="plate">{{ item.platenumber }}</text>
-									<view class="divider-dot"></view>
-									<text class="user-name">{{ item.personname }}</text>
-									<view class="divider-dot"></view>
-									<text class="phone">{{ item.mobile }}</text>
+					<scroll-view scroll-y class="sk-scroll" @scrolltolower="loadRecordList" :show-scrollbar="false">
+						<view class="sk-rec" v-for="(item, idx) in recordList" :key="idx">
+							<view class="sk-rec__head">
+								<view class="sk-plate sk-plate--sm">
+									<text class="sk-plate__text">{{ item.platenumber }}</text>
 								</view>
-								<view class="header-right">
-									<text class="tag-normal" v-if="item.status == 0">{{tips.InUse[lang]}}</text>
-									<text class="tag-expire" v-else>{{tips.Expired[lang]}}</text>
+								<view class="sk-tag sk-tag--on" v-if="item.status == 0">
+									<view class="sk-tag__dot"></view>
+									<text>{{ tips.InUse[lang] }}</text>
+								</view>
+								<view class="sk-tag sk-tag--off" v-else>
+									<view class="sk-tag__dot"></view>
+									<text>{{ tips.Expired[lang] }}</text>
 								</view>
 							</view>
-							<view class="card-date">
-								{{ (item.startdate || '-') }} ~ {{ (item.enddate || '-') }}
+							<view class="sk-rec__meta">
+								<text class="sk-rec__user">{{ item.personname }}</text>
+								<text class="sk-rec__dot">·</text>
+								<text class="sk-rec__phone">{{ item.mobile }}</text>
 							</view>
-							<view class="card-op">
+							<view class="sk-rec__period">
+								<text>{{ item.startdate || '-' }}</text>
+								<text class="sk-rec__arrow">→</text>
+								<text>{{ item.enddate || '-' }}</text>
+							</view>
+							<view class="sk-rec__ops">
 								<block v-if="!item.status">
-									<text class="op-text" @tap="openEditKeyModal" :data-item="item">{{tips.Edit[lang]}}</text>
-									<view class="op-group">
-										<text class="op-btn op-copy" @tap="copyLink" :data-item="item">
-											{{ copied ? tips.Copied[lang] : tips.CopyLink[lang] }}
-										</text>
-										<text class="op-btn op-cancel" @tap="cancelRentKey" :data-item="item">{{tips.CancelCarUse[lang]}}</text>
-									</view>
+									<view class="sk-link" @tap="openEditKeyModal" :data-item="item">{{ tips.Edit[lang] }}</view>
+									<view class="sk-flex"></view>
+									<view class="sk-op sk-op--ghost" @tap="copyLink" :data-item="item">{{ copied ? tips.Copied[lang] : tips.CopyLink[lang] }}</view>
+									<view class="sk-op sk-op--danger" @tap="cancelRentKey" :data-item="item">{{ tips.CancelCarUse[lang] }}</view>
 								</block>
 								<block v-else>
-									<view></view>
-									<view class="op-group">
-										<text class="op-btn op-view" @tap="previewImages" :data-item="item">{{tips.ViewPhotos[lang]}}</text>
-									</view>
+									<view class="sk-flex"></view>
+									<view class="sk-op sk-op--ghost" @tap="previewImages" :data-item="item">{{ tips.ViewPhotos[lang] }}</view>
 								</block>
 							</view>
 						</view>
@@ -131,143 +121,145 @@
 				</view>
 			</view>
 
-			<!-- ====== 底部固定按钮：在卡片内部，flex-shrink:0 ====== -->
-			<view class="fixed-bottom-btn" @tap="openGlobalSendModal">
-				<text class="btn-label">{{tips.SendKey[lang]}}</text>
+			<!-- 底部固定按钮 -->
+			<view class="sk-footbar">
+				<view class="sk-cta" @tap="openGlobalSendModal">{{ tips.SendKey[lang] }}</view>
 			</view>
 		</view>
 
 		<!-- ====== 下发钥匙弹窗 ====== -->
-		<view class="modal-mask" v-if="showSendModal" @tap="closeSendKeyModal"></view>
-		<view class="modal-popup" v-if="showSendModal" :style="{ bottom: showSearchList ? 250 : 0 + 'rpx' }">
+		<view class="sk-mask" v-if="showSendModal" @tap="closeSendKeyModal"></view>
+		<view class="sk-sheet" v-if="showSendModal">
+			<view class="sk-grabber"></view>
 			<form @submit="submitSendKey">
-				<view class="modal-inner">
-					<view class="modal-head">
-						<text class="modal-title">{{ tips.SendKey[lang] }}</text>
-						<view class="close-icon" @tap="closeSendKeyModal">✕</view>
+				<view class="sk-sheet__inner">
+					<view class="sk-sheet__head">
+						<text class="sk-sheet__title">{{ tips.SendKey[lang] }}</text>
+						<view class="sk-close" @tap="closeSendKeyModal">✕</view>
 					</view>
-					<scroll-view scroll-y class="modal-body" :show-scrollbar="false">
-						<view class="form-item">
-							<label class="form-label">{{ tips.PlateNo[lang] }}</label>
-							<view class="form-value">
-								<view v-if="isManualInput" class="input-box">
-									<input class="form-input" @focus="onInputFocus" @blur="onInputBlur"
-									:placeholder="tips.EnterPlateNo[lang]" name="platenumber" :value="searchKeyword"
+					<scroll-view scroll-y class="sk-sheet__body" :show-scrollbar="false">
+						<view class="sk-row">
+							<text class="sk-row__label">{{ tips.PlateNo[lang] }}</text>
+							<view class="sk-row__ctl">
+								<view v-if="isManualInput" class="sk-input-wrap">
+									<input class="sk-input" @focus="onInputFocus" @blur="onInputBlur"
+									:placeholder="tips.EnterPlateNo[lang]" placeholder-style="color:#a9bccf" name="platenumber" :value="searchKeyword"
 									@input="onSearchInput" confirm-type="search" />
-									<view v-if="searchList.length > 0 && searchKeyword.trim() !== ''" class="search-drop">
-										<view class="drop-item" v-for="(item, idx) in searchList" :key="idx" @tap="selectPlate" :data-item="item">
+									<view v-if="searchList.length > 0 && searchKeyword.trim() !== ''" class="sk-drop">
+										<view class="sk-drop__item" v-for="(item, idx) in searchList" :key="idx" @tap="selectPlate" :data-item="item">
 											{{ item.platenumber }}
 										</view>
 									</view>
 								</view>
-								<text v-else class="static-text">{{ selectCarData.platenumber }}</text>
+								<text v-else class="sk-static">{{ selectCarData.platenumber }}</text>
 							</view>
 						</view>
-						<view class="form-item">
-							<label class="form-label">{{ tips.User[lang] }}</label>
-							<view class="form-value">
-								<input class="form-input" @focus="onInputFocus" @blur="onInputBlur" :placeholder="tips.EnterUser[lang]" name="personName" />
+						<view class="sk-row">
+							<text class="sk-row__label">{{ tips.User[lang] }}</text>
+							<view class="sk-row__ctl">
+								<input class="sk-input" @focus="onInputFocus" @blur="onInputBlur" :placeholder="tips.EnterUser[lang]" placeholder-style="color:#a9bccf" name="personName" />
 							</view>
 						</view>
-						<view class="form-item">
-							<label class="form-label">{{ tips.StartTime[lang] }}</label>
-							<view class="form-value picker-row">
+						<view class="sk-row">
+							<text class="sk-row__label">{{ tips.StartTime[lang] }}</text>
+							<view class="sk-row__ctl sk-row__ctl--pickers">
 								<picker mode="date" data-index="startDate" @change="changeDateTime">
-									<view class="picker-box"><text>{{ startDate }}</text></view>
+									<view class="sk-picker"><text>{{ startDate }}</text><text class="sk-caret">›</text></view>
 								</picker>
 								<picker mode="time" data-index="startTime" @change="changeDateTime">
-									<view class="picker-box"><text>{{ startTime }}</text></view>
+									<view class="sk-picker sk-picker--gap"><text>{{ startTime }}</text><text class="sk-caret">›</text></view>
 								</picker>
 							</view>
 						</view>
-						<view class="form-item">
-							<label class="form-label">{{ tips.EndTime[lang] }}</label>
-							<view class="form-value picker-row">
+						<view class="sk-row">
+							<text class="sk-row__label">{{ tips.EndTime[lang] }}</text>
+							<view class="sk-row__ctl sk-row__ctl--pickers">
 								<picker mode="date" data-index="endDate" @change="changeDateTime">
-									<view class="picker-box"><text>{{ endDate }}</text></view>
+									<view class="sk-picker"><text>{{ endDate }}</text><text class="sk-caret">›</text></view>
 								</picker>
 								<picker mode="time" data-index="endTime" @change="changeDateTime">
-									<view class="picker-box"><text>{{ endTime }}</text></view>
+									<view class="sk-picker sk-picker--gap"><text>{{ endTime }}</text><text class="sk-caret">›</text></view>
 								</picker>
 							</view>
 						</view>
-						<view class="form-item">
-							<label class="form-label">{{ tips.MultiUserAllowed[lang] }}</label>
-							<view class="form-value">
+						<view class="sk-row">
+							<text class="sk-row__label">{{ tips.MultiUserAllowed[lang] }}</text>
+							<view class="sk-row__ctl">
 								<picker mode="selector" :range="multiOptions" range-key="name" @change="changeMultiSelect" :value="multiIndex">
-									<text class="picker-text">{{ multiOptions[multiIndex].name }}</text>
+									<view class="sk-picker"><text>{{ multiOptions[multiIndex].name }}</text><text class="sk-caret">›</text></view>
 								</picker>
 							</view>
 						</view>
-						<view class="form-item">
-							<label class="form-label">{{ tips.Remark[lang] }}</label>
-							<view class="form-value">
-								<input class="form-input" :placeholder="tips.EnterParkingPos[lang]" name="bak" />
+						<view class="sk-row">
+							<text class="sk-row__label">{{ tips.Remark[lang] }}</text>
+							<view class="sk-row__ctl">
+								<input class="sk-input" :placeholder="tips.EnterParkingPos[lang]" placeholder-style="color:#a9bccf" name="bak" />
 							</view>
 						</view>
 					</scroll-view>
-					<view class="modal-footer">
-						<button form-type="submit" class="submit-btn">{{ tips.Confirm[lang] }}</button>
+					<view class="sk-sheet__foot">
+						<button form-type="submit" class="sk-submit">{{ tips.Confirm[lang] }}</button>
 					</view>
 				</view>
 			</form>
 		</view>
 
 		<!-- ====== 编辑钥匙弹窗 ====== -->
-		<view class="modal-mask" v-if="showEditModal" @tap="closeEditKeyModal"></view>
-		<view class="modal-popup" v-if="showEditModal">
+		<view class="sk-mask" v-if="showEditModal" @tap="closeEditKeyModal"></view>
+		<view class="sk-sheet" v-if="showEditModal">
+			<view class="sk-grabber"></view>
 			<form @submit="submitEditKey">
-				<view class="modal-inner">
-					<view class="modal-head">
-						<text class="modal-title">{{ tips.Edit[lang] }}</text>
-						<view class="close-icon" @tap="closeEditKeyModal">✕</view>
+				<view class="sk-sheet__inner">
+					<view class="sk-sheet__head">
+						<text class="sk-sheet__title">{{ tips.Edit[lang] }}</text>
+						<view class="sk-close" @tap="closeEditKeyModal">✕</view>
 					</view>
-					<scroll-view scroll-y class="modal-body" :show-scrollbar="false">
-						<view class="form-item">
-							<label class="form-label">{{ tips.PlateNo[lang] }}</label>
-							<view class="form-value static-text">{{ editRecordData.platenumber }}</view>
+					<scroll-view scroll-y class="sk-sheet__body" :show-scrollbar="false">
+						<view class="sk-row">
+							<text class="sk-row__label">{{ tips.PlateNo[lang] }}</text>
+							<text class="sk-static">{{ editRecordData.platenumber }}</text>
 						</view>
-						<view class="form-item">
-							<label class="form-label">{{ tips.User[lang] }}</label>
-							<view class="form-value static-text">{{ editRecordData.personname }}</view>
+						<view class="sk-row">
+							<text class="sk-row__label">{{ tips.User[lang] }}</text>
+							<text class="sk-static">{{ editRecordData.personname }}</text>
 						</view>
-						<view class="form-item">
-							<label class="form-label">{{ tips.StartTime[lang] }}</label>
-							<view class="form-value picker-row">
+						<view class="sk-row">
+							<text class="sk-row__label">{{ tips.StartTime[lang] }}</text>
+							<view class="sk-row__ctl sk-row__ctl--pickers">
 								<picker mode="date" data-index="startDate" @change="changeDateTime">
-									<view class="picker-box"><text>{{ startDate }}</text></view>
+									<view class="sk-picker"><text>{{ startDate }}</text><text class="sk-caret">›</text></view>
 								</picker>
 								<picker mode="time" data-index="startTime" @change="changeDateTime">
-									<view class="picker-box"><text>{{ startTime }}</text></view>
+									<view class="sk-picker sk-picker--gap"><text>{{ startTime }}</text><text class="sk-caret">›</text></view>
 								</picker>
 							</view>
 						</view>
-						<view class="form-item">
-							<label class="form-label">{{ tips.EndTime[lang] }}</label>
-							<view class="form-value picker-row">
+						<view class="sk-row">
+							<text class="sk-row__label">{{ tips.EndTime[lang] }}</text>
+							<view class="sk-row__ctl sk-row__ctl--pickers">
 								<picker mode="date" data-index="endDate" @change="changeDateTime">
-									<view class="picker-box"><text>{{ endDate }}</text></view>
+									<view class="sk-picker"><text>{{ endDate }}</text><text class="sk-caret">›</text></view>
 								</picker>
 								<picker mode="time" data-index="endTime" @change="changeDateTime">
-									<view class="picker-box"><text>{{ endTime }}</text></view>
+									<view class="sk-picker sk-picker--gap"><text>{{ endTime }}</text><text class="sk-caret">›</text></view>
 								</picker>
 							</view>
 						</view>
-						<view class="form-item">
-							<label class="form-label">{{ tips.MultiUserAllowed[lang] }}</label>
-							<view class="form-value">
+						<view class="sk-row">
+							<text class="sk-row__label">{{ tips.MultiUserAllowed[lang] }}</text>
+							<view class="sk-row__ctl">
 								<picker mode="selector" :range="multiOptions" range-key="name" @change="changeMultiSelect" :value="multiIndex">
-									<text class="picker-text">{{ multiOptions[multiIndex].name }}</text>
+									<view class="sk-picker"><text>{{ multiOptions[multiIndex].name }}</text><text class="sk-caret">›</text></view>
 								</picker>
 							</view>
 						</view>
-						<view class="form-item">
-							<label class="form-label">{{ tips.Remark[lang] }}</label>
-							<view class="form-value static-text">{{ editRecordData.bak || '-' }}</view>
+						<view class="sk-row">
+							<text class="sk-row__label">{{ tips.Remark[lang] }}</text>
+							<text class="sk-static">{{ editRecordData.bak || '-' }}</text>
 						</view>
 					</scroll-view>
-					<view class="modal-footer">
-						<button form-type="submit" class="submit-btn">{{ tips.Confirm[lang] }}</button>
+					<view class="sk-sheet__foot">
+						<button form-type="submit" class="sk-submit">{{ tips.Confirm[lang] }}</button>
 					</view>
 				</view>
 			</form>
@@ -573,7 +565,7 @@
 
 <style scoped>
 	/* ============================================================
-	   1. 全局重置 & 滚动条
+	   1. 基础 & 滚动条
 	   ============================================================ */
 	::-webkit-scrollbar,
 	scroll-view::-webkit-scrollbar {
@@ -583,793 +575,646 @@
 	}
 
 	/* ============================================================
-	   2. 页面容器 — 明亮天蓝背景
+	   2. 页面 — 原有天蓝渐变背景
 	   ============================================================ */
-	.page-wrap {
-		background: linear-gradient(145deg, #e3f2fd 0%, #e3f2fd 20%, #81d4fa 100%);
-		padding: 20rpx;
-		box-sizing: border-box;
-		display: flex;
-		flex-direction: column;
+	.sk-page {
 		position: relative;
 		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		padding: 24rpx 24rpx 0;
+		box-sizing: border-box;
+		background: linear-gradient(145deg, #e3f2fd 0%, #e3f2fd 20%, #81d4fa 100%);
 	}
-
-	/* 装饰性光晕背景 */
-	.glow-bg {
+	.sk-glow {
 		position: absolute;
 		border-radius: 50%;
-		filter: blur(120rpx);
 		pointer-events: none;
-		opacity: 0.25;
 	}
-	.glow-1 {
+	.sk-glow--1 {
 		width: 600rpx;
 		height: 600rpx;
-		top: -200rpx;
-		right: -100rpx;
-		background: radial-gradient(circle, #ffffff, transparent 70%);
+		top: -220rpx;
+		right: -120rpx;
+		background: radial-gradient(circle, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 70%);
 	}
-	.glow-2 {
+	.sk-glow--2 {
 		width: 500rpx;
 		height: 500rpx;
-		bottom: 100rpx;
-		left: -150rpx;
-		background: radial-gradient(circle, #b3e5fc, transparent 70%);
+		bottom: 80rpx;
+		left: -160rpx;
+		background: radial-gradient(circle, rgba(179, 229, 252, 0.9), rgba(179, 229, 252, 0) 70%);
 	}
-	.glow-3 {
-		width: 400rpx;
-		height: 400rpx;
-		top: 40%;
+	.sk-glow--3 {
+		width: 420rpx;
+		height: 420rpx;
+		top: 38%;
 		left: 50%;
 		transform: translateX(-50%);
-		background: radial-gradient(circle, rgba(33, 150, 243, 0.08), transparent 70%);
+		background: radial-gradient(circle, rgba(33, 150, 243, 0.06), rgba(33, 150, 243, 0) 70%);
 	}
 
 	/* ============================================================
-	   3. 主卡片 — 半透明白色毛玻璃，flex列撑满
+	   3. 主卡片外壳
 	   ============================================================ */
-	.main-card {
-		width: 100%;
-		flex: 1;
-		/* 关键：flex列，让内容区域和按钮各司其职 */
-		display: flex;
-		flex-direction: column;
-		background: rgba(255, 255, 255, 0.5);
-		backdrop-filter: blur(24rpx);
-		-webkit-backdrop-filter: blur(24rpx);
-		border-radius: 24rpx;
-		border: 1rpx solid rgba(255, 255, 255, 0.5);
-		box-shadow: 0 20rpx 60rpx rgba(33, 150, 243, 0.08);
-		overflow: hidden;
+	.sk-shell {
 		position: relative;
 		z-index: 1;
+		flex: 1;
+		min-height: 0;
+		display: flex;
+		flex-direction: column;
+		padding: 16rpx;
+		background: rgba(255, 255, 255, 0.58);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border: 1rpx solid rgba(255, 255, 255, 0.88);
+		border-radius: 32rpx;
+		box-shadow: 0 24rpx 60rpx rgba(19, 96, 160, 0.12);
+		overflow: hidden;
+		box-sizing: border-box;
 	}
 
 	/* ============================================================
-	   4. Tab 头部 — 科技蓝强调
+	   4. 顶部分段切换
 	   ============================================================ */
-	.tab-header {
-		display: flex;
-		position: relative;
-		background: transparent;
+	.sk-seg {
 		flex-shrink: 0;
-		/* 固定高度，不被压缩 */
-		padding: 0 32rpx;
-		border-bottom: 1rpx solid rgba(33, 150, 243, 0.1);
+		display: flex;
+		padding: 5rpx;
+		margin-bottom: 14rpx;
+		background: rgba(255, 255, 255, 0.74);
+		border: 1rpx solid rgba(255, 255, 255, 0.96);
+		border-radius: 18rpx;
+		box-shadow: 0 4rpx 14rpx rgba(19, 96, 160, 0.05);
 	}
-	.tab-item {
+	.sk-seg__item {
 		flex: 1;
-		height: 96rpx;
+		padding: 20rpx 0;
+		text-align: center;
+		font-size: 27rpx;
+		font-weight: 600;
+		color: #5f7892;
+		border-radius: 14rpx;
+		transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+	}
+	.sk-seg__item--on {
+		color: #ffffff;
+		background: linear-gradient(135deg, #4facfe 0%, #1a8cf2 100%);
+		box-shadow: 0 8rpx 18rpx rgba(26, 140, 242, 0.24);
+	}
+
+	/* ============================================================
+	   5. 内容区
+	   ============================================================ */
+	.sk-body {
+		flex: 1;
+		min-height: 0;
+		display: flex;
+		flex-direction: column;
+	}
+	.sk-pane {
+		flex: 1;
+		min-height: 0;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+	}
+	.sk-scroll {
+		flex: 1;
+		height: 0;
+		width: 100%;
+		padding: 4rpx 2rpx 6rpx;
+		box-sizing: border-box;
+	}
+
+	/* ============================================================
+	   6. 记录页筛选区
+	   ============================================================ */
+	.sk-filter {
+		flex-shrink: 0;
+		display: flex;
+		flex-direction: column;
+		padding: 2rpx 2rpx 14rpx;
+	}
+	.sk-search {
+		display: flex;
+		align-items: center;
+		height: 76rpx;
+		padding: 0 22rpx;
+		background: #ffffff;
+		border: 1rpx solid #e7f1fa;
+		border-radius: 14rpx;
+		box-shadow: 0 4rpx 14rpx rgba(19, 96, 160, 0.04);
+	}
+	.sk-search__icon {
+		flex-shrink: 0;
+	}
+	.sk-search__input {
+		flex: 1;
+		height: 100%;
+		margin-left: 12rpx;
+		font-size: 26rpx;
+		color: #12283d;
+	}
+	.sk-filter__row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-top: 16rpx;
+	}
+	.sk-chips {
+		display: flex;
+		align-items: center;
+	}
+	.sk-chip {
+		margin-right: 12rpx;
+		padding: 9rpx 26rpx;
+		font-size: 24rpx;
+		color: #5f7892;
+		background: rgba(255, 255, 255, 0.62);
+		border: 1rpx solid #e7f1fa;
+		border-radius: 999rpx;
+		transition: all 0.2s ease;
+	}
+	.sk-chip--on {
+		color: #1a8cf2;
+		font-weight: 600;
+		background: rgba(79, 172, 254, 0.12);
+		border-color: rgba(79, 172, 254, 0.36);
+	}
+	.sk-total {
+		font-size: 22rpx;
+		color: #71869b;
+	}
+	.sk-total__num {
+		margin: 0 6rpx;
+		font-size: 26rpx;
+		font-weight: 700;
+		color: #1a8cf2;
+	}
+
+	/* ============================================================
+	   7. 车辆卡片
+	   ============================================================ */
+	.sk-car {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 18rpx;
+		background: #ffffff;
+		border: 1rpx solid #eef4fb;
+		border-radius: 24rpx;
+		box-shadow: 0 6rpx 20rpx rgba(19, 96, 160, 0.05);
+		overflow: hidden;
+	}
+	.sk-car__head {
+		display: flex;
+		flex-direction: column;
+		padding: 24rpx 24rpx 16rpx;
+	}
+	.sk-plate {
+		display: flex;
+		align-items: center;
+		align-self: flex-start;
+		max-width: 100%;
+		padding: 6rpx 16rpx 6rpx 12rpx;
+		background: #f3f9ff;
+		border: 1rpx solid #dcecfb;
+		border-radius: 14rpx;
+		box-sizing: border-box;
+	}
+	.sk-plate--sm {
+		padding: 4rpx 14rpx;
+		border-radius: 12rpx;
+	}
+	.sk-plate__icon {
+		width: 30rpx;
+		height: 24rpx;
+		margin-right: 10rpx;
+		opacity: 0.5;
+	}
+	.sk-plate__text {
+		font-size: 31rpx;
+		font-weight: 700;
+		color: #0f3d6e;
+		letter-spacing: 1rpx;
+	}
+	.sk-plate--sm .sk-plate__text {
+		font-size: 28rpx;
+	}
+	.sk-car__model {
+		margin-top: 10rpx;
+		font-size: 23rpx;
+		line-height: 32rpx;
+		color: #7b90a6;
+	}
+	.sk-specs {
+		padding: 0 24rpx;
+	}
+	.sk-spec {
+		display: flex;
+		align-items: flex-start;
+		min-height: 68rpx;
+		padding: 14rpx 0;
+		border-top: 1rpx solid #f2f7fc;
+	}
+	.sk-spec__k {
+		flex: 0 0 210rpx;
+		font-size: 23rpx;
+		line-height: 36rpx;
+		color: #7c91a6;
+	}
+	.sk-spec__v {
+		flex: 1;
+		min-width: 0;
+		font-size: 26rpx;
+		line-height: 36rpx;
+		font-weight: 500;
+		color: #16324f;
+		word-break: break-all;
+	}
+	.sk-car__foot {
+		display: flex;
+		justify-content: flex-end;
+		padding: 16rpx 24rpx 20rpx;
+	}
+	.sk-btn-sm {
+		height: 64rpx;
+		line-height: 64rpx;
+		padding: 0 40rpx;
+		font-size: 25rpx;
+		font-weight: 600;
+		letter-spacing: 0.5rpx;
+		color: #ffffff;
+		background: linear-gradient(135deg, #4facfe 0%, #1a8cf2 100%);
+		border-radius: 32rpx;
+		box-shadow: 0 8rpx 18rpx rgba(26, 140, 242, 0.2);
+		transition: opacity 0.2s ease;
+	}
+	.sk-btn-sm:active {
+		opacity: 0.88;
+	}
+
+	/* 空态 */
+	.sk-empty {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 96rpx 0 80rpx;
+	}
+	.sk-empty__ring {
+		width: 150rpx;
+		height: 150rpx;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 30rpx;
-		font-weight: 500;
-		color: rgba(13, 71, 161, 0.5);
-		position: relative;
-		transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-		cursor: pointer;
+		background: rgba(255, 255, 255, 0.72);
+		border: 1rpx solid #e7f1fa;
+		border-radius: 50%;
+		box-shadow: 0 8rpx 24rpx rgba(19, 96, 160, 0.06);
+	}
+	.sk-empty__icon {
+		width: 72rpx;
+		height: 60rpx;
+		opacity: 0.35;
+	}
+	.sk-empty__text {
+		margin-top: 22rpx;
+		font-size: 25rpx;
+		letter-spacing: 0.5rpx;
+		color: #8399ad;
+	}
+
+	/* ============================================================
+	   8. 使用记录卡片
+	   ============================================================ */
+	.sk-rec {
+		margin-bottom: 18rpx;
+		padding: 24rpx 24rpx 18rpx;
+		background: #ffffff;
+		border: 1rpx solid #eef4fb;
+		border-radius: 24rpx;
+		box-shadow: 0 6rpx 20rpx rgba(19, 96, 160, 0.05);
+	}
+	.sk-rec__head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.sk-tag {
+		display: flex;
+		align-items: center;
+		flex-shrink: 0;
+		padding: 5rpx 16rpx;
+		font-size: 21rpx;
+		border-radius: 999rpx;
+	}
+	.sk-tag__dot {
+		width: 10rpx;
+		height: 10rpx;
+		margin-right: 8rpx;
+		border-radius: 50%;
+	}
+	.sk-tag--on {
+		color: #0aa06e;
+		background: #effaf5;
+		border: 1rpx solid #d8f2e7;
+	}
+	.sk-tag--on .sk-tag__dot {
+		background: #0aa06e;
+	}
+	.sk-tag--off {
+		color: #c2515a;
+		background: #fdf3f4;
+		border: 1rpx solid #f7dfe2;
+	}
+	.sk-tag--off .sk-tag__dot {
+		background: #c2515a;
+	}
+	.sk-rec__meta {
+		margin-top: 14rpx;
+		font-size: 24rpx;
+		color: #5d7488;
+	}
+	.sk-rec__user {
+		font-weight: 600;
+		color: #16324f;
+	}
+	.sk-rec__dot {
+		margin: 0 8rpx;
+		color: #c3d1dd;
+	}
+	.sk-rec__phone {
+		color: #7b90a6;
 		letter-spacing: 0.5rpx;
 	}
-	.tab-label {
-		transition: all 0.35s ease;
+	.sk-rec__period {
+		display: flex;
+		align-items: center;
+		margin-top: 14rpx;
+		padding: 12rpx 16rpx;
+		background: #f7fafd;
+		border-radius: 12rpx;
+		font-size: 23rpx;
+		color: #5f7892;
 	}
-	.tab-active .tab-label {
-		color: #0d47a1;
+	.sk-rec__arrow {
+		margin: 0 10rpx;
+		color: #a9bccf;
+	}
+	.sk-rec__ops {
+		display: flex;
+		align-items: center;
+		margin-top: 14rpx;
+		padding-top: 14rpx;
+		border-top: 1rpx solid #f3f8fc;
+	}
+	.sk-flex {
+		flex: 1;
+	}
+	.sk-link {
+		font-size: 24rpx;
 		font-weight: 600;
-		text-shadow: 0 0 20rpx rgba(33, 150, 243, 0.15);
+		color: #1a8cf2;
 	}
-	.tab-line {
-		position: absolute;
-		bottom: 0;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 48rpx;
-		height: 4rpx;
-		border-radius: 4rpx;
-		background: transparent;
-		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	.sk-op {
+		margin-left: 12rpx;
+		padding: 8rpx 20rpx;
+		font-size: 22rpx;
+		border-radius: 999rpx;
 	}
-	.tab-active .tab-line {
-		background: linear-gradient(90deg, #1976d2, #42a5f5);
-		width: 64rpx;
-		box-shadow: 0 0 20rpx rgba(33, 150, 243, 0.3);
+	.sk-op--ghost {
+		color: #3a7fb9;
+		background: #f4f9fe;
+		border: 1rpx solid #e3f0fb;
 	}
-
-	/* ============================================================
-	   5. 内容区域 — flex:1，撑满剩余空间
-	   ============================================================ */
-	.tab-content {
-		flex: 1;
-		position: relative;
-		overflow: hidden;
-		/* 作为绝对定位子元素的参考容器 */;
+	.sk-op--danger {
+		color: #c2515a;
+		background: #fdf5f6;
+		border: 1rpx solid #f7e2e4;
+	}
+	.sk-link:active,
+	.sk-op:active {
+		opacity: 0.7;
 	}
 
 	/* ============================================================
-	   6. Tab Panel — 绝对定位填满父容器，内部flex列
+	   9. 底部主按钮
 	   ============================================================ */
-	.tab-panel {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		display: flex;
-		flex-direction: column;
-		overflow: hidden;
-	}
-
-	/* ============================================================
-	   7. 滚动容器 — flex:1 撑满 panel
-	   ============================================================ */
-	.scroll-container {
-		flex: 1;
-		/* 关键：配合 height:0 让 scroll-view 在 flex 中正确滚动 */
-		height: 0;
-		padding: 20rpx 20rpx 24rpx;
-		box-sizing: border-box;
-		overflow: hidden;
-	}
-
-	/* ============================================================
-	   8. Tab2 筛选区 — 固定高度，不压缩
-	   ============================================================ */
-	.filter-area {
+	.sk-footbar {
 		flex-shrink: 0;
-		padding: 16rpx 20rpx 12rpx;
-		display: flex;
-		flex-direction: column;
-		gap: 16rpx;
-		border-bottom: 1rpx solid rgba(33, 150, 243, 0.05);
+		padding: 12rpx 2rpx 20rpx;
 	}
-
-	/* ============================================================
-	   9. 车辆卡片
-	   ============================================================ */
-	.car-item {
-		background: rgba(255, 255, 255, 0.7);
-		backdrop-filter: blur(12rpx);
-		-webkit-backdrop-filter: blur(12rpx);
-		border-radius: 20rpx;
-		margin-bottom: 24rpx;
-		overflow: hidden;
-		border: 1rpx solid rgba(33, 150, 243, 0.1);
-		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-		position: relative;
-	}
-	.car-item::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: 2rpx;
-		background: linear-gradient(90deg, transparent, rgba(33, 150, 243, 0.3), transparent);
-		opacity: 0;
-		transition: opacity 0.4s ease;
-	}
-	.car-item:active {
-		transform: scale(0.98);
-		border-color: rgba(33, 150, 243, 0.25);
-	}
-	.car-item:active::before {
-		opacity: 1;
-	}
-	.item-head {
-		padding: 24rpx 24rpx 16rpx;
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-start;
-		border-bottom: 1rpx solid rgba(33, 150, 243, 0.05);
-	}
-	.head-left {
-		display: flex;
-		flex-direction: column;
-		gap: 6rpx;
-		flex: 1;
-	}
-	.plate-wrap {
-		display: flex;
-		align-items: center;
-		gap: 14rpx;
-	}
-	.car-icon {
-		width: 40rpx;
-		height: 32rpx;
-		opacity: 0.8;
-		filter: brightness(0) invert(0.2);
-	}
-	.plate-text {
-		font-size: 34rpx;
-		font-weight: 700;
-		color: #0d47a1;
-		letter-spacing: 1rpx;
-		text-shadow: 0 0 20rpx rgba(33, 150, 243, 0.1);
-	}
-	.model-text {
-		font-size: 24rpx;
-		color: rgba(13, 71, 161, 0.5);
-		font-weight: 400;
-	}
-	.status-dot {
-		width: 14rpx;
-		height: 14rpx;
-		border-radius: 50%;
-		background: #00e676;
-		box-shadow: 0 0 30rpx rgba(0, 230, 118, 0.4);
-		flex-shrink: 0;
-		margin-top: 6rpx;
-		animation: pulse-green 2s ease-in-out infinite;
-	}
-	@keyframes pulse-green {
-		0%,
-		100% {
-			opacity: 1;
-			transform: scale(1);
-			box-shadow: 0 0 30rpx rgba(0, 230, 118, 0.3);
-		}
-		50% {
-			opacity: 0.7;
-			transform: scale(0.85);
-			box-shadow: 0 0 60rpx rgba(0, 230, 118, 0.6);
-		}
-	}
-	.info-wrap {
-		padding: 18rpx 24rpx;
-		display: flex;
-		flex-wrap: wrap;
-		gap: 10rpx 20rpx;
-		border-bottom: 1rpx solid rgba(33, 150, 243, 0.05);
-	}
-	.info-row {
-		width: calc(50% - 12rpx);
-		font-size: 24rpx;
-		display: flex;
-		align-items: center;
-		padding: 4rpx 0;
-	}
-	.info-row-full {
-		width: 100%;
-	}
-	.info-label {
-		color: rgba(13, 71, 161, 0.4);
-		min-width: 130rpx;
-		font-weight: 400;
-		font-size: 22rpx;
-		letter-spacing: 0.3rpx;
-	}
-	.info-value {
-		color: #0d47a1;
-		flex: 1;
-		font-weight: 450;
-		word-break: break-all;
-	}
-	.item-footer {
-		padding: 16rpx 24rpx 20rpx;
-		display: flex;
-		justify-content: flex-end;
-	}
-
-	/* ============================================================
-	   10. 按钮 — 科技蓝渐变 + 流光
-	   ============================================================ */
-	.btn-primary {
-		padding: 14rpx 44rpx;
-		background: linear-gradient(135deg, #1976d2, #42a5f5);
-		color: #fff;
-		font-size: 26rpx;
-		font-weight: 600;
-		border-radius: 40rpx;
-		position: relative;
-		overflow: hidden;
-		box-shadow: 0 4rpx 30rpx rgba(33, 150, 243, 0.25);
-		transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-		cursor: pointer;
-		letter-spacing: 1rpx;
-	}
-	.btn-primary:active {
-		transform: scale(0.94);
-		box-shadow: 0 2rpx 20rpx rgba(33, 150, 243, 0.4);
-	}
-	.btn-shimmer {
-		position: absolute;
-		top: 0;
-		left: -100%;
-		width: 60%;
-		height: 100%;
-		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-		transform: skewX(-20deg);
-		animation: shimmer 3s infinite;
-	}
-	@keyframes shimmer {
-		0% {
-			left: -100%;
-		}
-		100% {
-			left: 200%;
-		}
-	}
-
-	/* ============================================================
-	   11. 空状态
-	   ============================================================ */
-	.empty-tip {
-		padding: 100rpx 0;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 20rpx;
-	}
-	.empty-icon {
-		font-size: 80rpx;
-		opacity: 0.3;
-	}
-	.empty-text {
-		font-size: 28rpx;
-		color: rgba(13, 71, 161, 0.25);
-		font-weight: 400;
-	}
-
-	/* ============================================================
-	   12. 筛选区域样式
-	   ============================================================ */
-	.search-input-wrap {
-		display: flex;
-		align-items: center;
-		background: rgba(255, 255, 255, 0.6);
-		border-radius: 40rpx;
-		padding: 14rpx 24rpx;
-		gap: 14rpx;
-		border: 1rpx solid rgba(33, 150, 243, 0.08);
-		transition: border 0.3s ease;
-	}
-	.search-input-wrap:focus-within {
-		border-color: rgba(33, 150, 243, 0.3);
-		box-shadow: 0 0 20rpx rgba(33, 150, 243, 0.05);
-	}
-	.search-icon {
-		font-size: 28rpx;
-		opacity: 0.4;
-	}
-	.search-input {
-		flex: 1;
-		font-size: 28rpx;
-		color: #0d47a1;
-		background: transparent;
-	}
-	.search-input::placeholder {
-		color: rgba(13, 71, 161, 0.3);
-	}
-	.status-tabs {
-		display: flex;
-		gap: 16rpx;
-	}
-	.status-tab {
-		padding: 10rpx 32rpx;
-		font-size: 24rpx;
-		border-radius: 40rpx;
-		background: rgba(255, 255, 255, 0.3);
-		color: rgba(13, 71, 161, 0.5);
-		transition: all 0.3s ease;
-		border: 1rpx solid transparent;
-	}
-	.status-active {
-		background: rgba(33, 150, 243, 0.08);
-		color: #1976d2;
-		border-color: rgba(33, 150, 243, 0.15);
-		box-shadow: 0 0 20rpx rgba(33, 150, 243, 0.05);
-	}
-	.total-count {
-		font-size: 22rpx;
-		color: rgba(13, 71, 161, 0.3);
-	}
-	.count-num {
-		color: #0d47a1;
-		font-weight: 600;
-		margin: 0 4rpx;
-	}
-
-	/* ============================================================
-	   13. 记录卡片
-	   ============================================================ */
-	.record-card {
-		background: rgba(255, 255, 255, 0.7);
-		backdrop-filter: blur(12rpx);
-		-webkit-backdrop-filter: blur(12rpx);
-		border-radius: 20rpx;
-		padding: 24rpx;
-		margin-bottom: 20rpx;
-		border: 1rpx solid rgba(33, 150, 243, 0.06);
-		transition: all 0.3s ease;
-	}
-	.record-card:active {
-		transform: scale(0.98);
-		border-color: rgba(33, 150, 243, 0.12);
-	}
-	.card-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding-bottom: 14rpx;
-		border-bottom: 1rpx solid rgba(33, 150, 243, 0.05);
-		margin-bottom: 14rpx;
-	}
-	.header-left {
-		display: flex;
-		align-items: center;
-		gap: 12rpx;
-		font-size: 28rpx;
-		color: #0d47a1;
-		flex-wrap: wrap;
-	}
-	.divider-dot {
-		width: 4rpx;
-		height: 4rpx;
-		border-radius: 50%;
-		background: rgba(13, 71, 161, 0.1);
-	}
-	.plate {
-		font-weight: 600;
-		color: #0d47a1;
-	}
-	.user-name {
-		color: rgba(13, 71, 161, 0.6);
-		font-size: 26rpx;
-	}
-	.phone {
-		color: rgba(13, 71, 161, 0.4);
-		font-size: 24rpx;
-	}
-	.header-right {
-		flex-shrink: 0;
-	}
-	.tag-normal {
-		padding: 6rpx 20rpx;
-		font-size: 22rpx;
-		border-radius: 30rpx;
-		background: rgba(0, 230, 118, 0.08);
-		color: #00c853;
-		border: 1rpx solid rgba(0, 230, 118, 0.1);
-	}
-	.tag-expire {
-		padding: 6rpx 20rpx;
-		font-size: 22rpx;
-		border-radius: 30rpx;
-		background: rgba(244, 67, 54, 0.06);
-		color: #d32f2f;
-		border: 1rpx solid rgba(244, 67, 54, 0.08);
-	}
-	.card-date {
-		font-size: 24rpx;
-		color: rgba(13, 71, 161, 0.5);
-		padding-bottom: 14rpx;
-		border-bottom: 1rpx solid rgba(33, 150, 243, 0.05);
-		margin-bottom: 14rpx;
-		display: flex;
-		align-items: center;
-		gap: 10rpx;
-	}
-	.date-icon {
-		font-size: 22rpx;
-	}
-	.card-op {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		font-size: 24rpx;
-	}
-	.op-text {
-		color: #1976d2;
-		font-weight: 500;
-		padding: 8rpx 4rpx;
-	}
-	.op-group {
-		display: flex;
-		gap: 12rpx;
-	}
-	.op-btn {
-		padding: 10rpx 24rpx;
-		border-radius: 30rpx;
-		font-size: 22rpx;
-		font-weight: 500;
-		transition: all 0.3s ease;
-	}
-	.op-copy {
-		background: rgba(33, 150, 243, 0.06);
-		color: #1976d2;
-		border: 1rpx solid rgba(33, 150, 243, 0.08);
-	}
-	.op-cancel {
-		background: rgba(244, 67, 54, 0.04);
-		color: #d32f2f;
-		border: 1rpx solid rgba(244, 67, 54, 0.06);
-	}
-	.op-view {
-		background: rgba(255, 255, 255, 0.3);
-		color: rgba(13, 71, 161, 0.5);
-		border: 1rpx solid rgba(33, 150, 243, 0.05);
-	}
-	.op-btn:active {
-		transform: scale(0.92);
-	}
-
-	/* ============================================================
-	   14. 底部固定按钮 — 在卡片内部，不被滚动带走
-	   ============================================================ */
-	.fixed-bottom-btn {
-		width: 80%;
-		margin: 0 auto 28rpx;
-		flex-shrink: 0;
-		/* 关键：不被压缩，始终在卡片底部 */
+	.sk-cta {
+		height: 88rpx;
+		line-height: 88rpx;
 		text-align: center;
-		padding: 20rpx 0;
-		background: linear-gradient(135deg, #1976d2, #42a5f5);
-		color: #fff;
-		font-size: 32rpx;
+		font-size: 30rpx;
 		font-weight: 600;
-		border-radius: 60rpx;
-		box-shadow: 0 8rpx 40rpx rgba(33, 150, 243, 0.3);
-		position: relative;
-		overflow: hidden;
-		letter-spacing: 2rpx;
-		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-		border: 1rpx solid rgba(255, 255, 255, 0.2);
-		/* 移除 sticky / fixed 定位，完全靠 flex 控制位置 */
-		position: static;
+		letter-spacing: 1rpx;
+		color: #ffffff;
+		background: linear-gradient(135deg, #4facfe 0%, #1a8cf2 100%);
+		border-radius: 44rpx;
+		box-shadow: 0 14rpx 28rpx rgba(26, 140, 242, 0.26);
+		transition: opacity 0.2s ease;
 	}
-	.fixed-bottom-btn:active {
-		transform: scale(0.94);
-		box-shadow: 0 4rpx 30rpx rgba(33, 150, 243, 0.5);
-	}
-	.btn-glow {
-		position: absolute;
-		top: -50%;
-		left: -50%;
-		width: 200%;
-		height: 200%;
-		background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1), transparent 70%);
-		animation: glow-rotate 8s linear infinite;
-	}
-	@keyframes glow-rotate {
-		0% {
-			transform: rotate(0deg);
-		}
-		100% {
-			transform: rotate(360deg);
-		}
-	}
-	.btn-label {
-		position: relative;
-		z-index: 1;
+	.sk-cta:active {
+		opacity: 0.9;
 	}
 
 	/* ============================================================
-	   15. 弹窗 — 白色毛玻璃
+	   10. 底部弹窗
 	   ============================================================ */
-	.modal-mask {
+	.sk-mask {
 		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background: rgba(255, 255, 255, 0.6);
-		backdrop-filter: blur(8rpx);
-		-webkit-backdrop-filter: blur(8rpx);
+		background: rgba(10, 40, 70, 0.36);
 		z-index: 998;
-		animation: fadeIn 0.25s ease;
 	}
-	@keyframes fadeIn {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
-	}
-	.modal-popup {
+	.sk-sheet {
 		position: fixed;
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background: rgba(255, 255, 255, 0.95);
-		backdrop-filter: blur(40rpx);
-		-webkit-backdrop-filter: blur(40rpx);
-		border-radius: 32rpx 32rpx 0 0;
 		z-index: 999;
-		padding: 32rpx 28rpx;
-		border-top: 1rpx solid rgba(33, 150, 243, 0.1);
-		animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+		padding: 0 30rpx;
+		background: rgba(255, 255, 255, 0.985);
+		border-radius: 36rpx 36rpx 0 0;
+		border-top: 1rpx solid rgba(255, 255, 255, 0.9);
+		box-shadow: 0 -20rpx 60rpx rgba(19, 96, 160, 0.18);
 	}
-	@keyframes slideUp {
-		from {
-			transform: translateY(100%);
-			opacity: 0;
-		}
-		to {
-			transform: translateY(0);
-			opacity: 1;
-		}
+	.sk-grabber {
+		width: 64rpx;
+		height: 8rpx;
+		margin: 14rpx auto 2rpx;
+		background: #dbe7f2;
+		border-radius: 4rpx;
 	}
-	.modal-inner {
+	.sk-sheet__inner {
 		max-height: 74vh;
 		display: flex;
 		flex-direction: column;
 	}
-	.modal-head {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding-bottom: 24rpx;
-		border-bottom: 1rpx solid rgba(33, 150, 243, 0.06);
-		margin-bottom: 20rpx;
-		flex-shrink: 0;
-	}
-	.modal-title {
-		font-size: 36rpx;
-		font-weight: 700;
-		color: #0d47a1;
-		letter-spacing: 1rpx;
-		text-shadow: 0 0 20rpx rgba(33, 150, 243, 0.05);
-	}
-	.close-icon {
-		width: 48rpx;
-		height: 48rpx;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 28rpx;
-		color: rgba(13, 71, 161, 0.3);
-		border-radius: 50%;
-		background: rgba(255, 255, 255, 0.5);
-		transition: all 0.3s ease;
-	}
-	.close-icon:active {
-		transform: rotate(90deg);
-		background: rgba(33, 150, 243, 0.04);
-	}
-	.modal-body {
-		flex: 1;
-		overflow-y: auto;
-		padding-bottom: 16rpx;
-	}
-	.form-item {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 18rpx 0;
-		border-bottom: 1rpx solid rgba(33, 150, 243, 0.04);
-		min-height: 76rpx;
-	}
-	.form-label {
-		font-size: 26rpx;
-		color: rgba(13, 71, 161, 0.4);
-		min-width: 150rpx;
-		font-weight: 400;
-	}
-	.form-value {
-		flex: 1;
-		text-align: right;
-		font-size: 28rpx;
-		color: #0d47a1;
-		display: flex;
-		justify-content: flex-end;
-		align-items: center;
-	}
-	.form-input {
-		text-align: right;
-		width: 100%;
-		font-size: 28rpx;
-		color: #0d47a1;
-		background: transparent;
-		padding: 4rpx 0;
-	}
-	.form-input::placeholder {
-		color: rgba(13, 71, 161, 0.2);
-	}
-	.input-box {
+	.sk-sheet__head {
 		position: relative;
-		width: 100%;
+		flex-shrink: 0;
+		padding: 22rpx 0 16rpx;
 	}
-	.search-drop {
+	.sk-sheet__title {
+		font-size: 33rpx;
+		font-weight: 700;
+		letter-spacing: 0.5rpx;
+		color: #16324f;
+	}
+	.sk-close {
 		position: absolute;
-		top: 60rpx;
 		right: 0;
+		top: 16rpx;
+		width: 56rpx;
+		height: 56rpx;
+		line-height: 56rpx;
+		text-align: center;
+		font-size: 24rpx;
+		color: #7b90a6;
+		background: #f2f7fc;
+		border-radius: 50%;
+	}
+	.sk-close:active {
+		background: #eaf3fb;
+	}
+	.sk-sheet__body {
+		flex: 1;
+		min-height: 0;
+	}
+	.sk-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		min-height: 100rpx;
+		padding: 14rpx 0;
+		border-bottom: 1rpx solid #f2f7fc;
+	}
+	.sk-row__label {
+		flex: 0 0 200rpx;
+		font-size: 25rpx;
+		line-height: 34rpx;
+		color: #7c91a6;
+	}
+	.sk-row__ctl {
+		flex: 1;
+		min-width: 0;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+	.sk-row__ctl--pickers {
+		justify-content: flex-end;
+		white-space: nowrap;
+	}
+	.sk-input-wrap {
+		position: relative;
+		flex: 1;
+		min-width: 0;
+	}
+	.sk-input {
+		width: 100%;
+		height: 62rpx;
+		line-height: 62rpx;
+		padding: 0 16rpx;
+		box-sizing: border-box;
+		font-size: 26rpx;
+		color: #16324f;
+		text-align: right;
+		background: #f8fbfe;
+		border: 1rpx solid #eff5fb;
+		border-radius: 10rpx;
+	}
+	.sk-static {
+		flex: 1;
+		font-size: 26rpx;
+		line-height: 62rpx;
+		text-align: right;
+		color: #3f5872;
+		word-break: break-all;
+	}
+	.sk-picker {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		max-width: 100%;
+		height: 62rpx;
+		line-height: 62rpx;
+		font-size: 26rpx;
+		color: #16324f;
+	}
+	.sk-picker--gap {
+		margin-left: 24rpx;
+	}
+	.sk-caret {
+		margin-left: 8rpx;
+		font-size: 24rpx;
+		line-height: 62rpx;
+		color: #a9bccf;
+	}
+	.sk-drop {
+		position: absolute;
+		top: 70rpx;
 		left: 0;
-		background: rgba(255, 255, 255, 0.98);
-		backdrop-filter: blur(20rpx);
-		border-radius: 16rpx;
-		border: 1rpx solid rgba(33, 150, 243, 0.06);
-		box-shadow: 0 12rpx 48rpx rgba(0, 0, 0, 0.04);
+		right: 0;
 		z-index: 9999;
 		overflow: hidden;
+		background: #ffffff;
+		border: 1rpx solid #e7f1fa;
+		border-radius: 14rpx;
+		box-shadow: 0 16rpx 40rpx rgba(19, 96, 160, 0.12);
 	}
-	.drop-item {
+	.sk-drop__item {
 		height: 76rpx;
 		line-height: 76rpx;
-		padding: 0 24rpx;
-		border-bottom: 1rpx solid rgba(33, 150, 243, 0.03);
-		font-size: 28rpx;
-		color: #0d47a1;
-		transition: background 0.2s ease;
-	}
-	.drop-item:active {
-		background: rgba(33, 150, 243, 0.04);
-	}
-	.picker-row {
-		display: flex;
-		gap: 16rpx;
-		justify-content: flex-end;
-	}
-	.picker-box {
-		padding: 8rpx 24rpx;
-		background: rgba(255, 255, 255, 0.4);
-		border-radius: 20rpx;
-		border: 1rpx solid rgba(33, 150, 243, 0.04);
+		padding: 0 22rpx;
 		font-size: 26rpx;
-		color: #0d47a1;
-		min-width: 120rpx;
-		text-align: center;
+		color: #16324f;
+		border-bottom: 1rpx solid #f3f8fc;
 	}
-	.picker-text {
-		color: #0d47a1;
+	.sk-drop__item:active {
+		background: #f4f9fe;
 	}
-	.static-text {
-		color: rgba(13, 71, 161, 0.5);
-		font-size: 26rpx;
-	}
-	.modal-footer {
-		padding-top: 20rpx;
+	.sk-sheet__foot {
 		flex-shrink: 0;
+		padding: 20rpx 0 22rpx;
 	}
-	.submit-btn {
+	.sk-submit {
 		width: 100%;
 		height: 88rpx;
-		background: linear-gradient(135deg, #1976d2, #42a5f5);
-		color: #fff;
-		font-size: 32rpx;
+		line-height: 88rpx;
+		font-size: 30rpx;
 		font-weight: 600;
-		border-radius: 40rpx;
+		letter-spacing: 1rpx;
+		color: #ffffff;
+		background: linear-gradient(135deg, #4facfe 0%, #1a8cf2 100%);
 		border: none;
-		box-shadow: 0 4rpx 30rpx rgba(33, 150, 243, 0.25);
-		transition: all 0.3s ease;
-		letter-spacing: 2rpx;
+		border-radius: 44rpx;
+		box-shadow: 0 14rpx 28rpx rgba(26, 140, 242, 0.26);
 	}
-	.submit-btn:active {
-		transform: scale(0.96);
-		box-shadow: 0 2rpx 20rpx rgba(33, 150, 243, 0.4);
+	.sk-submit::after {
+		border: none;
+	}
+	.sk-submit:active {
+		opacity: 0.9;
 	}
 
 	/* ============================================================
-	   16. uni-app 组件穿透
+	   11. 组件穿透（保留原有 picker 皮肤）
 	   ============================================================ */
 	::v-deep uni-scroll-view,
 	::v-deep .uni-scroll-view-content {
 		overscroll-behavior: none;
 	}
 	::v-deep picker {
-		color: #0d47a1;
+		color: #16324f;
 		font-size: 26rpx;
 	}
 	::v-deep picker .uni-picker-container {
@@ -1377,48 +1222,27 @@
 	}
 	::v-deep picker .uni-picker-header {
 		background: rgba(255, 255, 255, 0.98) !important;
-		border-bottom: 1rpx solid rgba(33, 150, 243, 0.06) !important;
+		border-bottom: 1rpx solid #eef4fb !important;
 	}
 	::v-deep picker .uni-picker-body {
 		background: rgba(255, 255, 255, 0.98) !important;
 	}
 	::v-deep picker .uni-picker-item {
-		color: #0d47a1 !important;
+		color: #16324f !important;
 	}
 	::v-deep picker .uni-picker-item.uni-picker-item-selected {
-		color: #1976d2 !important;
+		color: #1a8cf2 !important;
 	}
 
 	/* ============================================================
-	   17. 响应式微调
+	   12. 安全区适配
 	   ============================================================ */
-	@media screen and (max-width: 375px) {
-		.plate-text {
-			font-size: 30rpx;
-		}
-		.form-label {
-			min-width: 120rpx;
-			font-size: 24rpx;
-		}
-		.info-label {
-			min-width: 100rpx;
-			font-size: 20rpx;
-		}
-		.info-value {
-			font-size: 22rpx;
-		}
-	}
-
-	/* safe-area 底部适配 — 按钮在卡片内部，由卡片自身处理 */
 	@supports (padding-bottom: env(safe-area-inset-bottom)) {
-		.main-card {
-			padding-bottom: env(safe-area-inset-bottom);
+		.sk-footbar {
+			padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
 		}
-		.fixed-bottom-btn {
-			margin-bottom: calc(28rpx + env(safe-area-inset-bottom));
-		}
-		.modal-popup {
-			padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
+		.sk-sheet__foot {
+			padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
 		}
 	}
 </style>

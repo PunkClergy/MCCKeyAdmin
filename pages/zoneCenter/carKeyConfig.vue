@@ -404,20 +404,25 @@
 <style>
 	/* ===== 页面底色：沿用天蓝渐变主题 ===== */
 	page {
-		height: 100vh;
 		display: flex;
 		flex-direction: column;
-		background: linear-gradient(160deg, #eaf5fe 0%, #e3f2fd 34%, #b7e3fb 72%, #81d4fa 100%);
+		height: 100vh;
+		min-height: 100vh;
+		background-color: #81d4fa;
 		box-sizing: border-box;
 	}
 
 	.ck-page {
+		position: relative;
 		flex: 1;
 		min-height: 0;
 		display: flex;
 		flex-direction: column;
 		padding: 24rpx 24rpx 0;
 		box-sizing: border-box;
+		background: linear-gradient(160deg, #eaf5fe 0%, #e3f2fd 34%, #b7e3fb 72%, #81d4fa 100%);
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
 	}
 
 	.ck-shell {

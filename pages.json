@@ -107,7 +107,8 @@
 					"path": "carKeyConfig",
 					"style": {
 						"navigationBarTitleText": "车辆钥匙配置",
-						"navigationBarBackgroundColor": "#e3f2fd"
+						"navigationBarBackgroundColor": "#e3f2fd",
+						"backgroundColor": "#81d4fa"
 					}
 				},
 
