@@ -2,9 +2,9 @@
     "name" : "WiseLink Auto Global",
     "appid" : "__UNI__1B5BB05",
     "description" : "WiseLink Auto Global empowers car rental enterprises, auto financial risk control, shared mobility, online car-hailing and logistics fleets with core digital car key technology. We provide a complete integrated software and hardware solution covering self-driving rental, vehicle risk control, time-sharing travel and fleet management. It supports unmanned vehicle pick-up & return, remote vehicle control and real-time trajectory tracking. Custom cloud solutions for fuel monitoring, battery level detection and driving behavior analysis are also available. Proven and mature system serving over 500,000 users worldwide, helping global automotive businesses achieve digital, unmanned and intelligent operation.",
-    "versionName" : "1.3.4",
+    "versionName" : "1.3.5",
     "package" : "net.wiselink.auto",
-    "versionCode" : 261113,
+    "versionCode" : 261114,
     "transformPx" : false,
     "app-plus" : {
         /* 5+App特有相关 */
@@ -61,7 +61,11 @@
                 ],
                 "excludePermissions" : [
                     "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
-                    "<uses-permission android:name=\"android.permission.ACCESS_BACKGROUND_LOCATION\"/>"
+                    "<uses-permission android:name=\"android.permission.ACCESS_BACKGROUND_LOCATION\"/>",
+                    /* Google Play 政策：目标 API 33+ 不得请求媒体库宽泛权限，请改用系统照片选择器 */
+                    "<uses-permission android:name=\"android.permission.READ_MEDIA_IMAGES\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_MEDIA_VIDEO\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_MEDIA_VISUAL_USER_SELECTED\"/>"
                 ]
             },
             "ios" : {
