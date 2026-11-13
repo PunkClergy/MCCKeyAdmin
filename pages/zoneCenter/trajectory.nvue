@@ -313,6 +313,12 @@
 							plateNumber: plate || this.vehicle_info?.plateNumber,
 							platenumber: plate || this.vehicle_info?.platenumber
 						})
+						// 换到另一台车：上一台车的轨迹不能留在地图上
+						const prevPlate = this.vehicle_info?.platenumber || this.vehicle_info?.plateNumber || ''
+						if (plate && prevPlate && plate !== prevPlate) {
+							this.lat = []
+							this.sendDataToWebviewDebounced()
+						}
 					}
 				};
 

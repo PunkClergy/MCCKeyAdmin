@@ -12,8 +12,22 @@ var isMapInitialized = false;
 var isFirstLoad = true;
 var hasMyLocation = false;
 var vehicle_info = {};
-var trackPolyline = null;
 var trackPointsData = [];
+// ============ 轨迹回放状态 ============
+var trackPath = [];
+var trackPolylineDone = null;
+var trackPolylineRest = null;
+var playbackMarker = null;
+var playbackTimer = null;
+var PLAYBACK_SPEEDS = [1, 2, 4, 8];
+var PLAYBACK_TICK = 60;
+var playback = {
+	playing: false,
+	speed: 1,
+	elapsed: 0,
+	duration: 0,
+	trackKey: ''
+};
 let currentLang = 'enUs';
 // ============ 新增Google Key常量 ============
 const GOOGLE_API_KEY = 'AIzaSyDGzLnrbvfiqdmemX8yR4CTc6n2SzjOaBM';
@@ -108,6 +122,7 @@ const buttonTexts = {
 		btnSeeLang: "Fotos",
 		btn8Lang: "Bloquear",
 		btn6Lang: "Desbloquear",
+		trajectory: "Reproducción de trayecto",
 	},
 
 };
@@ -180,11 +195,114 @@ window.onAppMessage = async function(data) {
 	});
 };
 
+// 同一条轨迹重复下发时不重建，避免打断正在进行的回放
+function trackFingerprint(list) {
+	if (!list || !list.length) return '';
+	var first = list[0] || {};
+	var last = list[list.length - 1] || {};
+	return [
+		list.length,
+		first.gpstime || first.gpsTime || first.latitude || first.lat || '',
+		first.longitude || first.lng || '',
+		last.gpstime || last.gpsTime || ''
+	].join('|');
+}
+
+function normalizeTrack(pointList) {
+	var list = [];
+	(pointList || []).forEach(function (p, i) {
+		if (!p) return;
+		var la = Number(p.lat != null ? p.lat : p.latitude);
+		var ln = Number(p.lng != null ? p.lng : p.longitude);
+		if (!isFinite(la) || !isFinite(ln)) return;
+		if (la === 0 && ln === 0) return;
+		var t = Number(p.gpstime != null ? p.gpstime : (p.gpsTime != null ? p.gpsTime : p.time));
+		list.push({
+			lat: la,
+			lng: ln,
+			time: isFinite(t) ? t : NaN,
+			idx: i
+		});
+	});
+	var allTimed = list.length > 0;
+	for (var i = 0; i < list.length; i++) {
+		if (!isFinite(list[i].time)) {
+			allTimed = false;
+			break;
+		}
+	}
+	if (allTimed) {
+		list.sort(function (a, b) {
+			return a.time - b.time;
+		});
+	}
+	return {
+		list: list,
+		timed: allTimed
+	};
+}
+
+// 无时间戳时按 1 秒/点补一条单调时间轴；有时间戳时保证严格递增
+function buildTimedPath(list, timed) {
+	var out = [];
+	var lastTime = -Infinity;
+	for (var i = 0; i < list.length; i++) {
+		var t;
+		if (timed) {
+			t = list[i].time;
+			if (!(t > lastTime)) t = lastTime + 1;
+			lastTime = t;
+		} else {
+			t = i * 1000;
+		}
+		out.push({
+			lat: list[i].lat,
+			lng: list[i].lng,
+			time: t
+		});
+	}
+	return out;
+}
+
 function renderCurrentTrack() {
-	if (trackPointsData.length > 0) {
-		drawTrack(trackPointsData);
-	} else {
+	try {
+		var list = trackPointsData || [];
+		var key = trackFingerprint(list);
+		if (key === playback.trackKey) {
+			return;
+		}
+		stopPlayback();
 		clearTrack();
+		playback.trackKey = key;
+		playback.elapsed = 0;
+		if (!list.length) {
+			return;
+		}
+		var normalized = normalizeTrack(list);
+		if (!normalized.list.length) {
+			return;
+		}
+		if (normalized.list.length < 2) {
+			// 单点轨迹没有回放意义：只把镜头挪过去
+			map.setZoom(16);
+			map.setCenter({
+				lat: normalized.list[0].lat,
+				lng: normalized.list[0].lng
+			});
+			return;
+		}
+		trackPath = buildTimedPath(normalized.list, normalized.timed);
+		playback.duration = trackPath[trackPath.length - 1].time - trackPath[0].time;
+		if (!(playback.duration > 0)) {
+			playback.duration = (trackPath.length - 1) * 1000;
+		}
+		drawTrackBase();
+		fitTrackBounds();
+		showPlaybackBar();
+		renderPlaybackAt(0);
+		console.log('轨迹就绪，共 ' + trackPath.length + ' 点，时长 ' + playback.duration + 'ms');
+	} catch (e) {
+		console.error('renderCurrentTrack异常', e);
 	}
 }
 
@@ -301,49 +419,298 @@ async function createMarkers() {
 	}
 }
 
-function drawTrack(pointList) {
-	try {
-		clearTrack();
-		console.log("drawTrack原始点：", pointList);
-		// 兼容两种字段 lat/lng ｜ latitude/longitude
-		const pathArr = pointList.filter(p => {
-			const la = p.lat ?? p.latitude;
-			const ln = p.lng ?? p.longitude;
-			return la && ln && Number(la) !== 0 && Number(ln) !== 0;
-		}).map(p => {
-			return {
-				lat: Number(p.lat ?? p.latitude),
-				lng: Number(p.lng ?? p.longitude)
-			};
+// ============ 轨迹绘制 ============
+function drawTrackBase() {
+	if (!map || trackPath.length < 2) return;
+	var fullPath = trackPath.map(function (p) {
+		return {
+			lat: p.lat,
+			lng: p.lng
+		};
+	});
+	// 未走段：主题蓝灰；已走段：红（沿用原轨迹色）
+	trackPolylineRest = new google.maps.Polyline({
+		path: fullPath,
+		strokeColor: "#9BB4C4",
+		strokeOpacity: 0.85,
+		strokeWeight: 6,
+		map: map,
+		zIndex: 10,
+		clickable: false
+	});
+	trackPolylineDone = new google.maps.Polyline({
+		path: [{
+			lat: trackPath[0].lat,
+			lng: trackPath[0].lng
+		}],
+		strokeColor: "#FF0000",
+		strokeOpacity: 0.95,
+		strokeWeight: 6,
+		map: map,
+		zIndex: 11,
+		clickable: false
+	});
+}
+
+function fitTrackBounds() {
+	if (!map || trackPath.length < 2) return;
+	var bounds = new google.maps.LatLngBounds();
+	trackPath.forEach(function (p) {
+		bounds.extend({
+			lat: p.lat,
+			lng: p.lng
 		});
-		console.log("组装pathArr：", pathArr);
-		if (pathArr.length < 2) {
-			console.warn("轨迹点不足2个，放弃绘制");
-			return;
-		}
-		trackPolyline = new google.maps.Polyline({
-			path: pathArr,
-			strokeColor: "#FF0000",
-			strokeOpacity: 0.9,
-			strokeWeight: 6,
-			map: map
-		});
-		console.log("✅Polyline创建完成", trackPolyline);
-		// 强制镜头缩放到轨迹范围，必开！
-		const bounds = new google.maps.LatLngBounds();
-		pathArr.forEach(p => bounds.extend(p));
-		map.fitBounds(bounds);
-	} catch (e) {
-		console.error("drawTrack异常", e);
-	}
+	});
+	// 底部留出播放条空间，避免轨迹被端
+	map.fitBounds(bounds, {
+		top: 40,
+		right: 30,
+		bottom: 200,
+		left: 30
+	});
+	// 直线轨迹 fitBounds 会贴到最大层级，限一下
+	google.maps.event.addListenerOnce(map, 'idle', function () {
+		if (map.getZoom() > 17) map.setZoom(17);
+	});
 }
 
 function clearTrack() {
-	if (trackPolyline) {
-		trackPolyline.setMap(null);
-		trackPolyline = null;
-		console.log("清除旧轨迹");
+	if (trackPolylineDone) {
+		trackPolylineDone.setMap(null);
+		trackPolylineDone = null;
 	}
+	if (trackPolylineRest) {
+		trackPolylineRest.setMap(null);
+		trackPolylineRest = null;
+	}
+	if (playbackMarker) {
+		playbackMarker.setMap(null);
+		playbackMarker = null;
+	}
+	trackPath = [];
+	playback.duration = 0;
+	hidePlaybackBar();
+	console.log("清除旧轨迹");
+}
+
+// ============ 回放控制 ============
+function fmtDuration(ms) {
+	if (!isFinite(ms) || ms < 0) ms = 0;
+	var total = Math.round(ms / 1000);
+	var m = Math.floor(total / 60);
+	var s = total % 60;
+	return (m < 10 ? '0' + m : '' + m) + ':' + (s < 10 ? '0' + s : '' + s);
+}
+
+function bearingBetween(a, b) {
+	var dLng = (b.lng - a.lng) * Math.PI / 180;
+	var la1 = a.lat * Math.PI / 180;
+	var la2 = b.lat * Math.PI / 180;
+	var y = Math.sin(dLng) * Math.cos(la2);
+	var x = Math.cos(la1) * Math.sin(la2) - Math.sin(la1) * Math.cos(la2) * Math.cos(dLng);
+	if (x === 0 && y === 0) return 0;
+	return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+}
+
+function playbackPointAt(elapsed) {
+	var t0 = trackPath[0].time;
+	var target = t0 + elapsed;
+	var n = trackPath.length;
+	var i = 0;
+	for (i = 0; i < n - 1; i++) {
+		if (trackPath[i + 1].time >= target) break;
+	}
+	var seg = Math.min(i, n - 2);
+	var a = trackPath[seg];
+	var b = trackPath[seg + 1];
+	var span = b.time - a.time;
+	var ratio = span > 0 ? (target - a.time) / span : 0;
+	if (ratio < 0) ratio = 0;
+	if (ratio > 1) ratio = 1;
+	return {
+		lat: a.lat + (b.lat - a.lat) * ratio,
+		lng: a.lng + (b.lng - a.lng) * ratio,
+		bearing: bearingBetween(a, b),
+		seg: seg
+	};
+}
+
+function playbackIcon(bearing) {
+	return {
+		path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+		scale: 6,
+		fillColor: '#1E90FF',
+		fillOpacity: 1,
+		strokeColor: '#FFFFFF',
+		strokeWeight: 2,
+		rotation: Math.round(bearing || 0)
+	};
+}
+
+function renderPlaybackAt(elapsed) {
+	if (!map || trackPath.length < 2) return;
+	if (!isFinite(elapsed)) elapsed = 0;
+	if (elapsed < 0) elapsed = 0;
+	if (elapsed > playback.duration) elapsed = playback.duration;
+	var pt = playbackPointAt(elapsed);
+	var pos = {
+		lat: pt.lat,
+		lng: pt.lng
+	};
+	if (!playbackMarker) {
+		playbackMarker = new google.maps.Marker({
+			position: pos,
+			map: map,
+			zIndex: 30,
+			clickable: false,
+			icon: playbackIcon(pt.bearing)
+		});
+	} else {
+		playbackMarker.setPosition(pos);
+		playbackMarker.setIcon(playbackIcon(pt.bearing));
+	}
+	if (trackPolylineDone) {
+		var donePath = trackPath.slice(0, pt.seg + 1).map(function (p) {
+			return {
+				lat: p.lat,
+				lng: p.lng
+			};
+		});
+		donePath.push(pos);
+		trackPolylineDone.setPath(donePath);
+	}
+	if (trackPolylineRest) {
+		var restPath = [pos].concat(trackPath.slice(pt.seg + 1).map(function (p) {
+			return {
+				lat: p.lat,
+				lng: p.lng
+			};
+		}));
+		trackPolylineRest.setPath(restPath);
+	}
+	updatePlaybackUI(elapsed);
+}
+
+function updatePlaybackButton() {
+	var btn = document.getElementById('pbPlay');
+	if (!btn) return;
+	if (playback.playing) {
+		// 暂停态交给 CSS 双竖条绘制，不依赖字体字符
+		btn.classList.add('is-playing');
+		btn.textContent = '';
+		return;
+	}
+	btn.classList.remove('is-playing');
+	if (playback.duration > 0 && playback.elapsed >= playback.duration - 1) {
+		btn.textContent = '↻';
+	} else {
+		btn.textContent = '▶';
+	}
+}
+
+function updatePlaybackUI(elapsed) {
+	if (!isFinite(elapsed)) elapsed = 0;
+	var curEl = document.getElementById('pbTimeCur');
+	var allEl = document.getElementById('pbTimeAll');
+	var rangeEl = document.getElementById('pbRange');
+	var speedEl = document.getElementById('pbSpeed');
+	if (curEl) curEl.textContent = fmtDuration(elapsed);
+	if (allEl) allEl.textContent = fmtDuration(playback.duration);
+	if (rangeEl) {
+		rangeEl.value = playback.duration > 0 ? String(Math.round(elapsed / playback.duration * 1000)) : '0';
+	}
+	if (speedEl) speedEl.textContent = playback.speed + 'x';
+	updatePlaybackButton();
+}
+
+function showPlaybackBar() {
+	var bar = document.getElementById('playbackBar');
+	var pill = document.getElementById('trajectory');
+	if (bar) bar.classList.add('visible');
+	if (pill) pill.classList.add('shifted');
+	updatePlaybackUI(playback.elapsed);
+}
+
+function hidePlaybackBar() {
+	var bar = document.getElementById('playbackBar');
+	var pill = document.getElementById('trajectory');
+	if (bar) bar.classList.remove('visible');
+	if (pill) pill.classList.remove('shifted');
+	updatePlaybackUI(0);
+}
+
+function stopPlayback() {
+	playback.playing = false;
+	if (playbackTimer) {
+		clearInterval(playbackTimer);
+		playbackTimer = null;
+	}
+	updatePlaybackButton();
+}
+
+function startPlayback() {
+	if (trackPath.length < 2 || playback.duration <= 0) return;
+	if (playback.elapsed >= playback.duration) {
+		playback.elapsed = 0;
+	}
+	stopPlayback();
+	playback.playing = true;
+	updatePlaybackButton();
+	var lastTick = Date.now();
+	playbackTimer = setInterval(function () {
+		if (!playback.playing) {
+			stopPlayback();
+			return;
+		}
+		var now = Date.now();
+		var dt = now - lastTick;
+		lastTick = now;
+		playback.elapsed += dt * playback.speed;
+		if (playback.elapsed >= playback.duration) {
+			playback.elapsed = playback.duration;
+			renderPlaybackAt(playback.elapsed);
+			stopPlayback();
+			return;
+		}
+		renderPlaybackAt(playback.elapsed);
+	}, PLAYBACK_TICK);
+}
+
+function seekPlayback(ratio) {
+	if (playback.duration <= 0) return;
+	if (ratio < 0) ratio = 0;
+	if (ratio > 1) ratio = 1;
+	playback.elapsed = ratio * playback.duration;
+	renderPlaybackAt(playback.elapsed);
+}
+
+function bindPlaybackUI() {
+	var playBtn = document.getElementById('pbPlay');
+	var rangeEl = document.getElementById('pbRange');
+	var speedEl = document.getElementById('pbSpeed');
+	if (playBtn) {
+		playBtn.addEventListener('click', function () {
+			if (!trackPath.length) return;
+			if (playback.playing) {
+				stopPlayback();
+				return;
+			}
+			startPlayback();
+		});
+	}
+	if (rangeEl) {
+		rangeEl.addEventListener('input', function () {
+			seekPlayback(Number(rangeEl.value) / 1000);
+		});
+	}
+	if (speedEl) {
+		speedEl.addEventListener('click', function () {
+			var pos = PLAYBACK_SPEEDS.indexOf(playback.speed);
+			playback.speed = PLAYBACK_SPEEDS[(pos + 1) % PLAYBACK_SPEEDS.length];
+			updatePlaybackUI(playback.elapsed);
+		});
+	}
+	updatePlaybackUI(0);
 }
 
 function openMatchingMarkerInfoWindow() {
@@ -436,6 +803,8 @@ document.getElementById('trajectory').addEventListener('click', () => {
 		}
 	});
 });
+// 播放条事件绑定（脚本在 body 末尾，DOM 已就绪）
+bindPlaybackUI();
 window.initMap = initMap;
 uni.postMessage({
 	data: {
