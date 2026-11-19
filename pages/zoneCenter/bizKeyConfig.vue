@@ -57,6 +57,7 @@
 	import {
 		titles
 	} from '@/utils/langtitle.js'
+	import { getLang } from '@/utils/lang.js'
 	import {
 		u_GetRole,
 		u_carManagerList,
@@ -94,7 +95,7 @@
 		},
 
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			const pageRoute = 'zoneCenter/bizKeyConfig'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

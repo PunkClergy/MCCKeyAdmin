@@ -101,6 +101,7 @@
 	} from '@/api/index'
 	import { titles } from '@/utils/langtitle.js'
 	import { tips } from '@/utils/langtips.js'
+	import { getLang } from '@/utils/lang.js'
 	
 	export default {
 		data() {
@@ -128,7 +129,7 @@
 		},
 		
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			const pageRoute = 'zoneCenter/alarmDeviceRemove'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

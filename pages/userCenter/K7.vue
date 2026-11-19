@@ -271,6 +271,7 @@
 	import {
 		tips
 	} from '@/utils/langtips.js'
+	import { getLang } from '@/utils/lang.js'
 	// const { byGet, byPost } = require('../../../utils/request/http')
 
 	const MAX_LOG_COUNT = 50;
@@ -317,7 +318,7 @@
 			}
 		},
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 		},
 		methods: {
 			toggleDemo() {

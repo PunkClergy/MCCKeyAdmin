@@ -1,4 +1,5 @@
 // utils/http.js
+import { getLang } from '@/utils/lang.js'
 
 // 默认配置
 const defaultConfig = {
@@ -219,7 +220,8 @@ http.setInterceptor({
 			miNz: 'mi_NZ',
 			esEs: 'es_ES'
 		}
-		const language = langCodeMap[uni.getStorageSync('language')] || 'en_US'
+		// 语言码统一走 getLang()，检测不到时回落英语 en_US
+		const language = langCodeMap[getLang()] || 'en_US'
 		const token = userKey?.token || ''
 		let header = config.header || {}
 		header['funAreaId'] = funAreaId //暂时写死参数

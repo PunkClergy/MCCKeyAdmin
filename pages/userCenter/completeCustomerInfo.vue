@@ -61,6 +61,7 @@
 	import {
 		titles
 	} from '@/utils/langtitle.js'
+	import { getLang } from '@/utils/lang.js'
 
 	export default {
 		data() {
@@ -83,7 +84,7 @@
 			}
 		},
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			const pageRoute = 'userCenter/completeCustomerInfo'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

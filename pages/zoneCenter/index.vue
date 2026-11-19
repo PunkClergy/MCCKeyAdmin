@@ -99,6 +99,7 @@
 	import {
 		tips
 	} from '@/utils/langtips.js'
+	import { getLang } from '@/utils/lang.js'
 	export default {
 		data() {
 			return {
@@ -353,7 +354,7 @@
 		},
 		onShow() {
 			this.inIsShowInfo()
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 		},
 		onReady() {
 			this.initLoginStatus()

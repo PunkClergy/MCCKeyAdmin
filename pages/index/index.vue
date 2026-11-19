@@ -127,6 +127,7 @@
 	import {
 		tips
 	} from '@/utils/langtips.js'
+	import { getLang as getCurrentLang } from '@/utils/lang.js'
 	const IMG_BASE_URL = 'https://k1sw.wiselink.net.cn/';
 	export default {
 		components: {
@@ -215,7 +216,7 @@
 		},
 		methods: {
 			getLang() {
-				this.lang = uni.getStorageSync('language') || 'enUs'
+				this.lang = getCurrentLang()
 			},
 			getSystemHeight() {
 				const sys = uni.getSystemInfoSync()

@@ -54,6 +54,10 @@
 	import {
 		tips
 	} from '@/utils/langtips.js'
+	import {
+		getLang,
+		setLang
+	} from '@/utils/lang.js'
 	// 引入公共tabbar组件
 	import CustomTabbar from '@/components/custom-tabbar/custom-tabbar.vue';
 
@@ -130,7 +134,7 @@
 			this.initDirectoryStructure()
 		},
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			const pageRoute = 'userCenter/index'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]
@@ -248,13 +252,12 @@
 					this.closeLangPicker()
 					return
 				}
-				// 保存语言
-				uni.setStorageSync('language', value)
-				this.lang = value
+				// 保存语言（非法值自动回落到英语）
+				this.lang = setLang(value)
 				// 更新导航栏标题
 				const pageRoute = 'userCenter/index'
 				uni.setNavigationBarTitle({
-					title: titles[pageRoute][value]
+					title: titles[pageRoute][this.lang]
 				})
 				// 刷新列表数据（使列表文本按新语言显示）
 				await this.initDirectoryStructure()

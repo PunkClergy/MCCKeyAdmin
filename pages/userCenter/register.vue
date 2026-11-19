@@ -58,6 +58,7 @@
 	import {
 		tips
 	} from '@/utils/langtips.js'
+	import { getLang } from '@/utils/lang.js'
 	import {
 		u_register
 	} from '@/api';
@@ -79,7 +80,7 @@
 		},
 		components: {},
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			const pageRoute = 'userCenter/register'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

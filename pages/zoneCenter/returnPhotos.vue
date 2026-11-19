@@ -56,6 +56,7 @@
 <script>
 	import { tips } from '@/utils/langtips.js'
 	import { titles } from '@/utils/langtitle.js'
+	import { getLang } from '@/utils/lang.js'
 	export default {
 		name: 'UploadPhoto',
 		data() {
@@ -109,7 +110,7 @@
 			this.vehId = options.vehId
 		},
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			const pageRoute = 'zoneCenter/returnPhotos'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

@@ -67,6 +67,7 @@
 	import {
 		tips
 	} from '@/utils/langtips.js'
+	import { getLang } from '@/utils/lang.js'
 	export default {
 		data() {
 			return {
@@ -103,7 +104,7 @@
 
 		onShow() {
 			this.user = getApp()?.globalData?.userInfo?.username || ''
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			const pageRoute = 'zoneCenter/transferAdmin'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

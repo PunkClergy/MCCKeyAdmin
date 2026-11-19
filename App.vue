@@ -1,5 +1,6 @@
 <script>
 	import { tips } from '@/utils/langtips.js'
+	import { initLang } from '@/utils/lang.js'
 	export default {
 
 		// 全局数据（替代原 data，UniApp 推荐用 globalData）
@@ -57,7 +58,8 @@
 
 		// UniApp 生命周期：应用初始化（替代原 onLaunch）
 		onLaunch(options) {
-			const L = uni.getStorageSync('language') || 'enUs'
+			// 语言兜底：检测不到 / 非法 / 历史脏值一律回落英语 enUs，并纠正回写
+			const L = initLang()
 			// 1. 检查更新（仅微信小程序端生效，其他端自动忽略）
 
 			if (uni.canIUse('getUpdateManager')) {

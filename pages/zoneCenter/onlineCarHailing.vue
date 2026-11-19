@@ -259,6 +259,7 @@
 	import {
 		titles
 	} from '@/utils/langtitle.js'
+	import { getLang } from '@/utils/lang.js'
 	export default {
 		data() {
 			return {
@@ -317,7 +318,7 @@
 		},
 		onShow() {
 			this.initialiImageBaseConversion()
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			this.btnState = this.tips.Add[this.lang]
 			const pageRoute = 'zoneCenter/onlineCarHailing'
 			uni.setNavigationBarTitle({

@@ -85,6 +85,7 @@
 	import {
 		tips
 	} from '@/utils/langtips.js'
+	import { getLang } from '@/utils/lang.js'
 
 	const filter_sort = [{
 			value: 'asc',
@@ -168,7 +169,7 @@
 			this.initList(this.pageType)
 		},
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			this.buildFilters()
 			this.initialQuickEntry()
 		},

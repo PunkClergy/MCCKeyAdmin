@@ -90,6 +90,7 @@
 import { u_efenceAlarmList } from '@/api/index'
 import { tips } from '@/utils/langtips.js'
 import { titles } from '@/utils/langtitle.js'
+import { getLang } from '@/utils/lang.js'
 
 export default {
   data() {
@@ -115,7 +116,7 @@ export default {
     this.handleCarList('', '')
   },
   onShow() {
-    this.lang = uni.getStorageSync('language') || 'enUs'
+    this.lang = getLang()
     const pageRoute = 'zoneCenter/alarmOutOfFence'
     uni.setNavigationBarTitle({
       title: titles[pageRoute][this.lang]

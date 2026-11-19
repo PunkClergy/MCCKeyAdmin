@@ -114,6 +114,7 @@
 	import {
 		tips
 	} from '@/utils/langtips.js'
+	import { getLang } from '@/utils/lang.js'
 	export default {
 		data() {
 			return {
@@ -154,7 +155,7 @@
 		onShow() {
 			this.initialiImageBaseConversion()
 			this.handleRole()
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			const pageRoute = 'zoneCenter/userRole'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

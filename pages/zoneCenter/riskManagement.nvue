@@ -60,6 +60,7 @@
 	import {
 		info_screen
 	} from '@/utils/scheme/screen.js'
+	import { getLang } from '@/utils/lang.js'
 	import {
 		u_getAllCarPoisiton,
 		u_operation
@@ -128,7 +129,7 @@
 
 		async onShow() {
 			// 多语言 + 导航栏标题
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			const pageRoute = 'zoneCenter/riskManagement'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

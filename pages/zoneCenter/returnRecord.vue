@@ -47,6 +47,7 @@
 	import {
 		titles
 	} from '@/utils/langtitle.js'
+	import { getLang } from '@/utils/lang.js'
 	import {
 		u_rentRecord
 	} from '@/api/index'
@@ -69,7 +70,7 @@
 		},
 		onShow() {
 			// 多语言 + 导航栏标题
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			const pageRoute = 'zoneCenter/rentRecordList'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

@@ -168,6 +168,7 @@
 	import {
 		titles
 	} from '@/utils/langtitle.js'
+	import { getLang } from '@/utils/lang.js'
 	// 常量
 	const API_SUCCESS_CODE = 1000;
 	export default {
@@ -199,7 +200,7 @@
 		onShow() {
 			this.fetchAgreementData();
 			this.fetchCarList();
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			const pageRoute = 'zoneCenter/control'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

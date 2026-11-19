@@ -105,6 +105,7 @@
 	import {
 		titles
 	} from '@/utils/langtitle.js'
+	import { getLang } from '@/utils/lang.js'
 	import {
 		u_carList,
 		u_maintained,
@@ -149,11 +150,11 @@
 			}
 		},
 		onLoad() {
-			this.lang = uni.getStorageSync('language') || 'enUs';
+			this.lang = getLang();
 			this.loadCarMaintenanceList();
 		},
 		onShow() {
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			const pageRoute = 'zoneCenter/maintainRemind'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

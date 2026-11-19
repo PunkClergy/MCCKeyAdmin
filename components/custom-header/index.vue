@@ -23,6 +23,7 @@
 	import {
 		tips
 	} from '@/utils/langtips.js'
+	import { getLang } from '@/utils/lang.js'
 	export default {
 		name: 'CustomHeader',
 		props: {
@@ -101,7 +102,7 @@
 
 		},
 		mounted() { // 使用mounted替代onShow
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			this.initialScreenInfo();
 		}
 	};

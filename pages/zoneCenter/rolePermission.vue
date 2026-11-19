@@ -195,6 +195,7 @@
 	import {
 		tips
 	} from '@/utils/langtips.js'
+	import { getLang } from '@/utils/lang.js'
 	export default {
 		data() {
 			return {
@@ -236,7 +237,7 @@
 
 		onShow() {
 			this.inittMenuTree()
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			const pageRoute = 'zoneCenter/rolePermission'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]

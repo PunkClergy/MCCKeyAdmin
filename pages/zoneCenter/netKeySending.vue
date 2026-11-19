@@ -306,6 +306,7 @@
 	import {
 		titles
 	} from '@/utils/langtitle.js'
+	import { getLang } from '@/utils/lang.js'
 	export default {
 		data() {
 			return {
@@ -615,7 +616,7 @@
 		},
 		onShow() {
 			this.handleCurrentDate()
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			this.pickerList = [{
 				name: this.tips.Allow[this.lang],
 				value: 1

@@ -74,6 +74,7 @@
 	import {
 		tips
 	} from '@/utils/langtips.js'
+	import { getLang } from '@/utils/lang.js'
 	export default {
 		data() {
 			return {
@@ -94,7 +95,7 @@
 		},
 		onShow() {
 			this.handleGetCurrentLanguage()
-			this.lang = uni.getStorageSync('language') || 'enUs'
+			this.lang = getLang()
 			const pageRoute = 'login/index'
 			uni.setNavigationBarTitle({
 				title: titles[pageRoute][this.lang]
@@ -102,7 +103,7 @@
 		},
 		methods: {
 			handleGetCurrentLanguage() {
-				let currentLang = uni.getStorageSync('language') || 'enUs';
+				let currentLang = getLang();
 			},
 			// 预览图片
 			handlePreviewImage(evt) {
